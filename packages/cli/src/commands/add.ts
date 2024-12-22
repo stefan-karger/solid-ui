@@ -51,9 +51,10 @@ export const add = new Command()
         const prompts = await p.group(
           {
             components: () =>
-              p.multiselect<{ label: string; value: string }[], string>({
+              p.multiselect<string>({
                 message: `Which ${highlight("components")} would you like to add?`,
-                options: registryIndex.map((v) => ({ label: v.name, value: v.name }))
+                options: registryIndex.map((v) => ({ label: v.name, value: v.name })),
+                maxItems: 10
               })
           },
           {
