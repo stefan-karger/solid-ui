@@ -1,5 +1,5 @@
 import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { Show, splitProps } from "solid-js"
 
 import * as NumberFieldPrimitive from "@kobalte/core/number-field"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
@@ -82,20 +82,25 @@ const NumberFieldIncrementTrigger = <T extends ValidComponent = "button">(
       )}
       {...others}
     >
-      {local.children ?? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="M6 15l6 -6l6 6" />
-        </svg>
-      )}
+      <Show
+        when={local.children}
+        fallback={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-4"
+          >
+            <path d="M6 15l6 -6l6 6" />
+          </svg>
+        }
+      >
+        {(children) => children()}
+      </Show>
     </NumberFieldPrimitive.IncrementTrigger>
   )
 }
@@ -121,20 +126,25 @@ const NumberFieldDecrementTrigger = <T extends ValidComponent = "button">(
       )}
       {...others}
     >
-      {local.children ?? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="M6 9l6 6l6 -6" />
-        </svg>
-      )}
+      <Show
+        when={local.children}
+        fallback={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-4"
+          >
+            <path d="M6 9l6 6l6 -6" />
+          </svg>
+        }
+      >
+        {(children) => children()}
+      </Show>
     </NumberFieldPrimitive.DecrementTrigger>
   )
 }

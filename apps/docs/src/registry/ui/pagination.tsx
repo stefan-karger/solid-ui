@@ -1,5 +1,5 @@
 import type { JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { Show, splitProps } from "solid-js"
 
 import * as PaginationPrimitive from "@kobalte/core/pagination"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
@@ -99,23 +99,28 @@ const PaginationPrevious = <T extends ValidComponent = "button">(
       )}
       {...others}
     >
-      {local.children ?? (
-        <>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M15 6l-6 6l6 6" />
-          </svg>
-          <span>Previous</span>
-        </>
-      )}
+      <Show
+        when={local.children}
+        fallback={
+          <>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="M15 6l-6 6l6 6" />
+            </svg>
+            <span>Previous</span>
+          </>
+        }
+      >
+        {(children) => children()}
+      </Show>
     </PaginationPrimitive.Previous>
   )
 }
@@ -141,23 +146,28 @@ const PaginationNext = <T extends ValidComponent = "button">(
       )}
       {...others}
     >
-      {local.children ?? (
-        <>
-          <span>Next</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-        </>
-      )}
+      <Show
+        when={local.children}
+        fallback={
+          <>
+            <span>Next</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+          </>
+        }
+      >
+        {(children) => children()}
+      </Show>
     </PaginationPrimitive.Next>
   )
 }

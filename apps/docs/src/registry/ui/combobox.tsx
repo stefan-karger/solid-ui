@@ -1,5 +1,5 @@
 import type { JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { Show, splitProps } from "solid-js"
 
 import * as ComboboxPrimitive from "@kobalte/core/combobox"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
@@ -40,20 +40,25 @@ const ComboboxItemIndicator = <T extends ValidComponent = "div">(
   const [local, others] = splitProps(props as ComboboxItemIndicatorProps, ["children"])
   return (
     <ComboboxPrimitive.ItemIndicator {...others}>
-      {local.children ?? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="M5 12l5 5l10 -10" />
-        </svg>
-      )}
+      <Show
+        when={local.children}
+        fallback={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-4"
+          >
+            <path d="M5 12l5 5l10 -10" />
+          </svg>
+        }
+      >
+        {(children) => children()}
+      </Show>
     </ComboboxPrimitive.ItemIndicator>
   )
 }
@@ -126,21 +131,26 @@ const ComboboxTrigger = <T extends ValidComponent = "button">(
   return (
     <ComboboxPrimitive.Trigger class={cn("size-4 opacity-50", local.class)} {...others}>
       <ComboboxPrimitive.Icon>
-        {local.children ?? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M8 9l4 -4l4 4" />
-            <path d="M16 15l-4 4l-4 -4" />
-          </svg>
-        )}
+        <Show
+          when={local.children}
+          fallback={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="M8 9l4 -4l4 4" />
+              <path d="M16 15l-4 4l-4 -4" />
+            </svg>
+          }
+        >
+          {(children) => children()}
+        </Show>
       </ComboboxPrimitive.Icon>
     </ComboboxPrimitive.Trigger>
   )
