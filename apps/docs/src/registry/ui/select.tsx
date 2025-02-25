@@ -3,6 +3,7 @@ import { splitProps } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as SelectPrimitive from "@kobalte/core/select"
+import { cva } from "class-variance-authority"
 
 import { cn } from "~/lib/utils"
 
@@ -106,4 +107,75 @@ const SelectItem = <T extends ValidComponent = "li">(
   )
 }
 
-export { Select, SelectValue, SelectHiddenSelect, SelectTrigger, SelectContent, SelectItem }
+const labelVariants = cva(
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  {
+    variants: {
+      variant: {
+        label: "data-[invalid]:text-destructive",
+        description: "font-normal text-muted-foreground",
+        error: "text-xs text-destructive"
+      }
+    },
+    defaultVariants: {
+      variant: "label"
+    }
+  }
+)
+
+type SelectLabelProps<T extends ValidComponent = "label"> = SelectPrimitive.SelectLabelProps<T> & {
+  class?: string | undefined
+}
+
+const SelectLabel = <T extends ValidComponent = "label">(
+  props: PolymorphicProps<T, SelectLabelProps<T>>
+) => {
+  const [local, others] = splitProps(props as SelectLabelProps, ["class"])
+  return <SelectPrimitive.Label class={cn(labelVariants(), local.class)} {...others} />
+}
+
+type SelectDescriptionProps<T extends ValidComponent = "div"> =
+  SelectPrimitive.SelectDescriptionProps<T> & {
+    class?: string | undefined
+  }
+
+const SelectDescription = <T extends ValidComponent = "div">(
+  props: PolymorphicProps<T, SelectDescriptionProps<T>>
+) => {
+  const [local, others] = splitProps(props as SelectDescriptionProps, ["class"])
+  return (
+    <SelectPrimitive.Description
+      class={cn(labelVariants({ variant: "description" }), local.class)}
+      {...others}
+    />
+  )
+}
+
+type SelectErrorMessageProps<T extends ValidComponent = "div"> =
+  SelectPrimitive.SelectErrorMessageProps<T> & {
+    class?: string | undefined
+  }
+
+const SelectErrorMessage = <T extends ValidComponent = "div">(
+  props: PolymorphicProps<T, SelectErrorMessageProps<T>>
+) => {
+  const [local, others] = splitProps(props as SelectErrorMessageProps, ["class"])
+  return (
+    <SelectPrimitive.ErrorMessage
+      class={cn(labelVariants({ variant: "error" }), local.class)}
+      {...others}
+    />
+  )
+}
+
+export {
+  Select,
+  SelectValue,
+  SelectHiddenSelect,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectDescription,
+  SelectErrorMessage
+}
