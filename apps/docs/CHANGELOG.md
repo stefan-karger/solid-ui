@@ -1,5 +1,19 @@
 # docs
 
+## 0.5.1
+
+### Patch Changes
+
+- [`eeed205`](https://github.com/stefan-karger/solid-ui/commit/eeed205c4d8fa63e61d33d4ee8539b5d4a84b50e) Thanks [@stefan-karger](https://github.com/stefan-karger)! - fix: isMobile now works correctly (#156)
+
+- [`54b920c`](https://github.com/stefan-karger/solid-ui/commit/54b920c0f61c7da176a6ab728d4049dc6d12cb1c) Thanks [@stefan-karger](https://github.com/stefan-karger)! - fix: delta-bar indicator know matches bar color
+
+- [`27e6838`](https://github.com/stefan-karger/solid-ui/commit/27e6838c0a9c7262bd0f3e77a67a486036abd862) Thanks [@stefan-karger](https://github.com/stefan-karger)! - fix: removed remaining ?? in favor of show
+
+- [`cf9bf5b`](https://github.com/stefan-karger/solid-ui/commit/cf9bf5b42913d5428b538a665ee959e3b9133569) Thanks [@stefan-karger](https://github.com/stefan-karger)! - feat: add label,etc.. to select exports
+
+- [`520da18`](https://github.com/stefan-karger/solid-ui/commit/520da188398055deba86dff75838f2c75775b4b3) Thanks [@stefan-karger](https://github.com/stefan-karger)! - fix: remove bg blur from dialog (#160)
+
 ## 0.5.0
 
 ### Minor Changes
