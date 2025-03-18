@@ -10,17 +10,17 @@ const examples = [
   {
     name: "Mail",
     href: "/examples/mail",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/mail"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/components/mail"
   },
   {
     name: "Dashboard",
     href: "/examples/dashboard",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/dashboard"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/components/dashboard"
   },
   {
     name: "Cards",
     href: "/examples/cards",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/cards"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/components/cards"
   },
   {
     name: "Tasks",
@@ -30,7 +30,7 @@ const examples = [
   {
     name: "Authentication",
     href: "/examples/authentication",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/authentication"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/components/authentication"
   }
 ]
 
