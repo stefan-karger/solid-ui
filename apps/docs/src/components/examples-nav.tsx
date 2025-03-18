@@ -10,27 +10,27 @@ const examples = [
   {
     name: "Mail",
     href: "/examples/mail",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/examples/mail"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/mail"
   },
   {
     name: "Dashboard",
     href: "/examples/dashboard",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/examples/dashboard"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/dashboard"
   },
   {
     name: "Cards",
     href: "/examples/cards",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/examples/cards"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/cards"
   },
   {
     name: "Tasks",
     href: "/examples/tasks",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/examples/tasks"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/tasks"
   },
   {
     name: "Authentication",
     href: "/examples/authentication",
-    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/examples/authentication"
+    code: "https://github.com/stefan-karger/solid-ui/tree/main/apps/docs/src/routes/(app)/examples/authentication"
   }
 ]
 
