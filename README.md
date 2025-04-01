@@ -22,7 +22,3 @@ Published under the [MIT license](LICENSE). Built by [@stefan-karger](https://gi
 <a href="https://github.com/stefan-karger/solid-ui/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=stefan-karger/solid-ui" />
 </a>
-
-## Star History
-
-[![Star History](https://api.star-history.com/svg?repos=stefan-karger/solid-ui&type=Date)](https://star-history.com/#stefan-karger/solid-ui&Date)
