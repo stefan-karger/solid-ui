@@ -148,7 +148,12 @@ export const add = new Command()
         // install dependencies
         if (item.dependencies?.length) {
           const packageManager = await getPackageManager(cwd)
-          await execa(packageManager, ["add", ...item.dependencies], { cwd })
+          await execa(packageManager, [
+            "add",
+            ...(packageManager === "deno"
+              ? item.dependencies.map((dep) => `npm:${dep}`)
+              : item.dependencies),
+          ], { cwd });
         }
       }
 
