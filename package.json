@@ -17,6 +17,8 @@
   "scripts": {
     "build": "vinxi build",
     "dev": "vinxi dev",
+    "format": "biome format --write .",
+    "lint": "biome check --write .",
     "registry:build": "shadcn build",
     "start": "vinxi start"
   },
