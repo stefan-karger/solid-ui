@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    sort-package-json:
+      glob: "package.json"
+      run: bun sort-package-json {staged_files}
+      stage_fixed: true
+    lint:
+      glob: "*.{js,ts,tsx,json,jsonc}"
+      run: bun biome check --write {staged_files}
+      stage_fixed: true
+    format:
+      glob: "*.{js,ts,tsx,json,jsonc}"
+      run: bun biome format --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true

@@ -1,20 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Default",
   "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": true,
+    "baseUrl": ".",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
     "isolatedModules": true,
-    "moduleResolution": "bundler",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "ESNext"
   },
   "exclude": ["node_modules", "dist"]
 }

@@ -1,7 +1,0 @@
-{
-	"$schema": "https://cdn.jsdelivr.net/npm/tsup/schema.json",
-  "entry": ["src/index.ts"],
-  "splitting": false,
-  "clean": true,
-	"format": "esm"
-}
