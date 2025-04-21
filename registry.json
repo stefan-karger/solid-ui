@@ -412,6 +412,368 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "type": "registry:ui",
+      "description": "A navigation menu component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/navigation-menu",
+      "files": [
+        {
+          "path": "src/registry/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "number-field",
+      "title": "Number Field",
+      "type": "registry:ui",
+      "description": "A number field component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/number-field",
+      "files": [
+        {
+          "path": "src/registry/ui/number-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "otp-field",
+      "title": "OTP Field",
+      "type": "registry:ui",
+      "description": "An OTP field component",
+      "dependencies": ["solid-js", "@corvu/otp-field"],
+      "url": "https://solid-ui.com/docs/components/otp-field",
+      "files": [
+        {
+          "path": "src/registry/ui/otp-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "title": "Pagination",
+      "type": "registry:ui",
+      "description": "A pagination component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "registryDependencies": ["https://solid-ui.com/r/button.json"],
+      "url": "https://solid-ui.com/docs/components/pagination",
+      "files": [
+        {
+          "path": "src/registry/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "type": "registry:ui",
+      "description": "A popover component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/popover",
+      "files": [
+        {
+          "path": "src/registry/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress-circle",
+      "title": "Progress Circle",
+      "type": "registry:ui",
+      "description": "A progress circle component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/progress-circle",
+      "files": [
+        {
+          "path": "src/registry/ui/progress-circle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "type": "registry:ui",
+      "description": "A progress component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "registryDependencies": ["https://solid-ui.com/r/label.json"],
+      "url": "https://solid-ui.com/docs/components/progress",
+      "files": [
+        {
+          "path": "src/registry/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "type": "registry:ui",
+      "description": "A radio group component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/radio-group",
+      "files": [
+        {
+          "path": "src/registry/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "type": "registry:ui",
+      "description": "A resizable component",
+      "dependencies": ["solid-js", "@corvu/resizable"],
+      "url": "https://solid-ui.com/docs/components/resizable",
+      "files": [
+        {
+          "path": "src/registry/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "type": "registry:ui",
+      "description": "A select component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/select",
+      "files": [
+        {
+          "path": "src/registry/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "type": "registry:ui",
+      "description": "A separator component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/separator",
+      "files": [
+        {
+          "path": "src/registry/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "type": "registry:ui",
+      "description": "A sheet component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/sheet",
+      "files": [
+        {
+          "path": "src/registry/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "type": "registry:ui",
+      "description": "A sidebar component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "registryDependencies": [
+        "https://solid-ui.com/r/button.json",
+        "https://solid-ui.com/r/sheet.json",
+        "https://solid-ui.com/r/separator.json",
+        "https://solid-ui.com/r/skeleton.json",
+        "https://solid-ui.com/r/text-field.json",
+        "https://solid-ui.com/r/tooltip.json"
+      ],
+      "url": "https://solid-ui.com/docs/components/sidebar",
+      "files": [
+        {
+          "path": "src/registry/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "type": "registry:ui",
+      "description": "A skeleton component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/skeleton",
+      "files": [
+        {
+          "path": "src/registry/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "type": "registry:ui",
+      "description": "A slider component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "registryDependencies": ["https://solid-ui.com/r/label.json"],
+      "url": "https://solid-ui.com/docs/components/slider",
+      "files": [
+        {
+          "path": "src/registry/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "type": "registry:ui",
+      "description": "A sonner component",
+      "dependencies": ["solid-js", "solid-sonner"],
+      "url": "https://solid-ui.com/docs/components/sonner",
+      "files": [
+        {
+          "path": "src/registry/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "type": "registry:ui",
+      "description": "A switch component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/switch",
+      "files": [
+        {
+          "path": "src/registry/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "type": "registry:ui",
+      "description": "A table component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/table",
+      "files": [
+        {
+          "path": "src/registry/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "type": "registry:ui",
+      "description": "A tabs component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/tabs",
+      "files": [
+        {
+          "path": "src/registry/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "text-field",
+      "title": "Text Field",
+      "type": "registry:ui",
+      "description": "A text field component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/text-field",
+      "files": [
+        {
+          "path": "src/registry/ui/text-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "timeline",
+      "title": "Timeline",
+      "type": "registry:ui",
+      "description": "A timeline component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/timeline",
+      "files": [
+        {
+          "path": "src/registry/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "type": "registry:ui",
+      "description": "A toast component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/toast",
+      "files": [
+        {
+          "path": "src/registry/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "type": "registry:ui",
+      "description": "A toggle group component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "registryDependencies": ["https://solid-ui.com/r/toggle.json"],
+      "url": "https://solid-ui.com/docs/components/toggle-group",
+      "files": [
+        {
+          "path": "src/registry/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "type": "registry:ui",
+      "description": "A toggle component",
+      "dependencies": ["solid-js", "@kobalte/core", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/toggle",
+      "files": [
+        {
+          "path": "src/registry/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "type": "registry:ui",
+      "description": "A tooltip component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/tooltip",
+      "files": [
+        {
+          "path": "src/registry/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
