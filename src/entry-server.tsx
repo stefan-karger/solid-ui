@@ -27,7 +27,7 @@ export default createHandler(() => (
             type="font/woff2"
           />
         </head>
-        <body class="min-h-screen bg-background font-sans antialiased">
+        <body class="min-h-screen font-sans antialiased">
           <div id="app">{children}</div>
           {scripts}
         </body>

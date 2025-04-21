@@ -5,8 +5,6 @@ import { MDXComponents } from "~/components/mdx-components";
 import Sidebar from "~/components/sidebar";
 import { TableOfContents } from "~/components/toc";
 
-import "~/styles/mdx.css";
-
 export default function DocsLayout(props: RouteProps<string>) {
   return (
     <div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">

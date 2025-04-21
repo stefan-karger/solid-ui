@@ -23,6 +23,8 @@
     "start": "vinxi start"
   },
   "dependencies": {
+    "@ark-ui/solid": "^5.6.0",
+    "@corvu/drawer": "^0.2.4",
     "@corvu/otp-field": "^0.1.4",
     "@corvu/resizable": "^0.2.4",
     "@kobalte/core": "^0.13.9",
@@ -33,30 +35,36 @@
     "@solidjs/start": "^1.1.3",
     "@tanstack/solid-table": "^8.21.3",
     "@vinxi/plugin-mdx": "^3.7.2",
+    "chart.js": "^4.4.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk-solid": "^1.1.2",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-solid": "^8.6.0",
-    "estree-util-value-to-estree": "^3.3.3",
     "shadcn": "^2.5.0-canary.1",
     "solid-js": "^1.9.5",
     "solid-mdx": "^0.0.7",
+    "solid-sonner": "^0.2.8",
     "tailwind-merge": "^3.2.0",
-    "tw-animate-css": "^1.2.7",
     "valibot": "^1.0.0",
     "vinxi": "^0.5.4",
     "yaml": "^2.7.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0-beta.1",
+    "@kobalte/tailwindcss": "^0.9.0",
     "@tailwindcss/vite": "^4.1.4",
+    "estree-util-value-to-estree": "^3.3.3",
     "lefthook": "^1.11.11",
-    "rehype-pretty-code": "^0.14.1",
+    "rehype-pretty-code": "0.10.1",
     "rehype-slug": "^6.0.0",
-    "remark-gfm": "^4.0.1",
+    "remark-gfm": "^3.0.1",
+    "shiki": "0.14.5",
     "sort-package-json": "^3.0.0",
     "tailwindcss": "^4.1.4",
+    "tw-animate-css": "^1.2.7",
     "typescript": "^5.8.3",
-    "unist-builder": "^4.0.0"
+    "unist-builder": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
   }
 }

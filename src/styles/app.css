@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@kobalte/tailwindcss";
 
-@custom-variant dark (.dark &,[data-kb-theme="dark"] &);
+@custom-variant dark (&:where(.dark, .dark *, [data-kb-theme=dark], [data-kb-theme=dark] *));
 
 :root {
   --background: oklch(1 0 0);
@@ -28,7 +29,7 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
+  --radius: 0.5rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -39,7 +40,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+.dark,
+  [data-kb-theme="dark"] {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -59,6 +61,7 @@
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
+  --radius: 0.5rem;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -74,7 +77,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -111,39 +114,171 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius: 0.5rem;
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-*: initial;
+  --font-sans: "Geist Sans", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--kb-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--kb-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes content-show {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes content-hide {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-content-show: content-show 0.2s ease-out;
+  --animate-content-hide: content-hide 0.2s ease-out;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+}
+
+@utility container {
+  @apply px-8;
+  @media (width >= --theme(--breakpoint-sm)) {
+    @apply max-w-none;
+  }
+  @media (max-width: 640px) {
+    @apply px-4;
+  }
+}
+
+@utility step {
+  counter-increment: step;
+
+  &:before {
+    @apply absolute w-9 h-9 bg-muted rounded-full font-mono font-medium text-center text-base inline-flex items-center justify-center -indent-px border-4 border-background;
+    @apply ml-[-50px] mt-[-4px];
+    content: counter(step);
+  }
 }
 
 @layer base {
+  @font-face {
+    font-family: "Geist Sans";
+    src: url("/fonts/Geist.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/fonts/GeistMono.woff2") format("woff2");
+    font-display: swap;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /**
+   * Scrollbar
+   */
+
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    @apply bg-accent;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    display: none;
+  }
+
+  /**
+   * Corvu Resizable Panel
+   */
+
+  [data-corvu-resizable-panel]:has(+ [data-corvu-resizable-handle][data-dragging]) iframe {
+    pointer-events: none;
+  }
+
+  /**
+   * MDX Rehype
+   */
 
   [data-rehype-pretty-code-fragment] {
     @apply relative;
   }
-
+  
   [data-rehype-pretty-code-fragment] [data-highlighted-line] {
     @apply bg-white/10;
   }
-
+  
   [data-rehype-pretty-code-fragment] [data-line] {
     @apply px-4 min-h-[1rem] py-0.5 w-full inline-block;
   }
-
+  
   [data-rehype-pretty-code-fragment] code {
     @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0;
     counter-reset: line;
     box-decoration-break: clone;
   }
-
+  
   [data-rehype-pretty-code-fragment] [data-line-numbers] [data-line] {
     @apply px-2;
   }
-
+  
   [data-rehype-pretty-code-fragment] [data-line-numbers] > [data-line]::before {
     @apply text-zinc-50/40 text-xs;
     counter-increment: line;
@@ -153,11 +288,11 @@
     margin-right: 1.4rem;
     text-align: right;
   }
-
+  
   [data-rehype-pretty-code-title] {
     @apply mt-2 pt-6 px-4 text-sm font-medium;
   }
-
+  
   [data-rehype-pretty-code-title] + div > pre {
     @apply mt-2;
   }

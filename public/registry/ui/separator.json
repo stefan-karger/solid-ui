@@ -1,0 +1,11 @@
+{
+  "name": "separator",
+  "dependencies": ["@kobalte/core"],
+  "files": [
+    {
+      "name": "separator.tsx",
+      "content": "import type { ValidComponent } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\nimport * as SeparatorPrimitive from \"@kobalte/core/separator\"\n\nimport { cn } from \"~/lib/utils\"\n\ntype SeparatorRootProps<T extends ValidComponent = \"hr\"> =\n  SeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined }\n\nconst Separator = <T extends ValidComponent = \"hr\">(\n  props: PolymorphicProps<T, SeparatorRootProps<T>>\n) => {\n  const [local, others] = splitProps(props as SeparatorRootProps, [\"class\", \"orientation\"])\n  return (\n    <SeparatorPrimitive.Root\n      orientation={local.orientation ?? \"horizontal\"}\n      class={cn(\n        \"shrink-0 bg-border\",\n        local.orientation === \"vertical\" ? \"h-full w-px\" : \"h-px w-full\",\n        local.class\n      )}\n      {...others}\n    />\n  )\n}\n\nexport { Separator }\n"
+    }
+  ],
+  "type": "ui"
+}

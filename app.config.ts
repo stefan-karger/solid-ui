@@ -5,7 +5,7 @@ import pkg from "@vinxi/plugin-mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import { getSingletonHighlighter } from "shiki";
+import { getHighlighter } from "shiki";
 import rehypeComponent from "./src/lib/mdx/component";
 
 export default defineConfig({
@@ -25,9 +25,11 @@ export default defineConfig({
           [
             rehypePrettyCode,
             {
-              getHighlighter: getSingletonHighlighter({
-                themes: ["github-dark"],
-              }),
+              getHighlighter: async () => {
+                return await getHighlighter({
+                  theme: "github-dark",
+                });
+              },
             },
           ],
         ],
