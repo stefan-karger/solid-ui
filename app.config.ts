@@ -6,7 +6,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { getSingletonHighlighter } from "shiki";
-import rehypeComponent from "~/lib/mdx/component";
+import rehypeComponent from "./src/lib/mdx/component";
 
 export default defineConfig({
   extensions: ["mdx", "md"],

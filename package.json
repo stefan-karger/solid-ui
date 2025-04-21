@@ -26,6 +26,7 @@
     "@corvu/otp-field": "^0.1.4",
     "@corvu/resizable": "^0.2.4",
     "@kobalte/core": "^0.13.9",
+    "@modular-forms/solid": "^0.25.1",
     "@solid-primitives/storage": "^4.3.1",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.3",
@@ -36,12 +37,15 @@
     "clsx": "^2.1.1",
     "cmdk-solid": "^1.1.2",
     "embla-carousel-solid": "^8.6.0",
+    "estree-util-value-to-estree": "^3.3.3",
     "shadcn": "^2.5.0-canary.1",
     "solid-js": "^1.9.5",
     "solid-mdx": "^0.0.7",
     "tailwind-merge": "^3.2.0",
     "tw-animate-css": "^1.2.7",
-    "vinxi": "^0.5.4"
+    "valibot": "^1.0.0",
+    "vinxi": "^0.5.4",
+    "yaml": "^2.7.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0-beta.1",
@@ -52,6 +56,7 @@
     "remark-gfm": "^4.0.1",
     "sort-package-json": "^3.0.0",
     "tailwindcss": "^4.1.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unist-builder": "^4.0.0"
   }
 }

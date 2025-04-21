@@ -25,7 +25,7 @@ export function AccountSwitcher(props: AccountSwitcherProps) {
       itemComponent={(props) => (
         <SelectItem item={props.item}>
           <div class="flex items-center gap-3 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-foreground">
-            {props.item.rawValue.icon}
+            {props.item.rawValue.icon({})}
             {props.item.rawValue.email}
           </div>
         </SelectItem>

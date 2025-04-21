@@ -1,7 +1,7 @@
-import type { Input } from "valibot";
-import { email, object, string } from "valibot";
+import type { InferInput } from "valibot";
+import { email, object, pipe, string } from "valibot";
 
 export const AuthSchema = object({
-  email: string([email()]),
+  email: pipe(string(), email()),
 });
-export type AuthForm = Input<typeof AuthSchema>;
+export type AuthForm = InferInput<typeof AuthSchema>;
