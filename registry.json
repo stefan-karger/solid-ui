@@ -1,0 +1,417 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "solid-ui",
+  "homepage": "https://solid-ui.com",
+  "items": [
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "type": "registry:ui",
+      "description": "An accordion component",
+      "dependencies": ["@kobalte/core", "solid-js"],
+      "url": "https://solid-ui.com/docs/components/accordion",
+      "files": [
+        {
+          "path": "src/registry/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "type": "registry:ui",
+      "description": "An alert dialog component",
+      "dependencies": ["@kobalte/core", "solid-js"],
+      "url": "https://solid-ui.com/docs/components/alert-dialog",
+      "files": [
+        {
+          "path": "src/registry/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "type": "registry:ui",
+      "description": "An alert component",
+      "dependencies": ["@kobalte/core", "class-variance-authority", "solid-js"],
+      "url": "https://solid-ui.com/docs/components/alert",
+      "files": [
+        {
+          "path": "src/registry/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "type": "registry:ui",
+      "description": "An aspect ratio component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/aspect-ratio",
+      "files": [
+        {
+          "path": "src/registry/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "type": "registry:ui",
+      "description": "An avatar component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/avatar",
+      "files": [
+        {
+          "path": "src/registry/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge-delta",
+      "title": "Badge Delta",
+      "type": "registry:ui",
+      "description": "A badge delta component",
+      "dependencies": ["solid-js", "class-variance-authority"],
+      "registryDependencies": ["https://ui.shadcn.com/r/badge.json"],
+      "url": "https://solid-ui.com/docs/components/badge-delta",
+      "files": [
+        {
+          "path": "src/registry/ui/badge-delta.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "type": "registry:ui",
+      "description": "A badge component",
+      "dependencies": ["solid-js", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/badge",
+      "files": [
+        {
+          "path": "src/registry/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "bar-list",
+      "title": "Bar List",
+      "type": "registry:ui",
+      "description": "A bar list component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/bar-list",
+      "files": [
+        {
+          "path": "src/registry/ui/bar-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "type": "registry:ui",
+      "description": "A breadcrumb component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/breadcrumb",
+      "files": [
+        {
+          "path": "src/registry/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "type": "registry:ui",
+      "description": "A button component",
+      "dependencies": ["@kobalte/core", "class-variance-authority", "solid-js"],
+      "url": "https://solid-ui.com/docs/components/button",
+      "files": [
+        {
+          "path": "src/registry/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "callout",
+      "title": "Callout",
+      "type": "registry:ui",
+      "description": "A callout component",
+      "dependencies": ["solid-js", "class-variance-authority"],
+      "url": "https://solid-ui.com/docs/components/callout",
+      "files": [
+        {
+          "path": "src/registry/ui/callout.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "type": "registry:ui",
+      "description": "A card component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/card",
+      "files": [
+        {
+          "path": "src/registry/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "type": "registry:ui",
+      "description": "A carousel component",
+      "dependencies": ["solid-js", "embla-carousel-solid"],
+      "registryDependencies": ["https://solid-ui.com/r/button.json"],
+      "url": "https://solid-ui.com/docs/components/carousel",
+      "files": [
+        {
+          "path": "src/registry/ui/carousel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "charts",
+      "title": "Charts",
+      "type": "registry:ui",
+      "description": "A charts component",
+      "dependencies": ["solid-js", "chart.js", "@solid-primitives/refs"],
+      "url": "https://solid-ui.com/docs/components/charts",
+      "files": [
+        {
+          "path": "src/registry/ui/charts.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "type": "registry:ui",
+      "description": "A checkbox component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/checkbox",
+      "files": [
+        {
+          "path": "src/registry/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "type": "registry:ui",
+      "description": "A collapsible component",
+      "dependencies": ["@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/collapsible",
+      "files": [
+        {
+          "path": "src/registry/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "title": "Combobox",
+      "type": "registry:ui",
+      "description": "A combobox component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/combobox",
+      "files": [
+        {
+          "path": "src/registry/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "type": "registry:ui",
+      "description": "A command component",
+      "dependencies": ["solid-js", "cmdk-solid", "@kobalte/core"],
+      "registryDependencies": ["https://solid-ui.com/r/dialog.json"],
+      "url": "https://solid-ui.com/docs/components/command",
+      "files": [
+        {
+          "path": "src/registry/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "type": "registry:ui",
+      "description": "A context menu component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/context-menu",
+      "files": [
+        {
+          "path": "src/registry/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "title": "Date Picker",
+      "type": "registry:ui",
+      "description": "A date picker component",
+      "dependencies": ["solid-js", "@ark-ui/solid"],
+      "registryDependencies": ["https://solid-ui.com/r/button.json"],
+      "url": "https://solid-ui.com/docs/components/date-picker",
+      "files": [
+        {
+          "path": "src/registry/ui/date-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "delta-bar",
+      "title": "Delta Bar",
+      "type": "registry:ui",
+      "description": "A delta bar component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/delta-bar",
+      "files": [
+        {
+          "path": "src/registry/ui/delta-bar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "type": "registry:ui",
+      "description": "A dialog component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/dialog",
+      "files": [
+        {
+          "path": "src/registry/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "type": "registry:ui",
+      "description": "A drawer component",
+      "dependencies": ["solid-js", "@corvu/drawer"],
+      "url": "https://solid-ui.com/docs/components/drawer",
+      "files": [
+        {
+          "path": "src/registry/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "type": "registry:ui",
+      "description": "A dropdown menu component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/dropdown-menu",
+      "files": [
+        {
+          "path": "src/registry/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "flex",
+      "title": "Flex",
+      "type": "registry:ui",
+      "description": "A flex component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/flex",
+      "files": [
+        {
+          "path": "src/registry/ui/flex.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "grid",
+      "title": "Grid",
+      "type": "registry:ui",
+      "description": "A grid component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/grid",
+      "files": [
+        {
+          "path": "src/registry/ui/grid.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover Card",
+      "type": "registry:ui",
+      "description": "A hover card component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/hover-card",
+      "files": [
+        {
+          "path": "src/registry/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "type": "registry:ui",
+      "description": "A label component",
+      "dependencies": ["solid-js"],
+      "url": "https://solid-ui.com/docs/components/label",
+      "files": [
+        {
+          "path": "src/registry/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "type": "registry:ui",
+      "description": "A menubar component",
+      "dependencies": ["solid-js", "@kobalte/core"],
+      "url": "https://solid-ui.com/docs/components/menubar",
+      "files": [
+        {
+          "path": "src/registry/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
