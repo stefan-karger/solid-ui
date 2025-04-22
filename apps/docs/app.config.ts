@@ -6,6 +6,7 @@ import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import { getHighlighter } from "shiki"
+import tailwindcss from "@tailwindcss/vite";
 
 import rehypeComponent from "./src/lib/mdx/component"
 
@@ -19,6 +20,7 @@ export default defineConfig({
   extensions: ["mdx", "md"],
   vite: {
     plugins: [
+      tailwindcss(),
       mdx.withImports({})({
         jsx: true,
         jsxImportSource: "solid-js",

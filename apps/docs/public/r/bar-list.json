@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bar-list",
+  "type": "registry:ui",
+  "title": "Bar List",
+  "description": "A bar list component",
+  "dependencies": [
+    "solid-js"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/bar-list.tsx",
+      "content": "import type { ComponentProps, JSX } from \"solid-js\"\nimport { For, mergeProps, Show, splitProps } from \"solid-js\"\nimport { Dynamic } from \"solid-js/web\"\n\nimport { cn } from \"~/lib/utils\"\n\ntype Bar<T> = T & {\n  value: number\n  name: JSX.Element\n  icon?: (props: ComponentProps<\"svg\">) => JSX.Element\n  href?: string\n  target?: string\n}\n\ntype SortOrder = \"ascending\" | \"descending\" | \"none\"\n\ntype ValueFormatter = (value: number) => string\n\nconst defaultValueFormatter: ValueFormatter = (value: number) => value.toString()\n\ntype BarListProps<T> = ComponentProps<\"div\"> & {\n  data: Bar<T>[]\n  valueFormatter?: ValueFormatter\n  sortOrder?: SortOrder\n}\n\nconst BarList = <T,>(rawProps: BarListProps<T>) => {\n  const props = mergeProps(\n    {\n      valueFormatter: defaultValueFormatter,\n      sortOrder: \"descending\" as SortOrder\n    },\n    rawProps\n  )\n  const [local, others] = splitProps(props, [\"class\", \"data\", \"valueFormatter\", \"sortOrder\"])\n\n  const sortedData = () => {\n    if (local.sortOrder === \"none\") {\n      return local.data\n    }\n    return local.data.sort((a, b) =>\n      local.sortOrder === \"ascending\" ? a.value - b.value : b.value - a.value\n    )\n  }\n\n  const widths = () => {\n    const maxValue = Math.max(...sortedData().map((item) => item.value), 0)\n    return sortedData().map((item) =>\n      item.value === 0 ? 0 : Math.max((item.value / maxValue) * 100, 2)\n    )\n  }\n\n  return (\n    <div\n      class={cn(\"flex flex-col space-y-1.5\", local.class)}\n      aria-sort={local.sortOrder}\n      {...others}\n    >\n      <For each={sortedData()}>\n        {(bar, idx) => {\n          return (\n            <div class=\"row flex w-full justify-between space-x-6\">\n              <div class=\"grow\">\n                <div\n                  class={cn(\"flex h-8 items-center rounded-md bg-secondary px-2\")}\n                  style={{\n                    width: `${widths()[idx()]}%`\n                  }}\n                >\n                  <Show when={bar.icon}>\n                    {(icon) => <Dynamic component={icon()} class=\"mr-2 size-5 flex-none\" />}\n                  </Show>\n                  <Show when={bar.href} fallback={<p>{bar.name}</p>}>\n                    {(href) => (\n                      <a\n                        href={href()}\n                        target={bar.target ?? \"_blank\"}\n                        rel=\"noreferrer\"\n                        class=\"hover:underline\"\n                      >\n                        {bar.name}\n                      </a>\n                    )}\n                  </Show>\n                </div>\n              </div>\n              <div class=\"flex items-center\">{local.valueFormatter(bar.value)}</div>\n            </div>\n          )\n        }}\n      </For>\n    </div>\n  )\n}\n\nexport { BarList }\n",
+      "type": "registry:ui"
+    }
+  ]
+}
