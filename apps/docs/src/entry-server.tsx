@@ -9,8 +9,8 @@ export default createHandler(() => (
           {assets}
           <script
             defer
-            src="https://analytics.eu.umami.is/script.js"
-            data-website-id="ee09d538-8dab-4134-9dca-aad904b65af7"
+            src="http://umami-a8gg4kg4co40owco8w0so0k0.91.99.20.236.sslip.io/script.js"
+            data-website-id="19d584f1-8277-4761-8b29-ea2dc5521a75"
           />
           <link
             rel="preload"
