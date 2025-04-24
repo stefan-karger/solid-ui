@@ -298,26 +298,6 @@ export const TAILWIND_CSS = `@import "tailwindcss";
       transform: scale(0.96);
     }
   }
-
-  @keyframes caret-blink {
-
-    0%,
-    70%,
-    100% {
-      opacity: 1;
-    }
-
-    20%,
-    50% {
-      opacity: 0;
-    }
-  }
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-content-show: content-show 0.2s ease-out;
-  --animate-content-hide: content-hide 0.2s ease-out;
-  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
 }
 
 @utility container {
@@ -349,7 +329,6 @@ export const TAILWIND_CSS = `@import "tailwindcss";
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   /**
