@@ -9,7 +9,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "https://ui.shadcn.com/r/badge.json"
+    "https://solid-ui.com/r/badge.json"
   ],
   "files": [
     {

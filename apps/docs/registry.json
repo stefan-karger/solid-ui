@@ -79,7 +79,7 @@
       "type": "registry:ui",
       "description": "A badge delta component",
       "dependencies": ["solid-js", "class-variance-authority"],
-      "registryDependencies": ["https://ui.shadcn.com/r/badge.json"],
+      "registryDependencies": ["https://solid-ui.com/r/badge.json"],
       "url": "https://solid-ui.com/docs/components/badge-delta",
       "files": [
         {
