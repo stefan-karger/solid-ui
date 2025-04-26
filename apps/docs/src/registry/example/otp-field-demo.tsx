@@ -4,7 +4,7 @@ import {
   OTPFieldInput,
   OTPFieldSeparator,
   OTPFieldSlot
-} from "~/registry/ui/otp-field"
+} from "@/registry/ui/otp-field"
 
 export default function OTPFieldDemo() {
   return (

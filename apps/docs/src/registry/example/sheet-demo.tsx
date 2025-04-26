@@ -1,6 +1,6 @@
 import { For } from "solid-js"
 
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -9,8 +9,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from "~/registry/ui/sheet"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+} from "@/registry/ui/sheet"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 const SHEET_POSITIONS = ["top", "right", "bottom", "left"] as const
 

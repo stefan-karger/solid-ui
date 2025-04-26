@@ -1,5 +1,5 @@
-import { IconBold, IconItalic, IconUnderline } from "~/components/icons"
-import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
+import { IconBold, IconItalic, IconUnderline } from "@/components/icons"
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group"
 
 export default function ToggleGroupDemo() {
   return (

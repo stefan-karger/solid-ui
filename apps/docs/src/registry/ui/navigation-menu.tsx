@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import type { PolymorphicProps } from "@kobalte/core"
 import * as NavigationMenuPrimitive from "@kobalte/core/navigation-menu"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const NavigationMenuItem = NavigationMenuPrimitive.Menu
 
@@ -135,7 +135,7 @@ const NavigationMenuLink = <T extends ValidComponent = "a">(
   return (
     <NavigationMenuPrimitive.Item
       class={cn(
-        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors  hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
         local.class
       )}
       {...others}

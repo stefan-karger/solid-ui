@@ -5,7 +5,7 @@ import * as SheetPrimitive from "@kobalte/core/dialog"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const Sheet = SheetPrimitive.Root
 const SheetTrigger = SheetPrimitive.Trigger

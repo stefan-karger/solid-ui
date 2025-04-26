@@ -18,7 +18,7 @@ import {
   getSortedRowModel
 } from "@tanstack/solid-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/registry/ui/table"
 
 import { TablePagination } from "./table-pagination"
 import { TableToolbar } from "./table-toolbar"

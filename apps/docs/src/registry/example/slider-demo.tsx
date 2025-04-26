@@ -5,7 +5,7 @@ import {
   SliderThumb,
   SliderTrack,
   SliderValueLabel
-} from "~/registry/ui/slider"
+} from "@/registry/ui/slider"
 
 export default function SliderDemo() {
   return (

@@ -5,7 +5,7 @@ import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as SelectPrimitive from "@kobalte/core/select"
 import { cva } from "class-variance-authority"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const Select = SelectPrimitive.Root
 const SelectValue = SelectPrimitive.Value

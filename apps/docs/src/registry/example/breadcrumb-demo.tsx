@@ -5,7 +5,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator
-} from "~/registry/ui/breadcrumb"
+} from "@/registry/ui/breadcrumb"
 
 export default function BreadcrumbDemo() {
   return (

@@ -7,9 +7,9 @@ import {
   type ComponentProps
 } from "solid-js"
 
-import { Index } from "~/__registry__"
-import { cn } from "~/lib/utils"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
+import { Index } from "@/__registry__"
+import { cn } from "@/lib/utils"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs"
 
 interface ComponentPreviewProps extends ComponentProps<"div"> {
   name: string

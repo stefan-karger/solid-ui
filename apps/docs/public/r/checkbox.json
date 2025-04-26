@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "A checkbox component",
+  "dependencies": [
+    "solid-js",
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/checkbox.tsx",
+      "content": "import type { ValidComponent } from \"solid-js\"\nimport { Match, splitProps, Switch } from \"solid-js\"\n\nimport * as CheckboxPrimitive from \"@kobalte/core/checkbox\"\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype CheckboxRootProps<T extends ValidComponent = \"div\"> =\n  CheckboxPrimitive.CheckboxRootProps<T> & { class?: string | undefined }\n\nconst Checkbox = <T extends ValidComponent = \"div\">(\n  props: PolymorphicProps<T, CheckboxRootProps<T>>\n) => {\n  const [local, others] = splitProps(props as CheckboxRootProps, [\"class\"])\n  return (\n    <CheckboxPrimitive.Root\n      class={cn(\"items-top group relative flex space-x-2\", local.class)}\n      {...others}\n    >\n      <CheckboxPrimitive.Input class=\"peer\" />\n      <CheckboxPrimitive.Control class=\"size-4 shrink-0 rounded-sm border border-primary ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 data-[checked]:border-none data-[indeterminate]:border-none data-[checked]:bg-primary data-[indeterminate]:bg-primary data-[checked]:text-primary-foreground data-[indeterminate]:text-primary-foreground\">\n        <CheckboxPrimitive.Indicator>\n          <Switch>\n            <Match when={!others.indeterminate}>\n              <svg\n                xmlns=\"http://www.w3.org/2000/svg\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                stroke-width=\"2\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                class=\"size-4\"\n              >\n                <path d=\"M5 12l5 5l10 -10\" />\n              </svg>\n            </Match>\n            <Match when={others.indeterminate}>\n              <svg\n                xmlns=\"http://www.w3.org/2000/svg\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                stroke-width=\"2\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                class=\"size-4\"\n              >\n                <path d=\"M5 12l14 0\" />\n              </svg>\n            </Match>\n          </Switch>\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Control>\n    </CheckboxPrimitive.Root>\n  )\n}\n\nexport { Checkbox }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

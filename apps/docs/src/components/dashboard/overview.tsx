@@ -1,4 +1,4 @@
-import { BarChart } from "~/registry/ui/charts"
+import { BarChart } from "@/registry/ui/charts"
 
 export function Overview() {
   const chartData = {

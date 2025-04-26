@@ -4,7 +4,7 @@ import { Show, splitProps } from "solid-js"
 import * as ComboboxPrimitive from "@kobalte/core/combobox"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const Combobox = ComboboxPrimitive.Root
 const ComboboxItemLabel = ComboboxPrimitive.ItemLabel
@@ -73,7 +73,7 @@ const ComboboxSection = <T extends ValidComponent = "li">(
   return (
     <ComboboxPrimitive.Section
       class={cn(
-        "overflow-hidden p-1 px-2 py-1.5 text-xs font-medium text-muted-foreground ",
+        "overflow-hidden p-1 px-2 py-1.5 text-xs font-medium text-muted-foreground",
         local.class
       )}
       {...others}

@@ -1,7 +1,7 @@
 import { For } from "solid-js"
 
-import { IconBell, IconCheck } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
+import { IconBell, IconCheck } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
 import {
   Card,
   CardContent,
@@ -9,8 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "~/registry/ui/card"
-import { Switch, SwitchControl, SwitchThumb } from "~/registry/ui/switch"
+} from "@/registry/ui/card"
+import { Switch, SwitchControl, SwitchThumb } from "@/registry/ui/switch"
 
 const notifications = [
   {
@@ -35,7 +35,7 @@ export default function CardDemo() {
         <CardDescription>You have 3 unread messages.</CardDescription>
       </CardHeader>
       <CardContent class="grid gap-4">
-        <div class=" flex items-center space-x-4 rounded-md border p-4">
+        <div class="flex items-center space-x-4 rounded-md border p-4">
           <IconBell class="size-6" />
           <div class="flex-1 space-y-1">
             <p class="text-sm font-medium leading-none">Push Notifications</p>

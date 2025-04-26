@@ -7,7 +7,7 @@ import {
   IconSettings,
   IconSmile,
   IconUser
-} from "~/components/icons"
+} from "@/components/icons"
 import {
   CommandDialog,
   CommandEmpty,
@@ -17,7 +17,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut
-} from "~/registry/ui/command"
+} from "@/registry/ui/command"
 
 export default function CommandDialogDemo() {
   const [open, setOpen] = createSignal(false)

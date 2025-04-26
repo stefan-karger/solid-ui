@@ -3,7 +3,7 @@ import { splitProps } from "solid-js"
 
 import type { Column } from "@tanstack/solid-table"
 
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 type TableInputFilterProps<TData, TValue> = ComponentProps<typeof TextFieldInput> & {
   column?: Column<TData, TValue>

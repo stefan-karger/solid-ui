@@ -2,7 +2,7 @@ import type { ComponentProps, JSX } from "solid-js"
 import { For, mergeProps, Show, splitProps } from "solid-js"
 import { Dynamic } from "solid-js/web"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type Bar<T> = T & {
   value: number

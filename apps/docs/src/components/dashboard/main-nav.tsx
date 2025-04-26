@@ -1,7 +1,7 @@
 import type { ComponentProps } from "solid-js"
 import { splitProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 export function MainNav(props: ComponentProps<"nav">) {
   const [, rest] = splitProps(props, ["class"])

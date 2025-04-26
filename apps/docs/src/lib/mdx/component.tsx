@@ -37,7 +37,7 @@ export default function rehypeComponent() {
         const filePath = path.join(process.cwd(), "src", component.files[0].path)
         let source = fs.readFileSync(filePath, "utf-8")
 
-        source = source.replaceAll("~/registry/", "~/components/")
+        source = source.replaceAll("@/registry/", "@/components/")
         source = source.replaceAll("export default", "export")
 
         node.children?.push(
@@ -75,7 +75,7 @@ export default function rehypeComponent() {
         const filePath = path.join(process.cwd(), "src", component.files[0].path)
         let source = fs.readFileSync(filePath, "utf-8")
 
-        source = source.replaceAll("~/registry/", "~/components/")
+        source = source.replaceAll("@/registry/", "@/components/")
         source = source.replaceAll("export default", "export")
 
         node.children?.push(

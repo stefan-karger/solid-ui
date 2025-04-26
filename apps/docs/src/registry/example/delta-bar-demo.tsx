@@ -1,4 +1,4 @@
-import { DeltaBar } from "~/registry/ui/delta-bar"
+import { DeltaBar } from "@/registry/ui/delta-bar"
 
 export default function DeltaBarDemo() {
   return (

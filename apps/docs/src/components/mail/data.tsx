@@ -1,4 +1,4 @@
-import { IconBrandGoogle, IconBrandVercel, IconCloud } from "~/components/icons"
+import { IconBrandGoogle, IconBrandVercel, IconCloud } from "@/components/icons"
 
 export const mails = [
   {

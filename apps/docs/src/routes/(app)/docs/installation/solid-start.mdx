@@ -35,7 +35,7 @@ You will be asked a few questions to configure `ui.config.json`:
 Would you like to use TypeScript? (recommended) yes
 Where is your global CSS file? src/app.css
 Where is your tailwind.config.js located? tailwind.config.cjs
-Configure the import alias for the src directory: ~/*
+Configure the import alias for the src directory: @/*
 ```
 
 ### Fonts
@@ -58,7 +58,7 @@ import { Suspense } from "solid-js"
 import { Router } from "@solidjs/router"
 import { FileRoutes } from "@solidjs/start/router"
 
-import Nav from "~/components/Nav"
+import Nav from "@/components/Nav"
 
 import "@fontsource/inter"
 import "./app.css"
@@ -146,7 +146,7 @@ npx solidui-cli@latest add button
 The command above will add the `Button` component to your project. You can then import it like this:
 
 ```tsx {1,6} showLineNumbers
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (

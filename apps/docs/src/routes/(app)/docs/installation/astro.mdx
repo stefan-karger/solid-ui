@@ -59,7 +59,7 @@ Add the following code to the `tsconfig.json` file to resolve paths:
     // ...
     "baseUrl": ".",
     "paths": {
-      "~/*": [
+      "@/*": [
         "./src/*"
       ]
     }
@@ -84,7 +84,7 @@ You will be asked a few questions to configure `ui.config.json`:
 Would you like to use TypeScript? (recommended) yes
 Where is your global CSS file? src/style/globals.css
 Where is your tailwind.config.js located? tailwind.config.mjs
-Configure the import alias for the src directory: ~/*
+Configure the import alias for the src directory: @/*
 ```
 
 ### Import the globals.css file
@@ -93,7 +93,7 @@ Import the `globals.css` file in the `src/pages/index.astro` file:
 
 ```ts {2}
 ---
-import "~/styles/globals.css"
+import "@/styles/globals.css"
 ---
 ```
 
@@ -133,7 +133,7 @@ The command above will add the `Button` component to your project. You can then 
 
 ```astro {2,10}
 ---
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 ---
 
 <html lang="en">

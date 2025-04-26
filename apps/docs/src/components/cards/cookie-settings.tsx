@@ -1,4 +1,4 @@
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 import {
   Card,
   CardContent,
@@ -6,9 +6,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "~/registry/ui/card"
-import { Label } from "~/registry/ui/label"
-import { Switch, SwitchControl, SwitchThumb } from "~/registry/ui/switch"
+} from "@/registry/ui/card"
+import { Label } from "@/registry/ui/label"
+import { Switch, SwitchControl, SwitchThumb } from "@/registry/ui/switch"
 
 export function CookieSettings() {
   return (

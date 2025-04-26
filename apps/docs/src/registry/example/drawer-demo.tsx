@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js"
 
-import { IconMinus, IconPlus } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
+import { IconMinus, IconPlus } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
 import {
   Drawer,
   DrawerClose,
@@ -11,7 +11,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
-} from "~/registry/ui/drawer"
+} from "@/registry/ui/drawer"
 
 export default function DrawerDemo() {
   const [goal, setGoal] = createSignal(250)

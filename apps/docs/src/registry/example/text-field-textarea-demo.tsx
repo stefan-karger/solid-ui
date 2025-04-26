@@ -1,4 +1,4 @@
-import { TextField, TextFieldTextArea } from "~/registry/ui/text-field"
+import { TextField, TextFieldTextArea } from "@/registry/ui/text-field"
 
 export default function TextareaDemo() {
   return (

@@ -2,7 +2,7 @@ import type { ComponentProps } from "solid-js"
 import { For, Show, splitProps } from "solid-js"
 import { useLocation } from "@solidjs/router"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 import { IconArrowRight } from "./icons"
 

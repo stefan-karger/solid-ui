@@ -1,8 +1,8 @@
 import { createEffect, createSignal, For, onCleanup } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 
-import { docsConfig } from "~/config/docs"
-import { Button } from "~/registry/ui/button"
+import { docsConfig } from "@/config/docs"
+import { Button } from "@/registry/ui/button"
 import {
   CommandDialog,
   CommandEmpty,
@@ -10,7 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList
-} from "~/registry/ui/command"
+} from "@/registry/ui/command"
 
 import { IconCommand, IconFile } from "./icons"
 

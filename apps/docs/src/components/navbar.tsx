@@ -1,11 +1,11 @@
 import { A, useLocation } from "@solidjs/router"
 
-import { IconBrandGithub, IconLogo } from "~/components/icons"
-import { MobileNav } from "~/components/mobile-nav"
-import { ModeToggle } from "~/components/mode-toggle"
-import SearchBar from "~/components/search-bar"
-import { cn } from "~/lib/utils"
-import { buttonVariants } from "~/registry/ui/button"
+import { IconBrandGithub, IconLogo } from "@/components/icons"
+import { MobileNav } from "@/components/mobile-nav"
+import { ModeToggle } from "@/components/mode-toggle"
+import SearchBar from "@/components/search-bar"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/registry/ui/button"
 
 export default function Navbar() {
   const location = useLocation()

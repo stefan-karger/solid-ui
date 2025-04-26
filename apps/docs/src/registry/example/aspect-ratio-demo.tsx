@@ -1,4 +1,4 @@
-import { AspectRatio } from "~/registry/ui/aspect-ratio"
+import { AspectRatio } from "@/registry/ui/aspect-ratio"
 
 export default function AspectRatioDemo() {
   return (

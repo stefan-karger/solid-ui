@@ -1,15 +1,15 @@
 import { A } from "@solidjs/router"
 
-import { ExamplesNav } from "~/components/examples-nav"
-import { IconBrandGithub } from "~/components/icons"
-import { Mail } from "~/components/mail"
+import { ExamplesNav } from "@/components/examples-nav"
+import { IconBrandGithub } from "@/components/icons"
+import { Mail } from "@/components/mail"
 import {
-  PageHeader,
-  PageHeaderActions,
-  PageHeaderDescription,
-  PageHeaderHeading
-} from "~/components/page-header"
-import { Button } from "~/registry/ui/button"
+    PageHeader,
+    PageHeaderActions,
+    PageHeaderDescription,
+    PageHeaderHeading
+} from "@/components/page-header"
+import { Button } from "@/registry/ui/button"
 
 export default function Home() {
   return (

@@ -1,11 +1,11 @@
 import { A } from "@solidjs/router"
 
 import {
-  PageHeaderActions,
-  PageHeaderDescription,
-  PageHeaderHeading
-} from "~/components/page-header"
-import { Button } from "~/registry/ui/button"
+    PageHeaderActions,
+    PageHeaderDescription,
+    PageHeaderHeading
+} from "@/components/page-header"
+import { Button } from "@/registry/ui/button"
 
 export default function NotFound() {
   return (

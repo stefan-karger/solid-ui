@@ -1,6 +1,6 @@
 import { splitProps, type ComponentProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type IconProps = ComponentProps<"svg">
 

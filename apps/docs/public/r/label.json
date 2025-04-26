@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "description": "A label component",
+  "dependencies": [
+    "solid-js"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/label.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Label: Component<ComponentProps<\"label\">> = (props) => {\n  const [local, others] = splitProps(props, [\"class\"])\n  return (\n    <label\n      class={cn(\n        \"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",\n        local.class\n      )}\n      {...others}\n    />\n  )\n}\n\nexport { Label }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

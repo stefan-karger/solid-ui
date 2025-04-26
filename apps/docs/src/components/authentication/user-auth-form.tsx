@@ -1,10 +1,10 @@
 import type { SubmitHandler } from "@modular-forms/solid"
 import { createForm } from "@modular-forms/solid"
 
-import { IconBrandGithub, IconLoader } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { Grid } from "~/registry/ui/grid"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+import { IconBrandGithub, IconLoader } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { Grid } from "@/registry/ui/grid"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 import type { AuthForm } from "./validations/auth"
 

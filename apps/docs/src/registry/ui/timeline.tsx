@@ -1,7 +1,7 @@
 import type { ComponentProps, ParentComponent } from "solid-js"
 import { For, mergeProps, Show, splitProps, type Component, type JSXElement } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 export type TimelinePropsItem = Omit<
   TimelineItemProps,

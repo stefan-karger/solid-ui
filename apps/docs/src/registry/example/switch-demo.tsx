@@ -1,4 +1,4 @@
-import { Switch, SwitchControl, SwitchLabel, SwitchThumb } from "~/registry/ui/switch"
+import { Switch, SwitchControl, SwitchLabel, SwitchThumb } from "@/registry/ui/switch"
 
 export default function SwitchDemo() {
   return (

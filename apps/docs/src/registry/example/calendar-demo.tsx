@@ -17,7 +17,7 @@ import {
   DatePickerView,
   DatePickerViewControl,
   DatePickerViewTrigger
-} from "~/registry/ui/date-picker"
+} from "@/registry/ui/date-picker"
 
 export default function CalendarDemo() {
   return (

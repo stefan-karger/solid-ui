@@ -1,9 +1,9 @@
 import type { Component } from "solid-js"
 import { For, Show } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { buttonVariants } from "~/registry/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/registry/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip"
 
 interface NavProps {
   isCollapsed: boolean

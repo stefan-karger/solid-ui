@@ -4,7 +4,7 @@ import { Show, splitProps } from "solid-js"
 import * as NumberFieldPrimitive from "@kobalte/core/number-field"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const NumberField = NumberFieldPrimitive.Root
 

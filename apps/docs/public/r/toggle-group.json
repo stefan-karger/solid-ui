@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "title": "Toggle Group",
+  "description": "A toggle group component",
+  "dependencies": [
+    "solid-js",
+    "@kobalte/core",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://solid-ui.com/r/toggle.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/toggle-group.tsx",
+      "content": "import type { JSX, ValidComponent } from \"solid-js\"\nimport { createContext, splitProps, useContext } from \"solid-js\"\n\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\nimport * as ToggleGroupPrimitive from \"@kobalte/core/toggle-group\"\nimport type { VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { toggleVariants } from \"@/registry/ui/toggle\"\n\nconst ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({\n  size: \"default\",\n  variant: \"default\"\n})\n\ntype ToggleGroupRootProps<T extends ValidComponent = \"div\"> =\n  ToggleGroupPrimitive.ToggleGroupRootProps<T> &\n    VariantProps<typeof toggleVariants> & { class?: string | undefined; children?: JSX.Element }\n\nconst ToggleGroup = <T extends ValidComponent = \"div\">(\n  props: PolymorphicProps<T, ToggleGroupRootProps<T>>\n) => {\n  const [local, others] = splitProps(props as ToggleGroupRootProps, [\n    \"class\",\n    \"children\",\n    \"size\",\n    \"variant\"\n  ])\n\n  return (\n    <ToggleGroupPrimitive.Root\n      class={cn(\"flex items-center justify-center gap-1\", local.class)}\n      {...others}\n    >\n      <ToggleGroupContext.Provider\n        value={{\n          get size() {\n            return local.size\n          },\n          get variant() {\n            return local.variant\n          }\n        }}\n      >\n        {local.children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive.Root>\n  )\n}\n\ntype ToggleGroupItemProps<T extends ValidComponent = \"button\"> =\n  ToggleGroupPrimitive.ToggleGroupItemProps<T> &\n    VariantProps<typeof toggleVariants> & { class?: string | undefined }\n\nconst ToggleGroupItem = <T extends ValidComponent = \"button\">(\n  props: PolymorphicProps<T, ToggleGroupItemProps<T>>\n) => {\n  const [local, others] = splitProps(props as ToggleGroupItemProps, [\"class\", \"size\", \"variant\"])\n  const context = useContext(ToggleGroupContext)\n  return (\n    <ToggleGroupPrimitive.Item\n      class={cn(\n        toggleVariants({\n          size: context.size || local.size,\n          variant: context.variant || local.variant\n        }),\n        \"hover:bg-muted hover:text-muted-foreground data-[pressed]:bg-accent data-[pressed]:text-accent-foreground\",\n        local.class\n      )}\n      {...others}\n    />\n  )\n}\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -5,9 +5,9 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight
-} from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+} from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/ui/select"
 
 type TablePaginationProps<TData> = {
   table: Table<TData>

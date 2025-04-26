@@ -1,13 +1,13 @@
 import { Index } from "solid-js"
 
-import { Card, CardContent } from "~/registry/ui/card"
+import { Card, CardContent } from "@/registry/ui/card"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from "~/registry/ui/carousel"
+} from "@/registry/ui/carousel"
 
 export default function CarouselOrientationDemo() {
   return (

@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import * as AccordionPrimitive from "@kobalte/core/accordion"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const Accordion = AccordionPrimitive.Root
 

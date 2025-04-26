@@ -3,16 +3,16 @@ import { Match, Show, Switch } from "solid-js"
 
 import type { Column } from "@tanstack/solid-table"
 
-import { IconArrowDown, IconArrowUp, IconEyeOff, IconSelector } from "~/components/icons"
-import { cn } from "~/lib/utils"
-import { Button } from "~/registry/ui/button"
+import { IconArrowDown, IconArrowUp, IconEyeOff, IconSelector } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { Button } from "@/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
+} from "@/registry/ui/dropdown-menu"
 
 type TableColumnHeaderProps<TData, TValue> = ComponentProps<"div"> & {
   column: Column<TData, TValue>

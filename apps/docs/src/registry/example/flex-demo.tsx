@@ -1,5 +1,5 @@
-import { Card } from "~/registry/ui/card"
-import { Flex } from "~/registry/ui/flex"
+import { Card } from "@/registry/ui/card"
+import { Flex } from "@/registry/ui/flex"
 
 export default function FlexDemo() {
   return (

@@ -1,5 +1,5 @@
-import { Cards } from "~/components/cards"
-import { MetaTags } from "~/components/meta-tags"
+import { Cards } from "@/components/cards"
+import { MetaTags } from "@/components/meta-tags"
 
 export default function CardsRoute() {
   return (

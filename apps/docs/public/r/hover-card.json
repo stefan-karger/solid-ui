@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "type": "registry:ui",
+  "title": "Hover Card",
+  "description": "A hover card component",
+  "dependencies": [
+    "solid-js",
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/hover-card.tsx",
+      "content": "import type { Component, ValidComponent } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport * as HoverCardPrimitive from \"@kobalte/core/hover-card\"\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst HoverCardTrigger = HoverCardPrimitive.Trigger\n\nconst HoverCard: Component<HoverCardPrimitive.HoverCardRootProps> = (props) => {\n  return <HoverCardPrimitive.Root gutter={4} {...props} />\n}\n\ntype HoverCardContentProps<T extends ValidComponent = \"div\"> =\n  HoverCardPrimitive.HoverCardContentProps<T> & {\n    class?: string | undefined\n  }\n\nconst HoverCardContent = <T extends ValidComponent = \"div\">(\n  props: PolymorphicProps<T, HoverCardContentProps<T>>\n) => {\n  const [local, others] = splitProps(props as HoverCardContentProps, [\"class\"])\n  return (\n    <HoverCardPrimitive.Portal>\n      <HoverCardPrimitive.Content\n        class={cn(\n          \"z-50 w-64 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n          local.class\n        )}\n        {...others}\n      />\n    </HoverCardPrimitive.Portal>\n  )\n}\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

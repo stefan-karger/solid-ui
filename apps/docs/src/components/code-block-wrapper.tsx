@@ -1,8 +1,8 @@
 import { createSignal, mergeProps, splitProps, type Component, type ComponentProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { Button } from "~/registry/ui/button"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import { cn } from "@/lib/utils"
+import { Button } from "@/registry/ui/button"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/registry/ui/collapsible"
 
 interface CodeBlockProps extends ComponentProps<"div"> {
   expandButtonTitle?: string

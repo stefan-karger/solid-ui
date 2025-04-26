@@ -4,7 +4,7 @@ import { Show, splitProps } from "solid-js"
 import type { PolymorphicProps } from "@kobalte/core"
 import * as BreadcrumbPrimitive from "@kobalte/core/breadcrumbs"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const Breadcrumb = BreadcrumbPrimitive.Root
 

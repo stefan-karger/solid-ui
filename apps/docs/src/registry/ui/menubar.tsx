@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import * as MenubarPrimitive from "@kobalte/core/menubar"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const MenubarGroup = MenubarPrimitive.Group
 const MenubarPortal = MenubarPrimitive.Portal

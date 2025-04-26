@@ -6,7 +6,7 @@
 
 ```astro
 ---
-import '~/styles/globals.css'
+import '@/styles/globals.css'
 ---
 
 <script is:inline>
@@ -44,13 +44,13 @@ import { createEffect, createSignal } from "solid-js"
 import { As } from "@kobalte/core"
 import { TbDeviceLaptop, TbMoon, TbSun } from "solid-icons/tb"
 
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "~/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 export function ModeToggle() {
   const [theme, setTheme] = createSignal<"light" | "dark" | "system">("light")
@@ -99,8 +99,8 @@ Place a mode toggle on your site to toggle between light and dark mode.
 
 ```astro
 ---
-import '~/styles/globals.css'
-import { ModeToggle } from '~/components/mode-toggle';
+import '@/styles/globals.css'
+import { ModeToggle } from '@/components/mode-toggle';
 ---
 
 <!-- Inline script -->

@@ -18,14 +18,14 @@ import { Polymorphic } from "@kobalte/core"
 import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
 
-import { cn } from "~/lib/utils"
-import type { ButtonProps } from "~/registry/ui/button"
-import { Button } from "~/registry/ui/button"
-import { Separator } from "~/registry/ui/separator"
-import { Sheet, SheetContent } from "~/registry/ui/sheet"
-import { Skeleton } from "~/registry/ui/skeleton"
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+import { cn } from "@/lib/utils"
+import type { ButtonProps } from "@/registry/ui/button"
+import { Button } from "@/registry/ui/button"
+import { Separator } from "@/registry/ui/separator"
+import { Sheet, SheetContent } from "@/registry/ui/sheet"
+import { Skeleton } from "@/registry/ui/skeleton"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip"
 
 const MOBILE_BREAKPOINT = 768
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
@@ -183,7 +183,7 @@ const Sidebar: Component<SidebarProps> = (rawProps) => {
       <Match when={local.collapsible === "none"}>
         <div
           class={cn(
-            "test flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
+            "test w-(--sidebar-width) flex h-full flex-col bg-sidebar text-sidebar-foreground",
             local.class
           )}
           {...others}
@@ -196,7 +196,7 @@ const Sidebar: Component<SidebarProps> = (rawProps) => {
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
-            class="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+            class="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
             style={{
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE
             }}
@@ -217,24 +217,24 @@ const Sidebar: Component<SidebarProps> = (rawProps) => {
           {/* This is what handles the sidebar gap on desktop */}
           <div
             class={cn(
-              "relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear",
+              "w-(--sidebar-width) relative h-svh bg-transparent transition-[width] duration-200 ease-linear",
               "group-data-[collapsible=offcanvas]:w-0",
               "group-data-[side=right]:rotate-180",
               local.variant === "floating" || local.variant === "inset"
                 ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-                : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
+                : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
             )}
           />
           <div
             class={cn(
-              "fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex",
+              "w-(--sidebar-width) fixed inset-y-0 z-10 hidden h-svh transition-[left,right,width] duration-200 ease-linear md:flex",
               local.side === "left"
                 ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
                 : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
               // Adjust the padding for floating and inset variants.
               local.variant === "floating" || local.variant === "inset"
                 ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-                : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+                : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
               local.class
             )}
             {...others}
@@ -602,7 +602,7 @@ const SidebarMenuSkeleton: Component<SidebarMenuSkeletonProps> = (rawProps) => {
     >
       {local.showIcon && <Skeleton class="size-4 rounded-md" data-sidebar="menu-skeleton-icon" />}
       <Skeleton
-        class="h-4 max-w-[--skeleton-width] flex-1"
+        class="max-w-(--skeleton-width) h-4 flex-1"
         data-sidebar="menu-skeleton-text"
         style={{
           "--skeleton-width": width()

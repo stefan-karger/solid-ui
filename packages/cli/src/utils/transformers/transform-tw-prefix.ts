@@ -1,6 +1,6 @@
 import { SyntaxKind } from "ts-morph"
 
-import type { Transformer } from "~/utils/transformers"
+import type { Transformer } from "@/utils/transformers"
 
 export const transformTwPrefix: Transformer = async ({ sourceFile, config }) => {
   if (!config.tailwind.prefix) {

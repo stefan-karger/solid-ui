@@ -2,8 +2,8 @@ import { For } from "solid-js"
 
 import type { Table } from "@tanstack/solid-table"
 
-import { IconSettings } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
+import { IconSettings } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
+} from "@/registry/ui/dropdown-menu"
 
 type TableViewOptionsProps<TData> = {
   table: Table<TData>

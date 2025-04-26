@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const calloutVariants = cva("rounded-md border-l-4 p-2 pl-4", {
   variants: {

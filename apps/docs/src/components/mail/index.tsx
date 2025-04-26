@@ -2,11 +2,11 @@ import { createSignal } from "solid-js"
 
 import { cookieStorage, makePersisted } from "@solid-primitives/storage"
 
-import { cn } from "~/lib/utils"
-import { Resizable, ResizableHandle, ResizablePanel } from "~/registry/ui/resizable"
-import { Separator } from "~/registry/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+import { cn } from "@/lib/utils"
+import { Resizable, ResizableHandle, ResizablePanel } from "@/registry/ui/resizable"
+import { Separator } from "@/registry/ui/separator"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 import {
   IconArchive,

@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "~/registry/ui/card"
-import { PieChart } from "~/registry/ui/charts"
+import { Card, CardContent, CardHeader, CardTitle } from "@/registry/ui/card"
+import { PieChart } from "@/registry/ui/charts"
 
 export default function PieChartDemo() {
   const chartData = {

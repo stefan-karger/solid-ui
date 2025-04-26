@@ -1,11 +1,11 @@
 import type { RouteProps } from "@solidjs/router"
 import { MDXProvider } from "solid-mdx"
 
-import { MDXComponents } from "~/components/mdx-components"
-import Sidebar from "~/components/sidebar"
-import { TableOfContents } from "~/components/toc"
+import { MDXComponents } from "@/components/mdx-components"
+import Sidebar from "@/components/sidebar"
+import { TableOfContents } from "@/components/toc"
 
-import "~/styles/mdx.css"
+import "@/styles/mdx.css"
 
 export default function DocsLayout(props: RouteProps<string>) {
   return (

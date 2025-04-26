@@ -1,7 +1,7 @@
-import { IconCalendar } from "~/components/icons"
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Button } from "~/registry/ui/button"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/registry/ui/hover-card"
+import { IconCalendar } from "@/components/icons"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Button } from "@/registry/ui/button"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/registry/ui/hover-card"
 
 export default function HoverCardDemo() {
   return (

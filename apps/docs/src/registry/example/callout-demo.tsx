@@ -1,4 +1,4 @@
-import { Callout, CalloutContent, CalloutTitle } from "~/registry/ui/callout"
+import { Callout, CalloutContent, CalloutTitle } from "@/registry/ui/callout"
 
 export default function CalloutDemo() {
   return (

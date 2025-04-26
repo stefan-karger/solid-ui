@@ -1,10 +1,10 @@
 import type { ComponentProps } from "solid-js"
 import { createSignal, For } from "solid-js"
 
-import { IconLogo, IconSidebarOpen } from "~/components/icons"
-import { docsConfig } from "~/config/docs"
-import { Button } from "~/registry/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "~/registry/ui/sheet"
+import { IconLogo, IconSidebarOpen } from "@/components/icons"
+import { docsConfig } from "@/config/docs"
+import { Button } from "@/registry/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/registry/ui/sheet"
 
 export function MobileNav() {
   const [open, setOpen] = createSignal(false)

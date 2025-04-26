@@ -4,7 +4,7 @@ import { parse, type ParserOptions } from "@babel/parser"
 import transformTypescript from "@babel/plugin-transform-typescript"
 import * as recast from "recast"
 
-import type { Transformer } from "~/utils/transformers"
+import type { Transformer } from "@/utils/transformers"
 
 // TODO.
 // I'm using recast for the AST here.

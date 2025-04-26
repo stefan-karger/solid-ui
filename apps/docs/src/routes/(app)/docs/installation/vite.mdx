@@ -37,7 +37,7 @@ Add the following code to the `tsconfig.json` file to resolve paths:
     // ...
     "baseUrl": ".",
     "paths": {
-      "~/*": [
+      "@/*": [
         "./src/*"
       ]
     }
@@ -87,7 +87,7 @@ You will be asked a few questions to configure `ui.config.json`:
 Would you like to use TypeScript? (recommended) yes
 Where is your global CSS file? src/App.css
 Where is your tailwind.config.js located? tailwind.config.js
-Configure the import alias for the src directory: ~/*
+Configure the import alias for the src directory: @/*
 ```
 
 ### That's it
@@ -101,7 +101,7 @@ npx solidui-cli@latest add button
 The command above will add the `Button` component to your project. You can then import it like this:
 
 ```tsx {1,6} showLineNumbers
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (

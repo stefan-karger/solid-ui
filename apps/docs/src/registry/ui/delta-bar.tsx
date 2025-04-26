@@ -1,6 +1,6 @@
 import { mergeProps, Show, splitProps, type Component, type ComponentProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type DeltaBarProps = ComponentProps<"div"> & {
   value: number
@@ -47,5 +47,5 @@ const DeltaBar: Component<DeltaBarProps> = (rawProps) => {
   )
 }
 
-export type { DeltaBarProps }
 export { DeltaBar }
+export type { DeltaBarProps }

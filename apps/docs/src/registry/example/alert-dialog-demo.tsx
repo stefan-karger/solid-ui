@@ -4,8 +4,8 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger
-} from "~/registry/ui/alert-dialog"
-import { Button } from "~/registry/ui/button"
+} from "@/registry/ui/alert-dialog"
+import { Button } from "@/registry/ui/button"
 
 export default function AlertDialogDemo() {
   return (

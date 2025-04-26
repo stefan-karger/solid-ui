@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "~/registry/ui/table"
+} from "@/registry/ui/table"
 
 const invoices = [
   {

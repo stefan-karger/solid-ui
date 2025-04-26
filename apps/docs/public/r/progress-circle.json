@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress-circle",
+  "type": "registry:ui",
+  "title": "Progress Circle",
+  "description": "A progress circle component",
+  "dependencies": [
+    "solid-js"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/progress-circle.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\nimport { mergeProps, splitProps } from \"solid-js\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype Size = \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"\n\nconst sizes: Record<Size, { radius: number; strokeWidth: number }> = {\n  xs: { radius: 15, strokeWidth: 3 },\n  sm: { radius: 19, strokeWidth: 4 },\n  md: { radius: 32, strokeWidth: 6 },\n  lg: { radius: 52, strokeWidth: 8 },\n  xl: { radius: 80, strokeWidth: 10 }\n}\n\ntype ProgressCircleProps = ComponentProps<\"div\"> & {\n  value?: number\n  size?: Size\n  radius?: number\n  strokeWidth?: number\n  showAnimation?: boolean\n}\n\nconst ProgressCircle: Component<ProgressCircleProps> = (rawProps) => {\n  const props = mergeProps({ size: \"md\" as Size, showAnimation: true }, rawProps)\n  const [local, others] = splitProps(props, [\n    \"class\",\n    \"children\",\n    \"value\",\n    \"size\",\n    \"radius\",\n    \"strokeWidth\",\n    \"showAnimation\"\n  ])\n\n  const value = () => getLimitedValue(local.value)\n  const radius = () => local.radius ?? sizes[local.size].radius\n  const strokeWidth = () => local.strokeWidth ?? sizes[local.size].strokeWidth\n  const normalizedRadius = () => radius() - strokeWidth() / 2\n  const circumference = () => normalizedRadius() * 2 * Math.PI\n  const strokeDashoffset = () => (value() / 100) * circumference()\n  const offset = () => circumference() - strokeDashoffset()\n\n  return (\n    <div class={cn(\"flex flex-col items-center justify-center\", local.class)} {...others}>\n      <svg\n        width={radius() * 2}\n        height={radius() * 2}\n        viewBox={`0 0 ${radius() * 2} ${radius() * 2}`}\n        class=\"-rotate-90\"\n      >\n        <circle\n          r={normalizedRadius()}\n          cx={radius()}\n          cy={radius()}\n          stroke-width={strokeWidth()}\n          fill=\"transparent\"\n          stroke=\"\"\n          stroke-linecap=\"round\"\n          class={cn(\"stroke-secondary transition-colors ease-linear\")}\n        />\n        {value() >= 0 ? (\n          <circle\n            r={normalizedRadius()}\n            cx={radius()}\n            cy={radius()}\n            stroke-width={strokeWidth()}\n            stroke-dasharray={circumference() + \" \" + circumference()}\n            stroke-dashoffset={offset()}\n            fill=\"transparent\"\n            stroke=\"\"\n            stroke-linecap=\"round\"\n            class={cn(\n              \"stroke-primary transition-colors ease-linear\",\n              local.showAnimation ? \"transition-all duration-300 ease-in-out\" : \"\"\n            )}\n          />\n        ) : null}\n      </svg>\n      <div class={cn(\"absolute flex\")}>{local.children}</div>\n    </div>\n  )\n}\n\nfunction getLimitedValue(input: number | undefined) {\n  if (input === undefined) {\n    return 0\n  } else if (input > 100) {\n    return 100\n  }\n  return input\n}\n\nexport { ProgressCircle }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

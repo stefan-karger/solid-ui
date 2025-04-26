@@ -1,17 +1,17 @@
 import { createMemo, Show } from "solid-js"
 
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Button } from "~/registry/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Button } from "@/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
-import { Separator } from "~/registry/ui/separator"
-import { Switch, SwitchControl, SwitchLabel, SwitchThumb } from "~/registry/ui/switch"
-import { TextField, TextFieldTextArea } from "~/registry/ui/text-field"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+} from "@/registry/ui/dropdown-menu"
+import { Separator } from "@/registry/ui/separator"
+import { Switch, SwitchControl, SwitchLabel, SwitchThumb } from "@/registry/ui/switch"
+import { TextField, TextFieldTextArea } from "@/registry/ui/text-field"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip"
 
 import {
   IconArchive,

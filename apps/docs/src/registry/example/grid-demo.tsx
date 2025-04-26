@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "~/registry/ui/card"
-import { Col, Grid } from "~/registry/ui/grid"
+import { Card, CardContent, CardHeader, CardTitle } from "@/registry/ui/card"
+import { Col, Grid } from "@/registry/ui/grid"
 
 export default function GridDemo() {
   return (

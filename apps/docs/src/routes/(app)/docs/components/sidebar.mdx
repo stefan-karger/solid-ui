@@ -165,8 +165,8 @@ A `Sidebar` component is composed of the following parts:
 ## Usage
 
 ```tsx showLineNumbers title="app.tsx"
-import { AppSidebar } from "~/components/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 export default function Layout(props: ParentProps) {
   return (
@@ -188,7 +188,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader
-} from "~/components/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   return (
@@ -213,8 +213,8 @@ Let's start with the most basic sidebar. A collapsible sidebar with a menu.
 <Step>Add a `SidebarProvider` and `SidebarTrigger` at the root of your application.</Step>
 
 ```tsx showLineNumbers title="app.tsx"
-import { AppSidebar } from "~/components/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 export default function Layout(props: ParentProps) {
   return (
@@ -232,7 +232,7 @@ export default function Layout(props: ParentProps) {
 <Step>Create a new sidebar component at `components/app-sidebar.tsx`.</Step>
 
 ```tsx showLineNumbers title="components/app-sidebar.tsx"
-import { Sidebar, SidebarContent } from "~/components/ui/sidebar"
+import { Sidebar, SidebarContent } from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   return (
@@ -251,7 +251,7 @@ We'll use the `SidebarMenu` component in a `SidebarGroup`.
 import { For } from "solid-js"
 import { A } from "@solidjs/router"
 
-import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "~/components/icons"
+import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "@/components/icons"
 import {
   Sidebar,
   SidebarContent,
@@ -261,7 +261,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem
-} from "~/components/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 const items = [
   {

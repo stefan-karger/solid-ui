@@ -1,5 +1,5 @@
-import { IconBrandApple, IconBrandPaypal, IconCreditCard } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
+import { IconBrandApple, IconBrandPaypal, IconCreditCard } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
 import {
   Card,
   CardContent,
@@ -7,11 +7,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "~/registry/ui/card"
-import { Label } from "~/registry/ui/label"
-import { RadioGroup, RadioGroupItem } from "~/registry/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+} from "@/registry/ui/card"
+import { Label } from "@/registry/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/registry/ui/radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/ui/select"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 export function PaymentMethod() {
   return (

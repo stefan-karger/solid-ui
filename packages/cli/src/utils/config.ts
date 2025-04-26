@@ -4,10 +4,10 @@ import path from "node:path"
 import { loadConfig } from "tsconfig-paths"
 import * as v from "valibot"
 
-import { resolveImport } from "~/utils/resolve-import"
+import { resolveImport } from "@/utils/resolve-import"
 
-export const DEFAULT_COMPONENTS = "~/components/ui"
-export const DEFAULT_UTILS = "~/lib/utils"
+export const DEFAULT_COMPONENTS = "@/components/ui"
+export const DEFAULT_UTILS = "@/lib/utils"
 export const DEFAULT_CSS_FILE = "src/app.css"
 export const DEFAULT_TAILWIND_CONFIG = "tailwind.config.cjs"
 export const DEFAULT_TAILWIND_PREFIX = ""

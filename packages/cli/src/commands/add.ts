@@ -7,11 +7,11 @@ import { Command } from "commander"
 import { execa } from "execa"
 import * as v from "valibot"
 
-import { getConfig } from "~/utils/config"
-import { getPackageManager } from "~/utils/get-package-manager"
-import { handleError, highlight } from "~/utils/logger"
-import { fetchTree, getRegistryIndex, resolveTree } from "~/utils/registry"
-import { transform } from "~/utils/transformers"
+import { getConfig } from "@/utils/config"
+import { getPackageManager } from "@/utils/get-package-manager"
+import { handleError, highlight } from "@/utils/logger"
+import { fetchTree, getRegistryIndex, resolveTree } from "@/utils/registry"
+import { transform } from "@/utils/transformers"
 
 const addOptionsSchema = v.object({
   components: v.optional(v.array(v.string()), []),

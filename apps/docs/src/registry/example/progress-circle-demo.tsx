@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Card } from "~/registry/ui/card"
-import { ProgressCircle } from "~/registry/ui/progress-circle"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Card } from "@/registry/ui/card"
+import { ProgressCircle } from "@/registry/ui/progress-circle"
 
 export default function ProgressCircleDemo() {
   return (

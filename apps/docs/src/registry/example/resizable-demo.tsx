@@ -1,4 +1,4 @@
-import { Resizable, ResizableHandle, ResizablePanel } from "~/registry/ui/resizable"
+import { Resizable, ResizableHandle, ResizablePanel } from "@/registry/ui/resizable"
 
 export default function ResizableDemo() {
   return (

@@ -1,3 +1,5 @@
+@reference "./app.css";
+
 [data-rehype-pretty-code-fragment] {
   @apply relative;
 }

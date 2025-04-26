@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flex",
+  "type": "registry:ui",
+  "title": "Flex",
+  "description": "A flex component",
+  "dependencies": [
+    "solid-js"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/flex.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\nimport { mergeProps, splitProps } from \"solid-js\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype JustifyContent = \"start\" | \"end\" | \"center\" | \"between\" | \"around\" | \"evenly\"\ntype AlignItems = \"start\" | \"end\" | \"center\" | \"baseline\" | \"stretch\"\ntype FlexDirection = \"row\" | \"col\" | \"row-reverse\" | \"col-reverse\"\n\ntype FlexProps = ComponentProps<\"div\"> & {\n  flexDirection?: FlexDirection\n  justifyContent?: JustifyContent\n  alignItems?: AlignItems\n}\n\nconst Flex: Component<FlexProps> = (rawProps) => {\n  const props = mergeProps(\n    {\n      flexDirection: \"row\",\n      justifyContent: \"between\",\n      alignItems: \"center\"\n    } satisfies FlexProps,\n    rawProps\n  )\n  const [local, others] = splitProps(props, [\n    \"flexDirection\",\n    \"justifyContent\",\n    \"alignItems\",\n    \"class\"\n  ])\n\n  return (\n    <div\n      class={cn(\n        \"flex w-full\",\n        flexDirectionClassNames[local.flexDirection],\n        justifyContentClassNames[local.justifyContent],\n        alignItemsClassNames[local.alignItems],\n        local.class\n      )}\n      {...others}\n    />\n  )\n}\n\nexport { Flex }\n\nconst justifyContentClassNames: { [key in JustifyContent]: string } = {\n  start: \"justify-start\",\n  end: \"justify-end\",\n  center: \"justify-center\",\n  between: \"justify-between\",\n  around: \"justify-around\",\n  evenly: \"justify-evenly\"\n}\n\nconst alignItemsClassNames: { [key in AlignItems]: string } = {\n  start: \"items-start\",\n  end: \"items-end\",\n  center: \"items-center\",\n  baseline: \"items-baseline\",\n  stretch: \"items-stretch\"\n}\n\nconst flexDirectionClassNames: { [key in FlexDirection]: string } = {\n  row: \"flex-row\",\n  col: \"flex-col\",\n  \"row-reverse\": \"flex-row-reverse\",\n  \"col-reverse\": \"flex-col-reverse\"\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

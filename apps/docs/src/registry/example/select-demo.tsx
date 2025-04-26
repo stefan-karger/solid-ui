@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/ui/select"
 
 export default function SelectDemo() {
   const [value, setValue] = createSignal("")

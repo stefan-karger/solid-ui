@@ -2,8 +2,8 @@ import { Show } from "solid-js"
 
 import type { ColumnDef } from "@tanstack/solid-table"
 
-import { Badge } from "~/registry/ui/badge"
-import { Checkbox } from "~/registry/ui/checkbox"
+import { Badge } from "@/registry/ui/badge"
+import { Checkbox } from "@/registry/ui/checkbox"
 
 import type { Task } from "./data"
 import { labels, priorities, statuses } from "./data"

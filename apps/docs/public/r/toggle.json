@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "type": "registry:ui",
+  "title": "Toggle",
+  "description": "A toggle component",
+  "dependencies": [
+    "solid-js",
+    "@kobalte/core",
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/toggle.tsx",
+      "content": "import type { ValidComponent } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\nimport * as ToggleButtonPrimitive from \"@kobalte/core/toggle-button\"\nimport { cva } from \"class-variance-authority\"\nimport type { VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst toggleVariants = cva(\n  \"inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-input bg-transparent shadow-sm\"\n      },\n      size: {\n        default: \"h-9 px-3\",\n        sm: \"h-8 px-2\",\n        lg: \"h-10 px-3\"\n      }\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\"\n    }\n  }\n)\n\ntype ToggleButtonRootProps<T extends ValidComponent = \"button\"> =\n  ToggleButtonPrimitive.ToggleButtonRootProps<T> &\n    VariantProps<typeof toggleVariants> & { class?: string | undefined }\n\nconst Toggle = <T extends ValidComponent = \"button\">(\n  props: PolymorphicProps<T, ToggleButtonRootProps<T>>\n) => {\n  const [local, others] = splitProps(props as ToggleButtonRootProps, [\"class\", \"variant\", \"size\"])\n  return (\n    <ToggleButtonPrimitive.Root\n      class={cn(toggleVariants({ variant: local.variant, size: local.size }), local.class)}\n      {...others}\n    />\n  )\n}\n\nexport type { ToggleButtonRootProps as ToggleProps }\nexport { toggleVariants, Toggle }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

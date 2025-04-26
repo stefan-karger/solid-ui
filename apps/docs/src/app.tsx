@@ -1,16 +1,16 @@
 // @refresh reload
-import { Suspense } from "solid-js"
-import { isServer } from "solid-js/web"
 import { MetaProvider } from "@solidjs/meta"
 import { Router } from "@solidjs/router"
 import { FileRoutes } from "@solidjs/start/router"
+import { Suspense } from "solid-js"
+import { isServer } from "solid-js/web"
 
 import { ColorModeProvider, ColorModeScript, cookieStorageManagerSSR } from "@kobalte/core"
 import { getCookie } from "vinxi/http"
 
-import { MetaTags } from "~/components/meta-tags"
+import { MetaTags } from "@/components/meta-tags"
 
-import "~/styles/app.css"
+import "@/styles/app.css"
 
 function getServerCookies() {
   "use server"

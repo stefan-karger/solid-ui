@@ -1,13 +1,13 @@
 import { createSignal, For } from "solid-js"
 
-import { IconCheck, IconFile, IconSelector } from "~/components/icons"
+import { IconCheck, IconFile, IconSelector } from "@/components/icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "~/registry/ui/sidebar"
+} from "@/registry/ui/dropdown-menu"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/registry/ui/sidebar"
 
 export function VersionSwitcher(props: { versions: string[]; defaultVersion: string }) {
   const [selectedVersion, setSelectedVersion] = createSignal(props.defaultVersion)

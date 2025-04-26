@@ -1,8 +1,8 @@
 import type { Table } from "@tanstack/solid-table"
 
-import { IconX } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+import { IconX } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 import { priorities, statuses } from "./data"
 import { TableFacetedFilter } from "./table-faceted-filter"

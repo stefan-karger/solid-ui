@@ -1,4 +1,4 @@
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 export default function TextFieldDemo() {
   return (
