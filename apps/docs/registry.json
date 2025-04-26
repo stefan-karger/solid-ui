@@ -779,6 +779,7 @@
       "name": "css",
       "type": "registry:theme",
       "description": "Solid UI base CSS",
+      "files": [],
       "cssVars": {
         "light": {
           "info": "oklch(0.95 0.024 236.81)",

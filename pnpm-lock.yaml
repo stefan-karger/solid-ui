@@ -179,8 +179,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       shadcn:
-        specifier: ^2.5.0-canary.1
-        version: 2.5.0-canary.1(@types/node@18.19.41)(typescript@5.6.2)
+        specifier: ^2.5.0
+        version: 2.5.0(@types/node@18.19.41)(typescript@5.6.2)
       shiki:
         specifier: 0.14.5
         version: 0.14.5
@@ -9206,8 +9206,8 @@ packages:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
     dev: false
 
-  /shadcn@2.5.0-canary.1(@types/node@18.19.41)(typescript@5.6.2):
-    resolution: {integrity: sha512-QzW/r5OAUD9imqp/n8NwOnVGd1vG5xv2GwlJbfRi01VySY6oFd8U+XhIx8IzuDci+uCUod3wtUlWNBNlm06TFw==}
+  /shadcn@2.5.0(@types/node@18.19.41)(typescript@5.6.2):
+    resolution: {integrity: sha512-kqbTpDWIYE8spytMiJFoKyzOTHb+DzNLjMXzz+ifDFTBgTPv6gIydmirTZwwfFb23XvenrTSVHsZHUjGsllcHw==}
     hasBin: true
     dependencies:
       '@antfu/ni': 23.3.1
@@ -9873,7 +9873,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       psl: 1.15.0
-      punycode: 2.3.0
+      punycode: 2.3.1
       universalify: 0.2.0
       url-parse: 1.5.10
     dev: true
