@@ -1,7 +1,7 @@
 import { For } from "solid-js"
 import { A } from "@solidjs/router"
 
-import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "~/components/icons"
+import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "@/components/icons"
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +14,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger
-} from "~/registry/ui/sidebar"
+} from "@/registry/ui/sidebar"
 
 const items = [
   {

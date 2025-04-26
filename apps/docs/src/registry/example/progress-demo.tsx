@@ -1,4 +1,4 @@
-import { Progress, ProgressLabel, ProgressValueLabel } from "~/registry/ui/progress"
+import { Progress, ProgressLabel, ProgressValueLabel } from "@/registry/ui/progress"
 
 export default function ProgressDemo() {
   return (

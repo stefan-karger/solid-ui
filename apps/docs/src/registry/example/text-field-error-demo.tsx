@@ -5,8 +5,8 @@ import {
   TextFieldErrorMessage,
   TextFieldInput,
   TextFieldLabel
-} from "~/registry/ui/text-field"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+} from "@/registry/ui/text-field"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip"
 
 export default function TextFieldErrorDemo() {
   const [value, setValue] = createSignal("no valid email")

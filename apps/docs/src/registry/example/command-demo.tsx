@@ -5,7 +5,7 @@ import {
   IconSettings,
   IconSmile,
   IconUser
-} from "~/components/icons"
+} from "@/components/icons"
 import {
   Command,
   CommandEmpty,
@@ -15,7 +15,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut
-} from "~/registry/ui/command"
+} from "@/registry/ui/command"
 
 export default function CommandDemo() {
   return (

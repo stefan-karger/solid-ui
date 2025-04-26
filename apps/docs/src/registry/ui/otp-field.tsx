@@ -4,7 +4,7 @@ import { Show, splitProps } from "solid-js"
 import type { DynamicProps, RootProps } from "@corvu/otp-field"
 import OtpField from "@corvu/otp-field"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 export const REGEXP_ONLY_DIGITS = "^\\d*$"
 export const REGEXP_ONLY_CHARS = "^[a-zA-Z]*$"

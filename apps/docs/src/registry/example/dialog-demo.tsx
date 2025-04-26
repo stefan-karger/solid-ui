@@ -1,4 +1,4 @@
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from "~/registry/ui/dialog"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+} from "@/registry/ui/dialog"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 export default function DialogDemo() {
   return (

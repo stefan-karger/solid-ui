@@ -1,10 +1,9 @@
 import type { Accessor, Setter } from "solid-js"
 import { createEffect, createSignal, For, on, onCleanup, Suspense } from "solid-js"
 import { isServer } from "solid-js/web"
-
 import { useLocation } from "@solidjs/router"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type TocItem = {
   depth: number

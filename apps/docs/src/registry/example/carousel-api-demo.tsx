@@ -1,6 +1,6 @@
 import { createEffect, createSignal, Index } from "solid-js"
 
-import { Card, CardContent } from "~/registry/ui/card"
+import { Card, CardContent } from "@/registry/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi
-} from "~/registry/ui/carousel"
+} from "@/registry/ui/carousel"
 
 export default function CarouselApiDemo() {
   const [api, setApi] = createSignal<ReturnType<CarouselApi>>()

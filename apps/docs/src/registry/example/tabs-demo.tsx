@@ -1,4 +1,4 @@
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 import {
   Card,
   CardContent,
@@ -6,9 +6,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "~/registry/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+} from "@/registry/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 export default function TabsDemo() {
   return (

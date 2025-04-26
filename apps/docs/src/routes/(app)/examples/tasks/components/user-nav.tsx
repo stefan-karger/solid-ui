@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Button } from "~/registry/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Button } from "@/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
+} from "@/registry/ui/dropdown-menu"
 
 export function UserNav() {
   return (

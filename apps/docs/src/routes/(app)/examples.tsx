@@ -1,14 +1,14 @@
 import { A, type RouteProps } from "@solidjs/router"
 
-import { ExamplesNav } from "~/components/examples-nav"
-import { MetaTags } from "~/components/meta-tags"
+import { ExamplesNav } from "@/components/examples-nav"
+import { MetaTags } from "@/components/meta-tags"
 import {
-  PageHeader,
-  PageHeaderActions,
-  PageHeaderDescription,
-  PageHeaderHeading
-} from "~/components/page-header"
-import { Button } from "~/registry/ui/button"
+    PageHeader,
+    PageHeaderActions,
+    PageHeaderDescription,
+    PageHeaderHeading
+} from "@/components/page-header"
+import { Button } from "@/registry/ui/button"
 
 export default function ExamplesLayout(props: RouteProps<string>) {
   return (

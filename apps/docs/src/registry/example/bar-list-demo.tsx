@@ -4,9 +4,9 @@ import {
   IconBrandReddit,
   IconBrandX,
   IconBrandYoutube
-} from "~/components/icons"
-import { BarList } from "~/registry/ui/bar-list"
-import { Card } from "~/registry/ui/card"
+} from "@/components/icons"
+import { BarList } from "@/registry/ui/bar-list"
+import { Card } from "@/registry/ui/card"
 
 export default function BarListDemo() {
   const data = [

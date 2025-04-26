@@ -1,8 +1,8 @@
-import { IconDownload } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
-import { Grid } from "~/registry/ui/grid"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
+import { IconDownload } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
+import { Grid } from "@/registry/ui/grid"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs"
 
 import { MainNav } from "./main-nav"
 import { Overview } from "./overview"

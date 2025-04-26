@@ -1,5 +1,5 @@
-import { Button } from "~/registry/ui/button"
-import { showToast, Toaster } from "~/registry/ui/toast"
+import { Button } from "@/registry/ui/button"
+import { showToast, Toaster } from "@/registry/ui/toast"
 
 export default function ToastDemo() {
   return (

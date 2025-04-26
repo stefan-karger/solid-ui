@@ -1,6 +1,6 @@
-import { cn } from "~/lib/utils"
-import { IconCommand } from "~/components/icons"
-import { buttonVariants } from "~/registry/ui/button"
+import { IconCommand } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/registry/ui/button"
 
 import { UserAuthForm } from "./user-auth-form"
 
@@ -33,7 +33,7 @@ export function Authentication() {
         >
           Login
         </a>
-        <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+        <div class="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <div class="absolute inset-0 bg-zinc-900" />
           <div class="relative z-20 flex items-center text-lg font-medium">
             <IconCommand class="mr-2 size-6" />

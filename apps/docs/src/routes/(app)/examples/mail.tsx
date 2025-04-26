@@ -1,5 +1,5 @@
-import { Mail } from "~/components/mail"
-import { MetaTags } from "~/components/meta-tags"
+import { Mail } from "@/components/mail"
+import { MetaTags } from "@/components/meta-tags"
 
 export default function CardsRoute() {
   return (

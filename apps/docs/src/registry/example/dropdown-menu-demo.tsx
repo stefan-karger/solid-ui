@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js"
 
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,7 +17,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
+} from "@/registry/ui/dropdown-menu"
 
 export default function DropdownMenuDemo() {
   const [showGitLog, setShowGitLog] = createSignal(false)

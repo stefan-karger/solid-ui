@@ -4,10 +4,10 @@ import path from "node:path"
 
 import { Project, ScriptKind, type SourceFile } from "ts-morph"
 
-import type { Config } from "~/utils/config"
-import { transformImport } from "~/utils/transformers/transform-import"
-import { transformJsx } from "~/utils/transformers/transform-jsx"
-import { transformTwPrefix } from "~/utils/transformers/transform-tw-prefix"
+import type { Config } from "@/utils/config"
+import { transformImport } from "@/utils/transformers/transform-import"
+import { transformJsx } from "@/utils/transformers/transform-jsx"
+import { transformTwPrefix } from "@/utils/transformers/transform-tw-prefix"
 
 export type TransformProps = {
   filename: string

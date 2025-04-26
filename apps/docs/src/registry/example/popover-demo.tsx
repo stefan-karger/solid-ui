@@ -1,5 +1,5 @@
-import { Button } from "~/registry/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
+import { Button } from "@/registry/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover"
 
 export default function PopoverDemo() {
   return (

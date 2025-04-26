@@ -1,11 +1,11 @@
 import { createSignal, Show } from "solid-js"
 import { A } from "@solidjs/router"
 
-import { Index } from "~/__registry__"
-import { Button } from "~/registry/ui/button"
-import { Resizable, ResizableHandle, ResizablePanel } from "~/registry/ui/resizable"
-import { Separator } from "~/registry/ui/separator"
-import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
+import { Index } from "@/__registry__"
+import { Button } from "@/registry/ui/button"
+import { Resizable, ResizableHandle, ResizablePanel } from "@/registry/ui/resizable"
+import { Separator } from "@/registry/ui/separator"
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group"
 
 import { IconDesktop, IconFullscreen, IconMobile, IconTablet } from "./icons"
 

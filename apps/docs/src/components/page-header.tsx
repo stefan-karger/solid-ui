@@ -1,7 +1,7 @@
 import type { ComponentProps } from "solid-js"
 import { splitProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 export function PageHeader(props: ComponentProps<"section">) {
   const [local, others] = splitProps(props, ["class", "children"])

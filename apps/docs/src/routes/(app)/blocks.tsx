@@ -1,16 +1,16 @@
-import { For } from "solid-js"
 import { A } from "@solidjs/router"
+import { For } from "solid-js"
 
-import { Index } from "~/__registry__"
-import { BlockDisplay } from "~/components/block-display"
-import { MetaTags } from "~/components/meta-tags"
+import { Index } from "@/__registry__"
+import { BlockDisplay } from "@/components/block-display"
+import { MetaTags } from "@/components/meta-tags"
 import {
-  PageHeader,
-  PageHeaderActions,
-  PageHeaderDescription,
-  PageHeaderHeading
-} from "~/components/page-header"
-import { Button } from "~/registry/ui/button"
+    PageHeader,
+    PageHeaderActions,
+    PageHeaderDescription,
+    PageHeaderHeading
+} from "@/components/page-header"
+import { Button } from "@/registry/ui/button"
 
 function getAllBlocks() {
   return Object.values(Index)

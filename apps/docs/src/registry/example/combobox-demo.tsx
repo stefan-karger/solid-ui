@@ -8,7 +8,7 @@ import {
   ComboboxItemLabel,
   ComboboxSection,
   ComboboxTrigger
-} from "~/registry/ui/combobox"
+} from "@/registry/ui/combobox"
 
 interface Food {
   value: string

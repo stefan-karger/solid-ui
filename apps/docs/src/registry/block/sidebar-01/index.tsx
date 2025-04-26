@@ -4,9 +4,9 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator
-} from "~/registry/ui/breadcrumb"
-import { Separator } from "~/registry/ui/separator"
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "~/registry/ui/sidebar"
+} from "@/registry/ui/breadcrumb"
+import { Separator } from "@/registry/ui/separator"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/registry/ui/sidebar"
 
 import { AppSidebar } from "./components/app-sidebar"
 

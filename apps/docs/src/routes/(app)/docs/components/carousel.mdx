@@ -58,7 +58,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from "~/components/ui/carousel"
+} from "@/components/ui/carousel"
 ```
 
 ```tsx
@@ -183,7 +183,7 @@ Use a state and the `setApi` props to get an instance of the carousel API.
 <ComponentPreview name="carousel-api-demo" />
 
 ```tsx {1,4,22}
-import type { CarouselApi } from "~/components/ui/carousel"
+import type { CarouselApi } from "@/components/ui/carousel"
 
 export function Example() {
   const [api, setApi] = createSignal<ReturnType<CarouselApi>>()
@@ -220,7 +220,7 @@ export function Example() {
 You can listen to events using the api instance from `setApi`.
 
 ```tsx {1,4-16}
-import type { CarouselApi } from "~/components/ui/carousel"
+import type { CarouselApi } from "@/components/ui/carousel"
 
 export function Example() {
   const [api, setApi] = createSignal<ReturnType<CarouselApi>>()

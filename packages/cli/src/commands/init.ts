@@ -7,20 +7,20 @@ import { Command } from "commander"
 import { execa } from "execa"
 import * as v from "valibot"
 
-import type { RawConfig } from "~/utils/config"
+import type { RawConfig } from "@/utils/config"
 import {
-  DEFAULT_COMPONENTS,
-  DEFAULT_CSS_FILE,
-  DEFAULT_TAILWIND_CONFIG,
-  DEFAULT_TAILWIND_PREFIX,
-  DEFAULT_UTILS,
-  RawConfigSchema,
-  resolveConfigPaths
-} from "~/utils/config"
-import { getPackageInfo } from "~/utils/get-package-info"
-import { getPackageManager } from "~/utils/get-package-manager"
-import { handleError, headline, highlight, subtle } from "~/utils/logger"
-import * as templates from "~/utils/templates"
+    DEFAULT_COMPONENTS,
+    DEFAULT_CSS_FILE,
+    DEFAULT_TAILWIND_CONFIG,
+    DEFAULT_TAILWIND_PREFIX,
+    DEFAULT_UTILS,
+    RawConfigSchema,
+    resolveConfigPaths
+} from "@/utils/config"
+import { getPackageInfo } from "@/utils/get-package-info"
+import { getPackageManager } from "@/utils/get-package-manager"
+import { handleError, headline, highlight, subtle } from "@/utils/logger"
+import * as templates from "@/utils/templates"
 
 const PROJECT_DEPENDENCIES = [
   "tailwindcss-animate",

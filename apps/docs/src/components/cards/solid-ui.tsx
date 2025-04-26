@@ -1,6 +1,6 @@
-import { IconBrandTypescript, IconChevronDown, IconPlus, IconStar } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import { IconBrandTypescript, IconChevronDown, IconPlus, IconStar } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
-import { Separator } from "~/registry/ui/separator"
+} from "@/registry/ui/dropdown-menu"
+import { Separator } from "@/registry/ui/separator"
 
 export function SolidUI() {
   return (

@@ -1,5 +1,5 @@
-import { IconBell, IconEyeOff } from "~/components/icons"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import { IconBell, IconEyeOff } from "@/components/icons"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
 
 export function Notifications() {
   return (

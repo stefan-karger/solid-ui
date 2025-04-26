@@ -1,4 +1,4 @@
-import { Button } from "~/registry/ui/button"
+import { Button } from "@/registry/ui/button"
 
 export default function ButtonDemo() {
   return (

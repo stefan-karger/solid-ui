@@ -1,7 +1,7 @@
 import type { Component, ComponentProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { CodeBlockWrapper } from "~/components/code-block-wrapper"
+import { CodeBlockWrapper } from "@/components/code-block-wrapper"
+import { cn } from "@/lib/utils"
 
 interface ComponentSourceProps extends ComponentProps<"div"> {
   src: string

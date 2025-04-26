@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import * as HoverCardPrimitive from "@kobalte/core/hover-card"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 const HoverCardTrigger = HoverCardPrimitive.Trigger
 

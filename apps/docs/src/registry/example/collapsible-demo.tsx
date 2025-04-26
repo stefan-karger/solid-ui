@@ -1,5 +1,5 @@
-import { IconChevronDown } from "~/components/icons"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import { IconChevronDown } from "@/components/icons"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/registry/ui/collapsible"
 
 export default function CollapsibleDemo() {
   return (

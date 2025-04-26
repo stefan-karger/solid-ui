@@ -1,16 +1,21 @@
+import path from "path"
+import { fileURLToPath } from "url"
+
 import { defineConfig } from "@solidjs/start/config"
 
+import tailwindcss from "@tailwindcss/vite"
 /* @ts-ignore */
 import pkg from "@vinxi/plugin-mdx"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import { getHighlighter } from "shiki"
-import tailwindcss from "@tailwindcss/vite";
 
 import rehypeComponent from "./src/lib/mdx/component"
 
 const { default: mdx } = pkg
+const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
+const __dirname = path.dirname(__filename) // get the name of the directory
 
 export default defineConfig({
   ssr: true,
@@ -19,6 +24,11 @@ export default defineConfig({
   },
   extensions: ["mdx", "md"],
   vite: {
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src")
+      }
+    },
     plugins: [
       tailwindcss(),
       mdx.withImports({})({

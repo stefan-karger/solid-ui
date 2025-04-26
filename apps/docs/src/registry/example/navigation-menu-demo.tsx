@@ -2,7 +2,7 @@ import { createSignal, For } from "solid-js"
 
 import type { Orientation } from "@kobalte/core/navigation-menu"
 
-import { IconLogo } from "~/components/icons"
+import { IconLogo } from "@/components/icons"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,8 +12,8 @@ import {
   NavigationMenuLabel,
   NavigationMenuLink,
   NavigationMenuTrigger
-} from "~/registry/ui/navigation-menu"
-import { RadioGroup, RadioGroupItem, RadioGroupItemLabel } from "~/registry/ui/radio-group"
+} from "@/registry/ui/navigation-menu"
+import { RadioGroup, RadioGroupItem, RadioGroupItemLabel } from "@/registry/ui/radio-group"
 
 export default function NavigationMenuDemo() {
   const [orientation, setOrientation] = createSignal<Orientation>("horizontal")

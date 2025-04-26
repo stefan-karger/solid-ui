@@ -7,7 +7,7 @@ import {
   IconCircleHelp,
   IconCircleOff,
   IconTimer
-} from "~/components/icons"
+} from "@/components/icons"
 
 export const labels = [
   {

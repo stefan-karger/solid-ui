@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "~/registry/ui/card"
-import { BarChart } from "~/registry/ui/charts"
+import { Card, CardContent, CardHeader, CardTitle } from "@/registry/ui/card"
+import { BarChart } from "@/registry/ui/charts"
 
 export default function BarChartDemo() {
   const chartData = {

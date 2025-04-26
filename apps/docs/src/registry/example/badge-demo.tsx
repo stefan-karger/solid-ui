@@ -1,4 +1,4 @@
-import { Badge } from "~/registry/ui/badge"
+import { Badge } from "@/registry/ui/badge"
 
 export default function BadgeDemo() {
   return (

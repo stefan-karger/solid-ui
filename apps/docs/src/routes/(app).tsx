@@ -2,9 +2,9 @@ import { Suspense, type ParentProps } from "solid-js"
 
 import { MDXProvider } from "solid-mdx"
 
-import Footer from "~/components/footer"
-import { MDXComponents } from "~/components/mdx-components"
-import Navbar from "~/components/navbar"
+import Footer from "@/components/footer"
+import { MDXComponents } from "@/components/mdx-components"
+import Navbar from "@/components/navbar"
 
 export default function DocsLayout(props: ParentProps) {
   return (

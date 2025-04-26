@@ -1,11 +1,11 @@
 import type { Component } from "solid-js"
 import { createEffect, createSignal, on, Show, splitProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { IconCheck, IconCopy } from "~/components/icons"
-import type { ToggleProps } from "~/registry/ui/toggle"
-import { Toggle } from "~/registry/ui/toggle"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+import { IconCheck, IconCopy } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import type { ToggleProps } from "@/registry/ui/toggle"
+import { Toggle } from "@/registry/ui/toggle"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip"
 
 export interface CopyButtonProps extends ToggleProps {
   content: string

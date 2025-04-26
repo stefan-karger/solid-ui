@@ -154,7 +154,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "~/components/ui/table"
+} from "@/components/ui/table"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -316,7 +316,7 @@ Update our columns definition to add a new `actions` column. The `actions` cell 
 import { ColumnDef } from "@tanstack/solid-table"
 import { MoreHorizontal } from "lucide-solid"
 
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -324,7 +324,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "~/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 export const columns: ColumnDef<Payment>[] = [
   // ...
@@ -399,7 +399,7 @@ This will automatically paginate your rows into pages of 10. See the [pagination
 We can add pagination controls to our table using the `<Button />` component and the `table.previousPage()`, `table.nextPage()` API methods.
 
 ```tsx showLineNumbers title="data-table.tsx" {1,12,22-39}
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
   const table = createSolidTable({
@@ -552,8 +552,8 @@ import {
   createSolidTable
 } from "@tanstack/solid-table"
 
-import { Button } from "~/components/ui/button"
-import { TextField, TextFieldInput } from "~/components/ui/text-field"
+import { Button } from "@/components/ui/button"
+import { TextField, TextFieldInput } from "@/components/ui/text-field"
 
 export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = createSignal<SortingState>([])
@@ -628,13 +628,13 @@ import {
   createSolidTable,
 } from "@tanstack/solid-table"
 
-import { Button } from "~/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = createSignal<SortingState>([])
@@ -721,8 +721,8 @@ Next, we're going to add row selection to our table.
 ```tsx showLineNumbers title="columns.tsx" {4,7-26}
 import { ColumnDef } from "@tanstack/solid-table"
 
-import { Badge } from "~/components/ui/badge"
-import { Checkbox } from "~/components/ui/checkbox"
+import { Badge } from "@/components/ui/badge"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export const columns: ColumnDef<Payment>[] = [
   {

@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import { cn } from "@/lib/utils"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/ui/select"
 
 import { accounts, type Account } from "./data"
 

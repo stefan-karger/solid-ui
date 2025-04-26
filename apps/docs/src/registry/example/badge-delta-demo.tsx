@@ -1,4 +1,4 @@
-import { BadgeDelta } from "~/registry/ui/badge-delta"
+import { BadgeDelta } from "@/registry/ui/badge-delta"
 
 export default function BadgeDeltaDemo() {
   return (

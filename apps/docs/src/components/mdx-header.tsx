@@ -1,8 +1,8 @@
 import { Show } from "solid-js"
 import { A } from "@solidjs/router"
 
-import { cn } from "~/lib/utils"
-import { badgeVariants } from "~/registry/ui/badge"
+import { cn } from "@/lib/utils"
+import { badgeVariants } from "@/registry/ui/badge"
 
 import { IconExternalLink } from "./icons"
 

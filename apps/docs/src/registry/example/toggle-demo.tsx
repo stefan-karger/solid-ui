@@ -1,7 +1,7 @@
 import { Show } from "solid-js"
 
-import { IconMoon, IconSun } from "~/components/icons"
-import { Toggle } from "~/registry/ui/toggle"
+import { IconMoon, IconSun } from "@/components/icons"
+import { Toggle } from "@/registry/ui/toggle"
 
 export default function ToggleDemo() {
   return (

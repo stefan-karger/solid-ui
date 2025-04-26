@@ -4,8 +4,8 @@ import { splitProps } from "solid-js"
 import type { DialogRootProps } from "@kobalte/core/dialog"
 import * as CommandPrimitive from "cmdk-solid"
 
-import { cn } from "~/lib/utils"
-import { Dialog, DialogContent } from "~/registry/ui/dialog"
+import { cn } from "@/lib/utils"
+import { Dialog, DialogContent } from "@/registry/ui/dialog"
 
 const Command: Component<ParentProps<CommandPrimitive.CommandRootProps>> = (props) => {
   const [local, others] = splitProps(props, ["class"])

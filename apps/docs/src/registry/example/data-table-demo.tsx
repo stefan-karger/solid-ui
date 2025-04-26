@@ -11,9 +11,9 @@ import {
   type ColumnDef
 } from "@tanstack/solid-table"
 
-import { IconChevronDown, IconDots, IconSelector } from "~/components/icons"
-import { Button } from "~/registry/ui/button"
-import { Checkbox } from "~/registry/ui/checkbox"
+import { IconChevronDown, IconDots, IconSelector } from "@/components/icons"
+import { Button } from "@/registry/ui/button"
+import { Checkbox } from "@/registry/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -22,9 +22,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "~/registry/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+} from "@/registry/ui/dropdown-menu"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/registry/ui/table"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 const data: Payment[] = [
   {

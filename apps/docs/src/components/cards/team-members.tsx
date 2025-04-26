@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
 import {
   Combobox,
   ComboboxContent,
@@ -8,7 +8,7 @@ import {
   ComboboxItem,
   ComboboxItemLabel,
   ComboboxTrigger
-} from "~/registry/ui/combobox"
+} from "@/registry/ui/combobox"
 
 interface Role {
   label: string

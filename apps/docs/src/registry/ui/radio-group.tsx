@@ -4,7 +4,7 @@ import { splitProps } from "solid-js"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as RadioGroupPrimitive from "@kobalte/core/radio-group"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type RadioGroupRootProps<T extends ValidComponent = "div"> =
   RadioGroupPrimitive.RadioGroupRootProps<T> & { class?: string | undefined }
@@ -30,7 +30,7 @@ const RadioGroupItem = <T extends ValidComponent = "div">(
     <RadioGroupPrimitive.Item class={cn("flex items-center space-x-2", local.class)} {...others}>
       <RadioGroupPrimitive.ItemInput />
       <RadioGroupPrimitive.ItemControl class="aspect-square size-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-        <RadioGroupPrimitive.ItemIndicator class="flex h-full items-center justify-center ">
+        <RadioGroupPrimitive.ItemIndicator class="flex h-full items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

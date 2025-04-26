@@ -16,7 +16,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger
-} from "~/registry/ui/context-menu"
+} from "@/registry/ui/context-menu"
 
 export default function ContextMenuDemo() {
   const [showGitLog, setShowGitLog] = createSignal(true)

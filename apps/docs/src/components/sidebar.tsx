@@ -1,9 +1,9 @@
 import { For, Match, Switch } from "solid-js"
 import { useLocation } from "@solidjs/router"
 
-import { docsConfig } from "~/config/docs"
-import { cn } from "~/lib/utils"
-import { Badge } from "~/registry/ui/badge"
+import { docsConfig } from "@/config/docs"
+import { cn } from "@/lib/utils"
+import { Badge } from "@/registry/ui/badge"
 
 export default function Sidebar() {
   const location = useLocation()

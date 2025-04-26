@@ -1,12 +1,12 @@
 import type { JSX } from "solid-js"
-import { createSignal, For, Show } from "solid-js"
+import { For, Show } from "solid-js"
 
 import type { Column } from "@tanstack/solid-table"
 
-import { IconCheck, IconCirclePlus } from "~/components/icons"
-import { cn } from "~/lib/utils"
-import { Badge } from "~/registry/ui/badge"
-import { Button } from "~/registry/ui/button"
+import { IconCheck, IconCirclePlus } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { Badge } from "@/registry/ui/badge"
+import { Button } from "@/registry/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -15,9 +15,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator
-} from "~/registry/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
-import { Separator } from "~/registry/ui/separator"
+} from "@/registry/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover"
+import { Separator } from "@/registry/ui/separator"
 
 type TableFacetedFilterProps<TData, TValue> = {
   column?: Column<TData, TValue>

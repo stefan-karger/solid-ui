@@ -7,7 +7,7 @@ import {
   NumberFieldGroup,
   NumberFieldIncrementTrigger,
   NumberFieldInput
-} from "~/registry/ui/number-field"
+} from "@/registry/ui/number-field"
 
 export default function NumberFieldDemo() {
   const [rawValue, setRawValue] = createSignal<number>()

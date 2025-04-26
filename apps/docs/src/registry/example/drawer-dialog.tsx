@@ -1,8 +1,8 @@
 import type { ComponentProps } from "solid-js"
 import { createSignal, onMount, Show } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { Button } from "~/registry/ui/button"
+import { cn } from "@/lib/utils"
+import { Button } from "@/registry/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from "~/registry/ui/dialog"
+} from "@/registry/ui/dialog"
 import {
   Drawer,
   DrawerClose,
@@ -20,8 +20,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
-} from "~/registry/ui/drawer"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/registry/ui/text-field"
+} from "@/registry/ui/drawer"
+import { TextField, TextFieldInput, TextFieldLabel } from "@/registry/ui/text-field"
 
 export default function DrawerDialogDemo() {
   const [open, setOpen] = createSignal(false)

@@ -1,6 +1,6 @@
 import { mergeProps, Show, splitProps, type Component, type ComponentProps } from "solid-js"
 
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 type DeltaBarProps = ComponentProps<"div"> & {
   value: number
@@ -16,7 +16,7 @@ const DeltaBar: Component<DeltaBarProps> = (rawProps) => {
   )
   const [local, others] = splitProps(props, ["value", "isIncreasePositive", "class"])
 
-  const barColor = () => 
+  const barColor = () =>
     (local.value > 0 && local.isIncreasePositive) || (local.value < 0 && !local.isIncreasePositive)
       ? "bg-success-foreground"
       : "bg-error-foreground"
@@ -49,4 +49,3 @@ const DeltaBar: Component<DeltaBarProps> = (rawProps) => {
 
 export { DeltaBar }
 export type { DeltaBarProps }
-

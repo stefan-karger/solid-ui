@@ -1,4 +1,4 @@
-import { Timeline } from "~/registry/ui/timeline"
+import { Timeline } from "@/registry/ui/timeline"
 
 export default function TimelineDemo() {
   return (

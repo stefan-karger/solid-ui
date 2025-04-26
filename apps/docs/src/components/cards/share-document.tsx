@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
-import { Button } from "~/registry/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
-import { Separator } from "~/registry/ui/separator"
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar"
+import { Button } from "@/registry/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/ui/select"
+import { Separator } from "@/registry/ui/separator"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 export function ShareDocument() {
   return (

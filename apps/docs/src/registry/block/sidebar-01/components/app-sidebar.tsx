@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail
-} from "~/registry/ui/sidebar"
+} from "@/registry/ui/sidebar"
 
 import { SearchForm } from "./search-form"
 import { VersionSwitcher } from "./version-switcher"

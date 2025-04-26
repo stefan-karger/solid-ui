@@ -1,13 +1,13 @@
 import { type ComponentProps } from "solid-js"
 
-import { ComponentPreview } from "~/components/component-preview"
-import { ComponentSource } from "~/components/component-source"
-import { CopyButton } from "~/components/copy-button"
-import { MDXHeader } from "~/components/mdx-header"
-import { cn } from "~/lib/utils"
-import { Alert, AlertDescription, AlertTitle } from "~/registry/ui/alert"
-import { Callout } from "~/registry/ui/callout"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
+import { ComponentPreview } from "@/components/component-preview"
+import { ComponentSource } from "@/components/component-source"
+import { CopyButton } from "@/components/copy-button"
+import { MDXHeader } from "@/components/mdx-header"
+import { cn } from "@/lib/utils"
+import { Alert, AlertDescription, AlertTitle } from "@/registry/ui/alert"
+import { Callout } from "@/registry/ui/callout"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs"
 
 export const MDXComponents = {
   h1: (props: ComponentProps<"h1">) => {

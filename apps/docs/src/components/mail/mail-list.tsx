@@ -1,7 +1,7 @@
 import { For } from "solid-js"
 
-import { cn } from "~/lib/utils"
-import { Badge } from "~/registry/ui/badge"
+import { cn } from "@/lib/utils"
+import { Badge } from "@/registry/ui/badge"
 
 import { mails } from "./data"
 import { mail, setMail } from "./use-mail"

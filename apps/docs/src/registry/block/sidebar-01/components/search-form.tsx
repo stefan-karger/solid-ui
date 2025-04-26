@@ -1,7 +1,7 @@
 import type { ComponentProps } from "solid-js"
 
-import { IconSearch } from "~/components/icons"
-import { SidebarGroup, SidebarGroupContent, SidebarInput } from "~/registry/ui/sidebar"
+import { IconSearch } from "@/components/icons"
+import { SidebarGroup, SidebarGroupContent, SidebarInput } from "@/registry/ui/sidebar"
 
 export function SearchForm(props: ComponentProps<"form">) {
   return (

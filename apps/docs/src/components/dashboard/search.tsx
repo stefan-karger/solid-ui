@@ -1,4 +1,4 @@
-import { TextField, TextFieldInput } from "~/registry/ui/text-field"
+import { TextField, TextFieldInput } from "@/registry/ui/text-field"
 
 export function Search() {
   return (

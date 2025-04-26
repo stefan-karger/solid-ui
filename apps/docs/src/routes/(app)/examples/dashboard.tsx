@@ -1,5 +1,5 @@
-import { Dashboard } from "~/components/dashboard"
-import { MetaTags } from "~/components/meta-tags"
+import { Dashboard } from "@/components/dashboard"
+import { MetaTags } from "@/components/meta-tags"
 
 export default function DashboardRoute() {
   return (
