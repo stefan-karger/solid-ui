@@ -97,7 +97,11 @@ export const init = new Command()
       spinner.start(`Installing dependencies...`)
 
       const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, ["add", ...PROJECT_DEPENDENCIES], { cwd })
+      await execa(packageManager, [
+        "add",
+        packageManager === "deno" ? "--npm" : "",
+        ...PROJECT_DEPENDENCIES,
+      ], { cwd });
 
       spinner.stop(`Dependencies installed.`)
 
