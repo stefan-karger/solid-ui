@@ -16,7 +16,7 @@ const DeltaBar: Component<DeltaBarProps> = (rawProps) => {
   )
   const [local, others] = splitProps(props, ["value", "isIncreasePositive", "class"])
 
-  const barColor = () =>
+  const barColor = () => 
     (local.value > 0 && local.isIncreasePositive) || (local.value < 0 && !local.isIncreasePositive)
       ? "bg-success-foreground"
       : "bg-error-foreground"
@@ -47,5 +47,6 @@ const DeltaBar: Component<DeltaBarProps> = (rawProps) => {
   )
 }
 
-export type { DeltaBarProps }
 export { DeltaBar }
+export type { DeltaBarProps }
+
