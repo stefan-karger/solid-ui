@@ -1,6 +1,6 @@
 {
   "name": "solidui-cli",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Add Solid UI Components to your application using the Solid-UI CLI tool",
   "publishConfig": {
     "access": "public"

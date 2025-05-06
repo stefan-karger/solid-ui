@@ -1,5 +1,13 @@
 # @solid-ui/cli
 
+## 0.7.2
+
+### Patch Changes
+
+- [#181](https://github.com/stefan-karger/solid-ui/pull/181) [`ebf3265`](https://github.com/stefan-karger/solid-ui/commit/ebf3265c861fa4fc36f35489600e725763163976) Thanks [@torres-engineer](https://github.com/torres-engineer)! - feat: support deno
+
+- [#159](https://github.com/stefan-karger/solid-ui/pull/159) [`127912d`](https://github.com/stefan-karger/solid-ui/commit/127912d8bc647249098578d7088ffe7841be71fd) Thanks [@iAverages](https://github.com/iAverages)! - fix buggy rendering in component add command due to lots of items
+
 ## 0.7.1
 
 ### Patch Changes
