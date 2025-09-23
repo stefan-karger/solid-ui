@@ -63,6 +63,16 @@ const ContextMenuShortcut: Component<ComponentProps<"span">> = (props) => {
   return <span class={cn("ml-auto text-xs tracking-widest opacity-60", local.class)} {...others} />
 }
 
+const ContextMenuLabel: Component<ComponentProps<'div'> & { inset?: boolean }> = (props) => {
+  const [, rest] = splitProps(props, ['class', 'inset']);
+  return (
+    <div
+      class={cn('px-2 py-1.5 text-sm font-semibold', props.inset && 'pl-8', props.class)}
+      {...rest}
+    />
+  );
+};
+
 type ContextMenuSeparatorProps<T extends ValidComponent = "hr"> =
   ContextMenuPrimitive.ContextMenuSeparatorProps<T> & {
     class?: string | undefined
@@ -236,6 +246,7 @@ export {
   ContextMenuPortal,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuLabel,
   ContextMenuShortcut,
   ContextMenuSeparator,
   ContextMenuSub,
