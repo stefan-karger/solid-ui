@@ -258,6 +258,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "badge-demo": {
+    name: "badge-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["badge"],
+    component: lazy(() => import("~/registry/v1/examples/badge-demo.tsx")),
+    files: [{
+      path: "registry/examples/badge-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "button-default": {
     name: "button-default",
     description: "",

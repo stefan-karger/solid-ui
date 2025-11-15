@@ -44,6 +44,10 @@ export const docsConfig: Config = {
           href: "/docs/components/avatar"
         },
         {
+          title: "Badge",
+          href: "/docs/components/badge"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
         },
