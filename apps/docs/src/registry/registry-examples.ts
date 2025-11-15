@@ -35,6 +35,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "aspect-ratio-demo",
+    type: "registry:example",
+    registryDependencies: ["aspect-ratio"],
+    files: [
+      {
+        path: "examples/aspect-ratio-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "avatar-demo",
     type: "registry:example",
     registryDependencies: ["avatar"],
