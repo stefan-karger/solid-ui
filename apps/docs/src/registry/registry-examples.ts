@@ -35,12 +35,122 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-default",
+    name: "button-group-demo",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "button-group", "dropdown-menu"],
     files: [
       {
-        path: "examples/button-default.tsx",
+        path: "examples/button-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-orientation",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group"],
+    files: [
+      {
+        path: "examples/button-group-orientation.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-size",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group"],
+    files: [
+      {
+        path: "examples/button-group-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-nested",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group"],
+    files: [
+      {
+        path: "examples/button-group-nested.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-separator",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group"],
+    files: [
+      {
+        path: "examples/button-group-separator.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-split",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group"],
+    files: [
+      {
+        path: "examples/button-group-split.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-input",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "input"],
+    files: [
+      {
+        path: "examples/button-group-input.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-input-group",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "input-group", "tooltip"],
+    files: [
+      {
+        path: "examples/button-group-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-dropdown-menu",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/button-group-dropdown-menu.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-select",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "select", "input"],
+    files: [
+      {
+        path: "examples/button-group-select.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-popover",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "popover", "separator", "textarea"],
+    files: [
+      {
+        path: "examples/button-group-popover.tsx",
         type: "registry:example"
       }
     ]
@@ -52,6 +162,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/button-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-default",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-default.tsx",
         type: "registry:example"
       }
     ]
@@ -74,17 +195,6 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/button-ghost.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "button-group-demo",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group", "dropdown-menu"],
-    files: [
-      {
-        path: "examples/button-group-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -371,6 +481,28 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/input-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-demo",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [
+      {
+        path: "examples/kbd-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-demo",
+    type: "registry:example",
+    registryDependencies: ["popover", "button", "input", "label"],
+    files: [
+      {
+        path: "examples/popover-demo.tsx",
         type: "registry:example"
       }
     ]

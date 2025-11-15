@@ -260,3 +260,4 @@ export function DirectiveContainer(
 
 export { ComponentPreview } from "~/components/component-preview"
 export { ComponentsList } from "~/components/components-list"
+export { Kbd } from "~/registry/v1/ui/kbd"

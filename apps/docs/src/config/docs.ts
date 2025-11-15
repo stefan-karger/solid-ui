@@ -79,6 +79,10 @@ export const docsConfig: Config = {
           status: "new"
         },
         {
+          title: "Popover",
+          href: "/docs/components/popover"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
         },
