@@ -44,6 +44,10 @@ export const docsConfig: Config = {
           href: "/docs/components/alert-dialog"
         },
         {
+          title: "Alert",
+          href: "/docs/components/alert"
+        },
+        {
           title: "Avatar",
           href: "/docs/components/avatar"
         },

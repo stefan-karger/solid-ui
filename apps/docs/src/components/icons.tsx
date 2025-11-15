@@ -48,6 +48,27 @@ export function IconAlertTriangle(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconAlertCircle(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" x2="12" y1="8" y2="12" />
+      <line x1="12" x2="12.01" y1="16" y2="16" />
+    </svg>
+  )
+}
+
 export function IconArchive(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -264,6 +285,27 @@ export function IconCheck(props: ComponentProps<"svg">) {
     </svg>
   )
 }
+
+export function IconCheckCircle(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
 export function IconChevronDown(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -473,6 +515,28 @@ export function IconPlus(props: ComponentProps<"svg">) {
     >
       <path d="M12 5l0 14" />
       <path d="M5 12l14 0" />
+    </svg>
+  )
+}
+
+export function IconPopcorn(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4" />
+      <path d="M10 22 9 8" />
+      <path d="m14 22 1-14" />
+      <path d="M20 8c.5 0 .9.4.8 1l-2.6 12c-.1.5-.7 1-1.2 1H7c-.6 0-1.1-.4-1.2-1L3.2 9c-.1-.6.3-1 .8-1Z" />
     </svg>
   )
 }
