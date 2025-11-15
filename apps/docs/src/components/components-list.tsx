@@ -1,4 +1,4 @@
-import { For } from "solid-js"
+import { For, Show } from "solid-js"
 import { A } from "@solidjs/router"
 
 import { docsConfig } from "~/config/docs"
@@ -15,6 +15,9 @@ export function ComponentsList() {
             href={item.href}
           >
             {item.title}
+            <Show when={item.status === "new"}>
+              <span class="flex size-2 rounded-full bg-blue-500" title="New" />
+            </Show>
           </A>
         )}
       </For>

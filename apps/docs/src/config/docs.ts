@@ -48,6 +48,11 @@ export const docsConfig: Config = {
           href: "/docs/components/badge"
         },
         {
+          title: "Button Group",
+          href: "/docs/components/button-group",
+          status: "new"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
         },
@@ -61,11 +66,17 @@ export const docsConfig: Config = {
         },
         {
           title: "Field",
-          href: "/docs/components/field"
+          href: "/docs/components/field",
+          status: "new"
         },
         {
           title: "Input Group",
           href: "/docs/components/input-group"
+        },
+        {
+          title: "Kbd",
+          href: "/docs/components/kbd",
+          status: "new"
         },
         {
           title: "Radio Group",

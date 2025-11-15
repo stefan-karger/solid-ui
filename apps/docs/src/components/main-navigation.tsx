@@ -1,4 +1,4 @@
-import { Index } from "solid-js"
+import { Index, Show } from "solid-js"
 import { A, useLocation } from "@solidjs/router"
 
 import { docsConfig } from "~/config/docs"
@@ -41,6 +41,9 @@ export function MainNavigation() {
                           isActive={link().href === location.pathname}
                         >
                           {link().title}
+                          <Show when={link().status === "new"}>
+                            <span class="flex size-2 rounded-full bg-blue-500" title="New" />
+                          </Show>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     )}
