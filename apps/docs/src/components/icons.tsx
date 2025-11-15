@@ -27,6 +27,27 @@ export function IconLogo(props: ComponentProps<"svg">) {
 
 // REST
 
+export function IconAlertTriangle(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
+    </svg>
+  )
+}
+
 export function IconArchive(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -121,6 +142,30 @@ export function IconArrowUpRight(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconAudioLines(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M2 10v3" />
+      <path d="M6 6v11" />
+      <path d="M10 3v18" />
+      <path d="M14 8v7" />
+      <path d="M18 5v13" />
+      <path d="M22 10v3" />
+    </svg>
+  )
+}
+
 export function IconBadgeCheck(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -137,6 +182,30 @@ export function IconBadgeCheck(props: ComponentProps<"svg">) {
     >
       <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
       <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
+export function IconBot(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M12 8V4H8" />
+      <rect height="12" rx="2" width="16" x="4" y="8" />
+      <path d="M2 14h2" />
+      <path d="M20 14h2" />
+      <path d="M15 13v2" />
+      <path d="M9 13v2" />
     </svg>
   )
 }
@@ -195,6 +264,24 @@ export function IconCheck(props: ComponentProps<"svg">) {
     </svg>
   )
 }
+export function IconChevronDown(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  )
+}
 
 export function IconClock(props: ComponentProps<"svg">) {
   return (
@@ -210,6 +297,26 @@ export function IconClock(props: ComponentProps<"svg">) {
     >
       <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
       <path d="M12 7v5l3 3" />
+    </svg>
+  )
+}
+
+export function IconCopy(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect height="14" rx="2" ry="2" width="14" x="8" y="8" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
     </svg>
   )
 }
@@ -333,6 +440,25 @@ export function IconMailCheck(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconMinus(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M5 12h14" />
+    </svg>
+  )
+}
+
 export function IconPlus(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -365,6 +491,27 @@ export function IconSearch(props: ComponentProps<"svg">) {
     >
       <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
       <path d="M21 21l-6 -6" />
+    </svg>
+  )
+}
+
+export function IconShare(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M12 2v13" />
+      <path d="m16 6-4-4-4 4" />
+      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
     </svg>
   )
 }
@@ -422,6 +569,51 @@ export function IconTrash(props: ComponentProps<"svg">) {
       <path d="M14 11l0 6" />
       <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
       <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+    </svg>
+  )
+}
+
+export function IconUserRoundX(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M2 21a8 8 0 0 1 11.873-7" />
+      <circle cx="10" cy="8" r="5" />
+      <path d="m17 17 5 5" />
+      <path d="m22 17-5 5" />
+    </svg>
+  )
+}
+
+export function IconVolumeOff(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M16 9a5 5 0 0 1 .95 2.293" />
+      <path d="M19.364 5.636a9 9 0 0 1 1.889 9.96" />
+      <path d="m2 2 20 20" />
+      <path d="m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11" />
+      <path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686" />
     </svg>
   )
 }
