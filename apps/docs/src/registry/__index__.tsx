@@ -104,6 +104,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "Breadcrumb": {
+    name: "Breadcrumb",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/breadcrumb.tsx")),
+    files: [{
+      path: "registry/ui/breadcrumb.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "button": {
     name: "button",
     description: "",
@@ -364,6 +378,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/v1/examples/badge-demo.tsx")),
     files: [{
       path: "registry/examples/badge-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-demo": {
+    name: "breadcrumb-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb","dropdown-menu"],
+    component: lazy(() => import("~/registry/v1/examples/breadcrumb-demo.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-demo.tsx",
       type: "registry:example",
       target: ""
     }],
