@@ -216,6 +216,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "accordion-demo": {
+    name: "accordion-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    component: lazy(() => import("~/registry/v1/examples/accordion-demo.tsx")),
+    files: [{
+      path: "registry/examples/accordion-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "avatar-demo": {
     name: "avatar-demo",
     description: "",
