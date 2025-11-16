@@ -123,6 +123,10 @@ export const docsConfig: Config = {
           href: "/docs/components/table"
         },
         {
+          title: "Tabs",
+          href: "/docs/components/tabs"
+        },
+        {
           title: "Toggle Group",
           href: "/docs/components/toggle-group"
         },

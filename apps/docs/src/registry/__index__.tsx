@@ -1140,6 +1140,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "tabs-demo": {
+    name: "tabs-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs","card","input","label"],
+    component: lazy(() => import("~/registry/v1/examples/tabs-demo.tsx")),
+    files: [{
+      path: "registry/examples/tabs-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "toggle-group-demo": {
     name: "toggle-group-demo",
     description: "",
