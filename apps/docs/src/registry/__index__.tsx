@@ -300,6 +300,48 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "table": {
+    name: "table",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/table.tsx")),
+    files: [{
+      path: "registry/ui/table.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs": {
+    name: "tabs",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/tabs.tsx")),
+    files: [{
+      path: "registry/ui/tabs.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea": {
+    name: "textarea",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/textarea.tsx")),
+    files: [{
+      path: "registry/ui/textarea.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "toggle": {
     name: "toggle",
     description: "",
@@ -767,20 +809,6 @@ export const Index: Record<string, any> = {
     description: "",
     type: "registry:example",
     registryDependencies: ["card","button","input","label"],
-    component: lazy(() => import("~/registry/v1/examples/card-demo.tsx")),
-    files: [{
-      path: "registry/examples/card-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "card-demo": {
-    name: "card-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["card"],
     component: lazy(() => import("~/registry/v1/examples/card-demo.tsx")),
     files: [{
       path: "registry/examples/card-demo.tsx",
