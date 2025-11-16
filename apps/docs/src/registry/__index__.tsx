@@ -230,6 +230,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "item": {
+    name: "item",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/item.tsx")),
+    files: [{
+      path: "registry/ui/item.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "kbd": {
     name: "kbd",
     description: "",
@@ -1064,6 +1078,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/v1/examples/input-group-demo.tsx")),
     files: [{
       path: "registry/examples/input-group-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-demo": {
+    name: "item-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item","button"],
+    component: lazy(() => import("~/registry/v1/examples/item-demo.tsx")),
+    files: [{
+      path: "registry/examples/item-demo.tsx",
       type: "registry:example",
       target: ""
     }],

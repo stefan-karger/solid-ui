@@ -92,6 +92,9 @@ export const docsConfig: Config = {
         {
           title: "Input Group",
           href: "/docs/components/input-group"
+          title: "Item",
+          href: "/docs/components/item",
+          status: "new"
         },
         {
           title: "Kbd",
