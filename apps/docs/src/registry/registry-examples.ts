@@ -618,6 +618,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "table-demo",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    files: [
+      {
+        path: "examples/table-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "toggle-group-demo",
     type: "registry:example",
     registryDependencies: ["toggle-group"],
