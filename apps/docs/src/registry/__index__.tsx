@@ -1154,6 +1154,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "textarea-demo": {
+    name: "textarea-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    component: lazy(() => import("~/registry/v1/examples/textarea-demo.tsx")),
+    files: [{
+      path: "registry/examples/textarea-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "toggle-group-demo": {
     name: "toggle-group-demo",
     description: "",

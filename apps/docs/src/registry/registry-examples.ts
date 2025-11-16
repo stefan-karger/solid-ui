@@ -640,6 +640,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "textarea-demo",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    files: [
+      {
+        path: "examples/textarea-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "toggle-group-demo",
     type: "registry:example",
     registryDependencies: ["toggle-group"],
