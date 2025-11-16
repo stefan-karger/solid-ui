@@ -343,17 +343,6 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "card-demo",
-    type: "registry:example",
-    registryDependencies: ["card"],
-    files: [
-      {
-        path: "examples/card-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "dropdown-menu-checkboxes",
     type: "registry:example",
     registryDependencies: ["dropdown-menu"],
@@ -552,6 +541,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "input-demo",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    files: [
+      {
+        path: "examples/input-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "item-demo",
     type: "registry:example",
     registryDependencies: ["item", "button"],
@@ -613,6 +613,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/slider-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-demo",
+    type: "registry:example",
+    registryDependencies: ["spinner", "item"],
+    files: [
+      {
+        path: "examples/spinner-demo.tsx",
         type: "registry:example"
       }
     ]

@@ -167,6 +167,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "item",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/item.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "kbd",
     type: "registry:ui",
     files: [
@@ -205,6 +215,17 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/slider.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "spinner",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/spinner.tsx",
         type: "registry:ui"
       }
     ]

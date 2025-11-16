@@ -91,7 +91,14 @@ export const docsConfig: Config = {
         },
         {
           title: "Input Group",
-          href: "/docs/components/input-group"
+          href: "/docs/components/input-group",
+          status: "new"
+        },
+        {
+          title: "Input",
+          href: "/docs/components/input"
+        },
+        {
           title: "Item",
           href: "/docs/components/item",
           status: "new"
@@ -116,6 +123,11 @@ export const docsConfig: Config = {
         {
           title: "Slider",
           href: "/docs/components/slider"
+        },
+        {
+          title: "Spinner",
+          href: "/docs/components/spinner",
+          status: "new"
         },
         {
           title: "Switch",

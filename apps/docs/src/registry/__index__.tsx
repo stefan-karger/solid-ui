@@ -300,6 +300,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "spinner": {
+    name: "spinner",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/spinner.tsx")),
+    files: [{
+      path: "registry/ui/spinner.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "switch": {
     name: "switch",
     description: "",
@@ -1084,6 +1098,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "input-demo": {
+    name: "input-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    component: lazy(() => import("~/registry/v1/examples/input-demo.tsx")),
+    files: [{
+      path: "registry/examples/input-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "item-demo": {
     name: "item-demo",
     description: "",
@@ -1162,6 +1190,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/v1/examples/slider-demo.tsx")),
     files: [{
       path: "registry/examples/slider-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-demo": {
+    name: "spinner-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","item"],
+    component: lazy(() => import("~/registry/v1/examples/spinner-demo.tsx")),
+    files: [{
+      path: "registry/examples/spinner-demo.tsx",
       type: "registry:example",
       target: ""
     }],
