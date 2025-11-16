@@ -119,6 +119,14 @@ export const docsConfig: Config = {
           href: "/docs/components/switch"
         },
         {
+          title: "Toggle Group",
+          href: "/docs/components/toggle-group"
+        },
+        {
+          title: "Toggle",
+          href: "/docs/components/toggle"
+        },
+        {
           title: "Tooltip",
           href: "/docs/components/tooltip"
         }

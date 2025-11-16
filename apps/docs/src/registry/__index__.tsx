@@ -300,6 +300,34 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle": {
+    name: "toggle",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/toggle.tsx")),
+    files: [{
+      path: "registry/ui/toggle.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group": {
+    name: "toggle-group",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/v1/ui/toggle-group.tsx")),
+    files: [{
+      path: "registry/ui/toggle-group.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -734,6 +762,34 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "card-demo": {
+    name: "card-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["card","button","input","label"],
+    component: lazy(() => import("~/registry/v1/examples/card-demo.tsx")),
+    files: [{
+      path: "registry/examples/card-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "card-demo": {
+    name: "card-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["card"],
+    component: lazy(() => import("~/registry/v1/examples/card-demo.tsx")),
+    files: [{
+      path: "registry/examples/card-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "dropdown-menu-checkboxes": {
     name: "dropdown-menu-checkboxes",
     description: "",
@@ -1064,6 +1120,34 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/v1/examples/switch-demo.tsx")),
     files: [{
       path: "registry/examples/switch-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-demo": {
+    name: "toggle-group-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/v1/examples/toggle-group-demo.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-demo": {
+    name: "toggle-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/v1/examples/toggle-demo.tsx")),
+    files: [{
+      path: "registry/examples/toggle-demo.tsx",
       type: "registry:example",
       target: ""
     }],

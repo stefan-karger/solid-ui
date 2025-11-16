@@ -79,6 +79,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "button-group",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["button", "separator"],
+    files: [
+      {
+        path: "ui/button-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "button",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -90,13 +102,12 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "button-group",
+    name: "card",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
-    registryDependencies: ["button", "separator"],
     files: [
       {
-        path: "ui/button-group.tsx",
+        path: "ui/card.tsx",
         type: "registry:ui"
       }
     ]
@@ -205,6 +216,28 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/switch.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "toggle",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/toggle.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "toggle-group",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/toggle-group.tsx",
         type: "registry:ui"
       }
     ]
