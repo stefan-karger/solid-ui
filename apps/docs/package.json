@@ -11,8 +11,11 @@
     "release": "changeset version"
   },
   "dependencies": {
+    "@ark-ui/solid": "^5.28.0",
     "@corvu/calendar": "^0.1.2",
     "@corvu/drawer": "^0.2.4",
+    "@corvu/otp-field": "^0.1.4",
+    "@corvu/resizable": "^0.2.5",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource-variable/geist-mono": "^5.2.7",
     "@kobalte/core": "^0.13.11",
@@ -21,10 +24,14 @@
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.3",
     "@solidjs/start": "^1.2.0",
+    "@tanstack/solid-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk-solid": "^1.1.2",
+    "embla-carousel-solid": "^8.6.0",
     "rimraf": "^6.0.1",
     "solid-js": "^1.9.9",
+    "solid-sonner": "^0.2.8",
     "tailwind-merge": "^3.3.1",
     "vinxi": "^0.5.7",
     "zod": "^4.1.12"

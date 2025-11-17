@@ -332,12 +332,122 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "calendar-demo",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [
+      {
+        path: "examples/calendar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "card-demo",
     type: "registry:example",
     registryDependencies: ["card", "button", "input", "label"],
     files: [
       {
         path: "examples/card-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-demo",
+    type: "registry:example",
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "collapsible-demo",
+    type: "registry:example",
+    registryDependencies: ["collapsible", "button"],
+    files: [
+      {
+        path: "examples/collapsible-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-demo",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "command-demo",
+    type: "registry:example",
+    registryDependencies: ["command"],
+    files: [
+      {
+        path: "examples/command-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-demo",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "data-table-demo",
+    type: "registry:example",
+    registryDependencies: ["button", "checkbox", "dropdown-menu", "input", "table"],
+    files: [
+      {
+        path: "examples/data-table-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-demo",
+    type: "registry:example",
+    registryDependencies: ["label", "button", "calendar", "popover"],
+    files: [
+      {
+        path: "examples/date-picker-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-demo",
+    type: "registry:example",
+    registryDependencies: ["dialog", "button", "input", "label"],
+    files: [
+      {
+        path: "examples/dialog-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-demo",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button"],
+    files: [
+      {
+        path: "examples/drawer-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -393,6 +503,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/dropdown-menu-radio-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-demo",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -530,12 +651,34 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "hover-card-demo",
+    type: "registry:example",
+    registryDependencies: ["hover-card", "button", "avatar"],
+    files: [
+      {
+        path: "examples/hover-card-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "input-group-demo",
     type: "registry:example",
     registryDependencies: ["input-group"],
     files: [
       {
         path: "examples/input-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-demo",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -574,12 +717,67 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "label-demo",
+    type: "registry:example",
+    registryDependencies: ["label", "checkbox"],
+    files: [
+      {
+        path: "examples/label-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "menubar-demo",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [
+      {
+        path: "examples/menubar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-demo",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "navigation-menu-demo",
+    type: "registry:example",
+    registryDependencies: ["navigation-menu"],
+    files: [
+      {
+        path: "examples/navigation-menu-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "popover-demo",
     type: "registry:example",
     registryDependencies: ["popover", "button", "input", "label"],
     files: [
       {
         path: "examples/popover-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "progress-demo",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "examples/progress-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -596,12 +794,56 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "resizable-demo",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [
+      {
+        path: "examples/resizable-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "scroll-area-demo",
+    type: "registry:example",
+    registryDependencies: ["scroll-area", "separator"],
+    files: [
+      {
+        path: "examples/scroll-area-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "select-demo",
     type: "registry:example",
     registryDependencies: ["select"],
     files: [
       {
         path: "examples/select-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "separator-demo",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    files: [
+      {
+        path: "examples/separator-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-demo",
+    type: "registry:example",
+    registryDependencies: ["sheet", "button", "input", "label"],
+    files: [
+      {
+        path: "examples/sheet-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -635,6 +877,28 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/slider-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sonner-demo",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [
+      {
+        path: "examples/sonner-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sonner-types",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [
+      {
+        path: "examples/sonner-types.tsx",
         type: "registry:example"
       }
     ]

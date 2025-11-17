@@ -266,6 +266,56 @@ export function IconBrandGithub(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconCalculator(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect height="20" rx="2" width="16" x="4" y="2" />
+      <line x1="8" x2="16" y1="6" y2="6" />
+      <line x1="16" x2="16" y1="14" y2="18" />
+      <path d="M16 10h.01" />
+      <path d="M12 10h.01" />
+      <path d="M8 10h.01" />
+      <path d="M12 14h.01" />
+      <path d="M8 14h.01" />
+      <path d="M12 18h.01" />
+      <path d="M8 18h.01" />
+    </svg>
+  )
+}
+
+export function IconCalendar(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M8 2v4" />
+      <path d="M16 2v4" />
+      <rect height="18" rx="2" width="18" x="3" y="4" />
+      <path d="M3 10h18" />
+    </svg>
+  )
+}
+
 export function IconCalendarPlus(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -363,6 +413,26 @@ export function IconChevronRight(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconChevronsUpDown(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="m7 15 5 5 5-5" />
+      <path d="m7 9 5-5 5 5" />
+    </svg>
+  )
+}
+
 export function IconClock(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -397,6 +467,86 @@ export function IconCopy(props: ComponentProps<"svg">) {
     >
       <rect height="14" rx="2" ry="2" width="14" x="8" y="8" />
       <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </svg>
+  )
+}
+
+export function IconCircle(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+  )
+}
+
+export function IconCircleCheck(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
+export function IconCircleHelp(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" x2="12" y1="8" y2="12" />
+      <line x1="12" x2="12.01" y1="16" y2="16" />
+    </svg>
+  )
+}
+
+export function IconCreditCard(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect height="14" rx="2" width="20" x="2" y="5" />
+      <line x1="2" x2="22" y1="10" y2="10" />
     </svg>
   )
 }
@@ -456,6 +606,28 @@ export function IconFilterPlus(props: ComponentProps<"svg">) {
       <path d="M9 18h3" />
       <path d="M19 15v6" />
       <path d="M16 18h6" />
+    </svg>
+  )
+}
+
+export function IconFolderCode(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M0 0h24v24H0z" fill="none" stroke="none" />
+      <path d="M11 19h-6a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   )
 }
@@ -616,6 +788,26 @@ export function IconSearch(props: ComponentProps<"svg">) {
   )
 }
 
+export function IconSettings(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  )
+}
+
 export function IconShare(props: ComponentProps<"svg">) {
   return (
     <svg
@@ -633,6 +825,28 @@ export function IconShare(props: ComponentProps<"svg">) {
       <path d="M12 2v13" />
       <path d="m16 6-4-4-4 4" />
       <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+    </svg>
+  )
+}
+
+export function IconSmile(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+      <line x1="9" x2="9.01" y1="9" y2="9" />
+      <line x1="15" x2="15.01" y1="9" y2="9" />
     </svg>
   )
 }
@@ -710,6 +924,26 @@ export function IconTrash(props: ComponentProps<"svg">) {
       <path d="M14 11l0 6" />
       <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
       <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+    </svg>
+  )
+}
+
+export function IconUser(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
     </svg>
   )
 }

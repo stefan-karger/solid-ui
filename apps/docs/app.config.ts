@@ -40,18 +40,18 @@ export default defineConfig(
         packageManagers: {
           presets: {
             npm: {
-              install: "npm i :content",
-              "install-dev": "npm i :content -D",
-              "install-global": "npm i :content -g",
-              "install-local": "npm i",
+              install: "npm install :content",
+              "install-dev": "npm install :content -D",
+              "install-global": "npm install :content -g",
+              "install-local": "npm install",
               run: "npm run :content",
               exec: "npx :content",
               create: "npm init :content"
             },
             pnpm: {
-              install: "pnpm i :content",
-              "install-dev": "pnpm i :content -D",
-              "install-global": "pnpm i :content -g",
+              install: "pnpm add :content",
+              "install-dev": "pnpm add :content -D",
+              "install-global": "pnpm add :content -g",
               "install-local": "pnpm i",
               run: "pnpm :content",
               exec: "pnpx :content",
@@ -67,12 +67,12 @@ export default defineConfig(
               create: "yarn create :content"
             },
             bun: {
-              install: "bun i :content",
-              "install-dev": "bun i :content -d",
-              "install-global": "bun i :content -g",
+              install: "bun add :content",
+              "install-dev": "bun add :content -d",
+              "install-global": "bun add :content -g",
               "install-local": "bun i",
               run: "bun run :content",
-              exec: "bunx :content",
+              exec: "bunx --bun :content",
               create: "bun create :content"
             },
             deno: {
