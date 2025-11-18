@@ -14,7 +14,7 @@ import { cookieStorage, makePersisted, messageSync } from "@solid-primitives/sto
 import { CodeCollapsibleWrapper } from "~/components/code-collapsible-wrapper"
 import { ComponentSource as ComponentSourcePrimative } from "~/components/component-source"
 import { IconTerminal } from "~/components/icons"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/new-york-v4/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/v1/ui/tabs"
 
 export const h1 = (props: ComponentProps<"h1">) => {
   return <h1 class="mt-2 scroll-m-28 font-bold font-heading text-3xl tracking-tight" {...props} />
@@ -273,4 +273,4 @@ export const ComponentSource = (props: ComponentProps<typeof ComponentSourcePrim
 export { Callout } from "~/components/callout"
 export { ComponentPreview } from "~/components/component-preview"
 export { ComponentsList } from "~/components/components-list"
-export { Kbd } from "~/registry/new-york-v4/ui/kbd"
+export { Kbd } from "~/registry/v1/ui/kbd"

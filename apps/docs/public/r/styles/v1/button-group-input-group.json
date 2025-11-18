@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-input-group",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button",
+    "button-group",
+    "input-group",
+    "tooltip"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-group-input-group.tsx",
+      "content": "import { createSignal } from \"solid-js\"\r\n\r\nimport { IconAudioLines, IconPlus } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { ButtonGroup } from \"~/registry/v1/ui/button-group\"\r\nimport {\r\n  InputGroup,\r\n  InputGroupAddon,\r\n  InputGroupButton,\r\n  InputGroupInput\r\n} from \"~/registry/v1/ui/input-group\"\r\nimport { Tooltip, TooltipContent, TooltipTrigger } from \"~/registry/v1/ui/tooltip\"\r\n\r\nexport default function ButtonGroupInputGroup() {\r\n  const [voiceEnabled, setVoiceEnabled] = createSignal(false)\r\n\r\n  return (\r\n    <ButtonGroup class=\"[--radius:9999rem]\">\r\n      <ButtonGroup>\r\n        <Button size=\"icon\" variant=\"outline\">\r\n          <IconPlus />\r\n        </Button>\r\n      </ButtonGroup>\r\n      <ButtonGroup>\r\n        <InputGroup>\r\n          <InputGroupInput\r\n            disabled={voiceEnabled()}\r\n            placeholder={voiceEnabled() ? \"Record and send audio...\" : \"Send a message...\"}\r\n          />\r\n          <InputGroupAddon align=\"inline-end\">\r\n            <Tooltip>\r\n              <InputGroupButton\r\n                aria-pressed={voiceEnabled}\r\n                as={TooltipTrigger}\r\n                class=\"data-[active=true]:bg-orange-100 data-[active=true]:text-orange-700 dark:data-[active=true]:bg-orange-800 dark:data-[active=true]:text-orange-100\"\r\n                data-active={voiceEnabled}\r\n                onClick={() => setVoiceEnabled(!voiceEnabled)}\r\n                size=\"icon-xs\"\r\n              >\r\n                <IconAudioLines />\r\n              </InputGroupButton>\r\n\r\n              <TooltipContent>Voice Mode</TooltipContent>\r\n            </Tooltip>\r\n          </InputGroupAddon>\r\n        </InputGroup>\r\n      </ButtonGroup>\r\n    </ButtonGroup>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

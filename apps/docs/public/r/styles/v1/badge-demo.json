@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "badge"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/badge-demo.tsx",
+      "content": "import { IconBadgeCheck } from \"~/components/icons\"\r\nimport { Badge } from \"~/registry/v1/ui/badge\"\r\n\r\nexport default function BadgeDemo() {\r\n  return (\r\n    <div class=\"flex flex-col items-center gap-2\">\r\n      <div class=\"flex w-full flex-wrap gap-2\">\r\n        <Badge>Badge</Badge>\r\n        <Badge variant=\"secondary\">Secondary</Badge>\r\n        <Badge variant=\"destructive\">Destructive</Badge>\r\n        <Badge variant=\"outline\">Outline</Badge>\r\n      </div>\r\n      <div class=\"flex w-full flex-wrap gap-2\">\r\n        <Badge class=\"bg-blue-500 text-white dark:bg-blue-600\" variant=\"secondary\">\r\n          <IconBadgeCheck />\r\n          Verified\r\n        </Badge>\r\n        <Badge class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\">8</Badge>\r\n        <Badge class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\" variant=\"destructive\">\r\n          99\r\n        </Badge>\r\n        <Badge class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\" variant=\"outline\">\r\n          20+\r\n        </Badge>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -17,7 +17,7 @@ type ComponentPreviewProps = ComponentProps<"div"> & {
 
 export function ComponentPreview(rawProps: ComponentPreviewProps) {
   const props = mergeProps(rawProps, {
-    styleName: "new-york-v4",
+    styleName: "v1",
     align: "center",
     hideCode: false,
     chromeLessOnMobile: false

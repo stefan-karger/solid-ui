@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-responsive",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "button",
+    "input",
+    "textarea"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/field-responsive.tsx",
+      "content": "import { Button } from \"~/registry/v1/ui/button\"\r\nimport {\r\n  Field,\r\n  FieldContent,\r\n  FieldDescription,\r\n  FieldGroup,\r\n  FieldLabel,\r\n  FieldLegend,\r\n  FieldSeparator,\r\n  FieldSet\r\n} from \"~/registry/v1/ui/field\"\r\nimport { Input } from \"~/registry/v1/ui/input\"\r\nimport { Textarea } from \"~/registry/v1/ui/textarea\"\r\n\r\nexport default function FieldResponsive() {\r\n  return (\r\n    <div class=\"w-full max-w-4xl\">\r\n      <form>\r\n        <FieldSet>\r\n          <FieldLegend>Profile</FieldLegend>\r\n          <FieldDescription>Fill in your profile information.</FieldDescription>\r\n          <FieldSeparator />\r\n          <FieldGroup>\r\n            <Field orientation=\"responsive\">\r\n              <FieldContent>\r\n                <FieldLabel for=\"name\">Name</FieldLabel>\r\n                <FieldDescription>Provide your full name for identification</FieldDescription>\r\n              </FieldContent>\r\n              <Input id=\"name\" placeholder=\"Evil Rabbit\" required />\r\n            </Field>\r\n            <FieldSeparator />\r\n            <Field orientation=\"responsive\">\r\n              <FieldContent>\r\n                <FieldLabel for=\"lastName\">Message</FieldLabel>\r\n                <FieldDescription>\r\n                  You can write your message here. Keep it short, preferably under 100 characters.\r\n                </FieldDescription>\r\n              </FieldContent>\r\n              <Textarea\r\n                class=\"min-h-[100px] resize-none sm:min-w-[300px]\"\r\n                id=\"message\"\r\n                placeholder=\"Hello, world!\"\r\n                required\r\n              />\r\n            </Field>\r\n            <FieldSeparator />\r\n            <Field orientation=\"responsive\">\r\n              <Button type=\"submit\">Submit</Button>\r\n              <Button type=\"button\" variant=\"outline\">\r\n                Cancel\r\n              </Button>\r\n            </Field>\r\n          </FieldGroup>\r\n        </FieldSet>\r\n      </form>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

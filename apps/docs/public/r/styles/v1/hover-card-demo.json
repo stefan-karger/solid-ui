@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "hover-card",
+    "button",
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/hover-card-demo.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from \"~/registry/v1/ui/avatar\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { HoverCard, HoverCardContent, HoverCardTrigger } from \"~/registry/v1/ui/hover-card\"\r\n\r\nexport default function HoverCardDemo() {\r\n  return (\r\n    <HoverCard>\r\n      <Button as={HoverCardTrigger} variant=\"link\">\r\n        @solidjs\r\n      </Button>\r\n      <HoverCardContent class=\"w-80\">\r\n        <div class=\"flex justify-between gap-4\">\r\n          <Avatar>\r\n            <AvatarImage src=\"https://github.com/solidjs.png\" />\r\n            <AvatarFallback>VC</AvatarFallback>\r\n          </Avatar>\r\n          <div class=\"space-y-1\">\r\n            <h4 class=\"font-semibold text-sm\">@solidjs</h4>\r\n            <p class=\"text-sm\">The SolidJS Framework – created and maintained by @SolidJS Team.</p>\r\n            <div class=\"text-muted-foreground text-xs\">Joined June 2021</div>\r\n          </div>\r\n        </div>\r\n      </HoverCardContent>\r\n    </HoverCard>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

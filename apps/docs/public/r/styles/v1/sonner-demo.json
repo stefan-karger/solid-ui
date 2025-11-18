@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "sonner",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/sonner-demo.tsx",
+      "content": "import { toast } from \"solid-sonner\"\r\n\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { Toaster } from \"~/registry/v1/ui/sonner\"\r\n\r\nexport default function SonnerDemo() {\r\n  return (\r\n    <>\r\n      <Button\r\n        onClick={() =>\r\n          toast(\"Event has been created\", {\r\n            description: \"Sunday, December 03, 2023 at 9:00 AM\",\r\n            action: {\r\n              label: \"Undo\",\r\n              onClick: () => console.log(\"Undo\")\r\n            }\r\n          })\r\n        }\r\n        variant=\"outline\"\r\n      >\r\n        Show Toast\r\n      </Button>\r\n      <Toaster />\r\n    </>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

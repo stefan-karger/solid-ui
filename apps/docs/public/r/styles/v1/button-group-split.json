@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-split",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button",
+    "button-group"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-group-split.tsx",
+      "content": "import { IconPlus } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { ButtonGroup, ButtonGroupSeparator } from \"~/registry/v1/ui/button-group\"\r\n\r\nexport default function ButtonGroupSplit() {\r\n  return (\r\n    <ButtonGroup>\r\n      <Button variant=\"secondary\">Button</Button>\r\n      <ButtonGroupSeparator />\r\n      <Button size=\"icon\" variant=\"secondary\">\r\n        <IconPlus />\r\n      </Button>\r\n    </ButtonGroup>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

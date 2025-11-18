@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/ui/popover.tsx",
+      "content": "import type { Component, ValidComponent } from \"solid-js\"\r\nimport { splitProps } from \"solid-js\"\r\n\r\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\r\nimport * as PopoverPrimitive from \"@kobalte/core/popover\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\nconst Popover: Component<PopoverPrimitive.PopoverRootProps> = (props) => (\r\n  <PopoverPrimitive.Root data-slot=\"popover\" gutter={4} {...props} />\r\n)\r\n\r\nconst PopoverTrigger: Component<PopoverPrimitive.PopoverTriggerProps> = (props) => (\r\n  <PopoverPrimitive.Trigger data-slot=\"popover-trigger\" {...props} />\r\n)\r\n\r\ntype PopoverContentProps<T extends ValidComponent = \"div\"> =\r\n  PopoverPrimitive.PopoverContentProps<T> & { class?: string | undefined }\r\n\r\nconst PopoverContent = <T extends ValidComponent = \"div\">(\r\n  props: PolymorphicProps<T, PopoverContentProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as PopoverContentProps, [\"class\"])\r\n  return (\r\n    <PopoverPrimitive.Portal>\r\n      <PopoverPrimitive.Content\r\n        class={cn(\r\n          \"data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 origin-(--kb-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[closed]:animate-out data-[expanded]:animate-in\",\r\n          local.class\r\n        )}\r\n        data-slot=\"popover-content\"\r\n        {...others}\r\n      />\r\n    </PopoverPrimitive.Portal>\r\n  )\r\n}\r\n\r\nconst PopoverAnchor: Component<PopoverPrimitive.PopoverAnchorProps> = (props) => {\r\n  return <PopoverPrimitive.Anchor data-slot=\"popover-anchor\" {...props} />\r\n}\r\n\r\nexport { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

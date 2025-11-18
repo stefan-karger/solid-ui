@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-input",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button",
+    "button-group",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-group-input.tsx",
+      "content": "import { IconSearch } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { ButtonGroup } from \"~/registry/v1/ui/button-group\"\r\nimport { Input } from \"~/registry/v1/ui/input\"\r\n\r\nexport default function ButtonGroupInput() {\r\n  return (\r\n    <ButtonGroup>\r\n      <Input placeholder=\"Search...\" />\r\n      <Button aria-label=\"Search\" variant=\"outline\">\r\n        <IconSearch />\r\n      </Button>\r\n    </ButtonGroup>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

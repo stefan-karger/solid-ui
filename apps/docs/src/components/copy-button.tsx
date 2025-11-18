@@ -4,8 +4,8 @@ import { VariantProps } from "class-variance-authority"
 
 import { IconCheck, IconCopy } from "~/components/icons"
 import { cn } from "~/lib/utils"
-import { Button } from "~/registry/new-york-v4/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/new-york-v4/ui/tooltip"
+import { Button } from "~/registry/v1/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/v1/ui/tooltip"
 
 type CopyButtonProps = ComponentProps<typeof Button> & { value: string; tooltip?: string }
 

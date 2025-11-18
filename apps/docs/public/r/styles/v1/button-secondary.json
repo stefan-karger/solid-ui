@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-secondary",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-secondary.tsx",
+      "content": "import { Button } from \"~/registry/v1/ui/button\"\r\n\r\nexport default function ButtonSecondary() {\r\n  return <Button variant=\"secondary\">Secondary</Button>\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

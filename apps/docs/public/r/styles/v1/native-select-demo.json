@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "native-select"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/native-select-demo.tsx",
+      "content": "import { NativeSelect, NativeSelectOption } from \"~/registry/v1/ui/native-select\"\r\n\r\nexport default function NativeSelectDemo() {\r\n  return (\r\n    <NativeSelect>\r\n      <NativeSelectOption value=\"\">Select status</NativeSelectOption>\r\n      <NativeSelectOption value=\"todo\">Todo</NativeSelectOption>\r\n      <NativeSelectOption value=\"in-progress\">In Progress</NativeSelectOption>\r\n      <NativeSelectOption value=\"done\">Done</NativeSelectOption>\r\n      <NativeSelectOption value=\"cancelled\">Cancelled</NativeSelectOption>\r\n    </NativeSelect>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

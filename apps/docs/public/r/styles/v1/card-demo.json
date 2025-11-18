@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "card",
+    "button",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/card-demo.tsx",
+      "content": "import { Button } from \"~/registry/v1/ui/button\"\r\nimport {\r\n  Card,\r\n  CardAction,\r\n  CardContent,\r\n  CardDescription,\r\n  CardFooter,\r\n  CardHeader,\r\n  CardTitle\r\n} from \"~/registry/v1/ui/card\"\r\nimport { Input } from \"~/registry/v1/ui/input\"\r\nimport { Label } from \"~/registry/v1/ui/label\"\r\n\r\nexport default function CardDemo() {\r\n  return (\r\n    <Card class=\"w-full max-w-sm\">\r\n      <CardHeader>\r\n        <CardTitle>Login to your account</CardTitle>\r\n        <CardDescription>Enter your email below to login to your account</CardDescription>\r\n        <CardAction>\r\n          <Button variant=\"link\">Sign Up</Button>\r\n        </CardAction>\r\n      </CardHeader>\r\n      <CardContent>\r\n        <form>\r\n          <div class=\"flex flex-col gap-6\">\r\n            <div class=\"grid gap-2\">\r\n              <Label for=\"email\">Email</Label>\r\n              <Input id=\"email\" placeholder=\"m@example.com\" required type=\"email\" />\r\n            </div>\r\n            <div class=\"grid gap-2\">\r\n              <div class=\"flex items-center\">\r\n                <Label for=\"password\">Password</Label>\r\n                <a class=\"ml-auto inline-block text-sm underline-offset-4 hover:underline\" href=\"#\">\r\n                  Forgot your password?\r\n                </a>\r\n              </div>\r\n              <Input id=\"password\" required type=\"password\" />\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </CardContent>\r\n      <CardFooter class=\"flex-col gap-2\">\r\n        <Button class=\"w-full\" type=\"submit\">\r\n          Login\r\n        </Button>\r\n        <Button class=\"w-full\" variant=\"outline\">\r\n          Login with Google\r\n        </Button>\r\n      </CardFooter>\r\n    </Card>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

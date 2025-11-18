@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-rounded",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-rounded.tsx",
+      "content": "import { IconArrowUp } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\n\r\nexport default function ButtonRounded() {\r\n  return (\r\n    <Button class=\"rounded-full\" size=\"icon\" variant=\"outline\">\r\n      <IconArrowUp />\r\n    </Button>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

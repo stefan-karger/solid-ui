@@ -18,7 +18,7 @@ type ComponentSourceProps = ComponentProps<"div"> & {
 export function ComponentSource(rawProps: ComponentSourceProps) {
   const props = mergeProps(rawProps, {
     collapsible: true,
-    styleName: "new-york-v4"
+    styleName: "v1"
   })
 
   const [local, _other] = splitProps(props as ComponentSourceProps, [

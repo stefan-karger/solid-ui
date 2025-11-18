@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "empty",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/empty-demo.tsx",
+      "content": "import { IconArrowUpRight, IconFolderCode } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport {\r\n  Empty,\r\n  EmptyContent,\r\n  EmptyDescription,\r\n  EmptyHeader,\r\n  EmptyMedia,\r\n  EmptyTitle\r\n} from \"~/registry/v1/ui/empty\"\r\n\r\nexport default function EmptyDemo() {\r\n  return (\r\n    <Empty>\r\n      <EmptyHeader>\r\n        <EmptyMedia variant=\"icon\">\r\n          <IconFolderCode />\r\n        </EmptyMedia>\r\n        <EmptyTitle>No Projects Yet</EmptyTitle>\r\n        <EmptyDescription>\r\n          You haven&apos;t created any projects yet. Get started by creating your first project.\r\n        </EmptyDescription>\r\n      </EmptyHeader>\r\n      <EmptyContent>\r\n        <div class=\"flex gap-2\">\r\n          <Button>Create Project</Button>\r\n          <Button variant=\"outline\">Import Project</Button>\r\n        </div>\r\n      </EmptyContent>\r\n      <Button as=\"a\" class=\"text-muted-foreground\" href=\"#\" size=\"sm\" variant=\"link\">\r\n        Learn More <IconArrowUpRight />\r\n      </Button>\r\n    </Empty>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

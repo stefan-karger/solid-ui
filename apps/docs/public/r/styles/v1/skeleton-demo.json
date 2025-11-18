@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "skeleton"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/skeleton-demo.tsx",
+      "content": "import { Skeleton } from \"~/registry/v1/ui/skeleton\"\r\n\r\nexport default function SkeletonDemo() {\r\n  return (\r\n    <div class=\"flex items-center space-x-4\">\r\n      <Skeleton animate={false} circle height={48} />\r\n      <div class=\"space-y-2\">\r\n        <Skeleton height={16} radius={10} width={250} />\r\n        <Skeleton height={16} radius={10} width={200} />\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

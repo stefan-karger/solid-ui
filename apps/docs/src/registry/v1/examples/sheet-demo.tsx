@@ -1,0 +1,47 @@
+import { Button } from "~/registry/v1/ui/button"
+import { Input } from "~/registry/v1/ui/input"
+import { Label } from "~/registry/v1/ui/label"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from "~/registry/v1/ui/sheet"
+
+export default function SheetDemo() {
+  return (
+    <Sheet>
+      <Button as={SheetTrigger} variant="outline">
+        Open
+      </Button>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here. Click save when you&apos;re done.
+          </SheetDescription>
+        </SheetHeader>
+        <div class="grid flex-1 auto-rows-min gap-6 px-4">
+          <div class="grid gap-3">
+            <Label for="sheet-demo-name">Name</Label>
+            <Input id="sheet-demo-name" value="Pedro Duarte" />
+          </div>
+          <div class="grid gap-3">
+            <Label for="sheet-demo-username">Username</Label>
+            <Input id="sheet-demo-username" value="@peduarte" />
+          </div>
+        </div>
+        <SheetFooter>
+          <Button type="submit">Save changes</Button>
+          <Button as={SheetClose} variant="outline">
+            Close
+          </Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  )
+}

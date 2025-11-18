@@ -1,7 +1,7 @@
 import { type ComponentProps, splitProps } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { Alert, AlertDescription, AlertTitle } from "~/registry/new-york-v4/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "~/registry/v1/ui/alert"
 
 export function Callout(props: ComponentProps<typeof Alert>) {
   const [local, other] = splitProps(props, ["variant", "class", "children", "title", "icon"])

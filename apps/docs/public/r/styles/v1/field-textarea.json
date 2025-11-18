@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-textarea",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "textarea"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/field-textarea.tsx",
+      "content": "import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSet } from \"~/registry/v1/ui/field\"\r\nimport { Textarea } from \"~/registry/v1/ui/textarea\"\r\n\r\nexport default function FieldTextarea() {\r\n  return (\r\n    <div class=\"w-full max-w-md\">\r\n      <FieldSet>\r\n        <FieldGroup>\r\n          <Field>\r\n            <FieldLabel for=\"feedback\">Feedback</FieldLabel>\r\n            <Textarea id=\"feedback\" placeholder=\"Your feedback helps us improve...\" rows={4} />\r\n            <FieldDescription>Share your thoughts about our service.</FieldDescription>\r\n          </Field>\r\n        </FieldGroup>\r\n      </FieldSet>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

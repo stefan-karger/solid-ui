@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/ui/avatar.tsx",
+      "content": "import type { ValidComponent } from \"solid-js\"\r\nimport { splitProps } from \"solid-js\"\r\n\r\nimport * as ImagePrimitive from \"@kobalte/core/image\"\r\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\ntype AvatarRootProps<T extends ValidComponent = \"span\"> = ImagePrimitive.ImageRootProps<T> & {\r\n  class?: string | undefined\r\n}\r\n\r\nconst Avatar = <T extends ValidComponent = \"span\">(\r\n  props: PolymorphicProps<T, AvatarRootProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as AvatarRootProps, [\"class\"])\r\n  return (\r\n    <ImagePrimitive.Root\r\n      class={cn(\"relative flex size-8 shrink-0 overflow-hidden rounded-full\", local.class)}\r\n      data-slot=\"avatar\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\ntype AvatarImageProps<T extends ValidComponent = \"img\"> = ImagePrimitive.ImageImgProps<T> & {\r\n  class?: string | undefined\r\n}\r\n\r\nconst AvatarImage = <T extends ValidComponent = \"img\">(\r\n  props: PolymorphicProps<T, AvatarImageProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as AvatarImageProps, [\"class\"])\r\n  return (\r\n    <ImagePrimitive.Img\r\n      class={cn(\"aspect-square size-full\", local.class)}\r\n      data-slot=\"avatar-image\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\ntype AvatarFallbackProps<T extends ValidComponent = \"span\"> =\r\n  ImagePrimitive.ImageFallbackProps<T> & { class?: string | undefined }\r\n\r\nconst AvatarFallback = <T extends ValidComponent = \"span\">(\r\n  props: PolymorphicProps<T, AvatarFallbackProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as AvatarFallbackProps, [\"class\"])\r\n  return (\r\n    <ImagePrimitive.Fallback\r\n      class={cn(\"flex size-full items-center justify-center rounded-full bg-muted\", local.class)}\r\n      data-slot=\"avatar-fallback\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nexport { Avatar, AvatarImage, AvatarFallback }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

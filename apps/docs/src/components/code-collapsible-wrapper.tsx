@@ -1,13 +1,9 @@
 import { type ComponentProps, createSignal, splitProps } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { Button } from "~/registry/new-york-v4/ui/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
-} from "~/registry/new-york-v4/ui/collapsible"
-import { Separator } from "~/registry/new-york-v4/ui/separator"
+import { Button } from "~/registry/v1/ui/button"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/v1/ui/collapsible"
+import { Separator } from "~/registry/v1/ui/separator"
 
 export function CodeCollapsibleWrapper(props: ComponentProps<typeof Collapsible>) {
   const [local, other] = splitProps(props, ["class", "children"])

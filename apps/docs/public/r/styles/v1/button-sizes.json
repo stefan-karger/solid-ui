@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-sizes",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/button-sizes.tsx",
+      "content": "import { IconArrowUp } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\n\r\nexport default function ButtonSizes() {\r\n  return (\r\n    <div class=\"flex flex-col items-start gap-8 sm:flex-row\">\r\n      <div class=\"flex items-start gap-2\">\r\n        <Button size=\"sm\" variant=\"outline\">\r\n          Small\r\n        </Button>\r\n        <Button aria-label=\"Submit\" size=\"icon-sm\" variant=\"outline\">\r\n          <IconArrowUp />\r\n        </Button>\r\n      </div>\r\n      <div class=\"flex items-start gap-2\">\r\n        <Button variant=\"outline\">Default</Button>\r\n        <Button aria-label=\"Submit\" size=\"icon\" variant=\"outline\">\r\n          <IconArrowUp />\r\n        </Button>\r\n      </div>\r\n      <div class=\"flex items-start gap-2\">\r\n        <Button size=\"lg\" variant=\"outline\">\r\n          Large\r\n        </Button>\r\n        <Button aria-label=\"Submit\" size=\"icon-lg\" variant=\"outline\">\r\n          <IconArrowUp />\r\n        </Button>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}
