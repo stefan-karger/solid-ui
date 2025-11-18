@@ -2,7 +2,7 @@ import { createSignal, onMount } from "solid-js"
 import { A } from "@solidjs/router"
 
 import { IconBrandGithub } from "~/components/icons"
-import { Button } from "~/registry/v1/ui/button"
+import { Button } from "~/registry/new-york-v4/ui/button"
 
 const FALLBACK_STAR_COUNT = 1250
 

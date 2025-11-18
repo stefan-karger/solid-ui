@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-group-example",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "checkbox"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/field-group-example.tsx",
+      "content": "import { Checkbox } from \"~/registry/new-york-v4/ui/checkbox\"\r\nimport {\r\n  Field,\r\n  FieldDescription,\r\n  FieldGroup,\r\n  FieldLabel,\r\n  FieldSeparator,\r\n  FieldSet\r\n} from \"~/registry/new-york-v4/ui/field\"\r\n\r\nexport default function FieldGroupExample() {\r\n  return (\r\n    <div class=\"w-full max-w-md\">\r\n      <FieldGroup>\r\n        <FieldSet>\r\n          <FieldLabel>Responses</FieldLabel>\r\n          <FieldDescription>\r\n            Get notified when ChatGPT responds to requests that take time, like research or image\r\n            generation.\r\n          </FieldDescription>\r\n          <FieldGroup data-slot=\"checkbox-group\">\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox defaultChecked disabled id=\"push\" />\r\n              <FieldLabel class=\"font-normal\" for=\"push\">\r\n                Push notifications\r\n              </FieldLabel>\r\n            </Field>\r\n          </FieldGroup>\r\n        </FieldSet>\r\n        <FieldSeparator />\r\n        <FieldSet>\r\n          <FieldLabel>Tasks</FieldLabel>\r\n          <FieldDescription>\r\n            Get notified when tasks you&apos;ve created have updates. <a href=\"/#\">Manage tasks</a>\r\n          </FieldDescription>\r\n          <FieldGroup data-slot=\"checkbox-group\">\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox id=\"push-tasks\" />\r\n              <FieldLabel class=\"font-normal\" for=\"push-tasks\">\r\n                Push notifications\r\n              </FieldLabel>\r\n            </Field>\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox id=\"email-tasks\" />\r\n              <FieldLabel class=\"font-normal\" for=\"email-tasks\">\r\n                Email notifications\r\n              </FieldLabel>\r\n            </Field>\r\n          </FieldGroup>\r\n        </FieldSet>\r\n      </FieldGroup>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

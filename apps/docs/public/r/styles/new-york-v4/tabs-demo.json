@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "tabs",
+    "card",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/tabs-demo.tsx",
+      "content": "import { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport {\r\n  Card,\r\n  CardContent,\r\n  CardDescription,\r\n  CardFooter,\r\n  CardHeader,\r\n  CardTitle\r\n} from \"~/registry/new-york-v4/ui/card\"\r\nimport { Input } from \"~/registry/new-york-v4/ui/input\"\r\nimport { Label } from \"~/registry/new-york-v4/ui/label\"\r\nimport { Tabs, TabsContent, TabsList, TabsTrigger } from \"~/registry/new-york-v4/ui/tabs\"\r\n\r\nexport default function TabsDemo() {\r\n  return (\r\n    <div class=\"flex w-full max-w-sm flex-col gap-6\">\r\n      <Tabs defaultValue=\"account\">\r\n        <TabsList>\r\n          <TabsTrigger value=\"account\">Account</TabsTrigger>\r\n          <TabsTrigger value=\"password\">Password</TabsTrigger>\r\n        </TabsList>\r\n        <TabsContent value=\"account\">\r\n          <Card>\r\n            <CardHeader>\r\n              <CardTitle>Account</CardTitle>\r\n              <CardDescription>\r\n                Make changes to your account here. Click save when you&apos;re done.\r\n              </CardDescription>\r\n            </CardHeader>\r\n            <CardContent class=\"grid gap-6\">\r\n              <div class=\"grid gap-3\">\r\n                <Label for=\"tabs-demo-name\">Name</Label>\r\n                <Input id=\"tabs-demo-name\" value=\"Pedro Duarte\" />\r\n              </div>\r\n              <div class=\"grid gap-3\">\r\n                <Label for=\"tabs-demo-username\">Username</Label>\r\n                <Input id=\"tabs-demo-username\" value=\"@peduarte\" />\r\n              </div>\r\n            </CardContent>\r\n            <CardFooter>\r\n              <Button>Save changes</Button>\r\n            </CardFooter>\r\n          </Card>\r\n        </TabsContent>\r\n        <TabsContent value=\"password\">\r\n          <Card>\r\n            <CardHeader>\r\n              <CardTitle>Password</CardTitle>\r\n              <CardDescription>\r\n                Change your password here. After saving, you&apos;ll be logged out.\r\n              </CardDescription>\r\n            </CardHeader>\r\n            <CardContent class=\"grid gap-6\">\r\n              <div class=\"grid gap-3\">\r\n                <Label for=\"tabs-demo-current\">Current password</Label>\r\n                <Input id=\"tabs-demo-current\" type=\"password\" />\r\n              </div>\r\n              <div class=\"grid gap-3\">\r\n                <Label for=\"tabs-demo-new\">New password</Label>\r\n                <Input id=\"tabs-demo-new\" type=\"password\" />\r\n              </div>\r\n            </CardContent>\r\n            <CardFooter>\r\n              <Button>Save password</Button>\r\n            </CardFooter>\r\n          </Card>\r\n        </TabsContent>\r\n      </Tabs>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

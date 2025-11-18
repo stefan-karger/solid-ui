@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-loading",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button",
+    "spinner"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/button-loading.tsx",
+      "content": "import { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport { Spinner } from \"~/registry/new-york-v4/ui/spinner\"\r\n\r\nexport default function ButtonLoading() {\r\n  return (\r\n    <Button disabled size=\"sm\" variant=\"outline\">\r\n      <Spinner /> Submit\r\n    </Button>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

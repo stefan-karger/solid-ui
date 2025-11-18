@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner-types",
+  "type": "registry:example",
+  "registryDependencies": [
+    "sonner",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/sonner-types.tsx",
+      "content": "import { toast } from \"solid-sonner\"\r\n\r\nimport { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport { Toaster } from \"~/registry/new-york-v4/ui/sonner\"\r\n\r\nexport default function SonnerTypes() {\r\n  return (\r\n    <>\r\n      <div class=\"flex flex-wrap gap-2\">\r\n        <Button onClick={() => toast(\"Event has been created\")} variant=\"outline\">\r\n          Default\r\n        </Button>\r\n        <Button onClick={() => toast.success(\"Event has been created\")} variant=\"outline\">\r\n          Success\r\n        </Button>\r\n        <Button\r\n          onClick={() => toast.info(\"Be at the area 10 minutes before the event time\")}\r\n          variant=\"outline\"\r\n        >\r\n          Info\r\n        </Button>\r\n        <Button\r\n          onClick={() => toast.warning(\"Event start time cannot be earlier than 8am\")}\r\n          variant=\"outline\"\r\n        >\r\n          Warning\r\n        </Button>\r\n        <Button onClick={() => toast.error(\"Event has not been created\")} variant=\"outline\">\r\n          Error\r\n        </Button>\r\n        <Button\r\n          onClick={() => {\r\n            toast.promise<{ name: string }>(\r\n              () => new Promise((resolve) => setTimeout(() => resolve({ name: \"Event\" }), 2000)),\r\n              {\r\n                loading: \"Loading...\",\r\n                success: (data) => `${data.name} has been created`,\r\n                error: \"Error\"\r\n              }\r\n            )\r\n          }}\r\n          variant=\"outline\"\r\n        >\r\n          Promise\r\n        </Button>\r\n      </div>\r\n      <Toaster />\r\n    </>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

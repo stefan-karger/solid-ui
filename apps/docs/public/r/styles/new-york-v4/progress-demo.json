@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "progress"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/progress-demo.tsx",
+      "content": "import { createEffect, createSignal } from \"solid-js\"\r\n\r\nimport { Progress } from \"~/registry/new-york-v4/ui/progress\"\r\n\r\nexport default function ProgressDemo() {\r\n  const [progress, setProgress] = createSignal(13)\r\n\r\n  createEffect(() => {\r\n    const timer = setTimeout(() => setProgress(66), 500)\r\n    return () => clearTimeout(timer)\r\n  })\r\n\r\n  return <Progress class=\"w-[60%]\" value={progress()} />\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

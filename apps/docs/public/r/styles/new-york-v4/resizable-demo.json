@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "resizable"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/resizable-demo.tsx",
+      "content": "import { Resizable, ResizableHandle, ResizablePanel } from \"~/registry/new-york-v4/ui/resizable\"\r\n\r\nexport default function ResizableDemo() {\r\n  return (\r\n    <Resizable class=\"max-w-md rounded-lg border md:min-w-[450px]\" orientation=\"horizontal\">\r\n      <ResizablePanel initialSize={0.5}>\r\n        <div class=\"flex h-[200px] items-center justify-center p-6\">\r\n          <span class=\"font-semibold\">One</span>\r\n        </div>\r\n      </ResizablePanel>\r\n      <ResizableHandle />\r\n      <ResizablePanel initialSize={0.5}>\r\n        <Resizable orientation=\"vertical\">\r\n          <ResizablePanel initialSize={0.25}>\r\n            <div class=\"flex h-full items-center justify-center p-6\">\r\n              <span class=\"font-semibold\">Two</span>\r\n            </div>\r\n          </ResizablePanel>\r\n          <ResizableHandle />\r\n          <ResizablePanel initialSize={0.75}>\r\n            <div class=\"flex h-full items-center justify-center p-6\">\r\n              <span class=\"font-semibold\">Three</span>\r\n            </div>\r\n          </ResizablePanel>\r\n        </Resizable>\r\n      </ResizablePanel>\r\n    </Resizable>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

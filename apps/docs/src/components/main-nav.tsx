@@ -3,7 +3,7 @@ import { A } from "@solidjs/router"
 
 import { docsConfig } from "~/config/docs"
 import { cn } from "~/lib/utils"
-import { Button } from "~/registry/v1/ui/button"
+import { Button } from "~/registry/new-york-v4/ui/button"
 
 export function MainNav(props: ComponentProps<"nav">) {
   const [local, others] = splitProps(props, ["class"])

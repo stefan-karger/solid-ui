@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "alert-dialog"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/alert-dialog-demo.tsx",
+      "content": "import {\r\n  AlertDialog,\r\n  AlertDialogAction,\r\n  AlertDialogCancel,\r\n  AlertDialogContent,\r\n  AlertDialogDescription,\r\n  AlertDialogFooter,\r\n  AlertDialogHeader,\r\n  AlertDialogTitle,\r\n  AlertDialogTrigger\r\n} from \"~/registry/new-york-v4/ui/alert-dialog\"\r\nimport { Button } from \"~/registry/new-york-v4/ui/button\"\r\n\r\nexport default function AlertDialogDemo() {\r\n  return (\r\n    <AlertDialog>\r\n      <Button as={AlertDialogTrigger} variant=\"outline\">\r\n        Show Dialog\r\n      </Button>\r\n\r\n      <AlertDialogContent>\r\n        <AlertDialogHeader>\r\n          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\r\n          <AlertDialogDescription>\r\n            This action cannot be undone. This will permanently delete your account and remove your\r\n            data from our servers.\r\n          </AlertDialogDescription>\r\n        </AlertDialogHeader>\r\n        <AlertDialogFooter>\r\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\r\n          <AlertDialogAction>Continue</AlertDialogAction>\r\n        </AlertDialogFooter>\r\n      </AlertDialogContent>\r\n    </AlertDialog>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

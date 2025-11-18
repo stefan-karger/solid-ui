@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-orientation",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button",
+    "button-group"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/button-group-orientation.tsx",
+      "content": "import { IconMinus, IconPlus } from \"~/components/icons\"\r\nimport { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport { ButtonGroup } from \"~/registry/new-york-v4/ui/button-group\"\r\n\r\nexport default function ButtonGroupOrientation() {\r\n  return (\r\n    <ButtonGroup aria-label=\"Media controls\" class=\"h-fit\" orientation=\"vertical\">\r\n      <Button size=\"icon\" variant=\"outline\">\r\n        <IconPlus />\r\n      </Button>\r\n      <Button size=\"icon\" variant=\"outline\">\r\n        <IconMinus />\r\n      </Button>\r\n    </ButtonGroup>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

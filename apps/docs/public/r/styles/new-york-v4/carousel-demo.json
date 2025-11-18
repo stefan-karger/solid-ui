@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "carousel-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "carousel",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/carousel-demo.tsx",
+      "content": "import { Index } from \"solid-js\"\r\n\r\nimport { Card, CardContent } from \"~/registry/new-york-v4/ui/card\"\r\nimport {\r\n  Carousel,\r\n  CarouselContent,\r\n  CarouselItem,\r\n  CarouselNext,\r\n  CarouselPrevious\r\n} from \"~/registry/new-york-v4/ui/carousel\"\r\n\r\nexport default function CarouselDemo() {\r\n  return (\r\n    <Carousel class=\"w-full max-w-xs\">\r\n      <CarouselContent>\r\n        <Index each={Array.from({ length: 5 })}>\r\n          {(_, index) => (\r\n            <CarouselItem>\r\n              <div class=\"p-1\">\r\n                <Card>\r\n                  <CardContent class=\"flex aspect-square items-center justify-center p-6\">\r\n                    <span class=\"font-semibold text-4xl\">{index + 1}</span>\r\n                  </CardContent>\r\n                </Card>\r\n              </div>\r\n            </CarouselItem>\r\n          )}\r\n        </Index>\r\n      </CarouselContent>\r\n      <CarouselPrevious />\r\n      <CarouselNext />\r\n    </Carousel>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

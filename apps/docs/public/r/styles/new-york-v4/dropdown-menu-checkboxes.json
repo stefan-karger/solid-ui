@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dropdown-menu-checkboxes",
+  "type": "registry:example",
+  "registryDependencies": [
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/dropdown-menu-checkboxes.tsx",
+      "content": "import { createSignal } from \"solid-js\"\r\n\r\nimport { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport {\r\n  DropdownMenu,\r\n  DropdownMenuCheckboxItem,\r\n  DropdownMenuContent,\r\n  DropdownMenuLabel,\r\n  DropdownMenuSeparator,\r\n  DropdownMenuTrigger\r\n} from \"~/registry/new-york-v4/ui/dropdown-menu\"\r\n\r\nexport default function DropdownMenuCheckboxes() {\r\n  const [showStatusBar, setShowStatusBar] = createSignal(true)\r\n  const [showActivityBar, setShowActivityBar] = createSignal(false)\r\n  const [showPanel, setShowPanel] = createSignal(false)\r\n\r\n  return (\r\n    <DropdownMenu>\r\n      <DropdownMenuTrigger as={Button<\"button\">} variant=\"outline\">\r\n        Open\r\n      </DropdownMenuTrigger>\r\n      <DropdownMenuContent class=\"w-56\">\r\n        <DropdownMenuLabel>Appearance</DropdownMenuLabel>\r\n        <DropdownMenuSeparator />\r\n        <DropdownMenuCheckboxItem checked={showStatusBar()} onChange={setShowStatusBar}>\r\n          Status Bar\r\n        </DropdownMenuCheckboxItem>\r\n        <DropdownMenuCheckboxItem\r\n          checked={showActivityBar()}\r\n          disabled\r\n          onChange={setShowActivityBar}\r\n        >\r\n          Activity Bar\r\n        </DropdownMenuCheckboxItem>\r\n        <DropdownMenuCheckboxItem checked={showPanel()} onChange={setShowPanel}>\r\n          Panel\r\n        </DropdownMenuCheckboxItem>\r\n      </DropdownMenuContent>\r\n    </DropdownMenu>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

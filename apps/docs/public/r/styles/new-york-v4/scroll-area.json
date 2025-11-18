@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "type": "registry:ui",
+  "dependencies": [
+    "@ark-ui/solid"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/ui/scroll-area.tsx",
+      "content": "import { splitProps } from \"solid-js\"\r\n\r\nimport { ScrollArea as ScrollAreaPrimitive } from \"@ark-ui/solid/scroll-area\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\nconst ScrollArea = (props: ScrollAreaPrimitive.RootProps) => {\r\n  const [local, other] = splitProps(props, [\"class\", \"children\"])\r\n\r\n  return (\r\n    <ScrollAreaPrimitive.Root\r\n      class={cn(\"relative\", local.class)}\r\n      data-slot=\"scroll-area\"\r\n      {...other}\r\n    >\r\n      <ScrollAreaPrimitive.Viewport\r\n        class=\"size-full rounded-[inherit] outline-none transition-[color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50\"\r\n        data-slot=\"scroll-area-viewport\"\r\n      >\r\n        <ScrollAreaPrimitive.Content data-slot=\"scroll-area-content\">\r\n          {local.children}\r\n        </ScrollAreaPrimitive.Content>\r\n      </ScrollAreaPrimitive.Viewport>\r\n      <ScrollBar />\r\n      <ScrollAreaPrimitive.Corner />\r\n    </ScrollAreaPrimitive.Root>\r\n  )\r\n}\r\n\r\nconst ScrollBar = (props: ScrollAreaPrimitive.ScrollbarProps) => {\r\n  const [local, other] = splitProps(props, [\"class\", \"orientation\"])\r\n\r\n  return (\r\n    <ScrollAreaPrimitive.Scrollbar\r\n      class={cn(\r\n        \"flex touch-none select-none p-px transition-colors\",\r\n        local.orientation === \"vertical\" && \"h-full w-2.5 border-l border-l-transparent\",\r\n        local.orientation === \"horizontal\" && \"h-2.5 flex-col border-t border-t-transparent\",\r\n        local.class\r\n      )}\r\n      data-slot=\"scroll-area-scrollbar\"\r\n      orientation={local.orientation}\r\n      {...other}\r\n    >\r\n      <ScrollAreaPrimitive.Thumb\r\n        class=\"relative flex-1 rounded-full bg-border\"\r\n        data-slot=\"scroll-area-thumb\"\r\n      />\r\n    </ScrollAreaPrimitive.Scrollbar>\r\n  )\r\n}\r\n\r\nexport { ScrollArea, ScrollBar }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

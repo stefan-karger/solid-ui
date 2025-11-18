@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-ghost",
+  "type": "registry:example",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/button-ghost.tsx",
+      "content": "import { Button } from \"~/registry/new-york-v4/ui/button\"\r\n\r\nexport default function ButtonGhost() {\r\n  return <Button variant=\"ghost\">Ghost</Button>\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

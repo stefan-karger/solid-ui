@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "toggle-group"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/toggle-group-demo.tsx",
+      "content": "import { Show } from \"solid-js\"\r\n\r\nimport { IconBookmark, IconHeart, IconStar } from \"~/components/icons\"\r\nimport { ToggleGroup, ToggleGroupItem } from \"~/registry/new-york-v4/ui/toggle-group\"\r\n\r\nexport default function ToggleGroupSpacing() {\r\n  return (\r\n    <ToggleGroup multiple size=\"sm\" spacing={2} variant=\"outline\">\r\n      <ToggleGroupItem aria-label=\"Toggle star\" value=\"star\">\r\n        {(state) => (\r\n          <>\r\n            <Show fallback={<IconStar />} when={state.pressed()}>\r\n              <IconStar class=\"fill-yellow-500 stroke-yellow-500\" />\r\n            </Show>\r\n            Star\r\n          </>\r\n        )}\r\n      </ToggleGroupItem>\r\n      <ToggleGroupItem aria-label=\"Toggle heart\" value=\"heart\">\r\n        {(state) => (\r\n          <>\r\n            <Show fallback={<IconHeart />} when={state.pressed()}>\r\n              <IconHeart class=\"fill-red-500 stroke-red-500\" />\r\n            </Show>\r\n            Heart\r\n          </>\r\n        )}\r\n      </ToggleGroupItem>\r\n      <ToggleGroupItem aria-label=\"Toggle bookmark\" value=\"bookmark\">\r\n        {(state) => (\r\n          <>\r\n            <Show fallback={<IconBookmark />} when={state.pressed()}>\r\n              <IconBookmark class=\"fill-blue-500 stroke-blue-500\" />\r\n            </Show>\r\n            Bookmark\r\n          </>\r\n        )}\r\n      </ToggleGroupItem>\r\n    </ToggleGroup>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

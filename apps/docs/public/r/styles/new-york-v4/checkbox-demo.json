@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "checkbox"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/checkbox-demo.tsx",
+      "content": "import { Checkbox } from \"~/registry/new-york-v4/ui/checkbox\"\r\nimport { Label } from \"~/registry/new-york-v4/ui/label\"\r\n\r\nexport default function CheckboxDemo() {\r\n  return (\r\n    <div class=\"flex flex-col gap-6\">\r\n      <div class=\"flex items-center gap-3\">\r\n        <Checkbox id=\"terms\" />\r\n        <Label for=\"terms\">Accept terms and conditions</Label>\r\n      </div>\r\n      <div class=\"flex items-start gap-3\">\r\n        <Checkbox defaultChecked id=\"terms-2\" />\r\n        <div class=\"grid gap-2\">\r\n          <Label for=\"terms-2\">Accept terms and conditions</Label>\r\n          <p class=\"text-muted-foreground text-sm\">\r\n            By clicking this checkbox, you agree to the terms and conditions.\r\n          </p>\r\n        </div>\r\n      </div>\r\n      <div class=\"flex items-start gap-3\">\r\n        <Checkbox disabled id=\"toggle\" />\r\n        <Label for=\"toggle\">Enable notifications</Label>\r\n      </div>\r\n      <Label\r\n        class=\"flex items-start gap-3 rounded-lg border p-3 hover:bg-accent/50 has-[[data-checked]]:border-blue-600 has-[[data-checked]]:bg-blue-50 dark:has-[[data-checked]]:border-blue-900 dark:has-[[data-checked]]:bg-blue-950\"\r\n        for=\"toggle-2\"\r\n      >\r\n        <Checkbox\r\n          class=\"data-[checked]:border-blue-600 data-[checked]:bg-blue-600 data-[checked]:text-white dark:data-[checked]:border-blue-700 dark:data-[checked]:bg-blue-700\"\r\n          id=\"toggle-2\"\r\n        />\r\n        <div class=\"grid gap-1.5 font-normal\">\r\n          <p class=\"font-medium text-sm leading-none\">Enable notifications</p>\r\n          <p class=\"text-muted-foreground text-sm\">\r\n            You can enable or disable notifications at any time.\r\n          </p>\r\n        </div>\r\n      </Label>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

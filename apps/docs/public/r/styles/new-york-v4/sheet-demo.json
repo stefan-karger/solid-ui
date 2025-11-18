@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sheet-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "sheet",
+    "button",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/sheet-demo.tsx",
+      "content": "import { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport { Input } from \"~/registry/new-york-v4/ui/input\"\r\nimport { Label } from \"~/registry/new-york-v4/ui/label\"\r\nimport {\r\n  Sheet,\r\n  SheetClose,\r\n  SheetContent,\r\n  SheetDescription,\r\n  SheetFooter,\r\n  SheetHeader,\r\n  SheetTitle,\r\n  SheetTrigger\r\n} from \"~/registry/new-york-v4/ui/sheet\"\r\n\r\nexport default function SheetDemo() {\r\n  return (\r\n    <Sheet>\r\n      <Button as={SheetTrigger} variant=\"outline\">\r\n        Open\r\n      </Button>\r\n      <SheetContent>\r\n        <SheetHeader>\r\n          <SheetTitle>Edit profile</SheetTitle>\r\n          <SheetDescription>\r\n            Make changes to your profile here. Click save when you&apos;re done.\r\n          </SheetDescription>\r\n        </SheetHeader>\r\n        <div class=\"grid flex-1 auto-rows-min gap-6 px-4\">\r\n          <div class=\"grid gap-3\">\r\n            <Label for=\"sheet-demo-name\">Name</Label>\r\n            <Input id=\"sheet-demo-name\" value=\"Pedro Duarte\" />\r\n          </div>\r\n          <div class=\"grid gap-3\">\r\n            <Label for=\"sheet-demo-username\">Username</Label>\r\n            <Input id=\"sheet-demo-username\" value=\"@peduarte\" />\r\n          </div>\r\n        </div>\r\n        <SheetFooter>\r\n          <Button type=\"submit\">Save changes</Button>\r\n          <Button as={SheetClose} variant=\"outline\">\r\n            Close\r\n          </Button>\r\n        </SheetFooter>\r\n      </SheetContent>\r\n    </Sheet>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

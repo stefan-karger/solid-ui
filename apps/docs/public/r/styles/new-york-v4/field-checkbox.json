@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-checkbox",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "checkbox"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/field-checkbox.tsx",
+      "content": "import { Checkbox } from \"~/registry/new-york-v4/ui/checkbox\"\r\nimport {\r\n  Field,\r\n  FieldContent,\r\n  FieldDescription,\r\n  FieldGroup,\r\n  FieldLabel,\r\n  FieldLegend,\r\n  FieldSeparator,\r\n  FieldSet\r\n} from \"~/registry/new-york-v4/ui/field\"\r\n\r\nexport default function FieldCheckbox() {\r\n  return (\r\n    <div class=\"w-full max-w-md\">\r\n      <FieldGroup>\r\n        <FieldSet>\r\n          <FieldLegend variant=\"label\">Show these items on the desktop</FieldLegend>\r\n          <FieldDescription>Select the items you want to show on the desktop.</FieldDescription>\r\n          <FieldGroup class=\"gap-3\">\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox defaultChecked id=\"finder-pref-9k2-hard-disks-ljj\" />\r\n              <FieldLabel class=\"font-normal\" for=\"finder-pref-9k2-hard-disks-ljj\">\r\n                Hard disks\r\n              </FieldLabel>\r\n            </Field>\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox id=\"finder-pref-9k2-external-disks-1yg\" />\r\n              <FieldLabel class=\"font-normal\" for=\"finder-pref-9k2-external-disks-1yg\">\r\n                External disks\r\n              </FieldLabel>\r\n            </Field>\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox id=\"finder-pref-9k2-cds-dvds-fzt\" />\r\n              <FieldLabel class=\"font-normal\" for=\"finder-pref-9k2-cds-dvds-fzt\">\r\n                CDs, DVDs, and iPods\r\n              </FieldLabel>\r\n            </Field>\r\n            <Field orientation=\"horizontal\">\r\n              <Checkbox id=\"finder-pref-9k2-connected-servers-6l2\" />\r\n              <FieldLabel class=\"font-normal\" for=\"finder-pref-9k2-connected-servers-6l2\">\r\n                Connected servers\r\n              </FieldLabel>\r\n            </Field>\r\n          </FieldGroup>\r\n        </FieldSet>\r\n        <FieldSeparator />\r\n        <Field orientation=\"horizontal\">\r\n          <Checkbox defaultChecked id=\"finder-pref-9k2-sync-folders-nep\" />\r\n          <FieldContent>\r\n            <FieldLabel for=\"finder-pref-9k2-sync-folders-nep\">\r\n              Sync Desktop & Documents folders\r\n            </FieldLabel>\r\n            <FieldDescription>\r\n              Your Desktop & Documents folders are being synced with iCloud Drive. You can access\r\n              them from other devices.\r\n            </FieldDescription>\r\n          </FieldContent>\r\n        </Field>\r\n      </FieldGroup>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

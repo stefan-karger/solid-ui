@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "select"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/select-demo.tsx",
+      "content": "import { createSignal } from \"solid-js\"\r\n\r\nimport {\r\n  Select,\r\n  SelectContent,\r\n  SelectItem,\r\n  SelectTrigger,\r\n  SelectValue\r\n} from \"~/registry/new-york-v4/ui/select\"\r\n\r\nexport default function SelectDemo() {\r\n  const [value, setValue] = createSignal(\"\")\r\n  return (\r\n    <div class=\"flex-col\">\r\n      <Select\r\n        itemComponent={(props) => <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>}\r\n        onChange={setValue}\r\n        options={[\"Apple\", \"Banana\", \"Blueberry\", \"Grapes\", \"Pineapple\"]}\r\n        placeholder=\"Select a fruit…\"\r\n        value={value()}\r\n      >\r\n        <SelectTrigger aria-label=\"Fruit\" class=\"w-[180px]\">\r\n          <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>\r\n        </SelectTrigger>\r\n        <SelectContent />\r\n      </Select>\r\n      <p class=\"pt-2 text-gray-500 text-sm\">Your favorite fruit is: {value()}</p>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-input",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/field-input.tsx",
+      "content": "import {\r\n  Field,\r\n  FieldDescription,\r\n  FieldGroup,\r\n  FieldLabel,\r\n  FieldSet\r\n} from \"~/registry/new-york-v4/ui/field\"\r\nimport { Input } from \"~/registry/new-york-v4/ui/input\"\r\n\r\nexport default function FieldInput() {\r\n  return (\r\n    <div class=\"w-full max-w-md\">\r\n      <FieldSet>\r\n        <FieldGroup>\r\n          <Field>\r\n            <FieldLabel for=\"username\">Username</FieldLabel>\r\n            <Input id=\"username\" placeholder=\"Max Leiter\" type=\"text\" />\r\n            <FieldDescription>Choose a unique username for your account.</FieldDescription>\r\n          </Field>\r\n          <Field>\r\n            <FieldLabel for=\"password\">Password</FieldLabel>\r\n            <FieldDescription>Must be at least 8 characters long.</FieldDescription>\r\n            <Input id=\"password\" placeholder=\"••••••••\" type=\"password\" />\r\n          </Field>\r\n        </FieldGroup>\r\n      </FieldSet>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

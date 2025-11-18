@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "dialog",
+    "button",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/dialog-demo.tsx",
+      "content": "import { Button } from \"~/registry/new-york-v4/ui/button\"\r\nimport {\r\n  Dialog,\r\n  DialogClose,\r\n  DialogContent,\r\n  DialogDescription,\r\n  DialogFooter,\r\n  DialogHeader,\r\n  DialogTitle,\r\n  DialogTrigger\r\n} from \"~/registry/new-york-v4/ui/dialog\"\r\nimport { Input } from \"~/registry/new-york-v4/ui/input\"\r\nimport { Label } from \"~/registry/new-york-v4/ui/label\"\r\n\r\nexport default function DialogDemo() {\r\n  return (\r\n    <Dialog>\r\n      <form>\r\n        <Button as={DialogTrigger} variant=\"outline\">\r\n          Open Dialog\r\n        </Button>\r\n        <DialogContent class=\"sm:max-w-[425px]\">\r\n          <DialogHeader>\r\n            <DialogTitle>Edit profile</DialogTitle>\r\n            <DialogDescription>\r\n              Make changes to your profile here. Click save when you&apos;re done.\r\n            </DialogDescription>\r\n          </DialogHeader>\r\n          <div class=\"grid gap-4\">\r\n            <div class=\"grid gap-3\">\r\n              <Label for=\"name-1\">Name</Label>\r\n              <Input id=\"name-1\" name=\"name\" value=\"Pedro Duarte\" />\r\n            </div>\r\n            <div class=\"grid gap-3\">\r\n              <Label for=\"username-1\">Username</Label>\r\n              <Input id=\"username-1\" name=\"username\" value=\"@peduarte\" />\r\n            </div>\r\n          </div>\r\n          <DialogFooter>\r\n            <Button as={DialogClose} variant=\"outline\">\r\n              Cancel\r\n            </Button>\r\n            <Button type=\"submit\">Save changes</Button>\r\n          </DialogFooter>\r\n        </DialogContent>\r\n      </form>\r\n    </Dialog>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { getThemeVariant, setTheme } from "@kobalte/solidbase/client"
 
-import { Button } from "~/registry/v1/ui/button"
+import { Button } from "~/registry/new-york-v4/ui/button"
 
 export function ModeToggle() {
   const toggleTheme = () => setTheme(getThemeVariant() === "dark" ? "light" : "dark")

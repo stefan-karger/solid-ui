@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "combobox-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "combobox"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/combobox-demo.tsx",
+      "content": "import {\r\n  Combobox,\r\n  ComboboxContent,\r\n  ComboboxControl,\r\n  ComboboxInput,\r\n  ComboboxItem,\r\n  ComboboxItemIndicator,\r\n  ComboboxItemLabel,\r\n  ComboboxSection,\r\n  ComboboxTrigger\r\n} from \"~/registry/new-york-v4/ui/combobox\"\r\n\r\nconst frameworks = [\r\n  {\r\n    value: \"next.js\",\r\n    label: \"Next.js\"\r\n  },\r\n  {\r\n    value: \"sveltekit\",\r\n    label: \"SvelteKit\"\r\n  },\r\n  {\r\n    value: \"nuxt.js\",\r\n    label: \"Nuxt.js\"\r\n  },\r\n  {\r\n    value: \"remix\",\r\n    label: \"Remix\"\r\n  },\r\n  {\r\n    value: \"astro\",\r\n    label: \"Astro\"\r\n  }\r\n]\r\n\r\nexport default function ComboboxDemo() {\r\n  return (\r\n    <Combobox\r\n      itemComponent={(props) => (\r\n        <ComboboxItem item={props.item}>\r\n          <ComboboxItemLabel>{props.item.rawValue.label}</ComboboxItemLabel>\r\n          <ComboboxItemIndicator />\r\n        </ComboboxItem>\r\n      )}\r\n      optionLabel=\"label\"\r\n      options={frameworks}\r\n      optionTextValue=\"label\"\r\n      optionValue=\"value\"\r\n      placeholder=\"Search framework...\"\r\n      sectionComponent={(props) => (\r\n        <ComboboxSection>{props.section.rawValue.label}</ComboboxSection>\r\n      )}\r\n    >\r\n      <ComboboxControl aria-label=\"Framework\">\r\n        <ComboboxInput />\r\n        <ComboboxTrigger />\r\n      </ComboboxControl>\r\n      <ComboboxContent />\r\n    </Combobox>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

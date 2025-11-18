@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/ui/card.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\r\nimport { splitProps } from \"solid-js\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\nconst Card: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div\r\n      class={cn(\r\n        \"flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm\",\r\n        local.class\r\n      )}\r\n      data-slot=\"card\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nconst CardHeader: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div\r\n      class={cn(\r\n        \"@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6\",\r\n        local.class\r\n      )}\r\n      data-slot=\"card-header\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nconst CardTitle: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div class={cn(\"font-semibold leading-none\", local.class)} data-slot=\"card-title\" {...others} />\r\n  )\r\n}\r\n\r\nconst CardDescription: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div\r\n      class={cn(\"text-muted-foreground text-sm\", local.class)}\r\n      data-slot=\"card-description\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nconst CardAction: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div\r\n      class={cn(\"col-start-2 row-span-2 row-start-1 self-start justify-self-end\", local.class)}\r\n      data-slot=\"card-action\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nconst CardContent: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return <div class={cn(\"px-6\", local.class)} data-slot=\"card-content\" {...others} />\r\n}\r\n\r\nconst CardFooter: Component<ComponentProps<\"div\">> = (props) => {\r\n  const [local, others] = splitProps(props, [\"class\"])\r\n  return (\r\n    <div\r\n      class={cn(\"flex items-center px-6 [.border-t]:pt-6\", local.class)}\r\n      data-slot=\"card-footer\"\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nexport { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

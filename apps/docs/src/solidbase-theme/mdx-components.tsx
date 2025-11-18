@@ -12,7 +12,7 @@ import {
 import { cookieStorage, makePersisted, messageSync } from "@solid-primitives/storage"
 
 import { IconTerminal } from "~/components/icons"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/v1/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/new-york-v4/ui/tabs"
 
 export const h1 = (props: ComponentProps<"h1">) => {
   return <h1 class="mt-2 scroll-m-28 font-bold font-heading text-3xl tracking-tight" {...props} />

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-fieldset",
+  "type": "registry:example",
+  "registryDependencies": [
+    "field",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/field-fieldset.tsx",
+      "content": "import {\r\n  Field,\r\n  FieldDescription,\r\n  FieldGroup,\r\n  FieldLabel,\r\n  FieldLegend,\r\n  FieldSet\r\n} from \"~/registry/new-york-v4/ui/field\"\r\nimport { Input } from \"~/registry/new-york-v4/ui/input\"\r\n\r\nexport default function FieldFieldset() {\r\n  return (\r\n    <div class=\"w-full max-w-md space-y-6\">\r\n      <FieldSet>\r\n        <FieldLegend>Address Information</FieldLegend>\r\n        <FieldDescription>We need your address to deliver your order.</FieldDescription>\r\n        <FieldGroup>\r\n          <Field>\r\n            <FieldLabel for=\"street\">Street Address</FieldLabel>\r\n            <Input id=\"street\" placeholder=\"123 Main St\" type=\"text\" />\r\n          </Field>\r\n          <div class=\"grid grid-cols-2 gap-4\">\r\n            <Field>\r\n              <FieldLabel for=\"city\">City</FieldLabel>\r\n              <Input id=\"city\" placeholder=\"New York\" type=\"text\" />\r\n            </Field>\r\n            <Field>\r\n              <FieldLabel for=\"zip\">Postal Code</FieldLabel>\r\n              <Input id=\"zip\" placeholder=\"90502\" type=\"text\" />\r\n            </Field>\r\n          </div>\r\n        </FieldGroup>\r\n      </FieldSet>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

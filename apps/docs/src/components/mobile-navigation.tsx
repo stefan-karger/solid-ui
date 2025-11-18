@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js"
 
-import { Button } from "~/registry/v1/ui/button"
-import { Drawer, DrawerContent, DrawerTrigger } from "~/registry/v1/ui/drawer"
+import { Button } from "~/registry/new-york-v4/ui/button"
+import { Drawer, DrawerContent, DrawerTrigger } from "~/registry/new-york-v4/ui/drawer"
 
 export function MobileNavigation() {
   const [open, setOpen] = createSignal(false)

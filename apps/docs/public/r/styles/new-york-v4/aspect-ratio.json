@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/ui/aspect-ratio.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\r\nimport { mergeProps, splitProps } from \"solid-js\"\r\n\r\ntype AspectRatioProps = ComponentProps<\"div\"> & { ratio?: number }\r\n\r\nconst AspectRatio: Component<AspectRatioProps> = (rawProps) => {\r\n  const props = mergeProps({ ratio: 1 / 1 }, rawProps)\r\n  const [local, others] = splitProps(props, [\"ratio\"])\r\n  return (\r\n    <div\r\n      style={{\r\n        position: \"relative\",\r\n        width: \"100%\",\r\n        \"padding-bottom\": `${100 / local.ratio}%`\r\n      }}\r\n    >\r\n      <div\r\n        style={{\r\n          position: \"absolute\",\r\n          top: 0,\r\n          right: 0,\r\n          bottom: 0,\r\n          left: 0\r\n        }}\r\n        {...others}\r\n      />\r\n    </div>\r\n  )\r\n}\r\n\r\nexport { AspectRatio }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

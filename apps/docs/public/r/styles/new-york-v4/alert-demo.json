@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "alert"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york-v4/examples/alert-demo.tsx",
+      "content": "import { IconAlertCircle, IconCheckCircle, IconPopcorn } from \"~/components/icons\"\r\nimport { Alert, AlertDescription, AlertTitle } from \"~/registry/new-york-v4/ui/alert\"\r\n\r\nexport default function AlertDemo() {\r\n  return (\r\n    <div class=\"grid w-full max-w-xl items-start gap-4\">\r\n      <Alert>\r\n        <IconCheckCircle />\r\n        <AlertTitle>Success! Your changes have been saved</AlertTitle>\r\n        <AlertDescription>This is an alert with icon, title and description.</AlertDescription>\r\n      </Alert>\r\n      <Alert>\r\n        <IconPopcorn />\r\n        <AlertTitle>This Alert has a title and an icon. No description.</AlertTitle>\r\n      </Alert>\r\n      <Alert variant=\"destructive\">\r\n        <IconAlertCircle />\r\n        <AlertTitle>Unable to process your payment.</AlertTitle>\r\n        <AlertDescription>\r\n          <p>Please verify your billing information and try again.</p>\r\n          <ul class=\"list-inside list-disc text-sm\">\r\n            <li>Check your card details</li>\r\n            <li>Ensure sufficient funds</li>\r\n            <li>Verify billing address</li>\r\n          </ul>\r\n        </AlertDescription>\r\n      </Alert>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}
