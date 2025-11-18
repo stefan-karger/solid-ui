@@ -24,6 +24,9 @@ export default defineConfig(
       }
     },
     {
+      title: "solid-ui",
+      description: "The Future of Your Design System",
+      titleTemplate: ":title – solid-ui",
       markdown: {
         expressiveCode: {
           themes: ["github-dark-default", "github-light-default"]
