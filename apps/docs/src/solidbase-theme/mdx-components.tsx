@@ -11,6 +11,8 @@ import {
 
 import { cookieStorage, makePersisted, messageSync } from "@solid-primitives/storage"
 
+import { CodeCollapsibleWrapper } from "~/components/code-collapsible-wrapper"
+import { ComponentSource as ComponentSourcePrimative } from "~/components/component-source"
 import { IconTerminal } from "~/components/icons"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/new-york-v4/ui/tabs"
 
@@ -258,7 +260,17 @@ export function DirectiveContainer(
   )
 }
 
+export const ComponentSource = (props: ComponentProps<typeof ComponentSourcePrimative>) => {
+  const [local, other] = splitProps(props, ["class"])
+
+  return (
+    <CodeCollapsibleWrapper class={local.class}>
+      <ComponentSourcePrimative {...other} />
+    </CodeCollapsibleWrapper>
+  )
+}
+
 export { Callout } from "~/components/callout"
 export { ComponentPreview } from "~/components/component-preview"
 export { ComponentsList } from "~/components/components-list"
-export { Kbd } from "~/registry/v1/ui/kbd"
+export { Kbd } from "~/registry/new-york-v4/ui/kbd"

@@ -6,21 +6,12 @@ links:
   api: https://kobalte.dev/docs/core/components/accordion#api-reference
 ---
 
-::::tab-group[preview]
-:::tab[Preview]
-
-<ComponentPreview name="accordion-demo" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/v1/examples/accordion-demo" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview
+  name="accordion-demo"
+  class="[&_.preview>[data-orientation=vertical]]:sm:max-w-[80%] **:[.preview]:min-h-[400px]"
+  description="An accordion with three items"
+  align="start"
+/>
 
 ## Installation
 
@@ -32,24 +23,12 @@ solidui-cli@latest add accordion
 
 ### Manual
 
-<Steps>
 
-<Step>Install the following dependencies:</Step>
 
-```package-install
-@kobalte/core
-```
+Install the following dependencies:
 
-<Step>Copy and paste the following code into your project.</Step>
 
-```file="~/registry/v1/ui/accordion.tsx" showLineNumbers
-
-```
-
-<Step>Update the import paths to match your project setup.</Step>
-
-</Steps>
-
+<ComponentSource name="accordion" title="components/ui/accordion.tsx" />
 
 ## Usage
 
