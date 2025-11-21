@@ -1,5 +1,4 @@
 import {
-  Component,
   type ComponentProps,
   children,
   createSignal,
@@ -13,8 +12,14 @@ import { cookieStorage, makePersisted, messageSync } from "@solid-primitives/sto
 
 import { CodeCollapsibleWrapper } from "~/components/code-collapsible-wrapper"
 import { ComponentSource as ComponentSourcePrimative } from "~/components/component-source"
-import { IconTerminal } from "~/components/icons"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/v1/ui/tabs"
+import { getIconForLanguageExtension, IconTerminal } from "~/components/icons"
+import { cn } from "~/lib/utils"
+import {
+  TabsContent as TabsContentPrimitive,
+  TabsList as TabsListPrimitive,
+  Tabs as TabsPrimitive,
+  TabsTrigger as TabsTriggerPrimitive
+} from "~/registry/v1/ui/tabs"
 
 export const h1 = (props: ComponentProps<"h1">) => {
   return <h1 class="mt-2 scroll-m-28 font-bold font-heading text-3xl tracking-tight" {...props} />
@@ -22,7 +27,7 @@ export const h1 = (props: ComponentProps<"h1">) => {
 export const h2 = (props: ComponentProps<"h2">) => {
   return (
     <h2
-      class="[&+p]:!mt-4 mt-12 scroll-m-28 font-heading font-medium text-2xl tracking-tight first:mt-0 lg:mt-20 [&>a]:no-underline *:[code]:text-2xl"
+      class="[&+.steps]:!mt-0 [&+.steps>h3]:!mt-4 [&+h3]:!mt-6 [&+p]:!mt-4 mt-10 scroll-m-28 font-heading font-medium text-xl tracking-tight first:mt-0 lg:mt-16 [&>a]:no-underline [&+]*:[code]:text-xl"
       {...props}
     />
   )
@@ -127,13 +132,77 @@ export const code = (props: ComponentProps<"code">) => {
   )
 }
 
+export const figure = (props: ComponentProps<"figure">) => {
+  return <figure {...props} />
+}
+
+export const figcaption = (props: ComponentProps<"figcaption">) => {
+  const iconExtension =
+    "data-language" in props && typeof props["data-language"] === "string"
+      ? getIconForLanguageExtension(props["data-language"])
+      : null
+
+  return (
+    <figcaption
+      class={cn(
+        "flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:text-code-foreground [&_svg]:opacity-70",
+        props.class
+      )}
+      {...props}
+    >
+      {iconExtension}
+      {props.children}
+    </figcaption>
+  )
+}
+
 export const Step = (props: ComponentProps<"h3">) => (
-  <h3 class="mt-8 scroll-m-32 font-heading font-medium text-xl tracking-tight" {...props} />
+  <h3
+    class={cn("mt-8 scroll-m-32 font-heading font-medium text-xl tracking-tight", props.class)}
+    {...props}
+  />
 )
 
 export const Steps = (props: ComponentProps<"div">) => (
   <div class="[&>h3]:step steps *:[h3]:first:!mt-0 mb-12 [counter-reset:step]" {...props} />
 )
+
+export const Tabs = (props: ComponentProps<typeof TabsPrimitive>) => {
+  return <TabsPrimitive class={cn("relative mt-6 w-full", props.class)} {...props} />
+}
+
+export const TabsList = (props: ComponentProps<typeof TabsListPrimitive>) => {
+  return (
+    <TabsListPrimitive
+      class={cn("justify-start gap-4 rounded-none bg-transparent px-0", props.class)}
+      {...props}
+    />
+  )
+}
+
+export const TabsTrigger = (props: ComponentProps<typeof TabsTriggerPrimitive>) => {
+  return (
+    <TabsTriggerPrimitive
+      class={cn(
+        "rounded-none border-0 border-transparent border-b-2 bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none dark:data-[state=active]:border-primary dark:data-[state=active]:bg-transparent",
+        props.class
+      )}
+      {...props}
+    />
+  )
+}
+
+export const TabsContent = (props: ComponentProps<typeof TabsContentPrimitive>) => {
+  return (
+    <TabsContentPrimitive
+      class={cn(
+        "relative [&>.steps]:mt-6 [&_h3.font-heading]:font-medium [&_h3.font-heading]:text-base *:[figure]:first:mt-0",
+        props.class
+      )}
+      {...props}
+    />
+  )
+}
 
 export function DirectiveContainer(
   props: {
@@ -175,69 +244,69 @@ export function DirectiveContainer(
       const tabNames = props.tabNames?.split("\0")
       return (
         <div class="mt-6 rounded-lg bg-accent first:mt-0 dark:bg-zinc-900">
-          <Tabs class="gap-0" onChange={setOpenTab} value={openTab?.()}>
+          <TabsPrimitive class="gap-0" onChange={setOpenTab} value={openTab?.()}>
             <div class="flex items-center gap-2 border-border/50 border-b px-3 py-1">
               <div class="flex size-4 items-center justify-center rounded-[1px] bg-foreground opacity-70">
                 <IconTerminal class="size-3 text-white dark:text-black" />
               </div>
-              <TabsList class="rounded-none bg-transparent p-0">
+              <TabsListPrimitive class="rounded-none bg-transparent p-0">
                 <For each={tabNames}>
                   {(title) => (
-                    <TabsTrigger
+                    <TabsTriggerPrimitive
                       class="h-7 border border-transparent pt-0.5 data-[selected]:border-input data-[selected]:bg-accent data-[selected]:shadow-none"
                       value={title}
                     >
                       {title}
-                    </TabsTrigger>
+                    </TabsTriggerPrimitive>
                   )}
                 </For>
-              </TabsList>
+              </TabsListPrimitive>
             </div>
             <div class="no-scrollbar overflow-x-auto">
               <For each={tabNames}>
                 {(title, i) => (
-                  <TabsContent
+                  <TabsContentPrimitive
                     class="relative mt-0 hidden data-[selected]:block"
-                    forceMount={true}
+                    forceMount
                     value={title}
                   >
                     {_children[i()]}
-                  </TabsContent>
+                  </TabsContentPrimitive>
                 )}
               </For>
             </div>
-          </Tabs>
+          </TabsPrimitive>
         </div>
       )
     }
 
     return (
-      <Tabs class="relative mt-6 w-full" onChange={setOpenTab} value={openTab?.()}>
-        <TabsList class="justify-start gap-4 rounded-none bg-transparent px-0">
+      <TabsPrimitive class="relative mt-6 w-full" onChange={setOpenTab} value={openTab?.()}>
+        <TabsListPrimitive class="justify-start gap-4 rounded-none bg-transparent px-0">
           <For each={tabNames}>
             {(title) => (
-              <TabsTrigger
+              <TabsTriggerPrimitive
                 class="rounded-none border-0 bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[selected]:bg-transparent data-[selected]:text-foreground data-[selected]:shadow-none dark:data-[selected]:bg-transparent dark:data-[selected]:text-foreground"
                 value={title}
               >
                 {title}
-              </TabsTrigger>
+              </TabsTriggerPrimitive>
             )}
           </For>
-        </TabsList>
+        </TabsListPrimitive>
 
         <For each={tabNames}>
           {(title, i) => (
-            <TabsContent
-              class="[&_pre]:!min-h-[450px] relative hidden data-[selected]:block [&>.steps]:mt-6 [&_h3.font-heading]:font-medium [&_h3.font-heading]:text-base *:[figure]:first:mt-0"
+            <TabsContentPrimitive
+              class="relative hidden data-[selected]:block [&>.steps]:mt-6 [&_h3.font-heading]:font-medium [&_h3.font-heading]:text-base *:[figure]:first:mt-0"
               forceMount={true}
               value={title}
             >
               {_children[i()]}
-            </TabsContent>
+            </TabsContentPrimitive>
           )}
         </For>
-      </Tabs>
+      </TabsPrimitive>
     )
   }
 

@@ -1,51 +1,54 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import type { JSX, ValidComponent } from "solid-js";
+import { splitProps } from "solid-js";
 
-import * as AccordionPrimitive from "@kobalte/core/accordion"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+import * as AccordionPrimitive from "@kobalte/core/accordion";
+import type { PolymorphicProps } from "@kobalte/core/polymorphic";
 
-import { cn } from "~/lib/utils"
+import { cn } from "~/lib/utils";
 
 const Accordion = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, AccordionPrimitive.AccordionRootProps<T>>
+  props: PolymorphicProps<T, AccordionPrimitive.AccordionRootProps<T>>,
 ) => {
-  return <AccordionPrimitive.Root data-slot="accordion" {...props} />
-}
+  return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
+};
 
 type AccordionItemProps<T extends ValidComponent = "div"> =
   AccordionPrimitive.AccordionItemProps<T> & {
-    class?: string | undefined
-  }
+    class?: string | undefined;
+  };
 
 const AccordionItem = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, AccordionItemProps<T>>
+  props: PolymorphicProps<T, AccordionItemProps<T>>,
 ) => {
-  const [local, others] = splitProps(props as AccordionItemProps, ["class"])
+  const [local, others] = splitProps(props as AccordionItemProps, ["class"]);
   return (
     <AccordionPrimitive.Item
       class={cn("border-b last:border-b-0", local.class)}
       data-slot="accordion-item"
       {...others}
     />
-  )
-}
+  );
+};
 
 type AccordionTriggerProps<T extends ValidComponent = "button"> =
   AccordionPrimitive.AccordionTriggerProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
+    class?: string | undefined;
+    children?: JSX.Element;
+  };
 
 const AccordionTrigger = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, AccordionTriggerProps<T>>
+  props: PolymorphicProps<T, AccordionTriggerProps<T>>,
 ) => {
-  const [local, others] = splitProps(props as AccordionTriggerProps, ["class", "children"])
+  const [local, others] = splitProps(props as AccordionTriggerProps, [
+    "class",
+    "children",
+  ]);
   return (
     <AccordionPrimitive.Header class="flex">
       <AccordionPrimitive.Trigger
         class={cn(
           "flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left font-medium text-sm outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-expanded]>svg]:rotate-180",
-          local.class
+          local.class,
         )}
         data-slot="accordion-trigger"
         {...others}
@@ -65,19 +68,22 @@ const AccordionTrigger = <T extends ValidComponent = "button">(
         </svg>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
-  )
-}
+  );
+};
 
 type AccordionContentProps<T extends ValidComponent = "div"> =
   AccordionPrimitive.AccordionContentProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
+    class?: string | undefined;
+    children?: JSX.Element;
+  };
 
 const AccordionContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, AccordionContentProps<T>>
+  props: PolymorphicProps<T, AccordionContentProps<T>>,
 ) => {
-  const [local, others] = splitProps(props as AccordionContentProps, ["class", "children"])
+  const [local, others] = splitProps(props as AccordionContentProps, [
+    "class",
+    "children",
+  ]);
   return (
     <AccordionPrimitive.Content
       class="overflow-hidden text-sm data-[closed]:animate-accordion-up data-[expanded]:animate-accordion-down"
@@ -86,7 +92,7 @@ const AccordionContent = <T extends ValidComponent = "div">(
     >
       <div class={cn("pt-0 pb-4", local.class)}>{local.children}</div>
     </AccordionPrimitive.Content>
-  )
-}
+  );
+};
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };

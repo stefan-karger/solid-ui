@@ -126,7 +126,7 @@ type ContextMenuItemProps<T extends ValidComponent = "div"> =
 const ContextMenuItem = <T extends ValidComponent = "div">(
   rawProps: PolymorphicProps<T, ContextMenuItemProps<T>>
 ) => {
-  const props = mergeProps(rawProps, { variant: "default" })
+  const props = mergeProps({ variant: "default" }, rawProps)
 
   const [local, others] = splitProps(props as ContextMenuItemProps, ["class", "variant", "inset"])
   return (

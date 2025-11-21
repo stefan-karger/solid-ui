@@ -6,6 +6,8 @@ import * as NavigationMenuPrimitive from "@kobalte/core/navigation-menu"
 
 import { cn } from "~/lib/utils"
 
+//TODO: Tailwind -> V4
+
 const NavigationMenuItem = NavigationMenuPrimitive.Menu
 
 type NavigationMenuProps<T extends ValidComponent = "ul"> =

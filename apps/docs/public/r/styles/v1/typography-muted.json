@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-muted",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-muted.tsx",
+      "content": "export default function TypographyMuted() {\r\n  return <p class=\"text-muted-foreground text-sm\">Enter your email address.</p>\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -2,6 +2,12 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "item",
   "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "registryDependencies": [
+    "separator"
+  ],
   "files": [
     {
       "path": "src/registry/v1/ui/item.tsx",

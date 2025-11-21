@@ -6,6 +6,9 @@
     "@kobalte/core",
     "cmdk-solid"
   ],
+  "registryDependencies": [
+    "dialog"
+  ],
   "files": [
     {
       "path": "src/registry/v1/ui/command.tsx",

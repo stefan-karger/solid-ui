@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-h2",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-h2.tsx",
+      "content": "export default function TypographyH2() {\r\n  return (\r\n    <h2 class=\"scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight first:mt-0\">\r\n      The People of the Kingdom\r\n    </h2>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/ui/tooltip.tsx",
+      "content": "import type { JSX, ValidComponent } from \"solid-js\"\r\nimport { type Component, splitProps } from \"solid-js\"\r\n\r\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\r\nimport * as TooltipPrimitive from \"@kobalte/core/tooltip\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\nconst TooltipTrigger = <T extends ValidComponent = \"button\">(\r\n  props: PolymorphicProps<T, TooltipPrimitive.TooltipTriggerProps<T>>\r\n) => <TooltipPrimitive.Trigger data-slot=\"tooltip-trigger\" {...props} />\r\n\r\nconst Tooltip: Component<TooltipPrimitive.TooltipRootProps> = (props) => {\r\n  return <TooltipPrimitive.Root data-slot=\"tooltip\" {...props} />\r\n}\r\n\r\ntype TooltipContentProps<T extends ValidComponent = \"div\"> =\r\n  TooltipPrimitive.TooltipContentProps<T> & { class?: string | undefined; children?: JSX.Element }\r\n\r\nconst TooltipContent = <T extends ValidComponent = \"div\">(\r\n  props: PolymorphicProps<T, TooltipContentProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as TooltipContentProps, [\"class\", \"children\"])\r\n  return (\r\n    <TooltipPrimitive.Portal>\r\n      <TooltipPrimitive.Content\r\n        class={cn(\r\n          \"fade-in-0 zoom-in-95 data-[closed]:fade-out-0 data-[closed]:zoom-out-95 z-50 w-fit origin-(--kb-popover-content-transform-origin) animate-in text-balance rounded-md bg-foreground px-3 py-1.5 text-background text-xs data-[closed]:animate-out\",\r\n          local.class\r\n        )}\r\n        data-slot=\"tooltip-content\"\r\n        {...others}\r\n      >\r\n        <TooltipPrimitive.Arrow />\r\n        {local.children}\r\n      </TooltipPrimitive.Content>\r\n    </TooltipPrimitive.Portal>\r\n  )\r\n}\r\n\r\nexport { Tooltip, TooltipTrigger, TooltipContent }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

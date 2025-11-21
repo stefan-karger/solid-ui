@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "Breadcrumb",
+  "name": "breadcrumb",
   "type": "registry:ui",
   "dependencies": [
     "@kobalte/core"

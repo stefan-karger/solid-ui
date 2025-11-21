@@ -6,4 +6,40 @@ links:
   api: https://corvu.dev/docs/primitives/calendar/#api-reference
 ---
 
-<ComponentPreview name="calendar-demo" />
+<ComponentPreview
+  name="calendar-demo"
+  title="Calendar"
+  description="A calendar showing the current date."
+/>
+
+## Installation
+
+::::tab-group[installation]
+:::tab[CLI]
+
+```package-exec
+solidui-cli@latest add calendar
+```
+
+:::
+
+:::tab[Manual]
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```package-install
+@corvu/calendar
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="calendar" title="components/ui/calendar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::

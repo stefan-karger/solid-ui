@@ -1,4 +1,4 @@
-import type { ValidComponent } from "solid-js"
+import type { ComponentProps, ValidComponent } from "solid-js"
 import { Show, splitProps } from "solid-js"
 
 import type { DynamicProps, HandleProps, PanelProps, RootProps } from "@corvu/resizable"
@@ -68,4 +68,12 @@ const ResizableHandle = <T extends ValidComponent = "button">(
   )
 }
 
-export { Resizable, ResizablePanel, ResizableHandle }
+const StyledResizable = Object.assign(Resizable, {
+  Panel: ResizablePanel,
+  Handle: ResizableHandle,
+  // Forward the context hooks if you want to expose them directly
+  useContext: ResizablePrimitive.useContext,
+  usePanelContext: ResizablePrimitive.usePanelContext
+})
+
+export { StyledResizable as Resizable, ResizablePanel, ResizableHandle }

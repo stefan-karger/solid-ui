@@ -24,9 +24,10 @@ export default defineConfig(
       }
     },
     {
-      title: "solid-ui",
+      title: "SolidUI",
       description: "The Future of Your Design System",
-      titleTemplate: ":title – solid-ui",
+      titleTemplate: ":title – SolidUI",
+      editPath: "https://github.com/stefan-karger/solid-ui/edit/dev/:path",
       markdown: {
         expressiveCode: {
           themes: ["github-dark-default", "github-light-default"]
@@ -35,7 +36,7 @@ export default defineConfig(
           transform(code, id) {
             if (id.endsWith(".tsx")) {
               return code
-                .replaceAll("~/registry/new-york-v4/ui", "~/components/ui")
+                .replaceAll("~/registry/v1/ui", "~/components/ui")
                 .replaceAll("export default", "export")
             }
           }

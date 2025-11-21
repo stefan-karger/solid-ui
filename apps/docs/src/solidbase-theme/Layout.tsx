@@ -13,11 +13,12 @@ export default function (props: RouteSectionProps) {
 
   const isBlock = useMatch(() => "/blocks/*")
   const isDocsPage = useMatch(() => "/docs/*")
+  const isView = useMatch(() => "/view/*")
 
   return (
     <>
       <Title>SolidUI</Title>
-      <Show fallback={props.children} when={!isBlock()}>
+      <Show fallback={props.children} when={!isBlock() && !isView()}>
         <SiteHeader />
         <main class="expressive-code-overrides flex flex-1 flex-col">
           <Show fallback={props.children} when={isDocsPage()}>

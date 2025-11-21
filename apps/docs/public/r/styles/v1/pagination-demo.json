@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "pagination"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/examples/pagination-demo.tsx",
+      "content": "import {\r\n  Pagination,\r\n  PaginationEllipsis,\r\n  PaginationItem,\r\n  PaginationItems,\r\n  PaginationNext,\r\n  PaginationPrevious\r\n} from \"~/registry/v1/ui/pagination\"\r\n\r\nexport default function PaginationDemo() {\r\n  return (\r\n    <Pagination\r\n      count={10}\r\n      ellipsisComponent={() => <PaginationEllipsis />}\r\n      fixedItems\r\n      itemComponent={(props) => <PaginationItem page={props.page}>{props.page}</PaginationItem>}\r\n    >\r\n      <PaginationPrevious />\r\n      <PaginationItems />\r\n      <PaginationNext />\r\n    </Pagination>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

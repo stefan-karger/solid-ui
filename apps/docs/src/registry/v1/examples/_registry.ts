@@ -13,23 +13,23 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "alert-dialog-demo",
-    type: "registry:example",
-    registryDependencies: ["alert-dialog"],
-    files: [
-      {
-        path: "examples/alert-dialog-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "alert-demo",
     type: "registry:example",
     registryDependencies: ["alert"],
     files: [
       {
         path: "examples/alert-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-demo",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog"],
+    files: [
+      {
+        path: "examples/alert-dialog-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -79,6 +79,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "button-default",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-default.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-demo",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-destructive",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-destructive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-ghost",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-ghost.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "button-group-demo",
     type: "registry:example",
     registryDependencies: ["button", "button-group", "dropdown-menu"],
@@ -90,56 +134,12 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-group-orientation",
+    name: "button-group-dropdown-menu",
     type: "registry:example",
-    registryDependencies: ["button", "button-group"],
+    registryDependencies: ["button", "button-group", "dropdown-menu"],
     files: [
       {
-        path: "examples/button-group-orientation.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "button-group-size",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group"],
-    files: [
-      {
-        path: "examples/button-group-size.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "button-group-nested",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group"],
-    files: [
-      {
-        path: "examples/button-group-nested.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "button-group-separator",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group"],
-    files: [
-      {
-        path: "examples/button-group-separator.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "button-group-split",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group"],
-    files: [
-      {
-        path: "examples/button-group-split.tsx",
+        path: "examples/button-group-dropdown-menu.tsx",
         type: "registry:example"
       }
     ]
@@ -167,23 +167,23 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-group-dropdown-menu",
+    name: "button-group-nested",
     type: "registry:example",
-    registryDependencies: ["button", "button-group", "dropdown-menu"],
+    registryDependencies: ["button", "button-group"],
     files: [
       {
-        path: "examples/button-group-dropdown-menu.tsx",
+        path: "examples/button-group-nested.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "button-group-select",
+    name: "button-group-orientation",
     type: "registry:example",
-    registryDependencies: ["button", "button-group", "select", "input"],
+    registryDependencies: ["button", "button-group"],
     files: [
       {
-        path: "examples/button-group-select.tsx",
+        path: "examples/button-group-orientation.tsx",
         type: "registry:example"
       }
     ]
@@ -200,45 +200,45 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-demo",
+    name: "button-group-select",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "button-group", "select", "input"],
     files: [
       {
-        path: "examples/button-demo.tsx",
+        path: "examples/button-group-select.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "button-default",
+    name: "button-group-separator",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "button-group"],
     files: [
       {
-        path: "examples/button-default.tsx",
+        path: "examples/button-group-separator.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "button-destructive",
+    name: "button-group-size",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "button-group"],
     files: [
       {
-        path: "examples/button-destructive.tsx",
+        path: "examples/button-group-size.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "button-ghost",
+    name: "button-group-split",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "button-group"],
     files: [
       {
-        path: "examples/button-ghost.tsx",
+        path: "examples/button-group-split.tsx",
         type: "registry:example"
       }
     ]
@@ -365,6 +365,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "checkbox-demo",
+    type: "registry:example",
+    registryDependencies: ["checkbox"],
+    files: [
+      {
+        path: "examples/checkbox-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "collapsible-demo",
     type: "registry:example",
     registryDependencies: ["collapsible", "button"],
@@ -459,17 +470,6 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/dropdown-menu-checkboxes.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "checkbox-demo",
-    type: "registry:example",
-    registryDependencies: ["checkbox"],
-    files: [
-      {
-        path: "examples/checkbox-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -662,6 +662,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "input-demo",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    files: [
+      {
+        path: "examples/input-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "input-group-demo",
     type: "registry:example",
     registryDependencies: ["input-group"],
@@ -679,17 +690,6 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/input-otp-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "input-demo",
-    type: "registry:example",
-    registryDependencies: ["input"],
-    files: [
-      {
-        path: "examples/input-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -756,6 +756,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/navigation-menu-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "pagination-demo",
+    type: "registry:example",
+    registryDependencies: ["pagination"],
+    files: [
+      {
+        path: "examples/pagination-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -849,23 +860,23 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "skeleton-demo",
-    type: "registry:example",
-    registryDependencies: ["skeleton"],
-    files: [
-      {
-        path: "examples/skeleton-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "skeleton-card",
     type: "registry:example",
     registryDependencies: ["skeleton"],
     files: [
       {
         path: "examples/skeleton-card.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "skeleton-demo",
+    type: "registry:example",
+    registryDependencies: ["skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -959,17 +970,6 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "toggle-group-demo",
-    type: "registry:example",
-    registryDependencies: ["toggle-group"],
-    files: [
-      {
-        path: "examples/toggle-group-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "toggle-demo",
     type: "registry:example",
     registryDependencies: ["toggle"],
@@ -981,12 +981,163 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "toggle-group-demo",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    files: [
+      {
+        path: "examples/toggle-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "tooltip-demo",
     type: "registry:example",
     registryDependencies: ["tooltip"],
     files: [
       {
         path: "examples/tooltip-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-blockquote",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-blockquote.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-h1",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-h1.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-h2",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-h2.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-h3",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-h3.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-h4",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-h4.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-inline-code",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-inline-code.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-large",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-large.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-lead",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-lead.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-list",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-list.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-muted",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-muted.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-p",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-p.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-small",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-small.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "typography-table",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/typography-table.tsx",
         type: "registry:example"
       }
     ]

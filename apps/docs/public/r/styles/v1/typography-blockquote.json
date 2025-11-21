@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-blockquote",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-blockquote.tsx",
+      "content": "export default function TypographyBlockquote() {\r\n  return (\r\n    <blockquote class=\"mt-6 border-l-2 pl-6 italic\">\r\n      &quot;After all,&quot; he said, &quot;everyone enjoys a good joke, so it&apos;s only fair that\r\n      they should pay for the privilege.&quot;\r\n    </blockquote>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

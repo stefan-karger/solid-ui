@@ -20,6 +20,10 @@ export const docsConfig: Config = {
     {
       title: "Components",
       href: "/docs/components"
+    },
+    {
+      title: "Blocks",
+      href: "/blocks"
     }
   ],
   sidebarNav: [
@@ -274,6 +278,10 @@ export const docsConfig: Config = {
         {
           title: "Tooltip",
           href: "/docs/components/tooltip"
+        },
+        {
+          title: "Typography",
+          href: "/docs/components/typography"
         }
       ]
     }

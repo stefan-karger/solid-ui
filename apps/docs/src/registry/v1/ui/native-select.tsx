@@ -1,6 +1,5 @@
 import { type Component, type ComponentProps, splitProps } from "solid-js"
 
-import { IconChevronDown } from "~/components/icons"
 import { cn } from "~/lib/utils"
 
 const NativeSelect: Component<ComponentProps<"select">> = (props) => {
@@ -21,11 +20,22 @@ const NativeSelect: Component<ComponentProps<"select">> = (props) => {
         data-slot="native-select"
         {...other}
       />
-      <IconChevronDown
+      <svg
         aria-hidden="true"
         class="-translate-y-1/2 pointer-events-none absolute top-1/2 right-3.5 size-4 select-none text-muted-foreground opacity-50"
         data-slot="native-select-icon"
-      />
+        fill="none"
+        height="24"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
     </div>
   )
 }

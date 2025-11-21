@@ -13,6 +13,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "alert",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/alert.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "alert-dialog",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -20,16 +30,6 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/alert-dialog.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "alert",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/alert.tsx",
         type: "registry:ui"
       }
     ]
@@ -67,12 +67,23 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "Breadcrumb",
+    name: "breadcrumb",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/breadcrumb.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "button",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/button.tsx",
         type: "registry:ui"
       }
     ]
@@ -90,12 +101,13 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "button",
+    name: "calendar",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@corvu/calendar"],
+    registryDependencies: ["button"],
     files: [
       {
-        path: "ui/button.tsx",
+        path: "ui/calendar.tsx",
         type: "registry:ui"
       }
     ]
@@ -114,7 +126,7 @@ export const ui: Registry["items"] = [
   {
     name: "carousel",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "embla-carousel-solid"],
+    dependencies: ["embla-carousel-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -160,6 +172,7 @@ export const ui: Registry["items"] = [
     name: "command",
     type: "registry:ui",
     dependencies: ["@kobalte/core", "cmdk-solid"],
+    registryDependencies: ["dialog"],
     files: [
       {
         path: "ui/command.tsx",
@@ -179,6 +192,28 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "dialog",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/dialog.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "drawer",
+    type: "registry:ui",
+    dependencies: ["@corvu/drawer"],
+    files: [
+      {
+        path: "ui/drawer.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -192,6 +227,7 @@ export const ui: Registry["items"] = [
   {
     name: "empty",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/empty.tsx",
@@ -222,6 +258,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "input",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/input.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "input-group",
     type: "registry:ui",
     registryDependencies: ["button", "input", "textarea"],
@@ -244,18 +290,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "input",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/input.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "item",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["separator"],
     files: [
       {
         path: "ui/item.tsx",
@@ -316,6 +354,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "pagination",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "ui/pagination.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "popover",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -330,6 +380,7 @@ export const ui: Registry["items"] = [
     name: "progress",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
+    registryDependencies: ["label"],
     files: [
       {
         path: "ui/progress.tsx",
@@ -351,7 +402,7 @@ export const ui: Registry["items"] = [
   {
     name: "resizable",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@corvu/resizable"],
     files: [
       {
         path: "ui/resizable.tsx",
@@ -377,6 +428,48 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/select.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "separator",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/separator.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "sheet",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/sheet.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "sidebar",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: [
+      "use-mobile",
+      "button",
+      "input",
+      "separator",
+      "sheet",
+      "skeleton",
+      "tooltip"
+    ],
+    files: [
+      {
+        path: "ui/sidebar.tsx",
         type: "registry:ui"
       }
     ]
@@ -417,7 +510,6 @@ export const ui: Registry["items"] = [
   {
     name: "spinner",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/spinner.tsx",
@@ -461,7 +553,6 @@ export const ui: Registry["items"] = [
   {
     name: "textarea",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/textarea.tsx",
@@ -484,9 +575,21 @@ export const ui: Registry["items"] = [
     name: "toggle-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
+    registryDependencies: ["toggle"],
     files: [
       {
         path: "ui/toggle-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "tooltip",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/tooltip.tsx",
         type: "registry:ui"
       }
     ]

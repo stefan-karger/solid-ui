@@ -2,9 +2,6 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "textarea",
   "type": "registry:ui",
-  "dependencies": [
-    "@kobalte/core"
-  ],
   "files": [
     {
       "path": "src/registry/v1/ui/textarea.tsx",

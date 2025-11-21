@@ -6,29 +6,39 @@ links:
   api: https://kobalte.dev/docs/core/components/button#api-reference
 ---
 
-<ComponentPreview name="button-demo" />
+<ComponentPreview name="button-demo" description="A button" className="mb-4" />
 
 ## Installation
 
-### CLI
+::::tab-group[installation]
+:::tab[CLI]
 
 ```package-exec
 solidui-cli@latest add button
 ```
 
-### Manual
+:::
 
-Install the following dependencies:
+:::tab[Manual]
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
 
 ```package-install
 @kobalte/core
 ```
 
-Copy and paste the following code into your project.
+<Step>Copy and paste the following code into your project.</Step>
 
-```file="~/registry/v1/ui/button.tsx" showLineNumbers
+<ComponentSource name="button" title="components/ui/button.tsx" />
 
-```
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::
 
 ## Usage
 
@@ -59,212 +69,56 @@ If you want to keep the `cursor: pointer` behavior, add the following code to yo
 
 ### Size
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="button-sizes" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-sizes" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Default
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="button-default" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-default" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Outline
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="button-outline" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-outline" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Secondary
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="button-secondary" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-secondary" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Ghost
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="button-ghost" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-ghost" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Destructive
 
-::::tab-group[example5]
-:::tab[Preview]
-
 <ComponentPreview name="button-destructive" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-destructive" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Link
 
-::::tab-group[example6]
-:::tab[Preview]
-
 <ComponentPreview name="button-link" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-link" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Icon
 
-::::tab-group[example7]
-:::tab[Preview]
-
 <ComponentPreview name="button-icon" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-icon" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### With Icon
 
 The spacing between the icon and the text is automatically adjusted
 based on the size of the button. You do not need any margin on the icon.
 
-::::tab-group[example8]
-:::tab[Preview]
-
 <ComponentPreview name="button-with-icon" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-with-icon" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Rounded
 
-::::tab-group[example9]
-:::tab[Preview]
-
 <ComponentPreview name="button-rounded" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-rounded" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Spinner
 
-::::tab-group[example10]
-:::tab[Preview]
-
 <ComponentPreview name="button-loading" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-loading" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Button Group
 
 To create a button group, use the ButtonGroup component. See the Button Group documentation for more details.
 
-::::tab-group[example11]
-:::tab[Preview]
-
 <ComponentPreview name="button-group-demo" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/v1/examples/button-group-demo" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Link
 

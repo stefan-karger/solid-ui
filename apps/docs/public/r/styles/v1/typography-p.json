@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-p",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-p.tsx",
+      "content": "export default function TypographyP() {\r\n  return (\r\n    <p class=\"leading-7 [&:not(:first-child)]:mt-6\">\r\n      The king, seeing how much happier his subjects were, realized the error of his ways and\r\n      repealed the joke tax.\r\n    </p>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

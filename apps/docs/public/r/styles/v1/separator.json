@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/ui/separator.tsx",
+      "content": "import type { ValidComponent } from \"solid-js\"\r\nimport { splitProps } from \"solid-js\"\r\n\r\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\r\nimport * as SeparatorPrimitive from \"@kobalte/core/separator\"\r\n\r\nimport { cn } from \"~/lib/utils\"\r\n\r\ntype SeparatorRootProps<T extends ValidComponent = \"hr\"> =\r\n  SeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined }\r\n\r\nconst Separator = <T extends ValidComponent = \"hr\">(\r\n  props: PolymorphicProps<T, SeparatorRootProps<T>>\r\n) => {\r\n  const [local, others] = splitProps(props as SeparatorRootProps, [\"class\", \"orientation\"])\r\n  return (\r\n    <SeparatorPrimitive.Root\r\n      class={cn(\r\n        \"shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px\",\r\n        local.class\r\n      )}\r\n      data-slot=\"separator\"\r\n      orientation={local.orientation ?? \"horizontal\"}\r\n      {...others}\r\n    />\r\n  )\r\n}\r\n\r\nexport { Separator }\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

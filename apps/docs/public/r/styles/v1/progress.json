@@ -5,6 +5,9 @@
   "dependencies": [
     "@kobalte/core"
   ],
+  "registryDependencies": [
+    "label"
+  ],
   "files": [
     {
       "path": "src/registry/v1/ui/progress.tsx",

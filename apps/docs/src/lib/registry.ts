@@ -1,9 +1,8 @@
-"use server"
-
 import { promises as fs } from "fs"
 import { tmpdir } from "os"
 import path from "path"
 
+import { createTreeCollection } from "@ark-ui/solid/tree-view"
 import { Project, ScriptKind } from "ts-morph"
 import type { z } from "zod"
 
@@ -38,6 +37,7 @@ export async function getRegistryItems(
 }
 
 export async function getRegistryItem(name: string, styleName: Style["name"]) {
+  "use server"
   const item = Index[styleName]?.[name]
 
   if (!item) {
@@ -83,6 +83,8 @@ export async function getRegistryItem(name: string, styleName: Style["name"]) {
 }
 
 async function getFileContent(file: z.infer<typeof registryItemFileSchema>) {
+  "use server"
+
   const raw = await fs.readFile(file.path, "utf-8")
 
   const project = new Project({
@@ -118,7 +120,8 @@ function getFileTarget(file: z.infer<typeof registryItemFileSchema>) {
   let target = file.target
 
   if (!target || target === "") {
-    const fileName = file.path.split("/").pop()
+    const fileName = file.path.split("\\").pop()
+
     if (
       file.type === "registry:block" ||
       file.type === "registry:component" ||
@@ -144,6 +147,8 @@ function getFileTarget(file: z.infer<typeof registryItemFileSchema>) {
 }
 
 async function createTempSourceFile(filename: string) {
+  "use server"
+
   const dir = await fs.mkdtemp(path.join(tmpdir(), "shadcn-"))
   return path.join(dir, filename)
 }
@@ -231,4 +236,60 @@ export function createFileTreeForRegistryItemFiles(
   }
 
   return root
+}
+
+export function createCollectionForRegistryItemFiles(
+  files: Array<{ path: string; target?: string }>
+) {
+  const root: Node[] = []
+
+  for (const file of files) {
+    const path = file.target ?? file.path
+    const parts = path.split("/")
+    let currentLevel = root
+
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i]
+      const isFile = i === parts.length - 1
+      const existingNode = currentLevel.find((node) => node.name === part)
+
+      if (existingNode) {
+        if (isFile) {
+          // Update existing file node with full path
+          existingNode.id = path
+        } else {
+          // Move to next level in the tree
+          currentLevel = existingNode.children!
+        }
+      } else {
+        const newNode: Node = isFile
+          ? { name: part, id: path }
+          : { name: part, id: part, children: [] }
+
+        currentLevel.push(newNode)
+
+        if (!isFile) {
+          currentLevel = newNode.children!
+        }
+      }
+    }
+  }
+
+  const collection = createTreeCollection<Node>({
+    nodeToValue: (node) => node.id,
+    nodeToString: (node) => node.name,
+    rootNode: {
+      id: "ROOT",
+      name: "",
+      children: [...root]
+    }
+  })
+
+  return collection
+}
+
+export type Node = {
+  id: string
+  name: string
+  children?: Node[]
 }

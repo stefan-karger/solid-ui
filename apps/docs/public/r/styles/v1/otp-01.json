@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-01",
+  "type": "registry:block",
+  "description": "A simple OTP verification form.",
+  "registryDependencies": [
+    "button",
+    "card",
+    "input-otp",
+    "label",
+    "field"
+  ],
+  "files": [
+    {
+      "path": "src/registry/v1/blocks/otp-01/index.tsx",
+      "content": "import { OTPForm } from \"~/registry/v1/blocks/otp-01/components/otp-form\"\r\n\r\nexport default function OTPPage() {\r\n  return (\r\n    <div class=\"flex min-h-svh w-full items-center justify-center p-6 md:p-10\">\r\n      <div class=\"w-full max-w-xs\">\r\n        <OTPForm />\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:page",
+      "target": "app/otp/index.tsx"
+    },
+    {
+      "path": "src/registry/v1/blocks/otp-01/components/otp-form.tsx",
+      "content": "import type { ComponentProps } from \"solid-js\"\r\n\r\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"~/registry/v1//ui/card\"\r\nimport { Field, FieldDescription, FieldGroup, FieldLabel } from \"~/registry/v1//ui/field\"\r\nimport { Button } from \"~/registry/v1/ui/button\"\r\nimport { InputOTP, InputOTPGroup, InputOTPSlot } from \"~/registry/v1/ui/input-otp\"\r\n\r\nexport function OTPForm(props: ComponentProps<typeof Card>) {\r\n  return (\r\n    <Card {...props}>\r\n      <CardHeader>\r\n        <CardTitle>Enter verification code</CardTitle>\r\n        <CardDescription>We sent a 6-digit code to your email.</CardDescription>\r\n      </CardHeader>\r\n      <CardContent>\r\n        <form>\r\n          <FieldGroup>\r\n            <Field>\r\n              <FieldLabel for=\"otp\">Verification code</FieldLabel>\r\n              <InputOTP id=\"otp\" maxLength={6}>\r\n                <InputOTPGroup class=\"gap-2.5 *:data-[slot=input-otp-slot]:rounded-md *:data-[slot=input-otp-slot]:border\">\r\n                  <InputOTPSlot index={0} />\r\n                  <InputOTPSlot index={1} />\r\n                  <InputOTPSlot index={2} />\r\n                  <InputOTPSlot index={3} />\r\n                  <InputOTPSlot index={4} />\r\n                  <InputOTPSlot index={5} />\r\n                </InputOTPGroup>\r\n              </InputOTP>\r\n              <FieldDescription>Enter the 6-digit code sent to your email.</FieldDescription>\r\n            </Field>\r\n            <FieldGroup>\r\n              <Button type=\"submit\">Verify</Button>\r\n              <FieldDescription class=\"text-center\">\r\n                Didn&apos;t receive the code? <a href=\"#\">Resend</a>\r\n              </FieldDescription>\r\n            </FieldGroup>\r\n          </FieldGroup>\r\n        </form>\r\n      </CardContent>\r\n    </Card>\r\n  )\r\n}\r\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "authentication",
+    "otp"
+  ]
+}

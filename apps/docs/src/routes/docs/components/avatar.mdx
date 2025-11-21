@@ -6,30 +6,43 @@ links:
   api: https://kobalte.dev/docs/core/components/image#api-reference
 ---
 
-
-<ComponentPreview name="avatar-demo" />
+<ComponentPreview
+  name="avatar-demo"
+  title="Avatar"
+  description="An avatar with a fallback."
+/>
 
 ## Installation
 
-### CLI
+::::tab-group[installation]
+:::tab[CLI]
 
 ```package-exec
 solidui-cli@latest add avatar
 ```
 
-### Manual
+:::
 
-Install the following dependencies:
+:::tab[Manual]
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
 
 ```package-install
 @kobalte/core
 ```
 
-Copy and paste the following code into your project.
+<Step>Copy and paste the following code into your project.</Step>
 
-```file="~/registry/v1/ui/avatar.tsx" showLineNumbers
+<ComponentSource name="avatar" title="components/ui/avatar.tsx" />
 
-```
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::
 
 ## Usage
 

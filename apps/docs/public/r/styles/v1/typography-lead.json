@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-lead",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-lead.tsx",
+      "content": "export default function TypographyLead() {\r\n  return (\r\n    <p class=\"text-muted-foreground text-xl\">\r\n      A modal dialog that interrupts the user with important content and expects a response.\r\n    </p>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentProps, type JSX, Suspense, splitProps } from "solid-js"
+import { type ComponentProps, type JSX, Show, Suspense, splitProps } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
@@ -37,14 +37,14 @@ export function ComponentPreviewTabs(props: ComponentPreviewTabsProps) {
         >
           {local.component}
         </div>
-        {!local.hideCode && (
+        <Show when={!local.hideCode}>
           <div
             class="[&_[data-rehype-pretty-code-figure]]:!m-0 overflow-hidden [&_[data-rehype-pretty-code-figure]]:rounded-t-none [&_[data-rehype-pretty-code-figure]]:border-t [&_pre]:max-h-[400px]"
             data-slot="code"
           >
             <div class="relative">{local.source}</div>
           </div>
-        )}
+        </Show>
       </div>
     </div>
   )

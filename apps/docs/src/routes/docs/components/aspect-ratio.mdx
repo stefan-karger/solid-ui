@@ -4,3 +4,42 @@ description: Displays content within a desired ratio.
 ---
 
 <ComponentPreview name="aspect-ratio-demo" />
+
+## Installation
+
+::::tab-group[installation]
+:::tab[CLI]
+
+```package-exec
+solidui-cli@latest add aspect-ratio
+```
+
+:::
+
+:::tab[Manual]
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="aspect-ratio" title="components/ui/aspect-ratio.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::
+
+
+## Usage
+
+```tsx showLineNumbers
+import { AspectRatio } from "~/components/ui/aspect-ratio"
+```
+
+```tsx showLineNumbers
+<AspectRatio ratio={16 / 9}>
+  <img src="..." alt="Image" className="rounded-md object-cover" />
+</AspectRatio>
+```

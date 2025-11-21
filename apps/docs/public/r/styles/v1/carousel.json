@@ -3,7 +3,6 @@
   "name": "carousel",
   "type": "registry:ui",
   "dependencies": [
-    "@kobalte/core",
     "embla-carousel-solid"
   ],
   "registryDependencies": [

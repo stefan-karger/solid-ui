@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-h1",
+  "type": "registry:example",
+  "files": [
+    {
+      "path": "src/registry/v1/examples/typography-h1.tsx",
+      "content": "export default function TypographyH1() {\r\n  return (\r\n    <h1 class=\"scroll-m-20 text-balance text-center font-extrabold text-4xl tracking-tight\">\r\n      Taxing Laughter: The Joke Tax Chronicles\r\n    </h1>\r\n  )\r\n}\r\n",
+      "type": "registry:example"
+    }
+  ]
+}

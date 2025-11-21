@@ -6,4 +6,68 @@ links:
   api: https://www.embla-carousel.com/api/
 ---
 
-<ComponentPreview name="carousel-demo" />
+<ComponentPreview
+  name="carousel-demo"
+  title="Carousel"
+  description="A carousel with 5 items and a previous and next button."
+/>
+
+## About
+
+The carousel component is built using the [Embla Carousel](https://www.embla-carousel.com/) library.
+
+## Installation
+
+::::tab-group[installation]
+:::tab[CLI]
+
+```package-exec
+solidui-cli@latest add carousel
+```
+
+:::
+
+:::tab[Manual]
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```package-install
+embla-carousel-solid
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="carousel" title="components/ui/carousel.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel"
+```
+
+```tsx showLineNumbers
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```

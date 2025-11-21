@@ -6,6 +6,58 @@ links:
   api: https://kobalte.dev/docs/core/components/alert#api-reference
 ---
 
-<ComponentPreview name="alert-demo" />
+<ComponentPreview
+  name="alert-demo"
+  title="An alert with an icon, title and description."
+  description="An alert with an icon, title and description. The title says 'Heads up!' and the description is 'You can add components to your app using the cli.'."
+/>
 
 <ComponentSource name="alert" title="components/ui/alert.tsx" />
+
+## Installation
+
+::::tab-group[installation]
+:::tab[CLI]
+
+```package-exec
+solidui-cli@latest add alert
+```
+
+:::
+
+:::tab[Manual]
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```package-install
+@kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="alert" title="components/ui/alert.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+:::
+::::
+
+## Usage
+
+```tsx showLineNumbers
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
+```
+
+```tsx showLineNumbers
+<Alert variant="default | destructive">
+  <Terminal />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components and dependencies to your app using the cli.
+  </AlertDescription>
+</Alert>
+```

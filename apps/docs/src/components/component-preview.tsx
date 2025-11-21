@@ -1,4 +1,12 @@
-import { type ComponentProps, createMemo, mergeProps, Suspense, splitProps } from "solid-js"
+import {
+  type ComponentProps,
+  createMemo,
+  Match,
+  mergeProps,
+  Suspense,
+  Switch,
+  splitProps
+} from "solid-js"
 
 import { ComponentPreviewTabs } from "~/components/component-preview-tabs"
 import { ComponentSource } from "~/components/component-source"
@@ -16,12 +24,15 @@ type ComponentPreviewProps = ComponentProps<"div"> & {
 }
 
 export function ComponentPreview(rawProps: ComponentPreviewProps) {
-  const props = mergeProps(rawProps, {
-    styleName: "v1",
-    align: "center",
-    hideCode: false,
-    chromeLessOnMobile: false
-  })
+  const props = mergeProps(
+    {
+      styleName: "v1",
+      align: "center",
+      hideCode: false,
+      chromeLessOnMobile: false
+    },
+    rawProps
+  )
 
   const [local, other] = splitProps(props as ComponentPreviewProps, [
     "name",
@@ -31,6 +42,8 @@ export function ComponentPreview(rawProps: ComponentPreviewProps) {
     "hideCode",
     "chromeLessOnMobile"
   ])
+
+  console.log(local.hideCode)
 
   const Preview = createMemo(() => {
     const Component = Index[local.styleName]?.[local.name]?.component
@@ -51,14 +64,45 @@ export function ComponentPreview(rawProps: ComponentPreviewProps) {
   })
 
   return (
-    <ComponentPreviewTabs
-      align={local.align}
-      chromeLessOnMobile={local.chromeLessOnMobile}
-      class={local.class}
-      component={<Preview />}
-      hideCode={local.hideCode}
-      source={<ComponentSource collapsible={false} name={local.name} styleName={local.styleName} />}
-      {...other}
-    />
+    <Switch>
+      <Match when={props.type === "block"}>
+        <div class="md:-mx-1 relative aspect-[4/2.5] w-full overflow-hidden rounded-md border">
+          <img
+            alt={props.name}
+            class="absolute top-0 left-0 z-20 w-[970px] max-w-none bg-background sm:w-[1280px] md:hidden dark:hidden md:dark:hidden"
+            height={900}
+            src={`/r/styles/v1/${props.name}-light.png`}
+            width={1440}
+          />
+          <img
+            alt={props.name}
+            class="absolute top-0 left-0 z-20 hidden w-[970px] max-w-none bg-background sm:w-[1280px] md:hidden dark:block md:dark:hidden"
+            height={900}
+            src={`/r/stylesv1/${props.name}-dark.png`}
+            width={1440}
+          />
+          <div class="absolute inset-0 hidden w-[1600px] bg-background md:block">
+            <iframe
+              class="size-full"
+              src={`/view/${props.styleName}/${props.name}`}
+              title={props.name}
+            />
+          </div>
+        </div>
+      </Match>
+      <Match when={props.type !== "block"}>
+        <ComponentPreviewTabs
+          align={local.align}
+          chromeLessOnMobile={local.chromeLessOnMobile}
+          class={local.class}
+          component={<Preview />}
+          hideCode={local.hideCode}
+          source={
+            <ComponentSource collapsible={false} name={local.name} styleName={local.styleName} />
+          }
+          {...other}
+        />
+      </Match>
+    </Switch>
   )
 }

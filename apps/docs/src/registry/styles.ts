@@ -2,7 +2,7 @@ export const STYLES = [{ name: "v1" as const, title: "New York" }] as const
 
 export type Style = (typeof STYLES)[number]
 
-export async function getActiveStyle() {
+export function getActiveStyle() {
   // In the future, this can read from cookies, session, etc.
   return STYLES[0]
 }
