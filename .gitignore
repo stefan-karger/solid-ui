@@ -28,6 +28,9 @@ gitignore
 .DS_Store
 Thumbs.db
 
+# Claude
+.claude
+logs
 
 app.config.timestamp*
 
