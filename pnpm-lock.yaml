@@ -59,6 +59,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      lucide-solid:
+        specifier: ^0.562.0
+        version: 0.562.0(solid-js@1.9.9)
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -6447,6 +6450,14 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lucide-solid@0.562.0(solid-js@1.9.9):
+    resolution: {integrity: sha512-RzxujbWUoa4KqnV+/mYPINzyf1W969bv0jukSKcGExIl96QmRuylvBQ+d0UcOeZL/ASToPOWS34p9MfdzdvS9Q==}
+    peerDependencies:
+      solid-js: ^1.4.7
+    dependencies:
+      solid-js: 1.9.9
+    dev: false
 
   /magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
