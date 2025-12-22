@@ -1,4 +1,4 @@
-import type { ValidComponent } from "solid-js"
+import type { JSX, ValidComponent } from "solid-js"
 import { splitProps } from "solid-js"
 
 import * as AccordionPrimitive from "@kobalte/core/accordion"
@@ -46,6 +46,7 @@ const AccordionItem = <T extends ValidComponent = "div">(
 type AccordionTriggerProps<T extends ValidComponent = "button"> =
   AccordionPrimitive.AccordionTriggerProps<T> & {
     class?: string | undefined
+    children?: JSX.Element | undefined
   }
 
 const AccordionTrigger = <T extends ValidComponent = "button">(
@@ -59,7 +60,7 @@ const AccordionTrigger = <T extends ValidComponent = "button">(
     <AccordionPrimitive.Header class="flex" data-slot="accordion-header">
       <AccordionPrimitive.Trigger
         class={cn(
-          "cn-accordion-trigger group/accordion-trigger flex flex-1 items-center justify-between py-4 text-left font-medium text-sm transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-expanded]>svg]:rotate-180",
+          "cn-accordion-trigger group/accordion-trigger flex flex-1 items-center justify-between py-4 text-left font-medium text-sm outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-expanded]>svg]:rotate-180",
           local.class
         )}
         data-slot="accordion-trigger"
@@ -78,6 +79,7 @@ const AccordionTrigger = <T extends ValidComponent = "button">(
 type AccordionContentProps<T extends ValidComponent = "div"> =
   AccordionPrimitive.AccordionContentProps<T> & {
     class?: string | undefined
+    children?: JSX.Element | undefined
   }
 
 const AccordionContent = <T extends ValidComponent = "div">(
@@ -94,7 +96,7 @@ const AccordionContent = <T extends ValidComponent = "div">(
       {...others}
     >
       <div
-        class={cn("cn-accordion-content-inner pb-4 pt-0", local.class)}
+        class={cn("cn-accordion-content-inner pt-0 pb-4", local.class)}
         data-slot="accordion-content-inner"
       >
         {local.children}
