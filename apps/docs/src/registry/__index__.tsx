@@ -18,6 +18,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "accordion": {
+    name: "accordion",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/accordion.tsx")),
+    files: [{
+      path: "registry/ui/accordion.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "avatar": {
     name: "avatar",
     description: "",
@@ -195,6 +209,20 @@ export const Index: Record<string, any> = {
     files: [{
       path: "registry/hooks/use-mobile.ts",
       type: "registry:hook",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "accordion-demo": {
+    name: "accordion-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    component: lazy(() => import("~/registry/examples/accordion-demo.tsx")),
+    files: [{
+      path: "registry/examples/accordion-demo.tsx",
+      type: "registry:example",
       target: ""
     }],
     categories: undefined,

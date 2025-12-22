@@ -2,6 +2,17 @@ import type { Registry } from "~/registry/schema"
 
 export const ui: Registry["items"] = [
   {
+    name: "accordion",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    files: [
+      {
+        path: "ui/accordion.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "avatar",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
