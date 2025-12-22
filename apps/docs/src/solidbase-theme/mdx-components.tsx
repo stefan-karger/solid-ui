@@ -1,5 +1,4 @@
 import {
-  Component,
   type ComponentProps,
   children,
   createSignal,
@@ -159,12 +158,13 @@ export function DirectiveContainer(
   }
 
   if (props.type === "tab-group") {
-    const tabNames = props.tabNames?.split("\0")
+    const tabNames = props.tabNames?.split("\0") as string[]
 
-    const [openTab, setOpenTab] = makePersisted(createSignal(tabNames![0]!), {
+    const [openTab, setOpenTab] = makePersisted(createSignal(tabNames[0]), {
       name: `tab-group:${props.title}`,
       sync: messageSync(new BroadcastChannel("tab-group")),
-      storage: cookieStorage.withOptions({
+      // biome-ignore lint/complexity/useLiteralKeys: <TS don't allow dynamic keys as literals>
+      storage: cookieStorage["withOptions"]({
         expires: new Date(Date.now() + 3e10)
       })
     })
