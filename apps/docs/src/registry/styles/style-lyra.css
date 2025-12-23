@@ -10,7 +10,7 @@
   }
 
   .cn-accordion-content {
-    @apply data-open:animate-accordion-down data-closed:animate-accordion-up text-xs;
+    @apply data-expanded:animate-accordion-down data-closed:animate-accordion-up text-xs;
   }
 
   .cn-accordion-content-inner {

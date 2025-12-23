@@ -7,10 +7,9 @@ import { ChevronDown } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
 
-type AccordionProps<T extends ValidComponent = "div"> =
-  AccordionPrimitive.AccordionRootProps<T> & {
-    class?: string | undefined
-  }
+type AccordionProps<T extends ValidComponent = "div"> = AccordionPrimitive.AccordionRootProps<T> & {
+  class?: string | undefined
+}
 
 const Accordion = <T extends ValidComponent = "div">(
   props: PolymorphicProps<T, AccordionProps<T>>
@@ -36,7 +35,7 @@ const AccordionItem = <T extends ValidComponent = "div">(
   const [local, others] = splitProps(props as AccordionItemProps, ["class"])
   return (
     <AccordionPrimitive.Item
-      class={cn("cn-accordion-item border-b", local.class)}
+      class={cn("cn-accordion-item", local.class)}
       data-slot="accordion-item"
       {...others}
     />
@@ -52,15 +51,12 @@ type AccordionTriggerProps<T extends ValidComponent = "button"> =
 const AccordionTrigger = <T extends ValidComponent = "button">(
   props: PolymorphicProps<T, AccordionTriggerProps<T>>
 ) => {
-  const [local, others] = splitProps(props as AccordionTriggerProps, [
-    "class",
-    "children"
-  ])
+  const [local, others] = splitProps(props as AccordionTriggerProps, ["class", "children"])
   return (
     <AccordionPrimitive.Header class="flex" data-slot="accordion-header">
       <AccordionPrimitive.Trigger
         class={cn(
-          "cn-accordion-trigger group/accordion-trigger flex flex-1 items-center justify-between py-4 text-left font-medium text-sm outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-expanded]>svg]:rotate-180",
+          "cn-accordion-trigger group/accordion-trigger relative flex flex-1 items-start justify-between border border-transparent outline-none transition-all disabled:pointer-events-none disabled:opacity-50",
           local.class
         )}
         data-slot="accordion-trigger"
@@ -68,7 +64,7 @@ const AccordionTrigger = <T extends ValidComponent = "button">(
       >
         {local.children}
         <ChevronDown
-          class="cn-accordion-trigger-icon size-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          class="cn-accordion-trigger-icon pointer-events-none shrink-0 duration-300 group-aria-expanded/accordion-trigger:rotate-180"
           data-slot="accordion-trigger-icon"
         />
       </AccordionPrimitive.Trigger>
@@ -85,18 +81,18 @@ type AccordionContentProps<T extends ValidComponent = "div"> =
 const AccordionContent = <T extends ValidComponent = "div">(
   props: PolymorphicProps<T, AccordionContentProps<T>>
 ) => {
-  const [local, others] = splitProps(props as AccordionContentProps, [
-    "class",
-    "children"
-  ])
+  const [local, others] = splitProps(props as AccordionContentProps, ["class", "children"])
   return (
     <AccordionPrimitive.Content
-      class="cn-accordion-content overflow-hidden text-sm data-[closed]:animate-accordion-up data-[expanded]:animate-accordion-down"
+      class="cn-accordion-content overflow-hidden"
       data-slot="accordion-content"
       {...others}
     >
       <div
-        class={cn("cn-accordion-content-inner pt-0 pb-4", local.class)}
+        class={cn(
+          "cn-accordion-content-inner h-(--kb-collapsible-content-height) [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          local.class
+        )}
         data-slot="accordion-content-inner"
       >
         {local.children}

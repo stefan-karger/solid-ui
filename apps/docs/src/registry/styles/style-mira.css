@@ -6,7 +6,7 @@
   }
 
   .cn-accordion-item {
-    @apply data-open:bg-muted/50 not-last:border-b;
+    @apply data-expanded:bg-muted/50 not-last:border-b;
   }
 
   .cn-accordion-trigger {
@@ -14,7 +14,7 @@
   }
 
   .cn-accordion-content {
-    @apply data-open:animate-accordion-down data-closed:animate-accordion-up px-2 text-xs/relaxed;
+    @apply data-expanded:animate-accordion-down data-closed:animate-accordion-up px-2 text-xs/relaxed;
   }
 
   .cn-accordion-content-inner {
