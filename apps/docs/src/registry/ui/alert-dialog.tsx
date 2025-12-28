@@ -55,7 +55,7 @@ const AlertDialogContent = <T extends ValidComponent = "div">(
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
         class={cn(
-          "cn-alert-dialog-content group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 outline-none",
+          "cn-alert-dialog-content group/alert-dialog-content -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 grid w-full outline-none",
           local.class
         )}
         data-size={local.size}
@@ -168,7 +168,12 @@ const AlertDialogAction = <T extends ValidComponent = "button">(
     "children"
   ])
   return (
-    <Button variant={local.variant} size={local.size} as={AlertDialogPrimitive.CloseButton}>
+    <Button
+      as={AlertDialogPrimitive.CloseButton}
+      size={local.size}
+      variant={local.variant}
+      {...others}
+    >
       <span class={cn("cn-alert-dialog-action", local.class)} data-slot="alert-dialog-action">
         {local.children}
       </span>
@@ -194,7 +199,12 @@ const AlertDialogCancel = <T extends ValidComponent = "button">(
     "children"
   ])
   return (
-    <Button variant={local.variant} size={local.size} as={AlertDialogPrimitive.CloseButton}>
+    <Button
+      as={AlertDialogPrimitive.CloseButton}
+      size={local.size}
+      variant={local.variant}
+      {...others}
+    >
       <span class={cn("cn-alert-dialog-cancel", local.class)} data-slot="alert-dialog-cancel">
         {local.children}
       </span>
