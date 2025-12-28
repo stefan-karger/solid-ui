@@ -13,6 +13,28 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "alert-demo",
+    type: "registry:example",
+    registryDependencies: ["alert"],
+    files: [
+      {
+        path: "examples/alert-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-demo",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "aspect-ratio-demo",
     type: "registry:example",
     registryDependencies: ["aspect-ratio"],
@@ -30,6 +52,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/avatar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-demo",
+    type: "registry:example",
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-demo.tsx",
         type: "registry:example"
       }
     ]
