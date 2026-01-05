@@ -60,6 +60,10 @@ export const docsConfig: Config = {
           href: "/docs/components/badge"
         },
         {
+          title: "Breadcrumb",
+          href: "/docs/components/breadcrumb"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
         },

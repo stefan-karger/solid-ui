@@ -68,6 +68,61 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "breadcrumb-demo",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-collapsed",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-collapsed.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-dropdown",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb", "dropdown-menu", "button"],
+    files: [
+      {
+        path: "examples/breadcrumb-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-link",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-link.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-separator",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-separator.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "button-default",
     type: "registry:example",
     registryDependencies: ["button"],

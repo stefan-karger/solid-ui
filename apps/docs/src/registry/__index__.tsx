@@ -102,6 +102,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "breadcrumb": {
+    name: "breadcrumb",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/breadcrumb.tsx")),
+    files: [{
+      path: "registry/ui/breadcrumb.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "button": {
     name: "button",
     description: "",
@@ -348,6 +362,76 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/badge-demo.tsx")),
     files: [{
       path: "registry/examples/badge-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-demo": {
+    name: "breadcrumb-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    component: lazy(() => import("~/registry/examples/breadcrumb-demo.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-collapsed": {
+    name: "breadcrumb-collapsed",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    component: lazy(() => import("~/registry/examples/breadcrumb-collapsed.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-collapsed.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-dropdown": {
+    name: "breadcrumb-dropdown",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb","dropdown-menu","button"],
+    component: lazy(() => import("~/registry/examples/breadcrumb-dropdown.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-dropdown.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-link": {
+    name: "breadcrumb-link",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    component: lazy(() => import("~/registry/examples/breadcrumb-link.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-link.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "breadcrumb-separator": {
+    name: "breadcrumb-separator",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    component: lazy(() => import("~/registry/examples/breadcrumb-separator.tsx")),
+    files: [{
+      path: "registry/examples/breadcrumb-separator.tsx",
       type: "registry:example",
       target: ""
     }],

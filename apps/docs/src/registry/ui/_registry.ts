@@ -68,6 +68,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "breadcrumb",
+    type: "registry:ui",
+    dependencies: ["lucide-solid"],
+    files: [
+      {
+        path: "ui/breadcrumb.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "button",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
