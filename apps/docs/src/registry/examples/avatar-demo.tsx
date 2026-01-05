@@ -4,12 +4,12 @@ export default function AvatarDemo() {
   return (
     <div class="flex flex-row flex-wrap items-center gap-12">
       <Avatar>
-        <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage alt="@shadcn" src="https://github.com/stefan-karger.png" />
+        <AvatarFallback>EK</AvatarFallback>
       </Avatar>
       <Avatar class="rounded-lg">
-        <AvatarImage alt="@evilrabbit" src="https://github.com/evilrabbit.png" />
-        <AvatarFallback>ER</AvatarFallback>
+        <AvatarImage alt="@carere" src="https://github.com/carere.png" />
+        <AvatarFallback>CA</AvatarFallback>
       </Avatar>
       <div class="-space-x-2 flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
         <Avatar>
