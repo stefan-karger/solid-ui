@@ -114,7 +114,7 @@ export const ui: Registry["items"] = [
   {
     name: "carousel",
     type: "registry:ui",
-    dependencies: ["embla-carousel-solid", "lucide-solid"],
+    dependencies: ["embla-carousel", "embla-carousel-solid", "lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
