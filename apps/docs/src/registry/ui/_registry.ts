@@ -13,6 +13,40 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "alert",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/alert.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "ui/alert-dialog.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "aspect-ratio",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/aspect-ratio.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "avatar",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -24,12 +58,43 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "badge",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/badge.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb",
+    type: "registry:ui",
+    dependencies: ["lucide-solid"],
+    files: [
+      {
+        path: "ui/breadcrumb.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "button",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/button.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/card.tsx",
         type: "registry:ui"
       }
     ]
@@ -47,12 +112,35 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "carousel",
+    type: "registry:ui",
+    dependencies: ["embla-carousel", "embla-carousel-solid", "lucide-solid"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "ui/carousel.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "checkbox",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/checkbox.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "collapsible",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/collapsible.tsx",
         type: "registry:ui"
       }
     ]
@@ -96,6 +184,16 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/input.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "label",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/label.tsx",
         type: "registry:ui"
       }
     ]
