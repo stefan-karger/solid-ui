@@ -275,6 +275,11 @@
     @apply rounded-full;
   }
 
+  /* MARK: Collapsible */
+  .cn-collapsible-content {
+    @apply data-expanded:animate-accordion-down data-closed:animate-accordion-up overflow-hidden;
+  }
+
   /* MARK: Chart */
   .cn-chart-tooltip {
     @apply border-border/50 bg-background gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs/relaxed shadow-xl;

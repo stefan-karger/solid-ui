@@ -1,0 +1,303 @@
+---
+title: Button Group
+description: A container that groups related buttons together with consistent styling.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add button-group
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/button-group.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { ButtonGroup } from "~/components/ui/button-group";
+```
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+## Accessibility
+
+- The button group has `role="group"` for proper semantic meaning
+- Use Tab key to navigate between buttons
+- Apply `aria-label` or `aria-labelledby` to the ButtonGroup for clear identification
+
+```tsx showLineNumbers
+<ButtonGroup aria-label="Button group">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+## ButtonGroup vs ToggleGroup
+
+- Use the `ButtonGroup` component when you want to group buttons that perform an action.
+- Use the `ToggleGroup` component when you want to group buttons that toggle a state.
+
+## Examples
+
+### Orientation
+
+::::tab-group[orientation]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-orientation" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-orientation" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Size
+
+::::tab-group[size]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-size" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Nested
+
+::::tab-group[nested]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-nested" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-nested" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Separator
+
+::::tab-group[separator]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-separator" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-separator" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Split
+
+::::tab-group[split]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-split" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-split" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Input
+
+::::tab-group[input]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-input" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-input" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Input Group
+
+::::tab-group[input-group]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-input-group" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-input-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Dropdown Menu
+
+::::tab-group[dropdown-menu]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-dropdown-menu" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-dropdown-menu" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Select
+
+::::tab-group[select]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-select" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-select" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### ButtonGroup
+
+The `ButtonGroup` component is a container that groups related buttons together with consistent styling.
+
+| Prop          | Type                         | Default        |
+| ------------- | ---------------------------- | -------------- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+Nest multiple button groups to create complex layouts with spacing. See the [nested](#nested) example for more details.
+
+```tsx
+<ButtonGroup>
+  <ButtonGroup />
+  <ButtonGroup />
+</ButtonGroup>
+```
+
+### ButtonGroupSeparator
+
+The `ButtonGroupSeparator` component visually divides buttons within a group.
+
+| Prop          | Type                         | Default      |
+| ------------- | ---------------------------- | ------------ |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <ButtonGroupSeparator />
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+### ButtonGroupText
+
+Use this component to display text within a button group.
+
+| Prop      | Type      | Default |
+| --------- | --------- | ------- |
+| `asChild` | `boolean` | `false` |
+
+```tsx
+<ButtonGroup>
+  <ButtonGroupText>Text</ButtonGroupText>
+  <Button>Button</Button>
+</ButtonGroup>
+```
+
+Use the `as` prop to render a custom component as the text, for example a label.
+
+```tsx showLineNumbers
+import { ButtonGroupText } from "~/components/ui/button-group"
+import { Label } from "~/components/ui/label"
+
+export function ButtonGroupTextDemo() {
+  return (
+    <ButtonGroup>
+      <ButtonGroupText as={Label} htmlFor="name">
+        Text
+      </ButtonGroupText>
+      <Input placeholder="Type something here..." id="name" />
+    </ButtonGroup>
+  )
+}
+```
+
