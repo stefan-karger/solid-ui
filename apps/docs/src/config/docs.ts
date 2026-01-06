@@ -40,16 +40,61 @@ export const docsConfig: Config = {
           href: "/docs/components/accordion"
         },
         {
+          title: "Alert",
+          href: "/docs/components/alert"
+        },
+        {
+          title: "Alert Dialog",
+          href: "/docs/components/alert-dialog"
+        },
+        {
+          title: "Aspect Ratio",
+          href: "/docs/components/aspect-ratio"
+        },
+        {
           title: "Avatar",
           href: "/docs/components/avatar"
+        },
+        {
+          title: "Badge",
+          href: "/docs/components/badge"
+        },
+        {
+          title: "Breadcrumb",
+          href: "/docs/components/breadcrumb"
         },
         {
           title: "Button",
           href: "/docs/components/button"
         },
         {
+          title: "Button Group",
+          href: "/docs/components/button-group"
+        },
+        {
+          title: "Card",
+          href: "/docs/components/card"
+        },
+        {
+          title: "Carousel",
+          href: "/docs/components/carousel",
+          status: "new"
+        },
+        {
           title: "Checkbox",
           href: "/docs/components/checkbox"
+        },
+        {
+          title: "Collapsible",
+          href: "/docs/components/collapsible"
+        },
+        {
+          title: "Dialog",
+          href: "/docs/components/dialog"
+        },
+        {
+          title: "Context Menu",
+          href: "/docs/components/context-menu"
         },
         {
           title: "Dropdown Menu",
@@ -62,6 +107,10 @@ export const docsConfig: Config = {
         {
           title: "Input Group",
           href: "/docs/components/input-group"
+        },
+        {
+          title: "Label",
+          href: "/docs/components/label"
         },
         {
           title: "Radio Group",

@@ -1,0 +1,107 @@
+---
+title: Context Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a right-click or long-press.
+links:
+  doc: https://kobalte.dev/docs/core/components/context-menu
+  api: https://kobalte.dev/docs/core/components/context-menu#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add context-menu
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/context-menu.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "~/components/ui/context-menu";
+```
+
+```tsx showLineNumbers
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuLabel>Actions</ContextMenuLabel>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Profile</ContextMenuItem>
+    <ContextMenuItem>Billing</ContextMenuItem>
+    <ContextMenuItem>Team</ContextMenuItem>
+    <ContextMenuItem>Subscription</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Examples
+
+### Checkboxes
+
+::::tab-group[checkboxes]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-checkboxes" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-checkboxes" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Radio Group
+
+::::tab-group[radio-group]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-radio-group" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-radio-group" frame=none showLineNumbers
+
+```
+
+:::
+::::

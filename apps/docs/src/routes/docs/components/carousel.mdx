@@ -1,0 +1,319 @@
+---
+title: Carousel
+description: A carousel with motion and swipe built using Embla.
+links:
+  doc: https://www.embla-carousel.com/get-started/solid
+  api: https://www.embla-carousel.com/api
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## About
+
+The carousel component is built using the [Embla Carousel](https://www.embla-carousel.com/) library.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add carousel
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+embla-carousel-solid lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/carousel.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "~/components/ui/carousel";
+```
+
+```tsx
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Examples
+
+### Sizes
+
+To set the size of the items, you can use the `basis` utility class on the `<CarouselItem />`.
+
+::::tab-group[sizes]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-size" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+// 33% of the carousel width.
+<Carousel>
+  <CarouselContent>
+    <CarouselItem class="basis-1/3">...</CarouselItem>
+    <CarouselItem class="basis-1/3">...</CarouselItem>
+    <CarouselItem class="basis-1/3">...</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+```tsx
+// 50% on small screens and 33% on larger screens.
+<Carousel>
+  <CarouselContent>
+    <CarouselItem class="md:basis-1/2 lg:basis-1/3">...</CarouselItem>
+    <CarouselItem class="md:basis-1/2 lg:basis-1/3">...</CarouselItem>
+    <CarouselItem class="md:basis-1/2 lg:basis-1/3">...</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+### Spacing
+
+To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
+
+::::tab-group[spacing]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-spacing" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-spacing" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+<Carousel>
+  <CarouselContent class="-ml-4">
+    <CarouselItem class="pl-4">...</CarouselItem>
+    <CarouselItem class="pl-4">...</CarouselItem>
+    <CarouselItem class="pl-4">...</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+### Orientation
+
+Use the `orientation` prop to set the orientation of the carousel.
+
+::::tab-group[orientation]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-orientation" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-orientation" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+<Carousel orientation="vertical | horizontal">
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+## Options
+
+You can pass options to the carousel using the `opts` prop. See the [Embla Carousel docs](https://www.embla-carousel.com/api/options/) for more information.
+
+```tsx
+<Carousel
+  opts={{
+    align: "start",
+    loop: true
+  }}
+>
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+## API
+
+Use a signal and the `setApi` prop to get an instance of the carousel API.
+
+::::tab-group[api]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-api" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-api" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import { createEffect, createSignal, on } from "solid-js";
+import { type CarouselApi } from "~/components/ui/carousel";
+
+export function Example() {
+  const [api, setApi] = createSignal<CarouselApi>();
+  const [current, setCurrent] = createSignal(0);
+  const [count, setCount] = createSignal(0);
+
+  createEffect(
+    on(api, (emblaApi) => {
+      if (!emblaApi) return;
+
+      setCount(emblaApi.scrollSnapList().length);
+      setCurrent(emblaApi.selectedScrollSnap() + 1);
+
+      emblaApi.on("select", () => {
+        setCurrent(emblaApi.selectedScrollSnap() + 1);
+      });
+    })
+  );
+
+  return (
+    <Carousel setApi={setApi}>
+      <CarouselContent>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+      </CarouselContent>
+    </Carousel>
+  );
+}
+```
+
+## Events
+
+You can listen to events using the api instance from `setApi`.
+
+```tsx
+import { createEffect, createSignal, on } from "solid-js";
+import { type CarouselApi } from "~/components/ui/carousel";
+
+export function Example() {
+  const [api, setApi] = createSignal<CarouselApi>();
+
+  createEffect(
+    on(api, (emblaApi) => {
+      if (!emblaApi) return;
+
+      emblaApi.on("select", () => {
+        // Do something on select.
+      });
+    })
+  );
+
+  return (
+    <Carousel setApi={setApi}>
+      <CarouselContent>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+      </CarouselContent>
+    </Carousel>
+  );
+}
+```
+
+See the [Embla Carousel docs](https://www.embla-carousel.com/api/events/) for more information on using events.
+
+## Plugins
+
+You can use the `plugins` prop to add plugins to the carousel.
+
+```tsx
+import Autoplay from "embla-carousel-autoplay";
+
+export function Example() {
+  return (
+    <Carousel
+      plugins={[
+        Autoplay({
+          delay: 2000
+        })
+      ]}
+    >
+      // ...
+    </Carousel>
+  );
+}
+```
+
+::::tab-group[plugin]
+:::tab[Preview]
+
+<ComponentPreview name="carousel-plugin" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-plugin" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+See the [Embla Carousel docs](https://www.embla-carousel.com/api/plugins/) for more information on using plugins.

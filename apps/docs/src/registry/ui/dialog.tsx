@@ -3,8 +3,10 @@ import { mergeProps, Show, splitProps } from "solid-js"
 
 import * as DialogPrimitive from "@kobalte/core/dialog"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+import { X } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
+import { Button } from "~/registry/ui/button"
 
 const Dialog: Component<DialogPrimitive.DialogRootProps> = (props) => (
   <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -31,10 +33,7 @@ const DialogOverlay = <T extends ValidComponent = "div">(
   const [local, others] = splitProps(props as DialogOverlayProps, ["class"])
   return (
     <DialogPrimitive.Overlay
-      class={cn(
-        "data-[closed]:fade-out-0 data-[expanded]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[closed]:animate-out data-[expanded]:animate-in",
-        local.class
-      )}
+      class={cn("cn-dialog-overlay fixed inset-0 isolate z-50", local.class)}
       data-slot="dialog-overlay"
       {...others}
     />
@@ -62,7 +61,7 @@ const DialogContent = <T extends ValidComponent = "div">(
       <DialogOverlay />
       <DialogPrimitive.Content
         class={cn(
-          "data-[closed]:fade-out-0 data-[closed]:zoom-out-95 data-[expanded]:fade-in-0 data-[expanded]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[closed]:animate-out data-[expanded]:animate-in sm:max-w-lg",
+          "cn-dialog-content -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 w-full",
           local.class
         )}
         data-slot="dialog-content"
@@ -71,22 +70,13 @@ const DialogContent = <T extends ValidComponent = "div">(
         {local.children}
         <Show when={local.showCloseButton}>
           <DialogPrimitive.CloseButton
-            class="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[expanded]:bg-accent data-[expanded]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+            as={Button}
+            class="cn-dialog-close"
             data-slot="dialog-close"
+            size="icon"
+            variant="ghost"
           >
-            <svg
-              class="size-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M18 6l-12 12" />
-              <path d="M6 6l12 12" />
-            </svg>
+            <X />
             <span class="sr-only">Close</span>
           </DialogPrimitive.CloseButton>
         </Show>
@@ -99,7 +89,7 @@ const DialogHeader: Component<ComponentProps<"div">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn("flex flex-col gap-2 text-center sm:text-left", local.class)}
+      class={cn("cn-dialog-header flex flex-col", local.class)}
       data-slot="dialog-header"
       {...others}
     />
@@ -110,7 +100,10 @@ const DialogFooter: Component<ComponentProps<"div">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", local.class)}
+      class={cn(
+        "cn-dialog-footer flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        local.class
+      )}
       data-slot="dialog-footer"
       {...others}
     />
@@ -127,7 +120,7 @@ const DialogTitle = <T extends ValidComponent = "h2">(
   const [local, others] = splitProps(props as DialogTitleProps, ["class"])
   return (
     <DialogPrimitive.Title
-      class={cn("font-semibold text-lg leading-none", local.class)}
+      class={cn("cn-dialog-title", local.class)}
       data-slot="dialog-title"
       {...others}
     />
@@ -145,7 +138,7 @@ const DialogDescription = <T extends ValidComponent = "p">(
   const [local, others] = splitProps(props as DialogDescriptionProps, ["class"])
   return (
     <DialogPrimitive.Description
-      class={cn("text-muted-foreground text-sm", local.class)}
+      class={cn("cn-dialog-description", local.class)}
       data-slot="dialog-description"
       {...others}
     />

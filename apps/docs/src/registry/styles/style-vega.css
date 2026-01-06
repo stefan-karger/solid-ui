@@ -271,6 +271,11 @@
     @apply rounded-full;
   }
 
+  /* MARK: Collapsible */
+  .cn-collapsible-content {
+    @apply data-expanded:animate-accordion-down data-closed:animate-accordion-up overflow-hidden;
+  }
+
   /* MARK: Chart */
   .cn-chart-tooltip {
     @apply border-border/50 bg-background gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl;
@@ -434,11 +439,11 @@
 
   /* MARK: Dialog */
   .cn-dialog-overlay {
-    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs;
+    @apply data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs;
   }
 
   .cn-dialog-content {
-    @apply bg-background data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/10 grid max-w-[calc(100%-2rem)] gap-6 rounded-xl p-6 text-sm ring-1 duration-100 sm:max-w-md;
+    @apply bg-background data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 data-closed:zoom-out-95 data-expanded:zoom-in-95 ring-foreground/10 grid max-w-[calc(100%-2rem)] gap-6 rounded-xl p-6 text-sm ring-1 duration-100 sm:max-w-md;
   }
 
   .cn-dialog-close {
@@ -732,7 +737,7 @@
 
   /* MARK: Label */
   .cn-label {
-    @apply gap-2 text-sm leading-none font-medium group-data-[disabled=true]:opacity-50 peer-disabled:opacity-50;
+    @apply gap-2 text-sm leading-none font-medium group-data-disabled:opacity-50 peer-disabled:opacity-50 peer-data-disabled:opacity-50;
   }
 
   /* MARK: Menubar */
