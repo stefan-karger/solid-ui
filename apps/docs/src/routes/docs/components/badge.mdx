@@ -1,0 +1,59 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="badge-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add badge
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/badge.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { Badge } from "~/components/ui/badge";
+```
+
+```tsx
+<Badge variant="default | outline | secondary | destructive">Badge</Badge>
+```
+
+### Link
+
+You can use the `as` prop to make another component look like a badge. Here's an example of an anchor that looks like a badge.
+
+```tsx showLineNumbers
+import { Badge } from "~/components/ui/badge"
+
+export function LinkAsBadge() {
+  return (
+    <Badge as="a" href="/" />
+  )
+}
+```

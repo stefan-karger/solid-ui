@@ -1,0 +1,56 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+links:
+  doc: https://kobalte.dev/docs/core/components/aspect-ratio
+  api: https://kobalte.dev/docs/core/components/aspect-ratio#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="aspect-ratio-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/aspect-ratio-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add aspect-ratio
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/aspect-ratio.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { AspectRatio } from "~/components/ui/aspect-ratio";
+```
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img src="..." alt="..." />
+</AspectRatio>
+```
