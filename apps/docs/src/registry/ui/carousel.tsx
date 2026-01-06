@@ -1,9 +1,17 @@
 import type { Accessor, ComponentProps, JSX, ValidComponent } from "solid-js"
-import { createContext, createEffect, createSignal, mergeProps, onCleanup, splitProps, useContext } from "solid-js"
+import {
+  createContext,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  splitProps,
+  useContext
+} from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import createEmblaCarousel from "embla-carousel-solid"
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from "embla-carousel"
+import createEmblaCarousel from "embla-carousel-solid"
 import { ChevronLeft, ChevronRight } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
@@ -127,11 +135,11 @@ const Carousel = <T extends ValidComponent = "div">(
       }}
     >
       <div
-        onKeyDown={handleKeyDown}
-        class={cn("relative", local.class)}
-        role="region"
         aria-roledescription="carousel"
+        class={cn("relative", local.class)}
         data-slot="carousel"
+        onKeyDown={handleKeyDown}
+        role="region"
         {...others}
       >
         {local.children}
@@ -151,13 +159,9 @@ const CarouselContent = <T extends ValidComponent = "div">(
   const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div ref={carouselRef} class="overflow-hidden" data-slot="carousel-content">
+    <div class="overflow-hidden" data-slot="carousel-content" ref={carouselRef}>
       <div
-        class={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          local.class
-        )}
+        class={cn("flex", orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", local.class)}
         {...others}
       />
     </div>
@@ -176,14 +180,14 @@ const CarouselItem = <T extends ValidComponent = "div">(
 
   return (
     <div
-      role="group"
       aria-roledescription="slide"
-      data-slot="carousel-item"
       class={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         local.class
       )}
+      data-slot="carousel-item"
+      role="group"
       {...others}
     />
   )
@@ -202,18 +206,18 @@ const CarouselPrevious = <T extends ValidComponent = "button">(
 
   return (
     <Button
-      data-slot="carousel-previous"
-      variant={local.variant}
-      size={local.size}
       class={cn(
         "cn-carousel-previous absolute touch-manipulation",
         orientation === "horizontal"
-          ? "top-1/2 -left-12 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "-left-12 -translate-y-1/2 top-1/2"
+          : "-top-12 -translate-x-1/2 left-1/2 rotate-90",
         local.class
       )}
+      data-slot="carousel-previous"
       disabled={!canScrollPrev()}
       onClick={scrollPrev}
+      size={local.size}
+      variant={local.variant}
       {...others}
     >
       <ChevronLeft />
@@ -235,18 +239,18 @@ const CarouselNext = <T extends ValidComponent = "button">(
 
   return (
     <Button
-      data-slot="carousel-next"
-      variant={local.variant}
-      size={local.size}
       class={cn(
         "cn-carousel-next absolute touch-manipulation",
         orientation === "horizontal"
-          ? "top-1/2 -right-12 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "-right-12 -translate-y-1/2 top-1/2"
+          : "-bottom-12 -translate-x-1/2 left-1/2 rotate-90",
         local.class
       )}
+      data-slot="carousel-next"
       disabled={!canScrollNext()}
       onClick={scrollNext}
+      size={local.size}
+      variant={local.variant}
       {...others}
     >
       <ChevronRight />
