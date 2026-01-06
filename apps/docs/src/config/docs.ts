@@ -89,6 +89,10 @@ export const docsConfig: Config = {
           href: "/docs/components/collapsible"
         },
         {
+          title: "Dialog",
+          href: "/docs/components/dialog"
+        },
+        {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },

@@ -68,23 +68,23 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "breadcrumb-demo",
-    type: "registry:example",
-    registryDependencies: ["breadcrumb"],
-    files: [
-      {
-        path: "examples/breadcrumb-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "breadcrumb-collapsed",
     type: "registry:example",
     registryDependencies: ["breadcrumb"],
     files: [
       {
         path: "examples/breadcrumb-collapsed.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-demo",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -118,73 +118,6 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/breadcrumb-separator.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-demo",
-    type: "registry:example",
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-size",
-    type: "registry:example",
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-size.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-spacing",
-    type: "registry:example",
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-spacing.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-orientation",
-    type: "registry:example",
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-orientation.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-api",
-    type: "registry:example",
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-api.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "carousel-plugin",
-    type: "registry:example",
-    dependencies: ["embla-carousel-autoplay"],
-    registryDependencies: ["carousel", "card"],
-    files: [
-      {
-        path: "examples/carousel-plugin.tsx",
         type: "registry:example"
       }
     ]
@@ -256,23 +189,23 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-group-input-group",
-    type: "registry:example",
-    registryDependencies: ["button", "button-group", "input-group"],
-    files: [
-      {
-        path: "examples/button-group-input-group.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "button-group-input",
     type: "registry:example",
     registryDependencies: ["button", "button-group", "input"],
     files: [
       {
         path: "examples/button-group-input.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-group-input-group",
+    type: "registry:example",
+    registryDependencies: ["button", "button-group", "input-group"],
+    files: [
+      {
+        path: "examples/button-group-input-group.tsx",
         type: "registry:example"
       }
     ]
@@ -443,12 +376,68 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "dropdown-menu-checkboxes",
+    name: "carousel-api",
     type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
+    registryDependencies: ["carousel", "card"],
     files: [
       {
-        path: "examples/dropdown-menu-checkboxes.tsx",
+        path: "examples/carousel-api.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-demo",
+    type: "registry:example",
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-orientation",
+    type: "registry:example",
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-orientation.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-plugin",
+    type: "registry:example",
+    dependencies: ["embla-carousel-autoplay"],
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-plugin.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-size",
+    type: "registry:example",
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-spacing",
+    type: "registry:example",
+    registryDependencies: ["carousel", "card"],
+    files: [
+      {
+        path: "examples/carousel-spacing.tsx",
         type: "registry:example"
       }
     ]
@@ -471,6 +460,28 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/collapsible-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-close-button",
+    type: "registry:example",
+    registryDependencies: ["dialog", "button"],
+    files: [
+      {
+        path: "examples/dialog-close-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-demo",
+    type: "registry:example",
+    registryDependencies: ["dialog", "button", "field", "input"],
+    files: [
+      {
+        path: "examples/dialog-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -504,6 +515,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/context-menu-radio-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-checkboxes",
+    type: "registry:example",
+    registryDependencies: ["dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-checkboxes.tsx",
         type: "registry:example"
       }
     ]
