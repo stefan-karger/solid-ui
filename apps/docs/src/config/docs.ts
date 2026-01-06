@@ -40,12 +40,45 @@ export const docsConfig: Config = {
           href: "/docs/components/accordion"
         },
         {
+          title: "Alert",
+          href: "/docs/components/alert"
+        },
+        {
+          title: "Alert Dialog",
+          href: "/docs/components/alert-dialog"
+        },
+        {
+          title: "Aspect Ratio",
+          href: "/docs/components/aspect-ratio"
+        },
+        {
           title: "Avatar",
           href: "/docs/components/avatar"
         },
         {
+          title: "Badge",
+          href: "/docs/components/badge"
+        },
+        {
+          title: "Breadcrumb",
+          href: "/docs/components/breadcrumb"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
+        },
+        {
+          title: "Button Group",
+          href: "/docs/components/button-group"
+        },
+        {
+          title: "Card",
+          href: "/docs/components/card"
+        },
+        {
+          title: "Carousel",
+          href: "/docs/components/carousel",
+          status: "new"
         },
         {
           title: "Checkbox",

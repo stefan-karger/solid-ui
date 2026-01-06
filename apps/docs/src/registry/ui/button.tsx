@@ -48,7 +48,9 @@ const Button = <T extends ValidComponent = "button">(
   return (
     <ButtonPrimitive.Root
       class={cn(buttonVariants({ variant: local.variant, size: local.size }), local.class)}
+      data-size={local.size}
       data-slot="button"
+      data-variant={local.variant}
       {...others}
     />
   )
