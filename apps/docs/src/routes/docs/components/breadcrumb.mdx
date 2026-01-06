@@ -1,0 +1,152 @@
+---
+title: Breadcrumb
+description: Displays the path to the current resource using a hierarchy of links.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="breadcrumb-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/breadcrumb-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add breadcrumb
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/breadcrumb.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "~/components/ui/breadcrumb";
+```
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Components</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+## Examples
+
+### Custom Separator
+
+You can use a custom separator by passing it as children to `BreadcrumbSeparator`.
+
+::::tab-group[separator]
+:::tab[Preview]
+
+<ComponentPreview name="breadcrumb-separator" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/breadcrumb-separator" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+---
+
+### Dropdown
+
+You can compose `Breadcrumb` with a `DropdownMenu` to create a breadcrumb with a dropdown menu.
+
+::::tab-group[dropdown]
+:::tab[Preview]
+
+<ComponentPreview name="breadcrumb-dropdown" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/breadcrumb-dropdown" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+---
+
+### Collapsed
+
+We provide a `<BreadcrumbEllipsis />` component to show a collapsed state when the breadcrumb is too long.
+
+::::tab-group[collapsed]
+:::tab[Preview]
+
+<ComponentPreview name="breadcrumb-collapsed" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/breadcrumb-collapsed" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+---
+
+### Link Component
+
+Use the `BreadcrumbLink` component to render breadcrumb links.
+
+::::tab-group[link]
+:::tab[Preview]
+
+<ComponentPreview name="breadcrumb-link" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/breadcrumb-link" frame=none showLineNumbers
+
+```
+
+:::
+::::

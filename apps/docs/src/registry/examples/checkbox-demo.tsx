@@ -27,6 +27,7 @@ export default function CheckboxDemo() {
       >
         <Checkbox
           class="data-[checked]:border-blue-600 data-[checked]:bg-blue-600 data-[checked]:text-white dark:data-[checked]:border-blue-700 dark:data-[checked]:bg-blue-700"
+          defaultChecked
           id="toggle-2"
         />
         <div class="grid gap-1.5 font-normal">
