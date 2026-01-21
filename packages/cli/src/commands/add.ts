@@ -152,7 +152,7 @@ export const add = new Command()
             "add",
             packageManager === "deno" ? "--npm" : "",
             ...item.dependencies,
-          ], { cwd });
+          ].filter(Boolean), { cwd });
         }
       }
 
