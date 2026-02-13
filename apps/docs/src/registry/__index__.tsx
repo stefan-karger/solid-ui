@@ -2076,6 +2076,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "sidebar-demo": {
+    name: "sidebar-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar"],
+    component: lazy(() => import("~/registry/examples/sidebar-demo.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "slider-demo": {
     name: "slider-demo",
     description: "",

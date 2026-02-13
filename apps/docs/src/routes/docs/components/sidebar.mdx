@@ -1,0 +1,123 @@
+---
+title: Sidebar
+description: A composable, flexible and fully accessible sidebar component.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+<ComponentPreview name="sidebar-demo" />
+:::
+:::tab[Code]
+```file="~/registry/examples/sidebar-demo" frame=none showLineNumbers
+```
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add sidebar
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/sidebar.tsx" showLineNumbers
+```
+
+## Usage
+
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger
+} from "~/components/ui/sidebar"
+```
+
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader />
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <span>Item</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter />
+  </Sidebar>
+  <SidebarInset>
+    <header>
+      <SidebarTrigger />
+    </header>
+    <main>{/* Your content */}</main>
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## Features
+
+- **Collapsible** - Toggle between expanded and collapsed states
+- **Responsive** - Automatically switches to a sheet on mobile
+- **Keyboard shortcuts** - Press `Cmd/Ctrl + B` to toggle
+- **Persistent state** - Saves state to a cookie
+- **Flexible composition** - Build complex layouts with nested menus
+- **Accessible** - Built with Kobalte primitives
+
+## Structure
+
+The sidebar is composed of the following components:
+
+- `SidebarProvider` - Provides context for the entire sidebar
+- `Sidebar` - The main sidebar container
+- `SidebarHeader` - Header section of the sidebar
+- `SidebarContent` - Scrollable content area
+- `SidebarFooter` - Footer section of the sidebar
+- `SidebarInset` - Main content area alongside the sidebar
+- `SidebarTrigger` - Button to toggle the sidebar
+- `SidebarMenu` - Container for menu items
+- `SidebarMenuItem` - Individual menu item
+- `SidebarMenuButton` - Button within a menu item
+- `SidebarGroup` - Groups related menu items
+- `SidebarGroupLabel` - Label for a group
+- `SidebarGroupContent` - Content of a group
+
+## Keyboard Shortcuts
+
+- `Cmd/Ctrl + B` - Toggle sidebar
+
+## Accessibility
+
+The sidebar component is built with accessibility in mind:
+- Proper ARIA labels and roles
+- Keyboard navigation support
+- Focus management
+- Screen reader compatible
