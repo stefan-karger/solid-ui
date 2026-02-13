@@ -1,0 +1,55 @@
+---
+title: Progress
+description: Displays an indicator showing the completion progress of a task.
+links:
+  doc: https://kobalte.dev/docs/core/components/progress
+  api: https://kobalte.dev/docs/core/components/progress#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="progress-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/progress-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add progress
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/progress.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { Progress } from "~/components/ui/progress";
+```
+
+```tsx
+<Progress value={50} />
+```

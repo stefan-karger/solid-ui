@@ -1,0 +1,93 @@
+---
+title: Sonner
+description: An opinionated toast component for Solid.
+links:
+  doc: https://solid-sonner.vercel.app
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="sonner-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/sonner-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add sonner
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+solid-sonner
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/sonner.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { Toaster, toast } from "~/components/ui/sonner";
+```
+
+Add the `Toaster` component to your root layout:
+
+```tsx
+<Toaster />
+```
+
+Then use the `toast` function to create toasts:
+
+```tsx
+toast("Event has been created.");
+```
+
+## Examples
+
+### Toast Variants
+
+```tsx
+toast("Default toast");
+toast.success("Success toast");
+toast.error("Error toast");
+toast.warning("Warning toast");
+toast.info("Info toast");
+```
+
+### With Description
+
+```tsx
+toast("Event has been created", {
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+});
+```
+
+### With Action
+
+```tsx
+toast("Event has been created", {
+  action: {
+    label: "Undo",
+    onClick: () => console.log("Undo"),
+  },
+});
+```

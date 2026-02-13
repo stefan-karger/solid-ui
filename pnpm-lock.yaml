@@ -29,6 +29,9 @@ importers:
       '@corvu/drawer':
         specifier: ^0.2.4
         version: 0.2.4(solid-js@1.9.9)
+      '@corvu/resizable':
+        specifier: ^0.2.5
+        version: 0.2.5(solid-js@1.9.9)
       '@fontsource-variable/geist':
         specifier: ^5.2.8
         version: 5.2.8
@@ -41,6 +44,9 @@ importers:
       '@kobalte/solidbase':
         specifier: ^0.2.20
         version: 0.2.20(@solidjs/start@1.2.0)(solid-js@1.9.9)(vinxi@0.5.7)(vite@6.3.5)
+      '@modular-forms/solid':
+        specifier: ^0.25.1
+        version: 0.25.1(solid-js@1.9.9)(typescript@5.9.3)
       '@solid-primitives/storage':
         specifier: ^4.3.3
         version: 4.3.3(solid-js@1.9.9)
@@ -53,6 +59,9 @@ importers:
       '@solidjs/start':
         specifier: ^1.2.0
         version: 1.2.0(solid-js@1.9.9)(vinxi@0.5.7)(vite@6.3.5)
+      chart.js:
+        specifier: ^4.5.1
+        version: 4.5.1
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -77,6 +86,9 @@ importers:
       solid-js:
         specifier: ^1.9.9
         version: 1.9.9
+      solid-sonner:
+        specifier: ^0.2.8
+        version: 0.2.8(solid-js@1.9.9)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -1219,6 +1231,15 @@ packages:
       solid-transition-size: 0.1.4(solid-js@1.9.9)
     dev: false
 
+  /@corvu/resizable@0.2.5(solid-js@1.9.9):
+    resolution: {integrity: sha512-psax38DraM9SXtaNh/sfvizGO6xLCL4sqT4rWYlMZP5ZsUM05Q30tvXgnTo2roQFNOz2e06WofhDsBXTjY6g4A==}
+    peerDependencies:
+      solid-js: ^1.8
+    dependencies:
+      '@corvu/utils': 0.4.2(solid-js@1.9.9)
+      solid-js: 1.9.9
+    dev: false
+
   /@corvu/utils@0.3.2(solid-js@1.9.9):
     resolution: {integrity: sha512-ZWlyWEE8qV9+CB9OAyo2bTrZGXQN9ZeM+JfYv89zoR+lRACKTDuoOZEdiyL8Uc7U5dUSH1uTqKhTTnaHWb+wZA==}
     peerDependencies:
@@ -2048,6 +2069,10 @@ packages:
       solid-js: 1.9.9
     dev: false
 
+  /@kurkle/color@0.3.4:
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+    dev: false
+
   /@manypkg/find-root@1.1.0:
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
     dependencies:
@@ -2115,6 +2140,17 @@ packages:
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@modular-forms/solid@0.25.1(solid-js@1.9.9)(typescript@5.9.3):
+    resolution: {integrity: sha512-issNZ3xl4tj+1K7KT4dNTQaRq5SmVUXgUPeGTMjtrAzCeTnwM/u6vUxSuTY2bcMw4GzTxreFXLx1xMMhrFkt0A==}
+    peerDependencies:
+      solid-js: ^1.3.1
+    dependencies:
+      solid-js: 1.9.9
+      valibot: 1.2.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - typescript
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -4069,6 +4105,13 @@ packages:
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
+
+  /chart.js@4.5.1:
+    resolution: {integrity: sha512-GIjfiT9dbmHRiYi6Nl2yFCq7kkwdkp1W/lp2J99rX0yo9tgJGn3lKQATztIjb5tVtevcBtIdICNWqlq5+E8/Pw==}
+    engines: {pnpm: '>=8'}
+    dependencies:
+      '@kurkle/color': 0.3.4
+    dev: false
 
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -8844,6 +8887,14 @@ packages:
       - supports-color
     dev: false
 
+  /solid-sonner@0.2.8(solid-js@1.9.9):
+    resolution: {integrity: sha512-EQ2EIznvHHpAmkYh2CTu0AdCgmPJRJWLGFRWygE8j+vMEfvIV2wotHU5qgWzqzVTG1SODGsay2Lwq6ENWx/rPA==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.9.9
+    dev: false
+
   /solid-transition-size@0.1.4(solid-js@1.9.9):
     resolution: {integrity: sha512-ocHVnbfy23CgfaH4cEUR/AFg0Y3CEL8Oh3n9Qv8OHFJgPh+zkmERKZQfi/xH5XvxDCizg8VjPrVUhiHB1Gza8g==}
     peerDependencies:
@@ -10041,6 +10092,17 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: false
+
+  /valibot@1.2.0(typescript@5.9.3):
+    resolution: {integrity: sha512-mm1rxUsmOxzrwnX5arGS+U4T25RdvpPjPN4yR0u9pUBov9+zGVtO84tif1eY4r6zWxVxu3KzIyknJy3rxfRZZg==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.9.3
     dev: false
 
   /validate-html-nesting@1.2.2:

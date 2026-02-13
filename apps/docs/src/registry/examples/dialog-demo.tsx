@@ -14,8 +14,8 @@ import { Input } from "~/registry/ui/input"
 export default function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger as={Button<"button">} variant="outline">
-        Edit Profile
+      <DialogTrigger>
+        <Button variant="outline">Edit Profile</Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-[425px]">
         <DialogHeader>

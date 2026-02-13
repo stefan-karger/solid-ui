@@ -1,0 +1,93 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with drag to resize.
+links:
+  doc: https://corvu.dev/docs/primitives/resizable
+  api: https://corvu.dev/docs/primitives/resizable#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="resizable-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/resizable-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## About
+
+The resizable component is built using [corvu's Resizable](https://corvu.dev/docs/primitives/resizable) primitive.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add resizable
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@corvu/resizable
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/resizable.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  ResizableGroup,
+  ResizableHandle,
+  ResizablePanel
+} from "~/components/ui/resizable";
+```
+
+```tsx
+<ResizableGroup>
+  <ResizablePanel>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel>Two</ResizablePanel>
+</ResizableGroup>
+```
+
+## Examples
+
+### Vertical
+
+Use the `orientation` prop to set the orientation of the resizable panels.
+
+```tsx
+<ResizableGroup orientation="vertical">
+  <ResizablePanel>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel>Two</ResizablePanel>
+</ResizableGroup>
+```
+
+### Handle
+
+You can set the `withHandle` prop to add a visual drag handle to the resize handle.
+
+```tsx
+<ResizableGroup>
+  <ResizablePanel>One</ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel>Two</ResizablePanel>
+</ResizableGroup>
+```

@@ -81,6 +81,11 @@ export const docsConfig: Config = {
           status: "new"
         },
         {
+          title: "Chart",
+          href: "/docs/components/chart",
+          status: "new"
+        },
+        {
           title: "Checkbox",
           href: "/docs/components/checkbox"
         },
@@ -89,32 +94,117 @@ export const docsConfig: Config = {
           href: "/docs/components/collapsible"
         },
         {
-          title: "Dialog",
-          href: "/docs/components/dialog"
+          title: "Combobox",
+          href: "/docs/components/combobox",
+          status: "new"
+        },
+        {
+          title: "Command",
+          href: "/docs/components/command",
+          status: "new"
         },
         {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },
         {
+          title: "Dialog",
+          href: "/docs/components/dialog"
+        },
+        {
+          title: "Direction",
+          href: "/docs/components/direction",
+          status: "new"
+        },
+        {
           title: "Dropdown Menu",
           href: "/docs/components/dropdown-menu"
+        },
+        {
+          title: "Empty",
+          href: "/docs/components/empty",
+          status: "new"
         },
         {
           title: "Field",
           href: "/docs/components/field"
         },
         {
+          title: "Form",
+          href: "/docs/components/form",
+          status: "new"
+        },
+        {
+          title: "Hover Card",
+          href: "/docs/components/hover-card",
+          status: "new"
+        },
+        {
           title: "Input Group",
           href: "/docs/components/input-group"
+        },
+        {
+          title: "Input OTP",
+          href: "/docs/components/input-otp",
+          status: "new"
+        },
+        {
+          title: "Item",
+          href: "/docs/components/item",
+          status: "new"
+        },
+        {
+          title: "Kbd",
+          href: "/docs/components/kbd",
+          status: "new"
         },
         {
           title: "Label",
           href: "/docs/components/label"
         },
         {
+          title: "Menubar",
+          href: "/docs/components/menubar",
+          status: "new"
+        },
+        {
+          title: "Native Select",
+          href: "/docs/components/native-select",
+          status: "new"
+        },
+        {
+          title: "Navigation Menu",
+          href: "/docs/components/navigation-menu",
+          status: "new"
+        },
+        {
+          title: "Pagination",
+          href: "/docs/components/pagination",
+          status: "new"
+        },
+        {
+          title: "Popover",
+          href: "/docs/components/popover",
+          status: "new"
+        },
+        {
+          title: "Progress",
+          href: "/docs/components/progress",
+          status: "new"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
+        },
+        {
+          title: "Resizable",
+          href: "/docs/components/resizable",
+          status: "new"
+        },
+        {
+          title: "Scroll Area",
+          href: "/docs/components/scroll-area",
+          status: "new"
         },
         {
           title: "Select",
@@ -125,8 +215,26 @@ export const docsConfig: Config = {
           href: "/docs/components/slider"
         },
         {
+          title: "Sonner",
+          href: "/docs/components/sonner",
+          status: "new"
+        },
+        {
           title: "Switch",
           href: "/docs/components/switch"
+        },
+        {
+          title: "Tabs",
+          href: "/docs/components/tabs"
+        },
+        {
+          title: "Toggle",
+          href: "/docs/components/toggle"
+        },
+        {
+          title: "Toggle Group",
+          href: "/docs/components/toggle-group",
+          status: "new"
         },
         {
           title: "Tooltip",

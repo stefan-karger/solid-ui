@@ -1,0 +1,62 @@
+---
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
+links:
+  doc: https://kobalte.dev/docs/core/components/popover
+  api: https://kobalte.dev/docs/core/components/popover#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="popover-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/popover-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add popover
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/popover.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
+```
+
+```tsx
+<Popover>
+  <PopoverTrigger>Open</PopoverTrigger>
+  <PopoverContent>Content</PopoverContent>
+</Popover>
+```

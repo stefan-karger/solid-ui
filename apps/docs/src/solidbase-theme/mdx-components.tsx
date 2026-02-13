@@ -258,5 +258,35 @@ export function DirectiveContainer(
   )
 }
 
-export { ComponentPreview } from "~/components/component-preview"
-export { ComponentsList } from "~/components/components-list"
+import { ComponentPreview } from "~/components/component-preview"
+import { ComponentsList } from "~/components/components-list"
+
+export { ComponentPreview, ComponentsList }
+
+export default {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  p,
+  strong,
+  ul,
+  li,
+  blockquote,
+  img,
+  hr,
+  table,
+  tr,
+  th,
+  td,
+  pre,
+  code,
+  Step,
+  Steps,
+  DirectiveContainer,
+  ComponentPreview,
+  ComponentsList
+}

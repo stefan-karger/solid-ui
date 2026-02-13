@@ -1,0 +1,48 @@
+---
+title: Direction
+description: A provider component for managing RTL (Right-to-Left) and LTR (Left-to-Right) text direction.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="direction-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/direction-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add direction
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/direction.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { Direction } from "~/components/ui/direction";
+```
+
+```tsx
+<Direction dir="ltr | rtl">
+  {/* Your content */}
+</Direction>
+```

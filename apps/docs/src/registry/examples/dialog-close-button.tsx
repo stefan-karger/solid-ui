@@ -13,8 +13,8 @@ import {
 export default function DialogCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger as={Button<"button">} variant="outline">
-        Share
+      <DialogTrigger>
+        <Button variant="outline">Share</Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-md">
         <DialogHeader>

@@ -1,0 +1,85 @@
+---
+title: Toggle
+description: A two-state button that can be either on or off.
+links:
+  doc: https://kobalte.dev/docs/core/components/toggle-button
+  api: https://kobalte.dev/docs/core/components/toggle-button#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+<ComponentPreview name="toggle-demo" />
+:::
+:::tab[Code]
+```file="~/registry/examples/toggle-demo" frame=none showLineNumbers
+```
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add toggle
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/toggle.tsx" showLineNumbers
+```
+
+## Usage
+
+```tsx
+import { Toggle } from "~/components/ui/toggle";
+```
+
+```tsx
+<Toggle aria-label="Toggle italic">
+  <Italic class="size-4" />
+</Toggle>
+```
+
+## Examples
+
+### Default
+
+```tsx
+<Toggle aria-label="Toggle bold">
+  <Bold class="size-4" />
+</Toggle>
+```
+
+### Outline
+
+```tsx
+<Toggle variant="outline" aria-label="Toggle italic">
+  <Italic class="size-4" />
+</Toggle>
+```
+
+### With Text
+
+```tsx
+<Toggle aria-label="Toggle italic">
+  <Italic class="size-4" />
+  Italic
+</Toggle>
+```
+
+### Disabled
+
+```tsx
+<Toggle aria-label="Toggle italic" disabled>
+  <Italic class="size-4" />
+</Toggle>
+```
