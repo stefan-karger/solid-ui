@@ -76,7 +76,7 @@ const TableCell: Component<ComponentProps<"td">> = (props) => {
   return (
     <td
       class={cn(
-        "whitespace-nowrap p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]0",
+        "whitespace-nowrap p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         local.class
       )}
       data-slot="table-cell"

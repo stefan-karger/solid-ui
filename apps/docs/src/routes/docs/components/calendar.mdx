@@ -1,0 +1,109 @@
+---
+title: Calendar
+description: A date calendar component that allows users to select dates.
+links:
+  doc: https://corvu.dev/docs/primitives/calendar
+  api: https://corvu.dev/docs/primitives/calendar#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/calendar-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add calendar
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@corvu/calendar
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/calendar.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Calendar,
+  CalendarGrid,
+  CalendarGridBody,
+  CalendarGridBodyCell,
+  CalendarGridBodyCellTrigger,
+  CalendarGridBodyRow,
+  CalendarGridHead,
+  CalendarGridHeadCell,
+  CalendarGridHeadRow,
+  CalendarHead,
+  CalendarHeading,
+  CalendarNextTrigger,
+  CalendarPrevTrigger,
+} from "~/components/ui/calendar";
+```
+
+```tsx
+<Calendar mode="single">
+  {(props) => (
+    <>
+      <CalendarHead>
+        <CalendarPrevTrigger />
+        <CalendarHeading />
+        <CalendarNextTrigger />
+      </CalendarHead>
+      <CalendarGrid>
+        <CalendarGridHead>
+          <CalendarGridHeadRow>
+            <For each={props.weekdays}>
+              {(weekday) => (
+                <CalendarGridHeadCell>
+                  {weekday.toLocaleDateString("en", { weekday: "short" }).slice(0, 2)}
+                </CalendarGridHeadCell>
+              )}
+            </For>
+          </CalendarGridHeadRow>
+        </CalendarGridHead>
+        <CalendarGridBody>
+          <For each={props.weeks}>
+            {(week) => (
+              <CalendarGridBodyRow>
+                <For each={week}>
+                  {(day) => (
+                    <CalendarGridBodyCell>
+                      <CalendarGridBodyCellTrigger day={day}>
+                        {day.getDate()}
+                      </CalendarGridBodyCellTrigger>
+                    </CalendarGridBodyCell>
+                  )}
+                </For>
+              </CalendarGridBodyRow>
+            )}
+          </For>
+        </CalendarGridBody>
+      </CalendarGrid>
+    </>
+  )}
+</Calendar>
+```

@@ -365,6 +365,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "calendar-demo",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [
+      {
+        path: "examples/calendar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "card-demo",
     type: "registry:example",
     registryDependencies: ["card", "button", "input", "label"],
@@ -512,6 +523,66 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "data-table-column-visibility-demo",
+    type: "registry:example",
+    dependencies: ["@tanstack/solid-table", "lucide-solid"],
+    registryDependencies: ["table", "button", "input", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/data-table-column-visibility-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "data-table-demo",
+    type: "registry:example",
+    dependencies: ["@tanstack/solid-table", "lucide-solid"],
+    registryDependencies: ["table", "button"],
+    files: [
+      {
+        path: "examples/data-table-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "data-table-filtering-demo",
+    type: "registry:example",
+    dependencies: ["@tanstack/solid-table", "lucide-solid"],
+    registryDependencies: ["table", "button", "input"],
+    files: [
+      {
+        path: "examples/data-table-filtering-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "data-table-pagination-demo",
+    type: "registry:example",
+    dependencies: ["@tanstack/solid-table", "lucide-solid"],
+    registryDependencies: ["table", "button"],
+    files: [
+      {
+        path: "examples/data-table-pagination-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "data-table-row-selection-demo",
+    type: "registry:example",
+    dependencies: ["@tanstack/solid-table", "lucide-solid"],
+    registryDependencies: ["table", "button", "checkbox"],
+    files: [
+      {
+        path: "examples/data-table-row-selection-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dialog-close-button",
     type: "registry:example",
     registryDependencies: ["dialog", "button"],
@@ -540,6 +611,51 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/direction-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-demo",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    files: [
+      {
+        path: "examples/date-picker-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-form-demo",
+    type: "registry:example",
+    dependencies: ["@modular-forms/solid"],
+    registryDependencies: ["date-picker", "form", "button"],
+    files: [
+      {
+        path: "examples/date-picker-form-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-range-demo",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    files: [
+      {
+        path: "examples/date-picker-range-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-with-presets-demo",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    files: [
+      {
+        path: "examples/date-picker-with-presets-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -983,6 +1099,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/switch-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "table-demo",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    files: [
+      {
+        path: "examples/table-demo.tsx",
         type: "registry:example"
       }
     ]

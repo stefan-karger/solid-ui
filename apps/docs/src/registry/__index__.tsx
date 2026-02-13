@@ -158,6 +158,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "calendar": {
+    name: "calendar",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["button"],
+    component: lazy(() => import("~/registry/ui/calendar.tsx")),
+    files: [{
+      path: "registry/ui/calendar.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "carousel": {
     name: "carousel",
     description: "",
@@ -250,6 +264,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/ui/context-menu.tsx")),
     files: [{
       path: "registry/ui/context-menu.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "date-picker": {
+    name: "date-picker",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["button","calendar","popover"],
+    component: lazy(() => import("~/registry/ui/date-picker.tsx")),
+    files: [{
+      path: "registry/ui/date-picker.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -1166,6 +1194,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "calendar-demo": {
+    name: "calendar-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    component: lazy(() => import("~/registry/examples/calendar-demo.tsx")),
+    files: [{
+      path: "registry/examples/calendar-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "card-demo": {
     name: "card-demo",
     description: "",
@@ -1348,6 +1390,76 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "data-table-column-visibility-demo": {
+    name: "data-table-column-visibility-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","button","input","dropdown-menu"],
+    component: lazy(() => import("~/registry/examples/data-table-column-visibility-demo.tsx")),
+    files: [{
+      path: "registry/examples/data-table-column-visibility-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "data-table-demo": {
+    name: "data-table-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","button"],
+    component: lazy(() => import("~/registry/examples/data-table-demo.tsx")),
+    files: [{
+      path: "registry/examples/data-table-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "data-table-filtering-demo": {
+    name: "data-table-filtering-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","button","input"],
+    component: lazy(() => import("~/registry/examples/data-table-filtering-demo.tsx")),
+    files: [{
+      path: "registry/examples/data-table-filtering-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "data-table-pagination-demo": {
+    name: "data-table-pagination-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","button"],
+    component: lazy(() => import("~/registry/examples/data-table-pagination-demo.tsx")),
+    files: [{
+      path: "registry/examples/data-table-pagination-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "data-table-row-selection-demo": {
+    name: "data-table-row-selection-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","button","checkbox"],
+    component: lazy(() => import("~/registry/examples/data-table-row-selection-demo.tsx")),
+    files: [{
+      path: "registry/examples/data-table-row-selection-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "dialog-close-button": {
     name: "dialog-close-button",
     description: "",
@@ -1384,6 +1496,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/direction-demo.tsx")),
     files: [{
       path: "registry/examples/direction-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "date-picker-demo": {
+    name: "date-picker-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    component: lazy(() => import("~/registry/examples/date-picker-demo.tsx")),
+    files: [{
+      path: "registry/examples/date-picker-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "date-picker-form-demo": {
+    name: "date-picker-form-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["date-picker","form","button"],
+    component: lazy(() => import("~/registry/examples/date-picker-form-demo.tsx")),
+    files: [{
+      path: "registry/examples/date-picker-form-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "date-picker-range-demo": {
+    name: "date-picker-range-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    component: lazy(() => import("~/registry/examples/date-picker-range-demo.tsx")),
+    files: [{
+      path: "registry/examples/date-picker-range-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "date-picker-with-presets-demo": {
+    name: "date-picker-with-presets-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["date-picker"],
+    component: lazy(() => import("~/registry/examples/date-picker-with-presets-demo.tsx")),
+    files: [{
+      path: "registry/examples/date-picker-with-presets-demo.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1944,6 +2112,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/switch-demo.tsx")),
     files: [{
       path: "registry/examples/switch-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "table-demo": {
+    name: "table-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    component: lazy(() => import("~/registry/examples/table-demo.tsx")),
+    files: [{
+      path: "registry/examples/table-demo.tsx",
       type: "registry:example",
       target: ""
     }],

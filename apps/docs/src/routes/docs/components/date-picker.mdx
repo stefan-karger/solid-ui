@@ -1,0 +1,132 @@
+---
+title: Date Picker
+description: A date picker component with calendar popup, range selection, and presets.
+links:
+  doc: https://corvu.dev/docs/primitives/calendar
+  api: https://corvu.dev/docs/primitives/calendar#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="date-picker-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/date-picker-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add date-picker
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core @corvu/calendar
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/date-picker.tsx" showLineNumbers
+
+```
+
+Also install the [Calendar](/docs/components/calendar), [Popover](/docs/components/popover), and [Button](/docs/components/button) components.
+
+## Usage
+
+```tsx
+import {
+  DatePicker,
+  DatePickerCalendar,
+  DatePickerContent,
+  DatePickerInput,
+  DatePickerTrigger,
+  formatDate,
+} from "~/components/ui/date-picker";
+```
+
+```tsx
+<DatePicker>
+  <DatePickerTrigger>
+    <DatePickerInput placeholder="Pick a date">
+      <Show when={date()}>
+        {(d) => <span>{formatDate(d())}</span>}
+      </Show>
+    </DatePickerInput>
+  </DatePickerTrigger>
+  <DatePickerContent>
+    <DatePickerCalendar
+      mode="single"
+      value={date()}
+      onValueChange={(value) => setDate(value)}
+    />
+  </DatePickerContent>
+</DatePicker>
+```
+
+## Examples
+
+### Date Range Picker
+
+::::tab-group[range]
+:::tab[Preview]
+
+<ComponentPreview name="date-picker-range-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/date-picker-range-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Presets
+
+::::tab-group[presets]
+:::tab[Preview]
+
+<ComponentPreview name="date-picker-with-presets-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/date-picker-with-presets-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Form
+
+::::tab-group[form]
+:::tab[Preview]
+
+<ComponentPreview name="date-picker-form-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/date-picker-form-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::

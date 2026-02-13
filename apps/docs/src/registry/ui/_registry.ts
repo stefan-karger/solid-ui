@@ -112,6 +112,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "calendar",
+    type: "registry:ui",
+    dependencies: ["@corvu/calendar"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "ui/calendar.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "carousel",
     type: "registry:ui",
     dependencies: ["embla-carousel", "embla-carousel-solid", "lucide-solid"],
@@ -186,6 +198,18 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/context-menu.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "date-picker",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "@corvu/calendar"],
+    registryDependencies: ["button", "calendar", "popover"],
+    files: [
+      {
+        path: "ui/date-picker.tsx",
         type: "registry:ui"
       }
     ]

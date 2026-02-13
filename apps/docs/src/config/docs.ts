@@ -72,6 +72,11 @@ export const docsConfig: Config = {
           href: "/docs/components/button-group"
         },
         {
+          title: "Calendar",
+          href: "/docs/components/calendar",
+          status: "new"
+        },
+        {
           title: "Card",
           href: "/docs/components/card"
         },
@@ -106,6 +111,16 @@ export const docsConfig: Config = {
         {
           title: "Context Menu",
           href: "/docs/components/context-menu"
+        },
+        {
+          title: "Data Table",
+          href: "/docs/components/data-table",
+          status: "new"
+        },
+        {
+          title: "Date Picker",
+          href: "/docs/components/date-picker",
+          status: "new"
         },
         {
           title: "Dialog",
@@ -226,6 +241,10 @@ export const docsConfig: Config = {
         {
           title: "Tabs",
           href: "/docs/components/tabs"
+        },
+        {
+          title: "Table",
+          href: "/docs/components/table"
         },
         {
           title: "Toggle",
