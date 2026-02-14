@@ -50,13 +50,14 @@ type SheetContentProps<T extends ValidComponent = "div"> = SheetPrimitive.Dialog
   class?: string | undefined
   children?: JSX.Element
   side?: "top" | "right" | "bottom" | "left"
+  showCloseButton?: boolean
 }
 
 const SheetContent = <T extends ValidComponent = "div">(
   rawProps: PolymorphicProps<T, SheetContentProps<T>>
 ) => {
-  const props = mergeProps<SheetContentProps<T>[]>({ side: "right" }, rawProps)
-  const [local, others] = splitProps(props as SheetContentProps, ["class", "children", "side"])
+  const props = mergeProps<SheetContentProps<T>[]>({ side: "right", showCloseButton: true }, rawProps)
+  const [local, others] = splitProps(props as SheetContentProps, ["class", "children", "side", "showCloseButton"])
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -77,22 +78,24 @@ const SheetContent = <T extends ValidComponent = "div">(
         {...others}
       >
         {local.children}
-        <SheetClose class="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-          <svg
-            class="size-4"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M18 6l-12 12" />
-            <path d="M6 6l12 12" />
-          </svg>
-          <span class="sr-only">Close</span>
-        </SheetClose>
+        {local.showCloseButton && (
+          <SheetClose class="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+            <svg
+              class="size-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M18 6l-12 12" />
+              <path d="M6 6l12 12" />
+            </svg>
+            <span class="sr-only">Close</span>
+          </SheetClose>
+        )}
       </SheetPrimitive.Content>
     </SheetPortal>
   )

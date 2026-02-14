@@ -2076,6 +2076,104 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "separator-demo": {
+    name: "separator-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-demo.tsx")),
+    files: [{
+      path: "registry/examples/separator-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-vertical": {
+    name: "separator-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-vertical.tsx")),
+    files: [{
+      path: "registry/examples/separator-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-menu": {
+    name: "separator-menu",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-menu.tsx")),
+    files: [{
+      path: "registry/examples/separator-menu.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-list": {
+    name: "separator-list",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-list.tsx")),
+    files: [{
+      path: "registry/examples/separator-list.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-demo": {
+    name: "sheet-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    component: lazy(() => import("~/registry/examples/sheet-demo.tsx")),
+    files: [{
+      path: "registry/examples/sheet-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-side": {
+    name: "sheet-side",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    component: lazy(() => import("~/registry/examples/sheet-side.tsx")),
+    files: [{
+      path: "registry/examples/sheet-side.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-no-close-button": {
+    name: "sheet-no-close-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    component: lazy(() => import("~/registry/examples/sheet-no-close-button.tsx")),
+    files: [{
+      path: "registry/examples/sheet-no-close-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "sidebar-demo": {
     name: "sidebar-demo",
     description: "",
@@ -2140,6 +2238,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/table-demo.tsx")),
     files: [{
       path: "registry/examples/table-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-demo": {
+    name: "tabs-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs","card"],
+    component: lazy(() => import("~/registry/examples/tabs-demo.tsx")),
+    files: [{
+      path: "registry/examples/tabs-demo.tsx",
       type: "registry:example",
       target: ""
     }],

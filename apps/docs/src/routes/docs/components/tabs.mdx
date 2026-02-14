@@ -1,0 +1,78 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+links:
+  doc: https://kobalte.dev/docs/core/components/tabs
+  api: https://kobalte.dev/docs/core/components/tabs#api-reference
+---
+
+import { ComponentPreview } from "~/components/component-preview"
+
+<ComponentPreview name="tabs-demo" />
+
+## Installation
+
+```bash
+npx @solid-ui/cli add tabs
+```
+
+## Usage
+
+```tsx
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+```
+
+```tsx
+<Tabs value="account" class="w-[400px]">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+    Make changes to your account here.
+  </TabsContent>
+  <TabsContent value="password">
+    Change your password here.
+  </TabsContent>
+</Tabs>
+```
+
+## API Reference
+
+The Tabs component is built on top of [Kobalte's Tabs](https://kobalte.dev/docs/core/components/tabs) component.
+
+### Tabs
+
+The root tabs component.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | The controlled value of the tab to activate. |
+| `defaultValue` | `string` | - | The value of the tab that should be active when initially rendered. |
+| `onChange` | `(value: string) => void` | - | Event handler called when the value changes. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the tabs. |
+
+### TabsList
+
+The container for the tab triggers.
+
+### TabsTrigger
+
+The button that activates a tab panel.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | A unique value that associates the trigger with a content. |
+| `disabled` | `boolean` | - | Whether the tab is disabled. |
+
+### TabsContent
+
+The content area for a tab.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | A unique value that associates the content with a trigger. |
+
+### TabsIndicator
+
+An optional visual indicator showing the active tab.

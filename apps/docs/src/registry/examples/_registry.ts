@@ -1071,6 +1071,83 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "separator-demo",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    files: [
+      {
+        path: "examples/separator-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "separator-vertical",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    files: [
+      {
+        path: "examples/separator-vertical.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "separator-menu",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    files: [
+      {
+        path: "examples/separator-menu.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "separator-list",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    files: [
+      {
+        path: "examples/separator-list.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-demo",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-side",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-side.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-no-close-button",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-no-close-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "sidebar-demo",
     type: "registry:example",
     registryDependencies: ["sidebar"],
@@ -1121,6 +1198,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/table-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "tabs-demo",
+    type: "registry:example",
+    registryDependencies: ["tabs", "card"],
+    files: [
+      {
+        path: "examples/tabs-demo.tsx",
         type: "registry:example"
       }
     ]

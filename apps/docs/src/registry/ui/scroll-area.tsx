@@ -79,7 +79,6 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
   const [thumbPosition, setThumbPosition] = createSignal(0)
   const [isDragging, setIsDragging] = createSignal(false)
   const [dragStartY, setDragStartY] = createSignal(0)
-  const [dragStartScrollTop, setDragStartScrollTop] = createSignal(0)
   const [visible, setVisible] = createSignal(false)
 
   let scrollbarRef: HTMLDivElement | undefined
@@ -129,13 +128,11 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
     setIsDragging(true)
 
     if (isVertical()) {
-      const scrollbarRect = scrollbarRef.getBoundingClientRect()
       const thumbRect = thumbRef.getBoundingClientRect()
       // Store offset from top of thumb to mouse position
       const offsetInThumb = e.clientY - thumbRect.top
       setDragStartY(offsetInThumb)
     } else {
-      const scrollbarRect = scrollbarRef.getBoundingClientRect()
       const thumbRect = thumbRef.getBoundingClientRect()
       const offsetInThumb = e.clientX - thumbRect.left
       setDragStartY(offsetInThumb)
@@ -275,7 +272,7 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
       data-horizontal={!isVertical() ? "" : undefined}
       data-vertical={isVertical() ? "" : undefined}
       class={cn(
-        "cn-scroll-area-scrollbar absolute flex touch-none select-none p-px transition-colors",
+        "cn-scroll-area-scrollbar absolute touch-none select-none p-px transition-colors",
         isVertical() && "right-0 top-0 h-full w-2.5",
         !isVertical() && "bottom-0 left-0 w-full h-2.5",
         !visible() && "opacity-0 pointer-events-none",
@@ -287,12 +284,21 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
       <div
         ref={thumbRef}
         data-slot="scroll-area-thumb"
-        class="cn-scroll-area-thumb relative bg-border flex-1 rounded-full cursor-grab active:cursor-grabbing"
+        class="cn-scroll-area-thumb absolute bg-border rounded-full cursor-grab active:cursor-grabbing"
         style={{
-          transform: isVertical()
-            ? `translateY(${thumbPosition()}%)`
-            : `translateX(${thumbPosition()}%)`,
-          [isVertical() ? "height" : "width"]: `${thumbSize()}%`
+          ...(isVertical()
+            ? {
+                top: `${thumbPosition()}%`,
+                height: `${thumbSize()}%`,
+                left: "0",
+                right: "0"
+              }
+            : {
+                left: `${thumbPosition()}%`,
+                width: `${thumbSize()}%`,
+                top: "0",
+                bottom: "0"
+              })
         }}
         onMouseDown={handleThumbMouseDown}
       />

@@ -226,6 +226,14 @@ export const docsConfig: Config = {
           href: "/docs/components/select"
         },
         {
+          title: "Separator",
+          href: "/docs/components/separator"
+        },
+        {
+          title: "Sheet",
+          href: "/docs/components/sheet"
+        },
+        {
           title: "Sidebar",
           href: "/docs/components/sidebar"
         },
