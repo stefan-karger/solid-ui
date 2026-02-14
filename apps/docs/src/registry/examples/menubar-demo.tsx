@@ -99,7 +99,7 @@ export default function MenubarDemo() {
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup value={profile()} onChange={setProfile}>
+          <MenubarRadioGroup onChange={setProfile} value={profile()}>
             <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
             <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
             <MenubarRadioItem value="luis">Luis</MenubarRadioItem>

@@ -122,7 +122,7 @@ const CalendarHeading = <T extends ValidComponent = "h2">(
     new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(ctx.month())
   return (
     <CalendarPrimitive.Label
-      class={cn("text-sm font-medium text-foreground", local.class)}
+      class={cn("font-medium text-foreground text-sm", local.class)}
       {...others}
     >
       {local.children ?? formatMonth()}

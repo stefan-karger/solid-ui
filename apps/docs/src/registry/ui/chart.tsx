@@ -1,26 +1,33 @@
 import type { Component, ComponentProps, JSX } from "solid-js"
-import { createContext, createEffect, mergeProps, onCleanup, splitProps, useContext } from "solid-js"
+import {
+  createContext,
+  createEffect,
+  mergeProps,
+  onCleanup,
+  splitProps,
+  useContext
+} from "solid-js"
 
+import type { ChartConfiguration, ChartData, ChartOptions, ChartType } from "chart.js"
 import {
   ArcElement,
   BarController,
   BarElement,
   CategoryScale,
   Chart as ChartJS,
+  Tooltip as ChartJSTooltip,
   DoughnutController,
   Filler,
   Legend,
+  LinearScale,
   LineController,
   LineElement,
-  LinearScale,
   PieController,
   PointElement,
   RadarController,
   RadialLinearScale,
-  ScatterController,
-  Tooltip as ChartJSTooltip
+  ScatterController
 } from "chart.js"
-import type { ChartConfiguration, ChartData, ChartOptions, ChartType } from "chart.js"
 
 import { cn } from "~/lib/utils"
 
@@ -192,9 +199,9 @@ function Chart<T extends ChartType = ChartType>(rawProps: ChartProps<T>) {
 
   return (
     <canvas
-      ref={canvasRef!}
       class={cn(local.class)}
       data-slot="chart-canvas"
+      ref={canvasRef!}
       role="img"
       {...others}
     />
@@ -235,7 +242,10 @@ const ScatterChart: Component<TypedChartProps<"scatter">> = (props) => {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function mergeChartOptions(base: Record<string, any>, override: Record<string, any>): Record<string, any> {
+function mergeChartOptions(
+  base: Record<string, any>,
+  override: Record<string, any>
+): Record<string, any> {
   const result = { ...base }
   for (const key of Object.keys(override)) {
     if (

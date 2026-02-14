@@ -16,11 +16,7 @@ const Menubar = <T extends ValidComponent = "div">(
 ) => {
   const [local, others] = splitProps(props as MenubarRootProps, ["class"])
   return (
-    <MenubarPrimitive.Root
-      class={cn("cn-menubar", local.class)}
-      data-slot="menubar"
-      {...others}
-    />
+    <MenubarPrimitive.Root class={cn("cn-menubar", local.class)} data-slot="menubar" {...others} />
   )
 }
 
@@ -36,8 +32,10 @@ const MenubarPortal: Component<MenubarPrimitive.MenubarPortalProps> = (props) =>
   return <MenubarPrimitive.Portal data-slot="menubar-portal" {...props} />
 }
 
-type MenubarRadioGroupProps<T extends ValidComponent = "div", TValue = string> =
-  MenubarPrimitive.MenubarRadioGroupProps<T, TValue>
+type MenubarRadioGroupProps<
+  T extends ValidComponent = "div",
+  TValue = string
+> = MenubarPrimitive.MenubarRadioGroupProps<T, TValue>
 
 const MenubarRadioGroup = <T extends ValidComponent = "div", TValue = string>(
   props: PolymorphicProps<T, MenubarRadioGroupProps<T, TValue>>
@@ -209,11 +207,7 @@ const MenubarSeparator = <T extends ValidComponent = "hr">(
 const MenubarShortcut: Component<ComponentProps<"span">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
-    <span
-      class={cn("cn-menubar-shortcut", local.class)}
-      data-slot="menubar-shortcut"
-      {...others}
-    />
+    <span class={cn("cn-menubar-shortcut", local.class)} data-slot="menubar-shortcut" {...others} />
   )
 }
 
@@ -231,7 +225,11 @@ type MenubarSubTriggerProps<T extends ValidComponent = "div"> =
 const MenubarSubTrigger = <T extends ValidComponent = "div">(
   props: PolymorphicProps<T, MenubarSubTriggerProps<T>>
 ) => {
-  const [local, others] = splitProps(props as MenubarSubTriggerProps, ["class", "inset", "children"])
+  const [local, others] = splitProps(props as MenubarSubTriggerProps, [
+    "class",
+    "inset",
+    "children"
+  ])
   return (
     <MenubarPrimitive.SubTrigger
       class={cn(

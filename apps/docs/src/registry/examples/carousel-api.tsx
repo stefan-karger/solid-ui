@@ -3,11 +3,11 @@ import { createEffect, createSignal, For, on } from "solid-js"
 import { Card, CardContent } from "~/registry/ui/card"
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious,
-  type CarouselApi
+  CarouselPrevious
 } from "~/registry/ui/carousel"
 
 export default function CarouselApiDemo() {
@@ -30,14 +30,14 @@ export default function CarouselApiDemo() {
 
   return (
     <div class="mx-auto max-w-xs">
-      <Carousel setApi={setApi} class="w-full max-w-xs">
+      <Carousel class="w-full max-w-xs" setApi={setApi}>
         <CarouselContent>
           <For each={Array.from({ length: 5 })}>
             {(_, index) => (
               <CarouselItem>
                 <Card>
                   <CardContent class="flex aspect-square items-center justify-center p-6">
-                    <span class="text-4xl font-semibold">{index() + 1}</span>
+                    <span class="font-semibold text-4xl">{index() + 1}</span>
                   </CardContent>
                 </Card>
               </CarouselItem>
@@ -47,7 +47,7 @@ export default function CarouselApiDemo() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div class="text-muted-foreground py-2 text-center text-sm">
+      <div class="py-2 text-center text-muted-foreground text-sm">
         Slide {current()} of {count()}
       </div>
     </div>

@@ -34,7 +34,7 @@ const PopoverContent = <T extends ValidComponent = "div">(
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
         class={cn(
-          "cn-popover-content z-50 w-72 origin-(--kb-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[closed]:animate-out data-[expanded]:animate-in",
+          "cn-popover-content data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 z-50 w-72 origin-(--kb-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[closed]:animate-out data-[expanded]:animate-in",
           local.class
         )}
         data-slot="popover-content"

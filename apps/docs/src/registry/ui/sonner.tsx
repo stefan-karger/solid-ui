@@ -15,9 +15,9 @@ const Toaster: Component<SonnerProps> = (props) => {
     <SolidSonner
       class={cn("toaster group", local.class)}
       data-slot="sonner-toaster"
-      theme={local.theme ?? "system"}
-      richColors={local.richColors ?? true}
       position={local.position ?? "bottom-right"}
+      richColors={local.richColors ?? true}
+      theme={local.theme ?? "system"}
       toastOptions={{
         classes: {
           toast:
@@ -33,4 +33,5 @@ const Toaster: Component<SonnerProps> = (props) => {
 }
 
 export { Toaster }
+
 export { toast } from "solid-sonner"

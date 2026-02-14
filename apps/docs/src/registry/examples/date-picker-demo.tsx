@@ -22,8 +22,8 @@ export default function DatePickerDemo() {
       <DatePickerContent>
         <DatePickerCalendar
           mode="single"
-          value={date()}
           onValueChange={(value: Date | null) => setDate(value)}
+          value={date()}
         />
       </DatePickerContent>
     </DatePicker>

@@ -1,10 +1,4 @@
-import {
-  type Component,
-  type ComponentProps,
-  For,
-  createSignal,
-  splitProps
-} from "solid-js"
+import { type Component, type ComponentProps, createSignal, For, splitProps } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
@@ -30,7 +24,7 @@ const InputOTP: Component<InputOTPProps> = (props) => {
     Array.from({ length: local.maxLength }, (_, i) => initial[i] ?? "")
   )
 
-  let inputRefs: HTMLInputElement[] = []
+  const inputRefs: HTMLInputElement[] = []
 
   const focusInput = (index: number) => {
     const ref = inputRefs[index]
@@ -122,17 +116,10 @@ const InputOTP: Component<InputOTPProps> = (props) => {
   }
 
   return (
-    <div
-      class={cn("flex items-center gap-2", local.class)}
-      data-slot="input-otp"
-      {...others}
-    >
+    <div class={cn("flex items-center gap-2", local.class)} data-slot="input-otp" {...others}>
       <For each={Array.from({ length: local.maxLength }, (_, i) => i)}>
         {(index) => (
           <input
-            ref={(el) => {
-              inputRefs[index] = el
-            }}
             aria-label={`Digit ${index + 1} of ${local.maxLength}`}
             autocomplete="one-time-code"
             class={cn(
@@ -149,6 +136,9 @@ const InputOTP: Component<InputOTPProps> = (props) => {
             onKeyDown={[handleKeyDown, index]}
             onPaste={[handlePaste, index]}
             pattern="[0-9]"
+            ref={(el) => {
+              inputRefs[index] = el
+            }}
             type="text"
             value={values()[index]}
           />

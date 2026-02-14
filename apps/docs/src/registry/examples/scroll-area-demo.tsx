@@ -24,7 +24,7 @@ export default function ScrollAreaDemo() {
   return (
     <ScrollArea class="h-72 w-48 rounded-lg border">
       <div class="p-4">
-        <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
+        <h4 class="mb-4 font-medium text-sm leading-none">Tags</h4>
         <For each={tags}>
           {(tag, index) => (
             <>

@@ -63,9 +63,7 @@ const DatePickerInput: Component<DatePickerInputProps> = (props) => {
         <line x1="3" x2="21" y1="10" y2="10" />
       </svg>
       <Show
-        fallback={
-          <span class="text-muted-foreground">{local.placeholder ?? "Pick a date"}</span>
-        }
+        fallback={<span class="text-muted-foreground">{local.placeholder ?? "Pick a date"}</span>}
         when={local.children}
       >
         {local.children}
@@ -85,7 +83,7 @@ const DatePickerContent: Component<DatePickerContentProps> = (props) => {
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
         class={cn(
-          "z-50 origin-(--kb-popover-content-transform-origin) rounded-md border bg-popover p-0 text-popover-foreground shadow-md outline-hidden data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[closed]:animate-out data-[expanded]:animate-in",
+          "data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 z-50 origin-(--kb-popover-content-transform-origin) rounded-md border bg-popover p-0 text-popover-foreground shadow-md outline-hidden data-[closed]:animate-out data-[expanded]:animate-in",
           local.class
         )}
         data-slot="date-picker-content"

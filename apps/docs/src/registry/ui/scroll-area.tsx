@@ -44,15 +44,11 @@ const ScrollArea: Component<ScrollAreaProps> = (rawProps) => {
         contentRef: () => viewportRef
       }}
     >
-      <div
-        data-slot="scroll-area"
-        class={cn("relative overflow-hidden", local.class)}
-        {...others}
-      >
+      <div class={cn("relative overflow-hidden", local.class)} data-slot="scroll-area" {...others}>
         <div
-          ref={viewportRef!}
+          class="size-full overflow-scroll rounded-[inherit] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           data-slot="scroll-area-viewport"
-          class="size-full overflow-scroll rounded-[inherit] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          ref={viewportRef!}
           style={{
             "overflow-x": "hidden",
             "overflow-y": "scroll"
@@ -163,10 +159,13 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
       const trackAvailableHeight = scrollbarHeight * (maxThumbPosition / 100)
 
       // Calculate thumb position as percentage
-      const thumbPositionPercent = Math.max(0, Math.min((mousePositionInTrack / scrollbarHeight) * 100, maxThumbPosition))
+      const thumbPositionPercent = Math.max(
+        0,
+        Math.min((mousePositionInTrack / scrollbarHeight) * 100, maxThumbPosition)
+      )
 
       // Map thumb position to scroll position
-      const scrollRatio = trackAvailableHeight > 0 ? (thumbPositionPercent / maxThumbPosition) : 0
+      const scrollRatio = trackAvailableHeight > 0 ? thumbPositionPercent / maxThumbPosition : 0
       const newScrollTop = scrollRatio * maxScrollTop
 
       viewport.scrollTop = newScrollTop
@@ -185,9 +184,12 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
       const maxThumbPosition = 100 - thumbSize
       const trackAvailableWidth = scrollbarWidth * (maxThumbPosition / 100)
 
-      const thumbPositionPercent = Math.max(0, Math.min((mousePositionInTrack / scrollbarWidth) * 100, maxThumbPosition))
+      const thumbPositionPercent = Math.max(
+        0,
+        Math.min((mousePositionInTrack / scrollbarWidth) * 100, maxThumbPosition)
+      )
 
-      const scrollRatio = trackAvailableWidth > 0 ? (thumbPositionPercent / maxThumbPosition) : 0
+      const scrollRatio = trackAvailableWidth > 0 ? thumbPositionPercent / maxThumbPosition : 0
       const newScrollLeft = scrollRatio * maxScrollLeft
 
       viewport.scrollLeft = newScrollLeft
@@ -267,24 +269,25 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
 
   return (
     <div
-      ref={scrollbarRef}
-      data-slot="scroll-area-scrollbar"
-      data-horizontal={!isVertical() ? "" : undefined}
-      data-vertical={isVertical() ? "" : undefined}
       class={cn(
         "cn-scroll-area-scrollbar absolute touch-none select-none p-px transition-colors",
-        isVertical() && "right-0 top-0 h-full w-2.5",
-        !isVertical() && "bottom-0 left-0 w-full h-2.5",
-        !visible() && "opacity-0 pointer-events-none",
+        isVertical() && "top-0 right-0 h-full w-2.5",
+        !isVertical() && "bottom-0 left-0 h-2.5 w-full",
+        !visible() && "pointer-events-none opacity-0",
         local.class
       )}
+      data-horizontal={!isVertical() ? "" : undefined}
+      data-slot="scroll-area-scrollbar"
+      data-vertical={isVertical() ? "" : undefined}
       onClick={handleTrackClick}
+      ref={scrollbarRef}
       {...others}
     >
       <div
-        ref={thumbRef}
+        class="cn-scroll-area-thumb absolute cursor-grab rounded-full bg-border active:cursor-grabbing"
         data-slot="scroll-area-thumb"
-        class="cn-scroll-area-thumb absolute bg-border rounded-full cursor-grab active:cursor-grabbing"
+        onMouseDown={handleThumbMouseDown}
+        ref={thumbRef}
         style={{
           ...(isVertical()
             ? {
@@ -300,7 +303,6 @@ const ScrollBar: Component<ScrollBarProps> = (rawProps) => {
                 bottom: "0"
               })
         }}
-        onMouseDown={handleThumbMouseDown}
       />
     </div>
   )

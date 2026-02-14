@@ -92,7 +92,13 @@ const CommandDialog: ParentComponent<CommandDialogProps> = (rawProps) => {
     },
     rawProps
   )
-  const [local, others] = splitProps(props, ["title", "description", "class", "showCloseButton", "children"])
+  const [local, others] = splitProps(props, [
+    "title",
+    "description",
+    "class",
+    "showCloseButton",
+    "children"
+  ])
 
   return (
     <Dialog {...others}>
@@ -100,8 +106,11 @@ const CommandDialog: ParentComponent<CommandDialogProps> = (rawProps) => {
         <DialogTitle>{local.title}</DialogTitle>
         <DialogDescription>{local.description}</DialogDescription>
       </DialogHeader>
-      <DialogContent class={cn("overflow-hidden p-0", local.class)} showCloseButton={local.showCloseButton}>
-        <Command class="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5 **:data-[slot=command-input-wrapper]:h-12">
+      <DialogContent
+        class={cn("overflow-hidden p-0", local.class)}
+        showCloseButton={local.showCloseButton}
+      >
+        <Command class="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {local.children}
         </Command>
       </DialogContent>
@@ -116,7 +125,9 @@ const CommandInput: Component<CommandInputProps> = (props) => {
   const command = useCommand()
   const id = createUniqueId()
 
-  const handleInput = (e: InputEvent & { currentTarget: HTMLInputElement; target: HTMLInputElement }) => {
+  const handleInput = (
+    e: InputEvent & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+  ) => {
     command.setSearch(e.currentTarget.value)
     if (typeof local.onInput === "function") {
       local.onInput(e)
@@ -131,16 +142,16 @@ const CommandInput: Component<CommandInputProps> = (props) => {
     >
       <Search class="size-4 shrink-0 opacity-50" />
       <input
-        id={id}
         class={cn(
           "cn-command-input flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
           local.class
         )}
         cmdk-input=""
         data-slot="command-input"
+        id={id}
+        onInput={handleInput}
         type="text"
         value={local.value ?? command.search()}
-        onInput={handleInput}
         {...others}
       />
     </div>
@@ -154,7 +165,7 @@ const CommandList: ParentComponent<CommandListProps> = (props) => {
   return (
     <div
       class={cn(
-        "cn-command-list max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+        "cn-command-list max-h-[300px] scroll-py-1 overflow-y-auto overflow-x-hidden",
         local.class
       )}
       cmdk-list=""
@@ -210,7 +221,7 @@ const CommandGroup: ParentComponent<CommandGroupProps> = (props) => {
       >
         <Show when={local.heading}>
           <div
-            class="px-2 py-1.5 text-xs font-medium text-muted-foreground"
+            class="px-2 py-1.5 font-medium text-muted-foreground text-xs"
             cmdk-group-heading=""
             role="presentation"
           >
@@ -299,17 +310,17 @@ const CommandItem: ParentComponent<CommandItemProps> = (props) => {
     <Show when={isVisible()}>
       <div
         class={cn(
-          "cn-command-item relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+          "cn-command-item relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
           local.class
         )}
         cmdk-item=""
         data-disabled={isDisabled()}
         data-selected={selected()}
         data-slot="command-item"
-        role="option"
-        tabIndex={isDisabled() ? undefined : 0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
+        role="option"
+        tabIndex={isDisabled() ? undefined : 0}
         {...others}
       >
         {local.children}
@@ -325,7 +336,7 @@ const CommandShortcut: ParentComponent<CommandShortcutProps> = (props) => {
   return (
     <span
       class={cn(
-        "cn-command-shortcut ml-auto text-xs tracking-widest text-muted-foreground",
+        "cn-command-shortcut ml-auto text-muted-foreground text-xs tracking-widest",
         local.class
       )}
       data-slot="command-shortcut"

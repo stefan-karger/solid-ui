@@ -1,5 +1,6 @@
-import { createForm, type SubmitHandler } from "@modular-forms/solid"
 import { createSignal, Show } from "solid-js"
+
+import { createForm, type SubmitHandler } from "@modular-forms/solid"
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -10,13 +11,7 @@ import {
   DatePickerTrigger,
   formatDate
 } from "~/registry/ui/date-picker"
-import {
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/registry/ui/form"
+import { FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/registry/ui/form"
 
 type EventFormValues = {
   eventDate: string
@@ -37,8 +32,8 @@ export default function DatePickerFormDemo() {
 
   return (
     <div class="w-full max-w-md">
-      <Form onSubmit={handleSubmit} class="space-y-6">
-        <FormField of={eventForm} name="eventDate">
+      <Form class="space-y-6" onSubmit={handleSubmit}>
+        <FormField name="eventDate" of={eventForm}>
           <FormItem class="flex flex-col">
             <FormLabel>Event date</FormLabel>
             <Field name="eventDate">
@@ -48,18 +43,16 @@ export default function DatePickerFormDemo() {
                   <DatePicker>
                     <DatePickerTrigger>
                       <DatePickerInput placeholder="Pick a date">
-                        <Show when={date()}>
-                          {(d) => <span>{formatDate(d())}</span>}
-                        </Show>
+                        <Show when={date()}>{(d) => <span>{formatDate(d())}</span>}</Show>
                       </DatePickerInput>
                     </DatePickerTrigger>
                     <DatePickerContent>
                       <DatePickerCalendar
                         mode="single"
-                        value={date()}
                         onValueChange={(value: Date | null) => {
                           setDate(value)
                         }}
+                        value={date()}
                       />
                     </DatePickerContent>
                   </DatePicker>

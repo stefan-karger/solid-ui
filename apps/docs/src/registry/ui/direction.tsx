@@ -13,9 +13,7 @@ const DirectionContext = createContext<Accessor<Direction>>(() => "ltr" as Direc
 const DirectionProvider: ParentComponent<DirectionProviderProps> = (props) => {
   const dir = () => props.direction ?? props.dir ?? "ltr"
 
-  return (
-    <DirectionContext.Provider value={dir}>{props.children}</DirectionContext.Provider>
-  )
+  return <DirectionContext.Provider value={dir}>{props.children}</DirectionContext.Provider>
 }
 
 const useDirection = () => {

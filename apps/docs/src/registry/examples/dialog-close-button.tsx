@@ -19,9 +19,7 @@ export default function DialogCloseButton() {
       <DialogContent class="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>
         </DialogHeader>
         <div class="flex items-center space-x-2">
           <div class="grid flex-1 gap-2">

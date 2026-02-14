@@ -37,16 +37,16 @@ export default function ComboboxDemo() {
 
   return (
     <Combobox
-      options={frameworks}
-      optionValue="value"
-      optionTextValue="label"
-      optionLabel="label"
-      placeholder="Select a framework..."
-      value={value()}
-      onChange={setValue}
       itemComponent={(props) => (
         <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
       )}
+      onChange={setValue}
+      optionLabel="label"
+      options={frameworks}
+      optionTextValue="label"
+      optionValue="value"
+      placeholder="Select a framework..."
+      value={value()}
     >
       <ComboboxControl class="w-[200px]">
         <ComboboxInput />

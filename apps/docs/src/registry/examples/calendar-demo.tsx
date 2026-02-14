@@ -1,5 +1,4 @@
-import { createSignal } from "solid-js"
-import { For } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 import {
   Calendar,
@@ -22,11 +21,7 @@ export default function CalendarDemo() {
 
   return (
     <div class="rounded-md border p-3 shadow-sm">
-      <Calendar
-        mode="single"
-        value={date()}
-        onValueChange={(value) => setDate(value)}
-      >
+      <Calendar mode="single" onValueChange={(value) => setDate(value)} value={date()}>
         {(props) => (
           <>
             <CalendarHead>

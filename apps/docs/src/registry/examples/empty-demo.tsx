@@ -1,4 +1,4 @@
-import { FolderCode, ArrowUpRight } from "lucide-solid"
+import { ArrowUpRight, FolderCode } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -7,7 +7,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 
 export default function EmptyDemo() {
@@ -19,8 +19,7 @@ export default function EmptyDemo() {
         </EmptyMedia>
         <EmptyTitle>No Projects Yet</EmptyTitle>
         <EmptyDescription>
-          You haven't created any projects yet. Get started by creating your
-          first project.
+          You haven't created any projects yet. Get started by creating your first project.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
@@ -29,7 +28,7 @@ export default function EmptyDemo() {
           <Button variant="outline">Import Project</Button>
         </div>
       </EmptyContent>
-      <Button as="a" variant="link" class="text-muted-foreground" size="sm" href="#">
+      <Button as="a" class="text-muted-foreground" href="#" size="sm" variant="link">
         Learn More <ArrowUpRight />
       </Button>
     </Empty>

@@ -1,28 +1,21 @@
-import { For, createSignal } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 import {
   type ColumnDef,
   type ColumnFiltersState,
-  type SortingState,
   createSolidTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel
+  getSortedRowModel,
+  type SortingState
 } from "@tanstack/solid-table"
 import { ArrowUpDown } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
 import { Input } from "~/registry/ui/input"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "~/registry/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
 
 type Payment = {
   id: string
@@ -49,8 +42,8 @@ const columns: ColumnDef<Payment>[] = [
     accessorKey: "email",
     header: (props) => (
       <Button
-        variant="ghost"
         onClick={() => props.column.toggleSorting(props.column.getIsSorted() === "asc")}
+        variant="ghost"
       >
         Email
         <ArrowUpDown class="ml-2 size-4" />
@@ -101,9 +94,9 @@ export default function DataTableFilteringDemo() {
       <div class="flex items-center py-4">
         <Input
           class="max-w-sm"
+          onInput={(e) => table.getColumn("email")?.setFilterValue(e.currentTarget.value)}
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onInput={(e) => table.getColumn("email")?.setFilterValue(e.currentTarget.value)}
         />
       </div>
       <Table>
@@ -152,17 +145,17 @@ export default function DataTableFilteringDemo() {
         <div class="flex gap-x-2">
           <Button
             disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
             size="sm"
             variant="outline"
-            onClick={() => table.previousPage()}
           >
             Previous
           </Button>
           <Button
             disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
             size="sm"
             variant="outline"
-            onClick={() => table.nextPage()}
           >
             Next
           </Button>

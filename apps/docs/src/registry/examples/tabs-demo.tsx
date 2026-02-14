@@ -1,15 +1,9 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "~/registry/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
 
 export default function TabsDemo() {
   return (
-    <Tabs defaultValue="overview" class="w-[400px]">
+    <Tabs class="w-[400px]" defaultValue="overview">
       <TabsList>
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="analytics">Analytics</TabsTrigger>

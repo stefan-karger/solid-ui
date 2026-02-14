@@ -1,8 +1,8 @@
 import type { Component, JSX, ValidComponent } from "solid-js"
 import { mergeProps, splitProps } from "solid-js"
 
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as ComboboxPrimitive from "@kobalte/core/combobox"
+import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import { Check, ChevronDown } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
@@ -76,7 +76,7 @@ const ComboboxContent = <T extends ValidComponent = "div">(
     <ComboboxPrimitive.Portal>
       <ComboboxPrimitive.Content
         class={cn(
-          "cn-combobox-content relative z-50 min-w-[8rem] origin-(--kb-combobox-content-transform-origin) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[closed]:animate-out data-[expanded]:animate-in",
+          "cn-combobox-content data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 relative z-50 min-w-[8rem] origin-(--kb-combobox-content-transform-origin) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[closed]:animate-out data-[expanded]:animate-in",
           local.class
         )}
         data-slot="combobox-content"
@@ -145,7 +145,7 @@ const ComboboxLabel = <T extends ValidComponent = "label">(
   return (
     <ComboboxPrimitive.Label
       class={cn(
-        "cn-combobox-label text-muted-foreground px-2 py-1.5 text-xs font-medium",
+        "cn-combobox-label px-2 py-1.5 font-medium text-muted-foreground text-xs",
         local.class
       )}
       data-slot="combobox-label"

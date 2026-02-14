@@ -1,12 +1,7 @@
 import { createForm, email, minLength, required, type SubmitHandler } from "@modular-forms/solid"
+
 import { Button } from "~/registry/ui/button"
-import {
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/registry/ui/form"
+import { FormDescription, FormField, FormItem, FormLabel, FormMessage } from "~/registry/ui/form"
 import { Input } from "~/registry/ui/input"
 import { Textarea } from "~/registry/ui/textarea"
 
@@ -27,13 +22,15 @@ export default function FormDemo() {
 
   const handleSubmit: SubmitHandler<ProfileFormValues> = (values) => {
     console.log("Form submitted:", values)
-    alert(`Form submitted!\nUsername: ${values.username}\nEmail: ${values.email}\nBio: ${values.bio}`)
+    alert(
+      `Form submitted!\nUsername: ${values.username}\nEmail: ${values.email}\nBio: ${values.bio}`
+    )
   }
 
   return (
     <div class="w-full max-w-md">
-      <Form onSubmit={handleSubmit} class="space-y-6">
-        <FormField of={profileForm} name="username">
+      <Form class="space-y-6" onSubmit={handleSubmit}>
+        <FormField name="username" of={profileForm}>
           <FormItem>
             <FormLabel>Username</FormLabel>
             <Field
@@ -47,12 +44,12 @@ export default function FormDemo() {
                 <>
                   <Input
                     {...props}
-                    id="username"
-                    type="text"
-                    placeholder="johndoe"
-                    value={field.value}
                     autocomplete="username"
+                    id="username"
+                    placeholder="johndoe"
                     required
+                    type="text"
+                    value={field.value}
                   />
                   <FormDescription>
                     This is your public display name. It can be your real name or a pseudonym.
@@ -64,23 +61,26 @@ export default function FormDemo() {
           </FormItem>
         </FormField>
 
-        <FormField of={profileForm} name="email">
+        <FormField name="email" of={profileForm}>
           <FormItem>
             <FormLabel>Email</FormLabel>
             <Field
               name="email"
-              validate={[required("Email is required"), email("Please enter a valid email address")]}
+              validate={[
+                required("Email is required"),
+                email("Please enter a valid email address")
+              ]}
             >
               {(field, props) => (
                 <>
                   <Input
                     {...props}
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={field.value}
                     autocomplete="email"
+                    id="email"
+                    placeholder="john@example.com"
                     required
+                    type="email"
+                    value={field.value}
                   />
                   <FormDescription>
                     We'll use this email to contact you about your account.
@@ -92,7 +92,7 @@ export default function FormDemo() {
           </FormItem>
         </FormField>
 
-        <FormField of={profileForm} name="bio">
+        <FormField name="bio" of={profileForm}>
           <FormItem>
             <FormLabel>Bio</FormLabel>
             <Field
@@ -111,11 +111,11 @@ export default function FormDemo() {
                 <>
                   <Textarea
                     {...props}
+                    autocomplete="off"
+                    class="resize-none"
                     id="bio"
                     placeholder="Tell us a little bit about yourself"
-                    class="resize-none"
                     value={field.value}
-                    autocomplete="off"
                   />
                   <FormDescription>
                     You can write up to 160 characters about yourself.

@@ -1,24 +1,17 @@
-import { For, createSignal } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 import {
   type ColumnDef,
-  type SortingState,
   createSolidTable,
   flexRender,
   getCoreRowModel,
-  getSortedRowModel
+  getSortedRowModel,
+  type SortingState
 } from "@tanstack/solid-table"
 import { ArrowUpDown } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "~/registry/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
 
 type Payment = {
   id: string
@@ -45,8 +38,8 @@ const columns: ColumnDef<Payment>[] = [
     accessorKey: "email",
     header: (props) => (
       <Button
-        variant="ghost"
         onClick={() => props.column.toggleSorting(props.column.getIsSorted() === "asc")}
+        variant="ghost"
       >
         Email
         <ArrowUpDown class="ml-2 size-4" />
@@ -59,8 +52,8 @@ const columns: ColumnDef<Payment>[] = [
     header: (props) => (
       <Button
         class="w-full justify-end"
-        variant="ghost"
         onClick={() => props.column.toggleSorting(props.column.getIsSorted() === "asc")}
+        variant="ghost"
       >
         Amount
         <ArrowUpDown class="ml-2 size-4" />

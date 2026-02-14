@@ -56,8 +56,16 @@ type SheetContentProps<T extends ValidComponent = "div"> = SheetPrimitive.Dialog
 const SheetContent = <T extends ValidComponent = "div">(
   rawProps: PolymorphicProps<T, SheetContentProps<T>>
 ) => {
-  const props = mergeProps<SheetContentProps<T>[]>({ side: "right", showCloseButton: true }, rawProps)
-  const [local, others] = splitProps(props as SheetContentProps, ["class", "children", "side", "showCloseButton"])
+  const props = mergeProps<SheetContentProps<T>[]>(
+    { side: "right", showCloseButton: true },
+    rawProps
+  )
+  const [local, others] = splitProps(props as SheetContentProps, [
+    "class",
+    "children",
+    "side",
+    "showCloseButton"
+  ])
   return (
     <SheetPortal>
       <SheetOverlay />

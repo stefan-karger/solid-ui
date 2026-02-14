@@ -1,11 +1,4 @@
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User
-} from "lucide-solid"
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid"
 
 import {
   Command,
@@ -25,32 +18,32 @@ export default function CommandDemo() {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
-          <CommandItem value="calendar" keywords={["date", "schedule"]}>
+          <CommandItem keywords={["date", "schedule"]} value="calendar">
             <Calendar />
             <span>Calendar</span>
           </CommandItem>
-          <CommandItem value="search-emoji" keywords={["emoji", "emoticon"]}>
+          <CommandItem keywords={["emoji", "emoticon"]} value="search-emoji">
             <Smile />
             <span>Search Emoji</span>
           </CommandItem>
-          <CommandItem value="calculator" keywords={["math", "calc"]}>
+          <CommandItem keywords={["math", "calc"]} value="calculator">
             <Calculator />
             <span>Calculator</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Settings">
-          <CommandItem value="profile" keywords={["account", "user"]}>
+          <CommandItem keywords={["account", "user"]} value="profile">
             <User />
             <span>Profile</span>
             <CommandShortcut>⌘P</CommandShortcut>
           </CommandItem>
-          <CommandItem value="billing" keywords={["payment", "subscription"]}>
+          <CommandItem keywords={["payment", "subscription"]} value="billing">
             <CreditCard />
             <span>Billing</span>
             <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
-          <CommandItem value="settings" keywords={["preferences", "config"]}>
+          <CommandItem keywords={["preferences", "config"]} value="settings">
             <Settings />
             <span>Settings</span>
             <CommandShortcut>⌘S</CommandShortcut>

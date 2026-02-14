@@ -1,3 +1,5 @@
+import { createSignal } from "solid-js"
+
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -14,7 +16,6 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger
 } from "~/registry/ui/context-menu"
-import { createSignal } from "solid-js"
 
 export default function ContextMenuDemo() {
   const [bookmarksChecked, setBookmarksChecked] = createSignal(true)
@@ -62,7 +63,7 @@ export default function ContextMenuDemo() {
         </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuLabel>People</ContextMenuLabel>
-        <ContextMenuRadioGroup value={person()} onChange={setPerson}>
+        <ContextMenuRadioGroup onChange={setPerson} value={person()}>
           <ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
           <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
         </ContextMenuRadioGroup>

@@ -84,7 +84,7 @@ const PaginationEllipsis = <T extends ValidComponent = "div">(
       data-slot="pagination-ellipsis"
       {...others}
     >
-      <Show when={local.children} fallback={<MoreHorizontal class="size-4" />}>
+      <Show fallback={<MoreHorizontal class="size-4" />} when={local.children}>
         {local.children}
       </Show>
       <span class="sr-only">More pages</span>
@@ -116,13 +116,13 @@ const PaginationPrevious = <T extends ValidComponent = "button">(
       {...others}
     >
       <Show
-        when={local.children}
         fallback={
           <>
             <ChevronLeft class="size-4" />
             <span class="hidden sm:block">Previous</span>
           </>
         }
+        when={local.children}
       >
         {local.children}
       </Show>
@@ -154,13 +154,13 @@ const PaginationNext = <T extends ValidComponent = "button">(
       {...others}
     >
       <Show
-        when={local.children}
         fallback={
           <>
             <span class="hidden sm:block">Next</span>
             <ChevronRight class="size-4" />
           </>
         }
+        when={local.children}
       >
         {local.children}
       </Show>

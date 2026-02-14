@@ -1,5 +1,6 @@
 import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js"
 import { createContext, createUniqueId, Show, splitProps, useContext } from "solid-js"
+
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import type {
   FieldPath,
@@ -8,7 +9,7 @@ import type {
   FormStore,
   ResponseData
 } from "@modular-forms/solid"
-import { Field as ModularField, getValue } from "@modular-forms/solid"
+import { getValue, Field as ModularField } from "@modular-forms/solid"
 
 import { cn } from "~/lib/utils"
 import { Label } from "~/registry/ui/label"
@@ -38,7 +39,7 @@ type FormFieldComponent = <
 const FormField: FormFieldComponent = (props) => {
   return (
     // @ts-expect-error - Complex generic type compatibility with @modular-forms/solid
-    <ModularField of={props.of} name={props.name}>
+    <ModularField name={props.name} of={props.of}>
       {(field) => (
         <FormFieldContext.Provider
           value={{
@@ -129,9 +130,9 @@ const FormDescription: Component<ComponentProps<"p">> = (props) => {
 
   return (
     <p
-      id={formDescriptionId}
       class={cn("text-muted-foreground text-sm", local.class)}
       data-slot="form-description"
+      id={formDescriptionId}
       {...others}
     />
   )
@@ -151,9 +152,9 @@ const FormMessage: Component<ComponentProps<"p">> = (props) => {
   return (
     <Show when={body()}>
       <p
-        id={formMessageId}
         class={cn("text-destructive text-sm", local.class)}
         data-slot="form-message"
+        id={formMessageId}
         {...others}
       >
         {body()}

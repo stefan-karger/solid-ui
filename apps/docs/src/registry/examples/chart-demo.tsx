@@ -1,11 +1,11 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
 import {
   BarChart,
+  type ChartConfig,
   ChartContainer,
   DoughnutChart,
-  LineChart,
-  type ChartConfig
+  LineChart
 } from "~/registry/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
 
 const lineConfig: ChartConfig = {
   desktop: { label: "Desktop", color: "hsl(var(--primary))" },
@@ -100,7 +100,7 @@ export default function ChartDemo() {
           <CardDescription>Browser market share</CardDescription>
         </CardHeader>
         <CardContent class="flex justify-center">
-          <ChartContainer config={doughnutConfig} class="max-h-[280px] max-w-[280px]">
+          <ChartContainer class="max-h-[280px] max-w-[280px]" config={doughnutConfig}>
             <DoughnutChart
               data={{
                 labels: ["Chrome", "Safari", "Firefox", "Edge", "Other"],

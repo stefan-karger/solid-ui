@@ -1,4 +1,4 @@
-import { createSignal, onMount, onCleanup } from "solid-js"
+import { createSignal, onCleanup, onMount } from "solid-js"
 
 import { Progress } from "~/registry/ui/progress"
 
@@ -18,5 +18,5 @@ export default function ProgressDemo() {
     onCleanup(() => clearInterval(timer))
   })
 
-  return <Progress value={progress()} class="w-[60%]" />
+  return <Progress class="w-[60%]" value={progress()} />
 }

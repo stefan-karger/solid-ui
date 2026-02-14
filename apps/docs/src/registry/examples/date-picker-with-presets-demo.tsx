@@ -31,8 +31,8 @@ export default function DatePickerWithPresetsDemo() {
         <div class="flex">
           <DatePickerCalendar
             mode="single"
-            value={date()}
             onValueChange={(value: Date | null) => setDate(value)}
+            value={date()}
           />
           <DatePickerPresets>
             <DatePickerPreset onClick={() => setDate(new Date())}>Today</DatePickerPreset>

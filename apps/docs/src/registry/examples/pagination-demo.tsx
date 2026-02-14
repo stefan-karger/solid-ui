@@ -15,17 +15,15 @@ export default function PaginationDemo() {
   return (
     <Pagination
       count={50}
-      page={currentPage()}
-      onPageChange={setCurrentPage}
-      itemComponent={(props) => <PaginationItem page={props.page}>{props.page}</PaginationItem>}
       ellipsisComponent={() => <PaginationEllipsis />}
+      itemComponent={(props) => <PaginationItem page={props.page}>{props.page}</PaginationItem>}
+      onPageChange={setCurrentPage}
+      page={currentPage()}
     >
       <PaginationContent>
         <PaginationPrevious />
         <For each={[1, 2, 3, 4, 5]}>
-          {(page) => (
-            <PaginationItem page={page}>{page}</PaginationItem>
-          )}
+          {(page) => <PaginationItem page={page}>{page}</PaginationItem>}
         </For>
         <PaginationEllipsis />
         <PaginationNext />

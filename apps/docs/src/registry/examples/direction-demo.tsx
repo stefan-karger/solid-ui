@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js"
+
 import { DirectionProvider, useDirection } from "~/registry/ui/direction"
 import { NativeSelect } from "~/registry/ui/native-select"
 
@@ -8,13 +9,10 @@ function DirectionDisplay() {
   return (
     <div class="space-y-4">
       <div class="flex items-center justify-between">
-        <span class="text-sm text-muted-foreground">Current direction:</span>
+        <span class="text-muted-foreground text-sm">Current direction:</span>
         <span class="font-semibold text-foreground">{dir()}</span>
       </div>
-      <div
-        class="rounded-lg border p-4"
-        dir={dir()}
-      >
+      <div class="rounded-lg border p-4" dir={dir()}>
         <div class="space-y-2">
           <p class="text-sm">
             {dir() === "rtl"
@@ -38,11 +36,11 @@ export default function DirectionDemo() {
   return (
     <div class="space-y-4">
       <div class="flex items-center gap-2">
-        <label class="text-sm font-medium">Language:</label>
+        <label class="font-medium text-sm">Language:</label>
         <NativeSelect
-          value={direction()}
-          onChange={(e) => setDirection(e.currentTarget.value as "ltr" | "rtl")}
           class="w-[200px]"
+          onChange={(e) => setDirection(e.currentTarget.value as "ltr" | "rtl")}
+          value={direction()}
         >
           <option value="ltr">English (LTR)</option>
           <option value="rtl">العربية (RTL)</option>

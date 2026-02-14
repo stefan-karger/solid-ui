@@ -23,11 +23,7 @@ export default function ContextMenuCheckboxes() {
         <ContextMenuCheckboxItem checked={showStatusBar()} onChange={setShowStatusBar}>
           Status Bar
         </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem
-          checked={showActivityBar()}
-          disabled
-          onChange={setShowActivityBar}
-        >
+        <ContextMenuCheckboxItem checked={showActivityBar()} disabled onChange={setShowActivityBar}>
           Activity Bar
         </ContextMenuCheckboxItem>
         <ContextMenuCheckboxItem checked={showPanel()} onChange={setShowPanel}>

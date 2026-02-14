@@ -1,26 +1,19 @@
-import { For, createSignal } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 import {
   type ColumnDef,
-  type PaginationState,
-  type SortingState,
   createSolidTable,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  getSortedRowModel
+  getSortedRowModel,
+  type PaginationState,
+  type SortingState
 } from "@tanstack/solid-table"
 import { ArrowUpDown } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "~/registry/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
 
 type Payment = {
   id: string
@@ -54,8 +47,8 @@ const columns: ColumnDef<Payment>[] = [
     accessorKey: "email",
     header: (props) => (
       <Button
-        variant="ghost"
         onClick={() => props.column.toggleSorting(props.column.getIsSorted() === "asc")}
+        variant="ghost"
       >
         Email
         <ArrowUpDown class="ml-2 size-4" />
@@ -154,17 +147,17 @@ export default function DataTablePaginationDemo() {
         <div class="flex gap-x-2">
           <Button
             disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
             size="sm"
             variant="outline"
-            onClick={() => table.previousPage()}
           >
             Previous
           </Button>
           <Button
             disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
             size="sm"
             variant="outline"
-            onClick={() => table.nextPage()}
           >
             Next
           </Button>

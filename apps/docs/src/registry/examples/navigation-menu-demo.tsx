@@ -58,10 +58,10 @@ export default function NavigationMenuDemo() {
               <li class="row-span-3">
                 <NavigationMenuLink
                   as="a"
-                  class="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-4 no-underline outline-hidden transition-all duration-200 focus:shadow-md md:p-6"
+                  class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-hidden transition-all duration-200 focus:shadow-md md:p-6"
                   href="/"
                 >
-                  <div class="mb-2 text-lg font-medium sm:mt-4">solid-ui</div>
+                  <div class="mb-2 font-medium text-lg sm:mt-4">solid-ui</div>
                   <p class="text-muted-foreground text-sm leading-tight">
                     Beautifully designed components built with Kobalte and Tailwind CSS.
                   </p>
@@ -85,7 +85,7 @@ export default function NavigationMenuDemo() {
             <ul class="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               <For each={components}>
                 {(component) => (
-                  <ListItem title={component.title} href={component.href}>
+                  <ListItem href={component.href} title={component.title}>
                     {component.description}
                   </ListItem>
                 )}
@@ -94,7 +94,7 @@ export default function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuMenu>
         <NavigationMenuMenu>
-          <NavigationMenuLink as="a" href="/docs" class={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink as="a" class={navigationMenuTriggerStyle()} href="/docs">
             Documentation
           </NavigationMenuLink>
         </NavigationMenuMenu>
@@ -113,8 +113,8 @@ function ListItem(props: ListItemProps) {
   return (
     <li>
       <NavigationMenuLink as="a" href={props.href}>
-        <div class="text-sm font-medium leading-none">{props.title}</div>
-        <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">{props.children}</p>
+        <div class="font-medium text-sm leading-none">{props.title}</div>
+        <p class="line-clamp-2 text-muted-foreground text-sm leading-snug">{props.children}</p>
       </NavigationMenuLink>
     </li>
   )

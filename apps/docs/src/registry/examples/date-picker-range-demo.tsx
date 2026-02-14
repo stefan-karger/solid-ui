@@ -26,8 +26,8 @@ export default function DatePickerRangeDemo() {
         <DatePickerCalendar
           mode="range"
           numberOfMonths={2}
-          value={range()}
           onValueChange={(value: { from: Date | null; to: Date | null }) => setRange(value)}
+          value={range()}
         />
       </DatePickerContent>
     </DatePicker>

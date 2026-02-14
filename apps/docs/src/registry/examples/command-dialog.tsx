@@ -1,12 +1,6 @@
 import { createSignal } from "solid-js"
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User
-} from "lucide-solid"
+
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -27,7 +21,7 @@ export default function CommandDialogDemo() {
     <>
       <p class="text-muted-foreground text-sm">
         Press{" "}
-        <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+        <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-medium font-mono text-[10px] text-muted-foreground opacity-100">
           <span class="text-xs">⌘</span>K
         </kbd>
       </p>
@@ -35,40 +29,40 @@ export default function CommandDialogDemo() {
         Open Command Menu
       </Button>
 
-      <CommandDialog open={open()} onOpenChange={setOpen}>
+      <CommandDialog onOpenChange={setOpen} open={open()}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
             <CommandItem
-              value="calendar"
               keywords={["date", "schedule"]}
               onSelect={() => {
                 console.log("Calendar selected")
                 setOpen(false)
               }}
+              value="calendar"
             >
               <Calendar />
               <span>Calendar</span>
             </CommandItem>
             <CommandItem
-              value="search-emoji"
               keywords={["emoji", "emoticon"]}
               onSelect={() => {
                 console.log("Search Emoji selected")
                 setOpen(false)
               }}
+              value="search-emoji"
             >
               <Smile />
               <span>Search Emoji</span>
             </CommandItem>
             <CommandItem
-              value="calculator"
               keywords={["math", "calc"]}
               onSelect={() => {
                 console.log("Calculator selected")
                 setOpen(false)
               }}
+              value="calculator"
             >
               <Calculator />
               <span>Calculator</span>
@@ -77,36 +71,36 @@ export default function CommandDialogDemo() {
           <CommandSeparator />
           <CommandGroup heading="Settings">
             <CommandItem
-              value="profile"
               keywords={["account", "user"]}
               onSelect={() => {
                 console.log("Profile selected")
                 setOpen(false)
               }}
+              value="profile"
             >
               <User />
               <span>Profile</span>
               <CommandShortcut>⌘P</CommandShortcut>
             </CommandItem>
             <CommandItem
-              value="billing"
               keywords={["payment", "subscription"]}
               onSelect={() => {
                 console.log("Billing selected")
                 setOpen(false)
               }}
+              value="billing"
             >
               <CreditCard />
               <span>Billing</span>
               <CommandShortcut>⌘B</CommandShortcut>
             </CommandItem>
             <CommandItem
-              value="settings"
               keywords={["preferences", "config"]}
               onSelect={() => {
                 console.log("Settings selected")
                 setOpen(false)
               }}
+              value="settings"
             >
               <Settings />
               <span>Settings</span>

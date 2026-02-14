@@ -1,4 +1,5 @@
 import { For } from "solid-js"
+
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-solid"
 
 import {
@@ -49,7 +50,7 @@ const items = [
 export default function SidebarDemo() {
   return (
     <SidebarProvider
-      class="h-[600px] min-h-[600px]! overflow-hidden rounded-lg border [&_[data-slot=sidebar-container]]:!static [&_[data-slot=sidebar-container]]:!h-full"
+      class="[&_[data-slot=sidebar-container]]:!static [&_[data-slot=sidebar-container]]:!h-full h-[600px] min-h-[600px]! overflow-hidden rounded-lg border"
       style={{ "--sidebar-width": "16rem" }}
     >
       <Sidebar collapsible="icon">
@@ -101,7 +102,7 @@ export default function SidebarDemo() {
       <SidebarInset>
         <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger class="-ml-1" />
-          <div class="flex items-center gap-2 text-sm font-semibold">Dashboard</div>
+          <div class="flex items-center gap-2 font-semibold text-sm">Dashboard</div>
         </header>
         <div class="flex flex-1 flex-col gap-4 p-4">
           <div class="grid auto-rows-min gap-4 md:grid-cols-3">

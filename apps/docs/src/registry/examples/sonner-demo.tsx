@@ -7,36 +7,33 @@ export default function SonnerDemo() {
       <Toaster />
       <div class="flex flex-wrap gap-2">
         <Button
-          variant="outline"
           onClick={() =>
             toast("Event has been created", {
               description: "Sunday, December 03, 2023 at 9:00 AM"
             })
           }
+          variant="outline"
         >
           Default
         </Button>
         <Button
-          variant="outline"
           onClick={() => toast.success("Event has been created successfully.")}
+          variant="outline"
         >
           Success
         </Button>
-        <Button
-          variant="outline"
-          onClick={() => toast.error("Event could not be created.")}
-        >
+        <Button onClick={() => toast.error("Event could not be created.")} variant="outline">
           Error
         </Button>
         <Button
-          variant="outline"
           onClick={() => toast.warning("Please verify your email address.")}
+          variant="outline"
         >
           Warning
         </Button>
         <Button
-          variant="outline"
           onClick={() => toast.info("Be at the area 10 minutes before the event time.")}
+          variant="outline"
         >
           Info
         </Button>
