@@ -1,0 +1,194 @@
+---
+title: Chart
+description: Beautiful and responsive charts built with Chart.js.
+links:
+  doc: https://www.chartjs.org/docs/latest/
+  api: https://www.chartjs.org/docs/latest/api/
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="chart-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## About
+
+The chart component is built using [Chart.js](https://www.chartjs.org/), a flexible JavaScript charting library. It provides convenience wrappers for common chart types while allowing full access to Chart.js configuration.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add chart
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+chart.js
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/chart.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Chart,
+  ChartContainer,
+  LineChart,
+  BarChart,
+  PieChart,
+  DoughnutChart,
+  RadarChart,
+  ScatterChart,
+  type ChartConfig
+} from "~/components/ui/chart";
+```
+
+### Chart Config
+
+Define a chart config to describe your datasets. This is used by `ChartContainer` to generate CSS variables for theming.
+
+```tsx
+const chartConfig: ChartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--primary))"
+  },
+  mobile: {
+    label: "Mobile",
+    color: "hsl(var(--muted-foreground))"
+  }
+};
+```
+
+### Line Chart
+
+```tsx
+<ChartContainer config={chartConfig}>
+  <LineChart
+    data={{
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      datasets: [
+        {
+          label: "Desktop",
+          data: [186, 305, 237, 173, 209, 214],
+          borderColor: chartConfig.desktop.color,
+          tension: 0.3
+        }
+      ]
+    }}
+  />
+</ChartContainer>
+```
+
+### Bar Chart
+
+```tsx
+<ChartContainer config={chartConfig}>
+  <BarChart
+    data={{
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      datasets: [
+        {
+          label: "Revenue",
+          data: [4500, 3800, 5200, 4100, 4800, 5100],
+          backgroundColor: chartConfig.desktop.color,
+          borderRadius: 4
+        }
+      ]
+    }}
+  />
+</ChartContainer>
+```
+
+### Pie / Doughnut Chart
+
+```tsx
+<ChartContainer config={chartConfig} class="max-h-[280px] max-w-[280px]">
+  <DoughnutChart
+    data={{
+      labels: ["Chrome", "Safari", "Firefox"],
+      datasets: [
+        {
+          data: [63, 19, 8],
+          backgroundColor: ["hsl(221 83% 53%)", "hsl(262 83% 58%)", "hsl(142 71% 45%)"],
+          borderWidth: 0
+        }
+      ]
+    }}
+  />
+</ChartContainer>
+```
+
+### Generic Chart
+
+For full control, use the base `Chart` component with any Chart.js type:
+
+```tsx
+<ChartContainer config={chartConfig}>
+  <Chart
+    type="radar"
+    data={{
+      labels: ["Speed", "Strength", "Defense", "Magic", "Luck"],
+      datasets: [
+        {
+          label: "Stats",
+          data: [80, 65, 90, 50, 70],
+          borderColor: chartConfig.desktop.color,
+          backgroundColor: "hsla(var(--primary) / 0.2)"
+        }
+      ]
+    }}
+  />
+</ChartContainer>
+```
+
+## Theming
+
+Charts automatically integrate with your theme through CSS variables. The `ChartContainer` generates `--chart-1`, `--chart-2`, etc. variables from your config, and tooltips use `--popover` and `--border` variables.
+
+## Custom Options
+
+Pass any Chart.js options through the `options` prop. These are deep-merged with sensible defaults:
+
+```tsx
+<LineChart
+  data={data}
+  options={{
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: false }
+    },
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }}
+/>
+```
+
+## Accessibility
+
+The chart canvas element includes `role="img"` by default. Add an `aria-label` for screen readers:
+
+```tsx
+<LineChart aria-label="Monthly visitor statistics" data={data} />
+```

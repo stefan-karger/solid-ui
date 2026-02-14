@@ -1,0 +1,69 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications.
+links:
+  doc: https://kobalte.dev/docs/core/components/menubar
+  api: https://kobalte.dev/docs/core/components/menubar#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/menubar-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add menubar
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/menubar.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "~/components/ui/menubar";
+```
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>New</MenubarItem>
+      <MenubarItem>Open</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```

@@ -1,0 +1,64 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+links:
+  doc: https://kobalte.dev/docs/core/components/hover-card
+  api: https://kobalte.dev/docs/core/components/hover-card#api-reference
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="hover-card-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/hover-card-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add hover-card
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/hover-card.tsx" showLineNumbers
+
+```
+
+This component uses the `avatar` and `button` components from the registry. Make sure you have them installed.
+
+## Usage
+
+```tsx
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "~/components/ui/hover-card";
+```
+
+```tsx
+<HoverCard>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```

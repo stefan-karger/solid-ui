@@ -31,6 +31,7 @@ const Badge = <T extends ValidComponent = "span">(props: BadgeProps<T>) => {
   const [local, others] = splitProps(props, ["class", "variant"])
   return (
     <Polymorphic
+      as="span"
       class={cn(badgeVariants({ variant: local.variant }), local.class)}
       data-slot="badge"
       {...others}

@@ -1,0 +1,50 @@
+---
+title: Scroll Area
+description: A custom styled scrollable area with cross-browser support.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add scroll-area
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/scroll-area.tsx" showLineNumbers
+
+```
+
+This component uses the `separator` component from the registry. Make sure you have it installed.
+
+## Usage
+
+```tsx
+import { ScrollArea } from "~/components/ui/scroll-area";
+```
+
+```tsx
+<ScrollArea class="h-[200px] w-[350px]">
+  {/* Your scrollable content */}
+</ScrollArea>
+```

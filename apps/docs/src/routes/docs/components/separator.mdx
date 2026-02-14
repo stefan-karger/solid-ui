@@ -1,0 +1,55 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+links:
+  doc: https://kobalte.dev/docs/core/components/separator
+  api: https://kobalte.dev/docs/core/components/separator#api-reference
+---
+
+import { ComponentPreview } from "~/components/component-preview"
+
+<ComponentPreview name="separator-demo" />
+
+## Installation
+
+```bash
+npx @solid-ui/cli add separator
+```
+
+## Usage
+
+```tsx
+import { Separator } from "~/components/ui/separator"
+```
+
+```tsx
+<Separator />
+```
+
+## Examples
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical separator.
+
+<ComponentPreview name="separator-vertical" />
+
+### Menu
+
+Vertical separators between menu items with descriptions.
+
+<ComponentPreview name="separator-menu" />
+
+### List
+
+Horizontal separators between list items.
+
+<ComponentPreview name="separator-list" />
+
+## API Reference
+
+The Separator component is built on top of [Kobalte's Separator](https://kobalte.dev/docs/core/components/separator) component.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the separator. |

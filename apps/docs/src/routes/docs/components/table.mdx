@@ -1,0 +1,78 @@
+---
+title: Table
+description: A responsive table component for displaying tabular data.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+<ComponentPreview name="table-demo" />
+:::
+:::tab[Code]
+```file="~/registry/examples/table-demo" frame=none showLineNumbers
+```
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add table
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/table.tsx" showLineNumbers
+```
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "~/components/ui/table"
+```
+
+```tsx
+<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead class="w-[100px]">Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead>Method</TableHead>
+      <TableHead class="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell class="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell>
+      <TableCell class="text-right">$250.00</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell colspan={3}>Total</TableCell>
+      <TableCell class="text-right">$2,500.00</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>
+```
+
+## Data Table
+
+You can use this Table component with `@tanstack/solid-table` to create interactive data tables with sorting, filtering, and pagination.
+
+See the [Data Table](/docs/components/data-table) documentation for a step-by-step guide.

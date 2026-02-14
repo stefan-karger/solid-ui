@@ -1,0 +1,58 @@
+---
+title: Empty
+description: Displays an empty state with an icon, message, and optional action button.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="empty-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/empty-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add empty
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/empty.tsx" showLineNumbers
+
+```
+
+This component uses the `button` component from the registry. Make sure you have it installed.
+
+## Usage
+
+```tsx
+import { Empty } from "~/components/ui/empty";
+```
+
+```tsx
+<Empty
+  icon={/* Icon component */}
+  title="No results found"
+  description="Try adjusting your search"
+/>
+```

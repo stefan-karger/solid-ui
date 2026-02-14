@@ -13,15 +13,13 @@ import {
 export default function DialogCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger as={Button<"button">} variant="outline">
-        Share
+      <DialogTrigger>
+        <Button variant="outline">Share</Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>
         </DialogHeader>
         <div class="flex items-center space-x-2">
           <div class="grid flex-1 gap-2">

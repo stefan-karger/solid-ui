@@ -1,0 +1,46 @@
+---
+title: Input OTP
+description: A one-time password input component for entering verification codes.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add input-otp
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/input-otp.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import { InputOTP } from "~/components/ui/input-otp";
+```
+
+```tsx
+<InputOTP maxLength={6} />
+```

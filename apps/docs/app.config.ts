@@ -12,7 +12,7 @@ const theme = defineTheme({
 export default defineConfig(
   createWithSolidBase(theme)(
     {
-      ssr: true,
+      ssr: false,
       server: {
         preset: "vercel",
         prerender: {
@@ -21,8 +21,22 @@ export default defineConfig(
       },
       vite: {
         plugins: [tailwindcss()],
+        resolve: {
+          conditions: ["solid", "browser", "development"]
+        },
+        optimizeDeps: {
+          exclude: [
+            "@modular-forms/solid"
+          ]
+        },
         server: {
-          port: parseInt(process.env.FRONTEND_PORT || "5173", 10)
+          port: parseInt(process.env.FRONTEND_PORT || "5173", 10),
+          hmr: {
+            protocol: 'ws',
+            host: 'localhost',
+            port: 24678,
+            clientPort: 24678
+          }
         }
       }
     },

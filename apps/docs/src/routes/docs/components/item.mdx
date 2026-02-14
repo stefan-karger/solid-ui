@@ -1,0 +1,57 @@
+---
+title: Item
+description: A versatile list item component with support for icons, descriptions, and actions.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="item-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/item-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add item
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/item.tsx" showLineNumbers
+
+```
+
+This component uses the `separator` component from the registry. Make sure you have it installed.
+
+## Usage
+
+```tsx
+import { Item, ItemIndicator, ItemLabel } from "~/components/ui/item";
+```
+
+```tsx
+<Item>
+  <ItemIndicator>{/* Icon */}</ItemIndicator>
+  <ItemLabel>Item label</ItemLabel>
+</Item>
+```

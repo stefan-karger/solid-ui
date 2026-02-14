@@ -1,0 +1,102 @@
+---
+title: Sheet
+description: Extends the Dialog component to display content that complements the main content of the screen.
+---
+
+import { ComponentPreview } from "~/components/component-preview"
+
+<ComponentPreview name="sheet-demo" />
+
+## Installation
+
+```bash
+npx @solid-ui/cli add sheet
+```
+
+## Usage
+
+```tsx
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "~/components/ui/sheet"
+```
+
+```tsx
+<Sheet>
+  <SheetTrigger>Open</SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Are you absolutely sure?</SheetTitle>
+      <SheetDescription>This action cannot be undone.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+## Examples
+
+### Side
+
+Use the `side` prop on `SheetContent` to set the edge of the screen where the sheet appears. Values are `top`, `right`, `bottom`, or `left`.
+
+<ComponentPreview name="sheet-side" />
+
+### No Close Button
+
+Use `showCloseButton={false}` on `SheetContent` to hide the close button.
+
+<ComponentPreview name="sheet-no-close-button" />
+
+## API Reference
+
+The Sheet component is built on top of [Kobalte's Dialog](https://kobalte.dev/docs/core/components/dialog) component.
+
+### Sheet
+
+Contains all the parts of a sheet.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | - | The controlled open state of the sheet. |
+| `defaultOpen` | `boolean` | - | The default open state when initially rendered. |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes. |
+
+### SheetTrigger
+
+The button that opens the sheet.
+
+### SheetContent
+
+The component that pops out from the edge of the screen.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"right"` | The edge of the screen where the sheet appears. |
+| `showCloseButton` | `boolean` | `true` | Whether to show the close button in the top-right corner. |
+
+### SheetHeader
+
+A container for the sheet's title and description.
+
+### SheetTitle
+
+An accessible title for the sheet.
+
+### SheetDescription
+
+An accessible description for the sheet.
+
+### SheetFooter
+
+A container for action buttons in the sheet.
+
+### SheetClose
+
+A button that closes the sheet.

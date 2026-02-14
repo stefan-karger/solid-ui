@@ -110,13 +110,24 @@ const CalendarNextTrigger = <T extends ValidComponent = "button">(
 
 type CalendarHeadingProps<T extends ValidComponent = "h2"> = LabelProps<T> & {
   class?: string | undefined
+  children?: JSX.Element
 }
 
 const CalendarHeading = <T extends ValidComponent = "h2">(
   props: DynamicProps<T, CalendarHeadingProps<T>>
 ) => {
-  const [local, others] = splitProps(props as CalendarHeadingProps, ["class"])
-  return <CalendarPrimitive.Label class={cn("font-medium text-sm", local.class)} {...others} />
+  const [local, others] = splitProps(props as CalendarHeadingProps, ["class", "children"])
+  const ctx = CalendarPrimitive.useContext()
+  const formatMonth = () =>
+    new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(ctx.month())
+  return (
+    <CalendarPrimitive.Label
+      class={cn("font-medium text-foreground text-sm", local.class)}
+      {...others}
+    >
+      {local.children ?? formatMonth()}
+    </CalendarPrimitive.Label>
+  )
 }
 
 type CalendarGridProps<T extends ValidComponent = "table"> = TableProps<T> & {

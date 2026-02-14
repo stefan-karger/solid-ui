@@ -1,0 +1,322 @@
+---
+title: Data Table
+description: Powerful table with sorting, filtering, pagination, and more, built with TanStack Table.
+links:
+  doc: https://tanstack.com/table/latest/docs/framework/solid/solid-table
+  api: https://tanstack.com/table/latest/docs/api/core/table
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/data-table-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## About
+
+The Data Table component is built by combining the [Table](/docs/components/table) component with [TanStack Table](https://tanstack.com/table/latest). TanStack Table is a headless table library, meaning it provides the logic for sorting, filtering, pagination, and more, while you control the rendering using our Table UI components.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add table
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@tanstack/solid-table
+```
+
+Copy and paste the [Table](/docs/components/table) component into your project.
+
+```file="~/registry/ui/table.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  createSolidTable,
+  flexRender,
+  getCoreRowModel,
+} from "@tanstack/solid-table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
+```
+
+```tsx
+const columns = [
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+];
+
+const table = createSolidTable({
+  get data() {
+    return data();
+  },
+  columns,
+  getCoreRowModel: getCoreRowModel(),
+});
+```
+
+```tsx
+<Table>
+  <TableHeader>
+    <For each={table.getHeaderGroups()}>
+      {(headerGroup) => (
+        <TableRow>
+          <For each={headerGroup.headers}>
+            {(header) => (
+              <TableHead>
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
+                )}
+              </TableHead>
+            )}
+          </For>
+        </TableRow>
+      )}
+    </For>
+  </TableHeader>
+  <TableBody>
+    <For each={table.getRowModel().rows}>
+      {(row) => (
+        <TableRow>
+          <For each={row.getVisibleCells()}>
+            {(cell) => (
+              <TableCell>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </TableCell>
+            )}
+          </For>
+        </TableRow>
+      )}
+    </For>
+  </TableBody>
+</Table>
+```
+
+## Examples
+
+### Sorting
+
+Add sorting to your table with `getSortedRowModel` and a sorting state signal.
+
+::::tab-group[sorting]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/data-table-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import {
+  type SortingState,
+  getSortedRowModel,
+} from "@tanstack/solid-table";
+
+const [sorting, setSorting] = createSignal<SortingState>([]);
+
+const table = createSolidTable({
+  // ...
+  state: {
+    get sorting() {
+      return sorting();
+    },
+  },
+  onSortingChange: setSorting,
+  getSortedRowModel: getSortedRowModel(),
+});
+```
+
+### Pagination
+
+Add pagination with `getPaginationRowModel` and navigation controls.
+
+::::tab-group[pagination]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-pagination-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/data-table-pagination-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import {
+  type PaginationState,
+  getPaginationRowModel,
+} from "@tanstack/solid-table";
+
+const [pagination, setPagination] = createSignal<PaginationState>({
+  pageIndex: 0,
+  pageSize: 5,
+});
+
+const table = createSolidTable({
+  // ...
+  state: {
+    get pagination() {
+      return pagination();
+    },
+  },
+  onPaginationChange: setPagination,
+  getPaginationRowModel: getPaginationRowModel(),
+});
+```
+
+### Filtering
+
+Add column filtering using `getFilteredRowModel`.
+
+::::tab-group[filtering]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-filtering-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/data-table-filtering-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import {
+  type ColumnFiltersState,
+  getFilteredRowModel,
+} from "@tanstack/solid-table";
+
+const [columnFilters, setColumnFilters] =
+  createSignal<ColumnFiltersState>([]);
+
+const table = createSolidTable({
+  // ...
+  state: {
+    get columnFilters() {
+      return columnFilters();
+    },
+  },
+  onColumnFiltersChange: setColumnFilters,
+  getFilteredRowModel: getFilteredRowModel(),
+});
+```
+
+### Row Selection
+
+Add row selection with checkboxes using the Checkbox component.
+
+::::tab-group[row-selection]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-row-selection-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/data-table-row-selection-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import { type RowSelectionState } from "@tanstack/solid-table";
+
+const [rowSelection, setRowSelection] =
+  createSignal<RowSelectionState>({});
+
+const table = createSolidTable({
+  // ...
+  state: {
+    get rowSelection() {
+      return rowSelection();
+    },
+  },
+  onRowSelectionChange: setRowSelection,
+  enableRowSelection: true,
+});
+```
+
+### Column Visibility
+
+Allow users to toggle column visibility with a dropdown menu.
+
+::::tab-group[column-visibility]
+:::tab[Preview]
+
+<ComponentPreview name="data-table-column-visibility-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/data-table-column-visibility-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx
+import { type VisibilityState } from "@tanstack/solid-table";
+
+const [columnVisibility, setColumnVisibility] =
+  createSignal<VisibilityState>({});
+
+const table = createSolidTable({
+  // ...
+  state: {
+    get columnVisibility() {
+      return columnVisibility();
+    },
+  },
+  onColumnVisibilityChange: setColumnVisibility,
+});
+```
