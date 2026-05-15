@@ -1,0 +1,44 @@
+<MDXHeader title="Tauri" description="Adding dark mode to your Tauri + Solid app." />
+
+<Steps>
+
+### Install Kobalte
+
+```bash
+npm install @kobalte/core
+```
+
+### Wrap your app
+
+Tauri frontends are SPAs. Use local storage for the color mode (same as Vite).
+
+```tsx
+import { ColorModeProvider, ColorModeScript, createLocalStorageManager } from "@kobalte/core"
+
+const storageManager = createLocalStorageManager("tauri-ui-theme")
+
+export default function App() {
+  return (
+    <>
+      <ColorModeScript storageType={storageManager.type} />
+      <ColorModeProvider storageManager={storageManager}>
+        {/* your router / layout */}
+      </ColorModeProvider>
+    </>
+  )
+}
+```
+
+### Add a mode toggle
+
+```bash
+npx solidui-cli@latest add mode-toggle
+```
+
+```tsx
+import { ModeToggle } from "~/components/ui/mode-toggle"
+```
+
+Place `<ModeToggle />` in your title bar or main navigation.
+
+</Steps>

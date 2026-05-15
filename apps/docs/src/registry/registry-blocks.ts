@@ -10,19 +10,22 @@ export const blocks: Registry = [
       {
         path: "block/sidebar-01/index.tsx",
         type: "page",
-        target: "app/dashboard/page.tsx"
+        target: "src/routes/dashboard/index.tsx"
       },
       {
         path: "block/sidebar-01/components/app-sidebar.tsx",
-        type: "component"
+        type: "component",
+        target: "src/components/dashboard/app-sidebar.tsx"
       },
       {
         path: "block/sidebar-01/components/search-form.tsx",
-        type: "component"
+        type: "component",
+        target: "src/components/dashboard/search-form.tsx"
       },
       {
         path: "block/sidebar-01/components/version-switcher.tsx",
-        type: "component"
+        type: "component",
+        target: "src/components/dashboard/version-switcher.tsx"
       }
     ]
   },
@@ -32,7 +35,8 @@ export const blocks: Registry = [
     files: [
       {
         path: "block/demo-sidebar.tsx",
-        type: "component"
+        type: "component",
+        target: "src/components/demo-sidebar.tsx"
       }
     ]
   }

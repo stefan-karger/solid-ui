@@ -1,43 +1,33 @@
-# solid-ui
+# solidui-cli
 
-A CLI for adding components to your project.
+CLI for adding [Solid UI](https://www.solid-ui.com) components to your project.
+
+## Commands
+
+| Command | Description |
+| ------- | ----------- |
+| `init` | Create `ui.config.json`, Tailwind theme CSS, `cn` util |
+| `add` | Add UI components from the registry |
+| `add-block` | Add multi-file blocks (layouts) with `target` paths |
+| `update` | Re-fetch and overwrite installed UI components |
 
 ## Usage
 
-Use the `init` command to initialize dependencies for a new project.
-
-The `init` command installs dependencies, adds the `cn` util, configures `tailwind.config.cjs`, and sets up CSS variables for the project.
-
 ```bash
-npx solidui-cli@latest init
+npx solidui-cli@latest init -y --with-color-mode --with-tailwind
+npx solidui-cli@latest add button mode-toggle
+npx solidui-cli@latest add-block sidebar-01
+npx solidui-cli@latest update button
 ```
 
-## add
+## Environment
 
-Use the `add` command to add components to your project.
-
-The `add` command adds a component to your project and installs all required dependencies.
-
-```bash
-npx solidui-cli@latest add [component]
-```
-
-### Example
-
-```bash
-npx solidui-cli@latest add alert-dialog
-```
-
-You can also run the command without any arguments to view a list of all available components:
-
-```bash
-npx solidui-cli@latest add
-```
+- `SOLIDUI_REGISTRY_URL` — registry base URL (default `https://www.solid-ui.com`)
 
 ## Documentation
 
-Visit https://solid-ui.com to view the documentation.
+https://www.solid-ui.com/docs/cli
 
 ## License
 
-Licensed under the [MIT license](https://github.com/stefan-karger/solid-ui/blob/main/LICENSE).
+MIT

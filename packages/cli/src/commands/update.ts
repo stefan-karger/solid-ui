@@ -10,25 +10,23 @@ import { handleError, highlight } from "~/utils/logger"
 import { installRegistryItems } from "~/utils/install-registry-items"
 import { fetchRegistryItems, getRegistryIndex, resolveTree } from "~/utils/registry"
 
-const addOptionsSchema = v.object({
+const updateOptionsSchema = v.object({
   components: v.optional(v.array(v.string()), []),
   cwd: v.string(),
   overwrite: v.boolean(),
-  all: v.boolean(),
-  yes: v.boolean()
+  all: v.boolean()
 })
 
-export const add = new Command()
-  .name("add")
-  .description("add components to your project")
-  .argument("[components...]", "the components to add")
+export const update = new Command()
+  .name("update")
+  .description("update installed UI components from the registry")
+  .argument("[components...]", "the components to update")
   .option("-c, --cwd <cwd>", "the working directory", process.cwd())
-  .option("-o, --overwrite", "overwrite existing files", false)
-  .option("-a, --all", "add all available components", false)
-  .option("-y, --yes", "skip confirmation prompts when overwriting", false)
+  .option("-o, --overwrite", "overwrite existing files without prompting", true)
+  .option("-a, --all", "update all registry components present in your ui folder", false)
   .action(async (components, opts) => {
     try {
-      const options = v.parse(addOptionsSchema, { components, ...opts })
+      const options = v.parse(updateOptionsSchema, { components, ...opts, overwrite: opts.overwrite ?? true })
 
       const cwd = path.resolve(options.cwd)
       if (!existsSync(cwd)) {
@@ -45,14 +43,17 @@ export const add = new Command()
 
       const registryIndex = await getRegistryIndex("ui")
 
-      let selectedComponents = options.all ? registryIndex.map((v) => v.name) : options.components
+      let selectedComponents = options.all
+        ? registryIndex.map((entry) => entry.name)
+        : options.components
+
       if (!selectedComponents.length) {
         const prompts = await p.group(
           {
             components: () =>
               p.multiselect<string>({
-                message: `Which ${highlight("components")} would you like to add?`,
-                options: registryIndex.map((v) => ({ label: v.name, value: v.name })),
+                message: `Which ${highlight("components")} would you like to update?`,
+                options: registryIndex.map((entry) => ({ label: entry.name, value: entry.name })),
                 maxItems: 10
               })
           },
@@ -75,7 +76,7 @@ export const add = new Command()
       const payload = await fetchRegistryItems(tree, "ui")
 
       if (!payload.length) {
-        p.log.warn(`Selected components not found. Exiting.`)
+        p.log.warn(`Selected components not found in registry. Exiting.`)
         process.exit(0)
       }
 
@@ -84,7 +85,7 @@ export const add = new Command()
         config,
         payload,
         selectedNames: selectedComponents,
-        overwrite: options.overwrite || options.yes,
+        overwrite: true,
         kind: "ui"
       })
     } catch (e) {

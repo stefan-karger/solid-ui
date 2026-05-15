@@ -99,3 +99,70 @@ fs.writeFileSync(
   JSON.stringify(uiPayload, null, 2),
   "utf-8"
 )
+
+// #######################################
+//    BUILD registry/block/[name].json
+// #######################################
+
+const blocksDir = path.join(REGISTRY_PATH, "block")
+if (!fs.existsSync(blocksDir)) {
+  fs.mkdirSync(blocksDir, { recursive: true })
+}
+
+for (const item of result.output) {
+  if (item.type !== "block") {
+    continue
+  }
+
+  const files = item.files?.map((file) => {
+    const content = fs
+      .readFileSync(path.join(process.cwd(), "src", "registry", file.path), "utf8")
+      .replaceAll("\r\n", "\n")
+
+    const relativePath =
+      file.path.replace(new RegExp(`^block/${item.name}/`), "") || path.basename(file.path)
+
+    return {
+      name: relativePath,
+      content,
+      target: file.target
+    }
+  })
+
+  const payload = {
+    ...item,
+    files
+  }
+
+  fs.writeFileSync(
+    path.join(blocksDir, `${item.name}.json`),
+    JSON.stringify(payload, null, 2),
+    "utf8"
+  )
+}
+
+// #######################################
+//    BUILD registry/blocks/index.json
+// #######################################
+
+const blockPayload = result.output
+  .filter((item) => item.type === "block")
+  .map((item) => ({
+    name: item.name,
+    description: item.description,
+    type: item.type,
+    dependencies: item.dependencies,
+    registryDependencies: item.registryDependencies,
+    files: item.files.map((file) => file.path)
+  }))
+
+const blocksIndexDir = path.join(REGISTRY_PATH, "blocks")
+if (!fs.existsSync(blocksIndexDir)) {
+  fs.mkdirSync(blocksIndexDir, { recursive: true })
+}
+
+fs.writeFileSync(
+  path.join(blocksIndexDir, "index.json"),
+  JSON.stringify(blockPayload, null, 2),
+  "utf-8"
+)
