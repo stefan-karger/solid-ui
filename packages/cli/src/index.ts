@@ -2,7 +2,9 @@
 import { Command } from "commander"
 
 import { add } from "~/commands/add"
+import { addBlock } from "~/commands/add-block"
 import { init } from "~/commands/init"
+import { update } from "~/commands/update"
 import { getPackageInfo } from "~/utils/get-package-info"
 
 process.on("SIGINT", () => process.exit(0))
@@ -19,6 +21,8 @@ async function main() {
     .version(packageInfo.version || "0.0.0", "-v, --version", "display the version number")
     .addCommand(init)
     .addCommand(add)
+    .addCommand(addBlock)
+    .addCommand(update)
     .parse()
 }
 

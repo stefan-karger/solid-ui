@@ -1,38 +1,48 @@
 <MDXHeader title="CLI" description="Use the CLI to add components to your project." />
 
+## Environment
+
+| Variable | Description |
+| -------- | ----------- |
+| `SOLIDUI_REGISTRY_URL` | Override registry host (default `https://www.solid-ui.com`). Use when testing a fork or a pinned docs deploy. |
+
 ## init
-
-Use the `init` command to initialize configuration and dependencies for a new project.
-
-The `init` command installs dependencies, adds the `cn` util, configures `tailwind.config.cjs`, and CSS variables for the project.
 
 ```bash
 npx solidui-cli@latest init
 ```
 
-It also creates a `ui.config.json` file which houses all Solid UI configurations. Feel free to change where you would like your components to be stored by modifying the `componentDir` property.
+Flags:
+
+- `-y, --yes` — use default paths and TypeScript without prompts
+- `--with-color-mode` — install `@kobalte/core` and write `COLOR_MODE.md` setup snippets
+- `--with-tailwind` — install `tailwindcss`, `postcss`, `autoprefixer` (dev) and create `postcss.config.cjs` if missing
+
+Creates `ui.config.json` with `aliases.components` (default `~/components/ui`) and `aliases.utils` (default `~/lib/utils`).
 
 ## add
 
-Use the `add` command to add components and dependencies to your project.
+```bash
+npx solidui-cli@latest add button mode-toggle
+```
+
+- `-o, --overwrite` — replace existing component files
+- `-y, --yes` — treat as overwrite when files exist (skip confirm)
+- `-a, --all` — install every UI component (large)
+
+## add-block
 
 ```bash
-npx solidui-cli@latest add [component]
+npx solidui-cli@latest add-block sidebar-01
 ```
 
-You will be presented with a list of components to choose from:
+Installs multi-file layouts using `target` paths from the registry (e.g. SolidStart `src/routes/...`). UI `registryDependencies` are installed automatically.
 
-```txt
-Which components would you like to add? › Space to select. A to toggle all.
-Enter to submit.
+## update
 
-◯  accordion
-◯  avatar
-◯  badge
-◯  button
-◯  callout
-◯  card
-◯  charts
-◯  checkbox
-◯  dialog
+```bash
+npx solidui-cli@latest update button
+npx solidui-cli@latest update --all
 ```
+
+Re-fetches components from the registry and overwrites files (same as `add` with overwrite).

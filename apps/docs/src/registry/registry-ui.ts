@@ -314,6 +314,18 @@ export const ui: Registry = [
     ]
   },
   {
+    name: "mode-toggle",
+    type: "ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "ui/mode-toggle.tsx",
+        type: "ui"
+      }
+    ]
+  },
+  {
     name: "navigation-menu",
     type: "ui",
     dependencies: ["@kobalte/core"],

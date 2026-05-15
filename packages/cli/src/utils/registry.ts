@@ -1,54 +1,65 @@
 import * as v from "valibot"
 
-const BASE_URL = "https://www.solid-ui.com"
+export function getRegistryBaseUrl() {
+  const fromEnv = process.env.SOLIDUI_REGISTRY_URL?.replace(/\/$/, "")
+  return fromEnv ?? "https://www.solid-ui.com"
+}
 
 export const RegistryIndexSchema = v.array(
   v.object({
     name: v.string(),
     dependencies: v.optional(v.array(v.string())),
     registryDependencies: v.optional(v.array(v.string())),
-    files: v.array(v.string()),
-    type: v.picklist(["ui", "example"])
+    files: v.optional(v.array(v.string())),
+    type: v.picklist(["ui", "block", "example"])
   })
 )
 
 export type RegistryIndex = v.InferOutput<typeof RegistryIndexSchema>
 
+export const RegistryItemFileSchema = v.object({
+  name: v.string(),
+  content: v.string(),
+  target: v.optional(v.string())
+})
+
 export const RegistryItemSchema = v.object({
   name: v.string(),
   dependencies: v.optional(v.array(v.string())),
-  files: v.array(
-    v.object({
-      name: v.string(),
-      content: v.string()
-    })
-  ),
-  type: v.picklist(["ui", "example"])
+  registryDependencies: v.optional(v.array(v.string())),
+  files: v.array(RegistryItemFileSchema),
+  type: v.picklist(["ui", "block", "example"])
 })
 
 export type RegistryItem = v.InferOutput<typeof RegistryItemSchema>
 
 async function fetchRegistry(paths: string[]) {
+  const baseUrl = getRegistryBaseUrl()
   try {
     const results = await Promise.all(
-      paths.map(async (path) => {
-        const response = await fetch(`${BASE_URL}/registry/${path}`)
+      paths.map(async (registryPath) => {
+        const response = await fetch(`${baseUrl}/registry/${registryPath}`)
+        if (!response.ok) {
+          throw new Error(`${response.status} ${response.statusText}`)
+        }
         return await response.json()
       })
     )
     return results
   } catch (e) {
     console.log(e)
-    throw new Error(`Failed to fetch registry from ${BASE_URL}.`)
+    throw new Error(`Failed to fetch registry from ${baseUrl}.`)
   }
 }
 
-export async function getRegistryIndex() {
+export async function getRegistryIndex(kind: "ui" | "block" = "ui") {
   try {
-    const [result] = await fetchRegistry(["index.json"])
-    return v.parse(RegistryIndexSchema, result).filter((item) => item.type === "ui")
+    const indexPath = kind === "ui" ? "index.json" : "blocks/index.json"
+    const [result] = await fetchRegistry([indexPath])
+    const parsed = v.parse(RegistryIndexSchema, result)
+    return parsed.filter((item) => item.type === kind)
   } catch (e) {
-    throw new Error(`Failed to fetch components from registry.`)
+    throw new Error(`Failed to fetch ${kind} components from registry.`)
   }
 }
 
@@ -69,15 +80,15 @@ export async function resolveTree(index: RegistryIndex, names: string[]) {
     }
   }
 
-  // filter out duplicates
   return tree.filter(
     (component, idx, self) => self.findIndex((c) => c.name === component.name) === idx
   )
 }
 
-export async function fetchTree(tree: RegistryIndex) {
+export async function fetchRegistryItems(tree: RegistryIndex, kind: "ui" | "block") {
   try {
-    const paths = tree.map((item) => `ui/${item.name}.json`)
+    const prefix = kind === "ui" ? "ui" : "block"
+    const paths = tree.map((item) => `${prefix}/${item.name}.json`)
     const results = await fetchRegistry(paths)
 
     return v.parse(v.array(RegistryItemSchema), results)

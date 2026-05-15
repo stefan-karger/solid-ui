@@ -37,17 +37,19 @@ export default function App() {
 }
 ```
 
-### Add needed components
-
-Make sure you have the `button` and `dropdown-menu` components installed.
-
-```bash
-npx solidui-cli@latest add button dropdown-menu
-```
-
 ### Add a mode toggle
 
-Place a mode toggle on your site to toggle between light and dark mode.
+Install the mode toggle (pulls in `button` and `dropdown-menu` automatically) and place it in your layout.
+
+```bash
+npx solidui-cli@latest add mode-toggle
+```
+
+```tsx
+import { ModeToggle } from "~/components/ui/mode-toggle"
+```
+
+Place a mode toggle on your site to toggle between light, dark, and system mode.
 
 <ComponentPreview name="mode-toggle" />
 

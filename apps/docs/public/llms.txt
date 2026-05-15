@@ -1,0 +1,33 @@
+# solid-ui
+
+> Unofficial SolidJS port of shadcn/ui — copy-paste components (Kobalte, corvu, Tailwind).
+
+## Docs
+
+- Site: https://www.solid-ui.com
+- Introduction: https://www.solid-ui.com/docs/introduction
+- CLI: https://www.solid-ui.com/docs/cli
+- Installation (SolidStart): https://www.solid-ui.com/docs/installation/solid-start
+- Dark mode (SolidStart): https://www.solid-ui.com/docs/dark-mode/solid-start
+- Registry index: https://www.solid-ui.com/registry/index.json
+
+## CLI
+
+```bash
+npx solidui-cli@latest init
+npx solidui-cli@latest init -y --with-color-mode --with-tailwind
+npx solidui-cli@latest add button mode-toggle
+npx solidui-cli@latest add-block sidebar-01
+npx solidui-cli@latest update button
+```
+
+Environment: `SOLIDUI_REGISTRY_URL` overrides the registry host.
+
+## Stack
+
+- SolidJS, Kobalte, corvu, Tailwind CSS
+- CLI scaffolds Tailwind v3 (`tailwind.config.cjs`); docs app may use Tailwind v4
+
+## Repository
+
+https://github.com/stefan-karger/solid-ui

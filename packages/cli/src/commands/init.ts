@@ -29,17 +29,36 @@ const PROJECT_DEPENDENCIES = [
   "tailwind-merge"
 ]
 
+const COLOR_MODE_DEPENDENCIES = ["@kobalte/core"]
+
+const TAILWIND_DEV_DEPENDENCIES = ["tailwindcss", "postcss", "autoprefixer"]
+
 const initOptionsSchema = v.object({
-  cwd: v.string()
+  cwd: v.string(),
+  yes: v.boolean(),
+  withColorMode: v.boolean(),
+  withTailwind: v.boolean()
 })
 
 export const init = new Command()
   .name("init")
   .description("initialize your project and install dependencies")
   .option("-c, --cwd <cwd>", "the working directory", process.cwd())
+  .option("-y, --yes", "use defaults without prompts", false)
+  .option("--with-color-mode", "install @kobalte/core and write COLOR_MODE.md snippets", false)
+  .option(
+    "--with-tailwind",
+    "also install tailwindcss, postcss, and autoprefixer (devDependencies)",
+    false
+  )
   .action(async (opts) => {
     try {
-      const options = v.parse(initOptionsSchema, opts)
+      const options = v.parse(initOptionsSchema, {
+        cwd: opts.cwd,
+        yes: opts.yes ?? false,
+        withColorMode: opts.withColorMode ?? false,
+        withTailwind: opts.withTailwind ?? false
+      })
 
       const cwd = path.resolve(options.cwd)
       if (!existsSync(cwd)) {
@@ -49,7 +68,7 @@ export const init = new Command()
       const info = getPackageInfo()
       p.intro(headline(` ${info.name} - ${info.version} `))
 
-      const rawConfig = await promptForConfig()
+      const rawConfig = options.yes ? getDefaultConfig() : await promptForConfig()
 
       const spinner = p.spinner()
       spinner.start(`Creating ui.config.json...`)
@@ -63,12 +82,11 @@ export const init = new Command()
 
       spinner.start(`Initializing project...`)
 
-      // make sure all the directories exist
       for (const [key, resolvedPath] of Object.entries(config.resolvedPaths)) {
         let dirname = path.extname(resolvedPath) ? path.dirname(resolvedPath) : resolvedPath
 
         if (key === "utils" && resolvedPath.endsWith("/utils")) {
-          dirname = dirname.replace(/\/utils$/, "") // remove /utils at the end
+          dirname = dirname.replace(/\/utils$/, "")
         }
 
         if (!existsSync(dirname)) {
@@ -92,26 +110,77 @@ export const init = new Command()
         "utf-8"
       )
 
+      if (options.withColorMode) {
+        await writeFile(path.resolve(cwd, "COLOR_MODE.md"), templates.COLOR_MODE_SNIPPETS, "utf-8")
+      }
+
       spinner.stop(`Project initialized.`)
 
       spinner.start(`Installing dependencies...`)
 
       const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, [
-        "add",
-        packageManager === "deno" ? "--npm" : "",
-        ...PROJECT_DEPENDENCIES,
-      ], { cwd });
+      const deps = [...PROJECT_DEPENDENCIES]
+      if (options.withColorMode) {
+        deps.push(...COLOR_MODE_DEPENDENCIES)
+      }
+
+      await execa(
+        packageManager,
+        ["add", packageManager === "deno" ? "--npm" : "", ...deps],
+        { cwd }
+      )
+
+      if (options.withTailwind) {
+        const postcssPath = path.resolve(cwd, "postcss.config.cjs")
+        if (!existsSync(postcssPath)) {
+          await writeFile(postcssPath, templates.POSTCSS_CONFIG, "utf-8")
+        }
+        await execa(
+          packageManager,
+          [
+            "add",
+            "-D",
+            packageManager === "deno" ? "--npm" : "",
+            ...TAILWIND_DEV_DEPENDENCIES
+          ],
+          { cwd }
+        )
+      }
 
       spinner.stop(`Dependencies installed.`)
 
-      p.outro(
-        `${highlight("Success!")} Project initialization completed. You may now add components.`
-      )
+      const outroLines = [
+        `${highlight("Success!")} Project initialization completed. You may now add components.`,
+        `Registry URL: ${highlight(process.env.SOLIDUI_REGISTRY_URL ?? "https://www.solid-ui.com")}`
+      ]
+      if (options.withColorMode) {
+        outroLines.push(`See ${highlight("COLOR_MODE.md")} for ColorModeProvider setup.`)
+      }
+      if (options.withTailwind) {
+        outroLines.push(`Add PostCSS config if missing: postcss.config.cjs with tailwindcss + autoprefixer.`)
+      }
+
+      p.outro(outroLines.join("\n"))
     } catch (e) {
       handleError(e)
     }
   })
+
+function getDefaultConfig(): RawConfig {
+  return v.parse(RawConfigSchema, {
+    $schema: "https://solid-ui.com/schema.json",
+    tsx: true,
+    tailwind: {
+      css: DEFAULT_CSS_FILE,
+      config: DEFAULT_TAILWIND_CONFIG,
+      prefix: DEFAULT_TAILWIND_PREFIX
+    },
+    aliases: {
+      components: DEFAULT_COMPONENTS,
+      utils: DEFAULT_UTILS
+    }
+  })
+}
 
 async function promptForConfig(): Promise<RawConfig> {
   const options = await p.group(

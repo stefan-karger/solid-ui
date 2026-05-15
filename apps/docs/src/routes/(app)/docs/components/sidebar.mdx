@@ -29,6 +29,16 @@ Customizable.
 npx solidui-cli@latest add sidebar
 ```
 
+For the full example layout (SolidStart paths):
+
+```bash
+npx solidui-cli@latest add-block sidebar-01
+```
+
+<Callout type="note">
+  `solidui-cli init` scaffolds **Tailwind CSS v3**. The sidebar component uses `w-[var(--sidebar-width)]` and other v3-compatible arbitrary values. The solid-ui.com docs app runs Tailwind v4 separately.
+</Callout>
+
 <Step>Add the following colors to your CSS file</Step>
 
 ```css title="app.css"
