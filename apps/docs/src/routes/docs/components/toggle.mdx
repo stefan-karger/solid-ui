@@ -1,0 +1,153 @@
+---
+title: Toggle
+description: A two-state button that can be either on or off.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/toggle-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add toggle
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/toggle.tsx" showLineNumbers
+
+```
+
+## Examples
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-outline" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-outline" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Text
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-with-text" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-with-text" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Size
+
+Use the `size` prop to change the size of the toggle.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-sizes" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-sizes" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Toggle
+
+The `Toggle` component is a wrapper around the `button` element that adds a variety of styles and the toggling functionality.
+
+| Prop             | Type                                                                          | Default     |
+| ---------------- | ----------------------------------------------------------------------------- | ----------- |
+| `variant`        | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"` | `"default"` |
+| `size`           | `"default" \| "sm" \| "lg"`                                                   | `"default"` |
+| `as`             | `ValidComponent`                                                              |             |
+| `children`       | `Element \| (state: ToggleButtonRootState) => Element \| null \| undefined`   |             |
+| `pressed`        | `boolean \| undefined`                                                        |             |
+| `defaultPressed` | `boolean \| undefined`                                                        |             |
+| `onChange`       | `(pressed: boolean) => void \| undefined`                                     |             |
+| `onClick`        | `(e: Event) => void \| undefined`                                             |             |
+| `disabled`       | `boolean \| undefined`                                                        |             |
