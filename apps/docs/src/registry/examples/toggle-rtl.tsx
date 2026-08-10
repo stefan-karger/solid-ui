@@ -24,7 +24,7 @@
 //     },
 //   },
 // }
-// export function ToggleRtl() {
+// export default function ToggleRtl() {
 //   const { dir, t } = useTranslation(translations, "ar")
 //   return (
 //     <Toggle aria-label="Toggle bookmark" size="sm" variant="outline" dir={dir}>
