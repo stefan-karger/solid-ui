@@ -382,6 +382,34 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle": {
+    name: "toggle",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/toggle.tsx")),
+    files: [{
+      path: "registry/ui/toggle.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group": {
+    name: "toggle-group",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/ui/toggle-group.tsx")),
+    files: [{
+      path: "registry/ui/toggle-group.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -1390,6 +1418,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle-demo": {
+    name: "toggle-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-demo.tsx")),
+    files: [{
+      path: "registry/examples/toggle-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs-line": {
     name: "tabs-line",
     description: "",
@@ -1398,6 +1440,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-line.tsx")),
     files: [{
       path: "registry/examples/tabs-line.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-outline": {
+    name: "toggle-outline",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-outline.tsx")),
+    files: [{
+      path: "registry/examples/toggle-outline.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1418,6 +1474,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle-with-text": {
+    name: "toggle-with-text",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-with-text.tsx")),
+    files: [{
+      path: "registry/examples/toggle-with-text.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs-disabled": {
     name: "tabs-disabled",
     description: "",
@@ -1426,6 +1496,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-disabled.tsx")),
     files: [{
       path: "registry/examples/tabs-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-sizes": {
+    name: "toggle-sizes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-sizes.tsx")),
+    files: [{
+      path: "registry/examples/toggle-sizes.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1446,6 +1530,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle-disabled": {
+    name: "toggle-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-disabled.tsx")),
+    files: [{
+      path: "registry/examples/toggle-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs-rtl": {
     name: "tabs-rtl",
     description: "",
@@ -1454,6 +1552,132 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-rtl.tsx")),
     files: [{
       path: "registry/examples/tabs-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-rtl": {
+    name: "toggle-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle","rtl"],
+    component: lazy(() => import("~/registry/examples/toggle-rtl.tsx")),
+    files: [{
+      path: "registry/examples/toggle-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-demo": {
+    name: "toggle-group-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-demo.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-outline": {
+    name: "toggle-group-outline",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-outline.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-outline.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-sizes": {
+    name: "toggle-group-sizes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-sizes.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-sizes.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-spacing": {
+    name: "toggle-group-spacing",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-spacing.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-spacing.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-vertical": {
+    name: "toggle-group-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-vertical.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-disabled": {
+    name: "toggle-group-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    component: lazy(() => import("~/registry/examples/toggle-group-disabled.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-custom": {
+    name: "toggle-group-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group","field"],
+    component: lazy(() => import("~/registry/examples/toggle-group-custom.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-rtl": {
+    name: "toggle-group-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group","rtl"],
+    component: lazy(() => import("~/registry/examples/toggle-group-rtl.tsx")),
+    files: [{
+      path: "registry/examples/toggle-group-rtl.tsx",
       type: "registry:example",
       target: ""
     }],

@@ -137,6 +137,14 @@ export const docsConfig: Config = {
           href: "/docs/components/tabs"
         },
         {
+          title: "Toggle",
+          href: "/docs/components/toggle"
+        },
+        {
+          title: "Toggle Group",
+          href: "/docs/components/toggle-group"
+        },
+        {
           title: "Tooltip",
           href: "/docs/components/tooltip"
         }
