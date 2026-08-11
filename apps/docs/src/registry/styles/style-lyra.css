@@ -654,11 +654,11 @@
   }
 
   .cn-item-size-xs {
-    @apply gap-2 px-2.5 py-2 [[data-slot=dropdown-menu-content]_&]:p-0;
+    @apply gap-2 px-2.5 py-2 in-data-[slot=dropdown-menu-content]:p-0;
   }
 
   .cn-item-media {
-    @apply gap-2 group-has-[[data-slot=item-description]]/item:translate-y-0.5 group-has-[[data-slot=item-description]]/item:self-start;
+    @apply gap-2 group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start;
   }
 
   .cn-item-media-variant-default {
@@ -698,7 +698,7 @@
   }
 
   .cn-item-group {
-    @apply gap-4 has-[[data-size=sm]]:gap-2.5 has-[[data-size=xs]]:gap-2;
+    @apply gap-4 has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2;
   }
 
   .cn-item-separator {
