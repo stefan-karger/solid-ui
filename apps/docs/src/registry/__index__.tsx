@@ -368,6 +368,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "tabs": {
+    name: "tabs",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/tabs.tsx")),
+    files: [{
+      path: "registry/ui/tabs.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -1356,6 +1370,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/switch-demo.tsx")),
     files: [{
       path: "registry/examples/switch-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-demo": {
+    name: "tabs-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs","card"],
+    component: lazy(() => import("~/registry/examples/tabs-demo.tsx")),
+    files: [{
+      path: "registry/examples/tabs-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-line": {
+    name: "tabs-line",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    component: lazy(() => import("~/registry/examples/tabs-line.tsx")),
+    files: [{
+      path: "registry/examples/tabs-line.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-vertical": {
+    name: "tabs-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    component: lazy(() => import("~/registry/examples/tabs-vertical.tsx")),
+    files: [{
+      path: "registry/examples/tabs-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-disabled": {
+    name: "tabs-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    component: lazy(() => import("~/registry/examples/tabs-disabled.tsx")),
+    files: [{
+      path: "registry/examples/tabs-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-icons": {
+    name: "tabs-icons",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    component: lazy(() => import("~/registry/examples/tabs-icons.tsx")),
+    files: [{
+      path: "registry/examples/tabs-icons.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-rtl": {
+    name: "tabs-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs","card","rtl"],
+    component: lazy(() => import("~/registry/examples/tabs-rtl.tsx")),
+    files: [{
+      path: "registry/examples/tabs-rtl.tsx",
       type: "registry:example",
       target: ""
     }],

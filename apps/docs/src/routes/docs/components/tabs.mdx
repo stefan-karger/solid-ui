@@ -1,0 +1,146 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/tabs-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add tabs
+```
+
+### Manual
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/tabs.tsx" showLineNumbers
+
+```
+
+## Composition
+
+Use the following composition to build `Tabs`:
+
+```plaintext
+Tabs
+├── TabsList
+│   ├── TabsTrigger
+│   └── TabsTrigger
+├── TabsContent
+└── TabsContent
+```
+
+## Examples
+
+### Line
+
+Use the `variant="line"` prop on `TabsList` for a line style.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-line" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tabs-line" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Vertical
+
+Use `orientation="vertical"` for vertical tabs.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-vertical" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tabs-vertical" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tabs-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icons
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-icons" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tabs-icons" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="tabs-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tabs-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte UI Tabs](https://kobalte.dev/docs/core/components/tabs) documentation.
