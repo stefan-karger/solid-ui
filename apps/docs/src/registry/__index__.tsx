@@ -382,6 +382,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "spinner": {
+    name: "spinner",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/spinner.tsx")),
+    files: [{
+      path: "registry/ui/spinner.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "switch": {
     name: "switch",
     description: "",
@@ -1636,6 +1650,118 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/slider-demo.tsx")),
     files: [{
       path: "registry/examples/slider-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-demo": {
+    name: "spinner-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","item"],
+    component: lazy(() => import("~/registry/examples/spinner-demo.tsx")),
+    files: [{
+      path: "registry/examples/spinner-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-custom": {
+    name: "spinner-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    component: lazy(() => import("~/registry/examples/spinner-custom.tsx")),
+    files: [{
+      path: "registry/examples/spinner-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-size": {
+    name: "spinner-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    component: lazy(() => import("~/registry/examples/spinner-size.tsx")),
+    files: [{
+      path: "registry/examples/spinner-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-button": {
+    name: "spinner-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","button"],
+    component: lazy(() => import("~/registry/examples/spinner-button.tsx")),
+    files: [{
+      path: "registry/examples/spinner-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-badge": {
+    name: "spinner-badge",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","badge"],
+    component: lazy(() => import("~/registry/examples/spinner-badge.tsx")),
+    files: [{
+      path: "registry/examples/spinner-badge.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-input-group": {
+    name: "spinner-input-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","input-group"],
+    component: lazy(() => import("~/registry/examples/spinner-input-group.tsx")),
+    files: [{
+      path: "registry/examples/spinner-input-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-empty": {
+    name: "spinner-empty",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","button","empty"],
+    component: lazy(() => import("~/registry/examples/spinner-empty.tsx")),
+    files: [{
+      path: "registry/examples/spinner-empty.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-rtl": {
+    name: "spinner-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","item","rtl"],
+    component: lazy(() => import("~/registry/examples/spinner-rtl.tsx")),
+    files: [{
+      path: "registry/examples/spinner-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
