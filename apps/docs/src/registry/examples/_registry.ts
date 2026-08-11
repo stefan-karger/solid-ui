@@ -718,6 +718,72 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "kbd-demo",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [
+      {
+        path: "examples/kbd-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-group",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [
+      {
+        path: "examples/kbd-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-button",
+    type: "registry:example",
+    registryDependencies: ["kbd", "button"],
+    files: [
+      {
+        path: "examples/kbd-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-tooltip",
+    type: "registry:example",
+    registryDependencies: ["kbd", "button", "button-group", "tooltip"],
+    files: [
+      {
+        path: "examples/kbd-tooltip.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-input-group",
+    type: "registry:example",
+    registryDependencies: ["kbd", "input-group"],
+    files: [
+      {
+        path: "examples/kbd-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-rtl",
+    type: "registry:example",
+    registryDependencies: ["kbd", "rtl"],
+    files: [
+      {
+        path: "examples/kbd-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],
