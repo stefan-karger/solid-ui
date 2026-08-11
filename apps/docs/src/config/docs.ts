@@ -129,6 +129,10 @@ export const docsConfig: Config = {
           href: "/docs/components/slider"
         },
         {
+          title: "Spinner",
+          href: "/docs/components/spinner"
+        },
+        {
           title: "Switch",
           href: "/docs/components/switch"
         },

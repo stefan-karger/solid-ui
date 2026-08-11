@@ -872,6 +872,94 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "spinner-demo",
+    type: "registry:example",
+    registryDependencies: ["spinner", "item"],
+    files: [
+      {
+        path: "examples/spinner-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-custom",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    files: [
+      {
+        path: "examples/spinner-custom.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-size",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    files: [
+      {
+        path: "examples/spinner-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-button",
+    type: "registry:example",
+    registryDependencies: ["spinner", "button"],
+    files: [
+      {
+        path: "examples/spinner-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-badge",
+    type: "registry:example",
+    registryDependencies: ["spinner", "badge"],
+    files: [
+      {
+        path: "examples/spinner-badge.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-input-group",
+    type: "registry:example",
+    registryDependencies: ["spinner", "input-group"],
+    files: [
+      {
+        path: "examples/spinner-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-empty",
+    type: "registry:example",
+    registryDependencies: ["spinner", "button", "empty"],
+    files: [
+      {
+        path: "examples/spinner-empty.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-rtl",
+    type: "registry:example",
+    registryDependencies: ["spinner", "item", "rtl"],
+    files: [
+      {
+        path: "examples/spinner-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "switch-demo",
     type: "registry:example",
     registryDependencies: ["switch", "label"],
