@@ -326,6 +326,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "separator": {
+    name: "separator",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/separator.tsx")),
+    files: [{
+      path: "registry/ui/separator.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "skeleton": {
     name: "skeleton",
     description: "",
@@ -1362,6 +1376,76 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "separator-demo": {
+    name: "separator-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-demo.tsx")),
+    files: [{
+      path: "registry/examples/separator-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-vertical": {
+    name: "separator-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-vertical.tsx")),
+    files: [{
+      path: "registry/examples/separator-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-menu": {
+    name: "separator-menu",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-menu.tsx")),
+    files: [{
+      path: "registry/examples/separator-menu.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-list": {
+    name: "separator-list",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/examples/separator-list.tsx")),
+    files: [{
+      path: "registry/examples/separator-list.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "separator-rtl": {
+    name: "separator-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["separator","rtl"],
+    component: lazy(() => import("~/registry/examples/separator-rtl.tsx")),
+    files: [{
+      path: "registry/examples/separator-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "skeleton-demo": {
     name: "skeleton-demo",
     description: "",
@@ -1418,20 +1502,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "toggle-demo": {
-    name: "toggle-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["toggle"],
-    component: lazy(() => import("~/registry/examples/toggle-demo.tsx")),
-    files: [{
-      path: "registry/examples/toggle-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "tabs-line": {
     name: "tabs-line",
     description: "",
@@ -1440,20 +1510,6 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-line.tsx")),
     files: [{
       path: "registry/examples/tabs-line.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "toggle-outline": {
-    name: "toggle-outline",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["toggle"],
-    component: lazy(() => import("~/registry/examples/toggle-outline.tsx")),
-    files: [{
-      path: "registry/examples/toggle-outline.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1474,20 +1530,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "toggle-with-text": {
-    name: "toggle-with-text",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["toggle"],
-    component: lazy(() => import("~/registry/examples/toggle-with-text.tsx")),
-    files: [{
-      path: "registry/examples/toggle-with-text.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "tabs-disabled": {
     name: "tabs-disabled",
     description: "",
@@ -1496,20 +1538,6 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-disabled.tsx")),
     files: [{
       path: "registry/examples/tabs-disabled.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "toggle-sizes": {
-    name: "toggle-sizes",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["toggle"],
-    component: lazy(() => import("~/registry/examples/toggle-sizes.tsx")),
-    files: [{
-      path: "registry/examples/toggle-sizes.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1530,20 +1558,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "toggle-disabled": {
-    name: "toggle-disabled",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["toggle"],
-    component: lazy(() => import("~/registry/examples/toggle-disabled.tsx")),
-    files: [{
-      path: "registry/examples/toggle-disabled.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "tabs-rtl": {
     name: "tabs-rtl",
     description: "",
@@ -1552,6 +1566,76 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-rtl.tsx")),
     files: [{
       path: "registry/examples/tabs-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-demo": {
+    name: "toggle-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-demo.tsx")),
+    files: [{
+      path: "registry/examples/toggle-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-outline": {
+    name: "toggle-outline",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-outline.tsx")),
+    files: [{
+      path: "registry/examples/toggle-outline.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-with-text": {
+    name: "toggle-with-text",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-with-text.tsx")),
+    files: [{
+      path: "registry/examples/toggle-with-text.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-sizes": {
+    name: "toggle-sizes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-sizes.tsx")),
+    files: [{
+      path: "registry/examples/toggle-sizes.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-disabled": {
+    name: "toggle-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle"],
+    component: lazy(() => import("~/registry/examples/toggle-disabled.tsx")),
+    files: [{
+      path: "registry/examples/toggle-disabled.tsx",
       type: "registry:example",
       target: ""
     }],
