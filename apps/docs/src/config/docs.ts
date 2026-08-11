@@ -117,6 +117,10 @@ export const docsConfig: Config = {
           href: "/docs/components/item"
         },
         {
+          title: "Kbd",
+          href: "/docs/components/kbd"
+        },
+        {
           title: "Label",
           href: "/docs/components/label"
         },
