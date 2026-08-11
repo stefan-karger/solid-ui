@@ -109,6 +109,10 @@ export const docsConfig: Config = {
           href: "/docs/components/input-group"
         },
         {
+          title: "Item",
+          href: "/docs/components/item"
+        },
+        {
           title: "Label",
           href: "/docs/components/label"
         },

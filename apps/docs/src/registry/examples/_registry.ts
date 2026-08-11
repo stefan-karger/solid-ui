@@ -707,6 +707,127 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "item-demo",
+    type: "registry:example",
+    registryDependencies: ["item", "button"],
+    files: [
+      {
+        path: "examples/item-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-variant",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-variant.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-size",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-icon",
+    type: "registry:example",
+    registryDependencies: ["item", "button"],
+    files: [
+      {
+        path: "examples/item-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-avatar",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "item"],
+    files: [
+      {
+        path: "examples/item-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-image",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-image.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-group",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "item"],
+    files: [
+      {
+        path: "examples/item-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-header",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-header.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-link",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-link.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-dropdown",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "dropdown-menu", "item"],
+    files: [
+      {
+        path: "examples/item-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-rtl",
+    type: "registry:example",
+    registryDependencies: ["button", "item", "rtl"],
+    files: [
+      {
+        path: "examples/item-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "label-demo",
     type: "registry:example",
     registryDependencies: ["label", "checkbox"],
