@@ -101,6 +101,10 @@ export const docsConfig: Config = {
           href: "/docs/components/dropdown-menu"
         },
         {
+          title: "Empty",
+          href: "/docs/components/empty"
+        },
+        {
           title: "Field",
           href: "/docs/components/field"
         },
@@ -111,6 +115,10 @@ export const docsConfig: Config = {
         {
           title: "Item",
           href: "/docs/components/item"
+        },
+        {
+          title: "Kbd",
+          href: "/docs/components/kbd"
         },
         {
           title: "Label",
