@@ -1044,7 +1044,7 @@ export const Index: Record<string, any> = {
     name: "drawer-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer","buton","field","radio-group","use-mobile"],
+    registryDependencies: ["drawer","badge","button","field","radio-group","use-mobile"],
     component: lazy(() => import("~/registry/examples/drawer-demo.tsx")),
     files: [{
       path: "registry/examples/drawer-demo.tsx",
