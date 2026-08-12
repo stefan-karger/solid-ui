@@ -522,6 +522,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "table": {
+    name: "table",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/table.tsx")),
+    files: [{
+      path: "registry/ui/table.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs": {
     name: "tabs",
     description: "",
@@ -2700,6 +2714,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/switch-demo.tsx")),
     files: [{
       path: "registry/examples/switch-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "table-demo": {
+    name: "table-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    component: lazy(() => import("~/registry/examples/table-demo.tsx")),
+    files: [{
+      path: "registry/examples/table-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "table-footer": {
+    name: "table-footer",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    component: lazy(() => import("~/registry/examples/table-footer.tsx")),
+    files: [{
+      path: "registry/examples/table-footer.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "table-actions": {
+    name: "table-actions",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","dropdown-menu","button"],
+    component: lazy(() => import("~/registry/examples/table-actions.tsx")),
+    files: [{
+      path: "registry/examples/table-actions.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "table-rtl": {
+    name: "table-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["table","rtl"],
+    component: lazy(() => import("~/registry/examples/table-rtl.tsx")),
+    files: [{
+      path: "registry/examples/table-rtl.tsx",
       type: "registry:example",
       target: ""
     }],

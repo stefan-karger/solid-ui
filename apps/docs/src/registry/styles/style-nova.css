@@ -1206,12 +1206,24 @@
     @apply hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors;
   }
 
+  .cn-table-row-aria {
+    @apply data-selected:bg-muted;
+  }
+
   .cn-table-head {
     @apply text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0;
   }
 
+  .cn-table-head-aria {
+    @apply [&:has([data-slot=checkbox])]:pr-0;
+  }
+
   .cn-table-cell {
     @apply p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0;
+  }
+
+  .cn-table-cell-aria {
+    @apply [&:has([data-slot=checkbox])]:pr-0;
   }
 
   .cn-table-caption {

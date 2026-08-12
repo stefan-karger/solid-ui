@@ -181,6 +181,10 @@ export const docsConfig: Config = {
           href: "/docs/components/switch"
         },
         {
+          title: "Table",
+          href: "/docs/components/table"
+        },
+        {
           title: "Tabs",
           href: "/docs/components/tabs"
         },
