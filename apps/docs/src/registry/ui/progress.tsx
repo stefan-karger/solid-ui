@@ -22,7 +22,9 @@ const Progress = <T extends ValidComponent = "div">(
       data-slot="progress"
       {...others}
     >
-      {local.children}
+      <div class="flex flex-1">
+        {local.children}
+      </div>
       <ProgressPrimitive.Track class="cn-progress-track relative h-2 w-full overflow-hidden rounded-full bg-secondary">
         <ProgressPrimitive.Fill class="cn-progress-indicator h-full w-(--kb-progress-fill-width) flex-1 bg-primary transition-all" />
       </ProgressPrimitive.Track>

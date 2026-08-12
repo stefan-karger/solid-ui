@@ -870,7 +870,7 @@
 
   /* MARK: Progress */
   .cn-progress {
-    @apply bg-muted h-1 rounded-none;
+    @apply grid gap-2;
   }
 
   .cn-progress-track {

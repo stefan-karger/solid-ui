@@ -891,7 +891,7 @@
 
   /* MARK: Progress */
   .cn-progress {
-    @apply bg-muted h-1.5 rounded-full;
+    @apply grid gap-2;
   }
 
   .cn-progress-track {
