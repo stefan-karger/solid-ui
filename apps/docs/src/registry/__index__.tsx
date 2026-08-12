@@ -214,6 +214,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "drawer": {
+    name: "drawer",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/drawer.tsx")),
+    files: [{
+      path: "registry/ui/drawer.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "context-menu": {
     name: "context-menu",
     description: "",
@@ -1216,6 +1230,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/context-menu-radio-group.tsx")),
     files: [{
       path: "registry/examples/context-menu-radio-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-demo": {
+    name: "drawer-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer","buton","field","radio-group","use-mobile"],
+    component: lazy(() => import("~/registry/examples/drawer-demo.tsx")),
+    files: [{
+      path: "registry/examples/drawer-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-position": {
+    name: "drawer-position",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer","button"],
+    component: lazy(() => import("~/registry/examples/drawer-position.tsx")),
+    files: [{
+      path: "registry/examples/drawer-position.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-nested": {
+    name: "drawer-nested",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer","button","use-mobile"],
+    component: lazy(() => import("~/registry/examples/drawer-nested.tsx")),
+    files: [{
+      path: "registry/examples/drawer-nested.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-non-modal": {
+    name: "drawer-non-modal",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer","button"],
+    component: lazy(() => import("~/registry/examples/drawer-non-modal.tsx")),
+    files: [{
+      path: "registry/examples/drawer-non-modal.tsx",
       type: "registry:example",
       target: ""
     }],

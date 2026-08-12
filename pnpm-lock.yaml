@@ -83,6 +83,9 @@ importers:
       solid-js:
         specifier: ^1.9.9
         version: 1.9.9
+      solid-sonner:
+        specifier: ^0.3.1
+        version: 0.3.1(solid-js@1.9.9)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -8873,6 +8876,14 @@ packages:
       solid-js: 1.9.9
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /solid-sonner@0.3.1(solid-js@1.9.9):
+    resolution: {integrity: sha512-F/+zi9yKJTHh5hX1UGJfkDvyC+F34Vi3jgy44NJwOKCgic1QtAon0b1iT9OsDO77RTgR+PCil+3Y5B8T2Owy1Q==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.9.9
     dev: false
 
   /solid-transition-size@0.1.4(solid-js@1.9.9):

@@ -97,6 +97,10 @@ export const docsConfig: Config = {
           href: "/docs/components/context-menu"
         },
         {
+          title: "Drawer",
+          href: "/docs/components/drawer"
+        },
+        {
           title: "Dropdown Menu",
           href: "/docs/components/dropdown-menu"
         },

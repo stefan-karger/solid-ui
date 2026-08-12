@@ -157,6 +157,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "drawer",
+    type: "registry:ui",
+    dependencies: ["@corvu/drawer"],
+    files: [
+      {
+        path: "ui/drawer.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "context-menu",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
