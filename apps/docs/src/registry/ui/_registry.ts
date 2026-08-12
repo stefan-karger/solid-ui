@@ -275,6 +275,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "pagination",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/pagination.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "popover",
     type: "registry:ui",
     files: [

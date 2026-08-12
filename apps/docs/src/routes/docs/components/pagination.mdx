@@ -1,0 +1,183 @@
+---
+title: Pagination
+description: Pagination with page navigation, next and previous links.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/pagination-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add pagination
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/pagination.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+```
+
+```tsx showLineNumbers
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>
+        2
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+## Composition
+
+Use the following composition to build a `Pagination`:
+
+```text
+Pagination
+└── PaginationContent
+    ├── PaginationItem
+    │   └── PaginationPrevious
+    ├── PaginationItem
+    │   └── PaginationLink
+    ├── PaginationItem
+    │   └── PaginationEllipsis
+    └── PaginationItem
+        └── PaginationNext
+```
+
+## Examples
+
+### Simple
+
+A simple pagination with only page numbers.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-simple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/pagination-simple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icons Only
+
+Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page selector.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-icons-only" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/pagination-icons-only" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Tanstack Router
+
+By default the `<PaginationLink />` component will render an `<a />` tag.
+
+To use the TanStack Router `<Link />` component, make the following updates to `pagination.tsx`.
+
+```diff showLineNumbers /typeof Link/ {1}
++ import { Link } from "@tanstack/solid-router"
+
+- type PaginationLinkProps = ... & ComponentProps<"a">
++ type PaginationLinkProps = ... & ComponentProps<typeof Link>
+
+const PaginationLink = ({...props }: ) => (
+  <PaginationItem>
+-   <a>
++   <Link>
+      // ...
+-   </a>
++   </Link>
+  </PaginationItem>
+)
+
+```
+
+### RTL
+
+To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/pagination-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::

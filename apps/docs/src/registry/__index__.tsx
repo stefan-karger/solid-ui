@@ -368,6 +368,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "pagination": {
+    name: "pagination",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/pagination.tsx")),
+    files: [{
+      path: "registry/ui/pagination.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "popover": {
     name: "popover",
     description: "",
@@ -2182,6 +2196,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/label-demo.tsx")),
     files: [{
       path: "registry/examples/label-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "pagination-demo": {
+    name: "pagination-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["pagination"],
+    component: lazy(() => import("~/registry/examples/pagination-demo.tsx")),
+    files: [{
+      path: "registry/examples/pagination-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "pagination-simple": {
+    name: "pagination-simple",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["pagination"],
+    component: lazy(() => import("~/registry/examples/pagination-simple.tsx")),
+    files: [{
+      path: "registry/examples/pagination-simple.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "pagination-icons-only": {
+    name: "pagination-icons-only",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["pagination","field","select"],
+    component: lazy(() => import("~/registry/examples/pagination-icons-only.tsx")),
+    files: [{
+      path: "registry/examples/pagination-icons-only.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "pagination-rtl": {
+    name: "pagination-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["pagination","rtl"],
+    component: lazy(() => import("~/registry/examples/pagination-rtl.tsx")),
+    files: [{
+      path: "registry/examples/pagination-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
