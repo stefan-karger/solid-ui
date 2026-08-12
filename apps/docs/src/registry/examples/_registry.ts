@@ -564,6 +564,83 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "empty-demo",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-outline",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-outline.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-background",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-background.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-avatar",
+    type: "registry:example",
+    registryDependencies: ["empty", "avatar", "button"],
+    files: [
+      {
+        path: "examples/empty-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-avatar-group",
+    type: "registry:example",
+    registryDependencies: ["empty", "avatar", "button"],
+    files: [
+      {
+        path: "examples/empty-avatar-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-input-group",
+    type: "registry:example",
+    registryDependencies: ["empty", "input-group", "button"],
+    files: [
+      {
+        path: "examples/empty-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-rtl",
+    type: "registry:example",
+    registryDependencies: ["empty", "button", "rtl"],
+    files: [
+      {
+        path: "examples/empty-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "field-checkbox",
     type: "registry:example",
     registryDependencies: ["field", "checkbox"],
