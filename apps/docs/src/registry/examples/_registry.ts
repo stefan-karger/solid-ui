@@ -949,6 +949,119 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "input-otp-demo",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-pattern",
+    type: "registry:example",
+    dependencies: ["input-otp"],
+    registryDependencies: ["input-otp", "field"],
+    files: [
+      {
+        path: "examples/input-otp-pattern.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-separator",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-separator.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-disabled",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-controlled",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-controlled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-invalid",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-four-digits",
+    type: "registry:example",
+    dependencies: ["input-otp"],
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-four-digits.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-alphanumeric",
+    type: "registry:example",
+    dependencies: ["input-otp"],
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-alphanumeric.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-form",
+    type: "registry:example",
+    registryDependencies: ["input-otp", "button", "card", "field"],
+    files: [
+      {
+        path: "examples/input-otp-form.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-rtl",
+    type: "registry:example",
+    registryDependencies: ["input-otp", "field", "rtl"],
+    files: [
+      {
+        path: "examples/input-otp-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "item-demo",
     type: "registry:example",
     registryDependencies: ["item", "button"],

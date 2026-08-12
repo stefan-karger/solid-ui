@@ -14,6 +14,7 @@
   "dependencies": {
     "@corvu/calendar": "^0.1.2",
     "@corvu/drawer": "^0.2.4",
+    "@corvu/otp-field": "^0.1.4",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource-variable/geist-mono": "^5.2.7",
     "@kobalte/core": "^0.13.11",
@@ -29,6 +30,7 @@
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-solid": "^8.6.0",
+    "input-otp": "^1.4.2",
     "lucide-solid": "^0.575.0",
     "rimraf": "^6.0.1",
     "solid-js": "^1.9.9",

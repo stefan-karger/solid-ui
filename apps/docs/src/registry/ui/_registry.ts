@@ -222,6 +222,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "input-otp",
+    type: "registry:ui",
+    dependencies: ["@corvu/otp-field"],
+    registryDependencies: [],
+    files: [
+      {
+        path: "ui/input-otp.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "item",
     type: "registry:ui",
     registryDependencies: ["separator"],
