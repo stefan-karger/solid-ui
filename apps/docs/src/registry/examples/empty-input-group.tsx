@@ -1,4 +1,4 @@
-import { FolderIcon, SearchIcon } from "lucide-solid"
+import { SearchIcon } from "lucide-solid"
 
 import {
   Empty,
@@ -12,7 +12,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "~/registry/ui/input-group"
-// import { Kbd } from "~/registry/ui/kbd"
+import { Kbd } from "~/registry/ui/kbd"
 
 export default function EmptyInputGroup() {
   return (
@@ -31,8 +31,7 @@ export default function EmptyInputGroup() {
             <SearchIcon />
           </InputGroupAddon>
           <InputGroupAddon align="inline-end">
-            {/* <Kbd>/</Kbd> */}
-            <FolderIcon />
+            <Kbd>/</Kbd>
           </InputGroupAddon>
         </InputGroup>
         <EmptyDescription>
