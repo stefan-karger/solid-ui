@@ -762,6 +762,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "table-demo",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    files: [
+      {
+        path: "examples/table-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "table-footer",
+    type: "registry:example",
+    registryDependencies: ["table"],
+    files: [
+      {
+        path: "examples/table-footer.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "table-actions",
+    type: "registry:example",
+    registryDependencies: ["table", "dropdown-menu", "button"],
+    files: [
+      {
+        path: "examples/table-actions.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "table-rtl",
+    type: "registry:example",
+    registryDependencies: ["table", "rtl"],
+    files: [
+      {
+        path: "examples/table-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "tooltip-demo",
     type: "registry:example",
     registryDependencies: ["tooltip"],
