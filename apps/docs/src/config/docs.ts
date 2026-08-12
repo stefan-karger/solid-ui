@@ -139,6 +139,10 @@ export const docsConfig: Config = {
         {
           title: "Popover",
           href: "/docs/components/popover"
+        }
+        {
+          title: "Progress",
+          href: "/docs/components/progress"
         },
         {
           title: "Radio Group",

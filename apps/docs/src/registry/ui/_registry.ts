@@ -285,6 +285,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "progress",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/progress.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

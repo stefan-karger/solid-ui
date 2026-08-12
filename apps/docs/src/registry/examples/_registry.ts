@@ -1292,7 +1292,7 @@ export const examples: Registry["items"] = [
       }
     ]
   },
-  {
+    {
     name: "popover-demo",
     type: "registry:example",
     registryDependencies: ["popover", "button", "input", "label"],
@@ -1343,6 +1343,50 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/popover-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "progress-demo",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "examples/progress-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "progress-label",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "examples/progress-label.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "progress-controlled",
+    type: "registry:example",
+    registryDependencies: ["progress", "slider"],
+    files: [
+      {
+        path: "examples/progress-controlled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "progress-rtl",
+    type: "registry:example",
+    registryDependencies: ["progress", "rtl"],
+    files: [
+      {
+        path: "examples/progress-rtl.tsx",
         type: "registry:example"
       }
     ]

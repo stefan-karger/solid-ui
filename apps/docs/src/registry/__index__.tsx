@@ -382,6 +382,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "progress": {
+    name: "progress",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/progress.tsx")),
+    files: [{
+      path: "registry/ui/progress.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -2238,6 +2252,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/popover-rtl.tsx")),
     files: [{
       path: "registry/examples/popover-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "progress-demo": {
+    name: "progress-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    component: lazy(() => import("~/registry/examples/progress-demo.tsx")),
+    files: [{
+      path: "registry/examples/progress-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "progress-label": {
+    name: "progress-label",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    component: lazy(() => import("~/registry/examples/progress-label.tsx")),
+    files: [{
+      path: "registry/examples/progress-label.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "progress-controlled": {
+    name: "progress-controlled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["progress","slider"],
+    component: lazy(() => import("~/registry/examples/progress-controlled.tsx")),
+    files: [{
+      path: "registry/examples/progress-controlled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "progress-rtl": {
+    name: "progress-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["progress","rtl"],
+    component: lazy(() => import("~/registry/examples/progress-rtl.tsx")),
+    files: [{
+      path: "registry/examples/progress-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
