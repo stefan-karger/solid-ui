@@ -522,7 +522,7 @@ export const examples: Registry["items"] = [
   {
     name: "drawer-demo",
     type: "registry:example",
-    registryDependencies: ["drawer", "buton", "field", "radio-group", "use-mobile"],
+    registryDependencies: ["drawer", "badge", "button", "field", "radio-group", "use-mobile"],
     files: [
       {
         path: "examples/drawer-demo.tsx",

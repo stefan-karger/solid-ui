@@ -1,6 +1,7 @@
 import { toast } from "solid-sonner"
 
 import { useIsMobile } from "~/registry/hooks/use-mobile"
+import { Badge } from "~/registry/ui/badge"
 import { Button } from "~/registry/ui/button"
 import {
   Drawer,
@@ -102,7 +103,7 @@ export default function DrawerDemo() {
                       <FieldTitle class="flex items-center gap-2">
                         {time.label}
                         <Show when={time.badge}>
-                          <span class="bg-secondary p-1 inline-block text-sm">{time.badge}</span>
+                          <Badge variant="secondary">{time.badge}</Badge>
                         </Show>
                       </FieldTitle>
                       <FieldDescription>{time.description}</FieldDescription>
