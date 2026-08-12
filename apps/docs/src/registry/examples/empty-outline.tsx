@@ -1,3 +1,5 @@
+import { CloudIcon } from "lucide-solid"
+
 import { Button } from "~/registry/ui/button"
 import {
   Empty,
@@ -7,23 +9,22 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "~/registry/ui/empty"
-import { Spinner } from "~/registry/ui/spinner"
 
-export default function SpinnerEmpty() {
+export default function EmptyOutline() {
   return (
-    <Empty class="w-full">
+    <Empty class="border border-dashed">
       <EmptyHeader>
-        <EmptyMedia variant="default">
-          <Spinner class="size-6" />
+        <EmptyMedia variant="icon">
+          <CloudIcon />
         </EmptyMedia>
-        <EmptyTitle>Processing your request</EmptyTitle>
+        <EmptyTitle>Cloud Storage Empty</EmptyTitle>
         <EmptyDescription>
-          Please wait while we process your request. Do not refresh the page.
+          Upload files to your cloud storage to access them anywhere.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button variant="outline" size="sm">
-          Cancel
+          Upload Files
         </Button>
       </EmptyContent>
     </Empty>
