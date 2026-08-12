@@ -105,6 +105,10 @@ export const docsConfig: Config = {
           href: "/docs/components/field"
         },
         {
+          title: "Input",
+          href: "/docs/components/input"
+        },
+        {
           title: "Input Group",
           href: "/docs/components/input-group"
         },
