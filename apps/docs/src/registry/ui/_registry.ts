@@ -275,6 +275,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "popover",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/popover.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

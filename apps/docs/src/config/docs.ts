@@ -137,6 +137,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Popover",
+          href: "/docs/components/popover"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
         },

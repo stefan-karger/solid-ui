@@ -368,6 +368,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "popover": {
+    name: "popover",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/popover.tsx")),
+    files: [{
+      path: "registry/ui/popover.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -2062,20 +2076,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "label-demo": {
-    name: "label-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["label","checkbox"],
-    component: lazy(() => import("~/registry/examples/label-demo.tsx")),
-    files: [{
-      path: "registry/examples/label-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "kbd-demo": {
     name: "kbd-demo",
     description: "",
@@ -2154,6 +2154,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/kbd-rtl.tsx")),
     files: [{
       path: "registry/examples/kbd-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "label-demo": {
+    name: "label-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["label","checkbox"],
+    component: lazy(() => import("~/registry/examples/label-demo.tsx")),
+    files: [{
+      path: "registry/examples/label-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-demo": {
+    name: "popover-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover","button","input","label"],
+    component: lazy(() => import("~/registry/examples/popover-demo.tsx")),
+    files: [{
+      path: "registry/examples/popover-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-basic": {
+    name: "popover-basic",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover","button"],
+    component: lazy(() => import("~/registry/examples/popover-basic.tsx")),
+    files: [{
+      path: "registry/examples/popover-basic.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-form": {
+    name: "popover-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover","button","input","field"],
+    component: lazy(() => import("~/registry/examples/popover-form.tsx")),
+    files: [{
+      path: "registry/examples/popover-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-placement": {
+    name: "popover-placement",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover","button"],
+    component: lazy(() => import("~/registry/examples/popover-placement.tsx")),
+    files: [{
+      path: "registry/examples/popover-placement.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-rtl": {
+    name: "popover-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover","button","rtl"],
+    component: lazy(() => import("~/registry/examples/popover-rtl.tsx")),
+    files: [{
+      path: "registry/examples/popover-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
