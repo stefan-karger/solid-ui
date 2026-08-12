@@ -113,6 +113,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Pagination",
+          href: "/docs/components/pagination"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
         },

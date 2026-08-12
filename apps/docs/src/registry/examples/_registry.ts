@@ -718,6 +718,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "pagination-demo",
+    type: "registry:example",
+    registryDependencies: ["pagination"],
+    files: [
+      {
+        path: "examples/pagination-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "pagination-simple",
+    type: "registry:example",
+    registryDependencies: ["pagination"],
+    files: [
+      {
+        path: "examples/pagination-simple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "pagination-icons-only",
+    type: "registry:example",
+    registryDependencies: ["pagination", "field", "select"],
+    files: [
+      {
+        path: "examples/pagination-icons-only.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "pagination-rtl",
+    type: "registry:example",
+    registryDependencies: ["pagination", "rtl"],
+    files: [
+      {
+        path: "examples/pagination-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],

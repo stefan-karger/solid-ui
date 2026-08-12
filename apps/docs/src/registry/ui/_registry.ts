@@ -221,6 +221,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "pagination",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/pagination.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
