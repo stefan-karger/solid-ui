@@ -121,6 +121,10 @@ export const docsConfig: Config = {
           href: "/docs/components/input-group"
         },
         {
+          title: "Input OTP",
+          href: "/docs/components/input-otp"
+        },
+        {
           title: "Item",
           href: "/docs/components/item"
         },
