@@ -520,6 +520,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "drawer-demo",
+    type: "registry:example",
+    registryDependencies: ["drawer", "buton", "field", "radio-group", "use-mobile"],
+    files: [
+      {
+        path: "examples/drawer-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-position",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button"],
+    files: [
+      {
+        path: "examples/drawer-position.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-nested",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button", "use-mobile"],
+    files: [
+      {
+        path: "examples/drawer-nested.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-non-modal",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button"],
+    files: [
+      {
+        path: "examples/drawer-non-modal.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu-checkboxes",
     type: "registry:example",
     registryDependencies: ["dropdown-menu"],

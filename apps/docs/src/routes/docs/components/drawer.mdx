@@ -1,0 +1,220 @@
+---
+title: Drawer
+description: A drawer component for SolidJS.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="drawer-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/drawer-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add drawer
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/drawer.tsx" showLineNumbers
+
+```
+
+## Usage
+
+Add the following to your global styles. On iOS Safari, the drawer overlay is absolutely positioned and requires a positioned `body` to cover the viewport after the page is scrolled.
+
+```css
+body {
+  position: relative;
+}
+```
+
+```tsx
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+```
+
+```tsx
+<Drawer>
+  <DrawerTrigger as={Button<"button">} variant="outline">
+    Open
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+      <DrawerDescription>This action cannot be undone.</DrawerDescription>
+    </DrawerHeader>
+    <div class="p-4">{/* Content here */}</div>
+    <DrawerFooter>
+      <Button>Submit</Button>
+      <DrawerClose as={Button<"button">} variant="outline">
+        Cancel
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+## Composition
+
+Use the following composition to build a `Drawer`:
+
+```plaintext
+Drawer
+├── DrawerTrigger
+└── DrawerContent
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    └── DrawerFooter
+```
+
+`DrawerContent` composes the portal, overlay, viewport, and popup from Kobalte UI. For lower-level control, `DrawerPortal` and `DrawerOverlay` are also exported.
+
+## Custom Sizes
+
+A vertical drawer sizes itself to its content and is capped at `calc(100dvh - 6rem)` by default. A side drawer spans `75%` of the viewport width, or `24rem` on larger screens.
+
+To customize the height of a vertical drawer, use the `h-*` and `max-h-*` utilities on `DrawerContent`.
+
+```tsx
+<DrawerContent class="h-[50vh]">
+```
+
+To customize the width of a side drawer, use the `w-*` and `max-w-*` utilities on `DrawerContent`.
+
+```tsx
+<DrawerContent class="w-96">
+```
+
+When the same component renders in multiple directions, scope an override to one axis using the `data-[swipe-axis=*]` variants.
+
+```tsx
+<DrawerContent class="data-[swipe-axis=y]:max-h-[50vh] data-[swipe-axis=x]:w-96">
+```
+
+To make a region of the drawer scrollable, make the scroll container a flex item. Avoid `h-full`, which does not resolve inside a content-sized drawer.
+
+```tsx
+<DrawerContent>
+  <DrawerHeader>...</DrawerHeader>
+  <div class="flex-1 overflow-y-auto p-4">{/* Scrollable content */}</div>
+  <DrawerFooter>...</DrawerFooter>
+</DrawerContent>
+```
+
+## Styling
+
+The drawer exposes CSS variables for style-level customization. Set the sizing variables on `DrawerContent`. Set the overlay variable on `[data-slot=drawer-overlay]` in your CSS.
+
+| Variable                       | Default                | Description                                                             |
+| ------------------------------ | ---------------------- | ----------------------------------------------------------------------- |
+| `--drawer-inset`               | `0px`                  | Floats the drawer from the viewport edges.                              |
+| `--drawer-bleed-background`    | `var(--color-popover)` | Fills the gap behind the drawer on swipe overshoot.                     |
+| `--drawer-overlay-min-opacity` | `0`                    | Minimum overlay opacity. Defaults to `0.5` when snap points are active. |
+
+The drawer also sets data attributes you can target with variants such as `data-[swipe-direction=down]:` on `DrawerContent`, or `group-data-[swipe-axis=y]/drawer-popup:` on its descendants.
+
+| Attribute                 | Values                        | Set when                              |
+| ------------------------- | ----------------------------- | ------------------------------------- |
+| `data-swipe-direction`    | `up`, `right`, `down`, `left` | Always.                               |
+| `data-swipe-axis`         | `x`, `y`                      | Always.                               |
+| `data-snap-points`        | Present                       | The drawer has snap points.           |
+| `data-expanded`           | Present                       | The drawer is at the full snap point. |
+| `data-swiping`            | Present                       | A swipe is in progress.               |
+| `data-nested-drawer-open` | Present                       | A nested drawer is open on top.       |
+
+## Examples
+
+## Position
+
+Use the `side` prop to set the side of the drawer.
+
+Available options are `top`, `right`, `bottom`, and `left`.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="drawer-position" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-position" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Nested
+
+Open drawers from inside another drawer. Parent drawers stay mounted and stack behind the frontmost drawer.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="drawer-nested" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-nested" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Non Modal
+
+Set `modal={false}` to allow interaction with the rest of the page while the drawer is open. Combine with `disablePointerDismissal` to prevent the drawer from closing on outside presses. Use `modal="trap-focus"` to keep focus inside the drawer while leaving scroll and pointer interaction unrestricted.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="drawer-non-modal" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-non-modal" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Corvu Drawer](https://corvu.dev/docs/primitives/drawer/) documentation.
