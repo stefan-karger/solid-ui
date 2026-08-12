@@ -718,6 +718,61 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "popover-demo",
+    type: "registry:example",
+    registryDependencies: ["popover", "button", "input", "label"],
+    files: [
+      {
+        path: "examples/popover-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-basic",
+    type: "registry:example",
+    registryDependencies: ["popover", "button"],
+    files: [
+      {
+        path: "examples/popover-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-form",
+    type: "registry:example",
+    registryDependencies: ["popover", "button", "input", "field"],
+    files: [
+      {
+        path: "examples/popover-form.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-placement",
+    type: "registry:example",
+    registryDependencies: ["popover", "button"],
+    files: [
+      {
+        path: "examples/popover-placement.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-rtl",
+    type: "registry:example",
+    registryDependencies: ["popover", "button", "rtl"],
+    files: [
+      {
+        path: "examples/popover-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],
