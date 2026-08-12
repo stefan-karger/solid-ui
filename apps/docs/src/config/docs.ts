@@ -101,6 +101,10 @@ export const docsConfig: Config = {
           href: "/docs/components/dropdown-menu"
         },
         {
+          title: "Empty",
+          href: "/docs/components/empty"
+        },
+        {
           title: "Field",
           href: "/docs/components/field"
         },
@@ -111,6 +115,14 @@ export const docsConfig: Config = {
         {
           title: "Input Group",
           href: "/docs/components/input-group"
+        },
+        {
+          title: "Item",
+          href: "/docs/components/item"
+        },
+        {
+          title: "Kbd",
+          href: "/docs/components/kbd"
         },
         {
           title: "Label",
@@ -127,6 +139,10 @@ export const docsConfig: Config = {
         {
           title: "Slider",
           href: "/docs/components/slider"
+        },
+        {
+          title: "Spinner",
+          href: "/docs/components/spinner"
         },
         {
           title: "Switch",

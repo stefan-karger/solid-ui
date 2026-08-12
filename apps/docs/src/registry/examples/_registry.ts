@@ -564,6 +564,83 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "empty-demo",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-outline",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-outline.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-background",
+    type: "registry:example",
+    registryDependencies: ["empty", "button"],
+    files: [
+      {
+        path: "examples/empty-background.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-avatar",
+    type: "registry:example",
+    registryDependencies: ["empty", "avatar", "button"],
+    files: [
+      {
+        path: "examples/empty-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-avatar-group",
+    type: "registry:example",
+    registryDependencies: ["empty", "avatar", "button"],
+    files: [
+      {
+        path: "examples/empty-avatar-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-input-group",
+    type: "registry:example",
+    registryDependencies: ["empty", "input-group", "button"],
+    files: [
+      {
+        path: "examples/empty-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "empty-rtl",
+    type: "registry:example",
+    registryDependencies: ["empty", "button", "rtl"],
+    files: [
+      {
+        path: "examples/empty-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "field-checkbox",
     type: "registry:example",
     registryDependencies: ["field", "checkbox"],
@@ -872,12 +949,199 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "item-demo",
+    type: "registry:example",
+    registryDependencies: ["item", "button"],
+    files: [
+      {
+        path: "examples/item-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-variant",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-variant.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-size",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-icon",
+    type: "registry:example",
+    registryDependencies: ["item", "button"],
+    files: [
+      {
+        path: "examples/item-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-avatar",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "item"],
+    files: [
+      {
+        path: "examples/item-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-image",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-image.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-group",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "item"],
+    files: [
+      {
+        path: "examples/item-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-header",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-header.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-link",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    files: [
+      {
+        path: "examples/item-link.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-dropdown",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "dropdown-menu", "item"],
+    files: [
+      {
+        path: "examples/item-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "item-rtl",
+    type: "registry:example",
+    registryDependencies: ["button", "item", "rtl"],
+    files: [
+      {
+        path: "examples/item-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "label-demo",
     type: "registry:example",
     registryDependencies: ["label", "checkbox"],
     files: [
       {
         path: "examples/label-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-demo",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [
+      {
+        path: "examples/kbd-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-group",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [
+      {
+        path: "examples/kbd-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-button",
+    type: "registry:example",
+    registryDependencies: ["kbd", "button"],
+    files: [
+      {
+        path: "examples/kbd-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-tooltip",
+    type: "registry:example",
+    registryDependencies: ["kbd", "button", "button-group", "tooltip"],
+    files: [
+      {
+        path: "examples/kbd-tooltip.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-input-group",
+    type: "registry:example",
+    registryDependencies: ["kbd", "input-group"],
+    files: [
+      {
+        path: "examples/kbd-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "kbd-rtl",
+    type: "registry:example",
+    registryDependencies: ["kbd", "rtl"],
+    files: [
+      {
+        path: "examples/kbd-rtl.tsx",
         type: "registry:example"
       }
     ]
@@ -911,6 +1175,94 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/slider-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-demo",
+    type: "registry:example",
+    registryDependencies: ["spinner", "item"],
+    files: [
+      {
+        path: "examples/spinner-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-custom",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    files: [
+      {
+        path: "examples/spinner-custom.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-size",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    files: [
+      {
+        path: "examples/spinner-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-button",
+    type: "registry:example",
+    registryDependencies: ["spinner", "button"],
+    files: [
+      {
+        path: "examples/spinner-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-badge",
+    type: "registry:example",
+    registryDependencies: ["spinner", "badge"],
+    files: [
+      {
+        path: "examples/spinner-badge.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-input-group",
+    type: "registry:example",
+    registryDependencies: ["spinner", "input-group"],
+    files: [
+      {
+        path: "examples/spinner-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-empty",
+    type: "registry:example",
+    registryDependencies: ["spinner", "button", "empty"],
+    files: [
+      {
+        path: "examples/spinner-empty.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "spinner-rtl",
+    type: "registry:example",
+    registryDependencies: ["spinner", "item", "rtl"],
+    files: [
+      {
+        path: "examples/spinner-rtl.tsx",
         type: "registry:example"
       }
     ]

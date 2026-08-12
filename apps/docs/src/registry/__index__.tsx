@@ -242,6 +242,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "empty": {
+    name: "empty",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/empty.tsx")),
+    files: [{
+      path: "registry/ui/empty.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "field": {
     name: "field",
     description: "",
@@ -278,6 +292,34 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/ui/input-group.tsx")),
     files: [{
       path: "registry/ui/input-group.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item": {
+    name: "item",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["separator"],
+    component: lazy(() => import("~/registry/ui/item.tsx")),
+    files: [{
+      path: "registry/ui/item.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd": {
+    name: "kbd",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/kbd.tsx")),
+    files: [{
+      path: "registry/ui/kbd.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -334,6 +376,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/ui/slider.tsx")),
     files: [{
       path: "registry/ui/slider.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner": {
+    name: "spinner",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/spinner.tsx")),
+    files: [{
+      path: "registry/ui/spinner.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -1082,6 +1138,104 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "empty-demo": {
+    name: "empty-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","button"],
+    component: lazy(() => import("~/registry/examples/empty-demo.tsx")),
+    files: [{
+      path: "registry/examples/empty-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-outline": {
+    name: "empty-outline",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","button"],
+    component: lazy(() => import("~/registry/examples/empty-outline.tsx")),
+    files: [{
+      path: "registry/examples/empty-outline.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-background": {
+    name: "empty-background",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","button"],
+    component: lazy(() => import("~/registry/examples/empty-background.tsx")),
+    files: [{
+      path: "registry/examples/empty-background.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-avatar": {
+    name: "empty-avatar",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","avatar","button"],
+    component: lazy(() => import("~/registry/examples/empty-avatar.tsx")),
+    files: [{
+      path: "registry/examples/empty-avatar.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-avatar-group": {
+    name: "empty-avatar-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","avatar","button"],
+    component: lazy(() => import("~/registry/examples/empty-avatar-group.tsx")),
+    files: [{
+      path: "registry/examples/empty-avatar-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-input-group": {
+    name: "empty-input-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","input-group","button"],
+    component: lazy(() => import("~/registry/examples/empty-input-group.tsx")),
+    files: [{
+      path: "registry/examples/empty-input-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "empty-rtl": {
+    name: "empty-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["empty","button","rtl"],
+    component: lazy(() => import("~/registry/examples/empty-rtl.tsx")),
+    files: [{
+      path: "registry/examples/empty-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "field-checkbox": {
     name: "field-checkbox",
     description: "",
@@ -1474,6 +1628,160 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "item-demo": {
+    name: "item-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item","button"],
+    component: lazy(() => import("~/registry/examples/item-demo.tsx")),
+    files: [{
+      path: "registry/examples/item-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-variant": {
+    name: "item-variant",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    component: lazy(() => import("~/registry/examples/item-variant.tsx")),
+    files: [{
+      path: "registry/examples/item-variant.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-size": {
+    name: "item-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    component: lazy(() => import("~/registry/examples/item-size.tsx")),
+    files: [{
+      path: "registry/examples/item-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-icon": {
+    name: "item-icon",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item","button"],
+    component: lazy(() => import("~/registry/examples/item-icon.tsx")),
+    files: [{
+      path: "registry/examples/item-icon.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-avatar": {
+    name: "item-avatar",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["avatar","button","item"],
+    component: lazy(() => import("~/registry/examples/item-avatar.tsx")),
+    files: [{
+      path: "registry/examples/item-avatar.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-image": {
+    name: "item-image",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    component: lazy(() => import("~/registry/examples/item-image.tsx")),
+    files: [{
+      path: "registry/examples/item-image.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-group": {
+    name: "item-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["avatar","button","item"],
+    component: lazy(() => import("~/registry/examples/item-group.tsx")),
+    files: [{
+      path: "registry/examples/item-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-header": {
+    name: "item-header",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    component: lazy(() => import("~/registry/examples/item-header.tsx")),
+    files: [{
+      path: "registry/examples/item-header.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-link": {
+    name: "item-link",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["item"],
+    component: lazy(() => import("~/registry/examples/item-link.tsx")),
+    files: [{
+      path: "registry/examples/item-link.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-dropdown": {
+    name: "item-dropdown",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["avatar","button","dropdown-menu","item"],
+    component: lazy(() => import("~/registry/examples/item-dropdown.tsx")),
+    files: [{
+      path: "registry/examples/item-dropdown.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "item-rtl": {
+    name: "item-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["button","item","rtl"],
+    component: lazy(() => import("~/registry/examples/item-rtl.tsx")),
+    files: [{
+      path: "registry/examples/item-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "label-demo": {
     name: "label-demo",
     description: "",
@@ -1482,6 +1790,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/label-demo.tsx")),
     files: [{
       path: "registry/examples/label-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-demo": {
+    name: "kbd-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    component: lazy(() => import("~/registry/examples/kbd-demo.tsx")),
+    files: [{
+      path: "registry/examples/kbd-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-group": {
+    name: "kbd-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    component: lazy(() => import("~/registry/examples/kbd-group.tsx")),
+    files: [{
+      path: "registry/examples/kbd-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-button": {
+    name: "kbd-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd","button"],
+    component: lazy(() => import("~/registry/examples/kbd-button.tsx")),
+    files: [{
+      path: "registry/examples/kbd-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-tooltip": {
+    name: "kbd-tooltip",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd","button","button-group","tooltip"],
+    component: lazy(() => import("~/registry/examples/kbd-tooltip.tsx")),
+    files: [{
+      path: "registry/examples/kbd-tooltip.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-input-group": {
+    name: "kbd-input-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd","input-group"],
+    component: lazy(() => import("~/registry/examples/kbd-input-group.tsx")),
+    files: [{
+      path: "registry/examples/kbd-input-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-rtl": {
+    name: "kbd-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd","rtl"],
+    component: lazy(() => import("~/registry/examples/kbd-rtl.tsx")),
+    files: [{
+      path: "registry/examples/kbd-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
@@ -1524,6 +1916,118 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/slider-demo.tsx")),
     files: [{
       path: "registry/examples/slider-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-demo": {
+    name: "spinner-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","item"],
+    component: lazy(() => import("~/registry/examples/spinner-demo.tsx")),
+    files: [{
+      path: "registry/examples/spinner-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-custom": {
+    name: "spinner-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    component: lazy(() => import("~/registry/examples/spinner-custom.tsx")),
+    files: [{
+      path: "registry/examples/spinner-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-size": {
+    name: "spinner-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner"],
+    component: lazy(() => import("~/registry/examples/spinner-size.tsx")),
+    files: [{
+      path: "registry/examples/spinner-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-button": {
+    name: "spinner-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","button"],
+    component: lazy(() => import("~/registry/examples/spinner-button.tsx")),
+    files: [{
+      path: "registry/examples/spinner-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-badge": {
+    name: "spinner-badge",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","badge"],
+    component: lazy(() => import("~/registry/examples/spinner-badge.tsx")),
+    files: [{
+      path: "registry/examples/spinner-badge.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-input-group": {
+    name: "spinner-input-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","input-group"],
+    component: lazy(() => import("~/registry/examples/spinner-input-group.tsx")),
+    files: [{
+      path: "registry/examples/spinner-input-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-empty": {
+    name: "spinner-empty",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","button","empty"],
+    component: lazy(() => import("~/registry/examples/spinner-empty.tsx")),
+    files: [{
+      path: "registry/examples/spinner-empty.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner-rtl": {
+    name: "spinner-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["spinner","item","rtl"],
+    component: lazy(() => import("~/registry/examples/spinner-rtl.tsx")),
+    files: [{
+      path: "registry/examples/spinner-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
