@@ -286,18 +286,17 @@ Use this component to display text within a button group.
 Use the `as` prop to render a custom component as the text, for example a label.
 
 ```tsx showLineNumbers
-import { ButtonGroupText } from "~/components/ui/button-group"
-import { Label } from "~/components/ui/label"
+import { ButtonGroupText } from "~/components/ui/button-group";
+import { Label } from "~/components/ui/label";
 
 export function ButtonGroupTextDemo() {
   return (
     <ButtonGroup>
-      <ButtonGroupText as={Label} htmlFor="name">
+      <ButtonGroupText as={Label} for="name">
         Text
       </ButtonGroupText>
       <Input placeholder="Type something here..." id="name" />
     </ButtonGroup>
-  )
+  );
 }
 ```
-
