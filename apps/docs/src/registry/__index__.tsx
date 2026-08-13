@@ -452,6 +452,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "native-select": {
+    name: "native-select",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/native-select.tsx")),
+    files: [{
+      path: "registry/ui/native-select.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -2392,6 +2406,76 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/menubar-rtl.tsx")),
     files: [{
       path: "registry/examples/menubar-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "native-select-demo": {
+    name: "native-select-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    component: lazy(() => import("~/registry/examples/native-select-demo.tsx")),
+    files: [{
+      path: "registry/examples/native-select-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "native-select-groups": {
+    name: "native-select-groups",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    component: lazy(() => import("~/registry/examples/native-select-groups.tsx")),
+    files: [{
+      path: "registry/examples/native-select-groups.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "native-select-disabled": {
+    name: "native-select-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    component: lazy(() => import("~/registry/examples/native-select-disabled.tsx")),
+    files: [{
+      path: "registry/examples/native-select-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "native-select-invalid": {
+    name: "native-select-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    component: lazy(() => import("~/registry/examples/native-select-invalid.tsx")),
+    files: [{
+      path: "registry/examples/native-select-invalid.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "native-select-rtl": {
+    name: "native-select-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    component: lazy(() => import("~/registry/examples/native-select-rtl.tsx")),
+    files: [{
+      path: "registry/examples/native-select-rtl.tsx",
       type: "registry:example",
       target: ""
     }],

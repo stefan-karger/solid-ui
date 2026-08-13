@@ -1403,6 +1403,61 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "native-select-demo",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-groups",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-groups.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-disabled",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-invalid",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-rtl",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "navigation-menu-demo",
     type: "registry:example",
     registryDependencies: ["navigation-menu"],

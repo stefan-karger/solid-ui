@@ -145,6 +145,10 @@ export const docsConfig: Config = {
           href: "/docs/components/menubar"
         },
         {
+          title: "Native Select",
+          href: "/docs/components/native-select"
+        },
+        {
           title: "Navigation Menu",
           href: "/docs/components/navigation-menu"
         },
