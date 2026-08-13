@@ -718,6 +718,28 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "navigation-menu-demo",
+    type: "registry:example",
+    registryDependencies: ["navigation-menu"],
+    files: [
+      {
+        path: "examples/navigation-menu-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "navigation-menu-rtl",
+    type: "registry:example",
+    registryDependencies: ["navigation-menu", "rtl"],
+    files: [
+      {
+        path: "examples/navigation-menu-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],
