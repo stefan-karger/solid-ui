@@ -263,5 +263,16 @@ export const ui: Registry["items"] = [
         type: "registry:ui"
       }
     ]
-  }
+  },
+  {
+    name: "textarea",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/textarea.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
 ]
