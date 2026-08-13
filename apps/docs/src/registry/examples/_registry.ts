@@ -1975,6 +1975,72 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "textarea-demo",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    files: [
+      {
+        path: "examples/textarea-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "textarea-field",
+    type: "registry:example",
+    registryDependencies: ["textarea", "field"],
+    files: [
+      {
+        path: "examples/textarea-field.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "textarea-disabled",
+    type: "registry:example",
+    registryDependencies: ["textarea", "field"],
+    files: [
+      {
+        path: "examples/textarea-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "textarea-invalid",
+    type: "registry:example",
+    registryDependencies: ["textarea", "field"],
+    files: [
+      {
+        path: "examples/textarea-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "textarea-button",
+    type: "registry:example",
+    registryDependencies: ["textarea", "button"],
+    files: [
+      {
+        path: "examples/textarea-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "textarea-rtl",
+    type: "registry:example",
+    registryDependencies: ["textarea", "field", "rtl"],
+    files: [
+      {
+        path: "examples/textarea-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "toggle-demo",
     type: "registry:example",
     registryDependencies: ["toggle"],

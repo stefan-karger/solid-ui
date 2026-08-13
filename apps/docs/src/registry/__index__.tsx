@@ -606,6 +606,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "textarea": {
+    name: "textarea",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/textarea.tsx")),
+    files: [{
+      path: "registry/ui/textarea.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "toggle": {
     name: "toggle",
     description: "",
@@ -3148,6 +3162,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tabs-rtl.tsx")),
     files: [{
       path: "registry/examples/tabs-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-demo": {
+    name: "textarea-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    component: lazy(() => import("~/registry/examples/textarea-demo.tsx")),
+    files: [{
+      path: "registry/examples/textarea-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-field": {
+    name: "textarea-field",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea","field"],
+    component: lazy(() => import("~/registry/examples/textarea-field.tsx")),
+    files: [{
+      path: "registry/examples/textarea-field.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-disabled": {
+    name: "textarea-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea","field"],
+    component: lazy(() => import("~/registry/examples/textarea-disabled.tsx")),
+    files: [{
+      path: "registry/examples/textarea-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-invalid": {
+    name: "textarea-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea","field"],
+    component: lazy(() => import("~/registry/examples/textarea-invalid.tsx")),
+    files: [{
+      path: "registry/examples/textarea-invalid.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-button": {
+    name: "textarea-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea","button"],
+    component: lazy(() => import("~/registry/examples/textarea-button.tsx")),
+    files: [{
+      path: "registry/examples/textarea-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-rtl": {
+    name: "textarea-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea","field","rtl"],
+    component: lazy(() => import("~/registry/examples/textarea-rtl.tsx")),
+    files: [{
+      path: "registry/examples/textarea-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
