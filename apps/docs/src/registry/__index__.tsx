@@ -2808,7 +2808,7 @@ export const Index: Record<string, any> = {
     name: "sheet-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet","button","input","label"],
     component: lazy(() => import("~/registry/examples/sheet-demo.tsx")),
     files: [{
       path: "registry/examples/sheet-demo.tsx",
@@ -2822,7 +2822,7 @@ export const Index: Record<string, any> = {
     name: "sheet-side",
     description: "",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet","button"],
     component: lazy(() => import("~/registry/examples/sheet-side.tsx")),
     files: [{
       path: "registry/examples/sheet-side.tsx",
@@ -2836,7 +2836,7 @@ export const Index: Record<string, any> = {
     name: "sheet-no-close-button",
     description: "",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet","button"],
     component: lazy(() => import("~/registry/examples/sheet-no-close-button.tsx")),
     files: [{
       path: "registry/examples/sheet-no-close-button.tsx",
@@ -2850,7 +2850,7 @@ export const Index: Record<string, any> = {
     name: "sheet-rtl",
     description: "",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet","button","field","input","rtl"],
     component: lazy(() => import("~/registry/examples/sheet-rtl.tsx")),
     files: [{
       path: "registry/examples/sheet-rtl.tsx",

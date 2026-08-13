@@ -1702,7 +1702,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-demo",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet", "button", "input", "label"],
     files: [
       {
         path: "examples/sheet-demo.tsx",
@@ -1713,7 +1713,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-side",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet", "button"],
     files: [
       {
         path: "examples/sheet-side.tsx",
@@ -1724,7 +1724,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-no-close-button",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet", "button"],
     files: [
       {
         path: "examples/sheet-no-close-button.tsx",
@@ -1735,7 +1735,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-rtl",
     type: "registry:example",
-    registryDependencies: ["sheet"],
+    registryDependencies: ["sheet", "button", "field", "input", "rtl"],
     files: [
       {
         path: "examples/sheet-rtl.tsx",
