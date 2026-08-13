@@ -1700,6 +1700,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "sheet-demo",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-side",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-side.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-no-close-button",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-no-close-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sheet-rtl",
+    type: "registry:example",
+    registryDependencies: ["sheet"],
+    files: [
+      {
+        path: "examples/sheet-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "skeleton-demo",
     type: "registry:example",
     registryDependencies: ["skeleton"],
