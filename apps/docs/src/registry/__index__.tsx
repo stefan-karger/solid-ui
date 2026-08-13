@@ -424,6 +424,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "menubar": {
+    name: "menubar",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/menubar.tsx")),
+    files: [{
+      path: "registry/ui/menubar.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -2280,6 +2294,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/label-demo.tsx")),
     files: [{
       path: "registry/examples/label-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-demo": {
+    name: "menubar-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    component: lazy(() => import("~/registry/examples/menubar-demo.tsx")),
+    files: [{
+      path: "registry/examples/menubar-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-checkbox": {
+    name: "menubar-checkbox",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    component: lazy(() => import("~/registry/examples/menubar-checkbox.tsx")),
+    files: [{
+      path: "registry/examples/menubar-checkbox.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-radio": {
+    name: "menubar-radio",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    component: lazy(() => import("~/registry/examples/menubar-radio.tsx")),
+    files: [{
+      path: "registry/examples/menubar-radio.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-submenu": {
+    name: "menubar-submenu",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    component: lazy(() => import("~/registry/examples/menubar-submenu.tsx")),
+    files: [{
+      path: "registry/examples/menubar-submenu.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-icons": {
+    name: "menubar-icons",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    component: lazy(() => import("~/registry/examples/menubar-icons.tsx")),
+    files: [{
+      path: "registry/examples/menubar-icons.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-rtl": {
+    name: "menubar-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar","rtl"],
+    component: lazy(() => import("~/registry/examples/menubar-rtl.tsx")),
+    files: [{
+      path: "registry/examples/menubar-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
