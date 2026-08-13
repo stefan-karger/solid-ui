@@ -328,6 +328,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "navigation-menu",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/navigation-menu.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

@@ -438,6 +438,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "navigation-menu": {
+    name: "navigation-menu",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/navigation-menu.tsx")),
+    files: [{
+      path: "registry/ui/navigation-menu.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -2378,6 +2392,34 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/menubar-rtl.tsx")),
     files: [{
       path: "registry/examples/menubar-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "navigation-menu-demo": {
+    name: "navigation-menu-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["navigation-menu"],
+    component: lazy(() => import("~/registry/examples/navigation-menu-demo.tsx")),
+    files: [{
+      path: "registry/examples/navigation-menu-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "navigation-menu-rtl": {
+    name: "navigation-menu-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["navigation-menu","rtl"],
+    component: lazy(() => import("~/registry/examples/navigation-menu-rtl.tsx")),
+    files: [{
+      path: "registry/examples/navigation-menu-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
