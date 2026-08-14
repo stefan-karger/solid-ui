@@ -762,6 +762,42 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "toast-demo",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/toast-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "toast-types",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/toast-types.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "toast-promise",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/toast-promise.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "tooltip-demo",
     type: "registry:example",
     registryDependencies: ["tooltip"],

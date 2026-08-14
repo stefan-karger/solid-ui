@@ -129,6 +129,10 @@ export const docsConfig: Config = {
           href: "/docs/components/switch"
         },
         {
+          title: "Toast",
+          href: "/docs/components/toast"
+        },
+        {
           title: "Tooltip",
           href: "/docs/components/tooltip"
         }

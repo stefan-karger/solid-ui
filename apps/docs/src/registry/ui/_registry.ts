@@ -263,5 +263,17 @@ export const ui: Registry["items"] = [
         type: "registry:ui"
       }
     ]
-  }
+  },
+  {
+    name: "toast",
+    type: "registry:ui",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-color-mode"],
+    files: [
+      {
+        path: "ui/toast.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
 ]

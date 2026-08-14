@@ -10,5 +10,15 @@ export const hooks: Registry["items"] = [
         type: "registry:hook"
       }
     ]
+  },
+  {
+    name: "use-color-mode",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-color-mode.tsx",
+        type: "registry:hook"
+      }
+    ]
   }
 ]
