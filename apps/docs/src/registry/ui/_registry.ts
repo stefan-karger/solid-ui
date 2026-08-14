@@ -470,6 +470,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "toast",
+    type: "registry:ui",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-color-mode"],
+    files: [
+      {
+        path: "ui/toast.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "toggle",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

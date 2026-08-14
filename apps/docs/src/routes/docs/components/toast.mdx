@@ -1,0 +1,144 @@
+---
+title: Toast
+description: An opinionated toast component.
+---
+
+The Toast component wraps [solid-sonner](https://solid-sonner.vercel.app/), a SolidJS port of [Sonner](https://sonner.emilkowal.ski/), and themes it to match your app.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="toast-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/toast-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add toast
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+solid-sonner
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/toast.tsx" showLineNumbers
+
+```
+
+## Usage
+
+First import the `Toaster` component once and use it within the `app.tsx` or `__root.tsx` route. Placing the `Toaster` component multiple times on a page will cause issues.
+
+```tsx
+import { Toaster } from "~/registry/ui/toast";
+
+export default function Page(props) {
+  return (
+    <div>
+      <Toaster />
+      <main class="expressive-code-overrides flex flex-1 flex-col">
+        {props.children}
+      </main>
+    </div>
+  );
+}
+```
+
+To use, import `toast` from `solid-sonner` directly — the registry's `toast.tsx` only exports the themed `Toaster`, it does not re-export `toast` itself.
+
+```tsx
+import { toast } from "solid-sonner";
+```
+
+```tsx
+toast("Event created", {
+  description: "Sunday, December 3 at 9:00 AM",
+});
+```
+
+### Position
+
+Use the `position` on the `Toaster` to render the toast in different locations: `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`
+
+```tsx
+<Toaster position="bottom-right" />
+```
+
+## Examples
+
+### Types
+
+Call `toast.success`, `toast.info`, `toast.warning`, or `toast.error` to render the matching status icon. `toast.loading` renders a spinner.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="toast-types" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toast-types" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Action
+
+Pass an `action` with a `label` and `onClick` to render a button on the toast.
+
+```tsx
+toast("Event created", {
+  action: {
+    label: "Undo",
+    onClick: () => {
+      // do something
+    },
+  },
+});
+```
+
+### Promise
+
+Use `toast.promise` to update one toast as an asynchronous task moves through loading, success, and error states.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="toast-promise" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toast-promise" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+The only export from `toast.tsx`. It forwards every prop to `solid-sonner`'s `Toaster` and additionally wires up the app's color mode, status icons, and CSS variables so toasts match your theme.
+
+See the [solid-sonner README](https://github.com/wobsoriano/solid-sonner) for `Toaster` props (`position`, `richColors`, `duration`, `gap`, `visibleToasts`, `closeButton`, `dir`, and more) and the full `toast()` API (`toast()`, `toast.success()`, `toast.info()`, `toast.warning()`, `toast.error()`, `toast.loading()`, `toast.custom()`, `toast.message()`, `toast.promise()`, `toast.dismiss()`).
