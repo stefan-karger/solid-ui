@@ -60,6 +60,7 @@ export const ui: Registry["items"] = [
   {
     name: "badge",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/badge.tsx",
@@ -70,7 +71,7 @@ export const ui: Registry["items"] = [
   {
     name: "breadcrumb",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
     files: [
       {
         path: "ui/breadcrumb.tsx",
@@ -90,16 +91,6 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "card",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/card.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "button-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -107,6 +98,16 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/button-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/card.tsx",
         type: "registry:ui"
       }
     ]
@@ -146,9 +147,33 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "combobox",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["input-group", "badge", "button"],
+    files: [
+      {
+        path: "ui/combobox.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "context-menu",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    files: [
+      {
+        path: "ui/context-menu.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "dialog",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["button"],
     files: [
       {
         path: "ui/dialog.tsx",
@@ -168,20 +193,9 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "context-menu",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    files: [
-      {
-        path: "ui/context-menu.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "dropdown-menu",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
     files: [
       {
         path: "ui/dropdown-menu.tsx",
@@ -214,6 +228,7 @@ export const ui: Registry["items"] = [
   {
     name: "hover-card",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/hover-card.tsx",
@@ -245,7 +260,7 @@ export const ui: Registry["items"] = [
   {
     name: "input-otp",
     type: "registry:ui",
-    dependencies: ["@corvu/otp-field"],
+    dependencies: ["@corvu/otp-field", "lucide-solid"],
     registryDependencies: [],
     files: [
       {
@@ -257,6 +272,7 @@ export const ui: Registry["items"] = [
   {
     name: "item",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
     registryDependencies: ["separator"],
     files: [
       {
@@ -286,9 +302,43 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "menubar",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    files: [
+      {
+        path: "ui/menubar.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "native-select",
+    type: "registry:ui",
+    dependencies: ["lucide-solid"],
+    files: [
+      {
+        path: "ui/native-select.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "navigation-menu",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    files: [
+      {
+        path: "ui/navigation-menu.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "pagination",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["button"],
     files: [
       {
         path: "ui/pagination.tsx",
@@ -298,6 +348,7 @@ export const ui: Registry["items"] = [
   },
   {
     name: "popover",
+    dependencies: ["@kobalte/core"],
     type: "registry:ui",
     files: [
       {
@@ -309,41 +360,11 @@ export const ui: Registry["items"] = [
   {
     name: "progress",
     type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["label"],
     files: [
       {
         path: "ui/progress.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "menubar",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    files: [
-      {
-        path: "ui/menubar.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "navigation-menu",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    files: [
-      {
-        path: "ui/navigation-menu.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "native-select",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/native-select.tsx",
         type: "registry:ui"
       }
     ]
@@ -384,7 +405,7 @@ export const ui: Registry["items"] = [
   {
     name: "sheet",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
     files: [
       {
         path: "ui/sheet.tsx",
@@ -417,7 +438,7 @@ export const ui: Registry["items"] = [
   {
     name: "spinner",
     type: "registry:ui",
-    dependencies: [],
+    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/spinner.tsx",
@@ -439,7 +460,6 @@ export const ui: Registry["items"] = [
     {
     name: "table",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/table.tsx",
@@ -461,7 +481,6 @@ export const ui: Registry["items"] = [
   {
     name: "textarea",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/textarea.tsx",
@@ -472,7 +491,7 @@ export const ui: Registry["items"] = [
   {
     name: "toast",
     type: "registry:ui",
-    dependencies: ["solid-sonner"],
+    dependencies: ["solid-sonner", "lucide-solid"],
     registryDependencies: ["use-color-mode"],
     files: [
       {

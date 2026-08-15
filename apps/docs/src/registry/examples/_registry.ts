@@ -465,6 +465,105 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "combobox-demo",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-multiple",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-clear",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-clear.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-groups",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-groups.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-groups-separator",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-groups-separator.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-custom",
+    type: "registry:example",
+    registryDependencies: ["combobox", "item"],
+    files: [
+      {
+        path: "examples/combobox-custom.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-invalid",
+    type: "registry:example",
+    registryDependencies: ["combobox", "field"],
+    files: [
+      {
+        path: "examples/combobox-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-disabled",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-dialog",
+    type: "registry:example",
+    registryDependencies: ["combobox", "dialog", "field", "button"],
+    files: [
+      {
+        path: "examples/combobox-dialog.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dialog-close-button",
     type: "registry:example",
     registryDependencies: ["dialog", "button"],
