@@ -18,3 +18,117 @@ description: A popup that displays information related to an element when the el
 
 :::
 ::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add tooltip
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/tooltip.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+```
+
+```tsx
+<Tooltip>
+  <TooltipTrigger>Hover</TooltipTrigger>
+  <TooltipContent>
+    <p>Add to library</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+## Composition
+
+Use the following composition to build a `Tooltip`:
+
+```plaintext
+Tooltip
+├── TooltipTrigger
+└── TooltipContent
+```
+
+## Examples
+
+### Placement
+
+Use the `placement` prop to change the position of the tooltip.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="tooltip-placement" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tooltip-placement" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Show a tooltip on a disabled button.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="tooltip-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tooltip-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="tooltip-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/tooltip-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte UI Tooltip](https://kobalte.dev/docs/core/components/tooltip) documentation.
