@@ -2339,5 +2339,38 @@ export const examples: Registry["items"] = [
         type: "registry:example"
       }
     ]
-  }
+  },
+  {
+    name: "tooltip-placement",
+    type: "registry:example",
+    registryDependencies: ["tooltip", "button"],
+    files: [
+      {
+        path: "examples/tooltip-placement.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "tooltip-disabled",
+    type: "registry:example",
+    registryDependencies: ["tooltip", "button"],
+    files: [
+      {
+        path: "examples/tooltip-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "tooltip-rtl",
+    type: "registry:example",
+    registryDependencies: ["tooltip", "button", "rtl"],
+    files: [
+      {
+        path: "examples/tooltip-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
 ]
