@@ -130,20 +130,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "card": {
-    name: "card",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/card.tsx")),
-    files: [{
-      path: "registry/ui/card.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "button-group": {
     name: "button-group",
     description: "",
@@ -152,6 +138,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/ui/button-group.tsx")),
     files: [{
       path: "registry/ui/button-group.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "card": {
+    name: "card",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/card.tsx")),
+    files: [{
+      path: "registry/ui/card.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -194,6 +194,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/ui/collapsible.tsx")),
     files: [{
       path: "registry/ui/collapsible.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox": {
+    name: "combobox",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["input-group","badge","button"],
+    component: lazy(() => import("~/registry/ui/combobox.tsx")),
+    files: [{
+      path: "registry/ui/combobox.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -964,6 +978,132 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/collapsible-demo.tsx")),
     files: [{
       path: "registry/examples/collapsible-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-demo": {
+    name: "combobox-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-demo.tsx")),
+    files: [{
+      path: "registry/examples/combobox-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-multiple": {
+    name: "combobox-multiple",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-multiple.tsx")),
+    files: [{
+      path: "registry/examples/combobox-multiple.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-clear": {
+    name: "combobox-clear",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-clear.tsx")),
+    files: [{
+      path: "registry/examples/combobox-clear.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-groups": {
+    name: "combobox-groups",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-groups.tsx")),
+    files: [{
+      path: "registry/examples/combobox-groups.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-groups-separator": {
+    name: "combobox-groups-separator",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-groups-separator.tsx")),
+    files: [{
+      path: "registry/examples/combobox-groups-separator.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-custom": {
+    name: "combobox-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox","item"],
+    component: lazy(() => import("~/registry/examples/combobox-custom.tsx")),
+    files: [{
+      path: "registry/examples/combobox-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-invalid": {
+    name: "combobox-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox","field"],
+    component: lazy(() => import("~/registry/examples/combobox-invalid.tsx")),
+    files: [{
+      path: "registry/examples/combobox-invalid.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-disabled": {
+    name: "combobox-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    component: lazy(() => import("~/registry/examples/combobox-disabled.tsx")),
+    files: [{
+      path: "registry/examples/combobox-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-dialog": {
+    name: "combobox-dialog",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox","dialog","field","button"],
+    component: lazy(() => import("~/registry/examples/combobox-dialog.tsx")),
+    files: [{
+      path: "registry/examples/combobox-dialog.tsx",
       type: "registry:example",
       target: ""
     }],

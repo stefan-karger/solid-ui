@@ -90,16 +90,6 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "card",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/card.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "button-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -107,6 +97,16 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/button-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/card.tsx",
         type: "registry:ui"
       }
     ]
@@ -141,6 +141,18 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/collapsible.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "combobox",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["input-group", "badge", "button"],
+    files: [
+      {
+        path: "ui/combobox.tsx",
         type: "registry:ui"
       }
     ]

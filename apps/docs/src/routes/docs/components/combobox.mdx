@@ -1,0 +1,263 @@
+---
+title: Combobox
+description: Autocomplete input with a list of suggestions.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/combobox-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add combobox
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/combobox.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+```
+
+```tsx showLineNumbers
+const frameworks = [
+  "SolidJS",
+  "SolidStart",
+  "Next.js",
+  "SvelteKit",
+  "Nuxt.js",
+  "Remix",
+  "Astro",
+];
+
+export default function ComboboxBasic() {
+  return (
+    <Combobox
+      options={frameworks}
+      placeholder="Select a framework..."
+      itemComponent={(props) => (
+        <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
+      )}
+    >
+      <ComboboxInput placeholder="Select a framework..." />
+      <ComboboxContent>
+        <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
+      </ComboboxContent>
+    </Combobox>
+  );
+}
+```
+
+## Examples
+
+### Basic
+
+A simple combobox with a list of frameworks.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Multiple
+
+A combobox with multiple selection using `multiple` prop on the `Combobox` and `ComboboxInput`.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-multiple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-multiple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Clear Button
+
+Use the `showClear` prop to show a clear button.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-clear" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-clear" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Groups
+
+Use `ComboboxGroup` to group items.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-groups" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-groups" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Groups with Separator
+
+Use `ComboboxSeparator` to separate grouped items.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-groups-separator" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-groups-separator" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Custom Items
+
+You can render a custom component inside `ComboboxItem`.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-custom" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-custom" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use the `aria-invalid` prop to make the combobox invalid.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to disable the combobox.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Dialog
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="combobox-dialog" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/combobox-dialog" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+TODO: add RTL support
+
+## API Reference
+
+See the [Kobalte UI Combobox](https://kobalte.dev/docs/core/components/combobox) documentation for more information.
