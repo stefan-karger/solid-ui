@@ -117,6 +117,10 @@ export const docsConfig: Config = {
           href: "/docs/components/radio-group"
         },
         {
+          title: "Resizable",
+          href: "/docs/components/resizable"
+        },
+        {
           title: "Select",
           href: "/docs/components/select"
         },

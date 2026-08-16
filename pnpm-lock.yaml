@@ -29,6 +29,9 @@ importers:
       '@corvu/drawer':
         specifier: ^0.2.4
         version: 0.2.4(solid-js@1.9.9)
+      '@corvu/resizable':
+        specifier: ^0.2.5
+        version: 0.2.5(solid-js@1.9.9)
       '@fontsource-variable/geist':
         specifier: ^5.2.8
         version: 5.2.8
@@ -1223,6 +1226,15 @@ packages:
       '@solid-primitives/memo': 1.4.3(solid-js@1.9.9)
       solid-js: 1.9.9
       solid-transition-size: 0.1.4(solid-js@1.9.9)
+    dev: false
+
+  /@corvu/resizable@0.2.5(solid-js@1.9.9):
+    resolution: {integrity: sha512-psax38DraM9SXtaNh/sfvizGO6xLCL4sqT4rWYlMZP5ZsUM05Q30tvXgnTo2roQFNOz2e06WofhDsBXTjY6g4A==}
+    peerDependencies:
+      solid-js: ^1.8
+    dependencies:
+      '@corvu/utils': 0.4.2(solid-js@1.9.9)
+      solid-js: 1.9.9
     dev: false
 
   /@corvu/utils@0.3.2(solid-js@1.9.9):

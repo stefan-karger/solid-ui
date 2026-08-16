@@ -232,6 +232,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "resizable",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "@corvu/resizable"],
+    files: [
+      {
+        path: "ui/resizable.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "select",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
