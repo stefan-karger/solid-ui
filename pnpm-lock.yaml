@@ -32,6 +32,9 @@ importers:
       '@corvu/otp-field':
         specifier: ^0.1.4
         version: 0.1.4(solid-js@1.9.9)
+      '@corvu/resizable':
+        specifier: ^0.2.5
+        version: 0.2.5(solid-js@1.9.9)
       '@fontsource-variable/geist':
         specifier: ^5.2.8
         version: 5.2.8
@@ -1236,6 +1239,15 @@ packages:
 
   /@corvu/otp-field@0.1.4(solid-js@1.9.9):
     resolution: {integrity: sha512-3eG7OoUt6CfVqGujIYfqImdrhGR/s4DpKr5ZQT10zzw3nawIlcwVpqoHTam0v4cgv+NXXvl6I8DoA3J+WgW2YA==}
+    peerDependencies:
+      solid-js: ^1.8
+    dependencies:
+      '@corvu/utils': 0.4.2(solid-js@1.9.9)
+      solid-js: 1.9.9
+    dev: false
+
+  /@corvu/resizable@0.2.5(solid-js@1.9.9):
+    resolution: {integrity: sha512-psax38DraM9SXtaNh/sfvizGO6xLCL4sqT4rWYlMZP5ZsUM05Q30tvXgnTo2roQFNOz2e06WofhDsBXTjY6g4A==}
     peerDependencies:
       solid-js: ^1.8
     dependencies:

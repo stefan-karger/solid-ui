@@ -494,6 +494,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "resizable": {
+    name: "resizable",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/resizable.tsx")),
+    files: [{
+      path: "registry/ui/resizable.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "select": {
     name: "select",
     description: "",
@@ -2910,6 +2924,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/radio-group-demo.tsx")),
     files: [{
       path: "registry/examples/radio-group-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-demo": {
+    name: "resizable-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    component: lazy(() => import("~/registry/examples/resizable-demo.tsx")),
+    files: [{
+      path: "registry/examples/resizable-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-vertical": {
+    name: "resizable-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    component: lazy(() => import("~/registry/examples/resizable-vertical.tsx")),
+    files: [{
+      path: "registry/examples/resizable-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-handle": {
+    name: "resizable-handle",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    component: lazy(() => import("~/registry/examples/resizable-handle.tsx")),
+    files: [{
+      path: "registry/examples/resizable-handle.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-rtl": {
+    name: "resizable-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable","rtl"],
+    component: lazy(() => import("~/registry/examples/resizable-rtl.tsx")),
+    files: [{
+      path: "registry/examples/resizable-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
