@@ -97,12 +97,16 @@ export const docsConfig: Config = {
           href: "/docs/components/combobox"
         },
         {
-          title: "Dialog",
-          href: "/docs/components/dialog"
-        },
-        {
           title: "Context Menu",
           href: "/docs/components/context-menu"
+        },
+        {
+          title: "Date Picker",
+          href: "/docs/components/date-picker"
+        },
+        {
+          title: "Dialog",
+          href: "/docs/components/dialog"
         },
         {
           title: "Drawer",
