@@ -1,0 +1,98 @@
+---
+title: Date Picker
+description: A date picker component with range and presets.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-simple" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-simple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+The Date Picker is built using a composition of the `<Popover />` and the `<Calendar />` components.
+
+See installation instructions for the [Popover](/docs/components/popover) and the [Calendar](/docs/components/calendar) components.
+
+## Usage
+
+See the [Corvu Calendar](https://corvu.dev/docs/primitives/calendar/) documentation for more information.
+
+## Composition
+
+A date picker is built from Popover and Calendar (there is no DatePicker root component):
+
+```plaintext
+Popover
+├── PopoverTrigger
+└── PopoverContent
+    └── Calendar
+```
+
+## Examples
+
+### Basic
+
+A basic date picker component.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-simple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-simple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Date Picker with Dropdowns
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-with-dropdowns" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-with-dropdowns" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Range Picker
+
+A date picker component for selecting a range of dates.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-with-range" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-with-range" frame=none showLineNumbers
+
+```
+
+:::
+::::
