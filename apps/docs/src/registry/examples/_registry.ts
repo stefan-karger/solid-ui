@@ -365,6 +365,153 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "calendar-demo",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-single",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-single.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-multiple",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-week-numbers",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-week-numbers.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-booked-dates",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-booked-dates.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-range",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-range.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-range-multiple-months",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-range-multiple-months.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-with-time",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card", "field", "input"],
+    files: [
+      {
+        path: "examples/calendar-with-time.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-presets",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card", "button"],
+    files: [
+      {
+        path: "examples/calendar-presets.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-custom-cell",
+    type: "registry:example",
+    dependencies: ["date-fns"],
+    registryDependencies: ["calendar", "card"],
+    files: [
+      {
+        path: "examples/calendar-custom-cell.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-date-picker-simple",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    files: [
+      {
+        path: "examples/calendar-date-picker-simple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-date-picker-with-dropdowns",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    files: [
+      {
+        path: "examples/calendar-date-picker-with-dropdowns.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-date-picker-with-range",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    files: [
+      {
+        path: "examples/calendar-date-picker-with-range.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "card-demo",
     type: "registry:example",
     registryDependencies: ["card", "button", "input", "label"],
