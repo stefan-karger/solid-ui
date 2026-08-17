@@ -72,6 +72,10 @@ export const docsConfig: Config = {
           href: "/docs/components/button-group"
         },
         {
+          title: "Calendar",
+          href: "/docs/components/calendar"
+        },
+        {
           title: "Card",
           href: "/docs/components/card"
         },
