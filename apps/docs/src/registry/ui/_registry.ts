@@ -232,6 +232,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "scroll-area",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/scroll-area.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "select",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

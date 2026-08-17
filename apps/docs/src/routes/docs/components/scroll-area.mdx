@@ -1,0 +1,103 @@
+---
+title: Scroll Area
+description: Augments native scroll functionality for custom, cross-browser styling.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add scroll-area
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/scroll-area.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+```
+
+```tsx showLineNumbers
+<ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+  Your scrollable content here.
+</ScrollArea>
+```
+
+## Composition
+
+Use the following composition to build a `ScrollArea`:
+
+```text
+ScrollArea
+└── ScrollBar
+```
+
+## Examples
+
+### Horizontal
+
+Use `ScrollBar` with `orientation="horizontal"` for horizontal scrolling.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-horizontal" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-horizontal" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::

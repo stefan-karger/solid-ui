@@ -117,6 +117,10 @@ export const docsConfig: Config = {
           href: "/docs/components/radio-group"
         },
         {
+          title: "Scroll Area",
+          href: "/docs/components/scroll-area"
+        },
+        {
           title: "Select",
           href: "/docs/components/select"
         },
