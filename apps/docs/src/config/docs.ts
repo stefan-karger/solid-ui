@@ -177,6 +177,10 @@ export const docsConfig: Config = {
           href: "/docs/components/resizable"
         },
         {
+          title: "Scroll Area",
+          href: "/docs/components/scroll-area"
+        },
+        {
           title: "Select",
           href: "/docs/components/select"
         },

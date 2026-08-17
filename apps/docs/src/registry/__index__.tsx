@@ -508,6 +508,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "scroll-area": {
+    name: "scroll-area",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/scroll-area.tsx")),
+    files: [{
+      path: "registry/ui/scroll-area.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "select": {
     name: "select",
     description: "",
@@ -2980,6 +2994,48 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/resizable-rtl.tsx")),
     files: [{
       path: "registry/examples/resizable-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "scroll-area-demo": {
+    name: "scroll-area-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area","separator"],
+    component: lazy(() => import("~/registry/examples/scroll-area-demo.tsx")),
+    files: [{
+      path: "registry/examples/scroll-area-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "scroll-area-horizontal": {
+    name: "scroll-area-horizontal",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    component: lazy(() => import("~/registry/examples/scroll-area-horizontal.tsx")),
+    files: [{
+      path: "registry/examples/scroll-area-horizontal.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "scroll-area-rtl": {
+    name: "scroll-area-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area","separator","rtl"],
+    component: lazy(() => import("~/registry/examples/scroll-area-rtl.tsx")),
+    files: [{
+      path: "registry/examples/scroll-area-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
