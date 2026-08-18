@@ -443,6 +443,78 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "chart-demo",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart", "card"],
+    files: [
+      {
+        path: "examples/chart-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "chart-example",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart"],
+    files: [
+      {
+        path: "examples/chart-example.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "chart-example-grid",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart"],
+    files: [
+      {
+        path: "examples/chart-example-grid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "chart-example-axis",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart"],
+    files: [
+      {
+        path: "examples/chart-example-axis.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "chart-example-tooltip",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart"],
+    files: [
+      {
+        path: "examples/chart-example-tooltip.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "chart-example-legend",
+    type: "registry:example",
+    dependencies: ["solid-recharts"],
+    registryDependencies: ["chart"],
+    files: [
+      {
+        path: "examples/chart-example-legend.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "checkbox-demo",
     type: "registry:example",
     registryDependencies: ["checkbox"],
