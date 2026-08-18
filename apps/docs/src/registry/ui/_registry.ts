@@ -221,6 +221,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "marker",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/marker.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

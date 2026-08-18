@@ -113,6 +113,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Marker",
+          href: "/docs/components/marker"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
         },
