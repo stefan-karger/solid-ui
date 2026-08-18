@@ -92,6 +92,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "bubble",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    files: [
+      {
+        path: "ui/bubble.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "button",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -297,6 +308,26 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/marker.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "message",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/message.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "popover",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/popover.tsx",
         type: "registry:ui"
       }
     ]

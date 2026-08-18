@@ -24,15 +24,6 @@ export const docsConfig: Config = {
   ],
   sidebarNav: [
     {
-      title: "Sections",
-      items: [
-        {
-          title: "Components",
-          href: "/docs/components"
-        }
-      ]
-    },
-    {
       title: "Components",
       items: [
         {
@@ -66,6 +57,10 @@ export const docsConfig: Config = {
         {
           title: "Breadcrumb",
           href: "/docs/components/breadcrumb"
+        },
+        {
+          title: "Bubble",
+          href: "/docs/components/bubble"
         },
         {
           title: "Button",
@@ -165,6 +160,10 @@ export const docsConfig: Config = {
           href: "/docs/components/menubar"
         },
         {
+          title: "Message",
+          href: "/docs/components/message"
+        },
+        {
           title: "Native Select",
           href: "/docs/components/native-select"
         },
@@ -251,6 +250,15 @@ export const docsConfig: Config = {
         {
           title: "Tooltip",
           href: "/docs/components/tooltip"
+        }
+      ]
+    },
+    {
+      title: "Sections",
+      items: [
+        {
+          title: "Components",
+          href: "/docs/components"
         }
       ]
     }
