@@ -396,6 +396,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "tooltip": {
+    name: "tooltip",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/tooltip.tsx")),
+    files: [{
+      path: "registry/ui/tooltip.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -1524,6 +1538,48 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/tooltip-demo.tsx")),
     files: [{
       path: "registry/examples/tooltip-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-placement": {
+    name: "tooltip-placement",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip","button"],
+    component: lazy(() => import("~/registry/examples/tooltip-placement.tsx")),
+    files: [{
+      path: "registry/examples/tooltip-placement.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-disabled": {
+    name: "tooltip-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip","button"],
+    component: lazy(() => import("~/registry/examples/tooltip-disabled.tsx")),
+    files: [{
+      path: "registry/examples/tooltip-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-rtl": {
+    name: "tooltip-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip","button","rtl"],
+    component: lazy(() => import("~/registry/examples/tooltip-rtl.tsx")),
+    files: [{
+      path: "registry/examples/tooltip-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
