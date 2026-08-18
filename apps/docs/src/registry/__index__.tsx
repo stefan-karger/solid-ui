@@ -1600,6 +1600,62 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "sidebar-demo": {
+    name: "sidebar-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb","dropdown-menu","label","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-demo.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-floating-example": {
+    name: "sidebar-floating-example",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-floating-example.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-floating-example.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-icon-example": {
+    name: "sidebar-icon-example",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","avatar","breadcrumb","collapsible","dropdown-menu","kbd","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-icon-example.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-icon-example.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-inset-example": {
+    name: "sidebar-inset-example",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb"],
+    component: lazy(() => import("~/registry/examples/sidebar-inset-example.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-inset-example.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "skeleton-demo": {
     name: "skeleton-demo",
     description: "",
