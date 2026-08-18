@@ -125,6 +125,10 @@ export const docsConfig: Config = {
           href: "/docs/components/separator"
         },
         {
+          title: "Sheet",
+          href: "/docs/components/sheet"
+        },
+        {
           title: "Slider",
           href: "/docs/components/slider"
         },

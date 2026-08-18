@@ -340,6 +340,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "sheet": {
+    name: "sheet",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/sheet.tsx")),
+    files: [{
+      path: "registry/ui/sheet.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "slider": {
     name: "slider",
     description: "",
@@ -1384,6 +1398,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/separator-rtl.tsx")),
     files: [{
       path: "registry/examples/separator-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-demo": {
+    name: "sheet-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet","button","input","label"],
+    component: lazy(() => import("~/registry/examples/sheet-demo.tsx")),
+    files: [{
+      path: "registry/examples/sheet-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-side": {
+    name: "sheet-side",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet","button"],
+    component: lazy(() => import("~/registry/examples/sheet-side.tsx")),
+    files: [{
+      path: "registry/examples/sheet-side.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-no-close-button": {
+    name: "sheet-no-close-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet","button"],
+    component: lazy(() => import("~/registry/examples/sheet-no-close-button.tsx")),
+    files: [{
+      path: "registry/examples/sheet-no-close-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sheet-rtl": {
+    name: "sheet-rtl",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sheet","button","field","input","rtl"],
+    component: lazy(() => import("~/registry/examples/sheet-rtl.tsx")),
+    files: [{
+      path: "registry/examples/sheet-rtl.tsx",
       type: "registry:example",
       target: ""
     }],
