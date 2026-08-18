@@ -123,6 +123,109 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "bubble-demo",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-variants",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-variants.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-alignment",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-alignment.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-group-demo",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-link-button",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["bubble", "toast"],
+    files: [
+      {
+        path: "examples/bubble-link-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-reactions",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-reactions.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-collapsible",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["bubble", "button", "collapsible"],
+    files: [
+      {
+        path: "examples/bubble-collapsible.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-tooltip",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["bubble", "button", "tooltip"],
+    files: [
+      {
+        path: "examples/bubble-tooltip.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-popover",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["bubble", "button", "popover"],
+    files: [
+      {
+        path: "examples/bubble-popover.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "button-default",
     type: "registry:example",
     registryDependencies: ["button"],

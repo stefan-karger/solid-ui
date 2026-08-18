@@ -79,6 +79,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "bubble",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    files: [
+      {
+        path: "ui/bubble.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "button",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

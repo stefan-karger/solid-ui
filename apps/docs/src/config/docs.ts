@@ -64,6 +64,10 @@ export const docsConfig: Config = {
           href: "/docs/components/breadcrumb"
         },
         {
+          title: "Bubble",
+          href: "/docs/components/bubble"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
         },
