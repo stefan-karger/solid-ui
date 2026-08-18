@@ -46,6 +46,78 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "attachment-demo",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment", "spinner"],
+    files: [
+      {
+        path: "examples/attachment-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-image",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment"],
+    files: [
+      {
+        path: "examples/attachment-image.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-state",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment", "spinner"],
+    files: [
+      {
+        path: "examples/attachment-state.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-size",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment"],
+    files: [
+      {
+        path: "examples/attachment-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-group",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment"],
+    files: [
+      {
+        path: "examples/attachment-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-trigger",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["attachment", "dialog"],
+    files: [
+      {
+        path: "examples/attachment-trigger.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "avatar-demo",
     type: "registry:example",
     registryDependencies: ["avatar"],

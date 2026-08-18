@@ -47,6 +47,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "attachment",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "ui/attachment.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "avatar",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

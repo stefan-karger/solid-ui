@@ -52,6 +52,10 @@ export const docsConfig: Config = {
           href: "/docs/components/aspect-ratio"
         },
         {
+          title: "Attachment",
+          href: "/docs/components/attachment"
+        },
+        {
           title: "Avatar",
           href: "/docs/components/avatar"
         },
