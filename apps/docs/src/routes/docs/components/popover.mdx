@@ -1,0 +1,161 @@
+---
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="popover-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/popover-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add popover
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/popover.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+```
+
+```tsx showLineNumbers
+<Popover>
+  <PopoverTrigger render={<Button variant="outline" />}>
+    Open Popover
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverHeader>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverDescription>Description text here.</PopoverDescription>
+    </PopoverHeader>
+  </PopoverContent>
+</Popover>
+```
+
+## Composition
+
+Use the following composition to build a `Popover`:
+
+```text
+Popover
+├── PopoverTrigger
+└── PopoverContent
+```
+
+## Examples
+
+### Basic
+
+A simple popover with a header, title, and description.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="popover-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/popover-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Placement
+
+Use the `placement` prop on `PopoverContent` to control the horizontal alignment.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="popover-placement" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/popover-placement" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Form
+
+A popover with form fields inside.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="popover-form" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/popover-form" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="popover-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/popover-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### API Reference
+
+See the [Kobalte UI Popover](https://kobalte.dev/docs/core/components/popover) documentation.

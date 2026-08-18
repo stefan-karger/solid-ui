@@ -200,6 +200,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "input-group",
+    type: "registry:ui",
+    registryDependencies: ["button", "input", "textarea"],
+    files: [
+      {
+        path: "ui/input-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "label",
     type: "registry:ui",
     files: [
@@ -210,12 +221,11 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "input-group",
+    name: "popover",
     type: "registry:ui",
-    registryDependencies: ["button", "input", "textarea"],
     files: [
       {
-        path: "ui/input-group.tsx",
+        path: "ui/popover.tsx",
         type: "registry:ui"
       }
     ]
