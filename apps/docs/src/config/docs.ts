@@ -121,6 +121,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Marker",
+          href: "/docs/components/marker"
+        },
+        {
           title: "Popover",
           href: "/docs/components/popover"
         },
