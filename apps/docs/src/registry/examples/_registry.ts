@@ -1817,17 +1817,6 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "marker-separator",
-    type: "registry:example",
-    registryDependencies: ["marker"],
-    files: [
-      {
-        path: "examples/marker-separator.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "marker-status",
     type: "registry:example",
     registryDependencies: ["marker", "spinner"],
@@ -2116,28 +2105,6 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "popover-basic",
-    type: "registry:example",
-    registryDependencies: ["popover", "button"],
-    files: [
-      {
-        path: "examples/popover-basic.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "popover-demo",
-    type: "registry:example",
-    registryDependencies: ["popover", "button", "input", "label"],
-    files: [
-      {
-        path: "examples/popover-demo.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "popover-demo",
     type: "registry:example",
     registryDependencies: ["popover", "button", "input", "label"],
@@ -2160,45 +2127,12 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "popover-form",
-    type: "registry:example",
-    registryDependencies: ["popover", "button", "input", "field"],
-    files: [
-      {
-        path: "examples/popover-form.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
     name: "popover-placement",
     type: "registry:example",
     registryDependencies: ["popover", "button"],
     files: [
       {
         path: "examples/popover-placement.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "popover-placement",
-    type: "registry:example",
-    registryDependencies: ["popover", "button"],
-    files: [
-      {
-        path: "examples/popover-placement.tsx",
-        type: "registry:example"
-      }
-    ]
-  },
-  {
-    name: "popover-rtl",
-    type: "registry:example",
-    registryDependencies: ["popover", "button", "rtl"],
-    files: [
-      {
-        path: "examples/popover-rtl.tsx",
         type: "registry:example"
       }
     ]
