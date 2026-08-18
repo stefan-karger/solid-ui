@@ -84,6 +84,10 @@ export const docsConfig: Config = {
           status: "new"
         },
         {
+          title: "Chart",
+          href: "/docs/components/chart"
+        },
+        {
           title: "Checkbox",
           href: "/docs/components/checkbox"
         },

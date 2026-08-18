@@ -160,6 +160,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "chart",
+    type: "registry:ui",
+    dependencies: ["solid-recharts"],
+    files: [
+      {
+        path: "ui/chart.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "checkbox",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
