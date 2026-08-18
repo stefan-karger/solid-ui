@@ -125,6 +125,10 @@ export const docsConfig: Config = {
           href: "/docs/components/marker"
         },
         {
+          title: "Message",
+          href: "/docs/components/message"
+        },
+        {
           title: "Popover",
           href: "/docs/components/popover"
         },

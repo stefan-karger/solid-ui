@@ -244,21 +244,31 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "popover",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/popover.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "marker",
     type: "registry:ui",
     files: [
       {
         path: "ui/marker.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "message",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/message.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "popover",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/popover.tsx",
         type: "registry:ui"
       }
     ]

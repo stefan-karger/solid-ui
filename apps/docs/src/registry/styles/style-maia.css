@@ -1449,5 +1449,56 @@
   .cn-attachment-trigger {
     @apply absolute inset-0 z-10 outline-none;
   }
-  
+
+  /* MARK: Marker */
+  .cn-marker {
+    @apply gap-2 text-sm text-muted-foreground [a]:hover:text-foreground [a]:underline-offset-3 [a]:underline [&_svg:not([class*='size-'])]:size-4 min-h-4 text-left;
+  }
+
+  .cn-marker-variant-separator {
+    @apply before:h-px before:min-w-0 before:flex-1 before:bg-border after:h-px after:min-w-0 after:flex-1 after:bg-border before:mr-1 after:ml-1;
+  }
+
+  .cn-marker-variant-border {
+    @apply border-b border-border pb-2;
+  }
+
+  .cn-marker-icon {
+    @apply size-4 [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .cn-marker-content {
+    @apply group-data-[variant=separator]/marker:flex-none group-data-[variant=separator]/marker:text-center [&>a:hover]:text-foreground [&>a]:underline [&>a]:underline-offset-3;
+  }
+
+  /* MARK: Message Scroller */
+  .cn-message-scroller-content {
+    @apply gap-8;
+  }
+
+  /* MARK: Message */
+  .cn-message {
+    @apply text-sm gap-2;
+  }
+
+  .cn-message-avatar {
+    @apply min-w-8 group-has-data-[slot=message-footer]/message:-translate-y-8;
+  }
+
+  .cn-message-content {
+    @apply gap-2.5 group-data-[align=end]/message:[&>[data-slot]]:self-end;
+  }
+
+  .cn-message-header {
+    @apply text-xs font-medium text-muted-foreground px-3.5 group-has-data-[variant=ghost]/message:px-0;
+  }
+
+  .cn-message-footer {
+    @apply text-xs font-medium text-muted-foreground px-3.5 group-has-data-[variant=ghost]/message:px-0;
+  }
+
+  .cn-message-group {
+    @apply gap-2;
+  }
+
 }

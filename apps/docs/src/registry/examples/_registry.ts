@@ -893,6 +893,74 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "message-demo",
+    type: "registry:example",
+    registryDependencies: ["message", "avatar", "bubble", "marker"],
+    files: [
+      {
+        path: "examples/message-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-avatar",
+    type: "registry:example",
+    registryDependencies: ["message", "avatar", "bubble"],
+    files: [
+      {
+        path: "examples/message-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-group",
+    type: "registry:example",
+    registryDependencies: ["message", "avatar", "bubble"],
+    files: [
+      {
+        path: "examples/message-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-header-footer",
+    type: "registry:example",
+    registryDependencies: ["message", "bubble"],
+    files: [
+      {
+        path: "examples/message-header-footer.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-actions",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message", "button", "bubble"],
+    files: [
+      {
+        path: "examples/message-actions.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-attachment",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message", "attachment", "bubble"],
+    files: [
+      {
+        path: "examples/message-attachment.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "popover-demo",
     type: "registry:example",
     registryDependencies: ["popover", "button", "input", "label"],
