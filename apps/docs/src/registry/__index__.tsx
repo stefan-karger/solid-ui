@@ -74,6 +74,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "attachment": {
+    name: "attachment",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["button"],
+    component: lazy(() => import("~/registry/ui/attachment.tsx")),
+    files: [{
+      path: "registry/ui/attachment.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "avatar": {
     name: "avatar",
     description: "",
@@ -698,6 +712,90 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/aspect-ratio-demo.tsx")),
     files: [{
       path: "registry/examples/aspect-ratio-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-demo": {
+    name: "attachment-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment","spinner"],
+    component: lazy(() => import("~/registry/examples/attachment-demo.tsx")),
+    files: [{
+      path: "registry/examples/attachment-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-image": {
+    name: "attachment-image",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    component: lazy(() => import("~/registry/examples/attachment-image.tsx")),
+    files: [{
+      path: "registry/examples/attachment-image.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-state": {
+    name: "attachment-state",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment","spinner"],
+    component: lazy(() => import("~/registry/examples/attachment-state.tsx")),
+    files: [{
+      path: "registry/examples/attachment-state.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-size": {
+    name: "attachment-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    component: lazy(() => import("~/registry/examples/attachment-size.tsx")),
+    files: [{
+      path: "registry/examples/attachment-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-group": {
+    name: "attachment-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    component: lazy(() => import("~/registry/examples/attachment-group.tsx")),
+    files: [{
+      path: "registry/examples/attachment-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "attachment-trigger": {
+    name: "attachment-trigger",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["attachment","dialog"],
+    component: lazy(() => import("~/registry/examples/attachment-trigger.tsx")),
+    files: [{
+      path: "registry/examples/attachment-trigger.tsx",
       type: "registry:example",
       target: ""
     }],
