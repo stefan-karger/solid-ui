@@ -354,48 +354,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "input-otp": {
-    name: "input-otp",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: [],
-    component: lazy(() => import("~/registry/ui/input-otp.tsx")),
-    files: [{
-      path: "registry/ui/input-otp.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "item": {
-    name: "item",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["separator"],
-    component: lazy(() => import("~/registry/ui/item.tsx")),
-    files: [{
-      path: "registry/ui/item.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "kbd": {
-    name: "kbd",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/kbd.tsx")),
-    files: [{
-      path: "registry/ui/kbd.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
   "label": {
     name: "label",
     description: "",
@@ -410,84 +368,14 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "menubar": {
-    name: "menubar",
+  "marker": {
+    name: "marker",
     description: "",
     type: "registry:ui",
     registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/menubar.tsx")),
+    component: lazy(() => import("~/registry/ui/marker.tsx")),
     files: [{
-      path: "registry/ui/menubar.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "native-select": {
-    name: "native-select",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/native-select.tsx")),
-    files: [{
-      path: "registry/ui/native-select.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "navigation-menu": {
-    name: "navigation-menu",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/navigation-menu.tsx")),
-    files: [{
-      path: "registry/ui/navigation-menu.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "pagination": {
-    name: "pagination",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button"],
-    component: lazy(() => import("~/registry/ui/pagination.tsx")),
-    files: [{
-      path: "registry/ui/pagination.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "popover": {
-    name: "popover",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/ui/popover.tsx")),
-    files: [{
-      path: "registry/ui/popover.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    categories: undefined,
-    meta: undefined,
-  },
-  "progress": {
-    name: "progress",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["label"],
-    component: lazy(() => import("~/registry/ui/progress.tsx")),
-    files: [{
-      path: "registry/ui/progress.tsx",
+      path: "registry/ui/marker.tsx",
       type: "registry:ui",
       target: ""
     }],
@@ -2762,6 +2650,90 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "marker-demo": {
+    name: "marker-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker","spinner"],
+    component: lazy(() => import("~/registry/examples/marker-demo.tsx")),
+    files: [{
+      path: "registry/examples/marker-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-variants": {
+    name: "marker-variants",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    component: lazy(() => import("~/registry/examples/marker-variants.tsx")),
+    files: [{
+      path: "registry/examples/marker-variants.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-status": {
+    name: "marker-status",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker","spinner"],
+    component: lazy(() => import("~/registry/examples/marker-status.tsx")),
+    files: [{
+      path: "registry/examples/marker-status.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-border": {
+    name: "marker-border",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    component: lazy(() => import("~/registry/examples/marker-border.tsx")),
+    files: [{
+      path: "registry/examples/marker-border.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-icon": {
+    name: "marker-icon",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    component: lazy(() => import("~/registry/examples/marker-icon.tsx")),
+    files: [{
+      path: "registry/examples/marker-icon.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-separator": {
+    name: "marker-separator",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    component: lazy(() => import("~/registry/examples/marker-separator.tsx")),
+    files: [{
+      path: "registry/examples/marker-separator.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "menubar-demo": {
     name: "menubar-demo",
     description: "",
@@ -3120,6 +3092,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/progress-rtl.tsx")),
     files: [{
       path: "registry/examples/progress-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "marker-link-button": {
+    name: "marker-link-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    component: lazy(() => import("~/registry/examples/marker-link-button.tsx")),
+    files: [{
+      path: "registry/examples/marker-link-button.tsx",
       type: "registry:example",
       target: ""
     }],

@@ -153,6 +153,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Marker",
+          href: "/docs/components/marker"
+        },
+        {
           title: "Menubar",
           href: "/docs/components/menubar"
         },

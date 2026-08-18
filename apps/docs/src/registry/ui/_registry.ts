@@ -270,40 +270,6 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "input-otp",
-    type: "registry:ui",
-    dependencies: ["@corvu/otp-field", "lucide-solid"],
-    registryDependencies: [],
-    files: [
-      {
-        path: "ui/input-otp.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "item",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    registryDependencies: ["separator"],
-    files: [
-      {
-        path: "ui/item.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "kbd",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/kbd.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "label",
     type: "registry:ui",
     files: [
@@ -314,69 +280,11 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "menubar",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
-    files: [
-      {
-        path: "ui/menubar.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "native-select",
-    type: "registry:ui",
-    dependencies: ["lucide-solid"],
-    files: [
-      {
-        path: "ui/native-select.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "navigation-menu",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
-    files: [
-      {
-        path: "ui/navigation-menu.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "pagination",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
-    registryDependencies: ["button"],
-    files: [
-      {
-        path: "ui/pagination.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "popover",
-    dependencies: ["@kobalte/core"],
+    name: "marker",
     type: "registry:ui",
     files: [
       {
-        path: "ui/popover.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "progress",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    registryDependencies: ["label"],
-    files: [
-      {
-        path: "ui/progress.tsx",
+        path: "ui/marker.tsx",
         type: "registry:ui"
       }
     ]
