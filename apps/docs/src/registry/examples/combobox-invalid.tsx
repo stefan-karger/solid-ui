@@ -19,6 +19,20 @@ export default function ComboboxInvalid() {
           <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
         </ComboboxContent>
       </Combobox>
+      <Combobox
+        options={frameworks}
+        placeholder="Select a framework..."
+        validationState="invalid"
+        multiple={true}
+        itemComponent={(props) => (
+          <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
+        )}
+      >
+        <ComboboxInput placeholder="Select a framework..." aria-invalid="true" multiple={true} />
+        <ComboboxContent>
+          <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
+        </ComboboxContent>
+      </Combobox>
       <Field data-invalid>
         <FieldLabel for="combobox-framework-invalid">Framework</FieldLabel>
         <Combobox

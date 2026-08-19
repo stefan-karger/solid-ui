@@ -64,17 +64,18 @@ type ComboboxChipsProps = ComponentProps<"div"> & {
 }
 
 const ComboboxChips = (props: ComboboxChipsProps) => {
+  // cn-combobox-chips
   return (
     <div class={cn("flex flex-wrap gap-0.5 px-1 py-1 border-b", props.class)}>
       <For each={props.values}>
         {(option) => (
-          <Badge variant="outline" class="p-0 gap-0 cursor-pointer" onPointerDown={e => e.stopPropagation()}>
+          <span class="cn-combobox-chip cursor-pointer" onPointerDown={e => e.stopPropagation()}>
             {/* @ts-expect-error - option type is unknown, fix later */}
-            <span class="pl-1 py-1">{option}</span>
-            <Button variant="ghost" class="size-5 px-0 relative -right-[1px]" onClick={() => props.remove(option)}>
+            <span>{option}</span>
+            <button class="cn-combobox-chip-remove" onClick={() => props.remove(option)}>
               <XIcon class="size-3" />
-            </Button>
-          </Badge>
+            </button>
+          </span>
         )}
       </For>
     </div>
@@ -91,21 +92,21 @@ type ComboboxInputProps<T extends ValidComponent = "input"> = PolymorphicProps<
   > & {
     showTrigger?: boolean
     showClear?: boolean
-    multiple?: boolean
     children?: JSX.Element
+    multiple?: boolean
   }
 
 const ComboboxInput = <T extends ValidComponent = "input">(
   rawProps: ComboboxInputProps<T>,
 ) => {
-  const props = mergeProps({ showTrigger: true, showClear: true, showChips: false }, rawProps)
+  const props = mergeProps({ showTrigger: true, showClear: true, multiple: false }, rawProps)
   const [local, others] = splitProps(props as ComboboxInputProps, [
     "class",
     "showTrigger",
     "showClear",
-    "multiple",
     "children",
     "disabled",
+    "multiple",
   ])
 
   return (
@@ -128,7 +129,7 @@ const ComboboxInput = <T extends ValidComponent = "input">(
             as={InputGroupInput}
             disabled={local.disabled}
             data-slot="combobox-input"
-            class="min-w-0"
+            class="min-w-0 data-[invalid=true]:text-destructive"
             {...others}
           />
           <InputGroupAddon align="inline-end" class="whitespace-nowrap">
