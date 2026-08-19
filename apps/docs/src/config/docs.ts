@@ -113,6 +113,10 @@ export const docsConfig: Config = {
           href: "/docs/components/label"
         },
         {
+          title: "Native Select",
+          href: "/docs/components/native-select"
+        },
+        {
           title: "Questionnaire",
           href: "/docs/components/questionnaire"
         },

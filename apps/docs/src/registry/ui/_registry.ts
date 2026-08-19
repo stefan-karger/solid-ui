@@ -221,6 +221,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "native-select",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/native-select.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "questionnaire",
     type: "registry:ui",
     dependencies: ["lucide-solid", "@kobalte/core"],
