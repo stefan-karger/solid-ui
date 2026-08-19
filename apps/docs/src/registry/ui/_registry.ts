@@ -436,7 +436,7 @@ export const ui: Registry["items"] = [
   {
     name: "select",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@kobalte/core", "lucide-solid"],
     files: [
       {
         path: "ui/select.tsx",

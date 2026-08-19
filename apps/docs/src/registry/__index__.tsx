@@ -4288,6 +4288,62 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "select-disabled": {
+    name: "select-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    component: lazy(() => import("~/registry/examples/select-disabled.tsx")),
+    files: [{
+      path: "registry/examples/select-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "select-groups": {
+    name: "select-groups",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    component: lazy(() => import("~/registry/examples/select-groups.tsx")),
+    files: [{
+      path: "registry/examples/select-groups.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "select-invalid": {
+    name: "select-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select","field"],
+    component: lazy(() => import("~/registry/examples/select-invalid.tsx")),
+    files: [{
+      path: "registry/examples/select-invalid.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "select-scrollable": {
+    name: "select-scrollable",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    component: lazy(() => import("~/registry/examples/select-scrollable.tsx")),
+    files: [{
+      path: "registry/examples/select-scrollable.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "separator-demo": {
     name: "separator-demo",
     description: "",

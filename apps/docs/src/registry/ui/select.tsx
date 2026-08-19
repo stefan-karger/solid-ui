@@ -1,44 +1,92 @@
-import type { Component, JSX, ValidComponent } from "solid-js"
+import type { ComponentProps, JSX, ValidComponent } from "solid-js"
 import { mergeProps, splitProps } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as SelectPrimitive from "@kobalte/core/select"
+import {
+  Root,
+  Section,
+  type SelectContentProps as SelectPrimitiveContentProps,
+  type SelectTriggerProps as SelectPrimitiveTriggerProps,
+  type SelectValueProps as SelectPrimitiveValueProps,
+  type SelectRootProps,
+  type SelectSectionProps,
+  useSelectContext,
+  Value
+} from "@kobalte/core/select"
+import { Check, ChevronsUpDown } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
 
-const Select = <Option, OptGroup = never, T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, SelectPrimitive.SelectRootProps<Option, OptGroup, T>>
+type SelectProps<O, OptGroup = never, T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SelectRootProps<O, OptGroup, T>
+> &
+  Pick<ComponentProps<T>, "class" | "children">
+
+const Select = <O, OptGroup = never, T extends ValidComponent = "div">(
+  props: SelectProps<O, OptGroup, T>
 ) => {
-  return <SelectPrimitive.Root data-slot="select" {...props} />
+  const mergedProps = mergeProps(
+    {
+      sameWidth: true,
+      gutter: 4,
+      placement: "bottom"
+    } as const,
+    props
+  )
+  return <Root {...mergedProps} />
 }
+
+type SelectGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SelectSectionProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const SelectGroup = <T extends ValidComponent = "div">(props: SelectGroupProps<T>) => {
+  const [local, others] = splitProps(props as SelectGroupProps, ["class"])
+  return <Section class={cn("cn-select-group", local.class)} data-slot="select-group" {...others} />
+}
+
+type SelectValueProps<Option, T extends ValidComponent = "span"> = PolymorphicProps<
+  T,
+  SelectPrimitiveValueProps<Option, T>
+> &
+  Pick<ComponentProps<T>, "class">
 
 const SelectValue = <Option, T extends ValidComponent = "span">(
-  props: PolymorphicProps<T, SelectPrimitive.SelectValueProps<Option, T>>
+  props: SelectValueProps<Option, T>
 ) => {
-  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+  const context = useSelectContext()
+  const [local, others] = splitProps(props as SelectValueProps<Option>, ["class"])
+  return (
+    <Value
+      class={cn("cn-select-value", local.class, {
+        "text-muted-foreground": context.selectedOptions().length === 0
+      })}
+      data-slot="select-value"
+      {...others}
+    />
+  )
 }
 
-const SelectHiddenSelect: Component<SelectPrimitive.SelectHiddenSelectProps> = (props) => {
-  return <SelectPrimitive.HiddenSelect data-slot="select-hidden-select" {...props} />
-}
-
-type SelectTriggerProps<T extends ValidComponent = "button"> =
-  SelectPrimitive.SelectTriggerProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
+type SelectTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  SelectPrimitiveTriggerProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children"> & {
     size?: "sm" | "default"
   }
 
-const SelectTrigger = <T extends ValidComponent = "button">(
-  rawProps: PolymorphicProps<T, SelectTriggerProps<T>>
-) => {
+const SelectTrigger = <T extends ValidComponent = "button">(rawProps: SelectTriggerProps<T>) => {
   const props = mergeProps({ size: "default" }, rawProps)
   const [local, others] = splitProps(props as SelectTriggerProps, ["class", "children", "size"])
 
   return (
     <SelectPrimitive.Trigger
       class={cn(
-        "flex w-full items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[size=default]:h-9 data-[size=sm]:h-8 data-[placeholder]:text-muted-foreground *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 dark:bg-input/30 dark:aria-invalid:ring-destructive/40 dark:hover:bg-input/50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "cn-select-trigger flex w-fit items-center justify-between whitespace-nowrap outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
         local.class
       )}
       data-size={local.size}
@@ -47,43 +95,53 @@ const SelectTrigger = <T extends ValidComponent = "button">(
     >
       {local.children}
       <SelectPrimitive.Icon
-        as="svg"
-        class="size-4 opacity-50"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M8 9l4 -4l4 4" />
-        <path d="M16 15l-4 4l-4 -4" />
-      </SelectPrimitive.Icon>
+        as={ChevronsUpDown}
+        class="cn-select-trigger-icon pointer-events-none"
+      />
     </SelectPrimitive.Trigger>
   )
 }
 
-type SelectContentProps<T extends ValidComponent = "div"> =
-  SelectPrimitive.SelectContentProps<T> & { class?: string | undefined }
+type SelectContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SelectPrimitiveContentProps<T>
+> &
+  Pick<ComponentProps<T>, "class"> & {}
 
-const SelectContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, SelectContentProps<T>>
-) => {
+const SelectContent = <T extends ValidComponent = "div">(props: SelectContentProps<T>) => {
   const [local, others] = splitProps(props as SelectContentProps, ["class"])
+  let contentRef: HTMLElement | undefined
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         class={cn(
-          "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 relative z-50 min-w-[8rem] origin-(--kb-select-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in",
+          "cn-select-content relative isolate z-50 z-menu-target max-h-80 min-w-32 origin-(--kb-select-content-transform-origin) overflow-y-auto overflow-x-hidden",
           local.class
         )}
         data-slot="select-content"
+        ref={contentRef}
         {...others}
       >
-        <SelectPrimitive.Listbox class="m-0 max-h-60 overflow-y-auto p-1" />
+        <SelectPrimitive.Listbox class="m-0 p-1" scrollRef={() => contentRef} />
       </SelectPrimitive.Content>
     </SelectPrimitive.Portal>
+  )
+}
+
+type SelectLabelProps<T extends ValidComponent = "span"> = SelectPrimitive.SelectLabelProps<T> & {
+  class?: string | undefined
+}
+
+const SelectLabel = <T extends ValidComponent = "span">(
+  props: PolymorphicProps<T, SelectLabelProps<T>>
+) => {
+  const [local, others] = splitProps(props as SelectLabelProps, ["class"])
+  return (
+    <SelectPrimitive.Label
+      class={cn("cn-select-label", local.class)}
+      data-slot="select-label"
+      {...others}
+    />
   )
 }
 
@@ -99,31 +157,46 @@ const SelectItem = <T extends ValidComponent = "li">(
   return (
     <SelectPrimitive.Item
       class={cn(
-        "relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-
+        "cn-select-item relative flex w-full cursor-default select-none items-center outline-hidden data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         local.class
       )}
       data-slot="select-item"
       {...others}
     >
-      <SelectPrimitive.ItemIndicator class="absolute right-2 flex size-3.5 items-center justify-center">
-        <svg
-          class="size-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0 0h24v24H0z" fill="none" stroke="none" />
-          <path d="M5 12l5 5l10 -10" />
-        </svg>
+      <SelectPrimitive.ItemLabel class="cn-select-item-text shrink-0 whitespace-nowrap">
+        {local.children}
+      </SelectPrimitive.ItemLabel>
+      <SelectPrimitive.ItemIndicator as="span" class="cn-select-item-indicator">
+        <Check class="cn-select-item-indicator-icon pointer-events-none" />
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemLabel>{local.children}</SelectPrimitive.ItemLabel>
     </SelectPrimitive.Item>
   )
 }
 
-export { Select, SelectValue, SelectHiddenSelect, SelectTrigger, SelectContent, SelectItem }
+type SelectSeparatorProps<T extends ValidComponent = "hr"> = ComponentProps<T> & {
+  class?: string | undefined
+}
+
+const SelectSeparator = <T extends ValidComponent = "hr">(
+  props: PolymorphicProps<T, SelectSeparatorProps<T>>
+) => {
+  const [local, others] = splitProps(props as SelectSeparatorProps, ["class"])
+  return (
+    <hr
+      class={cn("cn-select-separator pointer-events-none", local.class)}
+      data-slot="select-separator"
+      {...others}
+    />
+  )
+}
+
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue
+}

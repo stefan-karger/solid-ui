@@ -2825,6 +2825,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "select-disabled",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [
+      {
+        path: "examples/select-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "select-groups",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [
+      {
+        path: "examples/select-groups.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "select-invalid",
+    type: "registry:example",
+    registryDependencies: ["select", "field"],
+    files: [
+      {
+        path: "examples/select-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "select-scrollable",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [
+      {
+        path: "examples/select-scrollable.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "separator-demo",
     type: "registry:example",
     registryDependencies: ["separator"],

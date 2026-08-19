@@ -3,6 +3,8 @@ title: Select
 description: Displays a list of options for the user to pick from—triggered by a button.
 ---
 
+The Select component wraps [Kobalte's Select](https://kobalte.dev/docs/core/components/select) primitive. It is data-driven rather than compositional: pass an `options` array plus `optionValue` / `optionTextValue` accessors, and render each option through `itemComponent`.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -18,3 +20,215 @@ description: Displays a list of options for the user to pick from—triggered by
 
 :::
 ::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add select
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/select.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
+
+const items = [
+  { label: "Light", value: "light" },
+  { label: "Dark", value: "dark" },
+  { label: "System", value: "system" },
+];
+```
+
+```tsx showLineNumbers
+<Select
+  options={items}
+  optionValue="value"
+  optionTextValue="label"
+  placeholder="Theme"
+  itemComponent={(props) => (
+    <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
+  )}
+>
+  <SelectTrigger aria-label="Theme" class="w-45">
+    <SelectValue<(typeof items)[number]>>
+      {(state) => state.selectedOption().label}
+    </SelectValue>
+  </SelectTrigger>
+  <SelectContent />
+</Select>
+```
+
+See the [Kobalte Select documentation](https://kobalte.dev/docs/core/components/select) for the full set of data-driven props (`multiple`, `value` / `onChange`, `optionGroupChildren`, etc.) supported by the root.
+
+## Composition
+
+`Select` is data-driven: options are supplied once on the root, and `SelectContent` renders them internally through `itemComponent`. Use the following composition to build a `Select`:
+
+```text
+Select (options, optionValue, optionTextValue, itemComponent, sectionComponent?)
+├── SelectTrigger
+│   └── SelectValue
+└── SelectContent
+```
+
+`itemComponent` renders a `SelectItem` for each option. `sectionComponent`, used together with `optionGroupChildren`, renders a `SelectGroup` (with a `SelectLabel` and, optionally, a `SelectSeparator`) for each group of options.
+
+## Examples
+
+### Groups
+
+Pass grouped data with `optionGroupChildren` and render a `SelectGroup` / `SelectLabel` per section from `sectionComponent`.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="select-groups" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/select-groups" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Scrollable
+
+A select with many items, grouped by region, that scrolls.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="select-scrollable" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/select-scrollable" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Pass `disabled` on `Select` to disable the whole control, or `optionDisabled` to disable individual options.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="select-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/select-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Add the `data-invalid` attribute to the `Field` component, set `validationState="invalid"` on `Select`, and add the `aria-invalid` attribute to the `SelectTrigger` component to show an error state.
+
+```tsx showLineNumbers /data-invalid/ /validationState="invalid"/ /aria-invalid/
+<Field data-invalid>
+  <FieldLabel for="fruit">Fruit</FieldLabel>
+  <Select validationState="invalid" /* options, itemComponent, ... */>
+    <SelectTrigger id="fruit" aria-invalid>
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent />
+  </Select>
+</Field>
+```
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="select-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/select-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+The Select component uses Kobalte's Select primitive under the hood. Here are the main props:
+
+| Prop                  | Type                                  | Default    | Description                                           |
+| --------------------- | ------------------------------------- | ---------- | ----------------------------------------------------- |
+| `options`             | `T[]`                                 | -          | The array of options (or option groups) to display    |
+| `optionValue`         | `keyof T \| ((option: T) => string)`  | -          | Key or function to get the option's value             |
+| `optionTextValue`     | `keyof T \| ((option: T) => string)`  | -          | Key or function to get the option's text              |
+| `optionLabel`         | `keyof T \| ((option: T) => string)`  | -          | Key or function to get the option's display label     |
+| `optionDisabled`      | `keyof T \| ((option: T) => boolean)` | -          | Key or function to determine if an option is disabled |
+| `optionGroupChildren` | `keyof T`                             | -          | Key on a group item that holds its child options      |
+| `itemComponent`       | `(props: { item }) => JSX.Element`    | -          | Renders a `SelectItem` for each option                |
+| `sectionComponent`    | `(props: { section }) => JSX.Element` | -          | Renders a `SelectGroup` for each option group         |
+| `value`               | `T`                                   | -          | The controlled value of the select                    |
+| `defaultValue`        | `T`                                   | -          | The default value of the select                       |
+| `onChange`            | `(value: T) => void`                  | -          | Handler called when the value changes                 |
+| `placeholder`         | `JSX.Element`                         | -          | Placeholder content when no value is selected         |
+| `disabled`            | `boolean`                             | `false`    | Whether the select is disabled                        |
+| `validationState`     | `"valid" \| "invalid"`                | -          | The validation state of the select                    |
+| `multiple`            | `boolean`                             | `false`    | Whether multiple options can be selected              |
+| `sameWidth`           | `boolean`                             | `true`     | Whether the content has the same width as the trigger |
+| `gutter`              | `number`                              | `4`        | Distance between the trigger and content              |
+| `placement`           | `Placement`                           | `"bottom"` | Preferred placement of the content                    |
+
+### SelectTrigger
+
+| Prop    | Type                | Default     | Description                     |
+| ------- | ------------------- | ----------- | ------------------------------- |
+| `size`  | `"sm" \| "default"` | `"default"` | The size variant of the trigger |
+| `class` | `string`            | -           | Additional CSS classes          |
+
+### SelectContent
+
+Renders the dropdown portal and listbox. It takes no children—options are rendered internally from the root's `options` and `itemComponent`.
+
+### SelectItem
+
+| Prop   | Type                                 | Default | Description                  |
+| ------ | ------------------------------------ | ------- | ---------------------------- |
+| `item` | the `item` passed to `itemComponent` | -       | The item object from Kobalte |
+
+### SelectGroup / SelectLabel / SelectSeparator
+
+Used inside `sectionComponent` to render a labeled group of options, optionally separated from the previous group by a `SelectSeparator`.
+
+See the [Kobalte Select API reference](https://kobalte.dev/docs/core/components/select#api-reference) for the complete prop list.
