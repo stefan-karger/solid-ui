@@ -728,6 +728,20 @@ export const examples: Registry["items"] = [
       }
     ]
   },
+  // questionnaire-animated
+  // questionnaire-card
+  // questionnaire-conditional
+  // questionnaire-controlled
+  // questionnaire-demo
+  // questionnaire-dialog
+  // questionnaire-freeform
+  // questionnaire-multiple
+  // questionnaire-navigation-state
+  // questionnaire-progress
+  // questionnaire-resume
+  // questionnaire-shortcuts
+  // questionnaire-skip
+  // questionnaire-validation
   {
     name: "select-demo",
     type: "registry:example",
