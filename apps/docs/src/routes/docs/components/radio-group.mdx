@@ -3,6 +3,8 @@ title: Radio Group
 description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
 ---
 
+`RadioGroup` wraps [Kobalte's Radio Group](https://kobalte.dev/docs/core/components/radio-group) primitive, which implements the [WAI-ARIA radio group pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) with roving-tabindex keyboard navigation and native form participation.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -49,13 +51,151 @@ import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 
 ```tsx showLineNumbers
 <RadioGroup defaultValue="option-one">
-  <div class="flex items-center space-x-2">
+  <div class="flex items-center gap-3">
     <RadioGroupItem value="option-one" id="option-one" />
     <Label for="option-one">Option One</Label>
   </div>
-  <div class="flex items-center space-x-2">
+  <div class="flex items-center gap-3">
     <RadioGroupItem value="option-two" id="option-two" />
     <Label for="option-two">Option Two</Label>
   </div>
 </RadioGroup>
 ```
+
+## Composition
+
+Use the following composition to build a `RadioGroup`:
+
+```text
+RadioGroup
+├── RadioGroupItem
+└── RadioGroupItem
+```
+
+## Examples
+
+### Description
+
+Radio group items with a description using the `Field` component.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="radio-group-description" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/radio-group-description" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Choice Card
+
+Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="radio-group-choice-card" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/radio-group-choice-card" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Fieldset
+
+Use `FieldSet` and `FieldLegend` to group radio items with a label and description.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="radio-group-fieldset" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/radio-group-fieldset" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop on `RadioGroup` to disable all items, or on `RadioGroupItem` to disable an individual item.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="radio-group-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/radio-group-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="radio-group-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/radio-group-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+`RadioGroup` and `RadioGroupItem` wrap [Kobalte's Radio Group](https://kobalte.dev/docs/core/components/radio-group) primitive, which implements the [WAI-ARIA radio group pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/), including roving-tabindex keyboard navigation, disabled, read-only, and form reset behavior.
+
+### RadioGroup
+
+| Prop              | Type                         | Default      |
+| ----------------- | ---------------------------- | ------------ |
+| `value`           | `string`                     | -            |
+| `defaultValue`    | `string`                     | -            |
+| `onChange`        | `(value: string) => void`    | -            |
+| `orientation`     | `"horizontal" \| "vertical"` | `"vertical"` |
+| `disabled`        | `boolean`                    | `false`      |
+| `readOnly`        | `boolean`                    | `false`      |
+| `required`        | `boolean`                    | `false`      |
+| `validationState` | `"valid" \| "invalid"`       | -            |
+| `name`            | `string`                     | -            |
+| `id`              | `string`                     | -            |
+| `as`              | `ValidComponent`             | `"div"`      |
+| `class`           | `string`                     | -            |
+
+### RadioGroupItem
+
+| Prop       | Type             | Default |
+| ---------- | ---------------- | ------- |
+| `value`    | `string`         | -       |
+| `disabled` | `boolean`        | `false` |
+| `id`       | `string`         | -       |
+| `as`       | `ValidComponent` | `"div"` |
+| `class`    | `string`         | -       |

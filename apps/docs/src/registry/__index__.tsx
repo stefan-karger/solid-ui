@@ -4092,6 +4092,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "radio-group-choice-card": {
+    name: "radio-group-choice-card",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio-group","field"],
+    component: lazy(() => import("~/registry/examples/radio-group-choice-card.tsx")),
+    files: [{
+      path: "registry/examples/radio-group-choice-card.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group-demo": {
     name: "radio-group-demo",
     description: "",
@@ -4100,6 +4114,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/radio-group-demo.tsx")),
     files: [{
       path: "registry/examples/radio-group-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "radio-group-description": {
+    name: "radio-group-description",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio-group","field"],
+    component: lazy(() => import("~/registry/examples/radio-group-description.tsx")),
+    files: [{
+      path: "registry/examples/radio-group-description.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "radio-group-disabled": {
+    name: "radio-group-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio-group","field"],
+    component: lazy(() => import("~/registry/examples/radio-group-disabled.tsx")),
+    files: [{
+      path: "registry/examples/radio-group-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "radio-group-fieldset": {
+    name: "radio-group-fieldset",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio-group","field"],
+    component: lazy(() => import("~/registry/examples/radio-group-fieldset.tsx")),
+    files: [{
+      path: "registry/examples/radio-group-fieldset.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "radio-group-invalid": {
+    name: "radio-group-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio-group","field"],
+    component: lazy(() => import("~/registry/examples/radio-group-invalid.tsx")),
+    files: [{
+      path: "registry/examples/radio-group-invalid.tsx",
       type: "registry:example",
       target: ""
     }],
