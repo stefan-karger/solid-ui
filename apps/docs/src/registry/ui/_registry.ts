@@ -304,6 +304,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "kbd",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/kbd.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "label",
     type: "registry:ui",
     files: [
@@ -329,6 +339,18 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/message.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "message-scroller",
+    type: "registry:ui",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "use-message-scroller"],
+    files: [
+      {
+        path: "ui/message-scroller.tsx",
         type: "registry:ui"
       }
     ]
@@ -452,7 +474,7 @@ export const ui: Registry["items"] = [
       }
     ]
   },
-    {
+  {
     name: "table",
     type: "registry:ui",
     files: [
@@ -528,5 +550,5 @@ export const ui: Registry["items"] = [
         type: "registry:ui"
       }
     ]
-  },
+  }
 ]

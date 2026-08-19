@@ -168,6 +168,10 @@ export const docsConfig: Config = {
           href: "/docs/components/message"
         },
         {
+          title: "Message Scroller",
+          href: "/docs/components/message-scroller"
+        },
+        {
           title: "Native Select",
           href: "/docs/components/native-select"
         },
