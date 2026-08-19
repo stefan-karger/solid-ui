@@ -2,7 +2,7 @@ import { Bubble, BubbleContent } from "~/registry/ui/bubble";
 
 export default function BubbleAlignment() {
   return (
-    <div class="flex w-full max-w-md flex-col gap-8">
+    <div class="flex w-full max-w-md flex-col gap-4">
       <Bubble variant="muted">
         <BubbleContent>This bubble is aligned to the start.</BubbleContent>
       </Bubble>

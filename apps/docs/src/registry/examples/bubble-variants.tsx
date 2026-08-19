@@ -2,7 +2,7 @@ import { Bubble, BubbleContent } from "~/registry/ui/bubble";
 
 export default function BubbleVariants() {
   return (
-    <div class="flex w-full max-w-md flex-col gap-8">
+    <div class="flex w-full max-w-md flex-col gap-4">
       <Bubble>
         <BubbleContent>
           Default bubbles use the primary color for the active user side of a chat.

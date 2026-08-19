@@ -2,7 +2,7 @@ import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from "~/registry/
 
 export default function BubbleDemo() {
   return (
-    <div class="flex w-full max-w-sm flex-col gap-8 py-12">
+    <div class="flex w-full max-w-sm flex-col gap-4 py-12">
       <Bubble align="end">
         <BubbleContent>Hey there! What&apos;s up?</BubbleContent>
       </Bubble>

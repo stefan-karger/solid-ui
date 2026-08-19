@@ -4,7 +4,7 @@ import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble";
 
 export default function BubbleWithReactions() {
   return (
-    <div class="flex w-full max-w-md flex-col gap-12">
+    <div class="flex w-full max-w-md flex-col gap-8">
       <GalleryMarker>side=bottom align=end</GalleryMarker>
       <Bubble>
         <BubbleContent>This is a one line message.</BubbleContent>
@@ -18,7 +18,7 @@ export default function BubbleWithReactions() {
         </BubbleContent>
         <BubbleReactions
           side="bottom"
-          align="start"
+          align="end"
           role="img"
           aria-label="Reactions: thumbs up, surprised"
         >
@@ -50,7 +50,7 @@ export default function BubbleWithReactions() {
           <span>🔥</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="secondary">
+      <Bubble variant="secondary" align="end">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
@@ -73,7 +73,7 @@ export default function BubbleWithReactions() {
           <span>🔥</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="secondary">
+      <Bubble variant="secondary" align="end">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
@@ -96,7 +96,7 @@ export default function BubbleWithReactions() {
           <span>👍</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="muted">
+      <Bubble variant="muted" align="end">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset.
         </BubbleContent>
