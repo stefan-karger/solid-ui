@@ -217,18 +217,6 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "dialog",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
-    registryDependencies: ["input-group", "badge", "button"],
-    files: [
-      {
-        path: "ui/combobox.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "context-menu",
     type: "registry:ui",
     dependencies: ["@kobalte/core", "lucide-solid"],
@@ -247,6 +235,16 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/dialog.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "direction",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/direction.tsx",
         type: "registry:ui"
       }
     ]
@@ -470,7 +468,15 @@ export const ui: Registry["items"] = [
     name: "sidebar",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
-    registryDependencies: ["use-mobile", "button", "input", "separator", "sheet", "skeleton", "tooltip"],
+    registryDependencies: [
+      "use-mobile",
+      "button",
+      "input",
+      "separator",
+      "sheet",
+      "skeleton",
+      "tooltip"
+    ],
     files: [
       {
         path: "ui/sidebar.tsx",

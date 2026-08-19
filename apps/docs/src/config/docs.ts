@@ -104,6 +104,10 @@ export const docsConfig: Config = {
           href: "/docs/components/command"
         },
         {
+          title: "Direction",
+          href: "/docs/components/direction"
+        },
+        {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },
