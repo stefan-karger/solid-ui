@@ -20,7 +20,7 @@ export function DocsLayout(props: ParentProps) {
 
   return (
     <div class="container-wrapper flex flex-1 flex-col px-2">
-      <SidebarProvider class="3xl:fixed:container min-h-min flex-1 items-start 3xl:fixed:px-3 px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+      <SidebarProvider class="min-h-min flex-1 items-start px-0 has-data-[variant=inset]:bg-transparent [--sidebar-width:--spacing(72)] [--toc-width:--spacing(64)] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--top-spacing:--spacing(4)] 3xl:fixed:container 3xl:fixed:px-3">
         <MainNavigation />
         <div class="size-full">
           <div class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full" data-slot="docs">

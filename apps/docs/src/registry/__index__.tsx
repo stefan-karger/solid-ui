@@ -1614,42 +1614,42 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "sidebar-floating-example": {
-    name: "sidebar-floating-example",
+  "sidebar-floating": {
+    name: "sidebar-floating",
     description: "",
     type: "registry:example",
     registryDependencies: ["sidebar","breadcrumb","separator"],
-    component: lazy(() => import("~/registry/examples/sidebar-floating-example.tsx")),
+    component: lazy(() => import("~/registry/examples/sidebar-floating.tsx")),
     files: [{
-      path: "registry/examples/sidebar-floating-example.tsx",
+      path: "registry/examples/sidebar-floating.tsx",
       type: "registry:example",
       target: ""
     }],
     categories: undefined,
     meta: undefined,
   },
-  "sidebar-icon-example": {
-    name: "sidebar-icon-example",
+  "sidebar-icon": {
+    name: "sidebar-icon",
     description: "",
     type: "registry:example",
     registryDependencies: ["sidebar","avatar","breadcrumb","collapsible","dropdown-menu","kbd","separator"],
-    component: lazy(() => import("~/registry/examples/sidebar-icon-example.tsx")),
+    component: lazy(() => import("~/registry/examples/sidebar-icon.tsx")),
     files: [{
-      path: "registry/examples/sidebar-icon-example.tsx",
+      path: "registry/examples/sidebar-icon.tsx",
       type: "registry:example",
       target: ""
     }],
     categories: undefined,
     meta: undefined,
   },
-  "sidebar-inset-example": {
-    name: "sidebar-inset-example",
+  "sidebar-inset": {
+    name: "sidebar-inset",
     description: "",
     type: "registry:example",
     registryDependencies: ["sidebar","breadcrumb"],
-    component: lazy(() => import("~/registry/examples/sidebar-inset-example.tsx")),
+    component: lazy(() => import("~/registry/examples/sidebar-inset.tsx")),
     files: [{
-      path: "registry/examples/sidebar-inset-example.tsx",
+      path: "registry/examples/sidebar-inset.tsx",
       type: "registry:example",
       target: ""
     }],

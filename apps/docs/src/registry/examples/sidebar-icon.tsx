@@ -4,18 +4,18 @@ import {
   Bell,
   BookOpen,
   Bot,
-  ChartPie,
   ChevronRight,
   ChevronsUpDown,
   Command,
   CreditCard,
-  Ellipsis,
   Folder,
   Forward,
   Frame,
   GalleryVerticalEnd,
   LogOut,
   Map as MapIcon,
+  EllipsisIcon,
+  ChartPieIcon,
   Plus,
   Settings2,
   Sparkles,
@@ -141,7 +141,7 @@ const data = {
   ],
   projects: [
     { name: "Design Engineering", url: "#", icon: Frame },
-    { name: "Sales & Marketing", url: "#", icon: ChartPie },
+    { name: "Sales & Marketing", url: "#", icon: ChartPieIcon },
     { name: "Travel", url: "#", icon: MapIcon },
   ],
 };
@@ -268,7 +268,7 @@ function NavProjects(props: {
               </SidebarMenuButton>
               <DropdownMenu placement={isMobile() ? "bottom-end" : "right-start"}>
                 <DropdownMenuTrigger as={SidebarMenuAction} showOnHover class="">
-                  <Ellipsis />
+                  <EllipsisIcon />
                   <span class="sr-only">More</span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="w-48 rounded-lg">
@@ -292,7 +292,7 @@ function NavProjects(props: {
         </For>
         <SidebarMenuItem>
           <SidebarMenuButton class="text-sidebar-foreground/70">
-            <Ellipsis class="text-sidebar-foreground/70" />
+            <EllipsisIcon class="text-sidebar-foreground/70" />
             <span>More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>

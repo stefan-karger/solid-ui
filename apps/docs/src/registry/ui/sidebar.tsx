@@ -2,7 +2,7 @@ import type { PolymorphicProps } from "@kobalte/core";
 import { Polymorphic } from "@kobalte/core";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
-import { Menu } from "lucide-solid";
+import { PanelLeft } from "lucide-solid";
 import type { Accessor, Component, ComponentProps, JSX, ValidComponent } from "solid-js";
 import {
   createContext,
@@ -31,7 +31,12 @@ import {
   SheetTitle,
 } from "~/registry/ui/sheet";
 import { Skeleton } from "~/registry/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  type TooltipContentProps,
+  TooltipTrigger,
+} from "~/registry/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -86,14 +91,17 @@ const SidebarProvider = (props: SidebarProviderProps) => {
   const [_open, _setOpen] = createSignal(local.defaultOpen);
   const open = () => local.open ?? _open();
   const setOpen = (value: boolean | ((value: boolean) => boolean)) => {
+    const openState = typeof value === "function" ? value(open()) : value;
+
     if (local.onOpenChange) {
-      return local.onOpenChange?.(typeof value === "function" ? value(open()) : value);
+      local.onOpenChange(openState);
+    } else {
+      _setOpen(openState);
     }
-    _setOpen(value);
 
     // This sets the cookie to keep the sidebar state.
     // biome-ignore lint/suspicious/noDocumentCookie: <waiting for better solution>
-    document.cookie = `${SIDEBAR_COOKIE_NAME}=${open()}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+    document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
   };
 
   // Helper to toggle the sidebar.
@@ -221,7 +229,7 @@ const Sidebar: Component<SidebarProps> = (props) => {
           <div
             data-slot="sidebar-gap"
             class={cn(
-              "relative cn-sidebar-gap w-(--sidebar-width) bg-transparent",
+              "cn-sidebar-gap relative w-(--sidebar-width) bg-transparent",
               "group-data-[collapsible=offcanvas]:w-0",
               "group-data-[side=right]:rotate-180",
               local.variant === "floating" || local.variant === "inset"
@@ -231,11 +239,9 @@ const Sidebar: Component<SidebarProps> = (props) => {
           />
           <div
             data-slot="sidebar-container"
+            data-side={local.side}
             class={cn(
-              "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
-              local.side === "left"
-                ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
-                : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+              "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:-left-(--sidebar-width) data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:-right-(--sidebar-width) md:flex",
               // Adjust the padding for floating and inset variants.
               local.variant === "floating" || local.variant === "inset"
                 ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
@@ -271,14 +277,17 @@ const SidebarTrigger = (props: SidebarTriggerProps) => {
       variant="ghost"
       size="icon-sm"
       class={cn("cn-sidebar-trigger", local.class)}
-      onClick={(event: MouseEvent) => {
-        //@ts-expect-error - TODO: Typescript wizardry needed here
-        local.onClick?.(event);
+      onClick={(event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
+        const handler = local.onClick as
+          | JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>
+          | undefined;
+        if (typeof handler === "function") handler(event);
+        else handler?.[0](handler[1], event);
         toggleSidebar();
       }}
       {...others}
     >
-      <Menu />
+      <PanelLeft />
       <span class="sr-only">Toggle Sidebar</span>
     </Button>
   );
@@ -297,7 +306,7 @@ const SidebarRail = (props: ComponentProps<"button">) => {
       onClick={toggleSidebar}
       title="Toggle Sidebar"
       class={cn(
-        "absolute inset-y-0 z-20 cn-sidebar-rail hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex",
+        "absolute inset-y-0 z-20 cn-sidebar-rail hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-0.5 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
         "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
         "group-data-[collapsible=offcanvas]:translate-x-0 hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:after:left-full",
@@ -357,12 +366,12 @@ const SidebarFooter = (props: ComponentProps<"div">) => {
   );
 };
 
-type SidebarSeparatorProps<T extends ValidComponent = "hr"> = PolymorphicProps<
+type SidebarSeparatorProps<T extends ValidComponent = "div"> = PolymorphicProps<
   T,
   ComponentProps<typeof Separator<T>>
 >;
 
-const SidebarSeparator = <T extends ValidComponent = "hr">(props: SidebarSeparatorProps<T>) => {
+const SidebarSeparator = <T extends ValidComponent = "div">(props: SidebarSeparatorProps<T>) => {
   const [local, others] = splitProps(props as SidebarSeparatorProps, ["class"]);
   return (
     <Separator
@@ -509,7 +518,7 @@ type SidebarMenuButtonProps<T extends ValidComponent = "button"> = PolymorphicPr
 > &
   VariantProps<typeof sidebarMenuButtonVariants> & {
     isActive?: boolean;
-    tooltip?: string;
+    tooltip?: string | TooltipContentProps;
   };
 
 const SidebarMenuButton = <T extends ValidComponent = "button">(
@@ -524,6 +533,10 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
     "class",
   ]);
   const { isMobile, state } = useSidebar();
+  const tooltipProps = () =>
+    typeof local.tooltip === "string"
+      ? ({ children: local.tooltip } satisfies TooltipContentProps)
+      : (local.tooltip ?? {});
 
   const MenuButton = (props: SidebarMenuButtonProps) => {
     const [_local, _others] = splitProps(props as SidebarMenuButtonProps, ["class"]);
@@ -533,7 +546,7 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
         data-slot="sidebar-menu-button"
         data-sidebar="menu-button"
         data-size={local.size}
-        data-active={local.isActive}
+        data-active={local.isActive ? "true" : undefined}
         class={cn(
           sidebarMenuButtonVariants({ variant: local.variant, size: local.size }),
           _local.class,
@@ -549,9 +562,12 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
     <Show fallback={<MenuButton />} when={local.tooltip}>
       <Tooltip placement="right">
         <TooltipTrigger as={MenuButton} class="w-full" />
-        <TooltipContent hidden={state() !== "collapsed" || isMobile()}>
-          {local.tooltip}
-        </TooltipContent>
+        <TooltipContent
+          side="right"
+          align="center"
+          hidden={state() !== "collapsed" || isMobile()}
+          {...tooltipProps()}
+        />
       </Tooltip>
     </Show>
   );
@@ -575,7 +591,7 @@ const SidebarMenuAction = <T extends ValidComponent = "button">(
       class={cn(
         "cn-sidebar-menu-action flex items-center justify-center outline-hidden transition-transform after:absolute after:-inset-2 group-data-[collapsible=icon]:hidden md:after:hidden [&>svg]:shrink-0",
         local.showOnHover &&
-          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-open:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground md:opacity-0",
+          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground aria-expanded:opacity-100 md:opacity-0",
         local.class,
       )}
       {...others}
@@ -675,7 +691,7 @@ const SidebarMenuSubButton = <T extends ValidComponent = "a">(
       data-slot="sidebar-menu-sub-button"
       data-sidebar="menu-sub-button"
       data-size={local.size}
-      data-active={local.isActive}
+      data-active={local.isActive ? "true" : undefined}
       class={cn(
         "cn-sidebar-menu-sub-button flex min-w-0 -translate-x-px items-center overflow-hidden outline-hidden disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 group-data-[collapsible=icon]:hidden [&>span:last-child]:truncate [&>svg]:shrink-0",
         local.class,

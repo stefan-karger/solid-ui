@@ -917,36 +917,36 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "sidebar-floating-example",
+    name: "sidebar-floating",
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: ["sidebar", "breadcrumb", "separator"],
     files: [
       {
-        path: "examples/sidebar-floating-example.tsx",
+        path: "examples/sidebar-floating.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "sidebar-icon-example",
+    name: "sidebar-icon",
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: ["sidebar", "avatar", "breadcrumb", "collapsible", "dropdown-menu", "kbd", "separator"],
     files: [
       {
-        path: "examples/sidebar-icon-example.tsx",
+        path: "examples/sidebar-icon.tsx",
         type: "registry:example"
       }
     ]
   },
   {
-    name: "sidebar-inset-example",
+    name: "sidebar-inset",
     type: "registry:example",
     registryDependencies: ["sidebar", "breadcrumb"],
     files: [
       {
-        path: "examples/sidebar-inset-example.tsx",
+        path: "examples/sidebar-inset.tsx",
         type: "registry:example"
       }
     ]
