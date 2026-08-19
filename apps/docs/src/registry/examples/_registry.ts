@@ -2642,6 +2642,53 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "sidebar-demo",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["sidebar", "breadcrumb", "dropdown-menu", "label", "separator"],
+    files: [
+      {
+        path: "examples/sidebar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sidebar-floating",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["sidebar", "breadcrumb", "separator"],
+    files: [
+      {
+        path: "examples/sidebar-floating.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sidebar-icon",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["sidebar", "avatar", "breadcrumb", "collapsible", "dropdown-menu", "kbd", "separator"],
+    files: [
+      {
+        path: "examples/sidebar-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sidebar-inset",
+    type: "registry:example",
+    registryDependencies: ["sidebar", "breadcrumb"],
+    files: [
+      {
+        path: "examples/sidebar-inset.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "skeleton-demo",
     type: "registry:example",
     registryDependencies: ["skeleton"],

@@ -564,6 +564,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "sidebar": {
+    name: "sidebar",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["use-mobile","button","input","separator","sheet","skeleton","tooltip"],
+    component: lazy(() => import("~/registry/ui/sidebar.tsx")),
+    files: [{
+      path: "registry/ui/sidebar.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "skeleton": {
     name: "skeleton",
     description: "",
@@ -4002,6 +4016,62 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/sheet-side.tsx")),
     files: [{
       path: "registry/examples/sheet-side.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-demo": {
+    name: "sidebar-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb","dropdown-menu","label","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-demo.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-floating": {
+    name: "sidebar-floating",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-floating.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-floating.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-icon": {
+    name: "sidebar-icon",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","avatar","breadcrumb","collapsible","dropdown-menu","kbd","separator"],
+    component: lazy(() => import("~/registry/examples/sidebar-icon.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-icon.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "sidebar-inset": {
+    name: "sidebar-inset",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["sidebar","breadcrumb"],
+    component: lazy(() => import("~/registry/examples/sidebar-inset.tsx")),
+    files: [{
+      path: "registry/examples/sidebar-inset.tsx",
       type: "registry:example",
       target: ""
     }],

@@ -17,6 +17,8 @@
 
 :root {
   --radius: 0.625rem;
+  --font-sans: "Geist Variable", sans-serif;
+  --font-mono: "Geist Mono Variable", monospace;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);

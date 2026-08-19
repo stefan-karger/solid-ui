@@ -216,6 +216,10 @@ export const docsConfig: Config = {
           href: "/docs/components/sheet"
         },
         {
+          title: "Sidebar",
+          href: "/docs/components/sidebar"
+        },
+        {
           title: "Skeleton",
           href: "/docs/components/skeleton"
         },
