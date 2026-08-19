@@ -65,6 +65,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cmdk-solid:
+        specifier: ^1.1.2
+        version: 1.1.2(solid-js@1.9.9)
       embla-carousel:
         specifier: ^8.6.0
         version: 8.6.0
@@ -1940,6 +1943,19 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: false
 
+  /@kobalte/core@0.12.6(solid-js@1.9.9):
+    resolution: {integrity: sha512-+Ta2o2wEqZ2fCqLMkvjT40VHNmcFKdGe8TNDVQbbMPk66qoU6g/DDRFR/Ib7eAjb+C95VoIyk6zaafos2VOo0w==}
+    peerDependencies:
+      solid-js: ^1.8.15
+    dependencies:
+      '@floating-ui/dom': 1.6.12
+      '@internationalized/date': 3.5.6
+      '@internationalized/number': 3.5.4
+      '@kobalte/utils': 0.9.1(solid-js@1.9.9)
+      solid-js: 1.9.9
+      solid-prevent-scroll: 0.1.10(solid-js@1.9.9)
+    dev: false
+
   /@kobalte/core@0.13.11(solid-js@1.9.9):
     resolution: {integrity: sha512-hK7TYpdib/XDb/r/4XDBFaO9O+3ZHz4ZWryV4/3BfES+tSQVgg2IJupDnztKXB0BqbSRy/aWlHKw1SPtNPYCFQ==}
     peerDependencies:
@@ -2890,6 +2906,15 @@ packages:
       solid-js: 1.9.9
     dev: false
 
+  /@solid-primitives/deep@0.2.10(solid-js@1.9.9):
+    resolution: {integrity: sha512-uzhXr/cMABsGkTcV3yuviZjTDmj44wb2JetuJ5O8NCugz4Ug/6XlPjT8ISMPYV7eCbC/gFhgt7e60+TRpl2Upg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/memo': 1.4.3(solid-js@1.9.9)
+      solid-js: 1.9.9
+    dev: false
+
   /@solid-primitives/event-listener@2.3.3(solid-js@1.9.9):
     resolution: {integrity: sha512-DAJbl+F0wrFW2xmcV8dKMBhk9QLVLuBSW+TR4JmIfTaObxd13PuL7nqaXnaYKDWOYa6otB00qcCUIGbuIhSUgQ==}
     peerDependencies:
@@ -2958,6 +2983,15 @@ packages:
       solid-js: 1.9.9
     dev: false
 
+  /@solid-primitives/mutation-observer@1.2.4(solid-js@1.9.9):
+    resolution: {integrity: sha512-CVKOLDj09ZLoN9Hq+o5BTNVBCVM1vKcpRhaZnvpSuXguQBaAz75R8nkaEhkIdMcpENueLivPIJbUqAA1BAaOGw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.4.1(solid-js@1.9.9)
+      solid-js: 1.9.9
+    dev: false
+
   /@solid-primitives/platform@0.1.2(solid-js@1.9.9):
     resolution: {integrity: sha512-sSxcZfuUrtxcwV0vdjmGnZQcflACzMfLriVeIIWXKp8hzaS3Or3tO6EFQkTd3L8T5dTq+kTtLvPscXIpL0Wzdg==}
     peerDependencies:
@@ -2980,7 +3014,7 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
-      '@solid-primitives/utils': 6.2.3(solid-js@1.9.9)
+      '@solid-primitives/utils': 6.3.2(solid-js@1.9.9)
       solid-js: 1.9.9
     dev: false
 
@@ -3001,7 +3035,7 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
-      '@solid-primitives/utils': 6.2.3(solid-js@1.9.9)
+      '@solid-primitives/utils': 6.3.2(solid-js@1.9.9)
       solid-js: 1.9.9
     dev: false
 
@@ -3038,7 +3072,7 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
-      '@solid-primitives/utils': 6.2.3(solid-js@1.9.9)
+      '@solid-primitives/utils': 6.3.2(solid-js@1.9.9)
       solid-js: 1.9.9
     dev: false
 
@@ -3072,7 +3106,7 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
-      '@solid-primitives/utils': 6.2.3(solid-js@1.9.9)
+      '@solid-primitives/utils': 6.3.2(solid-js@1.9.9)
       solid-js: 1.9.9
     dev: false
 
@@ -3086,6 +3120,14 @@ packages:
 
   /@solid-primitives/utils@6.3.2(solid-js@1.9.9):
     resolution: {integrity: sha512-hZ/M/qr25QOCcwDPOHtGjxTD8w2mNyVAYvcfgwzBHq2RwNqHNdDNsMZYap20+ruRwW4A3Cdkczyoz0TSxLCAPQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.9.9
+    dev: false
+
+  /@solid-primitives/utils@6.4.1(solid-js@1.9.9):
+    resolution: {integrity: sha512-ISSB5QX1qP2ynrheIpYwc4oKR5Ny4siNuUyf1qZniy+Il+p/PtDB0QK1Dnle8noiHpwRD3gpPdubOC3qI/Zamg==}
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
@@ -4182,6 +4224,18 @@ packages:
   /cluster-key-slot@1.1.2:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /cmdk-solid@1.1.2(solid-js@1.9.9):
+    resolution: {integrity: sha512-E0g6bwr2Z92Ib1K2WHwGsq6xsrkVVSN1oe5YTg8LCV3iIwtyZORwmR+8n0xrecqycdhgAar8vWUjtB1OJt9tiA==}
+    peerDependencies:
+      solid-js: ^1.8.0
+    dependencies:
+      '@kobalte/core': 0.12.6(solid-js@1.9.9)
+      '@kobalte/utils': 0.9.1(solid-js@1.9.9)
+      '@solid-primitives/deep': 0.2.10(solid-js@1.9.9)
+      '@solid-primitives/mutation-observer': 1.2.4(solid-js@1.9.9)
+      solid-js: 1.9.9
     dev: false
 
   /code-block-writer@12.0.0:
