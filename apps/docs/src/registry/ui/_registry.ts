@@ -213,6 +213,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "hover-card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/hover-card.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "input",
     type: "registry:ui",
     files: [
