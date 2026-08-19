@@ -390,6 +390,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "questionnaire",
+    type: "registry:ui",
+    dependencies: ["lucide-solid", "@kobalte/core"],
+    registryDependencies: ["use-questionnaire", "button"],
+    files: [
+      {
+        path: "ui/questionnaire.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "radio-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],

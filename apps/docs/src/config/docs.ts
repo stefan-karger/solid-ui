@@ -104,10 +104,6 @@ export const docsConfig: Config = {
           href: "/docs/components/command"
         },
         {
-          title: "Dialog",
-          href: "/docs/components/dialog"
-        },
-        {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },
@@ -198,6 +194,10 @@ export const docsConfig: Config = {
         {
           title: "Progress",
           href: "/docs/components/progress"
+        },
+        {
+          title: "Questionnaire",
+          href: "/docs/components/questionnaire"
         },
         {
           title: "Radio Group",

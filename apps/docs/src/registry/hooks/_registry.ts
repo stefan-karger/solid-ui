@@ -12,16 +12,6 @@ export const hooks: Registry["items"] = [
     ]
   },
   {
-    name: "use-mobile",
-    type: "registry:hook",
-    files: [
-      {
-        path: "hooks/use-mobile.ts",
-        type: "registry:hook"
-      }
-    ]
-  },
-  {
     name: "use-message-scroller",
     type: "registry:hook",
     registryDependencies: ["button"],
@@ -32,4 +22,25 @@ export const hooks: Registry["items"] = [
       }
     ]
   },
+  {
+    name: "use-mobile",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-mobile.ts",
+        type: "registry:hook"
+      }
+    ]
+  },
+  {
+    name: "use-questionnaire",
+    type: "registry:hook",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "hooks/use-questionnaire.ts",
+        type: "registry:hook"
+      }
+    ]
+  }
 ]

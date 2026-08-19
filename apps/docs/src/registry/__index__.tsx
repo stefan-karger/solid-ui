@@ -508,6 +508,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "questionnaire": {
+    name: "questionnaire",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["use-questionnaire","button"],
+    component: lazy(() => import("~/registry/ui/questionnaire.tsx")),
+    files: [{
+      path: "registry/ui/questionnaire.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "radio-group": {
     name: "radio-group",
     description: "",
@@ -774,6 +788,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "use-message-scroller": {
+    name: "use-message-scroller",
+    description: "",
+    type: "registry:hook",
+    registryDependencies: ["button"],
+    component: lazy(() => import("~/registry/hooks/use-message-scroller.ts")),
+    files: [{
+      path: "registry/hooks/use-message-scroller.ts",
+      type: "registry:hook",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -788,14 +816,14 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "use-message-scroller": {
-    name: "use-message-scroller",
+  "use-questionnaire": {
+    name: "use-questionnaire",
     description: "",
     type: "registry:hook",
     registryDependencies: ["button"],
-    component: lazy(() => import("~/registry/hooks/use-message-scroller.ts")),
+    component: lazy(() => import("~/registry/hooks/use-questionnaire.ts")),
     files: [{
-      path: "registry/hooks/use-message-scroller.ts",
+      path: "registry/hooks/use-questionnaire.ts",
       type: "registry:hook",
       target: ""
     }],
@@ -3862,6 +3890,202 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/progress-rtl.tsx")),
     files: [{
       path: "registry/examples/progress-rtl.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-animated": {
+    name: "questionnaire-animated",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-animated.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-animated.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-card": {
+    name: "questionnaire-card",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast","card"],
+    component: lazy(() => import("~/registry/examples/questionnaire-card.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-card.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-conditional": {
+    name: "questionnaire-conditional",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-conditional.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-conditional.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-controlled": {
+    name: "questionnaire-controlled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-controlled.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-controlled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-demo": {
+    name: "questionnaire-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-demo.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-dialog": {
+    name: "questionnaire-dialog",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast","button","dialog"],
+    component: lazy(() => import("~/registry/examples/questionnaire-dialog.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-dialog.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-freeform": {
+    name: "questionnaire-freeform",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-freeform.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-freeform.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-multiple": {
+    name: "questionnaire-multiple",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-multiple.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-multiple.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-navigation-state": {
+    name: "questionnaire-navigation-state",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-navigation-state.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-navigation-state.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-progress": {
+    name: "questionnaire-progress",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-progress.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-progress.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-resume": {
+    name: "questionnaire-resume",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast","button"],
+    component: lazy(() => import("~/registry/examples/questionnaire-resume.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-resume.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-shortcuts": {
+    name: "questionnaire-shortcuts",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast","native-select"],
+    component: lazy(() => import("~/registry/examples/questionnaire-shortcuts.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-shortcuts.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-skip": {
+    name: "questionnaire-skip",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast"],
+    component: lazy(() => import("~/registry/examples/questionnaire-skip.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-skip.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "questionnaire-validation": {
+    name: "questionnaire-validation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["use-questionnaire","questionnaire","toast","card"],
+    component: lazy(() => import("~/registry/examples/questionnaire-validation.tsx")),
+    files: [{
+      path: "registry/examples/questionnaire-validation.tsx",
       type: "registry:example",
       target: ""
     }],
