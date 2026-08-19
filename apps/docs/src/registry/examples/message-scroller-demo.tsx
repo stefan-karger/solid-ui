@@ -96,7 +96,7 @@ export default function MessageScrollerDemo() {
             >
               <MessageScroller>
                 <MessageScrollerViewport>
-                  <MessageScrollerContent aria-busy={chat.isBusy()} class="p-(--card-spacing)">
+                  <MessageScrollerContent aria-busy={chat.isBusy()} class="p-6">
                     <For each={chat.messages}>
                       {(message) => <MessageAnimated message={message} />}
                     </For>

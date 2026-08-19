@@ -40,7 +40,7 @@ export default function MessageScrollerScrollable() {
           <CardContent class="min-h-0 flex-1 overflow-hidden p-0">
             <MessageScroller>
               <MessageScrollerViewport>
-                <MessageScrollerContent class="gap-4 p-(--card-spacing)">
+                <MessageScrollerContent class="gap-4 p-6">
                   <For each={messages}>
                     {(message) => (
                       <MessageAnimated

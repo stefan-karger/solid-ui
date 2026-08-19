@@ -71,7 +71,7 @@ export default function MessageScrollerOpeningPosition() {
           >
             <TabsList class="w-full">
               <For each={positions}>
-                {(option) => <TabsTrigger value={option.value}>{option.label}</TabsTrigger>}
+                {(option) => <TabsTrigger class="data-[selected]:border-input data-[selected]:bg-accent data-[selected]:shadow-none" value={option.value}>{option.label}</TabsTrigger>}
               </For>
             </TabsList>
           </Tabs>
@@ -109,7 +109,7 @@ function OpeningPositionScroller(props: { position: Position }) {
   return (
     <MessageScroller>
       <MessageScrollerViewport>
-        <MessageScrollerContent class="p-(--card-spacing)">
+        <MessageScrollerContent class="p-6">
           <For each={messages}>
             {(message) => {
               const isUser = message.role === "user";

@@ -78,7 +78,7 @@ export default function MessageScrollerPreviousContext() {
           <CardContent class="min-h-0 flex-1 overflow-hidden p-0">
             <MessageScroller>
               <MessageScrollerViewport>
-                <MessageScrollerContent aria-busy={chat.isBusy()} class="p-(--card-spacing)">
+                <MessageScrollerContent aria-busy={chat.isBusy()} class="p-6">
                   <For each={chat.messages}>
                     {(message) => (
                       <MessageAnimated message={message} scrollAnchor={message.role === "user"} />

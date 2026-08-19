@@ -396,6 +396,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "message-scroller": {
+    name: "message-scroller",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["button","use-message-scroller"],
+    component: lazy(() => import("~/registry/ui/message-scroller.tsx")),
+    files: [{
+      path: "registry/ui/message-scroller.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "popover": {
     name: "popover",
     description: "",
@@ -508,6 +522,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "use-color-mode": {
+    name: "use-color-mode",
+    description: "",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/hooks/use-color-mode.tsx")),
+    files: [{
+      path: "registry/hooks/use-color-mode.tsx",
+      type: "registry:hook",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -522,14 +550,14 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "use-color-mode": {
-    name: "use-color-mode",
+  "use-message-scroller": {
+    name: "use-message-scroller",
     description: "",
     type: "registry:hook",
-    registryDependencies: undefined,
-    component: lazy(() => import("~/registry/hooks/use-color-mode.tsx")),
+    registryDependencies: ["button"],
+    component: lazy(() => import("~/registry/hooks/use-message-scroller.ts")),
     files: [{
-      path: "registry/hooks/use-color-mode.tsx",
+      path: "registry/hooks/use-message-scroller.ts",
       type: "registry:hook",
       target: ""
     }],
@@ -2056,6 +2084,160 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/message-header-footer.tsx")),
     files: [{
       path: "registry/examples/message-header-footer.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-anchoring": {
+    name: "message-scroller-anchoring",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scoller","button","card","empty","toggle-group"],
+    component: lazy(() => import("~/registry/examples/message-scroller-anchoring.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-anchoring.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-animation": {
+    name: "message-scroller-animation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","button","card","empty","select"],
+    component: lazy(() => import("~/registry/examples/message-scroller-animation.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-animation.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-commands": {
+    name: "message-scroller-commands",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","bubble","button","card","dropdown-menu","message"],
+    component: lazy(() => import("~/registry/examples/message-scroller-commands.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-commands.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-demo": {
+    name: "message-scroller-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scoller","button","card","dropdown-menu","empty","input-group","tooltip"],
+    component: lazy(() => import("~/registry/examples/message-scroller-demo.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-group-chat": {
+    name: "message-scroller-group-chat",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","bubble","button","card","marker","message","tooltip"],
+    component: lazy(() => import("~/registry/examples/message-scroller-group-chat.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-group-chat.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-load-history": {
+    name: "message-scroller-load-history",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","bubble","button","card","marker","message","tooltip"],
+    component: lazy(() => import("~/registry/examples/message-scroller-load-history.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-load-history.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-opening-position": {
+    name: "message-scroller-opening-position",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","bubble","card","message","tabs"],
+    component: lazy(() => import("~/registry/examples/message-scroller-opening-position.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-opening-position.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-previous-context": {
+    name: "message-scroller-previous-context",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","button","card","dropdown-menu","input-group","slider","tooltip"],
+    component: lazy(() => import("~/registry/examples/message-scroller-previous-context.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-previous-context.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-scrollable": {
+    name: "message-scroller-scrollable",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","card"],
+    component: lazy(() => import("~/registry/examples/message-scroller-scrollable.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-scrollable.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-streaming": {
+    name: "message-scroller-streaming",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","button","card","dropdown-menu","empty","input-group","tooltip"],
+    component: lazy(() => import("~/registry/examples/message-scroller-streaming.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-streaming.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "message-scroller-visibility": {
+    name: "message-scroller-visibility",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["message-scroller","bubble","card","hover-card","message"],
+    component: lazy(() => import("~/registry/examples/message-scroller-visibility.tsx")),
+    files: [{
+      path: "registry/examples/message-scroller-visibility.tsx",
       type: "registry:example",
       target: ""
     }],

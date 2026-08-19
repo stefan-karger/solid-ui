@@ -64,7 +64,7 @@ export default function MessageScrollerCommands() {
           <CardContent class="min-h-0 flex-1 overflow-hidden p-0">
             <MessageScroller>
               <MessageScrollerViewport>
-                <MessageScrollerContent class="p-(--card-spacing)">
+                <MessageScrollerContent class="p-6">
                   <For each={script.messages}>
                     {(message) => {
                       const isUser = message.role === "user";

@@ -91,7 +91,7 @@ export default function MessageScrollerLoadHistory() {
             <Show when={demoKey()} keyed>
               <MessageScroller>
                 <MessageScrollerViewport>
-                  <MessageScrollerContent class="p-(--card-spacing)">
+                  <MessageScrollerContent class="p-6">
                     <For each={visibleMessages()}>
                       {(message) => {
                         const isUser = message.role === "user";

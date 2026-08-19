@@ -104,7 +104,7 @@ export default function MessageScrollerAnchoring() {
             <MessageScrollerProvider>
               <MessageScroller>
                 <MessageScrollerViewport>
-                  <MessageScrollerContent class="p-(--card-spacing)">
+                  <MessageScrollerContent class="p-6">
                     <For each={messages()}>
                       {(message) => (
                         <MessageAnimated

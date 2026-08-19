@@ -127,7 +127,7 @@ export default function MessageScrollerGroupChat() {
             <Show when={demoKey()} keyed>
               <MessageScroller>
                 <MessageScrollerViewport>
-                  <MessageScrollerContent class="p-(--card-spacing)">
+                  <MessageScrollerContent class="p-6">
                     <For each={items()}>
                       {(item) =>
                         item.type === "message" ? (
