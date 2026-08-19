@@ -8,7 +8,7 @@ export default function BubbleLinkButton() {
   return (
     <>
       <Toaster />
-      <div class="flex w-full max-w-sm flex-col gap-8 py-12">
+      <div class="flex w-full max-w-sm flex-col gap-4 py-12">
         <Bubble variant="muted">
           <BubbleContent>How can I help you today?</BubbleContent>
         </Bubble>

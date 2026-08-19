@@ -20,7 +20,7 @@ export default function BubbleCollapsible() {
   const preview = `${text.slice(0, previewLength)}...`;
 
   return (
-    <div class="flex w-full max-w-md flex-col gap-8">
+    <div class="flex w-full max-w-md flex-col gap-4">
       <Collapsible open={open()} onOpenChange={setOpen}>
         <Bubble variant="muted" align="end">
           <BubbleContent class="whitespace-pre-line">

@@ -2,7 +2,7 @@ import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble";
 
 export default function BubbleGrouped() {
   return (
-    <div class="flex w-full max-w-md flex-col gap-8">
+    <div class="flex w-full max-w-md flex-col gap-4">
       <BubbleGroup>
         <Bubble variant="secondary">
           <BubbleContent>I finished the audit pass.</BubbleContent>
