@@ -295,6 +295,18 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "message-scroller",
+    type: "registry:ui",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "use-message-scroller"],
+    files: [
+      {
+        path: "ui/message-scroller.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "popover",
     type: "registry:ui",
     files: [

@@ -1185,6 +1185,149 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "message-scroller-demo",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scoller", "button", "card", "dropdown-menu", "empty", "input-group", "tooltip"],
+    files: [
+      {
+        path: "examples/message-scroller-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-anchoring",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scoller", "button", "card", "empty", "toggle-group"],
+    files: [
+      {
+        path: "examples/message-scroller-anchoring.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-group-chat",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "bubble", "button", "card", "marker", "message", "tooltip"],
+    files: [
+      {
+        path: "examples/message-scroller-group-chat.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-previous-context",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "button", "card", "dropdown-menu", "input-group", "slider", "tooltip"],
+    files: [
+      {
+        path: "examples/message-scroller-previous-context.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-streaming",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "button", "card", "dropdown-menu", "empty", "input-group", "tooltip"],
+    files: [
+      {
+        path: "examples/message-scroller-streaming.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-opening-position",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "bubble", "card", "message", "tabs"],
+    files: [
+      {
+        path: "examples/message-scroller-opening-position.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-load-history",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "bubble", "button", "card", "marker", "message", "tooltip"],
+    files: [
+      {
+        path: "examples/message-scroller-load-history.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-animation",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "button", "card", "empty", "select"],
+    files: [
+      {
+        path: "examples/message-scroller-animation.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-commands",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "bubble", "button", "card", "dropdown-menu", "message"],
+    files: [
+      {
+        path: "examples/message-scroller-commands.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-visibility",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "bubble", "card", "hover-card", "message"],
+    files: [
+      {
+        path: "examples/message-scroller-visibility.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-scrollable",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["message-scroller", "card"],
+    files: [
+      {
+        path: "examples/message-scroller-scrollable.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "popover-demo",
+    type: "registry:example",
+    registryDependencies: ["message", "avatar", "bubble"],
+    files: [
+      {
+        path: "examples/message-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "message-demo",
     type: "registry:example",
     registryDependencies: ["message", "avatar", "bubble", "marker"],
