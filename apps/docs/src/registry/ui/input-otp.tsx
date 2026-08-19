@@ -1,14 +1,17 @@
+import OtpField, { type RootProps as OtpFieldRootProps } from "@corvu/otp-field"
 import { Minus } from "lucide-solid"
-import { Show, splitProps, type ComponentProps } from "solid-js"
-import type { RootProps as OtpFieldRootProps } from "@corvu/otp-field"
-import OtpField from "@corvu/otp-field"
+import { type ComponentProps, Show, splitProps } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
 type InputOTPProps = OtpFieldRootProps &
   ComponentProps<"div"> &
   Pick<ComponentProps<"input">, "disabled" | "required"> & {
-    containerClass?: string,
+    containerClass?: string
+    /**
+     * Regex pattern for the input, forwarded to the underlying `OtpField.Input`.
+     * Defaults to digits only (`'^\d*$'`). Pass `null` to allow all characters.
+     */
     pattern?: string | null
   }
 
@@ -22,17 +25,14 @@ const InputOTP = (props: InputOTPProps) => {
     "required",
     "value",
     "onValueChange",
-    "pattern"
+    "pattern",
   ])
 
   return (
     <OtpField
       data-slot="input-otp"
       spellcheck={false}
-      class={cn(
-        "cn-input-otp flex items-center has-disabled:opacity-50",
-        local.containerClass
-      )}
+      class={cn("cn-input-otp flex items-center has-disabled:opacity-50", local.containerClass)}
       {...others}
     >
       <OtpField.Input
@@ -82,7 +82,7 @@ const InputOTPSlot = (props: InputOTPSlotProps) => {
       data-active={isActive()}
       class={cn(
         "relative cn-input-otp-slot flex items-center justify-center data-[active=true]:z-10",
-        local.class
+        local.class,
       )}
       {...others}
     >
@@ -115,10 +115,10 @@ const InputOTPSeparator = (props: InputOTPSeparatorProps) => {
 export {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
   type InputOTPGroupProps,
   type InputOTPProps,
+  InputOTPSeparator,
   type InputOTPSeparatorProps,
-  type InputOTPSlotProps
+  InputOTPSlot,
+  type InputOTPSlotProps,
 }
