@@ -191,6 +191,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "empty",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/empty.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "field",
     type: "registry:ui",
     registryDependencies: ["label", "separator"],
@@ -223,12 +234,34 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "input-otp",
+    type: "registry:ui",
+    dependencies: ["@corvu/otp-field"],
+    registryDependencies: [],
+    files: [
+      {
+        path: "ui/input-otp.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "item",
     type: "registry:ui",
     registryDependencies: ["separator"],
     files: [
       {
         path: "ui/item.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "kbd",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/kbd.tsx",
         type: "registry:ui"
       }
     ]
@@ -272,6 +305,17 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/slider.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "spinner",
+    type: "registry:ui",
+    dependencies: [],
+    files: [
+      {
+        path: "ui/spinner.tsx",
         type: "registry:ui"
       }
     ]
