@@ -215,7 +215,7 @@ export function DirectiveContainer(
           <For each={tabNames}>
             {(title) => (
               <TabsTrigger
-                class="rounded-none border-0 border-b-2 border-solid border-transparent bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[selected]:bg-transparent data-[selected]:text-foreground data-[selected]:shadow-none data-[selected]:border-b-2 data-[selected]:border-solid data-[selected]:border-foreground dark:data-[selected]:bg-transparent dark:data-[selected]:text-foreground"
+                class="rounded-none border-0 border-b-2 border-solid border-transparent bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[selected]:bg-transparent data-[selected]:text-foreground data-[selected]:shadow-none! data-[selected]:border-b-2 data-[selected]:border-solid data-[selected]:border-foreground dark:data-[selected]:bg-transparent dark:data-[selected]:text-foreground"
                 value={title}
               >
                 {title}
