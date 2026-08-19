@@ -1359,12 +1359,67 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "radio-group-choice-card",
+    type: "registry:example",
+    registryDependencies: ["radio-group", "field"],
+    files: [
+      {
+        path: "examples/radio-group-choice-card.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],
     files: [
       {
         path: "examples/radio-group-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "radio-group-description",
+    type: "registry:example",
+    registryDependencies: ["radio-group", "field"],
+    files: [
+      {
+        path: "examples/radio-group-description.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "radio-group-disabled",
+    type: "registry:example",
+    registryDependencies: ["radio-group", "field"],
+    files: [
+      {
+        path: "examples/radio-group-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "radio-group-fieldset",
+    type: "registry:example",
+    registryDependencies: ["radio-group", "field"],
+    files: [
+      {
+        path: "examples/radio-group-fieldset.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "radio-group-invalid",
+    type: "registry:example",
+    registryDependencies: ["radio-group", "field"],
+    files: [
+      {
+        path: "examples/radio-group-invalid.tsx",
         type: "registry:example"
       }
     ]
