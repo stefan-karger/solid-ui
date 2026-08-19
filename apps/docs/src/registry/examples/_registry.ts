@@ -487,6 +487,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "direction-demo",
+    type: "registry:example",
+    registryDependencies: ["direction", "native-select"],
+    files: [
+      {
+        path: "examples/direction-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "context-menu-checkboxes",
     type: "registry:example",
     registryDependencies: ["context-menu"],

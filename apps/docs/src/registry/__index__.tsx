@@ -214,6 +214,20 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "direction": {
+    name: "direction",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    component: lazy(() => import("~/registry/ui/direction.tsx")),
+    files: [{
+      path: "registry/ui/direction.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "context-menu": {
     name: "context-menu",
     description: "",
@@ -1020,6 +1034,20 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/dialog-demo.tsx")),
     files: [{
       path: "registry/examples/dialog-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "direction-demo": {
+    name: "direction-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["direction","native-select"],
+    component: lazy(() => import("~/registry/examples/direction-demo.tsx")),
+    files: [{
+      path: "registry/examples/direction-demo.tsx",
       type: "registry:example",
       target: ""
     }],
