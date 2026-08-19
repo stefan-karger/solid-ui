@@ -773,6 +773,174 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "questionnaire-animated",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-animated.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-card",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "card"],
+    files: [
+      {
+        path: "examples/questionnaire-card.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-conditional",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-conditional.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-controlled",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-controlled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-demo",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-dialog",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "button", "dialog"],
+    files: [
+      {
+        path: "examples/questionnaire-dialog.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-freeform",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-freeform.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-multiple",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-navigation-state",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-navigation-state.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-progress",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-progress.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-resume",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "button"],
+    files: [
+      {
+        path: "examples/questionnaire-resume.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-shortcuts",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "native-select"],
+    files: [
+      {
+        path: "examples/questionnaire-shortcuts.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-skip",
+    type: "registry:example",
+    dependencies: ["solid-sonner"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    files: [
+      {
+        path: "examples/questionnaire-skip.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-validation",
+    type: "registry:example",
+    dependencies: ["solid-sonner", "zod"],
+    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "card"],
+    files: [
+      {
+        path: "examples/questionnaire-validation.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "radio-group-demo",
     type: "registry:example",
     registryDependencies: ["radio-group", "label"],
@@ -783,20 +951,6 @@ export const examples: Registry["items"] = [
       }
     ]
   },
-  // questionnaire-animated
-  // questionnaire-card
-  // questionnaire-conditional
-  // questionnaire-controlled
-  // questionnaire-demo
-  // questionnaire-dialog
-  // questionnaire-freeform
-  // questionnaire-multiple
-  // questionnaire-navigation-state
-  // questionnaire-progress
-  // questionnaire-resume
-  // questionnaire-shortcuts
-  // questionnaire-skip
-  // questionnaire-validation
   {
     name: "select-demo",
     type: "registry:example",
