@@ -113,16 +113,6 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "card",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/card.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "button-group",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
@@ -130,6 +120,16 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/button-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/card.tsx",
         type: "registry:ui"
       }
     ]
@@ -169,23 +169,23 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "dialog",
-    type: "registry:ui",
-    dependencies: ["@kobalte/core"],
-    files: [
-      {
-        path: "ui/dialog.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
     name: "context-menu",
     type: "registry:ui",
     dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/context-menu.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "dialog",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/dialog.tsx",
         type: "registry:ui"
       }
     ]
@@ -255,6 +255,16 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "kbd",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/kbd.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "label",
     type: "registry:ui",
     files: [
@@ -290,16 +300,6 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/popover.tsx",
-        type: "registry:ui"
-      }
-    ]
-  },
-  {
-    name: "kbd",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/kbd.tsx",
         type: "registry:ui"
       }
     ]
@@ -360,4 +360,27 @@ export const ui: Registry["items"] = [
       }
     ]
   },
+  {
+    name: "toggle",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    files: [
+      {
+        path: "ui/toggle.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "toggle-group",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["toggle"],
+    files: [
+      {
+        path: "ui/toggle-group.tsx",
+        type: "registry:ui"
+      }
+    ]
+  }
 ]

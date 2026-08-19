@@ -1,0 +1,187 @@
+---
+title: Toggle Group
+description: A set of two-state buttons that can be toggled on or off.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add toggle-group
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/toggle-group.tsx" showLineNumbers
+
+```
+
+## Composition
+
+Use the following composition to build a `ToggleGroup`:
+
+```plaintext
+ToggleGroup
+├── ToggleGroupItem
+└── ToggleGroupItem
+```
+
+## Examples
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-outline" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-outline" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Size
+
+Use the `size` prop to change the size of the toggle group.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-sizes" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-sizes" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Spacing
+
+Use `spacing` to add spacing between toggle group items.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-spacing" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-spacing" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Vertical
+
+Use `orientation="vertical"` for vertical toggle groups.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-vertical" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-vertical" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Custom
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-custom" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-custom" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### RTL
+
+To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-group-rtl" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-group-rtl" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Base UI Toggle Group](/docs/components/toggle) documentation.
