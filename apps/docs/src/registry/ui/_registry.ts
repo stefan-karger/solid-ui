@@ -205,6 +205,30 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "command",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "cmdk-solid", "lucide-solid"],
+    registryDependencies: ["dialog", "input-group"],
+    files: [
+      {
+        path: "ui/command.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "dialog",
+    type: "registry:ui",
+    dependencies: ["@kobalte/core", "lucide-solid"],
+    registryDependencies: ["input-group", "badge", "button"],
+    files: [
+      {
+        path: "ui/combobox.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "context-menu",
     type: "registry:ui",
     dependencies: ["@kobalte/core", "lucide-solid"],

@@ -100,6 +100,14 @@ export const docsConfig: Config = {
           href: "/docs/components/combobox"
         },
         {
+          title: "Command",
+          href: "/docs/components/command"
+        },
+        {
+          title: "Dialog",
+          href: "/docs/components/dialog"
+        },
+        {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },

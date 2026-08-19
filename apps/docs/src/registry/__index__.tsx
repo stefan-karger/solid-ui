@@ -270,6 +270,34 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "command": {
+    name: "command",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["dialog","input-group"],
+    component: lazy(() => import("~/registry/ui/command.tsx")),
+    files: [{
+      path: "registry/ui/command.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog": {
+    name: "dialog",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["input-group","badge","button"],
+    component: lazy(() => import("~/registry/ui/combobox.tsx")),
+    files: [{
+      path: "registry/ui/combobox.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
   "context-menu": {
     name: "context-menu",
     description: "",
@@ -1958,6 +1986,76 @@ export const Index: Record<string, any> = {
     component: lazy(() => import("~/registry/examples/combobox-multiple.tsx")),
     files: [{
       path: "registry/examples/combobox-multiple.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "command-basic": {
+    name: "command-basic",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["command","button"],
+    component: lazy(() => import("~/registry/examples/command-basic.tsx")),
+    files: [{
+      path: "registry/examples/command-basic.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "command-demo": {
+    name: "command-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["command"],
+    component: lazy(() => import("~/registry/examples/command-demo.tsx")),
+    files: [{
+      path: "registry/examples/command-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "command-groups": {
+    name: "command-groups",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["command","button"],
+    component: lazy(() => import("~/registry/examples/command-groups.tsx")),
+    files: [{
+      path: "registry/examples/command-groups.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "command-scrollable": {
+    name: "command-scrollable",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["command","button"],
+    component: lazy(() => import("~/registry/examples/command-scrollable.tsx")),
+    files: [{
+      path: "registry/examples/command-scrollable.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    categories: undefined,
+    meta: undefined,
+  },
+  "command-shortcuts": {
+    name: "command-shortcuts",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["command","button"],
+    component: lazy(() => import("~/registry/examples/command-shortcuts.tsx")),
+    files: [{
+      path: "registry/examples/command-shortcuts.tsx",
       type: "registry:example",
       target: ""
     }],
