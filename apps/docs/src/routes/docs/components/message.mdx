@@ -3,6 +3,10 @@ title: Message
 description: Displays a message in a conversation, with optional avatar, header, footer, and alignment.
 ---
 
+The `Message` component lays out a single message in a conversation. It handles the avatar, alignment, header, and footer around the message surface.
+
+For AI apps, you can render reasoning steps, tool calls and assistant messages using the `Message` component.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -70,9 +74,9 @@ import {
 ```
 
 **Note:** `Message` owns the row layout—avatar, alignment, header, and footer. Render the visible
-message surface inside it with [`Bubble`](/docs/components/bubble). For the scroll
+message surface inside it with [`Bubble`](/docs/components/kobalte/bubble). For the scroll
 container around a conversation, use
-[`MessageScroller`](/docs/components/message-scroller).
+[`MessageScroller`](/create?item=message-scroller).
 
 ## Composition
 
@@ -111,20 +115,7 @@ MessageGroup
 Use `MessageAvatar` to render an avatar next to the message. Set `align="end"` on the message to
 align the avatar to the end of the message.
 
-::::tab-group[example1]
-:::tab[Preview]
-
-<ComponentPreview name="message-avatar" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/message-avatar" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="message-avatar" previewClass="h-auto" />
 
 | align   | Description                                         |
 | ------- | --------------------------------------------------- |
@@ -136,76 +127,24 @@ align the avatar to the end of the message.
 Use `MessageGroup` to stack consecutive messages from the same sender. Render an empty
 `MessageAvatar` on the earlier messages to keep them aligned with the avatar on the last one.
 
-::::tab-group[example2]
-:::tab[Preview]
-
-<ComponentPreview name="message-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/message-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="message-group" previewClass="h-auto" />
 
 ### Header and Footer
 
 Use `MessageHeader` for a sender name and `MessageFooter` for metadata such as a delivery or read
 status.
 
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="message-header-footer" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/message-header-footer" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="message-header-footer" previewClass="h-auto" />
 
 ### Actions
 
 Place message-level actions in `MessageFooter`, such as copy, retry, or feedback buttons.
 
-::::tab-group[example4]
-:::tab[Preview]
-
-<ComponentPreview name="message-actions" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/message-actions" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="message-actions" previewClass="h-auto" />
 
 ### Attachment
 
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="message-attachment" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/message-attachment" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="message-attachment" previewClass="h-auto" />
 
 ## Accessibility
 

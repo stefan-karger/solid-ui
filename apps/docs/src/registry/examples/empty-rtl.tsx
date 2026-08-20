@@ -1,9 +1,6 @@
 // import { ArrowUpRightIcon, FolderCodeIcon } from "lucide-solid"
 
-// import {
-//   useTranslation,
-//   type Translations,
-// } from "~/registry/language-selector"
+// import { type Translations, useTranslation } from "~/registry/language-selector"
 // import { Button } from "~/registry/ui/button"
 // import {
 //   Empty,
@@ -11,7 +8,7 @@
 //   EmptyDescription,
 //   EmptyHeader,
 //   EmptyMedia,
-//   EmptyTitle,
+//   EmptyTitle
 // } from "~/registry/ui/empty"
 
 // const translations: Translations = {
@@ -23,8 +20,8 @@
 //         "You haven't created any projects yet. Get started by creating your first project.",
 //       createProject: "Create Project",
 //       importProject: "Import Project",
-//       learnMore: "Learn More",
-//     },
+//       learnMore: "Learn More"
+//     }
 //   },
 //   ar: {
 //     dir: "rtl",
@@ -33,20 +30,19 @@
 //       description: "لم تقم بإنشاء أي مشاريع بعد. ابدأ بإنشاء مشروعك الأول.",
 //       createProject: "إنشاء مشروع",
 //       importProject: "استيراد مشروع",
-//       learnMore: "تعرف على المزيد",
-//     },
+//       learnMore: "تعرف على المزيد"
+//     }
 //   },
 //   he: {
 //     dir: "rtl",
 //     values: {
 //       title: "אין פרויקטים עדיין",
-//       description:
-//         "עדיין לא יצרת פרויקטים. התחל על ידי יצירת הפרויקט הראשון שלך.",
+//       description: "עדיין לא יצרת פרויקטים. התחל על ידי יצירת הפרויקט הראשון שלך.",
 //       createProject: "צור פרויקט",
 //       importProject: "ייבא פרויקט",
-//       learnMore: "למד עוד",
-//     },
-//   },
+//       learnMore: "למד עוד"
+//     }
+//   }
 // }
 
 // export default function EmptyRtl() {
@@ -65,7 +61,9 @@
 //         <Button>{t.createProject}</Button>
 //         <Button variant="outline">{t.importProject}</Button>
 //       </EmptyContent>
-//       <Button variant="link" class="text-muted-foreground" size="sm" a={"a"} href="#">{t.learnMore} <ArrowUpRightIcon class="rtl:rotate-270" data-icon="inline-end" /></Button>
+//       <Button as={"a"} class="text-muted-foreground" href="#" size="sm" variant="link">
+//         {t.learnMore} <ArrowUpRightIcon class="rtl:rotate-270" data-icon="inline-end" />
+//       </Button>
 //     </Empty>
 //   )
 // }

@@ -1,11 +1,19 @@
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxSection, ComboboxSectionLabel } from "~/registry/ui/combobox"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxSection,
+  ComboboxSectionLabel
+} from "~/registry/ui/combobox"
 
-type TimezoneOption = string;
+type TimezoneOption = string
 
 type TimezoneGroup = {
-  label: string;
-  options: TimezoneOption[];
-};
+  label: string
+  options: TimezoneOption[]
+}
 
 const timezones: TimezoneGroup[] = [
   {
@@ -16,8 +24,8 @@ const timezones: TimezoneGroup[] = [
       "(GMT-6) Chicago",
       "(GMT-5) Toronto",
       "(GMT-8) Vancouver",
-      "(GMT-3) São Paulo",
-    ],
+      "(GMT-3) São Paulo"
+    ]
   },
   {
     label: "Europe",
@@ -27,8 +35,8 @@ const timezones: TimezoneGroup[] = [
       "(GMT+1) Berlin",
       "(GMT+1) Rome",
       "(GMT+1) Madrid",
-      "(GMT+1) Amsterdam",
-    ],
+      "(GMT+1) Amsterdam"
+    ]
   },
   {
     label: "Asia/Pacific",
@@ -38,22 +46,22 @@ const timezones: TimezoneGroup[] = [
       "(GMT+8) Singapore",
       "(GMT+4) Dubai",
       "(GMT+11) Sydney",
-      "(GMT+9) Seoul",
-    ],
-  },
+      "(GMT+9) Seoul"
+    ]
+  }
 ]
 
 export default function ComboboxWithGroups() {
   return (
     <Combobox<TimezoneOption, TimezoneGroup>
-      options={timezones}
-      optionValue={(opt) => opt}
-      optionLabel={(opt) => opt}
-      optionGroupChildren="options"
-      placeholder="Select a timezone..."
       itemComponent={(props) => (
         <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
       )}
+      optionGroupChildren="options"
+      optionLabel={(opt) => opt}
+      options={timezones}
+      optionValue={(opt) => opt}
+      placeholder="Select a timezone..."
       sectionComponent={(props) => (
         <ComboboxSection>
           <ComboboxSectionLabel>{props.section.rawValue.label}</ComboboxSectionLabel>

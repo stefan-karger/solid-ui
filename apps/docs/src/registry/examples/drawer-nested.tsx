@@ -1,3 +1,6 @@
+import type { JSX } from "solid-js"
+
+import { cn } from "~/lib/utils"
 import { useIsMobile } from "~/registry/hooks/use-mobile"
 import { Button } from "~/registry/ui/button"
 import {
@@ -8,30 +11,46 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 } from "~/registry/ui/drawer"
+
+function DrawerPanel(props: { children?: JSX.Element }) {
+  return (
+    <div class="flex-1 p-4">
+      <div
+        class={cn(
+          "bg-muted",
+          "group-data-[side=bottom]/drawer-content:aspect-video",
+          "group-data-[side=bottom]/drawer-content:w-full",
+          "group-data-[side=right]/drawer-content:size-full"
+        )}
+      >
+        {props.children}
+      </div>
+    </div>
+  )
+}
 
 export default function DrawerNested() {
   const isMobile = useIsMobile()
-
-  const swipeDirection = isMobile() ? "bottom" : "right"
+  const side = () => (isMobile() ? "bottom" : "right")
 
   return (
-    <Drawer side={swipeDirection}>
-      <DrawerTrigger as={Button<"button">} variant="secondary">Open Drawer</DrawerTrigger>
+    <Drawer side={side()}>
+      <DrawerTrigger as={Button} variant="secondary">
+        Open Drawer
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Drawer</DrawerTitle>
-          <DrawerDescription>
-            Open another drawer from the same direction.
-          </DrawerDescription>
+          <DrawerDescription>Open another drawer from the same direction.</DrawerDescription>
         </DrawerHeader>
-        <div class="flex-1 p-4">
-          <div class="bg-muted group-data-[swipe-axis=x]/drawer-popup:size-full group-data-[swipe-axis=y]/drawer-popup:aspect-video group-data-[swipe-axis=y]/drawer-popup:w-full" />
-        </div>
+        <DrawerPanel />
         <DrawerFooter>
-          <Drawer side={swipeDirection}>
-            <DrawerTrigger as={Button<"button">} variant="outline">Open Nested Drawer</DrawerTrigger>
+          <Drawer side={side()}>
+            <DrawerTrigger as={Button} variant="outline">
+              Open Nested Drawer
+            </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle>Nested Drawer</DrawerTitle>
@@ -39,12 +58,12 @@ export default function DrawerNested() {
                   The parent drawer stays mounted behind this one.
                 </DrawerDescription>
               </DrawerHeader>
-              <div class="flex-1 p-4">
-                <div class="bg-muted group-data-[swipe-axis=x]/drawer-popup:size-full group-data-[swipe-axis=y]/drawer-popup:aspect-video group-data-[swipe-axis=y]/drawer-popup:w-full" />
-              </div>
+              <DrawerPanel />
               <DrawerFooter>
-                <Drawer side={swipeDirection}>
-                  <DrawerTrigger as={Button<"button">} variant="outline">Open Third Drawer</DrawerTrigger>
+                <Drawer side={side()}>
+                  <DrawerTrigger as={Button} variant="outline">
+                    Open Third Drawer
+                  </DrawerTrigger>
                   <DrawerContent>
                     <DrawerHeader>
                       <DrawerTitle>Third Drawer</DrawerTitle>
@@ -52,12 +71,12 @@ export default function DrawerNested() {
                         Two drawers are stacked behind this one.
                       </DrawerDescription>
                     </DrawerHeader>
-                    <div class="flex-1 p-4">
-                      <div class="bg-muted group-data-[swipe-axis=x]/drawer-popup:size-full group-data-[swipe-axis=y]/drawer-popup:aspect-video group-data-[swipe-axis=y]/drawer-popup:w-full" />
-                    </div>
+                    <DrawerPanel />
                     <DrawerFooter>
-                      <Drawer side={swipeDirection}>
-                        <DrawerTrigger as={Button<"button">} variant="outline">Open Fourth Drawer</DrawerTrigger>
+                      <Drawer side={side()}>
+                        <DrawerTrigger as={Button} variant="outline">
+                          Open Fourth Drawer
+                        </DrawerTrigger>
                         <DrawerContent>
                           <DrawerHeader>
                             <DrawerTitle>Fourth Drawer</DrawerTitle>
@@ -65,23 +84,29 @@ export default function DrawerNested() {
                               This is the frontmost drawer in the stack.
                             </DrawerDescription>
                           </DrawerHeader>
-                          <div class="flex-1 p-4">
-                            <div class="bg-muted group-data-[swipe-axis=x]/drawer-popup:size-full group-data-[swipe-axis=y]/drawer-popup:aspect-video group-data-[swipe-axis=y]/drawer-popup:w-full" />
-                          </div>
+                          <DrawerPanel />
                           <DrawerFooter>
-                            <DrawerClose as={Button<"button">} variant="outline">Close</DrawerClose>
+                            <DrawerClose as={Button} variant="outline">
+                              Close
+                            </DrawerClose>
                           </DrawerFooter>
                         </DrawerContent>
                       </Drawer>
-                      <DrawerClose as={Button<"button">} variant="outline">Close</DrawerClose>
+                      <DrawerClose as={Button} variant="outline">
+                        Close
+                      </DrawerClose>
                     </DrawerFooter>
                   </DrawerContent>
                 </Drawer>
-                <DrawerClose as={Button<"button">} variant="outline">Close</DrawerClose>
+                <DrawerClose as={Button} variant="outline">
+                  Close
+                </DrawerClose>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
-          <DrawerClose as={Button<"button">} variant="outline">Close</DrawerClose>
+          <DrawerClose as={Button} variant="outline">
+            Close
+          </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

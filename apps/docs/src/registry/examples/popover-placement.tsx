@@ -1,10 +1,7 @@
 import { For, Show } from "solid-js"
+
 import { Button } from "~/registry/ui/button"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/registry/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
 
 const popoverPlacement = [
   "top-start",
@@ -18,7 +15,7 @@ const popoverPlacement = [
   "bottom-end",
   "left-start",
   "left",
-  "left-end",
+  "left-end"
 ] as const
 
 export default function PopoverAlignments() {
@@ -29,12 +26,12 @@ export default function PopoverAlignments() {
           {(placement, index) => (
             <>
               <Popover placement={placement}>
-                <PopoverTrigger as={Button<"button">} variant="outline" size="sm">{placement}</PopoverTrigger>
-                <PopoverContent class="w-auto">
-                  Aligned to {placement}
-                </PopoverContent>
+                <PopoverTrigger as={Button<"button">} size="sm" variant="outline">
+                  {placement}
+                </PopoverTrigger>
+                <PopoverContent class="w-auto">Aligned to {placement}</PopoverContent>
               </Popover>
-              <Show when={(index()+1) % 3 == 0}>
+              <Show when={(index() + 1) % 3 === 0}>
                 <div class="w-full" />
               </Show>
             </>

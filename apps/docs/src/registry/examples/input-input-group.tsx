@@ -5,7 +5,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-  InputGroupText,
+  InputGroupText
 } from "~/registry/ui/input-group"
 
 export default function InputInputGroup() {

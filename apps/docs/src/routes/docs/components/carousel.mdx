@@ -21,9 +21,7 @@ links:
 :::
 ::::
 
-## About
-
-The carousel component is built using the [Embla Carousel](https://www.embla-carousel.com/) library.
+The Carousel component is built with [Embla Carousel](https://www.embla-carousel.com/), which provides motion, swipe, and keyboard navigation.
 
 ## Installation
 
@@ -38,7 +36,7 @@ solidui-cli@latest add carousel
 Install the following dependencies:
 
 ```package-install
-embla-carousel-solid lucide-solid
+embla-carousel embla-carousel-solid lucide-solid
 ```
 
 Copy and paste the following code into your project.
@@ -49,17 +47,17 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
 } from "~/components/ui/carousel";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Carousel>
   <CarouselContent>
     <CarouselItem>...</CarouselItem>
@@ -71,28 +69,28 @@ import {
 </Carousel>
 ```
 
+## Composition
+
+Use the following composition to build a `Carousel`:
+
+```text
+Carousel
+├── CarouselContent
+│   ├── CarouselItem
+│   └── CarouselItem
+├── CarouselPrevious
+└── CarouselNext
+```
+
 ## Examples
 
 ### Sizes
 
-To set the size of the items, you can use the `basis` utility class on the `<CarouselItem />`.
-
-::::tab-group[sizes]
-:::tab[Preview]
+To set the size of the items, use the `basis` utility class on `<CarouselItem />`.
 
 <ComponentPreview name="carousel-size" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/carousel-size" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-```tsx
+```tsx showLineNumbers {4-6}
 // 33% of the carousel width.
 <Carousel>
   <CarouselContent>
@@ -103,7 +101,7 @@ To set the size of the items, you can use the `basis` utility class on the `<Car
 </Carousel>
 ```
 
-```tsx
+```tsx showLineNumbers {4-6}
 // 50% on small screens and 33% on larger screens.
 <Carousel>
   <CarouselContent>
@@ -116,24 +114,11 @@ To set the size of the items, you can use the `basis` utility class on the `<Car
 
 ### Spacing
 
-To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
-
-::::tab-group[spacing]
-:::tab[Preview]
+To set item spacing, use a `pl-[VALUE]` utility on `<CarouselItem />` and a negative `-ml-[VALUE]` on `<CarouselContent />`.
 
 <ComponentPreview name="carousel-spacing" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/carousel-spacing" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-```tsx
+```tsx showLineNumbers /-ml-4/ /pl-4/
 <Carousel>
   <CarouselContent class="-ml-4">
     <CarouselItem class="pl-4">...</CarouselItem>
@@ -143,26 +128,23 @@ To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<Car
 </Carousel>
 ```
 
-### Orientation
-
-Use the `orientation` prop to set the orientation of the carousel.
-
-::::tab-group[orientation]
-:::tab[Preview]
-
-<ComponentPreview name="carousel-orientation" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/carousel-orientation" frame=none showLineNumbers
-
+```tsx showLineNumbers /-ml-2/ /pl-2/ /md:-ml-4/ /md:pl-4/
+<Carousel>
+  <CarouselContent class="-ml-2 md:-ml-4">
+    <CarouselItem class="pl-2 md:pl-4">...</CarouselItem>
+    <CarouselItem class="pl-2 md:pl-4">...</CarouselItem>
+    <CarouselItem class="pl-2 md:pl-4">...</CarouselItem>
+  </CarouselContent>
+</Carousel>
 ```
 
-:::
-::::
+### Orientation
 
-```tsx
+Use the `orientation` prop to set the carousel orientation.
+
+<ComponentPreview name="carousel-orientation" previewClass="h-[32rem]" />
+
+```tsx showLineNumbers /vertical | horizontal/
 <Carousel orientation="vertical | horizontal">
   <CarouselContent>
     <CarouselItem>...</CarouselItem>
@@ -172,15 +154,15 @@ Use the `orientation` prop to set the orientation of the carousel.
 </Carousel>
 ```
 
-## Options
+### Options
 
-You can pass options to the carousel using the `opts` prop. See the [Embla Carousel docs](https://www.embla-carousel.com/api/options/) for more information.
+Pass options to the carousel using the `opts` prop. See the [Embla Carousel options documentation](https://www.embla-carousel.com/api/options/) for more information.
 
-```tsx
+```tsx showLineNumbers {2-5}
 <Carousel
   opts={{
     align: "start",
-    loop: true
+    loop: true,
   }}
 >
   <CarouselContent>
@@ -195,23 +177,10 @@ You can pass options to the carousel using the `opts` prop. See the [Embla Carou
 
 Use a signal and the `setApi` prop to get an instance of the carousel API.
 
-::::tab-group[api]
-:::tab[Preview]
+<ComponentPreview name="carousel-api" previewClass="sm:h-[32rem]" />
 
-<ComponentPreview name="carousel-api" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/carousel-api" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-```tsx
-import { createEffect, createSignal, on } from "solid-js";
+```tsx showLineNumbers {1,4,23}
+import { createEffect, createSignal, onCleanup } from "solid-js";
 import { type CarouselApi } from "~/components/ui/carousel";
 
 export function Example() {
@@ -219,18 +188,19 @@ export function Example() {
   const [current, setCurrent] = createSignal(0);
   const [count, setCount] = createSignal(0);
 
-  createEffect(
-    on(api, (emblaApi) => {
-      if (!emblaApi) return;
+  createEffect(() => {
+    const carouselApi = api();
+    if (!carouselApi) return;
 
-      setCount(emblaApi.scrollSnapList().length);
-      setCurrent(emblaApi.selectedScrollSnap() + 1);
+    const onSelect = () => {
+      setCurrent(carouselApi.selectedScrollSnap() + 1);
+    };
 
-      emblaApi.on("select", () => {
-        setCurrent(emblaApi.selectedScrollSnap() + 1);
-      });
-    })
-  );
+    setCount(carouselApi.scrollSnapList().length);
+    onSelect();
+    carouselApi.on("select", onSelect);
+    onCleanup(() => carouselApi.off("select", onSelect));
+  });
 
   return (
     <Carousel setApi={setApi}>
@@ -246,24 +216,26 @@ export function Example() {
 
 ## Events
 
-You can listen to events using the api instance from `setApi`.
+Listen to events using the API instance from `setApi`.
 
-```tsx
-import { createEffect, createSignal, on } from "solid-js";
+```tsx showLineNumbers {1,4-17,19}
+import { createEffect, createSignal, onCleanup } from "solid-js";
 import { type CarouselApi } from "~/components/ui/carousel";
 
 export function Example() {
   const [api, setApi] = createSignal<CarouselApi>();
 
-  createEffect(
-    on(api, (emblaApi) => {
-      if (!emblaApi) return;
+  createEffect(() => {
+    const carouselApi = api();
+    if (!carouselApi) return;
 
-      emblaApi.on("select", () => {
-        // Do something on select.
-      });
-    })
-  );
+    const onSelect = () => {
+      // Do something on select.
+    };
+
+    carouselApi.on("select", onSelect);
+    onCleanup(() => carouselApi.off("select", onSelect));
+  });
 
   return (
     <Carousel setApi={setApi}>
@@ -277,13 +249,13 @@ export function Example() {
 }
 ```
 
-See the [Embla Carousel docs](https://www.embla-carousel.com/api/events/) for more information on using events.
+See the [Embla Carousel events documentation](https://www.embla-carousel.com/api/events/) for more information.
 
 ## Plugins
 
-You can use the `plugins` prop to add plugins to the carousel.
+Use the `plugins` prop to add plugins to the carousel.
 
-```tsx
+```ts showLineNumbers {1,6-10}
 import Autoplay from "embla-carousel-autoplay";
 
 export function Example() {
@@ -291,8 +263,8 @@ export function Example() {
     <Carousel
       plugins={[
         Autoplay({
-          delay: 2000
-        })
+          delay: 2000,
+        }),
       ]}
     >
       // ...
@@ -301,19 +273,8 @@ export function Example() {
 }
 ```
 
-::::tab-group[plugin]
-:::tab[Preview]
+<ComponentPreview name="carousel-plugin" previewClass="sm:h-[32rem]" />
 
-<ComponentPreview name="carousel-plugin" />
+## API Reference
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/carousel-plugin" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-See the [Embla Carousel docs](https://www.embla-carousel.com/api/plugins/) for more information on using plugins.
+See the [Embla Carousel API reference](https://www.embla-carousel.com/api/) for information on options, events, and plugins.

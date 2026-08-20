@@ -7,7 +7,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemMedia,
-  ItemTitle,
+  ItemTitle
 } from "~/registry/ui/item"
 
 export default function ItemDemo() {
@@ -16,17 +16,15 @@ export default function ItemDemo() {
       <Item variant="outline">
         <ItemContent>
           <ItemTitle>Basic Item</ItemTitle>
-          <ItemDescription>
-            A simple item with title and description.
-          </ItemDescription>
+          <ItemDescription>A simple item with title and description.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Action
           </Button>
         </ItemActions>
       </Item>
-      <Item variant="outline" size="sm" as="a" href="#">
+      <Item as="a" href="#" size="sm" variant="outline">
         <ItemMedia>
           <BadgeCheckIcon class="size-5" />
         </ItemMedia>

@@ -1,10 +1,9 @@
 import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js"
-import { Show } from "solid-js"
-import { mergeProps, splitProps } from "solid-js"
-import { XIcon } from "lucide-solid"
+import { mergeProps, Show, splitProps } from "solid-js"
 
 import * as SheetPrimitive from "@kobalte/core/dialog"
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+import { XIcon } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
 
@@ -38,10 +37,7 @@ const SheetOverlay = <T extends ValidComponent = "div">(
   const [local, others] = splitProps(props as SheetOverlayProps, ["class"])
   return (
     <SheetPrimitive.Overlay
-      class={cn(
-        "fixed inset-0 z-50 cn-sheet-overlay",
-        local.class
-      )}
+      class={cn("cn-sheet-overlay fixed inset-0 z-50", local.class)}
       data-slot="sheet-overlay"
       {...others}
     />
@@ -58,15 +54,23 @@ type SheetContentProps<T extends ValidComponent = "div"> = SheetPrimitive.Dialog
 const SheetContent = <T extends ValidComponent = "div">(
   rawProps: PolymorphicProps<T, SheetContentProps<T>>
 ) => {
-  const props = mergeProps({ side: "right", showCloseButton: true } as SheetContentProps<T>, rawProps)
-  const [local, others] = splitProps(props as SheetContentProps, ["class", "children", "side", "showCloseButton"])
+  const props = mergeProps(
+    { side: "right", showCloseButton: true } as SheetContentProps<T>,
+    rawProps
+  )
+  const [local, others] = splitProps(props as SheetContentProps, [
+    "class",
+    "children",
+    "side",
+    "showCloseButton"
+  ])
   return (
     <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
         class={cn("cn-sheet-content", local.class)}
-        data-slot="sheet-content"
         data-side={local.side}
+        data-slot="sheet-content"
         {...others}
       >
         {local.children}
@@ -85,8 +89,8 @@ const SheetHeader: Component<ComponentProps<"div">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      data-slot="sheet-header"
       class={cn("cn-sheet-header flex flex-col", local.class)}
+      data-slot="sheet-header"
       {...others}
     />
   )
@@ -96,8 +100,8 @@ const SheetFooter: Component<ComponentProps<"div">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      data-slot="sheet-footer"
       class={cn("cn-sheet-footer mt-auto flex flex-col", local.class)}
+      data-slot="sheet-footer"
       {...others}
     />
   )
@@ -112,7 +116,11 @@ const SheetTitle = <T extends ValidComponent = "h2">(
 ) => {
   const [local, others] = splitProps(props as SheetTitleProps, ["class"])
   return (
-    <SheetPrimitive.Title data-slot="sheet-title" class={cn("cn-font-heading cn-sheet-title", local.class)} {...others} />
+    <SheetPrimitive.Title
+      class={cn("cn-font-heading cn-sheet-title", local.class)}
+      data-slot="sheet-title"
+      {...others}
+    />
   )
 }
 
@@ -125,8 +133,8 @@ const SheetDescription = <T extends ValidComponent = "p">(
   const [local, others] = splitProps(props as SheetDescriptionProps, ["class"])
   return (
     <SheetPrimitive.Description
-      data-slot="sheet-description"
       class={cn("cn-sheet-description", local.class)}
+      data-slot="sheet-description"
       {...others}
     />
   )
@@ -134,11 +142,11 @@ const SheetDescription = <T extends ValidComponent = "p">(
 
 export {
   Sheet,
-  SheetTrigger,
   SheetClose,
   SheetContent,
-  SheetHeader,
+  SheetDescription,
   SheetFooter,
+  SheetHeader,
   SheetTitle,
-  SheetDescription
+  SheetTrigger
 }

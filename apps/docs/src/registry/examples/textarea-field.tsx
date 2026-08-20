@@ -1,8 +1,4 @@
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "~/registry/ui/field"
+import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
 import { Textarea } from "~/registry/ui/textarea"
 
 export default function TextareaField() {

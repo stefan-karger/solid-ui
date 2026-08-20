@@ -1,5 +1,7 @@
-import { createSignal } from "solid-js";
-import { toast } from "solid-sonner";
+import { createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -12,33 +14,33 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "scope", required: true },
   { name: "checks", required: true },
-  { name: "output", required: true },
-] as const;
+  { name: "output", required: true }
+] as const
 
 const itemLabels: Record<string, string> = {
   scope: "Change scope",
   checks: "Verification",
-  output: "Final output",
-};
+  output: "Final output"
+}
 
 export default function QuestionnaireControlled() {
-  const [item, setItem] = createSignal("scope");
+  const [item, setItem] = createSignal("scope")
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
     toast("Agent workflow configured", {
-      description: `Scope: ${formData.get("scope") ?? "None"} · Verification: ${formData.get("checks") ?? "None"} · Output: ${formData.get("output") ?? "None"}`,
-    });
+      description: `Scope: ${formData.get("scope") ?? "None"} · Verification: ${formData.get("checks") ?? "None"} · Output: ${formData.get("output") ?? "None"}`
+    })
   }
 
   return (
@@ -99,5 +101,5 @@ export default function QuestionnaireControlled() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </div>
-  );
+  )
 }

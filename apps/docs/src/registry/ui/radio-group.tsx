@@ -41,7 +41,7 @@ const RadioGroupItem = <T extends ValidComponent = "div">(props: RadioGroupItemP
   return (
     <Item
       class={cn(
-        "group/radio-group-item peer after:-inset-x-3 after:-inset-y-2 cn-radio-group-item relative aspect-square shrink-0 border outline-none after:absolute data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        "group/radio-group-item peer cn-radio-group-item relative aspect-square shrink-0 border outline-none after:absolute after:-inset-x-3 after:-inset-y-2 data-disabled:cursor-not-allowed data-disabled:opacity-50",
         local.class
       )}
       data-slot="radio-group-item"

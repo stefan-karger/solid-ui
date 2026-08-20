@@ -1,11 +1,11 @@
 import {
   CheckIcon,
   ClockIcon,
-  FileTextIcon,
   FileExclamationPoint,
+  FileTextIcon,
   RefreshCwIcon,
-  XIcon,
-} from "lucide-solid";
+  XIcon
+} from "lucide-solid"
 
 import {
   Attachment,
@@ -14,14 +14,14 @@ import {
   AttachmentContent,
   AttachmentDescription,
   AttachmentMedia,
-  AttachmentTitle,
-} from "~/registry/ui/attachment";
-import { Spinner } from "~/registry/ui/spinner";
+  AttachmentTitle
+} from "~/registry/ui/attachment"
+import { Spinner } from "~/registry/ui/spinner"
 
 export default function AttachmentStates() {
   return (
     <div class="mx-auto flex w-full max-w-sm flex-col gap-2 py-12">
-      <Attachment state="idle" class="w-full">
+      <Attachment class="w-full" state="idle">
         <AttachmentMedia>
           <ClockIcon />
         </AttachmentMedia>
@@ -35,7 +35,7 @@ export default function AttachmentStates() {
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
-      <Attachment state="uploading" class="w-full">
+      <Attachment class="w-full" state="uploading">
         <AttachmentMedia>
           <Spinner />
         </AttachmentMedia>
@@ -49,7 +49,7 @@ export default function AttachmentStates() {
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
-      <Attachment state="processing" class="w-full">
+      <Attachment class="w-full" state="processing">
         <AttachmentMedia>
           <FileTextIcon />
         </AttachmentMedia>
@@ -63,7 +63,7 @@ export default function AttachmentStates() {
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
-      <Attachment state="error" class="w-full">
+      <Attachment class="w-full" state="error">
         <AttachmentMedia>
           <FileExclamationPoint />
         </AttachmentMedia>
@@ -80,7 +80,7 @@ export default function AttachmentStates() {
           </AttachmentAction>
         </AttachmentActions>
       </Attachment>
-      <Attachment state="done" class="w-full">
+      <Attachment class="w-full" state="done">
         <AttachmentMedia>
           <CheckIcon />
         </AttachmentMedia>
@@ -95,5 +95,5 @@ export default function AttachmentStates() {
         </AttachmentActions>
       </Attachment>
     </div>
-  );
+  )
 }

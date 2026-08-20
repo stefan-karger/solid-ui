@@ -1,61 +1,50 @@
-import { splitProps, type ComponentProps } from "solid-js"
+import { type ComponentProps, splitProps } from "solid-js"
+
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from "lucide-solid"
 
 import { cn } from "~/lib/utils"
-import { Button, buttonVariants } from "~/registry/ui/button"
+import { type Button, buttonVariants } from "~/registry/ui/button"
 
-const Pagination = (
-  props: ComponentProps<"nav">
-) => {
+const Pagination = (props: ComponentProps<"nav">) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <nav
-      role="navigation"
       aria-label="pagination"
-      data-slot="pagination"
       class={cn("cn-pagination mx-auto flex w-full justify-center", local.class)}
+      data-slot="pagination"
       {...others}
     />
   )
 }
 
-const PaginationContent = (
-  props: ComponentProps<"ul">
-) => {
+const PaginationContent = (props: ComponentProps<"ul">) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <ul
-      data-slot="pagination-content"
       class={cn("cn-pagination-content flex flex-row items-center gap-1", local.class)}
+      data-slot="pagination-content"
       {...others}
     />
   )
 }
 
-const PaginationItem = (
-  props: ComponentProps<"li">
-) => {
+const PaginationItem = (props: ComponentProps<"li">) => {
   const [local, others] = splitProps(props, ["class"])
   return (
-    <li
-      data-slot="pagination-item"
-      class={cn("cn-pagination-item", local.class)}
-      {...others}
-    />
+    <li class={cn("cn-pagination-item", local.class)} data-slot="pagination-item" {...others} />
   )
 }
 
 type PaginationLinkProps = {
   isActive?: boolean
-} & Pick<ComponentProps<typeof Button>, "size"> & ComponentProps<"a">
+} & Pick<ComponentProps<typeof Button>, "size"> &
+  ComponentProps<"a">
 
 const PaginationLink = (props: PaginationLinkProps) => {
   const [local, others] = splitProps(props, ["class", "isActive", "size"])
   return (
     <a
       aria-current={local.isActive ? "page" : undefined}
-      data-slot="pagination-link"
-      data-active={local.isActive}
       class={cn(
         buttonVariants({
           variant: local.isActive ? "outline" : "ghost",
@@ -64,6 +53,8 @@ const PaginationLink = (props: PaginationLinkProps) => {
         }),
         local.class
       )}
+      data-active={local.isActive}
+      data-slot="pagination-link"
       {...others}
     />
   )
@@ -74,8 +65,8 @@ const PaginationPrevious = (props: ComponentProps<typeof PaginationLink>) => {
   return (
     <PaginationLink
       aria-label="Go to previous page"
-      size="default"
       class={cn("cn-pagination-previous gap-1 px-2.5 sm:pl-2.5", local.class)}
+      size="default"
       {...others}
     >
       <ChevronLeftIcon />
@@ -89,8 +80,8 @@ const PaginationNext = (props: ComponentProps<typeof PaginationLink>) => {
   return (
     <PaginationLink
       aria-label="Go to next page"
-      size="default"
       class={cn("cn-pagination-next gap-1 px-2.5 sm:pr-2.5", local.class)}
+      size="default"
       {...others}
     >
       <span class="hidden sm:block">Next</span>
@@ -104,8 +95,8 @@ const PaginationEllipsis = (props: ComponentProps<"span">) => {
   return (
     <span
       aria-hidden
-      data-slot="pagination-ellipsis"
       class={cn("cn-pagination-ellipsis flex size-9 items-center justify-center", local.class)}
+      data-slot="pagination-ellipsis"
       {...others}
     >
       <EllipsisIcon class="size-4" />
@@ -117,9 +108,9 @@ const PaginationEllipsis = (props: ComponentProps<"span">) => {
 export {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious, 
   PaginationNext,
-  PaginationEllipsis,
+  PaginationPrevious
 }

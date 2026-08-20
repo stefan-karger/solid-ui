@@ -1,10 +1,6 @@
 import { PlusIcon } from "lucide-solid"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/registry/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import { Button } from "~/registry/ui/button"
 import {
   Empty,
@@ -12,7 +8,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 
 export default function EmptyAvatarGroup() {
@@ -20,31 +16,23 @@ export default function EmptyAvatarGroup() {
     <Empty>
       <EmptyHeader>
         <EmptyMedia>
-          <div class="flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
+          <div class="-space-x-2 flex *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <Avatar>
-              <AvatarImage
-                src="https://github.com/maxleiter.png"
-                alt="@maxleiter"
-              />
+              <AvatarImage alt="@maxleiter" src="https://github.com/maxleiter.png" />
               <AvatarFallback>LR</AvatarFallback>
             </Avatar>
             <Avatar>
-              <AvatarImage
-                src="https://github.com/evilrabbit.png"
-                alt="@evilrabbit"
-              />
+              <AvatarImage alt="@evilrabbit" src="https://github.com/evilrabbit.png" />
               <AvatarFallback>ER</AvatarFallback>
             </Avatar>
           </div>
         </EmptyMedia>
         <EmptyTitle>No Team Members</EmptyTitle>
-        <EmptyDescription>
-          Invite your team to collaborate on this project.
-        </EmptyDescription>
+        <EmptyDescription>Invite your team to collaborate on this project.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button size="sm">

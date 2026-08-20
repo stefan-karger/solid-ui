@@ -1,4 +1,4 @@
-import { CopyIcon, FileSearchIcon, XIcon } from "lucide-solid";
+import { CopyIcon, FileSearchIcon, XIcon } from "lucide-solid"
 
 import {
   Attachment,
@@ -8,16 +8,16 @@ import {
   AttachmentDescription,
   AttachmentMedia,
   AttachmentTitle,
-  AttachmentTrigger,
-} from "~/registry/ui/attachment";
+  AttachmentTrigger
+} from "~/registry/ui/attachment"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "~/registry/ui/dialog";
+  DialogTrigger
+} from "~/registry/ui/dialog"
 
 export default function AttachmentTriggerDemo() {
   return (
@@ -39,7 +39,7 @@ export default function AttachmentTriggerDemo() {
               <XIcon />
             </AttachmentAction>
           </AttachmentActions>
-          <AttachmentTrigger as={DialogTrigger} aria-label="Preview research-summary.pdf" />
+          <AttachmentTrigger aria-label="Preview research-summary.pdf" as={DialogTrigger} />
         </Attachment>
         <DialogContent class="sm:max-w-md">
           <DialogHeader>
@@ -52,5 +52,5 @@ export default function AttachmentTriggerDemo() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

@@ -1,21 +1,18 @@
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "~/registry/ui/toggle-group"
+import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
 
 export default function ToggleGroupSpacing() {
   return (
-    <ToggleGroup size="sm" defaultValue={["top"]} variant="outline" spacing={2} multiple>
-      <ToggleGroupItem value="top" aria-label="Toggle top">
+    <ToggleGroup defaultValue={["top"]} multiple size="sm" spacing={2} variant="outline">
+      <ToggleGroupItem aria-label="Toggle top" value="top">
         Top
       </ToggleGroupItem>
-      <ToggleGroupItem value="bottom" aria-label="Toggle bottom">
+      <ToggleGroupItem aria-label="Toggle bottom" value="bottom">
         Bottom
       </ToggleGroupItem>
-      <ToggleGroupItem value="left" aria-label="Toggle left">
+      <ToggleGroupItem aria-label="Toggle left" value="left">
         Left
       </ToggleGroupItem>
-      <ToggleGroupItem value="right" aria-label="Toggle right">
+      <ToggleGroupItem aria-label="Toggle right" value="right">
         Right
       </ToggleGroupItem>
     </ToggleGroup>

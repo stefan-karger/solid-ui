@@ -1,8 +1,8 @@
-import { CopyIcon, RefreshCcwIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-solid";
+import { CopyIcon, RefreshCcwIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-solid"
 
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
-import { Button } from "~/registry/ui/button";
-import { Message, MessageContent, MessageFooter } from "~/registry/ui/message";
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Button } from "~/registry/ui/button"
+import { Message, MessageContent, MessageFooter } from "~/registry/ui/message"
 
 export default function MessageActionsDemo() {
   return (
@@ -13,13 +13,13 @@ export default function MessageActionsDemo() {
             <BubbleContent>The install failure is coming from the workspace package.</BubbleContent>
           </Bubble>
           <MessageFooter>
-            <Button variant="ghost" size="icon" aria-label="Copy" title="Copy">
+            <Button aria-label="Copy" size="icon" title="Copy" variant="ghost">
               <CopyIcon />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Like" title="Like">
+            <Button aria-label="Like" size="icon" title="Like" variant="ghost">
               <ThumbsUpIcon />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Dislike" title="Dislike">
+            <Button aria-label="Dislike" size="icon" title="Dislike" variant="ghost">
               <ThumbsDownIcon />
             </Button>
           </MessageFooter>
@@ -32,12 +32,12 @@ export default function MessageActionsDemo() {
           </Bubble>
           <MessageFooter class="gap-2">
             <span class="font-normal text-destructive">Failed to send</span>
-            <Button variant="ghost" size="icon-xs" title="Retry" aria-label="Retry">
+            <Button aria-label="Retry" size="icon-xs" title="Retry" variant="ghost">
               <RefreshCcwIcon />
             </Button>
           </MessageFooter>
         </MessageContent>
       </Message>
     </div>
-  );
+  )
 }

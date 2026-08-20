@@ -7,19 +7,10 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "~/registry/ui/card"
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "~/registry/ui/field"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "~/registry/ui/input-otp"
+import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
 
 export default function InputOTPForm() {
   return (
@@ -34,15 +25,13 @@ export default function InputOTPForm() {
       <CardContent>
         <Field>
           <div class="flex items-center justify-between">
-            <FieldLabel for="otp-verification">
-              Verification code
-            </FieldLabel>
-            <Button variant="outline" size="xs">
+            <FieldLabel for="otp-verification">Verification code</FieldLabel>
+            <Button size="xs" variant="outline">
               <RefreshCwIcon />
               Resend Code
             </Button>
           </div>
-          <InputOTP maxLength={6} id="otp-verification" required>
+          <InputOTP id="otp-verification" maxLength={6} required>
             <InputOTPGroup class="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
               <InputOTPSlot index={0} />
               <InputOTPSlot index={1} />
@@ -56,21 +45,19 @@ export default function InputOTPForm() {
             </InputOTPGroup>
           </InputOTP>
           <FieldDescription>
+            {/* biome-ignore lint/a11y/useValidAnchor: hash ok */}
             <a href="#">I no longer have access to this email address.</a>
           </FieldDescription>
         </Field>
       </CardContent>
       <CardFooter>
         <Field>
-          <Button type="submit" class="w-full">
+          <Button class="w-full" type="submit">
             Verify
           </Button>
-          <div class="text-sm text-muted-foreground">
-            Having trouble signing in?{" "}
-            <a
-              href="#"
-              class="underline underline-offset-4 transition-colors hover:text-primary"
-            >
+          <div class="text-muted-foreground text-sm">
+            Having trouble signing in?{/* biome-ignore lint/a11y/useValidAnchor: hash ok */}
+            <a class="underline underline-offset-4 transition-colors hover:text-primary" href="#">
               Contact support
             </a>
           </div>

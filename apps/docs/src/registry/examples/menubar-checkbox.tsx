@@ -6,7 +6,7 @@ import {
   MenubarMenu,
   MenubarSeparator,
   MenubarShortcut,
-  MenubarTrigger,
+  MenubarTrigger
 } from "~/registry/ui/menubar"
 
 export default function MenubarCheckbox() {
@@ -16,9 +16,7 @@ export default function MenubarCheckbox() {
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent class="w-64">
           <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem checked>
-            Always Show Full URLs
-          </MenubarCheckboxItem>
+          <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarItem inset>
             Reload <MenubarShortcut>⌘R</MenubarShortcut>

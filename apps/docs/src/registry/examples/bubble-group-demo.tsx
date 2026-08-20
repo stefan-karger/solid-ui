@@ -1,4 +1,4 @@
-import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble";
+import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble"
 
 export default function BubbleGrouped() {
   return (
@@ -17,13 +17,13 @@ export default function BubbleGrouped() {
         </Bubble>
       </BubbleGroup>
       <BubbleGroup>
-        <Bubble variant="tinted" align="end">
+        <Bubble align="end" variant="tinted">
           <BubbleContent>Yes, clean that up.</BubbleContent>
         </Bubble>
-        <Bubble variant="tinted" align="end">
+        <Bubble align="end" variant="tinted">
           <BubbleContent>Then rerun the registry build.</BubbleContent>
         </Bubble>
       </BubbleGroup>
     </div>
-  );
+  )
 }

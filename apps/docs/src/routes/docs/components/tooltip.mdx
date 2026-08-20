@@ -3,6 +3,8 @@ title: Tooltip
 description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 ---
 
+The Tooltip component is built on top of [Kobalte Tooltip](https://kobalte.dev/docs/core/components/tooltip), which provides accessible hover, focus, and keyboard behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -43,17 +45,20 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
+import { Button } from "~/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "~/components/ui/tooltip";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Tooltip>
-  <TooltipTrigger>Hover</TooltipTrigger>
+  <TooltipTrigger as={Button} variant="outline">
+    Hover
+  </TooltipTrigger>
   <TooltipContent>
     <p>Add to library</p>
   </TooltipContent>
@@ -64,7 +69,7 @@ import {
 
 Use the following composition to build a `Tooltip`:
 
-```plaintext
+```text
 Tooltip
 ├── TooltipTrigger
 └── TooltipContent
@@ -76,59 +81,18 @@ Tooltip
 
 Use the `placement` prop to change the position of the tooltip.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="tooltip-placement" />
 
-:::
-:::tab[Code]
+### With Keyboard Shortcut
 
-```file="~/registry/examples/tooltip-placement" frame=none showLineNumbers
+<ComponentPreview name="tooltip-keyboard" />
 
-```
+### Disabled Button
 
-:::
-::::
-
-### Disabled
-
-Show a tooltip on a disabled button.
-
-::::tab-group[example2]
-:::tab[Preview]
+Show a tooltip on a disabled button by wrapping it with a span.
 
 <ComponentPreview name="tooltip-disabled" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tooltip-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="tooltip-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tooltip-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ## API Reference
 
-See the [Kobalte UI Tooltip](https://kobalte.dev/docs/core/components/tooltip) documentation.
+See the [Kobalte Tooltip API reference](https://kobalte.dev/docs/core/components/tooltip#api-reference) for primitive props, keyboard behavior, and accessibility details.

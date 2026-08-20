@@ -1,46 +1,44 @@
-import type { LucideIcon } from "lucide-solid";
+import { createSignal, For, Show } from "solid-js"
+import { Dynamic } from "solid-js/web"
+
+import type { LucideIcon } from "lucide-solid"
 import {
   AudioWaveform,
   BadgeCheck,
   Bell,
   BookOpen,
   Bot,
+  ChartPieIcon,
   ChevronRight,
   ChevronsUpDown,
   Command,
   CreditCard,
+  EllipsisIcon,
   Folder,
   Forward,
   Frame,
   GalleryVerticalEnd,
   LogOut,
   MapIcon,
-  EllipsisIcon,
-  ChartPieIcon,
   Plus,
   Settings2,
   Sparkles,
   SquareTerminal,
-  Trash2,
-} from "lucide-solid";
-import { createSignal, For, Show } from "solid-js";
-import { Dynamic } from "solid-js/web";
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "~/registry/ui/collapsible";
+  Trash2
+} from "lucide-solid"
+
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuGroupLabel,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "~/registry/ui/dropdown-menu";
+  DropdownMenuTrigger
+} from "~/registry/ui/dropdown-menu"
 import {
   Sidebar,
   SidebarContent,
@@ -60,32 +58,32 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
-} from "~/registry/ui/sidebar";
+  useSidebar
+} from "~/registry/ui/sidebar"
 
 // This is sample data.
 const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "https://github.com/shadcn.png",
+    avatar: "https://github.com/shadcn.png"
   },
   teams: [
     {
       name: "Acme Inc",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: "Enterprise"
     },
     {
       name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: "Startup",
+      plan: "Startup"
     },
     {
       name: "Evil Corp.",
       logo: Command,
-      plan: "Free",
-    },
+      plan: "Free"
+    }
   ],
   navMain: [
     {
@@ -96,17 +94,17 @@ const data = {
       items: [
         {
           title: "History",
-          url: "#",
+          url: "#"
         },
         {
           title: "Starred",
-          url: "#",
+          url: "#"
         },
         {
           title: "Settings",
-          url: "#",
-        },
-      ],
+          url: "#"
+        }
+      ]
     },
     {
       title: "Models",
@@ -115,17 +113,17 @@ const data = {
       items: [
         {
           title: "Genesis",
-          url: "#",
+          url: "#"
         },
         {
           title: "Explorer",
-          url: "#",
+          url: "#"
         },
         {
           title: "Quantum",
-          url: "#",
-        },
-      ],
+          url: "#"
+        }
+      ]
     },
     {
       title: "Documentation",
@@ -134,21 +132,21 @@ const data = {
       items: [
         {
           title: "Introduction",
-          url: "#",
+          url: "#"
         },
         {
           title: "Get Started",
-          url: "#",
+          url: "#"
         },
         {
           title: "Tutorials",
-          url: "#",
+          url: "#"
         },
         {
           title: "Changelog",
-          url: "#",
-        },
-      ],
+          url: "#"
+        }
+      ]
     },
     {
       title: "Settings",
@@ -157,51 +155,51 @@ const data = {
       items: [
         {
           title: "General",
-          url: "#",
+          url: "#"
         },
         {
           title: "Team",
-          url: "#",
+          url: "#"
         },
         {
           title: "Billing",
-          url: "#",
+          url: "#"
         },
         {
           title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+          url: "#"
+        }
+      ]
+    }
   ],
   projects: [
     {
       name: "Design Engineering",
       url: "#",
-      icon: Frame,
+      icon: Frame
     },
     {
       name: "Sales & Marketing",
       url: "#",
-      icon: ChartPieIcon,
+      icon: ChartPieIcon
     },
     {
       name: "Travel",
       url: "#",
-      icon: MapIcon,
-    },
-  ],
-};
+      icon: MapIcon
+    }
+  ]
+}
 
 function TeamSwitcher(props: {
   teams: {
-    name: string;
-    logo: LucideIcon;
-    plan: string;
-  }[];
+    name: string
+    logo: LucideIcon
+    plan: string
+  }[]
 }) {
-  const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = createSignal(props.teams[0]);
+  const { isMobile } = useSidebar()
+  const [activeTeam, setActiveTeam] = createSignal(props.teams[0])
 
   return (
     <Show when={activeTeam()}>
@@ -211,11 +209,11 @@ function TeamSwitcher(props: {
             <DropdownMenu placement={isMobile() ? "bottom-start" : "right-start"}>
               <DropdownMenuTrigger
                 as={SidebarMenuButton}
-                size="lg"
                 class="data-expanded:bg-sidebar-accent data-expanded:text-sidebar-accent-foreground"
+                size="lg"
               >
                 <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Dynamic component={team().logo} class="size-4" />
+                  <Dynamic class="size-4" component={team().logo} />
                 </div>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                   <span class="truncate font-medium">{team().name}</span>
@@ -225,10 +223,10 @@ function TeamSwitcher(props: {
               </DropdownMenuTrigger>
               <DropdownMenuContent class="w-(--kb-popper-anchor-width) min-w-56 rounded-lg">
                 <DropdownMenuGroup>
-                  <DropdownMenuGroupLabel class="text-muted-foreground text-xs">Teams</DropdownMenuGroupLabel>
+                  <DropdownMenuLabel class="text-muted-foreground text-xs">Teams</DropdownMenuLabel>
                   <For each={props.teams}>
                     {(item, index) => (
-                      <DropdownMenuItem onClick={() => setActiveTeam(item)} class="gap-2 p-2">
+                      <DropdownMenuItem class="gap-2 p-2" onClick={() => setActiveTeam(item)}>
                         <div class="flex size-6 items-center justify-center rounded-md border">
                           <item.logo class="size-3.5 shrink-0" />
                         </div>
@@ -253,20 +251,20 @@ function TeamSwitcher(props: {
         </SidebarMenu>
       )}
     </Show>
-  );
+  )
 }
 
 function NavMain(props: {
   items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
+    title: string
+    url: string
+    icon?: LucideIcon
+    isActive?: boolean
     items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+      title: string
+      url: string
+    }[]
+  }[]
 }) {
   return (
     <SidebarGroup>
@@ -274,7 +272,7 @@ function NavMain(props: {
       <SidebarMenu>
         <For each={props.items}>
           {(item) => (
-            <Collapsible defaultOpen={item.isActive} class="group/collapsible">
+            <Collapsible class="group/collapsible" defaultOpen={item.isActive}>
               <SidebarMenuItem>
                 <CollapsibleTrigger as={SidebarMenuButton} tooltip={item.title}>
                   <Show when={item.icon}>{(icon) => <Dynamic component={icon()} />}</Show>
@@ -300,17 +298,17 @@ function NavMain(props: {
         </For>
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }
 
 function NavProjects(props: {
   projects: {
-    name: string;
-    url: string;
-    icon: LucideIcon;
-  }[];
+    name: string
+    url: string
+    icon: LucideIcon
+  }[]
 }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = useSidebar()
 
   return (
     <SidebarGroup class="group-data-[collapsible=icon]:hidden">
@@ -324,7 +322,7 @@ function NavProjects(props: {
                 <span>{item.name}</span>
               </SidebarMenuButton>
               <DropdownMenu placement={isMobile() ? "bottom-end" : "right-start"}>
-                <DropdownMenuTrigger as={SidebarMenuAction} showOnHover class="">
+                <DropdownMenuTrigger as={SidebarMenuAction} class="" showOnHover>
                   <EllipsisIcon />
                   <span class="sr-only">More</span>
                 </DropdownMenuTrigger>
@@ -355,17 +353,17 @@ function NavProjects(props: {
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }
 
 function NavUser(props: {
   user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
+    name: string
+    email: string
+    avatar: string
+  }
 }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = useSidebar()
 
   return (
     <SidebarMenu>
@@ -373,11 +371,11 @@ function NavUser(props: {
         <DropdownMenu placement={isMobile() ? "bottom-end" : "right-end"}>
           <DropdownMenuTrigger
             as={SidebarMenuButton}
-            size="lg"
             class="data-expanded:bg-sidebar-accent data-expanded:text-sidebar-accent-foreground"
+            size="lg"
           >
             <Avatar class="h-8 w-8 rounded-lg">
-              <AvatarImage src={props.user.avatar} alt={props.user.name} />
+              <AvatarImage alt={props.user.name} src={props.user.avatar} />
               <AvatarFallback class="rounded-lg">CN</AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
@@ -388,10 +386,10 @@ function NavUser(props: {
           </DropdownMenuTrigger>
           <DropdownMenuContent class="w-(--kb-popper-anchor-width) min-w-56 rounded-lg">
             <DropdownMenuGroup>
-              <DropdownMenuGroupLabel class="p-0 font-normal">
+              <DropdownMenuLabel class="p-0 font-normal">
                 <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar class="h-8 w-8 rounded-lg">
-                    <AvatarImage src={props.user.avatar} alt={props.user.name} />
+                    <AvatarImage alt={props.user.name} src={props.user.avatar} />
                     <AvatarFallback class="rounded-lg">CN</AvatarFallback>
                   </Avatar>
                   <div class="grid flex-1 text-left text-sm leading-tight">
@@ -399,7 +397,7 @@ function NavUser(props: {
                     <span class="truncate text-xs">{props.user.email}</span>
                   </div>
                 </div>
-              </DropdownMenuGroupLabel>
+              </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
@@ -434,7 +432,7 @@ function NavUser(props: {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }
 
 export default function SidebarDemo(props: SidebarProps) {
@@ -461,5 +459,5 @@ export default function SidebarDemo(props: SidebarProps) {
         </header>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }

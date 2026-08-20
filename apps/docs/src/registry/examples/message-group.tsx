@@ -1,11 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar";
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
-import {
-  Message,
-  MessageAvatar,
-  MessageContent,
-  MessageGroup,
-} from "~/registry/ui/message";
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Message, MessageAvatar, MessageContent, MessageGroup } from "~/registry/ui/message"
 
 export default function MessageGroupDemo() {
   return (
@@ -22,7 +17,7 @@ export default function MessageGroupDemo() {
         <Message>
           <MessageAvatar>
             <Avatar>
-              <AvatarImage src="https://github.com/evilrabbit.png" alt="@avatar" />
+              <AvatarImage alt="@avatar" src="https://github.com/evilrabbit.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </MessageAvatar>
@@ -36,5 +31,5 @@ export default function MessageGroupDemo() {
         </Message>
       </MessageGroup>
     </div>
-  );
+  )
 }

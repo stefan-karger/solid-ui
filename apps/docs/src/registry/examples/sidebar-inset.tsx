@@ -1,12 +1,13 @@
-import { For, Show } from "solid-js";
+import { For, Show } from "solid-js"
+
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "~/registry/ui/breadcrumb";
+  BreadcrumbSeparator
+} from "~/registry/ui/breadcrumb"
 import {
   Sidebar,
   SidebarContent,
@@ -22,8 +23,8 @@ import {
   SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
-  SidebarTrigger,
-} from "~/registry/ui/sidebar";
+  SidebarTrigger
+} from "~/registry/ui/sidebar"
 
 // Sample data
 const data = {
@@ -33,8 +34,8 @@ const data = {
       url: "#",
       items: [
         { title: "Installation", url: "#" },
-        { title: "Project Structure", url: "#" },
-      ],
+        { title: "Project Structure", url: "#" }
+      ]
     },
     {
       title: "Building Your Application",
@@ -51,8 +52,8 @@ const data = {
         { title: "Authentication", url: "#" },
         { title: "Deploying", url: "#" },
         { title: "Upgrading", url: "#" },
-        { title: "Examples", url: "#" },
-      ],
+        { title: "Examples", url: "#" }
+      ]
     },
     {
       title: "API Reference",
@@ -63,8 +64,8 @@ const data = {
         { title: "Functions", url: "#" },
         { title: "next.config.js Options", url: "#" },
         { title: "CLI", url: "#" },
-        { title: "Edge Runtime", url: "#" },
-      ],
+        { title: "Edge Runtime", url: "#" }
+      ]
     },
     {
       title: "Architecture",
@@ -74,16 +75,16 @@ const data = {
         { title: "Fast Refresh", url: "#" },
         { title: "Next.js Compiler", url: "#" },
         { title: "Supported Browsers", url: "#" },
-        { title: "Turbopack", url: "#" },
-      ],
+        { title: "Turbopack", url: "#" }
+      ]
     },
     {
       title: "Community",
       url: "#",
-      items: [{ title: "Contribution Guide", url: "#" }],
-    },
-  ],
-};
+      items: [{ title: "Contribution Guide", url: "#" }]
+    }
+  ]
+}
 
 export default function SidebarInsetExample() {
   return (
@@ -112,7 +113,7 @@ export default function SidebarInsetExample() {
           <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>
       </SidebarInset>
-      <Sidebar variant="inset" side="right">
+      <Sidebar side="right" variant="inset">
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Table of Contents</SidebarGroupLabel>
@@ -121,7 +122,7 @@ export default function SidebarInsetExample() {
                 <For each={data.navMain}>
                   {(item) => (
                     <SidebarMenuItem>
-                      <SidebarMenuButton as="a" href={item.url} class="font-medium">
+                      <SidebarMenuButton as="a" class="font-medium" href={item.url}>
                         {item.title}
                       </SidebarMenuButton>
                       <Show when={item.items?.length}>
@@ -151,5 +152,5 @@ export default function SidebarInsetExample() {
         <SidebarRail />
       </Sidebar>
     </SidebarProvider>
-  );
+  )
 }

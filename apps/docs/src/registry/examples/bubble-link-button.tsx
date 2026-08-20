@@ -1,9 +1,10 @@
-import { toast } from "solid-sonner";
-import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble";
-import { Toaster } from "~/registry/ui/toast";
+import { toast } from "solid-sonner"
+
+import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble"
+import { Toaster } from "~/registry/ui/toast"
 
 export default function BubbleLinkButton() {
-  const notify = (description: string) => toast.success(description);
+  const notify = (description: string) => toast.success(description)
 
   return (
     <>
@@ -13,29 +14,29 @@ export default function BubbleLinkButton() {
           <BubbleContent>How can I help you today?</BubbleContent>
         </Bubble>
         <BubbleGroup>
-          <Bubble variant="tinted" align="end">
+          <Bubble align="end" variant="tinted">
             <BubbleContent
               as="button"
-              type="button"
               onClick={() => notify("You clicked forgot password")}
+              type="button"
             >
               I forgot my password
             </BubbleContent>
           </Bubble>
-          <Bubble variant="tinted" align="end">
+          <Bubble align="end" variant="tinted">
             <BubbleContent
               as="button"
-              type="button"
               onClick={() => notify("You clicked help with subscription")}
+              type="button"
             >
               I need help with my subscription
             </BubbleContent>
           </Bubble>
-          <Bubble variant="tinted" align="end">
+          <Bubble align="end" variant="tinted">
             <BubbleContent
               as="button"
-              type="button"
               onClick={() => notify("You clicked something else. Talk to a human.")}
+              type="button"
             >
               Something else. Talk to a human.
             </BubbleContent>
@@ -43,5 +44,5 @@ export default function BubbleLinkButton() {
         </BubbleGroup>
       </div>
     </>
-  );
+  )
 }

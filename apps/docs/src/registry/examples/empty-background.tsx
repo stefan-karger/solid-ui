@@ -1,4 +1,4 @@
-import { RefreshCcwIcon, BellIcon } from "lucide-solid"
+import { BellIcon, RefreshCcwIcon } from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -7,7 +7,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 
 export default function EmptyMuted() {

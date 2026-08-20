@@ -6,6 +6,7 @@
 
 @import "~/styles/expressive-code.css";
 
+@import "../registry/styles/utilities.css";
 @import "../registry/styles/style-vega.css" layer(base);
 @import "../registry/styles/style-nova.css" layer(base);
 @import "../registry/styles/style-lyra.css" layer(base);

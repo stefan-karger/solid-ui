@@ -1,7 +1,8 @@
-import { FileCodeIcon, FileTextIcon, TableIcon, XIcon } from "lucide-solid";
-import type { Component } from "solid-js";
-import { For, Show } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import type { Component } from "solid-js"
+import { For, Show } from "solid-js"
+import { Dynamic } from "solid-js/web"
+
+import { FileCodeIcon, FileTextIcon, TableIcon, XIcon } from "lucide-solid"
 
 import {
   Attachment,
@@ -11,26 +12,26 @@ import {
   AttachmentDescription,
   AttachmentGroup,
   AttachmentMedia,
-  AttachmentTitle,
-} from "~/registry/ui/attachment";
+  AttachmentTitle
+} from "~/registry/ui/attachment"
 
 type Item = {
-  name: string;
-  meta: string;
-  icon?: Component;
-  src?: string;
-};
+  name: string
+  meta: string
+  icon?: Component
+  src?: string
+}
 
 const items: Item[] = [
   { name: "briefing-notes.pdf", meta: "PDF · 1.4 MB", icon: FileTextIcon },
   {
     name: "workspace.png",
     meta: "PNG · 820 KB",
-    src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80",
+    src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80"
   },
   { name: "customers.csv", meta: "CSV · 18 KB", icon: TableIcon },
-  { name: "renderer.tsx", meta: "TSX · 12 KB", icon: FileCodeIcon },
-];
+  { name: "renderer.tsx", meta: "TSX · 12 KB", icon: FileCodeIcon }
+]
 
 export default function AttachmentGroupDemo() {
   return (
@@ -40,7 +41,6 @@ export default function AttachmentGroupDemo() {
           {(item) => (
             <Attachment class="w-64">
               <Show
-                when={item.src}
                 fallback={
                   <Show when={item.icon}>
                     {(Icon) => (
@@ -50,10 +50,11 @@ export default function AttachmentGroupDemo() {
                     )}
                   </Show>
                 }
+                when={item.src}
               >
                 {(src) => (
                   <AttachmentMedia variant="image">
-                    <img src={src()} alt={item.name} />
+                    <img alt={item.name} src={src()} />
                   </AttachmentMedia>
                 )}
               </Show>
@@ -71,5 +72,5 @@ export default function AttachmentGroupDemo() {
         </For>
       </AttachmentGroup>
     </div>
-  );
+  )
 }

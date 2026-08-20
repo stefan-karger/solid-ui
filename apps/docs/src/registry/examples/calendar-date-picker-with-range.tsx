@@ -1,30 +1,32 @@
-import { CalendarIcon } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
+
+import { CalendarIcon } from "lucide-solid"
+
+import { Button } from "~/registry/ui/button"
 import { Calendar } from "~/registry/ui/calendar"
+import { Card, CardContent } from "~/registry/ui/card"
 import { Field, FieldLabel } from "~/registry/ui/field"
 import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
-import { Button } from "~/registry/ui/button"
-import { Card, CardContent } from "~/registry/ui/card"
 
 export default function DatePickerWithRange() {
   const addDays = (date: Date, days: number) => {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  };
+    const result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return result
+  }
 
   const [date, setDate] = createSignal<{ from: Date | null; to: Date | null }>({
     from: new Date(new Date().getFullYear(), 0, 20),
-    to: addDays(new Date(new Date().getFullYear(), 0, 20), 20),
-  });
+    to: addDays(new Date(new Date().getFullYear(), 0, 20), 20)
+  })
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
-      year: "numeric",
-    });
-  };
+      year: "numeric"
+    })
+  }
 
   return (
     <Field class="mx-auto w-72">
@@ -32,14 +34,14 @@ export default function DatePickerWithRange() {
       <Popover>
         <PopoverTrigger
           as={Button}
-          variant="outline"
-          id="date-picker-range"
           class="justify-start px-2.5 font-normal"
+          id="date-picker-range"
+          variant="outline"
         >
           <CalendarIcon data-icon="inline-start" />
-          <Show when={date().from} fallback={<span>Pick a date</span>} keyed>
+          <Show fallback={<span>Pick a date</span>} keyed when={date().from}>
             {(from) => (
-              <Show when={date().to} fallback={formatDate(from)} keyed>
+              <Show fallback={formatDate(from)} keyed when={date().to}>
                 {(to) => (
                   <>
                     {formatDate(from)} - {formatDate(to)}
@@ -52,11 +54,11 @@ export default function DatePickerWithRange() {
         <PopoverContent as={Card} class="w-fit p-0">
           <CardContent class="p-0">
             <Calendar
-              mode="range"
               defaultMonth={date().from ?? undefined}
-              value={date()}
-              onValueChange={setDate}
+              mode="range"
               numberOfMonths={2}
+              onValueChange={setDate}
+              value={date()}
             />
           </CardContent>
         </PopoverContent>

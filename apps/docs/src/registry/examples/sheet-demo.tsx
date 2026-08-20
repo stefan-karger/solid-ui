@@ -9,13 +9,15 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "~/registry/ui/sheet"
 
 export default function SheetDemo() {
   return (
     <Sheet>
-      <SheetTrigger as={Button<"button">} variant="outline">Open</SheetTrigger>
+      <SheetTrigger as={Button<"button">} variant="outline">
+        Open
+      </SheetTrigger>
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
@@ -35,7 +37,9 @@ export default function SheetDemo() {
         </div>
         <SheetFooter>
           <Button type="submit">Save changes</Button>
-          <SheetClose as={Button<"button">} variant="outline">Close</SheetClose>
+          <SheetClose as={Button<"button">} variant="outline">
+            Close
+          </SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>

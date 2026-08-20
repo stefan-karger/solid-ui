@@ -2,10 +2,7 @@ import type { ComponentProps, JSX, ValidComponent } from "solid-js"
 import { createContext, mergeProps, splitProps, useContext } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import type {
-  ToggleGroupItemProps,
-  ToggleGroupRootProps
-} from "@kobalte/core/toggle-group"
+import type { ToggleGroupItemProps, ToggleGroupRootProps } from "@kobalte/core/toggle-group"
 import { ToggleGroup as ToggleGroupPrimitive } from "@kobalte/core/toggle-group"
 import type { VariantProps } from "class-variance-authority"
 
@@ -34,9 +31,7 @@ type ToggleGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
     orientation?: "horizontal" | "vertical"
   }
 
-const ToggleGroup = <T extends ValidComponent = "div">(
-  rawProps: ToggleGroupProps<T>
-) => {
+const ToggleGroup = <T extends ValidComponent = "div">(rawProps: ToggleGroupProps<T>) => {
   const props = mergeProps(
     {
       spacing: 0,
@@ -55,19 +50,19 @@ const ToggleGroup = <T extends ValidComponent = "div">(
 
   return (
     <ToggleGroupPrimitive
-      data-slot="toggle-group"
-      data-variant={local.variant}
-      data-size={local.size}
-      data-spacing={local.spacing}
-      data-orientation={local.orientation}
-      style={{ "--gap": local.spacing } as JSX.CSSProperties}
       class={cn(
         "cn-toggle-group",
         "group group/toggle-group flex w-fit items-center gap-[--spacing(var(--gap))] rounded-md",
         "data-[spacing=default]:data-[variant=outline]:shadow-xs",
         "data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch",
-        local.class,
+        local.class
       )}
+      data-orientation={local.orientation}
+      data-size={local.size}
+      data-slot="toggle-group"
+      data-spacing={local.spacing}
+      data-variant={local.variant}
+      style={{ "--gap": local.spacing } as JSX.CSSProperties}
       {...others}
     >
       <ToggleGroupContext.Provider
@@ -84,18 +79,17 @@ const ToggleGroup = <T extends ValidComponent = "div">(
   )
 }
 
-type ToggleGroupItemComponentProps<T extends ValidComponent = "button"> =
-  PolymorphicProps<T, ToggleGroupItemProps<T>> &
-    VariantProps<typeof toggleVariants> &
-    Pick<ComponentProps<T>, "class" | "children">
+type ToggleGroupItemComponentProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  ToggleGroupItemProps<T>
+> &
+  VariantProps<typeof toggleVariants> &
+  Pick<ComponentProps<T>, "class" | "children">
 
 const ToggleGroupItem = <T extends ValidComponent = "button">(
   rawProps: ToggleGroupItemComponentProps<T>
 ) => {
-  const props = mergeProps(
-    { variant: "default" as const, size: "default" as const },
-    rawProps
-  )
+  const props = mergeProps({ variant: "default" as const, size: "default" as const }, rawProps)
   const [local, others] = splitProps(props as ToggleGroupItemComponentProps, [
     "class",
     "children",
@@ -106,14 +100,10 @@ const ToggleGroupItem = <T extends ValidComponent = "button">(
 
   return (
     <ToggleGroupPrimitive.Item
-      data-slot="toggle-group-item"
-      data-variant={context.variant || local.variant}
-      data-size={context.size || local.size}
-      data-spacing={context.spacing || 0}
       class={cn(
         toggleVariants({
           variant: context.variant || local.variant,
-          size: context.size || local.size,
+          size: context.size || local.size
         }),
         "cn-toggle-group-item",
         "focus:z-10 focus-visible:z-10",
@@ -128,6 +118,10 @@ const ToggleGroupItem = <T extends ValidComponent = "button">(
         "group-data-[orientation=vertical]/toggle-group:data-[spacing=0]:last:rounded-b-md!",
         local.class
       )}
+      data-size={context.size || local.size}
+      data-slot="toggle-group-item"
+      data-spacing={context.spacing || 0}
+      data-variant={context.variant || local.variant}
       {...others}
     >
       {local.children}

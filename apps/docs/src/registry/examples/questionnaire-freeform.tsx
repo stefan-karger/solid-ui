@@ -1,4 +1,5 @@
-import { toast } from "solid-sonner";
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -9,27 +10,27 @@ import {
   QuestionnaireItem,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
     choices: [{ value: "incremental" }, { value: "module" }, { value: "rewrite" }],
     name: "approach",
-    required: true,
-  },
-] as const;
+    required: true
+  }
+] as const
 
 export default function QuestionnaireFreeform() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const approach = new FormData(event.currentTarget).get("approach");
+    const approach = new FormData(event.currentTarget).get("approach")
 
     toast("Approach selected", {
-      description: `Approach: ${approach ?? "None"}`,
-    });
+      description: `Approach: ${approach ?? "None"}`
+    })
   }
 
   return (
@@ -38,8 +39,8 @@ export default function QuestionnaireFreeform() {
       <QuestionnaireRoot
         class="mx-auto max-w-md"
         items={items}
-        shortcuts="letters"
         onSubmit={handleSubmit}
+        shortcuts="letters"
       >
         <QuestionnaireItem name="approach" required>
           <QuestionnaireTitle>How should the agent approach this refactor?</QuestionnaireTitle>
@@ -50,9 +51,7 @@ export default function QuestionnaireFreeform() {
             <QuestionnaireChoice value="incremental">
               Make the smallest safe change
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="module">
-              Refactor one module at a time
-            </QuestionnaireChoice>
+            <QuestionnaireChoice value="module">Refactor one module at a time</QuestionnaireChoice>
             <QuestionnaireChoice value="rewrite">
               Replace the implementation completely
             </QuestionnaireChoice>
@@ -69,5 +68,5 @@ export default function QuestionnaireFreeform() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

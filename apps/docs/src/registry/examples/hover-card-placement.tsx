@@ -1,11 +1,7 @@
 import { For, Show } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "~/registry/ui/hover-card"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/registry/ui/hover-card"
 
 const HOVER_CARD_PLACEMENTS = [
   "left-start",
@@ -19,9 +15,8 @@ const HOVER_CARD_PLACEMENTS = [
   "right-end",
   "bottom-start",
   "bottom",
-  "bottom-end",
+  "bottom-end"
 ] as const
-
 
 export default function HoverCardPlacement() {
   return (
@@ -31,8 +26,8 @@ export default function HoverCardPlacement() {
           const current = () => index() + 1
           return (
             <>
-              <HoverCard id={placement} placement={placement} openDelay={100} closeDelay={100}>
-                <HoverCardTrigger as={Button<"button">} variant="outline" class="capitalize">
+              <HoverCard closeDelay={100} id={placement} openDelay={100} placement={placement}>
+                <HoverCardTrigger as={Button<"button">} class="capitalize" variant="outline">
                   {placement}
                 </HoverCardTrigger>
                 <HoverCardContent>
@@ -43,7 +38,7 @@ export default function HoverCardPlacement() {
                 </HoverCardContent>
               </HoverCard>
               <Show when={current() % 3 === 0}>
-                <div class="shrink-0 w-full" />
+                <div class="w-full shrink-0" />
               </Show>
             </>
           )

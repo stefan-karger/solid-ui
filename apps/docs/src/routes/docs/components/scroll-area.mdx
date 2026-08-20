@@ -44,60 +44,57 @@ Copy and paste the following code into your project.
 ## Usage
 
 ```tsx showLineNumbers
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 ```
 
 ```tsx showLineNumbers
-<ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+<ScrollArea class="h-[200px] w-[350px] rounded-md border p-4">
   Your scrollable content here.
 </ScrollArea>
 ```
 
 ## Composition
 
-Use the following composition to build a `ScrollArea`:
+`ScrollArea` renders its own viewport and a vertical `ScrollBar` internally, so most usages only need
+the root:
 
 ```text
 ScrollArea
-└── ScrollBar
+└── ScrollBar (horizontal, opt-in)
 ```
 
 ## Examples
 
 ### Horizontal
 
-Use `ScrollBar` with `orientation="horizontal"` for horizontal scrolling.
-
-::::tab-group[example2]
-:::tab[Preview]
+Add a `ScrollBar` with `orientation="horizontal"` as a direct child for horizontal scrolling. The
+vertical scrollbar is always present internally and simply stays hidden when its axis doesn't overflow.
 
 <ComponentPreview name="scroll-area-horizontal" />
 
-:::
-:::tab[Code]
+## API Reference
 
-```file="~/registry/examples/scroll-area-horizontal" frame=none showLineNumbers
+### ScrollArea
 
-```
+The root container. It renders a scrollable viewport around its children, a vertical `ScrollBar`, and
+a corner element, and shows/hides scrollbars based on hover state and overflow.
 
-:::
-::::
+| Prop       | Type          | Default |
+| ---------- | ------------- | ------- |
+| `class`    | `string`      | -       |
+| `children` | `JSX.Element` | -       |
 
-### RTL
+All other props are forwarded to the root `div`.
 
-To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+### ScrollBar
 
-::::tab-group[example2]
-:::tab[Preview]
+A scrollbar track and thumb for one axis. It is always mounted, but stays visually hidden
+(`opacity-0`, non-interactive) unless its axis overflows and the scroll area is hovered or the thumb
+is being dragged.
 
-<ComponentPreview name="scroll-area-rtl" />
+| Prop          | Type                         | Default      |
+| ------------- | ---------------------------- | ------------ |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `class`       | `string`                     | -            |
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/scroll-area-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
+ScrollArea is a native SolidJS implementation and does not build on a Kobalte or Corvu primitive, so it does not expose a primitive API to link to.

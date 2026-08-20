@@ -1,12 +1,8 @@
-import {
-  Progress,
-  ProgressLabel,
-  ProgressValue,
-} from "~/registry/ui/progress"
+import { Progress, ProgressLabel, ProgressValue } from "~/registry/ui/progress"
 
 export default function ProgressWithLabel() {
   return (
-    <Progress value={56} class="w-full max-w-sm">
+    <Progress class="w-full max-w-sm" value={56}>
       <ProgressLabel>Upload progress</ProgressLabel>
       <ProgressValue />
     </Progress>

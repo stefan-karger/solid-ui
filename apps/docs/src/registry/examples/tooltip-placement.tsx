@@ -1,4 +1,5 @@
 import { For, Show } from "solid-js"
+
 import { Button } from "~/registry/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 
@@ -14,7 +15,7 @@ const placements = [
   "bottom-end",
   "left-start",
   "left",
-  "left-end",
+  "left-end"
 ] as const
 
 export default function TooltipPlacement() {

@@ -9,7 +9,11 @@ links:
 ::::tab-group[preview]
 :::tab[Preview]
 
-<ComponentPreview name="accordion-demo" />
+<ComponentPreview
+  name="accordion-demo"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[300px]"
+/>
 
 :::
 
@@ -46,22 +50,92 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger
+  AccordionTrigger,
 } from "~/components/ui/accordion";
 ```
 
-```tsx
-<Accordion type="single" collapsible>
+```tsx showLineNumbers
+<Accordion defaultValue={["item-1"]}>
   <AccordionItem value="item-1">
     <AccordionTrigger>Is it accessible?</AccordionTrigger>
     <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
+      Yes. It follows the WAI-ARIA accordion pattern.
     </AccordionContent>
   </AccordionItem>
 </Accordion>
 ```
+
+## Composition
+
+Use the following composition to build an `Accordion`:
+
+```text
+Accordion
+├── AccordionItem
+│   ├── AccordionTrigger
+│   └── AccordionContent
+└── AccordionItem
+    ├── AccordionTrigger
+    └── AccordionContent
+```
+
+## Examples
+
+### Basic
+
+A basic accordion that shows one item at a time. The first item is open by default.
+
+<ComponentPreview
+  name="accordion-basic"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[300px]"
+/>
+
+### Multiple
+
+Use the `multiple` prop to allow multiple items to be open at the same time.
+
+<ComponentPreview
+  name="accordion-multiple"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[360px]"
+/>
+
+### Disabled
+
+Use the `disabled` prop on `AccordionItem` to disable individual items.
+
+<ComponentPreview
+  name="accordion-disabled"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[300px]"
+/>
+
+### Borders
+
+Add border utilities to the `Accordion` and `AccordionItem` components to visually group items.
+
+<ComponentPreview
+  name="accordion-borders"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[300px]"
+/>
+
+### Card
+
+Wrap the `Accordion` in a `Card` component.
+
+<ComponentPreview
+  name="accordion-card"
+  align="start"
+  previewClass="*:data-[slot=accordion]:max-w-sm min-h-[420px]"
+/>
+
+## API Reference
+
+See the [Kobalte Accordion documentation](https://kobalte.dev/docs/core/components/accordion#api-reference) for the primitive API.

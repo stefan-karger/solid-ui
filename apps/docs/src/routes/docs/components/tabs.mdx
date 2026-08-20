@@ -3,6 +3,8 @@ title: Tabs
 description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
 ---
 
+The Tabs component is built on top of [Kobalte Tabs](https://kobalte.dev/docs/core/components/tabs), which provides the accessible tab, tablist, and tabpanel primitives with keyboard navigation.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -35,11 +37,28 @@ Copy and paste the following code into your project.
 
 ```
 
+## Usage
+
+```tsx showLineNumbers
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+```
+
+```tsx showLineNumbers
+<Tabs defaultValue="account" class="w-[400px]">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Make changes to your account here.</TabsContent>
+  <TabsContent value="password">Change your password here.</TabsContent>
+</Tabs>
+```
+
 ## Composition
 
 Use the following composition to build `Tabs`:
 
-```plaintext
+```text
 Tabs
 ├── TabsList
 │   ├── TabsTrigger
@@ -54,93 +73,22 @@ Tabs
 
 Use the `variant="line"` prop on `TabsList` for a line style.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="tabs-line" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tabs-line" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Vertical
 
 Use `orientation="vertical"` for vertical tabs.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="tabs-vertical" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tabs-vertical" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Disabled
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="tabs-disabled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tabs-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Icons
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="tabs-icons" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tabs-icons" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="tabs-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/tabs-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 
-See the [Kobalte UI Tabs](https://kobalte.dev/docs/core/components/tabs) documentation.
+For primitive props, keyboard behavior, and accessibility details, see the [Kobalte Tabs API reference](https://kobalte.dev/docs/core/components/tabs#api-reference).

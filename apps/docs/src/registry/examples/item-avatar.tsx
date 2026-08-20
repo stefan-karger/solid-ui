@@ -1,10 +1,6 @@
 import { PlusIcon } from "lucide-solid"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/registry/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import { Button } from "~/registry/ui/button"
 import {
   Item,
@@ -12,7 +8,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemMedia,
-  ItemTitle,
+  ItemTitle
 } from "~/registry/ui/item"
 
 export default function ItemAvatar() {
@@ -30,44 +26,31 @@ export default function ItemAvatar() {
           <ItemDescription>Last seen 5 months ago</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button
-            size="icon-sm"
-            variant="outline"
-            class="rounded-full"
-            aria-label="Invite"
-          >
+          <Button aria-label="Invite" class="rounded-full" size="icon-sm" variant="outline">
             <PlusIcon />
           </Button>
         </ItemActions>
       </Item>
       <Item variant="outline">
         <ItemMedia>
-          <div class="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
+          <div class="-space-x-2 flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
             <Avatar class="hidden sm:flex">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <Avatar class="hidden sm:flex">
-              <AvatarImage
-                src="https://github.com/maxleiter.png"
-                alt="@maxleiter"
-              />
+              <AvatarImage alt="@maxleiter" src="https://github.com/maxleiter.png" />
               <AvatarFallback>LR</AvatarFallback>
             </Avatar>
             <Avatar>
-              <AvatarImage
-                src="https://github.com/evilrabbit.png"
-                alt="@evilrabbit"
-              />
+              <AvatarImage alt="@evilrabbit" src="https://github.com/evilrabbit.png" />
               <AvatarFallback>ER</AvatarFallback>
             </Avatar>
           </div>
         </ItemMedia>
         <ItemContent>
           <ItemTitle>No Team Members</ItemTitle>
-          <ItemDescription>
-            Invite your team to collaborate on this project.
-          </ItemDescription>
+          <ItemDescription>Invite your team to collaborate on this project.</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button size="sm" variant="outline">

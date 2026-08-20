@@ -6,29 +6,25 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationNext,
-  PaginationPrevious,
+  PaginationPrevious
 } from "~/registry/ui/pagination"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/registry/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
 
 export default function PaginationIconsOnly() {
   const [value, setValue] = createSignal(25)
   return (
     <div class="flex items-center justify-between gap-4">
-      <Field orientation="horizontal" class="w-fit">
+      <Field class="w-fit" orientation="horizontal">
         <FieldLabel for="select-rows-per-page">Rows per page</FieldLabel>
         <Select
-          placement="bottom-start"
-          itemComponent={(props) => <SelectItem item={props.item}>{String(props.item.rawValue)}</SelectItem>}
+          defaultValue={25}
+          itemComponent={(props) => (
+            <SelectItem item={props.item}>{String(props.item.rawValue)}</SelectItem>
+          )}
           onChange={setValue}
           options={[10, 25, 50, 100]}
           placeholder="Select a fruit…"
-          defaultValue={25}
+          placement="bottom-start"
           value={value()}
         >
           <SelectTrigger class="w-20" id="select-rows-per-page">

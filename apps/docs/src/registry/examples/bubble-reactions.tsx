@@ -1,6 +1,6 @@
-import { type JSX } from "solid-js";
-import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble";
+import type { JSX } from "solid-js"
 
+import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble"
 
 export default function BubbleWithReactions() {
   return (
@@ -8,19 +8,19 @@ export default function BubbleWithReactions() {
       <GalleryMarker>side=bottom align=end</GalleryMarker>
       <Bubble>
         <BubbleContent>This is a one line message.</BubbleContent>
-        <BubbleReactions side="bottom" align="end" role="img" aria-label="Reaction: thumbs up">
+        <BubbleReactions align="end" aria-label="Reaction: thumbs up" role="img" side="bottom">
           <span>👍</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="secondary" align="end">
+      <Bubble align="end" variant="secondary">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
         <BubbleReactions
-          side="bottom"
           align="end"
-          role="img"
           aria-label="Reactions: thumbs up, surprised"
+          role="img"
+          side="bottom"
         >
           <span>👍</span>
           <span>😮</span>
@@ -31,10 +31,10 @@ export default function BubbleWithReactions() {
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
         <BubbleReactions
-          side="bottom"
           align="end"
-          role="img"
           aria-label="Reactions: thumbs up, surprised, fire, eyes, and 8 more"
+          role="img"
+          side="bottom"
         >
           <span>👍</span>
           <span>😮</span>
@@ -46,19 +46,19 @@ export default function BubbleWithReactions() {
       <GalleryMarker>side=bottom align=start</GalleryMarker>
       <Bubble variant="secondary">
         <BubbleContent>This is a one line message.</BubbleContent>
-        <BubbleReactions side="bottom" align="start" role="img" aria-label="Reaction: fire">
+        <BubbleReactions align="start" aria-label="Reaction: fire" role="img" side="bottom">
           <span>🔥</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="secondary" align="end">
+      <Bubble align="end" variant="secondary">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
         <BubbleReactions
-          side="bottom"
           align="start"
-          role="img"
           aria-label="Reactions: thumbs up, surprised, fire, eyes"
+          role="img"
+          side="bottom"
         >
           <span>👍</span>
           <span>😮</span>
@@ -69,19 +69,19 @@ export default function BubbleWithReactions() {
       <GalleryMarker>side=top align=start</GalleryMarker>
       <Bubble variant="secondary">
         <BubbleContent>This is a one line message.</BubbleContent>
-        <BubbleReactions side="top" align="start" role="img" aria-label="Reaction: fire">
+        <BubbleReactions align="start" aria-label="Reaction: fire" role="img" side="top">
           <span>🔥</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="secondary" align="end">
+      <Bubble align="end" variant="secondary">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset is easier to inspect.
         </BubbleContent>
         <BubbleReactions
-          side="top"
           align="start"
-          role="img"
           aria-label="Reactions: thumbs up, surprised, fire, eyes"
+          role="img"
+          side="top"
         >
           <span>👍</span>
           <span>😮</span>
@@ -92,20 +92,20 @@ export default function BubbleWithReactions() {
       <GalleryMarker>side=bottom align=end</GalleryMarker>
       <Bubble variant="muted">
         <BubbleContent>This is a one line message.</BubbleContent>
-        <BubbleReactions side="top" align="end" role="img" aria-label="Reaction: thumbs up">
+        <BubbleReactions align="end" aria-label="Reaction: thumbs up" role="img" side="top">
           <span>👍</span>
         </BubbleReactions>
       </Bubble>
-      <Bubble variant="muted" align="end">
+      <Bubble align="end" variant="muted">
         <BubbleContent>
           A longer message that wraps across lines so the reaction offset.
         </BubbleContent>
         <BubbleReactions
-          side="top"
           align="end"
-          role="img"
           aria-label="Reactions: thumbs up, surprised, fire, eyes"
           class="px-1.5 py-0.5"
+          role="img"
+          side="top"
         >
           <span>👍</span>
           <span>😮</span>
@@ -114,19 +114,19 @@ export default function BubbleWithReactions() {
         </BubbleReactions>
       </Bubble>
     </div>
-  );
+  )
 }
 
 function GalleryMarker(props: { children: JSX.Element }) {
   return (
     <div
+      class="group/marker relative z-marker z-marker-variant-separator flex w-full items-center"
       data-slot="marker"
       data-variant="separator"
-      class="z-marker z-marker-variant-separator group/marker relative flex w-full items-center"
     >
-      <span data-slot="marker-content" class="z-marker-content min-w-0 wrap-break-word">
+      <span class="wrap-break-word z-marker-content min-w-0" data-slot="marker-content">
         {props.children}
       </span>
     </div>
-  );
+  )
 }

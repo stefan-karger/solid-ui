@@ -2,6 +2,39 @@ import type { Registry } from "~/registry/schema"
 
 export const examples: Registry["items"] = [
   {
+    name: "accordion-basic",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [
+      {
+        path: "examples/accordion-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "accordion-borders",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [
+      {
+        path: "examples/accordion-borders.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "accordion-card",
+    type: "registry:example",
+    registryDependencies: ["accordion", "card"],
+    files: [
+      {
+        path: "examples/accordion-card.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "accordion-demo",
     type: "registry:example",
     registryDependencies: ["accordion"],
@@ -13,12 +46,93 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "accordion-disabled",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [
+      {
+        path: "examples/accordion-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "accordion-multiple",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [
+      {
+        path: "examples/accordion-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-action",
+    type: "registry:example",
+    registryDependencies: ["alert", "button"],
+    files: [
+      {
+        path: "examples/alert-action.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-basic",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert"],
+    files: [
+      {
+        path: "examples/alert-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-colors",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert"],
+    files: [
+      {
+        path: "examples/alert-colors.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "alert-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["alert"],
     files: [
       {
         path: "examples/alert-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-destructive",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert"],
+    files: [
+      {
+        path: "examples/alert-destructive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-basic",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-basic.tsx",
         type: "registry:example"
       }
     ]
@@ -35,12 +149,81 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "alert-dialog-destructive",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-destructive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-media",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-media.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-small",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-small.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "alert-dialog-small-media",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["alert-dialog", "button"],
+    files: [
+      {
+        path: "examples/alert-dialog-small-media.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "aspect-ratio-demo",
     type: "registry:example",
     registryDependencies: ["aspect-ratio"],
     files: [
       {
         path: "examples/aspect-ratio-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "aspect-ratio-portrait",
+    type: "registry:example",
+    registryDependencies: ["aspect-ratio"],
+    files: [
+      {
+        path: "examples/aspect-ratio-portrait.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "aspect-ratio-square",
+    type: "registry:example",
+    registryDependencies: ["aspect-ratio"],
+    files: [
+      {
+        path: "examples/aspect-ratio-square.tsx",
         type: "registry:example"
       }
     ]
@@ -118,6 +301,40 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "avatar-badge",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-badge.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-badge-icon",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-badge-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-basic",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "avatar-demo",
     type: "registry:example",
     registryDependencies: ["avatar"],
@@ -129,12 +346,147 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "avatar-dropdown",
+    type: "registry:example",
+    registryDependencies: ["avatar", "button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/avatar-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-group",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-group-count",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-group-count.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-group-count-icon",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-group-count-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "avatar-size",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar-size.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-colors",
+    type: "registry:example",
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-colors.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "badge-demo",
     type: "registry:example",
     registryDependencies: ["badge"],
     files: [
       {
         path: "examples/badge-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-icon",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-link",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-link.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-spinner",
+    type: "registry:example",
+    registryDependencies: ["badge", "spinner"],
+    files: [
+      {
+        path: "examples/badge-spinner.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-status",
+    type: "registry:example",
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-status.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "badge-variants",
+    type: "registry:example",
+    registryDependencies: ["badge"],
+    files: [
+      {
+        path: "examples/badge-variants.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-basic",
+    type: "registry:example",
+    registryDependencies: ["breadcrumb"],
+    files: [
+      {
+        path: "examples/breadcrumb-basic.tsx",
         type: "registry:example"
       }
     ]
@@ -164,10 +516,23 @@ export const examples: Registry["items"] = [
   {
     name: "breadcrumb-dropdown",
     type: "registry:example",
-    registryDependencies: ["breadcrumb", "dropdown-menu", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["breadcrumb", "dropdown-menu"],
     files: [
       {
         path: "examples/breadcrumb-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "breadcrumb-ellipsis",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["breadcrumb", "button"],
+    files: [
+      {
+        path: "examples/breadcrumb-ellipsis.tsx",
         type: "registry:example"
       }
     ]
@@ -186,6 +551,7 @@ export const examples: Registry["items"] = [
   {
     name: "breadcrumb-separator",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["breadcrumb"],
     files: [
       {
@@ -311,6 +677,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -344,6 +711,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group", "dropdown-menu"],
     files: [
       {
@@ -355,6 +723,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-dropdown-menu",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group", "dropdown-menu"],
     files: [
       {
@@ -366,6 +735,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-input",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group", "input"],
     files: [
       {
@@ -377,7 +747,8 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-input-group",
     type: "registry:example",
-    registryDependencies: ["button", "button-group", "input-group"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "button-group", "input-group", "tooltip"],
     files: [
       {
         path: "examples/button-group-input-group.tsx",
@@ -388,6 +759,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-nested",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group"],
     files: [
       {
@@ -399,6 +771,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-orientation",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group"],
     files: [
       {
@@ -408,9 +781,22 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "button-group-popover",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "button-group", "field", "popover", "textarea"],
+    files: [
+      {
+        path: "examples/button-group-popover.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "button-group-select",
     type: "registry:example",
-    registryDependencies: ["button", "button-group", "select"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "button-group", "input", "select"],
     files: [
       {
         path: "examples/button-group-select.tsx",
@@ -432,6 +818,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-size",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group"],
     files: [
       {
@@ -443,6 +830,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-split",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button", "button-group"],
     files: [
       {
@@ -454,6 +842,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-icon",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -474,12 +863,12 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "button-loading",
+    name: "button-spinner",
     type: "registry:example",
     registryDependencies: ["button", "spinner"],
     files: [
       {
-        path: "examples/button-loading.tsx",
+        path: "examples/button-spinner.tsx",
         type: "registry:example"
       }
     ]
@@ -498,6 +887,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-rounded",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -520,6 +910,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-sizes",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -531,6 +922,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-with-icon",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -566,7 +958,7 @@ export const examples: Registry["items"] = [
     name: "calendar-date-picker-simple",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    registryDependencies: ["button", "calendar", "card", "field", "popover"],
     files: [
       {
         path: "examples/calendar-date-picker-simple.tsx",
@@ -578,7 +970,7 @@ export const examples: Registry["items"] = [
     name: "calendar-date-picker-with-dropdowns",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    registryDependencies: ["button", "calendar", "card", "field", "popover"],
     files: [
       {
         path: "examples/calendar-date-picker-with-dropdowns.tsx",
@@ -590,7 +982,7 @@ export const examples: Registry["items"] = [
     name: "calendar-date-picker-with-range",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["calendar", "field", "popover", "button", "card"],
+    registryDependencies: ["button", "calendar", "card", "field", "popover"],
     files: [
       {
         path: "examples/calendar-date-picker-with-range.tsx",
@@ -623,7 +1015,7 @@ export const examples: Registry["items"] = [
   {
     name: "calendar-presets",
     type: "registry:example",
-    registryDependencies: ["calendar", "card", "button"],
+    registryDependencies: ["button", "calendar", "card"],
     files: [
       {
         path: "examples/calendar-presets.tsx",
@@ -689,7 +1081,7 @@ export const examples: Registry["items"] = [
   {
     name: "card-demo",
     type: "registry:example",
-    registryDependencies: ["card", "button", "input", "label"],
+    registryDependencies: ["button", "card", "input", "label"],
     files: [
       {
         path: "examples/card-demo.tsx",
@@ -698,9 +1090,54 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "card-edge-to-edge",
+    type: "registry:example",
+    registryDependencies: ["button", "card"],
+    files: [
+      {
+        path: "examples/card-edge-to-edge.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "card-image",
+    type: "registry:example",
+    registryDependencies: ["badge", "button", "card"],
+    files: [
+      {
+        path: "examples/card-image.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "card-small",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "card"],
+    files: [
+      {
+        path: "examples/card-small.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "card-spacing",
+    type: "registry:example",
+    registryDependencies: ["button", "card", "input", "label", "toggle-group"],
+    files: [
+      {
+        path: "examples/card-spacing.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "carousel-api",
     type: "registry:example",
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-api.tsx",
@@ -711,7 +1148,7 @@ export const examples: Registry["items"] = [
   {
     name: "carousel-demo",
     type: "registry:example",
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-demo.tsx",
@@ -722,7 +1159,7 @@ export const examples: Registry["items"] = [
   {
     name: "carousel-orientation",
     type: "registry:example",
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-orientation.tsx",
@@ -734,7 +1171,7 @@ export const examples: Registry["items"] = [
     name: "carousel-plugin",
     type: "registry:example",
     dependencies: ["embla-carousel-autoplay"],
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-plugin.tsx",
@@ -745,7 +1182,7 @@ export const examples: Registry["items"] = [
   {
     name: "carousel-size",
     type: "registry:example",
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-size.tsx",
@@ -756,7 +1193,7 @@ export const examples: Registry["items"] = [
   {
     name: "carousel-spacing",
     type: "registry:example",
-    registryDependencies: ["carousel", "card"],
+    registryDependencies: ["card", "carousel"],
     files: [
       {
         path: "examples/carousel-spacing.tsx",
@@ -768,7 +1205,7 @@ export const examples: Registry["items"] = [
     name: "chart-demo",
     type: "registry:example",
     dependencies: ["solid-recharts"],
-    registryDependencies: ["chart", "card"],
+    registryDependencies: ["card", "chart"],
     files: [
       {
         path: "examples/chart-demo.tsx",
@@ -837,9 +1274,20 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "checkbox-basic",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "field"],
+    files: [
+      {
+        path: "examples/checkbox-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "checkbox-demo",
     type: "registry:example",
-    registryDependencies: ["checkbox"],
+    registryDependencies: ["checkbox", "field"],
     files: [
       {
         path: "examples/checkbox-demo.tsx",
@@ -848,12 +1296,115 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "checkbox-description",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "field"],
+    files: [
+      {
+        path: "examples/checkbox-description.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "checkbox-disabled",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "field"],
+    files: [
+      {
+        path: "examples/checkbox-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "checkbox-group",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "field"],
+    files: [
+      {
+        path: "examples/checkbox-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "checkbox-invalid",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "field"],
+    files: [
+      {
+        path: "examples/checkbox-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "checkbox-table",
+    type: "registry:example",
+    registryDependencies: ["checkbox", "table"],
+    files: [
+      {
+        path: "examples/checkbox-table.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "collapsible-basic",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "card", "collapsible"],
+    files: [
+      {
+        path: "examples/collapsible-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "collapsible-demo",
     type: "registry:example",
-    registryDependencies: ["collapsible", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "collapsible"],
     files: [
       {
         path: "examples/collapsible-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "collapsible-file-tree",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "card", "collapsible", "tabs"],
+    files: [
+      {
+        path: "examples/collapsible-file-tree.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "collapsible-settings",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "card", "collapsible", "field", "input"],
+    files: [
+      {
+        path: "examples/collapsible-settings.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-basic",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [
+      {
+        path: "examples/combobox-basic.tsx",
         type: "registry:example"
       }
     ]
@@ -894,7 +1445,7 @@ export const examples: Registry["items"] = [
   {
     name: "combobox-dialog",
     type: "registry:example",
-    registryDependencies: ["combobox", "dialog", "field", "button"],
+    registryDependencies: ["button", "combobox", "dialog", "field"],
     files: [
       {
         path: "examples/combobox-dialog.tsx",
@@ -936,6 +1487,30 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "combobox-icons",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["combobox", "input-group"],
+    files: [
+      {
+        path: "examples/combobox-icons.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "combobox-input-group",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["combobox", "input-group"],
+    files: [
+      {
+        path: "examples/combobox-input-group.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "combobox-invalid",
     type: "registry:example",
     registryDependencies: ["combobox", "field"],
@@ -958,9 +1533,20 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "combobox-popup",
+    type: "registry:example",
+    registryDependencies: ["combobox", "button"],
+    files: [
+      {
+        path: "examples/combobox-popup.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "command-basic",
     type: "registry:example",
-    registryDependencies: ["command", "button"],
+    registryDependencies: ["button", "command"],
     files: [
       {
         path: "examples/command-basic.tsx",
@@ -984,7 +1570,7 @@ export const examples: Registry["items"] = [
     name: "command-groups",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["command", "button"],
+    registryDependencies: ["button", "command"],
     files: [
       {
         path: "examples/command-groups.tsx",
@@ -996,7 +1582,7 @@ export const examples: Registry["items"] = [
     name: "command-scrollable",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["command", "button"],
+    registryDependencies: ["button", "command"],
     files: [
       {
         path: "examples/command-scrollable.tsx",
@@ -1008,10 +1594,21 @@ export const examples: Registry["items"] = [
     name: "command-shortcuts",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["command", "button"],
+    registryDependencies: ["button", "command"],
     files: [
       {
         path: "examples/command-shortcuts.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-basic",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-basic.tsx",
         type: "registry:example"
       }
     ]
@@ -1039,12 +1636,80 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "context-menu-radio-group",
+    name: "context-menu-destructive",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-destructive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-groups",
     type: "registry:example",
     registryDependencies: ["context-menu"],
     files: [
       {
-        path: "examples/context-menu-radio-group.tsx",
+        path: "examples/context-menu-groups.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-icons",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-icons.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-radio",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-radio.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-shortcuts",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-shortcuts.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-sides",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-sides.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "context-menu-submenu",
+    type: "registry:example",
+    registryDependencies: ["context-menu"],
+    files: [
+      {
+        path: "examples/context-menu-submenu.tsx",
         type: "registry:example"
       }
     ]
@@ -1052,7 +1717,7 @@ export const examples: Registry["items"] = [
   {
     name: "dialog-close-button",
     type: "registry:example",
-    registryDependencies: ["dialog", "button"],
+    registryDependencies: ["button", "dialog", "input", "label"],
     files: [
       {
         path: "examples/dialog-close-button.tsx",
@@ -1063,10 +1728,43 @@ export const examples: Registry["items"] = [
   {
     name: "dialog-demo",
     type: "registry:example",
-    registryDependencies: ["dialog", "button", "field", "input"],
+    registryDependencies: ["button", "dialog", "field", "input", "label"],
     files: [
       {
         path: "examples/dialog-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-no-close-button",
+    type: "registry:example",
+    registryDependencies: ["button", "dialog"],
+    files: [
+      {
+        path: "examples/dialog-no-close-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-scrollable-content",
+    type: "registry:example",
+    registryDependencies: ["button", "dialog"],
+    files: [
+      {
+        path: "examples/dialog-scrollable-content.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dialog-sticky-footer",
+    type: "registry:example",
+    registryDependencies: ["button", "dialog"],
+    files: [
+      {
+        path: "examples/dialog-sticky-footer.tsx",
         type: "registry:example"
       }
     ]
@@ -1085,7 +1783,7 @@ export const examples: Registry["items"] = [
   {
     name: "drawer-demo",
     type: "registry:example",
-    registryDependencies: ["drawer", "badge", "button", "field", "radio-group", "use-mobile"],
+    registryDependencies: ["badge", "button", "drawer", "field", "radio-group", "use-mobile"],
     files: [
       {
         path: "examples/drawer-demo.tsx",
@@ -1094,9 +1792,20 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "drawer-dialog",
+    type: "registry:example",
+    registryDependencies: ["button", "dialog", "drawer", "input", "label", "use-mobile", "utils"],
+    files: [
+      {
+        path: "examples/drawer-dialog.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "drawer-nested",
     type: "registry:example",
-    registryDependencies: ["drawer", "button", "use-mobile"],
+    registryDependencies: ["button", "drawer", "use-mobile", "utils"],
     files: [
       {
         path: "examples/drawer-nested.tsx",
@@ -1107,7 +1816,7 @@ export const examples: Registry["items"] = [
   {
     name: "drawer-non-modal",
     type: "registry:example",
-    registryDependencies: ["drawer", "button"],
+    registryDependencies: ["button", "drawer"],
     files: [
       {
         path: "examples/drawer-non-modal.tsx",
@@ -1118,7 +1827,7 @@ export const examples: Registry["items"] = [
   {
     name: "drawer-position",
     type: "registry:example",
-    registryDependencies: ["drawer", "button"],
+    registryDependencies: ["button", "drawer"],
     files: [
       {
         path: "examples/drawer-position.tsx",
@@ -1127,9 +1836,54 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "drawer-snap-points",
+    type: "registry:example",
+    registryDependencies: ["button", "drawer"],
+    files: [
+      {
+        path: "examples/drawer-snap-points.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-swipe-handle",
+    type: "registry:example",
+    registryDependencies: ["button", "drawer"],
+    files: [
+      {
+        path: "examples/drawer-swipe-handle.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-avatar",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["avatar", "button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-basic",
+    type: "registry:example",
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-basic.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu-checkboxes",
     type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
+    registryDependencies: ["button", "dropdown-menu"],
     files: [
       {
         path: "examples/dropdown-menu-checkboxes.tsx",
@@ -1138,9 +1892,33 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "dropdown-menu-checkboxes-icons",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-checkboxes-icons.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-complex",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-complex.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu-demo",
     type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
+    registryDependencies: ["button", "dropdown-menu"],
     files: [
       {
         path: "examples/dropdown-menu-demo.tsx",
@@ -1149,9 +1927,22 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "dropdown-menu-destructive",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-destructive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu-dialog",
     type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dialog", "dropdown-menu"],
     files: [
       {
         path: "examples/dropdown-menu-dialog.tsx",
@@ -1160,9 +1951,21 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "dropdown-menu-icons",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-icons.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "dropdown-menu-radio-group",
     type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
+    registryDependencies: ["button", "dropdown-menu"],
     files: [
       {
         path: "examples/dropdown-menu-radio-group.tsx",
@@ -1171,9 +1974,43 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "dropdown-menu-radio-icons",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-radio-icons.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-shortcuts",
+    type: "registry:example",
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-shortcuts.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "dropdown-menu-submenu",
+    type: "registry:example",
+    registryDependencies: ["button", "dropdown-menu"],
+    files: [
+      {
+        path: "examples/dropdown-menu-submenu.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "empty-avatar",
     type: "registry:example",
-    registryDependencies: ["empty", "avatar", "button"],
+    registryDependencies: ["avatar", "button", "empty"],
     files: [
       {
         path: "examples/empty-avatar.tsx",
@@ -1184,7 +2021,8 @@ export const examples: Registry["items"] = [
   {
     name: "empty-avatar-group",
     type: "registry:example",
-    registryDependencies: ["empty", "avatar", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["avatar", "button", "empty"],
     files: [
       {
         path: "examples/empty-avatar-group.tsx",
@@ -1195,7 +2033,8 @@ export const examples: Registry["items"] = [
   {
     name: "empty-background",
     type: "registry:example",
-    registryDependencies: ["empty", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "empty"],
     files: [
       {
         path: "examples/empty-background.tsx",
@@ -1206,7 +2045,8 @@ export const examples: Registry["items"] = [
   {
     name: "empty-demo",
     type: "registry:example",
-    registryDependencies: ["empty", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "empty"],
     files: [
       {
         path: "examples/empty-demo.tsx",
@@ -1217,7 +2057,8 @@ export const examples: Registry["items"] = [
   {
     name: "empty-input-group",
     type: "registry:example",
-    registryDependencies: ["empty", "input-group", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["empty", "input-group", "kbd"],
     files: [
       {
         path: "examples/empty-input-group.tsx",
@@ -1228,7 +2069,8 @@ export const examples: Registry["items"] = [
   {
     name: "empty-outline",
     type: "registry:example",
-    registryDependencies: ["empty", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "empty"],
     files: [
       {
         path: "examples/empty-outline.tsx",
@@ -1239,7 +2081,6 @@ export const examples: Registry["items"] = [
   {
     name: "empty-rtl",
     type: "registry:example",
-    registryDependencies: ["empty", "button", "rtl"],
     files: [
       {
         path: "examples/empty-rtl.tsx",
@@ -1250,7 +2091,7 @@ export const examples: Registry["items"] = [
   {
     name: "field-checkbox",
     type: "registry:example",
-    registryDependencies: ["field", "checkbox"],
+    registryDependencies: ["checkbox", "field"],
     files: [
       {
         path: "examples/field-checkbox.tsx",
@@ -1272,7 +2113,7 @@ export const examples: Registry["items"] = [
   {
     name: "field-demo",
     type: "registry:example",
-    registryDependencies: ["field"],
+    registryDependencies: ["button", "checkbox", "field", "input", "select", "textarea"],
     files: [
       {
         path: "examples/field-demo.tsx",
@@ -1294,7 +2135,7 @@ export const examples: Registry["items"] = [
   {
     name: "field-group-example",
     type: "registry:example",
-    registryDependencies: ["field", "checkbox"],
+    registryDependencies: ["checkbox", "field"],
     files: [
       {
         path: "examples/field-group-example.tsx",
@@ -1327,7 +2168,7 @@ export const examples: Registry["items"] = [
   {
     name: "field-responsive",
     type: "registry:example",
-    registryDependencies: ["field", "button", "input", "textarea"],
+    registryDependencies: ["button", "field", "input", "textarea"],
     files: [
       {
         path: "examples/field-responsive.tsx",
@@ -1382,7 +2223,7 @@ export const examples: Registry["items"] = [
   {
     name: "hover-card-demo",
     type: "registry:example",
-    registryDependencies: ["hover-card", "button"],
+    registryDependencies: ["button", "hover-card"],
     files: [
       {
         path: "examples/hover-card-demo.tsx",
@@ -1393,7 +2234,7 @@ export const examples: Registry["items"] = [
   {
     name: "hover-card-placement",
     type: "registry:example",
-    registryDependencies: ["hover-card", "button"],
+    registryDependencies: ["button", "hover-card"],
     files: [
       {
         path: "examples/hover-card-placement.tsx",
@@ -1404,7 +2245,6 @@ export const examples: Registry["items"] = [
   {
     name: "hover-card-rtl",
     type: "registry:example",
-    registryDependencies: ["hover-card", "button", "rtl"],
     files: [
       {
         path: "examples/hover-card-rtl.tsx",
@@ -1415,7 +2255,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-badge",
     type: "registry:example",
-    registryDependencies: ["input", "field", "badge"],
+    registryDependencies: ["badge", "field", "input"],
     files: [
       {
         path: "examples/input-badge.tsx",
@@ -1437,7 +2277,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-button-group",
     type: "registry:example",
-    registryDependencies: ["input", "field", "button", "button-group"],
+    registryDependencies: ["button", "button-group", "field", "input"],
     files: [
       {
         path: "examples/input-button-group.tsx",
@@ -1448,7 +2288,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-demo",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-demo.tsx",
@@ -1459,7 +2299,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-disabled",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-disabled.tsx",
@@ -1470,7 +2310,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-field",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-field.tsx",
@@ -1481,7 +2321,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-field-group",
     type: "registry:example",
-    registryDependencies: ["input", "field", "button"],
+    registryDependencies: ["button", "field", "input"],
     files: [
       {
         path: "examples/input-field-group.tsx",
@@ -1492,7 +2332,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-file",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-file.tsx",
@@ -1503,7 +2343,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-form",
     type: "registry:example",
-    registryDependencies: ["input", "field", "button", "select"],
+    registryDependencies: ["button", "field", "input", "select"],
     files: [
       {
         path: "examples/input-form.tsx",
@@ -1514,7 +2354,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-grid",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-grid.tsx",
@@ -1523,8 +2363,55 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "input-group-block-end",
+    type: "registry:example",
+    registryDependencies: ["field", "input-group"],
+    files: [
+      {
+        path: "examples/input-group-block-end.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-block-start",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["field", "input-group"],
+    files: [
+      {
+        path: "examples/input-group-block-start.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-button",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group", "popover"],
+    files: [
+      {
+        path: "examples/input-group-button.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-custom",
+    type: "registry:example",
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "examples/input-group-custom.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "input-group-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["input-group"],
     files: [
       {
@@ -1534,9 +2421,104 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "input-group-dropdown",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["dropdown-menu", "input-group"],
+    files: [
+      {
+        path: "examples/input-group-dropdown.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-icon",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "examples/input-group-icon.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-inline-end",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["field", "input-group"],
+    files: [
+      {
+        path: "examples/input-group-inline-end.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-inline-start",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["field", "input-group"],
+    files: [
+      {
+        path: "examples/input-group-inline-start.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-kbd",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group", "kbd"],
+    files: [
+      {
+        path: "examples/input-group-kbd.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-spinner",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group", "spinner"],
+    files: [
+      {
+        path: "examples/input-group-spinner.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-text",
+    type: "registry:example",
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "examples/input-group-text.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-group-textarea",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group"],
+    files: [
+      {
+        path: "examples/input-group-textarea.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "input-inline",
     type: "registry:example",
-    registryDependencies: ["input", "field", "button"],
+    registryDependencies: ["button", "field", "input"],
     files: [
       {
         path: "examples/input-inline.tsx",
@@ -1547,7 +2529,8 @@ export const examples: Registry["items"] = [
   {
     name: "input-input-group",
     type: "registry:example",
-    registryDependencies: ["input", "input-group", "field"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["field", "input-group"],
     files: [
       {
         path: "examples/input-input-group.tsx",
@@ -1558,7 +2541,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-invalid",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-invalid.tsx",
@@ -1614,7 +2597,8 @@ export const examples: Registry["items"] = [
   {
     name: "input-otp-form",
     type: "registry:example",
-    registryDependencies: ["input-otp", "button", "card", "field"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "card", "field", "input-otp"],
     files: [
       {
         path: "examples/input-otp-form.tsx",
@@ -1649,7 +2633,7 @@ export const examples: Registry["items"] = [
     name: "input-otp-pattern",
     type: "registry:example",
     dependencies: ["input-otp"],
-    registryDependencies: ["input-otp", "field"],
+    registryDependencies: ["field", "input-otp"],
     files: [
       {
         path: "examples/input-otp-pattern.tsx",
@@ -1660,7 +2644,6 @@ export const examples: Registry["items"] = [
   {
     name: "input-otp-rtl",
     type: "registry:example",
-    registryDependencies: ["input-otp", "field", "rtl"],
     files: [
       {
         path: "examples/input-otp-rtl.tsx",
@@ -1682,7 +2665,7 @@ export const examples: Registry["items"] = [
   {
     name: "input-required",
     type: "registry:example",
-    registryDependencies: ["input", "field"],
+    registryDependencies: ["field", "input"],
     files: [
       {
         path: "examples/input-required.tsx",
@@ -1693,7 +2676,6 @@ export const examples: Registry["items"] = [
   {
     name: "input-rtl",
     type: "registry:example",
-    registryDependencies: ["input", "field", "rtl"],
     files: [
       {
         path: "examples/input-rtl.tsx",
@@ -1704,6 +2686,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-avatar",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["avatar", "button", "item"],
     files: [
       {
@@ -1715,7 +2698,8 @@ export const examples: Registry["items"] = [
   {
     name: "item-demo",
     type: "registry:example",
-    registryDependencies: ["item", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "item"],
     files: [
       {
         path: "examples/item-demo.tsx",
@@ -1726,6 +2710,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-dropdown",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["avatar", "button", "dropdown-menu", "item"],
     files: [
       {
@@ -1737,6 +2722,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-group",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["avatar", "button", "item"],
     files: [
       {
@@ -1759,7 +2745,8 @@ export const examples: Registry["items"] = [
   {
     name: "item-icon",
     type: "registry:example",
-    registryDependencies: ["item", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "item"],
     files: [
       {
         path: "examples/item-icon.tsx",
@@ -1781,6 +2768,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-link",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["item"],
     files: [
       {
@@ -1792,7 +2780,6 @@ export const examples: Registry["items"] = [
   {
     name: "item-rtl",
     type: "registry:example",
-    registryDependencies: ["button", "item", "rtl"],
     files: [
       {
         path: "examples/item-rtl.tsx",
@@ -1803,6 +2790,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-size",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["item"],
     files: [
       {
@@ -1814,6 +2802,7 @@ export const examples: Registry["items"] = [
   {
     name: "item-variant",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["item"],
     files: [
       {
@@ -1825,7 +2814,7 @@ export const examples: Registry["items"] = [
   {
     name: "kbd-button",
     type: "registry:example",
-    registryDependencies: ["kbd", "button"],
+    registryDependencies: ["button", "kbd"],
     files: [
       {
         path: "examples/kbd-button.tsx",
@@ -1858,7 +2847,8 @@ export const examples: Registry["items"] = [
   {
     name: "kbd-input-group",
     type: "registry:example",
-    registryDependencies: ["kbd", "input-group"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group", "kbd"],
     files: [
       {
         path: "examples/kbd-input-group.tsx",
@@ -1869,7 +2859,6 @@ export const examples: Registry["items"] = [
   {
     name: "kbd-rtl",
     type: "registry:example",
-    registryDependencies: ["kbd", "rtl"],
     files: [
       {
         path: "examples/kbd-rtl.tsx",
@@ -1880,7 +2869,7 @@ export const examples: Registry["items"] = [
   {
     name: "kbd-tooltip",
     type: "registry:example",
-    registryDependencies: ["kbd", "button", "button-group", "tooltip"],
+    registryDependencies: ["button", "button-group", "kbd", "tooltip"],
     files: [
       {
         path: "examples/kbd-tooltip.tsx",
@@ -1891,7 +2880,7 @@ export const examples: Registry["items"] = [
   {
     name: "label-demo",
     type: "registry:example",
-    registryDependencies: ["label", "checkbox"],
+    registryDependencies: ["checkbox", "label"],
     files: [
       {
         path: "examples/label-demo.tsx",
@@ -1959,6 +2948,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "marker-shimmer",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [
+      {
+        path: "examples/marker-shimmer.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "marker-status",
     type: "registry:example",
     registryDependencies: ["marker", "spinner"],
@@ -2005,6 +3005,7 @@ export const examples: Registry["items"] = [
   {
     name: "menubar-icons",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["menubar"],
     files: [
       {
@@ -2027,7 +3028,6 @@ export const examples: Registry["items"] = [
   {
     name: "menubar-rtl",
     type: "registry:example",
-    registryDependencies: ["menubar", "rtl"],
     files: [
       {
         path: "examples/menubar-rtl.tsx",
@@ -2050,7 +3050,7 @@ export const examples: Registry["items"] = [
     name: "message-actions",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["message", "button", "bubble"],
+    registryDependencies: ["bubble", "button", "message"],
     files: [
       {
         path: "examples/message-actions.tsx",
@@ -2062,7 +3062,7 @@ export const examples: Registry["items"] = [
     name: "message-attachment",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["message", "attachment", "bubble"],
+    registryDependencies: ["attachment", "bubble", "message"],
     files: [
       {
         path: "examples/message-attachment.tsx",
@@ -2073,7 +3073,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-avatar",
     type: "registry:example",
-    registryDependencies: ["message", "avatar", "bubble"],
+    registryDependencies: ["avatar", "bubble", "message"],
     files: [
       {
         path: "examples/message-avatar.tsx",
@@ -2084,7 +3084,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-demo",
     type: "registry:example",
-    registryDependencies: ["message", "avatar", "bubble", "marker"],
+    registryDependencies: ["avatar", "bubble", "marker", "message"],
     files: [
       {
         path: "examples/message-demo.tsx",
@@ -2095,7 +3095,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-group",
     type: "registry:example",
-    registryDependencies: ["message", "avatar", "bubble"],
+    registryDependencies: ["avatar", "bubble", "message"],
     files: [
       {
         path: "examples/message-group.tsx",
@@ -2106,7 +3106,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-header-footer",
     type: "registry:example",
-    registryDependencies: ["message", "bubble"],
+    registryDependencies: ["bubble", "message"],
     files: [
       {
         path: "examples/message-header-footer.tsx",
@@ -2118,7 +3118,14 @@ export const examples: Registry["items"] = [
     name: "message-scroller-anchoring",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["message-scoller", "button", "card", "empty", "toggle-group"],
+    registryDependencies: [
+      "button",
+      "card",
+      "empty",
+      "message-scroller",
+      "message-scroller-utils",
+      "toggle-group"
+    ],
     files: [
       {
         path: "examples/message-scroller-anchoring.tsx",
@@ -2130,7 +3137,14 @@ export const examples: Registry["items"] = [
     name: "message-scroller-animation",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["message-scroller", "button", "card", "empty", "select"],
+    registryDependencies: [
+      "button",
+      "card",
+      "empty",
+      "message-scroller",
+      "message-scroller-utils",
+      "select"
+    ],
     files: [
       {
         path: "examples/message-scroller-animation.tsx",
@@ -2141,14 +3155,14 @@ export const examples: Registry["items"] = [
   {
     name: "message-scroller-commands",
     type: "registry:example",
-    dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scroller",
       "bubble",
       "button",
       "card",
       "dropdown-menu",
-      "message"
+      "message",
+      "message-scroller",
+      "message-scroller-utils"
     ],
     files: [
       {
@@ -2162,12 +3176,13 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scoller",
       "button",
       "card",
       "dropdown-menu",
       "empty",
       "input-group",
+      "message-scroller",
+      "message-scroller-utils",
       "tooltip"
     ],
     files: [
@@ -2182,12 +3197,13 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scroller",
       "bubble",
       "button",
       "card",
       "marker",
       "message",
+      "message-scroller",
+      "message-scroller-utils",
       "tooltip"
     ],
     files: [
@@ -2202,12 +3218,13 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scroller",
       "bubble",
       "button",
       "card",
       "marker",
       "message",
+      "message-scroller",
+      "message-scroller-utils",
       "tooltip"
     ],
     files: [
@@ -2220,8 +3237,14 @@ export const examples: Registry["items"] = [
   {
     name: "message-scroller-opening-position",
     type: "registry:example",
-    dependencies: ["lucide-solid"],
-    registryDependencies: ["message-scroller", "bubble", "card", "message", "tabs"],
+    registryDependencies: [
+      "bubble",
+      "card",
+      "message",
+      "message-scroller",
+      "message-scroller-utils",
+      "tabs"
+    ],
     files: [
       {
         path: "examples/message-scroller-opening-position.tsx",
@@ -2234,11 +3257,12 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scroller",
       "button",
       "card",
       "dropdown-menu",
       "input-group",
+      "message-scroller",
+      "message-scroller-utils",
       "slider",
       "tooltip"
     ],
@@ -2252,8 +3276,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-scroller-scrollable",
     type: "registry:example",
-    dependencies: ["lucide-solid"],
-    registryDependencies: ["message-scroller", "card"],
+    registryDependencies: ["card", "message-scroller", "message-scroller-utils"],
     files: [
       {
         path: "examples/message-scroller-scrollable.tsx",
@@ -2266,12 +3289,13 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "message-scroller",
       "button",
       "card",
       "dropdown-menu",
       "empty",
       "input-group",
+      "message-scroller",
+      "message-scroller-utils",
       "tooltip"
     ],
     files: [
@@ -2282,10 +3306,27 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "message-scroller-utils",
+    type: "registry:example",
+    registryDependencies: ["bubble", "message", "message-scroller"],
+    files: [
+      {
+        path: "examples/message-scroller-utils.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "message-scroller-visibility",
     type: "registry:example",
-    dependencies: ["lucide-solid"],
-    registryDependencies: ["message-scroller", "bubble", "card", "hover-card", "message"],
+    registryDependencies: [
+      "bubble",
+      "card",
+      "hover-card",
+      "message",
+      "message-scroller",
+      "message-scroller-utils"
+    ],
     files: [
       {
         path: "examples/message-scroller-visibility.tsx",
@@ -2311,6 +3352,17 @@ export const examples: Registry["items"] = [
     files: [
       {
         path: "examples/native-select-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "native-select-field",
+    type: "registry:example",
+    registryDependencies: ["field", "native-select"],
+    files: [
+      {
+        path: "examples/native-select-field.tsx",
         type: "registry:example"
       }
     ]
@@ -2349,8 +3401,20 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "native-select-sizes",
+    type: "registry:example",
+    registryDependencies: ["native-select"],
+    files: [
+      {
+        path: "examples/native-select-sizes.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "navigation-menu-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["navigation-menu"],
     files: [
       {
@@ -2362,7 +3426,6 @@ export const examples: Registry["items"] = [
   {
     name: "navigation-menu-rtl",
     type: "registry:example",
-    registryDependencies: ["navigation-menu", "rtl"],
     files: [
       {
         path: "examples/navigation-menu-rtl.tsx",
@@ -2384,7 +3447,7 @@ export const examples: Registry["items"] = [
   {
     name: "pagination-icons-only",
     type: "registry:example",
-    registryDependencies: ["pagination", "field", "select"],
+    registryDependencies: ["field", "pagination", "select"],
     files: [
       {
         path: "examples/pagination-icons-only.tsx",
@@ -2395,7 +3458,6 @@ export const examples: Registry["items"] = [
   {
     name: "pagination-rtl",
     type: "registry:example",
-    registryDependencies: ["pagination", "rtl"],
     files: [
       {
         path: "examples/pagination-rtl.tsx",
@@ -2417,7 +3479,7 @@ export const examples: Registry["items"] = [
   {
     name: "popover-basic",
     type: "registry:example",
-    registryDependencies: ["popover", "button"],
+    registryDependencies: ["button", "popover"],
     files: [
       {
         path: "examples/popover-basic.tsx",
@@ -2428,7 +3490,7 @@ export const examples: Registry["items"] = [
   {
     name: "popover-demo",
     type: "registry:example",
-    registryDependencies: ["popover", "button", "input", "label"],
+    registryDependencies: ["button", "input", "label", "popover"],
     files: [
       {
         path: "examples/popover-demo.tsx",
@@ -2439,7 +3501,7 @@ export const examples: Registry["items"] = [
   {
     name: "popover-form",
     type: "registry:example",
-    registryDependencies: ["popover", "button", "input", "field"],
+    registryDependencies: ["button", "field", "input", "popover"],
     files: [
       {
         path: "examples/popover-form.tsx",
@@ -2450,7 +3512,7 @@ export const examples: Registry["items"] = [
   {
     name: "popover-placement",
     type: "registry:example",
-    registryDependencies: ["popover", "button"],
+    registryDependencies: ["button", "popover"],
     files: [
       {
         path: "examples/popover-placement.tsx",
@@ -2461,7 +3523,6 @@ export const examples: Registry["items"] = [
   {
     name: "popover-rtl",
     type: "registry:example",
-    registryDependencies: ["popover", "button", "rtl"],
     files: [
       {
         path: "examples/popover-rtl.tsx",
@@ -2492,6 +3553,17 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "progress-indeterminate",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "examples/progress-indeterminate.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "progress-label",
     type: "registry:example",
     registryDependencies: ["progress"],
@@ -2503,9 +3575,19 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "progress-range",
+    type: "registry:example",
+    registryDependencies: ["progress"],
+    files: [
+      {
+        path: "examples/progress-range.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "progress-rtl",
     type: "registry:example",
-    registryDependencies: ["progress", "rtl"],
     files: [
       {
         path: "examples/progress-rtl.tsx",
@@ -2517,7 +3599,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-animated",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-animated.tsx",
@@ -2529,7 +3611,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-card",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "card"],
+    registryDependencies: ["card", "questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-card.tsx",
@@ -2541,7 +3623,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-conditional",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-conditional.tsx",
@@ -2553,7 +3635,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-controlled",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-controlled.tsx",
@@ -2565,7 +3647,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-demo",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-demo.tsx",
@@ -2577,7 +3659,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-dialog",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "button", "dialog"],
+    registryDependencies: ["button", "dialog", "questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-dialog.tsx",
@@ -2589,7 +3671,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-freeform",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-freeform.tsx",
@@ -2601,7 +3683,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-multiple",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-multiple.tsx",
@@ -2613,7 +3695,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-navigation-state",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast", "use-questionnaire"],
     files: [
       {
         path: "examples/questionnaire-navigation-state.tsx",
@@ -2625,7 +3707,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-progress",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-progress.tsx",
@@ -2637,7 +3719,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-resume",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "button"],
+    registryDependencies: ["button", "questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-resume.tsx",
@@ -2649,7 +3731,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-shortcuts",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "native-select"],
+    registryDependencies: ["native-select", "questionnaire", "toast", "use-questionnaire"],
     files: [
       {
         path: "examples/questionnaire-shortcuts.tsx",
@@ -2661,7 +3743,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-skip",
     type: "registry:example",
     dependencies: ["solid-sonner"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast"],
+    registryDependencies: ["questionnaire", "toast", "use-questionnaire"],
     files: [
       {
         path: "examples/questionnaire-skip.tsx",
@@ -2673,7 +3755,7 @@ export const examples: Registry["items"] = [
     name: "questionnaire-validation",
     type: "registry:example",
     dependencies: ["solid-sonner", "zod"],
-    registryDependencies: ["use-questionnaire", "questionnaire", "toast", "card"],
+    registryDependencies: ["card", "questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-validation.tsx",
@@ -2684,7 +3766,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-choice-card",
     type: "registry:example",
-    registryDependencies: ["radio-group", "field"],
+    registryDependencies: ["field", "radio-group"],
     files: [
       {
         path: "examples/radio-group-choice-card.tsx",
@@ -2695,7 +3777,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-demo",
     type: "registry:example",
-    registryDependencies: ["radio-group", "label"],
+    registryDependencies: ["label", "radio-group"],
     files: [
       {
         path: "examples/radio-group-demo.tsx",
@@ -2706,7 +3788,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-description",
     type: "registry:example",
-    registryDependencies: ["radio-group", "field"],
+    registryDependencies: ["field", "radio-group"],
     files: [
       {
         path: "examples/radio-group-description.tsx",
@@ -2717,7 +3799,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-disabled",
     type: "registry:example",
-    registryDependencies: ["radio-group", "field"],
+    registryDependencies: ["field", "radio-group"],
     files: [
       {
         path: "examples/radio-group-disabled.tsx",
@@ -2728,7 +3810,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-fieldset",
     type: "registry:example",
-    registryDependencies: ["radio-group", "field"],
+    registryDependencies: ["field", "radio-group"],
     files: [
       {
         path: "examples/radio-group-fieldset.tsx",
@@ -2739,7 +3821,7 @@ export const examples: Registry["items"] = [
   {
     name: "radio-group-invalid",
     type: "registry:example",
-    registryDependencies: ["radio-group", "field"],
+    registryDependencies: ["field", "radio-group"],
     files: [
       {
         path: "examples/radio-group-invalid.tsx",
@@ -2772,7 +3854,6 @@ export const examples: Registry["items"] = [
   {
     name: "resizable-rtl",
     type: "registry:example",
-    registryDependencies: ["resizable", "rtl"],
     files: [
       {
         path: "examples/resizable-rtl.tsx",
@@ -2816,7 +3897,6 @@ export const examples: Registry["items"] = [
   {
     name: "scroll-area-rtl",
     type: "registry:example",
-    registryDependencies: ["scroll-area", "separator", "rtl"],
     files: [
       {
         path: "examples/scroll-area-rtl.tsx",
@@ -2860,7 +3940,7 @@ export const examples: Registry["items"] = [
   {
     name: "select-invalid",
     type: "registry:example",
-    registryDependencies: ["select", "field"],
+    registryDependencies: ["field", "select"],
     files: [
       {
         path: "examples/select-invalid.tsx",
@@ -2915,7 +3995,6 @@ export const examples: Registry["items"] = [
   {
     name: "separator-rtl",
     type: "registry:example",
-    registryDependencies: ["separator", "rtl"],
     files: [
       {
         path: "examples/separator-rtl.tsx",
@@ -2937,7 +4016,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-demo",
     type: "registry:example",
-    registryDependencies: ["sheet", "button", "input", "label"],
+    registryDependencies: ["button", "input", "label", "sheet"],
     files: [
       {
         path: "examples/sheet-demo.tsx",
@@ -2948,7 +4027,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-no-close-button",
     type: "registry:example",
-    registryDependencies: ["sheet", "button"],
+    registryDependencies: ["button", "sheet"],
     files: [
       {
         path: "examples/sheet-no-close-button.tsx",
@@ -2959,7 +4038,6 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-rtl",
     type: "registry:example",
-    registryDependencies: ["sheet", "button", "field", "input", "rtl"],
     files: [
       {
         path: "examples/sheet-rtl.tsx",
@@ -2970,7 +4048,7 @@ export const examples: Registry["items"] = [
   {
     name: "sheet-side",
     type: "registry:example",
-    registryDependencies: ["sheet", "button"],
+    registryDependencies: ["button", "sheet"],
     files: [
       {
         path: "examples/sheet-side.tsx",
@@ -2982,7 +4060,7 @@ export const examples: Registry["items"] = [
     name: "sidebar-demo",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["sidebar", "breadcrumb", "dropdown-menu", "label", "separator"],
+    registryDependencies: ["avatar", "collapsible", "dropdown-menu", "sidebar"],
     files: [
       {
         path: "examples/sidebar-demo.tsx",
@@ -2994,7 +4072,7 @@ export const examples: Registry["items"] = [
     name: "sidebar-floating",
     type: "registry:example",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["sidebar", "breadcrumb", "separator"],
+    registryDependencies: ["breadcrumb", "separator", "sidebar"],
     files: [
       {
         path: "examples/sidebar-floating.tsx",
@@ -3007,13 +4085,13 @@ export const examples: Registry["items"] = [
     type: "registry:example",
     dependencies: ["lucide-solid"],
     registryDependencies: [
-      "sidebar",
       "avatar",
       "breadcrumb",
       "collapsible",
       "dropdown-menu",
       "kbd",
-      "separator"
+      "separator",
+      "sidebar"
     ],
     files: [
       {
@@ -3025,10 +4103,32 @@ export const examples: Registry["items"] = [
   {
     name: "sidebar-inset",
     type: "registry:example",
-    registryDependencies: ["sidebar", "breadcrumb"],
+    registryDependencies: ["breadcrumb", "sidebar"],
     files: [
       {
         path: "examples/sidebar-inset.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "skeleton-avatar",
+    type: "registry:example",
+    registryDependencies: ["skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-avatar.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "skeleton-card",
+    type: "registry:example",
+    registryDependencies: ["card", "skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-card.tsx",
         type: "registry:example"
       }
     ]
@@ -3045,6 +4145,50 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "skeleton-form",
+    type: "registry:example",
+    registryDependencies: ["skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-form.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "skeleton-table",
+    type: "registry:example",
+    registryDependencies: ["skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-table.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "skeleton-text",
+    type: "registry:example",
+    registryDependencies: ["skeleton"],
+    files: [
+      {
+        path: "examples/skeleton-text.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "slider-controlled",
+    type: "registry:example",
+    registryDependencies: ["label", "slider"],
+    files: [
+      {
+        path: "examples/slider-controlled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "slider-demo",
     type: "registry:example",
     registryDependencies: ["slider"],
@@ -3056,9 +4200,53 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "slider-disabled",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [
+      {
+        path: "examples/slider-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "slider-multiple",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [
+      {
+        path: "examples/slider-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "slider-range",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [
+      {
+        path: "examples/slider-range.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "slider-vertical",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [
+      {
+        path: "examples/slider-vertical.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "spinner-badge",
     type: "registry:example",
-    registryDependencies: ["spinner", "badge"],
+    registryDependencies: ["badge", "spinner"],
     files: [
       {
         path: "examples/spinner-badge.tsx",
@@ -3069,7 +4257,7 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-button",
     type: "registry:example",
-    registryDependencies: ["spinner", "button"],
+    registryDependencies: ["button", "spinner"],
     files: [
       {
         path: "examples/spinner-button.tsx",
@@ -3080,7 +4268,8 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-custom",
     type: "registry:example",
-    registryDependencies: ["spinner"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["utils"],
     files: [
       {
         path: "examples/spinner-custom.tsx",
@@ -3091,7 +4280,7 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-demo",
     type: "registry:example",
-    registryDependencies: ["spinner", "item"],
+    registryDependencies: ["item", "spinner"],
     files: [
       {
         path: "examples/spinner-demo.tsx",
@@ -3102,7 +4291,7 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-empty",
     type: "registry:example",
-    registryDependencies: ["spinner", "button", "empty"],
+    registryDependencies: ["button", "empty", "spinner"],
     files: [
       {
         path: "examples/spinner-empty.tsx",
@@ -3113,7 +4302,8 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-input-group",
     type: "registry:example",
-    registryDependencies: ["spinner", "input-group"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["input-group", "spinner"],
     files: [
       {
         path: "examples/spinner-input-group.tsx",
@@ -3124,7 +4314,6 @@ export const examples: Registry["items"] = [
   {
     name: "spinner-rtl",
     type: "registry:example",
-    registryDependencies: ["spinner", "item", "rtl"],
     files: [
       {
         path: "examples/spinner-rtl.tsx",
@@ -3144,9 +4333,20 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "switch-choice-card",
+    type: "registry:example",
+    registryDependencies: ["field", "switch"],
+    files: [
+      {
+        path: "examples/switch-choice-card.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "switch-demo",
     type: "registry:example",
-    registryDependencies: ["switch", "label"],
+    registryDependencies: ["label", "switch"],
     files: [
       {
         path: "examples/switch-demo.tsx",
@@ -3155,9 +4355,54 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "switch-description",
+    type: "registry:example",
+    registryDependencies: ["field", "switch"],
+    files: [
+      {
+        path: "examples/switch-description.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "switch-disabled",
+    type: "registry:example",
+    registryDependencies: ["field", "switch"],
+    files: [
+      {
+        path: "examples/switch-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "switch-invalid",
+    type: "registry:example",
+    registryDependencies: ["field", "switch"],
+    files: [
+      {
+        path: "examples/switch-invalid.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "switch-sizes",
+    type: "registry:example",
+    registryDependencies: ["field", "switch"],
+    files: [
+      {
+        path: "examples/switch-sizes.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "table-actions",
     type: "registry:example",
-    registryDependencies: ["table", "dropdown-menu", "button"],
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "dropdown-menu", "table"],
     files: [
       {
         path: "examples/table-actions.tsx",
@@ -3190,7 +4435,6 @@ export const examples: Registry["items"] = [
   {
     name: "table-rtl",
     type: "registry:example",
-    registryDependencies: ["table", "rtl"],
     files: [
       {
         path: "examples/table-rtl.tsx",
@@ -3201,7 +4445,7 @@ export const examples: Registry["items"] = [
   {
     name: "tabs-demo",
     type: "registry:example",
-    registryDependencies: ["tabs", "card"],
+    registryDependencies: ["card", "tabs"],
     files: [
       {
         path: "examples/tabs-demo.tsx",
@@ -3223,6 +4467,7 @@ export const examples: Registry["items"] = [
   {
     name: "tabs-icons",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["tabs"],
     files: [
       {
@@ -3245,7 +4490,6 @@ export const examples: Registry["items"] = [
   {
     name: "tabs-rtl",
     type: "registry:example",
-    registryDependencies: ["tabs", "card", "rtl"],
     files: [
       {
         path: "examples/tabs-rtl.tsx",
@@ -3267,7 +4511,7 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-button",
     type: "registry:example",
-    registryDependencies: ["textarea", "button"],
+    registryDependencies: ["button", "textarea"],
     files: [
       {
         path: "examples/textarea-button.tsx",
@@ -3289,7 +4533,7 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-disabled",
     type: "registry:example",
-    registryDependencies: ["textarea", "field"],
+    registryDependencies: ["field", "textarea"],
     files: [
       {
         path: "examples/textarea-disabled.tsx",
@@ -3300,7 +4544,7 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-field",
     type: "registry:example",
-    registryDependencies: ["textarea", "field"],
+    registryDependencies: ["field", "textarea"],
     files: [
       {
         path: "examples/textarea-field.tsx",
@@ -3311,7 +4555,7 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-invalid",
     type: "registry:example",
-    registryDependencies: ["textarea", "field"],
+    registryDependencies: ["field", "textarea"],
     files: [
       {
         path: "examples/textarea-invalid.tsx",
@@ -3322,7 +4566,6 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-rtl",
     type: "registry:example",
-    registryDependencies: ["textarea", "field", "rtl"],
     files: [
       {
         path: "examples/textarea-rtl.tsx",
@@ -3369,6 +4612,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle"],
     files: [
       {
@@ -3389,12 +4633,12 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "toggle-group-custom",
+    name: "toggle-group-font-weight-selector",
     type: "registry:example",
-    registryDependencies: ["toggle-group", "field"],
+    registryDependencies: ["field", "toggle-group"],
     files: [
       {
-        path: "examples/toggle-group-custom.tsx",
+        path: "examples/toggle-group-font-weight-selector.tsx",
         type: "registry:example"
       }
     ]
@@ -3402,6 +4646,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-group-demo",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle-group"],
     files: [
       {
@@ -3413,6 +4658,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-group-disabled",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle-group"],
     files: [
       {
@@ -3435,7 +4681,6 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-group-rtl",
     type: "registry:example",
-    registryDependencies: ["toggle-group", "rtl"],
     files: [
       {
         path: "examples/toggle-group-rtl.tsx",
@@ -3468,6 +4713,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-group-vertical",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle-group"],
     files: [
       {
@@ -3479,6 +4725,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-outline",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle"],
     files: [
       {
@@ -3490,7 +4737,6 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-rtl",
     type: "registry:example",
-    registryDependencies: ["toggle", "rtl"],
     files: [
       {
         path: "examples/toggle-rtl.tsx",
@@ -3512,6 +4758,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-with-text",
     type: "registry:example",
+    dependencies: ["lucide-solid"],
     registryDependencies: ["toggle"],
     files: [
       {
@@ -3523,7 +4770,7 @@ export const examples: Registry["items"] = [
   {
     name: "tooltip-demo",
     type: "registry:example",
-    registryDependencies: ["tooltip"],
+    registryDependencies: ["button", "tooltip"],
     files: [
       {
         path: "examples/tooltip-demo.tsx",
@@ -3534,7 +4781,7 @@ export const examples: Registry["items"] = [
   {
     name: "tooltip-disabled",
     type: "registry:example",
-    registryDependencies: ["tooltip", "button"],
+    registryDependencies: ["button", "tooltip"],
     files: [
       {
         path: "examples/tooltip-disabled.tsx",
@@ -3543,9 +4790,21 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "tooltip-keyboard",
+    type: "registry:example",
+    dependencies: ["lucide-solid"],
+    registryDependencies: ["button", "kbd", "tooltip"],
+    files: [
+      {
+        path: "examples/tooltip-keyboard.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "tooltip-placement",
     type: "registry:example",
-    registryDependencies: ["tooltip", "button"],
+    registryDependencies: ["button", "tooltip"],
     files: [
       {
         path: "examples/tooltip-placement.tsx",
@@ -3556,7 +4815,6 @@ export const examples: Registry["items"] = [
   {
     name: "tooltip-rtl",
     type: "registry:example",
-    registryDependencies: ["tooltip", "button", "rtl"],
     files: [
       {
         path: "examples/tooltip-rtl.tsx",

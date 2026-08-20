@@ -3,6 +3,8 @@ title: Combobox
 description: Autocomplete input with a list of suggestions.
 ---
 
+The Combobox component is built on top of [Kobalte Combobox](https://kobalte.dev/docs/core/components/combobox), which provides the accessible autocomplete primitive and keyboard navigation.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -83,181 +85,183 @@ export default function ComboboxBasic() {
 }
 ```
 
+## Usage
+
+```tsx showLineNumbers
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+} from "~/components/ui/combobox";
+
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
+```
+
+```tsx showLineNumbers
+<Combobox
+  options={frameworks}
+  placeholder="Select a framework..."
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
+  )}
+>
+  <ComboboxInput placeholder="Select a framework..." />
+  <ComboboxContent>
+    <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
+  </ComboboxContent>
+</Combobox>
+```
+
+See the [Kobalte Combobox documentation](https://kobalte.dev/docs/core/components/combobox) for primitive-level options, accessibility, and keyboard behavior.
+
+## Composition
+
+### Simple
+
+A single-line input and a flat list rendered from `options` via `itemComponent` (see [Basic](#basic)).
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    └── ComboboxEmpty
+```
+
+### With Groups
+
+Group `options` with `optionGroupChildren`, and render a section heading (and an optional separator) from `sectionComponent` (see [Groups](#groups)).
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    └── ComboboxEmpty
+
+sectionComponent renders, per group:
+├── ComboboxSeparator (optional, skipped for the first group)
+└── ComboboxSection
+    └── ComboboxSectionLabel
+```
+
+## Custom Items
+
+Use `optionValue` and `optionTextValue` when your options are objects.
+
+```tsx showLineNumbers
+type Framework = {
+  label: string;
+  value: string;
+};
+
+const frameworks: Framework[] = [
+  { label: "Next.js", value: "next" },
+  { label: "SvelteKit", value: "sveltekit" },
+  { label: "Nuxt", value: "nuxt" },
+];
+
+<Combobox
+  options={frameworks}
+  optionValue="value"
+  optionTextValue="label"
+  placeholder="Select a framework..."
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+  )}
+>
+  <ComboboxInput placeholder="Select a framework..." />
+  <ComboboxContent>
+    <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
+  </ComboboxContent>
+</Combobox>;
+```
+
+## Multiple Selection
+
+Use `multiple` (with a `T[]` `value`/`defaultValue`) for multi-select behavior. The input text reflects the selection the same way single-select does.
+
+```tsx showLineNumbers
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+} from "~/components/ui/combobox";
+
+<Combobox
+  options={frameworks}
+  placeholder="Select frameworks..."
+  multiple
+  defaultValue={[frameworks[0]]}
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
+  )}
+>
+  <ComboboxInput placeholder="Select frameworks..." />
+  <ComboboxContent>
+    <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
+  </ComboboxContent>
+</Combobox>;
+```
+
 ## Examples
 
 ### Basic
 
 A simple combobox with a list of frameworks.
 
-::::tab-group[example1]
-:::tab[Preview]
-
-<ComponentPreview name="combobox-demo" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-demo" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="combobox-basic" />
 
 ### Multiple
 
-A combobox with multiple selection using `multiple` prop on the `Combobox` and `ComboboxInput`.
-
-::::tab-group[example2]
-:::tab[Preview]
+A combobox with multiple selection using `multiple`.
 
 <ComponentPreview name="combobox-multiple" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-multiple" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Clear Button
 
 Use the `showClear` prop to show a clear button.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="combobox-clear" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-clear" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Groups
 
-Use `ComboboxGroup` to group items.
-
-::::tab-group[example4]
-:::tab[Preview]
+Use `optionGroupChildren` with a `sectionComponent` rendering `ComboboxSection`, `ComboboxSectionLabel`, and `ComboboxSeparator` to group items.
 
 <ComponentPreview name="combobox-groups" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-groups" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Groups with Separator
-
-Use `ComboboxSeparator` to separate grouped items.
-
-::::tab-group[example4]
-:::tab[Preview]
-
-<ComponentPreview name="combobox-groups-separator" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-groups-separator" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Custom Items
 
-You can render a custom component inside `ComboboxItem`.
-
-::::tab-group[example5]
-:::tab[Preview]
+You can render a custom component inside `ComboboxItem` via `itemComponent`.
 
 <ComponentPreview name="combobox-custom" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-custom" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Invalid
 
-Use the `aria-invalid` prop to make the combobox invalid.
-
-::::tab-group[example6]
-:::tab[Preview]
+Use the `validationState="invalid"` prop to make the combobox invalid.
 
 <ComponentPreview name="combobox-invalid" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-invalid" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Disabled
 
 Use the `disabled` prop to disable the combobox.
 
-::::tab-group[example7]
-:::tab[Preview]
-
 <ComponentPreview name="combobox-disabled" />
 
-:::
-:::tab[Code]
+### Popup
 
-```file="~/registry/examples/combobox-disabled" frame=none showLineNumbers
+Use `ComboboxTrigger` to open a combobox from a button instead of a text input.
 
-```
+<ComponentPreview name="combobox-popup" />
 
-:::
-::::
+### Input Group
 
-### Dialog
+Add an addon to the combobox by placing `InputGroupAddon` inside `ComboboxInput`.
 
-::::tab-group[example9]
-:::tab[Preview]
-
-<ComponentPreview name="combobox-dialog" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/combobox-dialog" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-TODO: add RTL support
+<ComponentPreview name="combobox-input-group" />
 
 ## API Reference
 
-See the [Kobalte UI Combobox](https://kobalte.dev/docs/core/components/combobox) documentation for more information.
+See the [Kobalte Combobox API reference](https://kobalte.dev/docs/core/components/combobox#api-reference) for primitive props, keyboard behavior, and accessibility details.

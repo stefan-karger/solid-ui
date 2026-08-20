@@ -6,20 +6,21 @@ import {
   type ParentProps,
   Show,
   Suspense,
-  splitProps,
-} from "solid-js";
-import { Dynamic } from "solid-js/web";
-import { cn } from "~/lib/utils";
-import { getDocsExample } from "~/lib/docs-examples";
-import { Button } from "~/registry/ui/button";
-import { Tabs } from "~/registry/ui/tabs";
+  splitProps
+} from "solid-js"
+import { Dynamic } from "solid-js/web"
+
+import { getDocsExample } from "~/lib/docs-examples"
+import { cn } from "~/lib/utils"
+import { Button } from "~/registry/ui/button"
+import { Tabs } from "~/registry/ui/tabs"
 
 type ComponentPreviewProps = ParentProps<{
-  name: string;
-  align?: "center" | "start" | "end";
-  class?: string;
-  previewClass?: string;
-  hideCode?: boolean;
+  name: string
+  align?: "center" | "start" | "end"
+  class?: string
+  previewClass?: string
+  hideCode?: boolean
   /**
    * Contain full-app demos (e.g. sidebar) whose components use
    * `position: fixed` inside the preview frame. `contain-layout` turns the
@@ -27,8 +28,8 @@ type ComponentPreviewProps = ParentProps<{
    * escaping to the page viewport, and the data-slot overrides size the
    * sidebar primitives to the frame instead of the viewport.
    */
-  contained?: boolean;
-}>;
+  contained?: boolean
+}>
 
 export function ComponentPreview(props: ComponentPreviewProps) {
   const [local, others] = splitProps(props, [
@@ -38,42 +39,42 @@ export function ComponentPreview(props: ComponentPreviewProps) {
     "previewClass",
     "hideCode",
     "contained",
-    "children",
-  ]);
-  const [expanded, setExpanded] = createSignal(false);
-  const source = children(() => local.children);
-  const example = createMemo(() => getDocsExample(local.name));
+    "children"
+  ])
+  const [expanded, setExpanded] = createSignal(false)
+  const source = children(() => local.children)
+  const example = createMemo(() => getDocsExample(local.name))
 
   return (
     <div
-      data-slot="component-preview"
-      data-not-typeset
       class={cn(
         "group relative mt-4 mb-12 flex flex-col overflow-hidden rounded-2xl border",
-        local.class,
+        local.class
       )}
+      data-not-typeset
+      data-slot="component-preview"
       {...others}
     >
       <div
-        data-slot="preview"
-        data-align={local.align ?? "center"}
         class={cn(
-          "preview relative flex min-h-72 w-full justify-center p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start",
+          "preview relative flex min-h-72 w-full justify-center p-10 data-[align=start]:items-start data-[align=end]:items-end data-[align=center]:items-center",
           local.contained && [
             "overflow-hidden contain-layout",
             "[&_[data-slot=sidebar-container]]:h-full",
-            "[&_[data-slot=sidebar-wrapper]]:h-full [&_[data-slot=sidebar-wrapper]]:min-h-0",
+            "[&_[data-slot=sidebar-wrapper]]:h-full [&_[data-slot=sidebar-wrapper]]:min-h-0"
           ],
-          local.previewClass,
+          local.previewClass
         )}
+        data-align={local.align ?? "center"}
+        data-slot="preview"
       >
         <Show
-          when={example()}
           fallback={
             <p class="text-muted-foreground text-sm">
               Preview <code>{local.name}</code> was not found.
             </p>
           }
+          when={example()}
         >
           {(Example) => (
             <Suspense>
@@ -85,16 +86,14 @@ export function ComponentPreview(props: ComponentPreviewProps) {
 
       <Show when={!local.hideCode}>
         <div
-          data-slot="component-preview-source"
-          data-expanded={expanded()}
           class="relative overflow-hidden border-t bg-neutral-100 dark:bg-zinc-900 [&_.expressive-code]:mx-0 [&_.expressive-code]:mt-0 [&_.expressive-code_.frame_pre]:rounded-none"
+          data-expanded={expanded()}
+          data-slot="component-preview-source"
         >
           <div
             class={cn(
               "relative",
-              expanded()
-                ? "max-h-72 overflow-auto"
-                : "max-h-[108px] overflow-hidden",
+              expanded() ? "max-h-72 overflow-auto" : "max-h-[108px] overflow-hidden"
             )}
           >
             {source()}
@@ -105,11 +104,11 @@ export function ComponentPreview(props: ComponentPreviewProps) {
           <Show when={!expanded()}>
             <div class="absolute inset-0 flex items-center justify-center pb-4">
               <Button
-                type="button"
-                size="sm"
-                variant="outline"
                 class="relative z-10 rounded-lg bg-background shadow-none"
                 onClick={() => setExpanded(true)}
+                size="sm"
+                type="button"
+                variant="outline"
               >
                 View Code
               </Button>
@@ -118,34 +117,34 @@ export function ComponentPreview(props: ComponentPreviewProps) {
         </div>
       </Show>
     </div>
-  );
+  )
 }
 
 export function ComponentSource(props: ParentProps<{ class?: string }>) {
-  const [local, others] = splitProps(props, ["class", "children"]);
+  const [local, others] = splitProps(props, ["class", "children"])
   return (
     <div
-      data-slot="component-source"
-      data-not-typeset
       class={cn("relative mt-6 [&_.expressive-code]:mt-0", local.class)}
+      data-not-typeset
+      data-slot="component-source"
       {...others}
     >
       {local.children}
     </div>
-  );
+  )
 }
 
 export function CodeTabs(props: ComponentProps<typeof Tabs>) {
-  const [local, others] = splitProps(props, ["class"]);
+  const [local, others] = splitProps(props, ["class"])
   return (
     <Tabs
+      class={cn(
+        "relative mt-6 w-full gap-2 [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:rounded-none [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:px-0 [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:py-1 [&>[data-slot=tabs-list]]:gap-6 [&>[data-slot=tabs-list]]:p-0",
+        local.class
+      )}
       data-not-typeset
       defaultValue="cli"
-      class={cn(
-        "relative mt-6 w-full gap-2 [&>[data-slot=tabs-list]]:gap-6 [&>[data-slot=tabs-list]]:p-0 [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:rounded-none [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:px-0 [&>[data-slot=tabs-list]>[data-slot=tabs-trigger]]:py-1",
-        local.class,
-      )}
       {...others}
     />
-  );
+  )
 }

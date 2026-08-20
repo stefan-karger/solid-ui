@@ -1,5 +1,9 @@
-import { createSignal } from "solid-js";
-import { toast } from "solid-sonner";
+import { createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+
+import type { QuestionnaireShortcutMode } from "~/registry/hooks/use-questionnaire"
+import { NativeSelect, NativeSelectOption } from "~/registry/ui/native-select"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -9,31 +13,29 @@ import {
   QuestionnaireItem,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { NativeSelect, NativeSelectOption } from "~/registry/ui/native-select";
-import { Toaster } from "~/registry/ui/toast";
-import type { QuestionnaireShortcutMode } from "~/registry/hooks/use-questionnaire";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
     choices: [{ value: "inspect" }, { value: "tests" }, { value: "patch" }],
     name: "action",
-    required: true,
-  },
-] as const;
+    required: true
+  }
+] as const
 
 export default function QuestionnaireShortcuts() {
-  const [shortcuts, setShortcuts] = createSignal<QuestionnaireShortcutMode | undefined>("letters");
+  const [shortcuts, setShortcuts] = createSignal<QuestionnaireShortcutMode | undefined>("letters")
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const action = new FormData(event.currentTarget).get("action");
+    const action = new FormData(event.currentTarget).get("action")
 
     toast("Next action selected", {
-      description: `Action: ${action ?? "None"} · Shortcuts: ${shortcuts() ?? "none"}`,
-    });
+      description: `Action: ${action ?? "None"} · Shortcuts: ${shortcuts() ?? "none"}`
+    })
   }
 
   return (
@@ -42,11 +44,11 @@ export default function QuestionnaireShortcuts() {
       <NativeSelect
         aria-label="Shortcut style"
         class="absolute end-0 top-0"
-        value={shortcuts() ?? "none"}
         onChange={(event) => {
-          const value = event.currentTarget.value;
-          setShortcuts(value === "letters" || value === "numbers" ? value : undefined);
+          const value = event.currentTarget.value
+          setShortcuts(value === "letters" || value === "numbers" ? value : undefined)
         }}
+        value={shortcuts() ?? "none"}
       >
         <NativeSelectOption value="none">No shortcuts</NativeSelectOption>
         <NativeSelectOption value="letters">Letters</NativeSelectOption>
@@ -56,8 +58,8 @@ export default function QuestionnaireShortcuts() {
       <QuestionnaireRoot
         class="mt-auto"
         items={items}
-        shortcuts={shortcuts()}
         onSubmit={handleSubmit}
+        shortcuts={shortcuts()}
       >
         <QuestionnaireItem name="action" required>
           <QuestionnaireTitle>What should the agent do next?</QuestionnaireTitle>
@@ -77,5 +79,5 @@ export default function QuestionnaireShortcuts() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </div>
-  );
+  )
 }

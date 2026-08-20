@@ -50,31 +50,31 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx showLineNumbers title="app/layout.tsx"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
+```tsx showLineNumbers
+import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
+import { AppSidebar } from "~/components/app-sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout(props: { children: JSX.Element }) {
   return (
     <SidebarProvider>
       <AppSidebar />
       <main>
         <SidebarTrigger />
-        {children}
+        {props.children}
       </main>
     </SidebarProvider>
   );
 }
 ```
 
-```tsx showLineNumbers title="components/app-sidebar.tsx"
+```tsx showLineNumbers
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-} from "@/components/ui/sidebar";
+} from "~/components/ui/sidebar";
 
 export function AppSidebar() {
   return (
@@ -99,24 +99,16 @@ SidebarProvider
 ├── Sidebar
 │   ├── SidebarHeader
 │   ├── SidebarContent
-│   │   ├── SidebarGroup
-│   │   │   ├── SidebarGroupLabel
-│   │   │   ├── SidebarGroupAction
-│   │   │   ├── SidebarGroupContent
-│   │   │   └── SidebarMenu
-│   │   │       ├── SidebarMenuItem
-│   │   │       │   ├── SidebarMenuButton
-│   │   │       │   ├── SidebarMenuAction
-│   │   │       │   └── SidebarMenuBadge
-│   │   │       └── SidebarMenuItem
-│   │   │           ├── SidebarMenuButton
-│   │   │           └── SidebarMenuSub
-│   │   │               ├── SidebarMenuSubItem
-│   │   │               └── SidebarMenuSubItem
 │   │   └── SidebarGroup
+│   │       ├── SidebarGroupLabel
+│   │       ├── SidebarGroupAction
+│   │       ├── SidebarGroupContent
 │   │       └── SidebarMenu
-│   │           ├── SidebarMenuItem
 │   │           └── SidebarMenuItem
+│   │               ├── SidebarMenuButton
+│   │               ├── SidebarMenuAction
+│   │               ├── SidebarMenuBadge
+│   │               └── SidebarMenuSub
 │   ├── SidebarFooter
 │   └── SidebarRail
 ├── SidebarInset
@@ -125,48 +117,36 @@ SidebarProvider
 
 ## Structure
 
-- **SidebarProvider** — Handles collapsible state and provides sidebar context to child components.
-- **Sidebar** — The main collapsible sidebar panel.
-- **SidebarHeader** — Sticky at the top; use for branding, titles, or workspace switchers.
-- **SidebarFooter** — Sticky at the bottom; use for user menus, settings, or actions.
-- **SidebarContent** — Scrollable region between the header and footer.
-- **SidebarGroup** — Groups related navigation with optional label, action, and content areas.
-- **SidebarMenu** / **SidebarMenuItem** — Menu structure for links, badges, actions, and nested submenus.
-- **SidebarRail** — Resize handle for adjusting sidebar width when applicable.
-- **SidebarInset** — Wraps main content when using the `inset` variant.
-- **SidebarTrigger** — Control that toggles the sidebar open or collapsed.
-
-[[/public/sidebar-structure.webp]]
+- **SidebarProvider** manages desktop and mobile open state.
+- **Sidebar** renders the responsive sidebar surface.
+- **SidebarHeader** and **SidebarFooter** hold persistent controls.
+- **SidebarContent** is the scrollable navigation region.
+- **SidebarGroup** organizes related navigation.
+- **SidebarMenu** and **SidebarMenuItem** build menus, actions, badges, and submenus.
+- **SidebarRail** toggles the sidebar from its edge.
+- **SidebarInset** wraps the primary content for the inset variant.
+- **SidebarTrigger** toggles the sidebar from anywhere within the provider.
 
 ## SidebarProvider
 
-The `SidebarProvider` component is used to provide the sidebar context to the `Sidebar` component. You should always wrap your application in a `SidebarProvider` component.
+Wrap the application in `SidebarProvider` before rendering `Sidebar` or `SidebarTrigger`.
 
-| Name           | Type                      | Description                                  |
-| -------------- | ------------------------- | -------------------------------------------- |
-| `defaultOpen`  | `boolean`                 | Default open state of the sidebar.           |
-| `open`         | `boolean`                 | Open state of the sidebar (controlled).      |
-| `onOpenChange` | `(open: boolean) => void` | Sets open state of the sidebar (controlled). |
+| Name           | Type                      | Description                        |
+| -------------- | ------------------------- | ---------------------------------- |
+| `defaultOpen`  | `boolean`                 | Initial desktop open state.        |
+| `open`         | `boolean`                 | Controlled desktop open state.     |
+| `onOpenChange` | `(open: boolean) => void` | Called when desktop state changes. |
 
 ### Width
 
-If you have a single sidebar in your application, you can use the `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` variables in `sidebar.tsx` to set the width of the sidebar.
-
-```tsx showLineNumbers title="components/ui/sidebar.tsx"
-const SIDEBAR_WIDTH = "16rem";
-const SIDEBAR_WIDTH_MOBILE = "18rem";
-```
-
-For multiple sidebars in your application, you can use the `--sidebar-width` and `--sidebar-width-mobile` CSS variables in the `style` prop.
+For a single sidebar, change the width constants in `sidebar.tsx`. For multiple sidebars, set CSS variables on the provider.
 
 ```tsx showLineNumbers
 <SidebarProvider
-  style={
-    {
-      "--sidebar-width": "20rem",
-      "--sidebar-width-mobile": "20rem",
-    } as React.CSSProperties
-  }
+  style={{
+    "--sidebar-width": "20rem",
+    "--sidebar-width-mobile": "20rem",
+  }}
 >
   <Sidebar />
 </SidebarProvider>
@@ -174,27 +154,23 @@ For multiple sidebars in your application, you can use the `--sidebar-width` and
 
 ### Keyboard Shortcut
 
-To trigger the sidebar, you use the `cmd+b` keyboard shortcut on Mac and `ctrl+b` on Windows.
-
-```tsx showLineNumbers title="components/ui/sidebar.tsx"
-const SIDEBAR_KEYBOARD_SHORTCUT = "b";
-```
+Press `⌘B` on macOS or `Ctrl+B` elsewhere to toggle the sidebar. The default shortcut key is `b`.
 
 ## Sidebar
 
-The main `Sidebar` component used to render a collapsible sidebar.
+`Sidebar` renders the main sidebar panel.
 
-| Property      | Type                              | Description                       |
-| ------------- | --------------------------------- | --------------------------------- |
-| `side`        | `left` or `right`                 | The side of the sidebar.          |
-| `variant`     | `sidebar`, `floating`, or `inset` | The variant of the sidebar.       |
-| `collapsible` | `offcanvas`, `icon`, or `none`    | Collapsible state of the sidebar. |
+| Property      | Type                                 | Description                        |
+| ------------- | ------------------------------------ | ---------------------------------- |
+| `side`        | `"left" \| "right"`                  | The physical side of the viewport. |
+| `variant`     | `"sidebar" \| "floating" \| "inset"` | The visual treatment.              |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"`    | Desktop collapse behavior.         |
 
-| Prop        | Description                                                  |
-| ----------- | ------------------------------------------------------------ |
-| `offcanvas` | A collapsible sidebar that slides in from the left or right. |
-| `icon`      | A sidebar that collapses to icons.                           |
-| `none`      | A non-collapsible sidebar.                                   |
+| `collapsible` value | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `offcanvas`         | Slides the sidebar fully offscreen.           |
+| `icon`              | Collapses the sidebar to its icon rail.       |
+| `none`              | Leaves the sidebar fixed and non-collapsible. |
 
 When using the `inset` variant, wrap the primary content in `SidebarInset`.
 
@@ -207,14 +183,13 @@ When using the `inset` variant, wrap the primary content in `SidebarInset`.
 </SidebarProvider>
 ```
 
-## Variants
+## Examples
+
+Every visual treatment is a prop on the single `Sidebar` component — there are no separate variant components.
 
 ### Floating
 
 Set `variant="floating"` for a card-like panel with rounded corners and padding from the window edges.
-
-::::tab-group[example1]
-:::tab[Preview]
 
 <ComponentPreview
   name="sidebar-floating"
@@ -223,22 +198,9 @@ Set `variant="floating"` for a card-like panel with rounded corners and padding 
   previewClass="h-[42rem] p-0"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/sidebar-floating" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Inset
 
 Set `variant="inset"` and wrap the primary content in `SidebarInset`.
-
-::::tab-group[example2]
-:::tab[Preview]
 
 <ComponentPreview
   name="sidebar-inset"
@@ -247,22 +209,9 @@ Set `variant="inset"` and wrap the primary content in `SidebarInset`.
   previewClass="h-[42rem] p-0"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/sidebar-inset" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Icon collapse
 
 Set `collapsible="icon"` to collapse the sidebar to its icon rail instead of hiding it.
-
-::::tab-group[example3]
-:::tab[Preview]
 
 <ComponentPreview
   name="sidebar-icon"
@@ -271,17 +220,11 @@ Set `collapsible="icon"` to collapse the sidebar to its icon rail instead of hid
   previewClass="h-[42rem] p-0"
 />
 
-:::
-:::tab[Code]
+## API Reference
 
-```file="~/registry/examples/sidebar-icon" frame=none showLineNumbers
+Sidebar's public API is native SolidJS composition. For mobile sheet primitive props, focus management, and keyboard behavior, see the [Kobalte Dialog API reference](https://kobalte.dev/docs/core/components/dialog#api-reference).
 
-```
-
-:::
-::::
-
-## useSidebar
+### useSidebar
 
 Use `useSidebar` inside a provider to inspect and control state.
 
@@ -297,7 +240,17 @@ export function CustomTrigger() {
 }
 ```
 
-## SidebarHeader
+| Property        | Type                                  | Description                                |
+| --------------- | ------------------------------------- | ------------------------------------------ |
+| `state`         | `Accessor<"expanded" \| "collapsed">` | Desktop visual state.                      |
+| `open`          | `Accessor<boolean>`                   | Desktop open state.                        |
+| `setOpen`       | `(open: boolean) => void`             | Changes desktop state.                     |
+| `openMobile`    | `Accessor<boolean>`                   | Mobile sheet state.                        |
+| `setOpenMobile` | `(open: boolean) => void`             | Changes mobile sheet state.                |
+| `isMobile`      | `Accessor<boolean>`                   | Whether the mobile presentation is active. |
+| `toggleSidebar` | `() => void`                          | Toggles the appropriate presentation.      |
+
+### SidebarHeader
 
 Use `SidebarHeader` for workspace switchers, branding, search, or other persistent top-level controls.
 
@@ -314,7 +267,7 @@ Use `SidebarHeader` for workspace switchers, branding, search, or other persiste
 </SidebarHeader>
 ```
 
-## SidebarFooter
+### SidebarFooter
 
 Use `SidebarFooter` for user menus, settings, or persistent actions.
 
@@ -330,7 +283,7 @@ Use `SidebarFooter` for user menus, settings, or persistent actions.
 </SidebarFooter>
 ```
 
-## SidebarContent
+### SidebarContent
 
 `SidebarContent` is the scrollable area between the header and footer. Add one or more groups inside it.
 
@@ -341,7 +294,7 @@ Use `SidebarFooter` for user menus, settings, or persistent actions.
 </SidebarContent>
 ```
 
-## SidebarGroup
+### SidebarGroup
 
 Use `SidebarGroup` to create a section. A group can contain a label, content, and an optional action.
 
@@ -371,7 +324,7 @@ Wrap a group in `Collapsible` when its content should be independently expandabl
 </Collapsible>
 ```
 
-## SidebarMenu
+### SidebarMenu
 
 Use `SidebarMenu` and `SidebarMenuItem` for navigation links.
 
@@ -390,7 +343,7 @@ Use `SidebarMenu` and `SidebarMenuItem` for navigation links.
 </SidebarMenu>
 ```
 
-## SidebarMenuButton
+### SidebarMenuButton
 
 `SidebarMenuButton` renders a button by default and can render an anchor with `as="a"`. Use `isActive` to mark the current item and `tooltip` to provide a collapsed-sidebar label.
 
@@ -401,7 +354,7 @@ Use `SidebarMenu` and `SidebarMenuItem` for navigation links.
 </SidebarMenuButton>
 ```
 
-## SidebarMenuAction
+### SidebarMenuAction
 
 Use `SidebarMenuAction` for an action associated with a menu item. Set `showOnHover` when the action should stay visually quiet until its item is hovered or focused.
 
@@ -417,7 +370,7 @@ Use `SidebarMenuAction` for an action associated with a menu item. Set `showOnHo
 </SidebarMenuItem>
 ```
 
-## SidebarMenuSub
+### SidebarMenuSub
 
 Use `SidebarMenuSub` for nested navigation inside a menu item.
 
@@ -434,7 +387,7 @@ Use `SidebarMenuSub` for nested navigation inside a menu item.
 </SidebarMenuItem>
 ```
 
-## SidebarMenuBadge
+### SidebarMenuBadge
 
 Use `SidebarMenuBadge` to show a count or status in a menu item.
 
@@ -445,7 +398,7 @@ Use `SidebarMenuBadge` to show a count or status in a menu item.
 </SidebarMenuItem>
 ```
 
-## SidebarMenuSkeleton
+### SidebarMenuSkeleton
 
 Use `SidebarMenuSkeleton` while navigation data is loading.
 
@@ -461,7 +414,7 @@ Use `SidebarMenuSkeleton` while navigation data is loading.
 </SidebarMenu>
 ```
 
-## SidebarTrigger
+### SidebarTrigger
 
 Use `SidebarTrigger` anywhere within the provider to toggle the sidebar.
 
@@ -469,7 +422,7 @@ Use `SidebarTrigger` anywhere within the provider to toggle the sidebar.
 <SidebarTrigger />
 ```
 
-## SidebarRail
+### SidebarRail
 
 Use `SidebarRail` inside `Sidebar` to provide its edge toggle target.
 
@@ -484,7 +437,7 @@ Use `SidebarRail` inside `Sidebar` to provide its edge toggle target.
 </Sidebar>
 ```
 
-## Controlled Sidebar
+### Controlled Sidebar
 
 Control the desktop sidebar with a Solid signal.
 
@@ -496,9 +449,9 @@ const [open, setOpen] = createSignal(false);
 </SidebarProvider>;
 ```
 
-## Theming
+### Theming
 
-The sidebar reads the sidebar semantic tokens from the active solid-ui style. Override them with your style variables when needed.
+The sidebar reads the sidebar semantic tokens from the active Zaidan style. Override them with your style variables when needed.
 
 ```css
 :root {
@@ -513,11 +466,11 @@ The sidebar reads the sidebar semantic tokens from the active solid-ui style. Ov
 }
 ```
 
-## Styling
+### Styling
 
 Target the Sidebar data attributes to tailor collapsed and active states.
 
-```tsx showLineNumbers
+```tsx
 <Sidebar collapsible="icon">
   <SidebarContent>
     <SidebarGroup class="group-data-[collapsible=icon]:hidden" />
@@ -525,13 +478,9 @@ Target the Sidebar data attributes to tailor collapsed and active states.
 </Sidebar>
 ```
 
-```tsx showLineNumbers
+```tsx
 <SidebarMenuItem>
   <SidebarMenuButton />
   <SidebarMenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
 </SidebarMenuItem>
 ```
-
-## API Reference
-
-Sidebar's public API is native SolidJS composition. For mobile sheet primitive props, focus management, and keyboard behavior, see the [Kobalte Dialog API reference](https://kobalte.dev/docs/core/components/dialog#api-reference).

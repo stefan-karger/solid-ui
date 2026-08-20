@@ -1,10 +1,5 @@
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
-import {
-  Message,
-  MessageContent,
-  MessageFooter,
-  MessageHeader,
-} from "~/registry/ui/message";
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Message, MessageContent, MessageFooter, MessageHeader } from "~/registry/ui/message"
 
 export default function MessageHeaderFooterDemo() {
   return (
@@ -32,5 +27,5 @@ export default function MessageHeaderFooterDemo() {
         </MessageContent>
       </Message>
     </div>
-  );
+  )
 }

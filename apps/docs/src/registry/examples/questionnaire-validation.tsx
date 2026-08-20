@@ -1,6 +1,9 @@
-import { createSignal } from "solid-js";
-import { toast } from "solid-sonner";
-import { z } from "zod";
+import { createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+import { z } from "zod"
+
+import { Card, CardAction, CardContent, CardFooter, CardHeader } from "~/registry/ui/card"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -13,33 +16,32 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Card, CardAction, CardContent, CardFooter, CardHeader } from "~/registry/ui/card";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "detail", required: true },
-  { name: "audience", required: true },
-] as const;
+  { name: "audience", required: true }
+] as const
 
 const questionnaireSchema = z
   .object({
     detail: z.enum(["summary", "complete"]),
-    audience: z.enum(["team", "public"]),
+    audience: z.enum(["team", "public"])
   })
   .superRefine((answers, context) => {
     if (answers.audience === "public" && answers.detail === "summary") {
       context.addIssue({
         code: "custom",
         message: "Public answers need enough context. Choose a complete answer.",
-        path: ["detail"],
-      });
+        path: ["detail"]
+      })
     }
-  });
+  })
 
-type QuestionnaireItemName = keyof z.infer<typeof questionnaireSchema>;
-type QuestionnaireErrors = Partial<Record<QuestionnaireItemName, string>>;
+type QuestionnaireItemName = keyof z.infer<typeof questionnaireSchema>
+type QuestionnaireErrors = Partial<Record<QuestionnaireItemName, string>>
 
 function ValidationProgress() {
   return (
@@ -50,56 +52,56 @@ function ValidationProgress() {
         </>
       )}
     </QuestionnaireProgress>
-  );
+  )
 }
 
 export default function QuestionnaireValidation() {
-  const [item, setItem] = createSignal("detail");
-  const [errors, setErrors] = createSignal<QuestionnaireErrors>({});
+  const [item, setItem] = createSignal("detail")
+  const [errors, setErrors] = createSignal<QuestionnaireErrors>({})
 
   function clearError(name: QuestionnaireItemName) {
     setErrors((currentErrors) => {
       if (!currentErrors[name]) {
-        return currentErrors;
+        return currentErrors
       }
 
-      const nextErrors = { ...currentErrors };
-      delete nextErrors[name];
-      return nextErrors;
-    });
+      const nextErrors = { ...currentErrors }
+      delete nextErrors[name]
+      return nextErrors
+    })
   }
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
     const result = questionnaireSchema.safeParse(
-      Object.fromEntries(new FormData(event.currentTarget)),
-    );
+      Object.fromEntries(new FormData(event.currentTarget))
+    )
 
     if (result.success) {
-      setErrors({});
+      setErrors({})
       toast("Agent response configured", {
-        description: `Detail: ${result.data.detail} · Audience: ${result.data.audience}`,
-      });
-      return;
+        description: `Detail: ${result.data.detail} · Audience: ${result.data.audience}`
+      })
+      return
     }
 
-    const nextErrors: QuestionnaireErrors = {};
+    const nextErrors: QuestionnaireErrors = {}
 
     for (const issue of result.error.issues) {
-      const name = issue.path[0];
+      const name = issue.path[0]
 
       if ((name === "detail" || name === "audience") && !nextErrors[name]) {
-        nextErrors[name] = issue.message;
+        nextErrors[name] = issue.message
       }
     }
 
-    const firstInvalidItem = result.error.issues[0]?.path[0];
+    const firstInvalidItem = result.error.issues[0]?.path[0]
 
-    setErrors(nextErrors);
+    setErrors(nextErrors)
 
     if (firstInvalidItem === "detail" || firstInvalidItem === "audience") {
-      setItem(firstInvalidItem);
+      setItem(firstInvalidItem)
     }
   }
 
@@ -124,10 +126,10 @@ export default function QuestionnaireValidation() {
             </CardHeader>
             <CardContent>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="summary" onChange={() => clearError("detail")}>
+                <QuestionnaireChoice onChange={() => clearError("detail")} value="summary">
                   Concise summary
                 </QuestionnaireChoice>
-                <QuestionnaireChoice value="complete" onChange={() => clearError("detail")}>
+                <QuestionnaireChoice onChange={() => clearError("detail")} value="complete">
                   Complete answer
                 </QuestionnaireChoice>
               </QuestionnaireChoices>
@@ -147,10 +149,10 @@ export default function QuestionnaireValidation() {
             </CardHeader>
             <CardContent>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="team" onChange={() => clearError("audience")}>
+                <QuestionnaireChoice onChange={() => clearError("audience")} value="team">
                   My team
                 </QuestionnaireChoice>
-                <QuestionnaireChoice value="public" onChange={() => clearError("audience")}>
+                <QuestionnaireChoice onChange={() => clearError("audience")} value="public">
                   Public audience
                 </QuestionnaireChoice>
               </QuestionnaireChoices>
@@ -168,5 +170,5 @@ export default function QuestionnaireValidation() {
         </Card>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

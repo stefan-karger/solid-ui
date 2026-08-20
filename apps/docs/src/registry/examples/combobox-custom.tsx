@@ -1,4 +1,10 @@
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem } from "~/registry/ui/combobox"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem
+} from "~/registry/ui/combobox"
 import { Item, ItemContent, ItemDescription, ItemTitle } from "~/registry/ui/item"
 
 const countries = [
@@ -27,19 +33,15 @@ const countries = [
   { code: "jp", value: "japan", label: "Japan", continent: "Asia" },
   { code: "mx", value: "mexico", label: "Mexico", continent: "North America" },
   { code: "gb", value: "united-kingdom", label: "United Kingdom", continent: "Europe" },
-  { code: "us", value: "united-states", label: "United States", continent: "North America" },
+  { code: "us", value: "united-states", label: "United States", continent: "North America" }
 ]
 
 export default function ComboboxWithCustomItems() {
   return (
     <Combobox<(typeof countries)[number]>
-      options={countries}
-      optionValue="value"
-      optionLabel="label"
-      placeholder="Search countries..."
       itemComponent={(props) => (
         <ComboboxItem item={props.item}>
-          <Item size="xs" class="p-0">
+          <Item class="p-0" size="xs">
             <ItemContent>
               <ItemTitle class="whitespace-nowrap">{props.item.rawValue.label}</ItemTitle>
               <ItemDescription>
@@ -49,6 +51,10 @@ export default function ComboboxWithCustomItems() {
           </Item>
         </ComboboxItem>
       )}
+      optionLabel="label"
+      options={countries}
+      optionValue="value"
+      placeholder="Search countries..."
     >
       <ComboboxInput placeholder="Search countries..." />
       <ComboboxContent>

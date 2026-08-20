@@ -5,7 +5,7 @@ import { Input } from "~/registry/ui/input"
 export default function InputInline() {
   return (
     <Field orientation="horizontal">
-      <Input type="search" placeholder="Search..." />
+      <Input placeholder="Search..." type="search" />
       <Button>Search</Button>
     </Field>
   )

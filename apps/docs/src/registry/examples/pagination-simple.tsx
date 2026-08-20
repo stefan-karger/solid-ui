@@ -2,7 +2,7 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
+  PaginationLink
 } from "~/registry/ui/pagination"
 
 export default function PaginationSimple() {

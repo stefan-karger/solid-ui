@@ -7,15 +7,11 @@ export default function InputBadge() {
     <Field>
       <FieldLabel for="input-badge">
         Webhook URL{" "}
-        <Badge variant="secondary" class="ml-auto">
+        <Badge class="ml-auto" variant="secondary">
           Beta
         </Badge>
       </FieldLabel>
-      <Input
-        id="input-badge"
-        type="url"
-        placeholder="https://api.example.com/webhook"
-      />
+      <Input id="input-badge" placeholder="https://api.example.com/webhook" type="url" />
     </Field>
   )
 }

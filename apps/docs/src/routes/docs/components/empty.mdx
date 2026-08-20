@@ -43,7 +43,7 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Empty,
   EmptyContent,
@@ -51,10 +51,10 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "~/registry/ui/empty";
+} from "~/components/ui/empty";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Empty>
   <EmptyHeader>
     <EmptyMedia variant="icon">
@@ -73,7 +73,7 @@ import {
 
 Use the following composition to build an `Empty` state:
 
-```plaintext
+```text
 Empty
 ├── EmptyHeader
 │   ├── EmptyMedia
@@ -88,115 +88,31 @@ Empty
 
 Use the `border` utility class to create an outline empty state.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="empty-outline" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-outline" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Background
 
 Use the `bg-*` and `bg-gradient-*` utilities to add a background to the empty state.
 
-::::tab-group[example2]
-:::tab[Preview]
-
-<ComponentPreview name="empty-background" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-background" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="empty-background" previewClass="p-0" />
 
 ### Avatar
 
 Use the `EmptyMedia` component to display an avatar in the empty state.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="empty-avatar" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-avatar" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Avatar Group
 
 Use the `EmptyMedia` component to display an avatar group in the empty state.
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="empty-avatar-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-avatar-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### InputGroup
 
 You can add an `InputGroup` component to the `EmptyContent` component.
 
-::::tab-group[example5]
-:::tab[Preview]
-
 <ComponentPreview name="empty-input-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-input-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example6]
-:::tab[Preview]
-
-<ComponentPreview name="empty-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/empty-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 
@@ -206,7 +122,7 @@ The main component of the empty state. Wraps the `EmptyHeader` and `EmptyContent
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <Empty>
@@ -221,7 +137,7 @@ The `EmptyHeader` component wraps the empty media, title, and description.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <EmptyHeader>
@@ -238,7 +154,7 @@ Use the `EmptyMedia` component to display the media of the empty state such as a
 | Prop      | Type                  | Default   |
 | --------- | --------------------- | --------- |
 | `variant` | `"default" \| "icon"` | `default` |
-| `class`   | `string`              |           |
+| `class`   | `string`              | ``        |
 
 ```tsx
 <EmptyMedia variant="icon">
@@ -261,7 +177,7 @@ Use the `EmptyTitle` component to display the title of the empty state.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <EmptyTitle>No data</EmptyTitle>
@@ -273,7 +189,7 @@ Use the `EmptyDescription` component to display the description of the empty sta
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <EmptyDescription>You do not have any notifications.</EmptyDescription>
@@ -285,7 +201,7 @@ Use the `EmptyContent` component to display the content of the empty state such 
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <EmptyContent>

@@ -7,7 +7,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 
 export default function EmptyDemo() {
@@ -19,15 +19,16 @@ export default function EmptyDemo() {
         </EmptyMedia>
         <EmptyTitle>No Projects Yet</EmptyTitle>
         <EmptyDescription>
-          You haven&apos;t created any projects yet. Get started by creating
-          your first project.
+          You haven&apos;t created any projects yet. Get started by creating your first project.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent class="flex-row justify-center gap-2">
         <Button>Create Project</Button>
         <Button variant="outline">Import Project</Button>
       </EmptyContent>
-      <Button variant="link" class="text-muted-foreground" size="sm" as={"a"} href="#">Learn More <ArrowUpRightIcon /></Button>
+      <Button as={"a"} class="text-muted-foreground" href="#" size="sm" variant="link">
+        Learn More <ArrowUpRightIcon />
+      </Button>
     </Empty>
   )
 }

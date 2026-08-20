@@ -1,4 +1,5 @@
 import { BookmarkIcon } from "lucide-solid"
+
 import { Toggle } from "~/registry/ui/toggle"
 
 export default function ToggleDemo() {

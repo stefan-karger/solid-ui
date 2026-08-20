@@ -1,5 +1,16 @@
-import { createSignal } from "solid-js";
-import { toast } from "solid-sonner";
+import { createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+
+import { Button } from "~/registry/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger
+} from "~/registry/ui/dialog"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -12,42 +23,33 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Button } from "~/registry/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTrigger,
-} from "~/registry/ui/dialog";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "scope", required: true },
-  { name: "tests", required: true },
-] as const;
+  { name: "tests", required: true }
+] as const
 
 export default function QuestionnaireDialog() {
-  const [open, setOpen] = createSignal(false);
+  const [open, setOpen] = createSignal(false)
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
-    setOpen(false);
+    setOpen(false)
     toast("Clarification sent", {
-      description: `Scope: ${formData.get("scope") ?? "None"} · Verification: ${formData.get("tests") ?? "None"}`,
-    });
+      description: `Scope: ${formData.get("scope") ?? "None"} · Verification: ${formData.get("tests") ?? "None"}`
+    })
   }
 
   return (
     <>
       <Toaster />
-      <Dialog open={open()} onOpenChange={setOpen}>
+      <Dialog onOpenChange={setOpen} open={open()}>
         <DialogTrigger as={Button} variant="outline">
           Open clarification
         </DialogTrigger>
@@ -88,9 +90,7 @@ export default function QuestionnaireDialog() {
               <QuestionnaireChoices>
                 <QuestionnaireChoice value="targeted">Targeted tests</QuestionnaireChoice>
                 <QuestionnaireChoice value="package">Package tests</QuestionnaireChoice>
-                <QuestionnaireChoice value="full">
-                  Full workspace verification
-                </QuestionnaireChoice>
+                <QuestionnaireChoice value="full">Full workspace verification</QuestionnaireChoice>
               </QuestionnaireChoices>
               <QuestionnaireError />
             </QuestionnaireItem>
@@ -109,5 +109,5 @@ export default function QuestionnaireDialog() {
         </DialogContent>
       </Dialog>
     </>
-  );
+  )
 }

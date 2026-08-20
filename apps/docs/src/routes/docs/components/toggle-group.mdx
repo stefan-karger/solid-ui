@@ -3,6 +3,8 @@ title: Toggle Group
 description: A set of two-state buttons that can be toggled on or off.
 ---
 
+The Toggle Group component is built on top of [Kobalte Toggle Group](https://kobalte.dev/docs/core/components/toggle-group), which provides accessible toggle buttons, keyboard navigation, and focus behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -41,14 +43,43 @@ Copy and paste the following code into your project.
 
 ```
 
+## Usage
+
+```tsx showLineNumbers
+import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
+```
+
+```tsx showLineNumbers
+<ToggleGroup defaultValue="a">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+  <ToggleGroupItem value="c">C</ToggleGroupItem>
+</ToggleGroup>
+```
+
 ## Composition
 
-Use the following composition to build a `ToggleGroup`:
+Use the following composition to build `ToggleGroup`:
 
-```plaintext
+```text
 ToggleGroup
 ├── ToggleGroupItem
 └── ToggleGroupItem
+```
+
+### Single vs. multiple selection
+
+By default `ToggleGroup` only allows a single item to be pressed at a time. In that mode
+`value`/`defaultValue` are a single `string | null` and `onChange` receives `string | null`.
+Pass `multiple` to allow several items to be pressed at once — in that mode `value`/`defaultValue`
+are a `string[]` and `onChange` receives `string[]`.
+
+```tsx showLineNumbers
+// single (default)
+<ToggleGroup defaultValue="bold" onChange={(value) => console.log(value)}>
+
+// multiple
+<ToggleGroup multiple defaultValue={["bold"]} onChange={(value) => console.log(value)}>
 ```
 
 ## Examples
@@ -57,131 +88,39 @@ ToggleGroup
 
 Use `variant="outline"` for an outline style.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="toggle-group-outline" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-outline" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Size
 
 Use the `size` prop to change the size of the toggle group.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="toggle-group-sizes" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-sizes" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Spacing
 
 Use `spacing` to add spacing between toggle group items.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="toggle-group-spacing" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-spacing" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Vertical
 
 Use `orientation="vertical"` for vertical toggle groups.
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="toggle-group-vertical" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-vertical" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Disabled
 
-::::tab-group[example5]
-:::tab[Preview]
-
 <ComponentPreview name="toggle-group-disabled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Custom
 
-::::tab-group[example6]
-:::tab[Preview]
+A custom toggle group example.
 
-<ComponentPreview name="toggle-group-custom" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-custom" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example7]
-:::tab[Preview]
-
-<ComponentPreview name="toggle-group-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/toggle-group-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview
+  name="toggle-group-font-weight-selector"
+  previewClass="*:data-[slot=field]:max-w-xs"
+/>
 
 ## API Reference
 
-See the [Base UI Toggle Group](/docs/components/toggle) documentation.
+For primitive props, keyboard behavior, and accessibility details, see the [Kobalte Toggle Group API reference](https://kobalte.dev/docs/core/components/toggle-group#api-reference).

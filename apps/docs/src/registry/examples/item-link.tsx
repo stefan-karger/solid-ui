@@ -1,12 +1,6 @@
 import { ChevronRightIcon, ExternalLinkIcon } from "lucide-solid"
 
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from "~/registry/ui/item"
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "~/registry/ui/item"
 
 export default function ItemLink() {
   return (
@@ -14,20 +8,18 @@ export default function ItemLink() {
       <Item as="a" href="#">
         <ItemContent>
           <ItemTitle>Visit our documentation</ItemTitle>
-          <ItemDescription>
-            Learn how to get started with our components.
-          </ItemDescription>
-        </ItemContent><ItemActions>
+          <ItemDescription>Learn how to get started with our components.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
           <ChevronRightIcon class="size-4" />
         </ItemActions>
       </Item>
-      <Item variant="outline" as="a" href="#" target="_blank" rel="noopener noreferrer">
+      <Item as="a" href="#" rel="noopener noreferrer" target="_blank" variant="outline">
         <ItemContent>
           <ItemTitle>External resource</ItemTitle>
-          <ItemDescription>
-            Opens in a new tab with security attributes.
-          </ItemDescription>
-        </ItemContent><ItemActions>
+          <ItemDescription>Opens in a new tab with security attributes.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
           <ExternalLinkIcon class="size-4" />
         </ItemActions>
       </Item>

@@ -40,7 +40,7 @@ const DrawerOverlay = <T extends ValidComponent = "div">(
   return (
     <DrawerPrimitive.Overlay
       class={cn(
-        "cn-drawer-overlay fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0",
+        "cn-drawer-overlay data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in",
         local.class
       )}
       data-slot="drawer-overlay"
@@ -86,7 +86,11 @@ const DrawerContent = <T extends ValidComponent = "div">(
 const DrawerHeader: Component<ComponentProps<"div">> = (props) => {
   const [, rest] = splitProps(props, ["class"])
   return (
-    <div class={cn("cn-drawer-header flex flex-col gap-1.5 p-4", props.class)} data-slot="drawer-header" {...rest} />
+    <div
+      class={cn("cn-drawer-header flex flex-col gap-1.5 p-4", props.class)}
+      data-slot="drawer-header"
+      {...rest}
+    />
   )
 }
 
@@ -135,13 +139,13 @@ const DrawerDescription = <T extends ValidComponent = "div">(
 
 export {
   Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
   DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger
 }

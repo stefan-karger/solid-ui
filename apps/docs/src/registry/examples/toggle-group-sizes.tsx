@@ -1,50 +1,47 @@
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "~/registry/ui/toggle-group"
+import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
 
 export default function ToggleGroupSizes() {
   return (
     <div class="flex flex-col gap-4">
-      <ToggleGroup size="sm" defaultValue={["top"]} variant="outline" multiple>
-        <ToggleGroupItem value="top" aria-label="Toggle top">
+      <ToggleGroup defaultValue={["top"]} multiple size="sm" variant="outline">
+        <ToggleGroupItem aria-label="Toggle top" value="top">
           Top
         </ToggleGroupItem>
-        <ToggleGroupItem value="bottom" aria-label="Toggle bottom">
+        <ToggleGroupItem aria-label="Toggle bottom" value="bottom">
           Bottom
         </ToggleGroupItem>
-        <ToggleGroupItem value="left" aria-label="Toggle left">
+        <ToggleGroupItem aria-label="Toggle left" value="left">
           Left
         </ToggleGroupItem>
-        <ToggleGroupItem value="right" aria-label="Toggle right">
+        <ToggleGroupItem aria-label="Toggle right" value="right">
           Right
         </ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup size="default" defaultValue={["top"]} variant="outline" multiple>
-        <ToggleGroupItem value="top" aria-label="Toggle top">
+      <ToggleGroup defaultValue={["top"]} multiple size="default" variant="outline">
+        <ToggleGroupItem aria-label="Toggle top" value="top">
           Top
         </ToggleGroupItem>
-        <ToggleGroupItem value="bottom" aria-label="Toggle bottom">
+        <ToggleGroupItem aria-label="Toggle bottom" value="bottom">
           Bottom
         </ToggleGroupItem>
-        <ToggleGroupItem value="left" aria-label="Toggle left">
+        <ToggleGroupItem aria-label="Toggle left" value="left">
           Left
         </ToggleGroupItem>
-        <ToggleGroupItem value="right" aria-label="Toggle right">
+        <ToggleGroupItem aria-label="Toggle right" value="right">
           Right
         </ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup size="lg" defaultValue={["top"]} variant="outline" multiple>
-        <ToggleGroupItem value="top" aria-label="Toggle top">
+      <ToggleGroup defaultValue={["top"]} multiple size="lg" variant="outline">
+        <ToggleGroupItem aria-label="Toggle top" value="top">
           Top
         </ToggleGroupItem>
-        <ToggleGroupItem value="bottom" aria-label="Toggle bottom">
+        <ToggleGroupItem aria-label="Toggle bottom" value="bottom">
           Bottom
         </ToggleGroupItem>
-        <ToggleGroupItem value="left" aria-label="Toggle left">
+        <ToggleGroupItem aria-label="Toggle left" value="left">
           Left
         </ToggleGroupItem>
-        <ToggleGroupItem value="right" aria-label="Toggle right">
+        <ToggleGroupItem aria-label="Toggle right" value="right">
           Right
         </ToggleGroupItem>
       </ToggleGroup>

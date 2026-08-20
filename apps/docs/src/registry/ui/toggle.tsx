@@ -47,4 +47,4 @@ const Toggle = <T extends ValidComponent = "button">(
 }
 
 export type { ToggleButtonRootProps as ToggleProps }
-export { toggleVariants, Toggle }
+export { Toggle, toggleVariants }

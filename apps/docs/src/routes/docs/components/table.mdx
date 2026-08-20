@@ -52,7 +52,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "~/components/ui/table";
 ```
 
 ```tsx showLineNumbers
@@ -60,18 +60,18 @@ import {
   <TableCaption>A list of your recent invoices.</TableCaption>
   <TableHeader>
     <TableRow>
-      <TableHead className="w-[100px]">Invoice</TableHead>
+      <TableHead class="w-[100px]">Invoice</TableHead>
       <TableHead>Status</TableHead>
       <TableHead>Method</TableHead>
-      <TableHead className="text-right">Amount</TableHead>
+      <TableHead class="text-right">Amount</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow>
-      <TableCell className="font-medium">INV001</TableCell>
+      <TableCell class="font-medium">INV001</TableCell>
       <TableCell>Paid</TableCell>
       <TableCell>Credit Card</TableCell>
-      <TableCell className="text-right">$250.00</TableCell>
+      <TableCell class="text-right">$250.00</TableCell>
     </TableRow>
   </TableBody>
 </Table>
@@ -110,63 +110,64 @@ Table
 
 Use the `<TableFooter />` component to add a footer to the table.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="table-footer" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/table-footer" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Actions
 
 A table showing actions for each row using a `<DropdownMenu />` component.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="table-actions" />
 
-:::
-:::tab[Code]
+## Data Table
 
-```file="~/registry/examples/table-actions" frame=none showLineNumbers
+You can use the `<Table />` component to build more complex data tables. Combine it with [@tanstack/solid-table](https://tanstack.com/table/v8) to create tables with sorting, filtering, and pagination.
 
-```
+## API Reference
 
-:::
-::::
+### Table
 
-### Data Table
+A responsive native `<table>` wrapped in a scrollable container. It forwards standard table attributes.
 
-You can use the `<Table />` component to build more complex data tables. Combine it with [@tanstack/solid-table](https://tanstack.com/table/latest) to create tables with sorting, filtering and pagination.
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-See the [Data Table](/docs/components/data-table) documentation for more information.
+### TableCaption
 
-You can also see an example of a data table in the [Tasks](/examples/tasks) demo.
+A native `<caption>` that describes the table.
 
-### RTL
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
+### TableHeader and TableBody
 
-::::tab-group[example3]
-:::tab[Preview]
+Native `<thead>` and `<tbody>` sections.
 
-<ComponentPreview name="table-rtl" />
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-:::
-:::tab[Code]
+### TableFooter
 
-```file="~/registry/examples/table-rtl" frame=none showLineNumbers
+A native `<tfoot>` for summary rows.
 
-```
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-:::
-::::
+### TableRow
+
+A native `<tr>` row.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableHead and TableCell
+
+Native `<th>` and `<td>` cells.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |

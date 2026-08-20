@@ -1,4 +1,5 @@
 import { toast } from "solid-sonner"
+
 import { Button } from "~/registry/ui/button"
 
 export default function ToastDemo() {
@@ -7,12 +8,12 @@ export default function ToastDemo() {
       description: "Sunday, December 3 at 9:00 AM",
       action: {
         label: "Undo",
-        onClick: () => {},
-      },
-    });
+        onClick: () => {}
+      }
+    })
 
   return (
-    <Button variant="outline" onClick={showToast}>
+    <Button onClick={showToast} variant="outline">
       Show Toast
     </Button>
   )

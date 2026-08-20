@@ -37,141 +37,79 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
-import { Spinner } from "@/components/ui/spinner";
+```tsx showLineNumbers
+import { Spinner } from "~/components/ui/spinner";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Spinner />
 ```
 
-## Examples
+## Customization
 
-### Customization
-
-You can replace the default spinner icon with any other icon by editing the Spinner component.
-
-::::tab-group[example1]
-:::tab[Preview]
+You can replace the default spinner icon with any other icon by editing the `Spinner` component.
 
 <ComponentPreview name="spinner-custom" />
 
-:::
-:::tab[Code]
+```tsx showLineNumbers title="components/ui/spinner.tsx"
+import { LoaderIcon } from "lucide-solid";
+import type { ComponentProps } from "solid-js";
+import { splitProps } from "solid-js";
 
-```file="~/registry/examples/spinner-custom" frame=none showLineNumbers
+import { cn } from "~/lib/utils";
 
+type SpinnerProps = ComponentProps<"svg">;
+
+const Spinner = (props: SpinnerProps) => {
+  const [local, others] = splitProps(props, ["class"]);
+
+  return (
+    <LoaderIcon
+      role="status"
+      aria-label="Loading"
+      class={cn("size-4 animate-spin", local.class)}
+      {...others}
+    />
+  );
+};
+
+export { Spinner };
 ```
 
-:::
-::::
+## Examples
 
 ### Size
 
 Use the `size-*` utility class to change the size of the spinner.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="spinner-size" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/spinner-size" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Button
 
 Add a spinner to a button to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="spinner-button" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/spinner-button" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Badge
 
 Add a spinner to a badge to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="spinner-badge" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/spinner-badge" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Input Group
 
-::::tab-group[example5]
-:::tab[Preview]
-
 <ComponentPreview name="spinner-input-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/spinner-input-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Empty
 
-::::tab-group[example6]
-:::tab[Preview]
-
 <ComponentPreview name="spinner-empty" />
 
-:::
-:::tab[Code]
+## API Reference
 
-```file="~/registry/examples/spinner-empty" frame=none showLineNumbers
+### Spinner
 
-```
+`Spinner` forwards standard SVG props to its loading indicator.
 
-:::
-::::
-
-### RTL
-
-To enable RTL support in shadcn/ui, see [the RTL configuration guide](/docs/rtl).
-
-::::tab-group[example7]
-:::tab[Preview]
-
-<ComponentPreview name="spinner-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/spinner-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |

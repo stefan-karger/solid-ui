@@ -3,6 +3,8 @@ title: Progress
 description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 ---
 
+The Progress component is built on top of [Kobalte Progress](https://kobalte.dev/docs/core/components/progress), which provides the accessible progress primitive.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -41,6 +43,16 @@ Copy and paste the following code into your project.
 
 ```
 
+## Usage
+
+```tsx showLineNumbers
+import { Progress } from "~/components/ui/progress";
+```
+
+```tsx showLineNumbers
+<Progress value={33} />
+```
+
 ## Composition
 
 ### With label and value
@@ -52,9 +64,9 @@ import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@/components/ui/progress";
+} from "~/components/ui/progress";
 
-<Progress value={56} className="w-full max-w-sm">
+<Progress value={56} class="w-full max-w-sm">
   <ProgressLabel>Upload progress</ProgressLabel>
   <ProgressValue />
 </Progress>;
@@ -74,59 +86,26 @@ Progress
 
 Use `ProgressLabel` and `ProgressValue` to add a label and value display.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="progress-label" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/progress-label" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Controlled
 
 A progress bar that can be controlled by a slider.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="progress-controlled" />
 
-:::
-:::tab[Code]
+### Indeterminate
 
-```file="~/registry/examples/progress-controlled" frame=none showLineNumbers
+Use the `indeterminate` prop to show an indeterminate progress state.
 
-```
+<ComponentPreview name="progress-indeterminate" />
 
-:::
-::::
+### Custom Value Range
 
-### RTL
+Use `minValue` and `maxValue` to set custom value ranges.
 
-To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+<ComponentPreview name="progress-range" />
 
-::::tab-group[example3]
-:::tab[Preview]
+## API Reference
 
-<ComponentPreview name="progress-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/progress-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### API Reference
-
-See the [Kobalte UI Progress](https://kobalte.dev/docs/core/components/progress) documentation.
+See the [Kobalte Progress API reference](https://kobalte.dev/docs/core/components/progress#api-reference) for primitive props, accessibility, and progress semantics.

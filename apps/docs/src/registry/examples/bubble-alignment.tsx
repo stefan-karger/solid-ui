@@ -1,4 +1,4 @@
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
 
 export default function BubbleAlignment() {
   return (
@@ -22,5 +22,5 @@ export default function BubbleAlignment() {
         </BubbleContent>
       </Bubble>
     </div>
-  );
+  )
 }

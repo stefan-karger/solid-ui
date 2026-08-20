@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar";
-import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble";
-import { Message, MessageAvatar, MessageContent } from "~/registry/ui/message";
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
+import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble"
+import { Message, MessageAvatar, MessageContent } from "~/registry/ui/message"
 
 export default function MessageAvatarDemo() {
   return (
@@ -8,7 +8,7 @@ export default function MessageAvatarDemo() {
       <Message>
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/evilrabbit.png" alt="@avatar" />
+            <AvatarImage alt="@avatar" src="https://github.com/evilrabbit.png" />
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -21,7 +21,7 @@ export default function MessageAvatarDemo() {
       <Message align="end">
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@avatar" />
+            <AvatarImage alt="@avatar" src="https://github.com/shadcn.png" />
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -34,7 +34,7 @@ export default function MessageAvatarDemo() {
       <Message>
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/evilrabbit.png" alt="@avatar" />
+            <AvatarImage alt="@avatar" src="https://github.com/evilrabbit.png" />
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -53,5 +53,5 @@ export default function MessageAvatarDemo() {
         </MessageContent>
       </Message>
     </div>
-  );
+  )
 }

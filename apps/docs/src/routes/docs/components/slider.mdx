@@ -43,10 +43,44 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Slider } from "~/components/ui/slider";
 ```
 
-```tsx
-<Slider defaultValue={[33]} step={1} />
+```tsx showLineNumbers
+<Slider defaultValue={[33]} maxValue={100} step={1} />
 ```
+
+## Examples
+
+### Range
+
+Use an array with two values for a range slider.
+
+<ComponentPreview name="slider-range" />
+
+### Multiple Thumbs
+
+Use an array with multiple values for multiple thumbs.
+
+<ComponentPreview name="slider-multiple" />
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical slider.
+
+<ComponentPreview name="slider-vertical" />
+
+### Controlled
+
+<ComponentPreview name="slider-controlled" />
+
+### Disabled
+
+Use the `disabled` prop to disable the slider.
+
+<ComponentPreview name="slider-disabled" />
+
+## API Reference
+
+See the [Kobalte Slider API reference](https://kobalte.dev/docs/core/components/slider#api-reference) for the pinned public API, keyboard behavior, and accessibility contract.

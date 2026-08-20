@@ -1,80 +1,135 @@
-import * as PopoverPrimitive from "@kobalte/core/popover"
+import type { ComponentProps, ValidComponent } from "solid-js"
 import { mergeProps, splitProps } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import type { Component, ComponentProps, ValidComponent } from "solid-js"
+import * as PopoverPrimitive from "@kobalte/core/popover"
 
 import { cn } from "~/lib/utils"
 
-const PopoverTrigger = PopoverPrimitive.Trigger
+type PopoverProps = PopoverPrimitive.PopoverRootProps
 
-const Popover: Component<PopoverPrimitive.PopoverRootProps> = (props) => {
-  return <PopoverPrimitive.Root gutter={4} {...props} />
+const Popover = (props: PopoverProps) => {
+  const mergedProps = mergeProps({ gutter: 4, placement: "bottom" } as const, props)
+  return <PopoverPrimitive.Root data-slot="popover" {...mergedProps} />
 }
 
-type PopoverContentProps<T extends ValidComponent = "div"> =
-  PopoverPrimitive.PopoverContentProps<T> & { class?: string | undefined }
+type PopoverTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverTriggerProps<T>
+>
 
-const PopoverContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, PopoverContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as PopoverContentProps, ["class"])
+const PopoverTrigger = <T extends ValidComponent = "button">(props: PopoverTriggerProps<T>) => {
+  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
+}
+
+type PopoverAnchorProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverAnchorProps<T>
+>
+
+const PopoverAnchor = <T extends ValidComponent = "div">(props: PopoverAnchorProps<T>) => {
+  return <PopoverPrimitive.Anchor data-slot="popover-anchor" {...props} />
+}
+
+type PopoverContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverContentProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children">
+
+const PopoverContent = <T extends ValidComponent = "div">(props: PopoverContentProps<T>) => {
+  const [local, others] = splitProps(props as PopoverContentProps, ["class", "children"])
+
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
         class={cn(
-          "cn-popover-content z-50 flex w-72 origin-(--transform-origin) flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "cn-popover-content z-50 w-72 origin-(--kb-popover-content-transform-origin) outline-hidden",
           local.class
         )}
+        data-slot="popover-content"
         {...others}
-      />
+      >
+        {local.children}
+      </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   )
 }
 
-const PopoverHeader = (props: ComponentProps<"div">) => {
-  const [local, others] = splitProps(props, ["class"])
+type PopoverCloseButtonProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverCloseButtonProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
+const PopoverCloseButton = <T extends ValidComponent = "button">(
+  props: PopoverCloseButtonProps<T>
+) => {
+  const [local, others] = splitProps(props as PopoverCloseButtonProps, ["class"])
   return (
-    <div
-      data-slot="popover-header"
-      class={cn("cn-popover-header flex flex-col gap-0.5 text-sm", local.class)}
+    <PopoverPrimitive.CloseButton
+      class={cn("cn-popover-close-button", local.class)}
+      data-slot="popover-close-button"
       {...others}
     />
   )
 }
 
-type PopoverTitleProps<T extends ValidComponent = "div"> =
-  PopoverPrimitive.PopoverTitleProps<T> & { class?: string | undefined }
+type PopoverHeaderProps = ComponentProps<"div"> & {
+  class?: string | undefined
+}
 
-const PopoverTitle = <T extends ValidComponent = "div">(
-  rawProps: PolymorphicProps<T, PopoverTitleProps<T>>
-) => {
-  const props = mergeProps({ as: "div" } as PopoverTitleProps, rawProps)
-  const [local, others] = splitProps(props, ["class", "as"])
+const PopoverHeader = (props: PopoverHeaderProps) => {
+  const [local, others] = splitProps(props, ["class"])
+  return <div class={cn("cn-popover-header", local.class)} data-slot="popover-header" {...others} />
+}
 
+type PopoverTitleProps<T extends ValidComponent = "h2"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverTitleProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const PopoverTitle = <T extends ValidComponent = "h2">(props: PopoverTitleProps<T>) => {
+  const [local, others] = splitProps(props as PopoverTitleProps, ["class"])
   return (
     <PopoverPrimitive.Title
+      class={cn("cn-popover-title z-font-heading", local.class)}
       data-slot="popover-title"
-      class={cn("cn-popover-title font-medium", local.class)}
       {...others}
     />
   )
 }
 
-type PopoverDescriptionProps<T extends ValidComponent = "div"> =
-  PopoverPrimitive.PopoverDescriptionProps<T> & { class?: string | undefined }
+type PopoverDescriptionProps<T extends ValidComponent = "p"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverDescriptionProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
 
-const PopoverDescription = <T extends ValidComponent = "div">(
-  rawProps: PolymorphicProps<T, PopoverDescriptionProps<T>>
-) => {
-  const props = mergeProps({ as: "div" } as PopoverDescriptionProps, rawProps)
-  const [local, others] = splitProps(props, ["class", "as"])
-
+const PopoverDescription = <T extends ValidComponent = "p">(props: PopoverDescriptionProps<T>) => {
+  const [local, others] = splitProps(props as PopoverDescriptionProps, ["class"])
   return (
     <PopoverPrimitive.Description
+      class={cn("cn-popover-description", local.class)}
       data-slot="popover-description"
-      class={cn("cn-popover-description text-muted-foreground", local.class)}
+      {...others}
+    />
+  )
+}
+
+type PopoverArrowProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  PopoverPrimitive.PopoverArrowProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const PopoverArrow = <T extends ValidComponent = "div">(props: PopoverArrowProps<T>) => {
+  const [local, others] = splitProps(props as PopoverArrowProps, ["class"])
+  return (
+    <PopoverPrimitive.Arrow
+      class={cn("cn-popover-arrow", local.class)}
+      data-slot="popover-arrow"
       {...others}
     />
   )
@@ -82,9 +137,12 @@ const PopoverDescription = <T extends ValidComponent = "div">(
 
 export {
   Popover,
+  PopoverAnchor,
+  PopoverArrow,
+  PopoverCloseButton,
   PopoverContent,
-  PopoverTrigger,
+  PopoverDescription,
   PopoverHeader,
   PopoverTitle,
-  PopoverDescription
+  PopoverTrigger
 }

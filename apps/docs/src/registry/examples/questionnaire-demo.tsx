@@ -1,5 +1,7 @@
-import { For, Show } from "solid-js";
-import { toast } from "solid-sonner";
+import { For, Show } from "solid-js"
+
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -14,9 +16,9 @@ import {
   QuestionnaireRoot,
   QuestionnaireSkip,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const questionnaireItems = [
   {
@@ -24,68 +26,68 @@ const questionnaireItems = [
       {
         description: "Show what the agent ran and what came back.",
         label: "Tool call timeline",
-        value: "tool-calls",
+        value: "tool-calls"
       },
       {
         description: "Ask before sensitive or destructive actions.",
         label: "Approval checkpoints",
-        value: "approvals",
+        value: "approvals"
       },
       {
         description: "Make delegated work and results easier to follow.",
         label: "Sub-agent handoffs",
-        value: "handoffs",
-      },
+        value: "handoffs"
+      }
     ],
     description: "Choose a direction or describe another task.",
     input: {
       label: "Another agent feature",
-      placeholder: "Describe another feature…",
+      placeholder: "Describe another feature…"
     },
     name: "direction",
     required: true,
-    title: "What should the agent build next?",
+    title: "What should the agent build next?"
   },
   {
     choices: [
       { label: "Progress", value: "progress" },
       { label: "Decisions", value: "decisions" },
       { label: "Risks", value: "risks" },
-      { label: "Next step", value: "next-step" },
+      { label: "Next step", value: "next-step" }
     ],
     description: "Select all that apply, or skip this question.",
     multiple: true,
     name: "signals",
     required: false,
-    title: "What should every progress update include?",
+    title: "What should every progress update include?"
   },
   {
     choices: [
       { label: "Start now", value: "now" },
       { label: "Next development cycle", value: "next-cycle" },
-      { label: "Add it to the backlog", value: "backlog" },
+      { label: "Add it to the backlog", value: "backlog" }
     ],
     description: "Choose when the agent should begin the work.",
     name: "timing",
     required: true,
-    title: "When should work begin?",
-  },
-] as const;
+    title: "When should work begin?"
+  }
+] as const
 
 export default function QuestionnaireDemo() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
     const answers = {
       direction: formData.get("direction"),
       signals: formData.getAll("signals"),
-      timing: formData.get("timing"),
-    };
+      timing: formData.get("timing")
+    }
 
     toast("Agent plan saved", {
-      description: `Direction: ${answers.direction ?? "None"} · Progress signals: ${answers.signals.join(", ") || "None"} · Timing: ${answers.timing ?? "None"}`,
-    });
+      description: `Direction: ${answers.direction ?? "None"} · Progress signals: ${answers.signals.join(", ") || "None"} · Timing: ${answers.timing ?? "None"}`
+    })
   }
 
   return (
@@ -95,8 +97,8 @@ export default function QuestionnaireDemo() {
         class="mx-auto max-w-md"
         defaultItem="direction"
         items={questionnaireItems}
-        shortcuts="letters"
         onSubmit={handleSubmit}
+        shortcuts="letters"
       >
         <QuestionnaireProgress />
         <For each={questionnaireItems}>
@@ -142,5 +144,5 @@ export default function QuestionnaireDemo() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

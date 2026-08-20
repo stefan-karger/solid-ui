@@ -1,6 +1,8 @@
-import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid";
-import { createSignal } from "solid-js";
-import { Button } from "~/registry/ui/button";
+import { createSignal } from "solid-js"
+
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid"
+
+import { Button } from "~/registry/ui/button"
 import {
   Command,
   CommandDialog,
@@ -10,18 +12,18 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
-} from "~/registry/ui/command";
+  CommandShortcut
+} from "~/registry/ui/command"
 
 export default function CommandGroups() {
-  const [open, setOpen] = createSignal(false);
+  const [open, setOpen] = createSignal(false)
 
   return (
     <div class="flex flex-col gap-4">
-      <Button onClick={() => setOpen(true)} variant="outline" class="w-fit">
+      <Button class="w-fit" onClick={() => setOpen(true)} variant="outline">
         Open Menu
       </Button>
-      <CommandDialog open={open()} onOpenChange={setOpen}>
+      <CommandDialog onOpenChange={setOpen} open={open()}>
         <Command>
           <CommandInput placeholder="Type a command or search..." />
           <CommandList>
@@ -62,5 +64,5 @@ export default function CommandGroups() {
         </Command>
       </CommandDialog>
     </div>
-  );
+  )
 }

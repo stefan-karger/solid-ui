@@ -66,7 +66,7 @@ const DialogContent = <T extends ValidComponent = "div">(
       <DialogOverlay />
       <DialogPrimitive.Content
         class={cn(
-          "cn-dialog-content -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 w-full",
+          "cn-dialog-content fixed top-1/2 left-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2",
           local.class
         )}
         data-slot="dialog-content"
@@ -152,11 +152,11 @@ const DialogDescription = <T extends ValidComponent = "p">(
 
 export {
   Dialog,
-  DialogTrigger,
   DialogClose,
   DialogContent,
-  DialogHeader,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-  DialogDescription
+  DialogTrigger
 }

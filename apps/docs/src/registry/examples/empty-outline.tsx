@@ -7,7 +7,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 
 export default function EmptyOutline() {
@@ -23,7 +23,7 @@ export default function EmptyOutline() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           Upload Files
         </Button>
       </EmptyContent>

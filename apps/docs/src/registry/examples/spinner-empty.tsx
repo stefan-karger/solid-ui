@@ -5,7 +5,7 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
+  EmptyTitle
 } from "~/registry/ui/empty"
 import { Spinner } from "~/registry/ui/spinner"
 
@@ -22,7 +22,7 @@ export default function SpinnerEmpty() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           Cancel
         </Button>
       </EmptyContent>

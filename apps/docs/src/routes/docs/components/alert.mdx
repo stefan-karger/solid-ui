@@ -3,10 +3,12 @@ title: Alert
 description: Displays a callout for user attention.
 ---
 
+The Alert component is built on top of [Kobalte Alert](https://kobalte.dev/docs/core/components/alert), which provides accessible callout semantics.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
-<ComponentPreview name="alert-demo" />
+<ComponentPreview name="alert-demo" previewClass="h-auto p-6 sm:min-h-72" />
 
 :::
 :::tab[Code]
@@ -36,16 +38,103 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+```tsx showLineNumbers
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "~/components/ui/alert";
+import { Button } from "~/components/ui/button";
+import { InfoIcon } from "lucide-solid";
 ```
 
 ```tsx showLineNumbers
 <Alert>
-  <AlertCircle class="size-4" />
+  <InfoIcon />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
-    You can add components to your app using the cli.
+    You can add components and dependencies to your app using the CLI.
   </AlertDescription>
+  <AlertAction>
+    <Button variant="outline">Enable</Button>
+  </AlertAction>
 </Alert>
 ```
+
+## Composition
+
+Use the following composition to build an Alert:
+
+```text
+Alert
+├── Icon
+├── AlertTitle
+├── AlertDescription
+└── AlertAction
+```
+
+## Examples
+
+### Basic
+
+A basic alert with an icon, title, and description.
+
+<ComponentPreview name="alert-basic" previewClass="h-auto p-6 sm:min-h-72" />
+
+### Destructive
+
+Use `variant="destructive"` to create a destructive alert.
+
+<ComponentPreview
+  name="alert-destructive"
+  previewClass="h-auto p-6 sm:min-h-72"
+/>
+
+### Action
+
+Use `AlertAction` to add a button or other action element to an alert.
+
+<ComponentPreview name="alert-action" previewClass="h-auto p-6 sm:min-h-72" />
+
+### Custom Colors
+
+Customize alert colors with utility classes such as `bg-amber-50 dark:bg-amber-950`.
+
+<ComponentPreview name="alert-colors" previewClass="h-auto p-6 sm:min-h-72" />
+
+## API Reference
+
+### Alert
+
+Displays a callout for user attention.
+
+| Prop      | Type                         | Default     |
+| --------- | ---------------------------- | ----------- |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+
+### AlertTitle
+
+Displays the title of an alert.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AlertDescription
+
+Displays an alert's description or content.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AlertAction
+
+Displays an action element positioned at the alert's top right.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+For all primitive props and keyboard interactions, see the [Kobalte Alert API reference](https://kobalte.dev/docs/core/components/alert#api-reference).

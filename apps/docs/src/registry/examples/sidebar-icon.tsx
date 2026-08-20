@@ -1,54 +1,52 @@
+import type { Component, ComponentProps } from "solid-js"
+import { createSignal, For, Show } from "solid-js"
+
 import {
   AudioWaveform,
   BadgeCheck,
   Bell,
   BookOpen,
   Bot,
+  ChartPieIcon,
   ChevronRight,
   ChevronsUpDown,
   Command,
   CreditCard,
+  EllipsisIcon,
   Folder,
   Forward,
   Frame,
   GalleryVerticalEnd,
   LogOut,
   Map as MapIcon,
-  EllipsisIcon,
-  ChartPieIcon,
   Plus,
   Settings2,
   Sparkles,
   SquareTerminal,
-  Trash2,
-} from "lucide-solid";
-import type { Component, ComponentProps } from "solid-js";
-import { createSignal, For, Show } from "solid-js";
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar";
+  Trash2
+} from "lucide-solid"
+
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "~/registry/ui/breadcrumb";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "~/registry/ui/collapsible";
+  BreadcrumbSeparator
+} from "~/registry/ui/breadcrumb"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuGroupLabel,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/registry/ui/dropdown-menu";
-import { Kbd } from "~/registry/ui/kbd";
-import { Separator } from "~/registry/ui/separator";
+  DropdownMenuTrigger
+} from "~/registry/ui/dropdown-menu"
+import { Kbd } from "~/registry/ui/kbd"
+import { Separator } from "~/registry/ui/separator"
 import {
   Sidebar,
   SidebarContent,
@@ -67,32 +65,32 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
-} from "~/registry/ui/sidebar";
+  useSidebar
+} from "~/registry/ui/sidebar"
 
 // Sample data
 const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/avatars/shadcn.jpg"
   },
   teams: [
     {
       name: "Acme Inc",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: "Enterprise"
     },
     {
       name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: "Startup",
+      plan: "Startup"
     },
     {
       name: "Evil Corp.",
       logo: Command,
-      plan: "Free",
-    },
+      plan: "Free"
+    }
   ],
   navMain: [
     {
@@ -103,8 +101,8 @@ const data = {
       items: [
         { title: "History", url: "#" },
         { title: "Starred", url: "#" },
-        { title: "Settings", url: "#" },
-      ],
+        { title: "Settings", url: "#" }
+      ]
     },
     {
       title: "Models",
@@ -113,8 +111,8 @@ const data = {
       items: [
         { title: "Genesis", url: "#" },
         { title: "Explorer", url: "#" },
-        { title: "Quantum", url: "#" },
-      ],
+        { title: "Quantum", url: "#" }
+      ]
     },
     {
       title: "Documentation",
@@ -124,8 +122,8 @@ const data = {
         { title: "Introduction", url: "#" },
         { title: "Get Started", url: "#" },
         { title: "Tutorials", url: "#" },
-        { title: "Changelog", url: "#" },
-      ],
+        { title: "Changelog", url: "#" }
+      ]
     },
     {
       title: "Settings",
@@ -135,34 +133,34 @@ const data = {
         { title: "General", url: "#" },
         { title: "Team", url: "#" },
         { title: "Billing", url: "#" },
-        { title: "Limits", url: "#" },
-      ],
-    },
+        { title: "Limits", url: "#" }
+      ]
+    }
   ],
   projects: [
     { name: "Design Engineering", url: "#", icon: Frame },
     { name: "Sales & Marketing", url: "#", icon: ChartPieIcon },
-    { name: "Travel", url: "#", icon: MapIcon },
-  ],
-};
+    { name: "Travel", url: "#", icon: MapIcon }
+  ]
+}
 
 // Team Switcher component
 function TeamSwitcher(props: {
-  teams: { name: string; logo: Component<ComponentProps<"svg">>; plan: string }[];
+  teams: { name: string; logo: Component<ComponentProps<"svg">>; plan: string }[]
 }) {
-  const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = createSignal(props.teams[0]);
+  const { isMobile } = useSidebar()
+  const [activeTeam, setActiveTeam] = createSignal(props.teams[0])
 
   return (
-    <Show when={activeTeam()} keyed>
+    <Show keyed when={activeTeam()}>
       {(team) => (
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu placement={isMobile() ? "bottom" : "right"}>
               <DropdownMenuTrigger
                 as={SidebarMenuButton}
-                size="lg"
                 class="data-[expanded]:bg-sidebar-accent data-[expanded]:text-sidebar-accent-foreground"
+                size="lg"
               >
                 <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   {team.logo({ class: "size-4" })}
@@ -174,10 +172,10 @@ function TeamSwitcher(props: {
                 <ChevronsUpDown class="ml-auto" />
               </DropdownMenuTrigger>
               <DropdownMenuContent class="w-(--kb-popper-anchor-width) min-w-56 rounded-lg">
-                <DropdownMenuGroupLabel class="text-muted-foreground text-xs">Teams</DropdownMenuGroupLabel>
+                <DropdownMenuLabel class="text-muted-foreground text-xs">Teams</DropdownMenuLabel>
                 <For each={props.teams}>
                   {(team, index) => (
-                    <DropdownMenuItem onSelect={() => setActiveTeam(team)} class="gap-2 p-2">
+                    <DropdownMenuItem class="gap-2 p-2" onSelect={() => setActiveTeam(team)}>
                       <div class="flex size-6 items-center justify-center rounded-md border">
                         {team.logo({ class: "size-3.5 shrink-0" })}
                       </div>
@@ -199,18 +197,18 @@ function TeamSwitcher(props: {
         </SidebarMenu>
       )}
     </Show>
-  );
+  )
 }
 
 // Nav Main component
 function NavMain(props: {
   items: {
-    title: string;
-    url: string;
-    icon?: Component<ComponentProps<"svg">>;
-    isActive?: boolean;
-    items?: { title: string; url: string }[];
-  }[];
+    title: string
+    url: string
+    icon?: Component<ComponentProps<"svg">>
+    isActive?: boolean
+    items?: { title: string; url: string }[]
+  }[]
 }) {
   return (
     <SidebarGroup>
@@ -218,10 +216,10 @@ function NavMain(props: {
       <SidebarMenu>
         <For each={props.items}>
           {(item) => (
-            <Collapsible defaultOpen={item.isActive} class="group/collapsible">
+            <Collapsible class="group/collapsible" defaultOpen={item.isActive}>
               <SidebarMenuItem>
                 <CollapsibleTrigger as={SidebarMenuButton} tooltip={item.title}>
-                  <Show when={item.icon} keyed>
+                  <Show keyed when={item.icon}>
                     {(Icon) => <Icon />}
                   </Show>
                   <span>{item.title}</span>
@@ -246,14 +244,14 @@ function NavMain(props: {
         </For>
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }
 
 // Nav Projects component
 function NavProjects(props: {
-  projects: { name: string; url: string; icon: Component<ComponentProps<"svg">> }[];
+  projects: { name: string; url: string; icon: Component<ComponentProps<"svg">> }[]
 }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = useSidebar()
 
   return (
     <SidebarGroup class="group-data-[collapsible=icon]:hidden">
@@ -267,7 +265,7 @@ function NavProjects(props: {
                 <span>{item.name}</span>
               </SidebarMenuButton>
               <DropdownMenu placement={isMobile() ? "bottom-end" : "right-start"}>
-                <DropdownMenuTrigger as={SidebarMenuAction} showOnHover class="">
+                <DropdownMenuTrigger as={SidebarMenuAction} class="" showOnHover>
                   <EllipsisIcon />
                   <span class="sr-only">More</span>
                 </DropdownMenuTrigger>
@@ -298,12 +296,12 @@ function NavProjects(props: {
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }
 
 // Nav User component
 function NavUser(props: { user: { name: string; email: string; avatar: string } }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = useSidebar()
 
   return (
     <SidebarMenu>
@@ -311,11 +309,11 @@ function NavUser(props: { user: { name: string; email: string; avatar: string } 
         <DropdownMenu placement={isMobile() ? "bottom-end" : "right-end"}>
           <DropdownMenuTrigger
             as={SidebarMenuButton}
-            size="lg"
             class="data-[expanded]:bg-sidebar-accent data-[expanded]:text-sidebar-accent-foreground"
+            size="lg"
           >
             <Avatar class="h-8 w-8 rounded-lg">
-              <AvatarImage src={props.user.avatar} alt={props.user.name} />
+              <AvatarImage alt={props.user.name} src={props.user.avatar} />
               <AvatarFallback class="rounded-lg">CN</AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
@@ -325,10 +323,10 @@ function NavUser(props: { user: { name: string; email: string; avatar: string } 
             <ChevronsUpDown class="ml-auto size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent class="w-(--kb-popper-anchor-width) min-w-56 rounded-lg">
-            <DropdownMenuGroupLabel class="p-0 font-normal">
+            <DropdownMenuLabel class="p-0 font-normal">
               <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar class="h-8 w-8 rounded-lg">
-                  <AvatarImage src={props.user.avatar} alt={props.user.name} />
+                  <AvatarImage alt={props.user.name} src={props.user.avatar} />
                   <AvatarFallback class="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div class="grid flex-1 text-left text-sm leading-tight">
@@ -336,7 +334,7 @@ function NavUser(props: { user: { name: string; email: string; avatar: string } 
                   <span class="truncate text-xs">{props.user.email}</span>
                 </div>
               </div>
-            </DropdownMenuGroupLabel>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
@@ -368,7 +366,7 @@ function NavUser(props: { user: { name: string; email: string; avatar: string } 
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }
 
 export default function SidebarIconExample() {
@@ -391,7 +389,7 @@ export default function SidebarIconExample() {
         <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div class="flex items-center gap-2 px-4">
             <SidebarTrigger class="-ml-1" />
-            <Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
+            <Separator class="mr-2 data-[orientation=vertical]:h-4" orientation="vertical" />
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem class="hidden md:block">
@@ -415,5 +413,5 @@ export default function SidebarIconExample() {
         </div>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }

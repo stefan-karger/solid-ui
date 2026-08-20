@@ -1,10 +1,6 @@
 import { SearchIcon } from "lucide-solid"
 
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "~/registry/ui/input-group"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "~/registry/ui/input-group"
 import { Kbd } from "~/registry/ui/kbd"
 
 export default function KbdInputGroup() {

@@ -1,13 +1,8 @@
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "~/registry/ui/input-otp"
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
 
 export default function InputOTPDisabled() {
   return (
-    <InputOTP id="disabled" maxLength={6} disabled value="123456">
+    <InputOTP disabled id="disabled" maxLength={6} value="123456">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />

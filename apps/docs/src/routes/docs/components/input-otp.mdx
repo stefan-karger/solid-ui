@@ -3,6 +3,8 @@ title: Input OTP
 description: Accessible one-time password component with copy-paste functionality.
 ---
 
+The Input OTP component is built on top of [Corvu OTP Field](https://corvu.dev/docs/primitives/otp-field), which provides the accessible one-time password input primitive with copy-paste support.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -18,10 +20,6 @@ description: Accessible one-time password component with copy-paste functionalit
 
 :::
 ::::
-
-## About
-
-Input OTP is built on top of [corvu](https://github.com/corvudev/corvu/).
 
 ## Installation
 
@@ -53,7 +51,7 @@ import {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "~/registry/ui/input-otp";
+} from "~/components/ui/input-otp";
 ```
 
 ```tsx showLineNumbers
@@ -76,7 +74,7 @@ import {
 
 Use the following composition to build an `InputOTP`:
 
-```plaintext
+```text
 InputOTP
 ├── InputOTPGroup
 │   ├── InputOTPSlot
@@ -93,177 +91,56 @@ InputOTP
     └── InputOTPSlot
 ```
 
+The input only accepts digits by default (Corvu OTP Field's built-in `^\d*$` pattern). Use the `pattern` prop to customize the accepted characters.
+
 ## Examples
 
 ### Pattern
 
-Use the `pattern` prop to define a custom pattern for the OTP input.
-
-::::tab-group[example1]
-:::tab[Preview]
+Use the `pattern` prop to define a custom regex for the accepted characters. The default only accepts digits; this example also accepts letters. Pass `null` to allow all characters.
 
 <ComponentPreview name="input-otp-pattern" />
 
-:::
-:::tab[Code]
+### Alphanumeric
 
-```file="~/registry/examples/input-otp-pattern" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Separator
-
-Use the `<InputOTPSeparator />` component to add a separator between input groups.
-
-::::tab-group[example2]
-:::tab[Preview]
-
-<ComponentPreview name="input-otp-separator" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/input-otp-separator" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Disabled
-
-Use the `disabled` prop to disable the input.
-
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="input-otp-disabled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/input-otp-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Controlled
-
-Use the `value` and `onChange` props to control the input value.
-
-::::tab-group[example4]
-:::tab[Preview]
-
-<ComponentPreview name="input-otp-controlled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/input-otp-controlled" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Invalid
-
-Use `aria-invalid` on the slots to show an error state.
-
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="input-otp-invalid" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/input-otp-invalid" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Four Digits
-
-A common pattern for PIN codes. This uses the `pattern={REGEXP_ONLY_DIGITS}` prop.
-
-::::tab-group[example6]
-:::tab[Preview]
-
-<ComponentPreview name="input-otp-four-digits" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/input-otp-four-digits" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Alphanumeric
-
-Use `REGEXP_ONLY_DIGITS_AND_CHARS` to accept both letters and numbers.
-
-::::tab-group[example1]
-:::tab[Preview]
+Accept both letters and numbers with an alphanumeric pattern.
 
 <ComponentPreview name="input-otp-alphanumeric" />
 
-:::
-:::tab[Code]
+### Separator
 
-```file="~/registry/examples/input-otp-alphanumeric" frame=none showLineNumbers
+Use the `<InputOTPSeparator />` component to add a separator between input groups.
 
-```
+<ComponentPreview name="input-otp-separator" />
 
-:::
-::::
+### Disabled
 
-## Form
+Use the `disabled` prop to disable the input.
 
-::::tab-group[example1]
-:::tab[Preview]
+<ComponentPreview name="input-otp-disabled" />
 
-<ComponentPreview name="input-otp-form" />
+### Controlled
 
-:::
-:::tab[Code]
+Use the `value` and `onValueChange` props to control the input value.
 
-```file="~/registry/examples/input-otp-form" frame=none showLineNumbers
+<ComponentPreview name="input-otp-controlled" />
 
-```
+### Invalid
 
-:::
-::::
+Use `aria-invalid` on the slots to show an error state.
 
-## RTL
+<ComponentPreview name="input-otp-invalid" />
 
-To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
+### Four Digits
 
-::::tab-group[example1]
-:::tab[Preview]
+A common pattern for PIN codes: set `maxLength={4}`.
 
-<ComponentPreview name="input-otp-rtl" />
+<ComponentPreview name="input-otp-four-digits" />
 
-:::
-:::tab[Code]
+### Form
 
-```file="~/registry/examples/input-otp-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="input-otp-form" previewClass="h-[30rem]" />
 
 ## API Reference
 
-See the [input-otp](https://corvu.dev/docs/primitives/otp-field/) documentation for more information.
+See the [Corvu OTP Field API reference](https://corvu.dev/docs/primitives/otp-field#api-reference) for primitive props, keyboard interactions, and accessibility details.

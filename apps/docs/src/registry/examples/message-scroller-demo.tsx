@@ -1,3 +1,5 @@
+import { For, Show } from "solid-js"
+
 import {
   ArrowUpIcon,
   GlobeIcon,
@@ -6,17 +8,10 @@ import {
   PaperclipIcon,
   PlusIcon,
   RotateCwIcon,
-  TelescopeIcon,
-} from "lucide-solid";
-import { For, Show } from "solid-js";
-import {
-  MessageScroller,
-  MessageScrollerButton,
-  MessageScrollerContent,
-  MessageScrollerProvider,
-  MessageScrollerViewport
-} from "~/registry/ui/message-scroller";
-import { Button } from "~/registry/ui/button";
+  TelescopeIcon
+} from "lucide-solid"
+
+import { Button } from "~/registry/ui/button"
 import {
   Card,
   CardAction,
@@ -24,32 +19,30 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
-} from "~/registry/ui/card";
+  CardTitle
+} from "~/registry/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/registry/ui/dropdown-menu";
+  DropdownMenuTrigger
+} from "~/registry/ui/dropdown-menu"
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "~/registry/ui/empty"
+import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group"
 import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "~/registry/ui/empty";
-import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip";
-import {
-  createScriptedChat,
-  MessageAnimated,
-  scrollBehaviorScript,
-} from "./message-scroller-utils";
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerProvider,
+  MessageScrollerViewport
+} from "~/registry/ui/message-scroller"
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+
+import { createScriptedChat, MessageAnimated, scrollBehaviorScript } from "./message-scroller-utils"
 
 export default function MessageScrollerDemo() {
-  const chat = createScriptedChat({ delayMs: 20, script: scrollBehaviorScript });
+  const chat = createScriptedChat({ delayMs: 20, script: scrollBehaviorScript })
 
   return (
     <MessageScrollerProvider>
@@ -62,11 +55,11 @@ export default function MessageScrollerDemo() {
               <Tooltip>
                 <TooltipTrigger as="span" class="inline-block w-fit">
                   <Button
-                    variant="outline"
-                    size="icon"
                     aria-label="Reset conversation"
                     disabled={chat.messages.length === 0 || chat.isBusy()}
                     onClick={chat.reset}
+                    size="icon"
+                    variant="outline"
                   >
                     <RotateCwIcon />
                   </Button>
@@ -79,7 +72,6 @@ export default function MessageScrollerDemo() {
           </CardHeader>
           <CardContent class="min-h-0 flex-1 overflow-hidden p-0">
             <Show
-              when={chat.messages.length > 0}
               fallback={
                 <Empty class="h-full">
                   <EmptyHeader>
@@ -93,6 +85,7 @@ export default function MessageScrollerDemo() {
                   </EmptyHeader>
                 </Empty>
               }
+              when={chat.messages.length > 0}
             >
               <MessageScroller>
                 <MessageScrollerViewport>
@@ -110,8 +103,8 @@ export default function MessageScrollerDemo() {
             <form
               class="w-full"
               onSubmit={(event) => {
-                event.preventDefault();
-                chat.send();
+                event.preventDefault()
+                chat.send()
               }}
             >
               <InputGroup>
@@ -121,13 +114,13 @@ export default function MessageScrollerDemo() {
                     data-status={chat.status()}
                   >
                     <Show
-                      when={chat.nextMessage()}
-                      keyed
                       fallback={
                         <span class="text-muted-foreground">
                           No messages queued. Reset the conversation.
                         </span>
                       }
+                      keyed
+                      when={chat.nextMessage()}
                     >
                       {(message) => message.text}
                     </Show>
@@ -136,10 +129,10 @@ export default function MessageScrollerDemo() {
                 <InputGroupAddon align="block-end" class="pt-1">
                   <DropdownMenu placement="top-start">
                     <DropdownMenuTrigger
-                      as={InputGroupButton}
                       aria-label="Add files"
-                      type="button"
+                      as={InputGroupButton}
                       size="icon-sm"
+                      type="button"
                       variant="outline"
                     >
                       <PlusIcon />
@@ -165,11 +158,11 @@ export default function MessageScrollerDemo() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                   <InputGroupButton
+                    class="ml-auto"
+                    disabled={!chat.nextMessage() || chat.isBusy()}
+                    size="icon-sm"
                     type="submit"
                     variant="default"
-                    size="icon-sm"
-                    disabled={!chat.nextMessage() || chat.isBusy()}
-                    class="ml-auto"
                   >
                     <ArrowUpIcon />
                     <span class="sr-only">Send</span>
@@ -184,5 +177,5 @@ export default function MessageScrollerDemo() {
         </div>
       </div>
     </MessageScrollerProvider>
-  );
+  )
 }

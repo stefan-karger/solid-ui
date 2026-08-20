@@ -22,13 +22,12 @@ const Slider = <T extends ValidComponent = "div">(
     "maxValue"
   ])
 
-  const _values = createMemo(
-    () =>
-      Array.isArray(local.value)
-        ? local.value
-        : Array.isArray(local.defaultValue)
-          ? local.defaultValue
-          : [local.minValue, local.maxValue],
+  const _values = createMemo(() =>
+    Array.isArray(local.value)
+      ? local.value
+      : Array.isArray(local.defaultValue)
+        ? local.defaultValue
+        : [local.minValue, local.maxValue]
   )
 
   return (

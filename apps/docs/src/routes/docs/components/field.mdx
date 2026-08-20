@@ -3,6 +3,8 @@ title: Field
 description: Combine labels, controls, and help text to compose accessible form fields and grouped inputs.
 ---
 
+Field is a Solid composition helper that uses [Kobalte Label](https://kobalte.dev/docs/core/components/label) for accessible control labeling. Use the Field family to arrange labels, controls, descriptions, validation messages, and related controls.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -43,12 +45,12 @@ import {
   <FieldGroup>
     <Field>
       <FieldLabel for="name">Full name</FieldLabel>
-      <Input id="name" autoComplete="off" placeholder="Evil Rabbit" />
+      <Input id="name" autocomplete="off" placeholder="Evil Rabbit" />
       <FieldDescription>This appears on invoices and emails.</FieldDescription>
     </Field>
     <Field>
       <FieldLabel for="username">Username</FieldLabel>
-      <Input id="username" autoComplete="off" aria-invalid />
+      <Input id="username" autocomplete="off" aria-invalid />
       <FieldError>Choose another username.</FieldError>
     </Field>
     <Field orientation="horizontal">
@@ -57,6 +59,56 @@ import {
     </Field>
   </FieldGroup>
 </FieldSet>
+```
+
+## Composition
+
+### Field
+
+A single control with label, helper text, and validation.
+
+```text
+Field
+├── FieldLabel
+├── Input / Textarea / Switch / Select
+├── FieldDescription
+└── FieldError
+```
+
+### FieldGroup
+
+Related fields in one group. Use `FieldSeparator` between sections when needed.
+
+```text
+FieldGroup
+├── Field
+│   ├── FieldLabel
+│   ├── Input / Textarea / Switch / Select
+│   ├── FieldDescription
+│   └── FieldError
+├── FieldSeparator
+└── Field
+    ├── FieldLabel
+    └── Input / Textarea / Switch / Select
+```
+
+### FieldSet
+
+Semantic grouping with a legend and description, usually containing a `FieldGroup`.
+
+```text
+FieldSet
+├── FieldLegend
+├── FieldDescription
+└── FieldGroup
+    ├── Field
+    │   ├── FieldLabel
+    │   ├── Input / Textarea / Switch / Select
+    │   ├── FieldDescription
+    │   └── FieldError
+    └── Field
+        ├── FieldLabel
+        └── Input / Textarea / Switch / Select
 ```
 
 ## Anatomy
@@ -73,214 +125,77 @@ The `Field` family is designed for composing accessible forms. A typical field i
 ```
 
 - `Field` is the core wrapper for a single field.
-- `FieldContent` is a flex column that groups label and description. Not required if you have no description.
+- `FieldContent` is a flex column that groups label and description. It is not required without a description.
 - Wrap related fields with `FieldGroup`, and use `FieldSet` with `FieldLegend` for semantic grouping.
 
 ## Examples
 
 ### Input
 
-::::tab-group[exampl21]
-:::tab[Preview]
-
 <ComponentPreview name="field-input" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-input" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Textarea
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="field-textarea" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-textarea" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Select
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="field-select" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-select" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Slider
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="field-slider" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-slider" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Fieldset
 
-::::tab-group[example5]
-:::tab[Preview]
-
 <ComponentPreview name="field-fieldset" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-fieldset" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Checkbox
 
-::::tab-group[example6]
-:::tab[Preview]
-
-<ComponentPreview name="field-checkbox" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-checkbox" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="field-checkbox" previewClass="h-[32rem]" />
 
 ### Radio
 
-::::tab-group[example7]
-:::tab[Preview]
-
 <ComponentPreview name="field-radio" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-radio" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Switch
 
-::::tab-group[example8]
-:::tab[Preview]
-
 <ComponentPreview name="field-switch" />
-
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-switch" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Choice Card
 
-::::tab-group[example9]
-:::tab[Preview]
+Wrap `Field` components inside `FieldLabel` to create selectable field groups. This works with `RadioGroupItem`, `Checkbox`, and `Switch` components.
 
 <ComponentPreview name="field-choice-card" />
 
-:::
-
-:::tab[Code]
-
-```file="~/registry/examples/field-choice-card" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Field Group
 
-::::tab-group[example10]
-:::tab[Preview]
+Stack `Field` components with `FieldGroup`. Add `FieldSeparator` to divide them.
 
-<ComponentPreview name="field-group-example" />
+<ComponentPreview name="field-group" previewClass="h-96" />
 
-:::
+### Responsive Layout
 
-:::tab[Code]
-
-```file="~/registry/examples/field-group-example" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Responsive Layout
-
-- **Vertical fields:** Default orientation stacks label, control, and helper text—ideal for mobile-first layouts.
+- **Vertical fields:** The default orientation stacks label, control, and helper text for mobile-first layouts.
 - **Horizontal fields:** Set `orientation="horizontal"` on `Field` to align the label and control side-by-side. Pair with `FieldContent` to keep descriptions aligned.
-- **Responsive fields:** Set `orientation="responsive"` for automatic column layouts inside container-aware parents. Apply `@container/field-group` classes on `FieldGroup` to switch orientations at specific breakpoints.
+- **Responsive fields:** Set `orientation="responsive"` for automatic column layouts inside container-aware parents. `FieldGroup` provides the `@container/field-group` container used by the component styles.
 
-::::tab-group[example11]
-:::tab[Preview]
+<ComponentPreview
+  name="field-responsive"
+  previewClass="h-[650px] p-6 md:h-[500px] md:p-10"
+/>
 
-<ComponentPreview name="field-responsive" />
+## Accessibility
 
-:::
+- `FieldSet` and `FieldLegend` keep related controls grouped for keyboard and assistive-tech users.
+- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend` when combined.
+- Apply `FieldSeparator` sparingly so screen readers encounter clear section boundaries.
 
-:::tab[Code]
+## API Reference
 
-```file="~/registry/examples/field-responsive" frame=none showLineNumbers
+For primitive label props and keyboard behavior, see the [Kobalte Label API reference](https://kobalte.dev/docs/core/components/label#api-reference).
 
-```
-
-:::
-::::
-
-## Validation and Errors
+### Validation and Errors
 
 - Add `data-invalid` to `Field` to switch the entire block into an error state.
 - Add `aria-invalid` on the input itself for assistive technologies.
@@ -294,21 +209,13 @@ The `Field` family is designed for composing accessible forms. A typical field i
 </Field>
 ```
 
-## Accessibility
-
-- `FieldSet` and `FieldLegend` keep related controls grouped for keyboard and assistive tech users.
-- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend` when combined.
-- Apply `FieldSeparator` sparingly to ensure screen readers encounter clear section boundaries.
-
-## API Reference
-
 ### FieldSet
 
 Container that renders a semantic `fieldset` with spacing presets.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldSet>
@@ -324,13 +231,13 @@ Legend element for a `FieldSet`. Switch to the `label` variant to align with lab
 | Prop      | Type                  | Default    |
 | --------- | --------------------- | ---------- |
 | `variant` | `"legend" \| "label"` | `"legend"` |
-| `class`   | `string`              |            |
+| `class`   | `string`              | -          |
 
 ```tsx
 <FieldLegend variant="label">Notification Preferences</FieldLegend>
 ```
 
-The `FieldLegend` has two variants: `legend` and `label`. The `label` variant applies label sizing and alignment. Handy if you have nested `FieldSet`.
+The `FieldLegend` has two variants: `legend` and `label`. The `label` variant applies label sizing and alignment. Handy if you have a nested `FieldSet`.
 
 ### FieldGroup
 
@@ -338,7 +245,7 @@ Layout wrapper that stacks `Field` components and enables container queries for 
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldGroup class="@container/field-group flex flex-col gap-6">
@@ -354,8 +261,8 @@ The core wrapper for a single field. Provides orientation control, invalid state
 | Prop           | Type                                         | Default      |
 | -------------- | -------------------------------------------- | ------------ |
 | `orientation`  | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` |
-| `class`        | `string`                                     |              |
-| `data-invalid` | `boolean`                                    |              |
+| `data-invalid` | `boolean`                                    | -            |
+| `class`        | `string`                                     | -            |
 
 ```tsx
 <Field orientation="horizontal">
@@ -370,7 +277,7 @@ Flex column that groups control and descriptions when the label sits beside the 
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <Field>
@@ -386,10 +293,9 @@ Flex column that groups control and descriptions when the label sits beside the 
 
 Label styled for both direct inputs and nested `Field` children.
 
-| Prop      | Type      | Default |
-| --------- | --------- | ------- |
-| `class`   | `string`  |         |
-| `asChild` | `boolean` | `false` |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldLabel for="email">Email</FieldLabel>
@@ -401,7 +307,7 @@ Renders a title with label styling inside `FieldContent`.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldContent>
@@ -416,7 +322,7 @@ Helper text slot that automatically balances long lines in horizontal layouts.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldDescription>We never share your email with anyone.</FieldDescription>
@@ -428,7 +334,7 @@ Visual divider to separate sections inside a `FieldGroup`. Accepts optional inli
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | -       |
 
 ```tsx
 <FieldSeparator>Or continue with</FieldSeparator>
@@ -436,17 +342,15 @@ Visual divider to separate sections inside a `FieldGroup`. Accepts optional inli
 
 ### FieldError
 
-Accessible error container that accepts children or an `errors` array (e.g., from `formisch`).
+Accessible error container that accepts children or an `errors` array (e.g., from a form library).
 
 | Prop     | Type                                       | Default |
 | -------- | ------------------------------------------ | ------- |
-| `errors` | `Array<{ message?: string } \| undefined>` |         |
-| `class`  | `string`                                   |         |
+| `errors` | `Array<{ message?: string } \| undefined>` | -       |
+| `class`  | `string`                                   | -       |
 
 ```tsx
 <FieldError errors={errors.username} />
 ```
 
 When the `errors` array contains multiple messages, the component renders a list automatically.
-
-`FieldError` also accepts issues produced by any validator that implements [Standard Schema](https://standardschema.dev/), including Zod, Valibot, and ArkType. Pass the `issues` array from the schema result directly to render a unified error list across libraries.

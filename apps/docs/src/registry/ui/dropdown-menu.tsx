@@ -69,16 +69,16 @@ const DropdownMenuItem = <T extends ValidComponent = "div">(
   )
 }
 
-type DropdownMenuGroupLabelProps<T extends ValidComponent = "span"> =
+type DropdownMenuLabelProps<T extends ValidComponent = "span"> =
   DropdownMenuPrimitive.DropdownMenuGroupLabelProps<T> & {
     class?: string | undefined
     inset?: boolean
   }
 
-const DropdownMenuGroupLabel = <T extends ValidComponent = "span">(
-  props: PolymorphicProps<T, DropdownMenuGroupLabelProps<T>>
+const DropdownMenuLabel = <T extends ValidComponent = "span">(
+  props: PolymorphicProps<T, DropdownMenuLabelProps<T>>
 ) => {
-  const [local, others] = splitProps(props as DropdownMenuGroupLabelProps, ["class", "inset"])
+  const [local, others] = splitProps(props as DropdownMenuLabelProps, ["class", "inset"])
   return (
     <DropdownMenuPrimitive.GroupLabel
       class={cn("cn-dropdown-menu-label data-[inset]:pl-8", local.class)}
@@ -244,18 +244,18 @@ const DropdownMenuRadioItem = <T extends ValidComponent = "div">(
 
 export {
   DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuPortal,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuShortcut,
-  DropdownMenuGroupLabel,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
   DropdownMenuCheckboxItem,
+  DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
 }

@@ -18,6 +18,8 @@ description: Renders an accessible label associated with controls.
 :::
 ::::
 
+For form fields, use the [Field](/docs/components/kobalte/field) component which includes built-in label, description, and error handling.
+
 ## Installation
 
 ### CLI
@@ -36,10 +38,35 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Label } from "~/components/ui/label";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Label for="email">Your email address</Label>
 ```
+
+## Examples
+
+### Label in Field
+
+For form fields, use the [Field](/docs/components/kobalte/field) component which includes built-in `FieldLabel`, `FieldDescription`, and `FieldError` components.
+
+```tsx showLineNumbers
+<Field>
+  <FieldLabel for="email">Your email address</FieldLabel>
+  <Input id="email" />
+</Field>
+```
+
+<ComponentPreview name="field-demo" previewClass="h-[800px] p-6 md:h-[850px]" />
+
+## API Reference
+
+`Label` is a styled native label element. See the [HTML label element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) for its native props and accessibility semantics.
+
+### Label
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |

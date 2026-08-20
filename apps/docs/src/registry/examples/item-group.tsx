@@ -1,11 +1,8 @@
-import { PlusIcon } from "lucide-solid"
 import { For } from "solid-js"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/registry/ui/avatar"
+import { PlusIcon } from "lucide-solid"
+
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import { Button } from "~/registry/ui/button"
 import {
   Item,
@@ -14,25 +11,25 @@ import {
   ItemDescription,
   ItemGroup,
   ItemMedia,
-  ItemTitle,
+  ItemTitle
 } from "~/registry/ui/item"
 
 const people = [
   {
     username: "shadcn",
     avatar: "https://github.com/shadcn.png",
-    email: "shadcn@vercel.com",
+    email: "shadcn@vercel.com"
   },
   {
     username: "maxleiter",
     avatar: "https://github.com/maxleiter.png",
-    email: "maxleiter@vercel.com",
+    email: "maxleiter@vercel.com"
   },
   {
     username: "evilrabbit",
     avatar: "https://github.com/evilrabbit.png",
-    email: "evilrabbit@vercel.com",
-  },
+    email: "evilrabbit@vercel.com"
+  }
 ]
 
 export default function ItemGroupExample() {
@@ -43,7 +40,7 @@ export default function ItemGroupExample() {
           <Item id={person.username} variant="outline">
             <ItemMedia>
               <Avatar>
-                <AvatarImage src={person.avatar} class="grayscale" />
+                <AvatarImage class="grayscale" src={person.avatar} />
                 <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
               </Avatar>
             </ItemMedia>
@@ -52,7 +49,7 @@ export default function ItemGroupExample() {
               <ItemDescription>{person.email}</ItemDescription>
             </ItemContent>
             <ItemActions>
-              <Button variant="ghost" size="icon" class="rounded-full">
+              <Button class="rounded-full" size="icon" variant="ghost">
                 <PlusIcon />
               </Button>
             </ItemActions>

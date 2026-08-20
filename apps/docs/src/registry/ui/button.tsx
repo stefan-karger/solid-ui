@@ -1,4 +1,4 @@
-import type { ComponentProps, JSX, ValidComponent } from "solid-js"
+import type { ComponentProps, ValidComponent } from "solid-js"
 import { splitProps } from "solid-js"
 
 import * as ButtonPrimitive from "@kobalte/core/button"
@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "~/lib/utils"
 
 const buttonVariants = cva(
-  "cn-button group/button inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap outline-none transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "group/button cn-button inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap outline-none transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -38,9 +38,12 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonProps<T extends ValidComponent = "button"> = PolymorphicProps<T, ButtonPrimitive.ButtonRootProps<T>> &
+type ButtonProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  ButtonPrimitive.ButtonRootProps<T>
+> &
   VariantProps<typeof buttonVariants> &
-  Partial<Pick<ComponentProps<T>, "class">>;
+  Partial<Pick<ComponentProps<T>, "class">>
 
 const Button = <T extends ValidComponent = "button">(
   props: PolymorphicProps<T, ButtonProps<T>>

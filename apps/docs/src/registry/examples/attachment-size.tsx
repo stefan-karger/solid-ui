@@ -1,17 +1,17 @@
-import { FileTextIcon } from "lucide-solid";
+import { FileTextIcon } from "lucide-solid"
 
 import {
   Attachment,
   AttachmentContent,
   AttachmentDescription,
   AttachmentMedia,
-  AttachmentTitle,
-} from "~/registry/ui/attachment";
+  AttachmentTitle
+} from "~/registry/ui/attachment"
 
 export default function AttachmentSizes() {
   return (
     <div class="mx-auto flex w-full max-w-sm flex-col gap-3 py-12">
-      <Attachment size="default" class="w-full">
+      <Attachment class="w-full" size="default">
         <AttachmentMedia>
           <FileTextIcon />
         </AttachmentMedia>
@@ -20,7 +20,7 @@ export default function AttachmentSizes() {
           <AttachmentDescription>PDF · 2.4 MB</AttachmentDescription>
         </AttachmentContent>
       </Attachment>
-      <Attachment size="sm" class="w-full">
+      <Attachment class="w-full" size="sm">
         <AttachmentMedia>
           <FileTextIcon />
         </AttachmentMedia>
@@ -29,7 +29,7 @@ export default function AttachmentSizes() {
           <AttachmentDescription>PDF · 2.4 MB</AttachmentDescription>
         </AttachmentContent>
       </Attachment>
-      <Attachment size="xs" class="w-full">
+      <Attachment class="w-full" size="xs">
         <AttachmentMedia>
           <FileTextIcon />
         </AttachmentMedia>
@@ -38,5 +38,5 @@ export default function AttachmentSizes() {
         </AttachmentContent>
       </Attachment>
     </div>
-  );
+  )
 }

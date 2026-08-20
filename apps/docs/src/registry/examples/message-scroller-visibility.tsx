@@ -1,52 +1,48 @@
-import { For } from "solid-js";
+import { For } from "solid-js"
+
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/registry/ui/hover-card"
+import { Message, MessageContent } from "~/registry/ui/message"
 import {
-  MessageScrollerProvider,
   MessageScroller,
-  MessageScrollerViewport,
+  MessageScrollerButton,
   MessageScrollerContent,
   MessageScrollerItem,
-  MessageScrollerButton,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
   useMessageScroller,
-  useMessageScrollerVisibility,
-} from "~/registry/ui/message-scroller";
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/registry/ui/card";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/registry/ui/hover-card";
-import { Message, MessageContent } from "~/registry/ui/message";
-import { createScript, type DemoMessage, splitParagraphs } from "./message-scroller-utils";
+  useMessageScrollerVisibility
+} from "~/registry/ui/message-scroller"
+
+import { createScript, type DemoMessage, splitParagraphs } from "./message-scroller-utils"
 
 const script = createScript("vis", [
   {
     questionId: "vis-brief",
     question: "Review the incident handoff and tell me what to read first.",
     answer:
-      "Start with the summary and the impact section. The regression affected the upload queue, but the recovery path completed for every queued job.",
+      "Start with the summary and the impact section. The regression affected the upload queue, but the recovery path completed for every queued job."
   },
   {
     questionId: "vis-impact",
     question: "What was the customer impact?",
     answer:
-      "Impact was limited to delayed processing.\n\nNo records were dropped, and the reconciliation worker confirmed each retry batch. Support saw confusion from two customers, but there were no checkout or billing errors.",
+      "Impact was limited to delayed processing.\n\nNo records were dropped, and the reconciliation worker confirmed each retry batch. Support saw confusion from two customers, but there were no checkout or billing errors."
   },
   {
     questionId: "vis-actions",
     question: "What actions are open?",
     answer:
-      "Keep the retry window enabled until the next deploy, then add a queue-depth alert as the long-term fix.\n\nThe alert should fire on sustained queue growth, not a single short spike.",
+      "Keep the retry window enabled until the next deploy, then add a queue-depth alert as the long-term fix.\n\nThe alert should fire on sustained queue growth, not a single short spike."
   },
   {
     questionId: "vis-checklist",
     question: "Give me the follow-up checklist.",
     answer:
-      "After that, compare the queue recovery graph with the deploy timeline so the handoff shows exactly when processing returned to baseline. That makes it easier for support and engineering to answer the same customer questions without re-reading the whole incident thread.\n\nI would also add a short owner note beside each follow-up item. The checklist is small, but ownership keeps the retry-window decision, alert tuning, and support macro from drifting into separate follow-up conversations.\n\nKeep the retry window enabled until the next deploy, then add a queue-depth alert as the long-term fix.\n\nThe alert should fire on sustained queue growth, not a single short spike.",
-  },
-]);
+      "After that, compare the queue recovery graph with the deploy timeline so the handoff shows exactly when processing returned to baseline. That makes it easier for support and engineering to answer the same customer questions without re-reading the whole incident thread.\n\nI would also add a short owner note beside each follow-up item. The checklist is small, but ownership keeps the retry-window decision, alert tuning, and support macro from drifting into separate follow-up conversations.\n\nKeep the retry window enabled until the next deploy, then add a queue-depth alert as the long-term fix.\n\nThe alert should fire on sustained queue growth, not a single short spike."
+  }
+])
 
 export default function MessageScrollerVisibility() {
   return (
@@ -64,7 +60,7 @@ export default function MessageScrollerVisibility() {
                   <MessageScrollerContent class="p-6">
                     <For each={script.messages}>
                       {(message) => {
-                        const isUser = message.role === "user";
+                        const isUser = message.role === "user"
 
                         return (
                           <MessageScrollerItem messageId={message.id} scrollAnchor={isUser}>
@@ -82,7 +78,7 @@ export default function MessageScrollerVisibility() {
                               </MessageContent>
                             </Message>
                           </MessageScrollerItem>
-                        );
+                        )
                       }}
                     </For>
                   </MessageScrollerContent>
@@ -100,28 +96,28 @@ export default function MessageScrollerVisibility() {
         </div>
       </div>
     </MessageScrollerProvider>
-  );
+  )
 }
 
 function TranscriptOutline() {
-  const { scrollToMessage } = useMessageScroller();
+  const { scrollToMessage } = useMessageScroller()
   // `currentAnchorId` is a getter; read it through the object at each use site
   // so the outline stays reactive. Destructuring would freeze it.
-  const visibility = useMessageScrollerVisibility();
+  const visibility = useMessageScrollerVisibility()
 
   return (
     <HoverCard placement="left">
       <HoverCardTrigger
-        as="button"
-        type="button"
         aria-label="Open transcript outline"
+        as="button"
         class="flex h-9 w-9 flex-col items-center justify-center gap-1 rounded-md outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50"
+        type="button"
       >
         <For each={script.userMessages}>
           {(message) => (
             <span
-              data-current={message.id === visibility.currentAnchorId}
               class="h-0.5 w-4 rounded-full bg-muted-foreground/40 data-[current=true]:bg-foreground"
+              data-current={message.id === visibility.currentAnchorId}
             />
           )}
         </For>
@@ -130,10 +126,10 @@ function TranscriptOutline() {
         <For each={script.userMessages}>
           {(message) => (
             <button
-              type="button"
               aria-current={visibility.currentAnchorId === message.id ? "location" : undefined}
               class="flex min-h-7 items-center rounded-xl px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground aria-current:bg-accent aria-current:text-accent-foreground"
               onClick={() => scrollToMessage(message.id, { align: "start", behavior: "smooth" })}
+              type="button"
             >
               <span class="line-clamp-1 min-w-0">{getTrimmedMessageText(message)}</span>
             </button>
@@ -141,9 +137,9 @@ function TranscriptOutline() {
         </For>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }
 
 function getTrimmedMessageText(message: DemoMessage) {
-  return message.text.length > 42 ? `${message.text.slice(0, 39)}...` : message.text;
+  return message.text.length > 42 ? `${message.text.slice(0, 39)}...` : message.text
 }

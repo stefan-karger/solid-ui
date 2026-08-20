@@ -20,4 +20,4 @@ const useDirection = () => {
   return useContext(DirectionContext)
 }
 
-export { DirectionProvider, useDirection, type Direction }
+export { type Direction, DirectionProvider, useDirection }

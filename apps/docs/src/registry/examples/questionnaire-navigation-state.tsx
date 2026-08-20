@@ -1,4 +1,6 @@
-import { toast } from "solid-sonner";
+import { toast } from "solid-sonner"
+
+import { useQuestionnaire } from "~/registry/hooks/use-questionnaire"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -11,19 +13,18 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
-import { useQuestionnaire } from "~/registry/hooks/use-questionnaire";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "permission", required: true },
-  { name: "verification", required: true },
-] as const;
+  { name: "verification", required: true }
+] as const
 
 function NavigationActions() {
-  const state = useQuestionnaire();
-  const unanswered = () => state.activeItemStatus === "unanswered";
+  const state = useQuestionnaire()
+  const unanswered = () => state.activeItemStatus === "unanswered"
 
   return (
     <QuestionnaireActions>
@@ -37,18 +38,18 @@ function NavigationActions() {
       </QuestionnaireNext>
       <QuestionnaireSubmit disabled={unanswered()}>Save permissions</QuestionnaireSubmit>
     </QuestionnaireActions>
-  );
+  )
 }
 
 export default function QuestionnaireNavigationState() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
     toast("Permissions saved", {
-      description: `Permission: ${formData.get("permission") ?? "None"} · Verification: ${formData.get("verification") ?? "None"}`,
-    });
+      description: `Permission: ${formData.get("permission") ?? "None"} · Verification: ${formData.get("verification") ?? "None"}`
+    })
   }
 
   return (
@@ -90,5 +91,5 @@ export default function QuestionnaireNavigationState() {
         <NavigationActions />
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

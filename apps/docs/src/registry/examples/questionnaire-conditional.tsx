@@ -1,5 +1,7 @@
-import { createMemo, createSignal } from "solid-js";
-import { toast } from "solid-sonner";
+import { createMemo, createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -12,12 +14,12 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 export default function QuestionnaireConditional() {
-  const [runtime, setRuntime] = createSignal("local");
+  const [runtime, setRuntime] = createSignal("local")
   const items = createMemo(
     () =>
       [
@@ -25,20 +27,20 @@ export default function QuestionnaireConditional() {
         {
           disabled: runtime() !== "cloud",
           name: "environment",
-          required: true,
+          required: true
         },
-        { name: "approval", required: true },
-      ] as const,
-  );
+        { name: "approval", required: true }
+      ] as const
+  )
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
     toast("Execution plan saved", {
-      description: `Runtime: ${formData.get("runtime") ?? "None"} · Environment: ${formData.get("environment") ?? "Not applicable"} · Approval: ${formData.get("approval") ?? "None"}`,
-    });
+      description: `Runtime: ${formData.get("runtime") ?? "None"} · Environment: ${formData.get("environment") ?? "Not applicable"} · Approval: ${formData.get("approval") ?? "None"}`
+    })
   }
 
   return (
@@ -60,15 +62,15 @@ export default function QuestionnaireConditional() {
           <QuestionnaireChoices>
             <QuestionnaireChoice
               checked={runtime() === "local"}
-              value="local"
               onChange={() => setRuntime("local")}
+              value="local"
             >
               Local workspace
             </QuestionnaireChoice>
             <QuestionnaireChoice
               checked={runtime() === "cloud"}
-              value="cloud"
               onChange={() => setRuntime("cloud")}
+              value="cloud"
             >
               Cloud workspace
             </QuestionnaireChoice>
@@ -91,9 +93,7 @@ export default function QuestionnaireConditional() {
           <QuestionnaireChoices>
             <QuestionnaireChoice value="writes">Before writing files</QuestionnaireChoice>
             <QuestionnaireChoice value="commands">Before running commands</QuestionnaireChoice>
-            <QuestionnaireChoice value="sensitive">
-              Only for sensitive actions
-            </QuestionnaireChoice>
+            <QuestionnaireChoice value="sensitive">Only for sensitive actions</QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
@@ -105,5 +105,5 @@ export default function QuestionnaireConditional() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

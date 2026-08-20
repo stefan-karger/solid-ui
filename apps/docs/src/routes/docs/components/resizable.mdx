@@ -3,6 +3,8 @@ title: Resizable
 description: Accessible resizable panel groups and layouts with keyboard support.
 ---
 
+The `Resizable` component is built on top of [Corvu Resizable](https://corvu.dev/docs/primitives/resizable) by [Jasmin](https://github.com/GiyoMoon).
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -48,14 +50,14 @@ import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui/resizable";
+} from "~/components/ui/resizable";
 ```
 
 ```tsx showLineNumbers
 <ResizablePanelGroup orientation="horizontal">
-  <ResizablePanel>One</ResizablePanel>
+  <ResizablePanel initialSize={0.25}>One</ResizablePanel>
   <ResizableHandle />
-  <ResizablePanel>Two</ResizablePanel>
+  <ResizablePanel initialSize={0.75}>Two</ResizablePanel>
 </ResizablePanelGroup>
 ```
 
@@ -76,59 +78,14 @@ ResizablePanelGroup
 
 Use `orientation="vertical"` for vertical resizing.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="resizable-vertical" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/resizable-vertical" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Handle
 
 Use the `withHandle` prop on `ResizableHandle` to show a visible handle.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="resizable-handle" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/resizable-handle" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="resizable-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/resizable-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 
-See the [Corvu Resizable](https://corvu.dev/docs/primitives/resizable/) documentation.
+See the [Corvu Resizable documentation](https://corvu.dev/docs/primitives/resizable#api-reference) for the primitive API.

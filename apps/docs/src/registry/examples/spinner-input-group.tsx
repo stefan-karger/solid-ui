@@ -5,7 +5,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-  InputGroupTextarea,
+  InputGroupTextarea
 } from "~/registry/ui/input-group"
 import { Spinner } from "~/registry/ui/spinner"
 
@@ -13,13 +13,13 @@ export default function SpinnerInputGroup() {
   return (
     <div class="flex w-full max-w-md flex-col gap-4">
       <InputGroup>
-        <InputGroupInput placeholder="Send a message..." disabled />
+        <InputGroupInput disabled placeholder="Send a message..." />
         <InputGroupAddon align="inline-end">
           <Spinner />
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupTextarea placeholder="Send a message..." disabled />
+        <InputGroupTextarea disabled placeholder="Send a message..." />
         <InputGroupAddon align="block-end">
           <Spinner /> Validating...
           <InputGroupButton class="ml-auto" variant="default">

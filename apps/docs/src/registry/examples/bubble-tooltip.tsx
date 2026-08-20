@@ -1,7 +1,8 @@
-import { CheckIcon } from "lucide-solid";
-import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble";
-import { Button } from "~/registry/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip";
+import { CheckIcon } from "lucide-solid"
+
+import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble"
+import { Button } from "~/registry/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 
 export default function BubbleTooltip() {
   return (
@@ -14,10 +15,10 @@ export default function BubbleTooltip() {
         <BubbleReactions>
           <Tooltip>
             <TooltipTrigger
-              as={Button}
-              variant="ghost"
-              size="icon-xs"
               aria-label="Message read details"
+              as={Button}
+              size="icon-xs"
+              variant="ghost"
             >
               <CheckIcon />
             </TooltipTrigger>
@@ -26,5 +27,5 @@ export default function BubbleTooltip() {
         </BubbleReactions>
       </Bubble>
     </div>
-  );
+  )
 }

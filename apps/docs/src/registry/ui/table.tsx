@@ -18,7 +18,13 @@ const Table: Component<ComponentProps<"table">> = (props) => {
 
 const TableHeader: Component<ComponentProps<"thead">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
-  return <thead class={cn("cn-table-header [&_tr]:border-b", local.class)} data-slot="table-header" {...others} />
+  return (
+    <thead
+      class={cn("cn-table-header [&_tr]:border-b", local.class)}
+      data-slot="table-header"
+      {...others}
+    />
+  )
 }
 
 const TableBody: Component<ComponentProps<"tbody">> = (props) => {
@@ -36,7 +42,10 @@ const TableFooter: Component<ComponentProps<"tfoot">> = (props) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <tfoot
-      class={cn("cn-table-footer border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", local.class)}
+      class={cn(
+        "cn-table-footer border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+        local.class
+      )}
       data-slot="table-footer"
       {...others}
     />
@@ -96,13 +105,4 @@ const TableCaption: Component<ComponentProps<"caption">> = (props) => {
   )
 }
 
-export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow
-}
+export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow }

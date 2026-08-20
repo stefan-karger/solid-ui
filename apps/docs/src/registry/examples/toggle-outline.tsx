@@ -1,14 +1,15 @@
 import { BoldIcon, ItalicIcon } from "lucide-solid"
+
 import { Toggle } from "~/registry/ui/toggle"
 
 export default function ToggleOutline() {
   return (
     <div class="flex flex-wrap items-center gap-2">
-      <Toggle variant="outline" aria-label="Toggle italic">
+      <Toggle aria-label="Toggle italic" variant="outline">
         <ItalicIcon />
         Italic
       </Toggle>
-      <Toggle variant="outline" aria-label="Toggle bold">
+      <Toggle aria-label="Toggle bold" variant="outline">
         <BoldIcon />
         Bold
       </Toggle>

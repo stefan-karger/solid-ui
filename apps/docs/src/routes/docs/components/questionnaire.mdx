@@ -3,6 +3,8 @@ title: Questionnaire
 description: A multi-step questionnaire with single-choice, multiple-choice, freeform, and skippable questions.
 ---
 
+The Questionnaire block renders a multi-step question flow as a single form. Use it for agent clarification prompts, onboarding, surveys, intake forms, and configuration.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -48,22 +50,7 @@ Copy and paste the following code into your project.
 ## Usage
 
 ```tsx showLineNumbers
-import {
-  QuestionnaireActions,
-  QuestionnaireChoice,
-  QuestionnaireChoices,
-  QuestionnaireDescription,
-  QuestionnaireError,
-  QuestionnaireInput,
-  QuestionnaireItem,
-  QuestionnaireNext,
-  QuestionnairePrevious,
-  QuestionnaireProgress,
-  QuestionnaireRoot,
-  QuestionnaireSkip,
-  QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/components/blocks/questionnaire";
+import { Questionnaire } from "~/components/blocks/questionnaire";
 ```
 
 ```tsx showLineNumbers
@@ -101,23 +88,23 @@ const items = [
 ] as const;
 ```
 
-Define the collection once: pass it to `QuestionnaireRoot` for progress, actions, and shortcuts,
+Define the collection once: pass it to `Questionnaire.Root` for progress, actions, and shortcuts,
 then map it into the parts.
 
 ```tsx showLineNumbers
-<QuestionnaireRoot items={items} onSubmit={handleSubmit}>
-  <QuestionnaireProgress />
+<Questionnaire.Root items={items} onSubmit={handleSubmit}>
+  <Questionnaire.Progress />
   <For each={items}>
     {(question) => (
-      <QuestionnaireItem name={question.name} required={question.required}>
-        <QuestionnaireTitle>{question.prompt}</QuestionnaireTitle>
-        <QuestionnaireDescription>
+      <Questionnaire.Item name={question.name} required={question.required}>
+        <Questionnaire.Title>{question.prompt}</Questionnaire.Title>
+        <Questionnaire.Description>
           {question.description}
-        </QuestionnaireDescription>
-        <QuestionnaireChoices>
+        </Questionnaire.Description>
+        <Questionnaire.Choices>
           <For each={question.choices}>
             {(choice) => (
-              <QuestionnaireChoice value={choice.value}>
+              <Questionnaire.Choice value={choice.value}>
                 <span class="font-medium">{choice.label}</span>
                 <Show
                   when={
@@ -128,29 +115,29 @@ then map it into the parts.
                     {choice.description}
                   </span>
                 </Show>
-              </QuestionnaireChoice>
+              </Questionnaire.Choice>
             )}
           </For>
           <Show when={"input" in question ? question.input : undefined}>
             {(input) => (
-              <QuestionnaireInput
+              <Questionnaire.Input
                 aria-label={input().label}
                 placeholder={input().placeholder}
               />
             )}
           </Show>
-        </QuestionnaireChoices>
-        <QuestionnaireError />
-      </QuestionnaireItem>
+        </Questionnaire.Choices>
+        <Questionnaire.Error />
+      </Questionnaire.Item>
     )}
   </For>
-  <QuestionnaireActions>
-    <QuestionnairePrevious />
-    <QuestionnaireSkip />
-    <QuestionnaireNext />
-    <QuestionnaireSubmit />
-  </QuestionnaireActions>
-</QuestionnaireRoot>
+  <Questionnaire.Actions>
+    <Questionnaire.Previous />
+    <Questionnaire.Skip />
+    <Questionnaire.Next />
+    <Questionnaire.Submit />
+  </Questionnaire.Actions>
+</Questionnaire.Root>
 ```
 
 The answers submit as regular form data:
@@ -168,50 +155,45 @@ function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
 Use the following composition to build a questionnaire:
 
 ```text
-QuestionnaireRoot
-├── QuestionnaireProgress
-├── QuestionnaireItem
-│   ├── QuestionnaireTitle
-│   ├── QuestionnaireDescription
-│   ├── QuestionnaireChoices
-│   │   ├── QuestionnaireChoice
-│   │   │   └── QuestionnaireChoiceDescription
-│   │   └── QuestionnaireInput
-│   └── QuestionnaireError
-└── QuestionnaireActions
-    ├── QuestionnairePrevious
-    ├── QuestionnaireSkip
-    ├── QuestionnaireNext
-    └── QuestionnaireSubmit
+Questionnaire.Root
+├── Questionnaire.Progress
+├── Questionnaire.Item
+│   ├── Questionnaire.Title
+│   ├── Questionnaire.Description
+│   ├── Questionnaire.Choices
+│   │   ├── Questionnaire.Choice
+│   │   │   └── Questionnaire.ChoiceDescription
+│   │   └── Questionnaire.Input
+│   └── Questionnaire.Error
+└── Questionnaire.Actions
+    ├── Questionnaire.Previous
+    ├── Questionnaire.Skip
+    ├── Questionnaire.Next
+    └── Questionnaire.Submit
 ```
 
-`QuestionnaireRoot` owns the ordered items, active item, answer state, validation, progress, and
+`Questionnaire.Root` owns the ordered items, active item, answer state, validation, progress, and
 navigation. The containing page, card, dialog, or drawer owns close and cancellation behavior,
 persistence, transport, and branching.
 
-`QuestionnaireChoice` renders its native input, indicator, label, and shortcut parts by default.
-The `QuestionnaireChoiceInput`, `QuestionnaireChoiceLabel`, and `QuestionnaireChoiceShortcut`
+`Questionnaire.Choice` renders its native input, indicator, label, and shortcut parts by default.
+The `Questionnaire.ChoiceInput`, `Questionnaire.ChoiceLabel`, and `Questionnaire.ChoiceShortcut`
 sub-parts are also exported for custom compositions that read the choice state.
 
 ## Item Definitions
 
-The `items` prop on `QuestionnaireRoot` is the collection of record. It drives the progress
+The `items` prop on `Questionnaire.Root` is the collection of record. It drives the progress
 count, decides when Previous, Skip, Next, and Submit are visible, and assigns shortcut keys in
 definition order, independently of when the rendered parts mount.
 
-Keep the definitions and the rendered `QuestionnaireItem` and `QuestionnaireChoice` elements in
+Keep the definitions and the rendered `Questionnaire.Item` and `Questionnaire.Choice` elements in
 sync: `name`, `required`, `disabled`, and choice `value` order must match. In development the
 block logs a console warning for every drift it detects, such as an item defined but never
 rendered or a choice missing from the definitions.
 
-## Examples
-
-### Multiple Selection
+## Multiple Selection
 
 Use `multiple` for an item that accepts more than one fixed answer.
-
-::::tab-group[example2]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-multiple"
@@ -219,22 +201,9 @@ Use `multiple` for an item that accepts more than one fixed answer.
   previewClass="min-h-[420px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
+## Freeform Answer
 
-```file="~/registry/examples/questionnaire-multiple" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Freeform Answer
-
-Compose `QuestionnaireInput` with fixed choices when the user can provide another answer.
-
-::::tab-group[example3]
-:::tab[Preview]
+Compose `Questionnaire.Input` with fixed choices when the user can provide another answer.
 
 <ComponentPreview
   name="questionnaire-freeform"
@@ -242,22 +211,9 @@ Compose `QuestionnaireInput` with fixed choices when the user can provide anothe
   previewClass="min-h-[420px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
+## Explicit Skip
 
-```file="~/registry/examples/questionnaire-freeform" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Explicit Skip
-
-Add `QuestionnaireSkip` when an optional item may be intentionally left unanswered.
-
-::::tab-group[example4]
-:::tab[Preview]
+Add `Questionnaire.Skip` when an optional item may be intentionally left unanswered.
 
 <ComponentPreview
   name="questionnaire-skip"
@@ -265,22 +221,9 @@ Add `QuestionnaireSkip` when an optional item may be intentionally left unanswer
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-skip" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Shortcuts
+## Shortcuts
 
 Assign a letter or number key to each answer with `shortcuts`.
-
-::::tab-group[example5]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-shortcuts"
@@ -288,23 +231,10 @@ Assign a letter or number key to each answer with `shortcuts`.
   previewClass="min-h-[480px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-shortcuts" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Custom Validation
+## Custom Validation
 
 Combine controlled navigation with an external schema such as Zod to return to an invalid item
 and present its error.
-
-::::tab-group[example6]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-validation"
@@ -312,22 +242,9 @@ and present its error.
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-validation" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Controlled
+## Controlled
 
 Control the active item from host state, such as returning to an invalid step.
-
-::::tab-group[example7]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-controlled"
@@ -335,22 +252,9 @@ Control the active item from host state, such as returning to an invalid step.
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-controlled" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Resume
+## Resume
 
 Restore a saved active item and default answers, then reset changes back to that saved state.
-
-::::tab-group[example8]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-resume"
@@ -358,22 +262,9 @@ Restore a saved active item and default answers, then reset changes back to that
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-resume" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Conditional Items
+## Conditional Items
 
 Disable items that do not apply to the user's earlier answers.
-
-::::tab-group[example9]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-conditional"
@@ -381,22 +272,9 @@ Disable items that do not apply to the user's earlier answers.
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-conditional" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Navigation State
+## Navigation State
 
 Read item status to opt into disabled navigation and custom action styling.
-
-::::tab-group[example10]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-navigation-state"
@@ -404,23 +282,10 @@ Read item status to opt into disabled navigation and custom action styling.
   previewClass="min-h-[480px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
+## Custom Progress
 
-```file="~/registry/examples/questionnaire-navigation-state" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Custom Progress
-
-Pass a function child to `QuestionnaireProgress` to build a custom progress indicator from the
+Pass a function child to `Questionnaire.Progress` to build a custom progress indicator from the
 root state.
-
-::::tab-group[example11]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-progress"
@@ -428,22 +293,9 @@ root state.
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-progress" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Animated Items
+## Animated Items
 
 Animate the active item while keeping progress and navigation stationary.
-
-::::tab-group[example12]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-animated"
@@ -451,22 +303,9 @@ Animate the active item while keeping progress and navigation stationary.
   previewClass="min-h-[520px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-animated" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Card
+## Card
 
 Compose Questionnaire with Card slots while keeping the question title and description semantic.
-
-::::tab-group[example13]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-card"
@@ -474,22 +313,9 @@ Compose Questionnaire with Card slots while keeping the question title and descr
   previewClass="min-h-[560px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/questionnaire-card" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### Dialog
+## Dialog
 
 Compose Questionnaire inside a Dialog while keeping cancellation and dismissal host-owned.
-
-::::tab-group[example14]
-:::tab[Preview]
 
 <ComponentPreview
   name="questionnaire-dialog"
@@ -497,17 +323,21 @@ Compose Questionnaire inside a Dialog while keeping cancellation and dismissal h
   previewClass="min-h-[320px] p-4 sm:p-8"
 />
 
-:::
-:::tab[Code]
+## Accessibility
 
-```file="~/registry/examples/questionnaire-dialog" frame=none showLineNumbers
+`Questionnaire.Item` renders a `fieldset`, and `Questionnaire.Title` renders its `legend`.
+Descriptions and active errors are associated with the current item, and invalid items and answer
+controls expose `aria-invalid`.
 
-```
+Fixed choices preserve native radio and checkbox behavior. Progress is exposed as a named
+progressbar, navigation uses real buttons, and inactive items and actions are hidden and inert.
+Successful navigation focuses the newly active item; failed validation focuses an available
+answer control.
 
-:::
-::::
+Always give `Questionnaire.Input` an accessible name with a visible label, `aria-label`, or
+`aria-labelledby`. A placeholder is not a label.
 
-## Keyboard
+### Keyboard
 
 - <kbd>Enter</kbd> on a filled answer confirms the current item; <kbd>⌘</kbd>/
   <kbd>Ctrl</kbd> +<kbd>Enter</kbd> confirms from anywhere in the form.
@@ -517,25 +347,11 @@ Compose Questionnaire inside a Dialog while keeping cancellation and dismissal h
   item once the current item is answered.
 - With `shortcuts` enabled, single letter or number keys select the matching choice.
 
-## Accessibility
-
-`QuestionnaireItem` renders a `fieldset`, and `QuestionnaireTitle` renders its `legend`.
-Descriptions and active errors are associated with the current item, and invalid items and answer
-controls expose `aria-invalid`.
-
-Fixed choices preserve native radio and checkbox behavior. Progress is exposed as a named
-progressbar, navigation uses real buttons, and inactive items and actions are hidden and inert.
-Successful navigation focuses the newly active item; failed validation focuses an available
-answer control.
-
-Always give `QuestionnaireInput` an accessible name with a visible label, `aria-label`, or
-`aria-labelledby`. A placeholder is not a label.
-
 ## API Reference
 
 The state and behavior are implemented in the block itself: every part exposes its state
 through `data-*` attributes such as `data-active`, `data-status`, `data-checked`, `data-filled`,
 and `data-visible`. Navigation components also accept Button `size` and `variant` props, and
-`QuestionnaireActions` is a styled-only layout helper. Use the exported `useQuestionnaire`
-accessor inside a `QuestionnaireRoot` to read `current`, `total`, `first`, `last`, and
+`Questionnaire.Actions` is a styled-only layout helper. Use the exported `useQuestionnaire`
+accessor inside a `Questionnaire.Root` to read `current`, `total`, `first`, `last`, and
 `activeItemStatus` for custom composition.

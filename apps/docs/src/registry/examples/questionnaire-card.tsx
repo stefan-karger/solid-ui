@@ -1,4 +1,6 @@
-import { toast } from "solid-sonner";
+import { toast } from "solid-sonner"
+
+import { Card, CardAction, CardContent, CardFooter, CardHeader } from "~/registry/ui/card"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -11,33 +13,32 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Card, CardAction, CardContent, CardFooter, CardHeader } from "~/registry/ui/card";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
     choices: [{ value: "fix" }, { value: "refactor" }, { value: "docs" }],
     name: "task",
-    required: true,
+    required: true
   },
   {
     choices: [{ value: "summary" }, { value: "files" }, { value: "review" }],
     name: "output",
-    required: true,
-  },
-] as const;
+    required: true
+  }
+] as const
 
 export default function QuestionnaireCard() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
     toast("Agent task created", {
-      description: `Task: ${formData.get("task") ?? "None"} · Handoff: ${formData.get("output") ?? "None"}`,
-    });
+      description: `Task: ${formData.get("task") ?? "None"} · Handoff: ${formData.get("output") ?? "None"}`
+    })
   }
 
   return (
@@ -47,16 +48,16 @@ export default function QuestionnaireCard() {
         class="mx-auto max-w-md"
         defaultItem="task"
         items={items}
-        shortcuts="numbers"
         onSubmit={handleSubmit}
+        shortcuts="numbers"
       >
         <Card>
           <QuestionnaireItem name="task" required>
             <CardHeader>
-              <QuestionnaireTitle class="z-card-title z-font-heading">
+              <QuestionnaireTitle class="cn-card-title z-font-heading">
                 What should the agent work on?
               </QuestionnaireTitle>
-              <QuestionnaireDescription class="z-card-description">
+              <QuestionnaireDescription class="cn-card-description">
                 Choose the task that should be handled next.
               </QuestionnaireDescription>
               <CardAction>
@@ -66,12 +67,8 @@ export default function QuestionnaireCard() {
             <CardContent>
               <QuestionnaireChoices>
                 <QuestionnaireChoice value="fix">Fix the failing tests</QuestionnaireChoice>
-                <QuestionnaireChoice value="refactor">
-                  Refactor the data layer
-                </QuestionnaireChoice>
-                <QuestionnaireChoice value="docs">
-                  Update the integration guide
-                </QuestionnaireChoice>
+                <QuestionnaireChoice value="refactor">Refactor the data layer</QuestionnaireChoice>
+                <QuestionnaireChoice value="docs">Update the integration guide</QuestionnaireChoice>
               </QuestionnaireChoices>
               <QuestionnaireError />
             </CardContent>
@@ -79,10 +76,10 @@ export default function QuestionnaireCard() {
 
           <QuestionnaireItem name="output" required>
             <CardHeader>
-              <QuestionnaireTitle class="z-card-title z-font-heading">
+              <QuestionnaireTitle class="cn-card-title z-font-heading">
                 What should the final handoff include?
               </QuestionnaireTitle>
-              <QuestionnaireDescription class="z-card-description">
+              <QuestionnaireDescription class="cn-card-description">
                 Pick the level of detail needed for review.
               </QuestionnaireDescription>
               <CardAction>
@@ -109,5 +106,5 @@ export default function QuestionnaireCard() {
         </Card>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

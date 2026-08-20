@@ -45,17 +45,17 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Button } from "~/components/ui/button";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Button variant="outline">Button</Button>
 ```
 
 ## Cursor
 
-Tailwind v4 [switched](https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor) from `cursor: pointer` to `cursor: default` for the button component.
+Tailwind v4 [switched](https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor) from `cursor: pointer` to `cursor: default` for button elements.
 
 If you want to keep the `cursor: pointer` behavior, add the following code to your CSS file:
 
@@ -72,239 +72,78 @@ If you want to keep the `cursor: pointer` behavior, add the following code to yo
 
 ### Size
 
-::::tab-group[example1]
-:::tab[Preview]
+Use the `size` prop to change the size of the button.
 
 <ComponentPreview name="button-sizes" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-sizes" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Default
-
-::::tab-group[example2]
-:::tab[Preview]
 
 <ComponentPreview name="button-default" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-default" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Outline
-
-::::tab-group[example3]
-:::tab[Preview]
 
 <ComponentPreview name="button-outline" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-outline" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Secondary
-
-::::tab-group[example4]
-:::tab[Preview]
 
 <ComponentPreview name="button-secondary" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-secondary" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Ghost
-
-::::tab-group[example4]
-:::tab[Preview]
 
 <ComponentPreview name="button-ghost" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-ghost" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Destructive
-
-::::tab-group[example5]
-:::tab[Preview]
 
 <ComponentPreview name="button-destructive" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-destructive" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Link
-
-::::tab-group[example6]
-:::tab[Preview]
 
 <ComponentPreview name="button-link" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-link" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Icon
-
-::::tab-group[example7]
-:::tab[Preview]
 
 <ComponentPreview name="button-icon" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-icon" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### With Icon
 
-The spacing between the icon and the text is automatically adjusted
-based on the size of the button. You do not need any margin on the icon.
-
-::::tab-group[example8]
-:::tab[Preview]
+Add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to an icon for correct spacing.
 
 <ComponentPreview name="button-with-icon" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-with-icon" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Rounded
 
-::::tab-group[example9]
-:::tab[Preview]
+Use the `rounded-full` class to make a button rounded.
 
 <ComponentPreview name="button-rounded" />
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-rounded" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
 ### Spinner
 
-::::tab-group[example10]
-:::tab[Preview]
+Render a `<Spinner />` inside the button to show a loading state. Add `data-icon="inline-start"` or `data-icon="inline-end"` to the spinner for correct spacing.
 
-<ComponentPreview name="button-loading" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/button-loading" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="button-spinner" />
 
 ### Button Group
 
-To create a button group, use the ButtonGroup component. See the Button Group documentation for more details.
-
-::::tab-group[example11]
-:::tab[Preview]
+To create a button group, use the `ButtonGroup` component. See the [Button Group](/docs/components/kobalte/button-group) documentation for more details.
 
 <ComponentPreview name="button-group-demo" />
 
-:::
-:::tab[Code]
+### As Link
 
-```file="~/registry/examples/button-group-demo" frame=none showLineNumbers
+Use the `buttonVariants` helper to make a link look like a button while preserving native link semantics.
 
-```
-
-:::
-::::
-
-### Link
-
-You can use the `as` prop to make another component look like a button. Here's an example of a link that looks like a button.
-
-```tsx
-import { A } from "@solidjs/router";
-
-import { Button } from "~/components/ui/button";
-
-export function LinkAsButton() {
-  return (
-    <Button as={A} href="/login">
-      Login
-    </Button>
-  );
-}
-```
+<ComponentPreview name="button-link" />
 
 ## API Reference
 
 ### Button
 
-The `Button` component is a wrapper around the `button` element that adds a variety of styles and functionality.
+The `Button` component is a wrapper around the button element that adds a variety of styles and functionality.
 
-| Prop      | Type                                                                          | Default     |
-| --------- | ----------------------------------------------------------------------------- | ----------- |
-| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"` | `"default"` |
-| `size`    | `"default" \| "sm" \| "lg" \| "icon" \| "icon-sm" \| "icon-lg"`               | `"default"` |
-| `as`      | `ValidComponent`                                                              |             |
+| Prop      | Type                                                                                 | Default     |
+| --------- | ------------------------------------------------------------------------------------ | ----------- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"`        | `"default"` |
+| `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
+| `class`   | `string`                                                                             | -           |
+
+For primitive props, see the [Kobalte Button API reference](https://kobalte.dev/docs/core/components/button#api-reference).

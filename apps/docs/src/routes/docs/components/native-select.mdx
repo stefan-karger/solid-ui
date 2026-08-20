@@ -6,6 +6,8 @@ links:
   api: https://kobalte.dev/docs/core/components/button#api-reference
 ---
 
+For a styled select component, see the [Select](/docs/components/kobalte/select) component.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -50,7 +52,7 @@ import {
   NativeSelect,
   NativeSelectOptGroup,
   NativeSelectOption,
-} from "@/components/ui/native-select";
+} from "~/components/ui/native-select";
 ```
 
 ```tsx showLineNumbers
@@ -62,11 +64,6 @@ import {
   <NativeSelectOption value="pineapple">Pineapple</NativeSelectOption>
 </NativeSelect>
 ```
-
-## Native Select vs Select
-
-- Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns.
-- Use `Select` for custom styling, animations, or complex interactions.
 
 ## Composition
 
@@ -102,83 +99,63 @@ NativeSelect
 
 Use `NativeSelectOptGroup` to organize options into categories.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="native-select-groups" />
 
-:::
-:::tab[Code]
+### Sizes
 
-```file="~/registry/examples/native-select-groups" frame=none showLineNumbers
+Use the `size` prop to switch between the default and small select sizes.
 
-```
+<ComponentPreview name="native-select-sizes" />
 
-:::
-::::
+### With Field
+
+Use with the Field component for proper form labeling and descriptions.
+
+<ComponentPreview name="native-select-field" />
 
 ### Disabled
 
 Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="native-select-disabled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/native-select-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Invalid
 
 Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the `Field` component for styling.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="native-select-invalid" />
 
-:::
-:::tab[Code]
+## Native Select vs Select
 
-```file="~/registry/examples/native-select-invalid" frame=none showLineNumbers
+- Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns.
+- Use `Select` for custom styling, animations, or complex interactions.
 
+## Accessibility
+
+- The component maintains all native HTML select accessibility features.
+- Screen readers can navigate through options using arrow keys.
+- The chevron icon is marked as `aria-hidden="true"` to avoid duplication.
+- Use `aria-label` or `aria-labelledby` for additional context when needed.
+
+```tsx showLineNumbers
+<NativeSelect aria-label="Choose your preferred language">
+  <NativeSelectOption value="en">English</NativeSelectOption>
+  <NativeSelectOption value="es">Spanish</NativeSelectOption>
+  <NativeSelectOption value="fr">French</NativeSelectOption>
+</NativeSelect>
 ```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example1]
-:::tab[Preview]
-
-<ComponentPreview name="native-select-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/native-select-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 
 ### NativeSelect
 
 The main select component that wraps the native HTML select element.
+
+| Prop           | Type                | Default     |
+| -------------- | ------------------- | ----------- |
+| `size`         | `"sm" \| "default"` | `"default"` |
+| `class`        | `string`            | -           |
+| `defaultValue` | `string`            | -           |
 
 ```tsx
 <NativeSelect>
@@ -193,7 +170,7 @@ Represents an individual option within the select.
 
 | Prop       | Type      | Default |
 | ---------- | --------- | ------- |
-| `value`    | `string`  |         |
+| `value`    | `string`  | -       |
 | `disabled` | `boolean` | `false` |
 
 ### NativeSelectOptGroup
@@ -202,7 +179,7 @@ Groups related options together for better organization.
 
 | Prop       | Type      | Default |
 | ---------- | --------- | ------- |
-| `label`    | `string`  |         |
+| `label`    | `string`  | -       |
 | `disabled` | `boolean` | `false` |
 
 ```tsx

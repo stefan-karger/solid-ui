@@ -10,7 +10,7 @@ export default function MarkerStatusDemo() {
         </MarkerIcon>
         <MarkerContent>Compacting conversation</MarkerContent>
       </Marker>
-      <Marker variant="separator" role="status">
+      <Marker role="status" variant="separator">
         <MarkerIcon>
           <Spinner />
         </MarkerIcon>

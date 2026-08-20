@@ -1,4 +1,5 @@
-import { toast } from "solid-sonner";
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -8,27 +9,27 @@ import {
   QuestionnaireItem,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
     choices: [{ value: "source" }, { value: "tests" }, { value: "docs" }, { value: "history" }],
     name: "context",
-    required: true,
-  },
-] as const;
+    required: true
+  }
+] as const
 
 export default function QuestionnaireMultiple() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const context = new FormData(event.currentTarget).getAll("context");
+    const context = new FormData(event.currentTarget).getAll("context")
 
     toast("Context selected", {
-      description: `Context: ${context.join(", ") || "None"}`,
-    });
+      description: `Context: ${context.join(", ") || "None"}`
+    })
   }
 
   return (
@@ -37,10 +38,10 @@ export default function QuestionnaireMultiple() {
       <QuestionnaireRoot
         class="mx-auto max-w-md"
         items={items}
-        shortcuts="letters"
         onSubmit={handleSubmit}
+        shortcuts="letters"
       >
-        <QuestionnaireItem name="context" multiple required>
+        <QuestionnaireItem multiple name="context" required>
           <QuestionnaireTitle>What context should the agent inspect?</QuestionnaireTitle>
           <QuestionnaireDescription>
             Select every source that may affect the implementation.
@@ -59,5 +60,5 @@ export default function QuestionnaireMultiple() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

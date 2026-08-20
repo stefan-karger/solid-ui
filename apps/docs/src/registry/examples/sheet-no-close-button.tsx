@@ -5,19 +5,21 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "~/registry/ui/sheet"
 
 export default function SheetNoCloseButton() {
   return (
     <Sheet>
-      <SheetTrigger as={Button<"button">} variant="outline">Open Sheet</SheetTrigger>
+      <SheetTrigger as={Button<"button">} variant="outline">
+        Open Sheet
+      </SheetTrigger>
       <SheetContent showCloseButton={false}>
         <SheetHeader>
           <SheetTitle>No Close Button</SheetTitle>
           <SheetDescription>
-            This sheet doesn&apos;t have a close button in the top-right corner.
-            Click outside to close.
+            This sheet doesn&apos;t have a close button in the top-right corner. Click outside to
+            close.
           </SheetDescription>
         </SheetHeader>
       </SheetContent>

@@ -1,4 +1,4 @@
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
 
 export default function BubbleVariants() {
   return (
@@ -10,8 +10,7 @@ export default function BubbleVariants() {
       </Bubble>
       <Bubble variant="secondary">
         <BubbleContent>
-          Secondary bubbles are the standard neutral surface for assistant and conversation
-          content.
+          Secondary bubbles are the standard neutral surface for assistant and conversation content.
         </BubbleContent>
       </Bubble>
       <Bubble variant="muted">
@@ -20,7 +19,7 @@ export default function BubbleVariants() {
           content.
         </BubbleContent>
       </Bubble>
-      <Bubble variant="tinted" align="end">
+      <Bubble align="end" variant="tinted">
         <BubbleContent>
           Tinted bubbles use a softer primary tint when primary fill is too strong.
         </BubbleContent>
@@ -46,5 +45,5 @@ Ghost bubbles are full width and can take the full width of the container.
         </BubbleContent>
       </Bubble>
     </div>
-  );
+  )
 }

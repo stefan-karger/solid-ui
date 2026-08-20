@@ -7,7 +7,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemMedia,
-  ItemTitle,
+  ItemTitle
 } from "~/registry/ui/item"
 
 export default function ItemIcon() {
@@ -19,9 +19,7 @@ export default function ItemIcon() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Security Alert</ItemTitle>
-          <ItemDescription>
-            New login detected from unknown device.
-          </ItemDescription>
+          <ItemDescription>New login detected from unknown device.</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button size="sm" variant="outline">

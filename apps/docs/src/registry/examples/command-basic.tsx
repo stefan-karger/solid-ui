@@ -1,5 +1,6 @@
-import { createSignal } from "solid-js";
-import { Button } from "~/registry/ui/button";
+import { createSignal } from "solid-js"
+
+import { Button } from "~/registry/ui/button"
 import {
   Command,
   CommandDialog,
@@ -7,18 +8,18 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-} from "~/registry/ui/command";
+  CommandList
+} from "~/registry/ui/command"
 
 export default function CommandBasic() {
-  const [open, setOpen] = createSignal(false);
+  const [open, setOpen] = createSignal(false)
 
   return (
     <div class="flex flex-col gap-4">
-      <Button onClick={() => setOpen(true)} variant="outline" class="w-fit">
+      <Button class="w-fit" onClick={() => setOpen(true)} variant="outline">
         Open Menu
       </Button>
-      <CommandDialog open={open()} onOpenChange={setOpen}>
+      <CommandDialog onOpenChange={setOpen} open={open()}>
         <Command>
           <CommandInput placeholder="Type a command or search..." />
           <CommandList>
@@ -32,5 +33,5 @@ export default function CommandBasic() {
         </Command>
       </CommandDialog>
     </div>
-  );
+  )
 }

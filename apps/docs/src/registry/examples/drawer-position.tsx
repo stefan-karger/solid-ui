@@ -7,13 +7,15 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 } from "~/registry/ui/drawer"
 
 export default function DrawerWithSides() {
   return (
     <Drawer side="left">
-      <DrawerTrigger as={Button<"button">} variant="secondary">Open Left Drawer</DrawerTrigger>
+      <DrawerTrigger as={Button<"button">} variant="secondary">
+        Open Left Drawer
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Move Goal</DrawerTitle>

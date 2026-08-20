@@ -3,6 +3,8 @@ title: Marker
 description: Displays an inline status, system note, bordered row, or labeled separator in a conversation.
 ---
 
+The `Marker` component displays inline conversation markers such as status updates, system notes, bordered rows, and labeled separators. Compose it with [`Message`](/docs/components/kobalte/message) in a conversation thread.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -44,7 +46,7 @@ Copy and paste the following code into your project.
 ## Usage
 
 ```tsx showLineNumbers
-import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
+import { Marker, MarkerContent, MarkerIcon } from "~/components/ui/marker";
 ```
 
 ```tsx showLineNumbers
@@ -68,10 +70,11 @@ Marker
 
 ## Features
 
-- Inline marker, bordered row, and labeled separator variants
-- Decorative icon slot that is hidden from assistive tech
-- Polymorphic root via `as` for link and button markers
-- Customizable styling through the `class` prop on every part
+- Inline marker, bordered row, and labeled separator variants.
+- Decorative icon slot that is hidden from assistive tech.
+- Polymorphic root via `as` for link and button markers.
+- Pairs with the `shimmer` utility class for streaming status text.
+- Customizable styling through the `class` prop on every part.
 
 ## Examples
 
@@ -79,20 +82,7 @@ Marker
 
 Use `variant` to switch between an inline marker, bordered row, and labeled separator.
 
-::::tab-group[example1]
-:::tab[Preview]
-
-<ComponentPreview name="marker-variants" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/marker-variants" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="marker-variants" previewClass="h-auto" />
 
 | Variant     | Description                                          |
 | ----------- | ---------------------------------------------------- |
@@ -102,106 +92,66 @@ Use `variant` to switch between an inline marker, bordered row, and labeled sepa
 
 ### Status
 
-Set `role="status"` and include a [`Spinner`](/docs/components/spinner) for streaming or in-progress markers so updates are announced.
+Set `role="status"` and include a [`Spinner`](/docs/components/kobalte/spinner) for streaming or
+in-progress markers so updates are announced.
 
-::::tab-group[example2]
-:::tab[Preview]
+<ComponentPreview name="marker-status" previewClass="h-auto" />
 
-<ComponentPreview name="marker-status" />
+### Shimmer
 
-:::
-:::tab[Code]
+Add the `shimmer` utility class to `MarkerContent` for an animated streaming-text effect.
 
-```file="~/registry/examples/marker-status" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="marker-shimmer" previewClass="h-auto" />
 
 ### Separator
 
-Use the `separator` variant for labeled dividers, such as dates or section breaks, in a conversation.
+Use the `separator` variant for labeled dividers, such as dates or section breaks, in a
+conversation.
 
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="marker-separator" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/marker-separator" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="marker-separator" previewClass="h-auto" />
 
 ### Border
 
-Use the `border` variant for status rows that should keep the default marker alignment while separating the next row.
+Use the `border` variant for status rows that should keep the default marker alignment while
+separating the next row.
 
-::::tab-group[example4]
-:::tab[Preview]
-
-<ComponentPreview name="marker-border" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/marker-border" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="marker-border" previewClass="h-auto" />
 
 ### With Icon
 
-Use `MarkerIcon` to render an icon alongside the content. Use `flex-col` to stack the icon above the content.
+Use `MarkerIcon` to render an icon alongside the content. Use `flex-col` to stack the icon above
+the content.
 
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="marker-icon" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/marker-icon" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="marker-icon" previewClass="h-auto" />
 
 ### Links and Buttons
 
 Turn a marker into a link or button with the `as` prop on `Marker`.
 
-::::tab-group[example6]
-:::tab[Preview]
+<ComponentPreview name="marker-link-button" previewClass="h-auto" />
 
-<ComponentPreview name="marker-link-button" />
+```tsx showLineNumbers
+import { Marker, MarkerContent } from "~/components/ui/marker";
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/marker-link-button" frame=none showLineNumbers
-
+export function MarkerLinkDemo() {
+  return (
+    <Marker as="a" href="#">
+      <MarkerContent>View the pull request</MarkerContent>
+    </Marker>
+  );
+}
 ```
-
-:::
-::::
 
 ## Accessibility
 
-`Marker` is presentational by default. The correct semantics depend on how you use it, so choose the role based on intent rather than relying on a single default.
+`Marker` is presentational by default. The correct semantics depend on how you use it, so choose
+the role based on intent rather than relying on a single default.
 
 ### Status and Progress
 
-For streaming or progress markers such as "Thinking..." or a running tool, set `role="status"` so assistive tech announces the update as it appears. `Marker` forwards `role` to the underlying element.
+For streaming or progress markers such as "Thinking..." or a running tool, set `role="status"` so
+assistive tech announces the update as it appears. `Marker` forwards `role` to the underlying
+element.
 
 ```tsx showLineNumbers
 <Marker role="status">
@@ -214,7 +164,8 @@ For streaming or progress markers such as "Thinking..." or a running tool, set `
 
 ### Labeled Separators
 
-A separator that carries text, such as a date or a section label, needs no role. The divider lines are decorative CSS pseudo-elements, and the text is announced as ordinary content.
+A separator that carries text, such as a date or a section label, needs no role. The divider lines
+are decorative CSS pseudo-elements, and the text is announced as ordinary content.
 
 ```tsx showLineNumbers
 <Marker variant="separator">
@@ -222,14 +173,15 @@ A separator that carries text, such as a date or a section label, needs no role.
 </Marker>
 ```
 
-**Note:** Do not add `role="separator"` to a labeled divider. A separator
-takes its accessible name from `aria-label`, not from its text, and its
-contents are treated as presentational, so the visible label would not be
-announced. Reserve `role="separator"` for a divider with no meaningful text.
+**Note:** Do not add `role="separator"` to a labeled divider. A separator takes its accessible name
+from `aria-label`, not from its text, and its contents are treated as presentational, so the
+visible label would not be announced. Reserve `role="separator"` for a divider with no meaningful
+text.
 
 ### Bordered Markers
 
-A bordered marker keeps the same semantics as the default marker. The bottom border is decorative, so choose `role="status"`, `as`, or no role based on the marker's purpose.
+A bordered marker keeps the same semantics as the default marker. The bottom border is decorative,
+so choose `role="status"`, `as`, or no role based on the marker's purpose.
 
 ```tsx showLineNumbers
 <Marker variant="border">
@@ -242,7 +194,9 @@ A bordered marker keeps the same semantics as the default marker. The bottom bor
 
 ### Decorative Icons
 
-`MarkerIcon` is decorative and hidden from assistive tech with `aria-hidden`, so the adjacent `MarkerContent` carries the meaning. For an icon-only marker, provide an `aria-label` or visible text so it is not announced as empty.
+`MarkerIcon` is decorative and hidden from assistive tech with `aria-hidden`, so the adjacent
+`MarkerContent` carries the meaning. For an icon-only marker, provide an `aria-label` or visible
+text so it is not announced as empty.
 
 ```tsx showLineNumbers
 <Marker aria-label="Synced">
@@ -254,10 +208,12 @@ A bordered marker keeps the same semantics as the default marker. The bottom bor
 
 ### Interactive Markers
 
-When a marker links or triggers an action, render it as a real `<button>` or `<a>` with the `as` prop so it is focusable and exposes the correct role. The accessible name comes from the marker text.
+When a marker links or triggers an action, render it as a real `<button>` or `<a>` with the `as`
+prop so it is focusable and exposes the correct role. The accessible name comes from the marker
+text.
 
 ```tsx showLineNumbers
-<Marker as={"a"} href="/files">
+<Marker as="a" href="/files">
   <MarkerIcon>
     <FileTextIcon />
   </MarkerIcon>
@@ -269,12 +225,13 @@ When a marker links or triggers an action, render it as a real `<button>` or `<a
 
 ### Marker
 
-The root marker element. The file also exports `markerVariants` for composing the marker styles into custom components.
+The root marker element. The file also exports `markerVariants` for composing the marker styles
+into custom components.
 
 | Prop      | Type                                   | Default     | Description                                      |
 | --------- | -------------------------------------- | ----------- | ------------------------------------------------ |
 | `variant` | `"default" \| "border" \| "separator"` | `"default"` | The marker layout.                               |
-| `as`      | `JSX.Element \| string`                | -           | Render as a different element, such as a link.   |
+| `as`      | `ValidComponent`                       | `"div"`     | Render as a different element, such as a link.   |
 | `class`   | `string`                               | -           | Additional classes to apply to the root element. |
 
 ### MarkerIcon

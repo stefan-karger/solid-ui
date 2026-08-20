@@ -1,14 +1,15 @@
-import { InfoIcon } from "lucide-solid";
-import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble";
-import { Button } from "~/registry/ui/button";
+import { InfoIcon } from "lucide-solid"
+
+import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble"
+import { Button } from "~/registry/ui/button"
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
   PopoverHeader,
   PopoverTitle,
-  PopoverTrigger,
-} from "~/registry/ui/popover";
+  PopoverTrigger
+} from "~/registry/ui/popover"
 
 export default function BubblePopover() {
   return (
@@ -21,11 +22,11 @@ export default function BubblePopover() {
         <BubbleReactions>
           <Popover>
             <PopoverTrigger
-              as={Button}
-              variant="ghost"
-              size="icon-xs"
               aria-label="Show error details"
+              as={Button}
               class="aria-expanded:text-destructive"
+              size="icon-xs"
+              variant="ghost"
             >
               <InfoIcon />
             </PopoverTrigger>
@@ -41,5 +42,5 @@ export default function BubblePopover() {
         </BubbleReactions>
       </Bubble>
     </div>
-  );
+  )
 }

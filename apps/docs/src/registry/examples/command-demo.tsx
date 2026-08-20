@@ -1,4 +1,5 @@
-import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid";
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-solid"
+
 import {
   Command,
   CommandEmpty,
@@ -7,12 +8,12 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
-} from "~/registry/ui/command";
+  CommandShortcut
+} from "~/registry/ui/command"
 
 export default function CommandDemo() {
   return (
-    <Command class="max-w-sm rounded-lg border">
+    <Command class="w-full max-w-sm rounded-lg border">
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -25,7 +26,7 @@ export default function CommandDemo() {
             <Smile />
             <span>Search Emoji</span>
           </CommandItem>
-          <CommandItem value="calculator" disabled>
+          <CommandItem disabled value="calculator">
             <Calculator />
             <span>Calculator</span>
           </CommandItem>
@@ -50,5 +51,5 @@ export default function CommandDemo() {
         </CommandGroup>
       </CommandList>
     </Command>
-  );
+  )
 }

@@ -1,20 +1,17 @@
-import {  BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-solid"
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-solid"
 
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "~/registry/ui/toggle-group"
+import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
 
 export default function ToggleGroupDemo() {
   return (
     <ToggleGroup variant="outline">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
+      <ToggleGroupItem aria-label="Toggle bold" value="bold">
         <BoldIcon />
       </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
+      <ToggleGroupItem aria-label="Toggle italic" value="italic">
         <ItalicIcon />
       </ToggleGroupItem>
-      <ToggleGroupItem value="strikethrough" aria-label="Toggle strikethrough">
+      <ToggleGroupItem aria-label="Toggle strikethrough" value="strikethrough">
         <UnderlineIcon />
       </ToggleGroupItem>
     </ToggleGroup>

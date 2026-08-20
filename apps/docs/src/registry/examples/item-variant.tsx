@@ -1,12 +1,6 @@
 import { InboxIcon } from "lucide-solid"
 
-import {
-  Item,
-  ItemContent,
-  ItemDescription,
-  ItemMedia,
-  ItemTitle,
-} from "~/registry/ui/item"
+import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "~/registry/ui/item"
 
 export default function ItemVariant() {
   return (
@@ -17,9 +11,7 @@ export default function ItemVariant() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Default Variant</ItemTitle>
-          <ItemDescription>
-            Transparent background with no border.
-          </ItemDescription>
+          <ItemDescription>Transparent background with no border.</ItemDescription>
         </ItemContent>
       </Item>
       <Item variant="outline">
@@ -28,9 +20,7 @@ export default function ItemVariant() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Outline Variant</ItemTitle>
-          <ItemDescription>
-            Outlined style with a visible border.
-          </ItemDescription>
+          <ItemDescription>Outlined style with a visible border.</ItemDescription>
         </ItemContent>
       </Item>
       <Item variant="muted">
@@ -39,9 +29,7 @@ export default function ItemVariant() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Muted Variant</ItemTitle>
-          <ItemDescription>
-            Muted background for secondary content.
-          </ItemDescription>
+          <ItemDescription>Muted background for secondary content.</ItemDescription>
         </ItemContent>
       </Item>
     </div>

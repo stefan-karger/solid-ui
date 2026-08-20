@@ -5,12 +5,12 @@ import { useMatch } from "@solidjs/router"
 
 import { useThemeListener } from "@kobalte/solidbase/client"
 
-import { Toaster } from "~/registry/ui/toast"
 import { DesignSystemProvider } from "~/components/design-system-provider"
 import { DocsLayout } from "~/components/docs-layout"
 import { SiteHeader } from "~/components/site-header"
-import { LocksProvider } from "~/hooks/use-locks"
 import { ColorModeProvider } from "~/hooks/use-color-mode"
+import { LocksProvider } from "~/hooks/use-locks"
+import { Toaster } from "~/registry/ui/toast"
 
 export default function (props: RouteSectionProps) {
   useThemeListener()

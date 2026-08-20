@@ -11,7 +11,11 @@ export default function MarkerLinkButtonDemo() {
         </MarkerIcon>
         <MarkerContent>View the pull request</MarkerContent>
       </Marker>
-      <Marker as={"button"} class="transition-colors hover:text-foreground" onClick={() => alert("You clicked the revert button")}>
+      <Marker
+        as={"button"}
+        class="transition-colors hover:text-foreground"
+        onClick={() => alert("You clicked the revert button")}
+      >
         <MarkerIcon>
           <RotateCcwIcon />
         </MarkerIcon>

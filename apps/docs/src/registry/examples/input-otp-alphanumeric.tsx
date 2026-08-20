@@ -1,11 +1,6 @@
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "~/registry/ui/input-otp"
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
 
 export default function InputOTPAlphanumeric() {
   return (

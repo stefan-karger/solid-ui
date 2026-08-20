@@ -1,8 +1,23 @@
 import { createSignal } from "solid-js"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "~/registry/ui/dialog"
-import { Field, FieldLabel } from "~/registry/ui/field"
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem } from "~/registry/ui/combobox"
+
 import { Button } from "~/registry/ui/button"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem
+} from "~/registry/ui/combobox"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "~/registry/ui/dialog"
+import { Field, FieldLabel } from "~/registry/ui/field"
 
 const frameworks = ["SolidJS", "SolidStart", "Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
 
@@ -10,7 +25,7 @@ export default function ComboboxInDialog() {
   const [open, setOpen] = createSignal(false)
 
   return (
-    <Dialog open={open()} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} open={open()}>
       <DialogTrigger as={Button} variant="outline">
         Open Dialog
       </DialogTrigger>
@@ -22,15 +37,15 @@ export default function ComboboxInDialog() {
           </DialogDescription>
         </DialogHeader>
         <Field>
-          <FieldLabel for="framework-dialog" class="sr-only">
+          <FieldLabel class="sr-only" for="framework-dialog">
             Framework
           </FieldLabel>
           <Combobox
-            options={frameworks}
-            placeholder="Select a framework..."
             itemComponent={(props) => (
               <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
             )}
+            options={frameworks}
+            placeholder="Select a framework..."
           >
             <ComboboxInput id="framework-dialog" placeholder="Select a framework..." />
             <ComboboxContent>
@@ -39,15 +54,15 @@ export default function ComboboxInDialog() {
           </Combobox>
         </Field>
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <Button onClick={() => setOpen(false)} type="button" variant="outline">
             Cancel
           </Button>
           <Button
-            type="button"
             onClick={() => {
               alert("Framework selected.")
               setOpen(false)
             }}
+            type="button"
           >
             Confirm
           </Button>

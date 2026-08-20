@@ -7,29 +7,29 @@ import {
   PopoverDescription,
   PopoverHeader,
   PopoverTitle,
-  PopoverTrigger,
+  PopoverTrigger
 } from "~/registry/ui/popover"
 
 export default function PopoverForm() {
   return (
     <Popover placement="bottom">
-      <PopoverTrigger as={Button<"button">} variant="outline">Open Popover</PopoverTrigger>
+      <PopoverTrigger as={Button<"button">} variant="outline">
+        Open Popover
+      </PopoverTrigger>
       <PopoverContent class="w-64">
         <PopoverHeader>
           <PopoverTitle>Dimensions</PopoverTitle>
-          <PopoverDescription>
-            Set the dimensions for the layer.
-          </PopoverDescription>
+          <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>
         </PopoverHeader>
         <FieldGroup class="gap-4">
           <Field orientation="horizontal">
-            <FieldLabel for="width" class="w-1/2">
+            <FieldLabel class="w-1/2" for="width">
               Width
             </FieldLabel>
             <Input id="width" placeholder="100%" />
           </Field>
           <Field orientation="horizontal">
-            <FieldLabel for="height" class="w-1/2">
+            <FieldLabel class="w-1/2" for="height">
               Height
             </FieldLabel>
             <Input id="height" placeholder="25px" />

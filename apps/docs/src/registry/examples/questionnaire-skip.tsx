@@ -1,5 +1,8 @@
-import { createSignal } from "solid-js";
-import { toast } from "solid-sonner";
+import { createSignal } from "solid-js"
+
+import { toast } from "solid-sonner"
+
+import type { QuestionnaireItemStatus } from "~/registry/hooks/use-questionnaire"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -14,37 +17,36 @@ import {
   QuestionnaireRoot,
   QuestionnaireSkip,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
-import type { QuestionnaireItemStatus } from "~/registry/hooks/use-questionnaire";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "task", required: true },
   { name: "constraints" },
-  { name: "review", required: true },
-] as const;
+  { name: "review", required: true }
+] as const
 
 export default function QuestionnaireSkipDemo() {
   const [constraintStatus, setConstraintStatus] =
-    createSignal<QuestionnaireItemStatus>("unanswered");
+    createSignal<QuestionnaireItemStatus>("unanswered")
 
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
     const answers = {
       task: formData.get("task"),
       constraints: formData.get("constraints"),
       constraintStatus: constraintStatus(),
-      review: formData.get("review"),
-    };
+      review: formData.get("review")
+    }
 
     toast("Agent brief submitted", {
       description: `Task: ${answers.task ?? "None"} · Constraints: ${
         answers.constraintStatus === "skipped" ? "Skipped" : (answers.constraints ?? "None")
-      } · Review: ${answers.review ?? "None"}`,
-    });
+      } · Review: ${answers.review ?? "None"}`
+    })
   }
 
   return (
@@ -83,9 +85,7 @@ export default function QuestionnaireSkipDemo() {
             <QuestionnaireChoice value="no-migrations">
               Do not change the database
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="preserve-api">
-              Preserve the public API
-            </QuestionnaireChoice>
+            <QuestionnaireChoice value="preserve-api">Preserve the public API</QuestionnaireChoice>
             <QuestionnaireInput
               aria-label="Another implementation constraint"
               placeholder="Describe another constraint…"
@@ -114,5 +114,5 @@ export default function QuestionnaireSkipDemo() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js"
+
 import {
   Menubar,
   MenubarContent,
@@ -7,7 +8,7 @@ import {
   MenubarRadioGroup,
   MenubarRadioItem,
   MenubarSeparator,
-  MenubarTrigger,
+  MenubarTrigger
 } from "~/registry/ui/menubar"
 
 export default function MenubarRadio() {
@@ -19,7 +20,7 @@ export default function MenubarRadio() {
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup value={user()} onChange={setUser}>
+          <MenubarRadioGroup onChange={setUser} value={user()}>
             <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
             <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
             <MenubarRadioItem value="luis">Luis</MenubarRadioItem>
@@ -32,7 +33,7 @@ export default function MenubarRadio() {
       <MenubarMenu>
         <MenubarTrigger>Theme</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup value={theme()} onChange={setTheme}>
+          <MenubarRadioGroup onChange={setTheme} value={theme()}>
             <MenubarRadioItem value="light">Light</MenubarRadioItem>
             <MenubarRadioItem value="dark">Dark</MenubarRadioItem>
             <MenubarRadioItem value="system">System</MenubarRadioItem>

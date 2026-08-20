@@ -34,7 +34,7 @@ solidui-cli@latest add calendar
 Install the following dependencies:
 
 ```package-install
-@kobalte/core
+@corvu/calendar @date-fns/tz date-fns lucide-solid
 ```
 
 Copy and paste the following code into your project.
@@ -45,42 +45,23 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-### Props
+```tsx showLineNumbers
+import { createSignal } from "solid-js";
+import { Calendar } from "~/components/ui/calendar";
 
-The Calendar component accepts the following props:
+const [date, setDate] = createSignal<Date>();
+```
 
-| Prop                 | Type                                                                 | Default             | Description                                    |
-| -------------------- | -------------------------------------------------------------------- | ------------------- | ---------------------------------------------- |
-| `mode`               | `"single" \| "multiple" \| "range"`                                  | `"single"`          | The selection mode                             |
-| `value`              | `Date \| null \| Date[] \| { from: Date \| null, to: Date \| null }` | -                   | The controlled value                           |
-| `onValueChange`      | `(value) => void`                                                    | -                   | Handler called when value changes              |
-| `defaultValue`       | Same as `value`                                                      | -                   | The default uncontrolled value                 |
-| `month`              | `Date`                                                               | -                   | The controlled month to display                |
-| `onMonthChange`      | `(month: Date) => void`                                              | -                   | Handler called when month changes              |
-| `defaultMonth`       | `Date`                                                               | `new Date()`        | The initial month to display                   |
-| `showOutsideDays`    | `boolean`                                                            | `true`              | Whether to show days from adjacent months      |
-| `fixedWeeks`         | `boolean`                                                            | `false`             | Whether to always show 6 weeks                 |
-| `numberOfMonths`     | `number`                                                             | `1`                 | Number of months to display                    |
-| `disabled`           | `(date: Date) => boolean`                                            | -                   | Function to disable specific dates             |
-| `weekStartsOn`       | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`                                    | `1`                 | Which day of the week to start on (0 = Sunday) |
-| `weekNumbers`        | `boolean`                                                            | `false`             | Whether to show ISO week numbers               |
-| `customCell`         | `(props: CustomCellProps) => JSX.Element`                            | -                   | Custom render function for day cells           |
-| `monthYearSelection` | `boolean`                                                            | `false`             | Enable month/year dropdown selection           |
-| `startYear`          | `number`                                                             | `currentYear - 100` | Start year for year dropdown                   |
-| `endYear`            | `number`                                                             | `currentYear + 10`  | End year for year dropdown                     |
-| `class`              | `string`                                                             | -                   | Additional CSS classes                         |
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  selected={date()}
+  onSelect={setDate}
+  class="rounded-lg border"
+/>
+```
 
-### CustomCellProps
-
-The `customCell` render function receives the following props:
-
-| Prop             | Type      | Description                                   |
-| ---------------- | --------- | --------------------------------------------- |
-| `date`           | `Date`    | The date of the cell                          |
-| `isOutsideMonth` | `boolean` | Whether the date is outside the current month |
-| `isSelected`     | `boolean` | Whether the date is selected                  |
-| `isDisabled`     | `boolean` | Whether the date is disabled                  |
-| `isToday`        | `boolean` | Whether the date is today                     |
+See the [Corvu Calendar documentation](https://corvu.dev/docs/primitives/calendar) for primitive-level options and behavior.
 
 ### Date Picker
 
@@ -405,4 +386,22 @@ const isBooked = (day: Date) => {
 
 ## API Reference
 
-The Calendar component is built on top of [Corvu Calendar](https://corvu.dev/docs/primitives/calendar/). It provides a fully accessible date selection component with keyboard navigation and support for single, multiple, and range selection modes.
+### Calendar
+
+The Calendar wrapper follows the [Corvu Calendar API reference](https://corvu.dev/docs/primitives/calendar#api-reference) and adds the DayPicker-compatible props shown below.
+
+| Prop              | Type                                                             | Default   | Description                              |
+| ----------------- | ---------------------------------------------------------------- | --------- | ---------------------------------------- |
+| `mode`            | `"single" \| "multiple" \| "range"`                              | -         | Selection mode.                          |
+| `selected`        | `Date \| Date[] \| { from: Date; to?: Date }`                    | -         | Controlled selected value.               |
+| `onSelect`        | `(selected, triggerDate, modifiers, event) => void`              | -         | Called after selection changes.          |
+| `month`           | `Date`                                                           | -         | Controlled month to display.             |
+| `onMonthChange`   | `(month: Date) => void`                                          | -         | Called when the displayed month changes. |
+| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | Caption presentation.                    |
+| `numberOfMonths`  | `number`                                                         | `1`       | Number of visible months.                |
+| `showOutsideDays` | `boolean`                                                        | `true`    | Whether adjacent-month days are visible. |
+| `showWeekNumber`  | `boolean`                                                        | `false`   | Whether to show ISO week numbers.        |
+| `disabled`        | `CalendarMatcher \| CalendarMatcher[]`                           | -         | Dates that cannot be selected.           |
+| `class`           | `string`                                                         | -         | Additional classes on the root element.  |
+
+For primitive props, keyboard behavior, and accessibility details, see the [Corvu Calendar API reference](https://corvu.dev/docs/primitives/calendar#api-reference).

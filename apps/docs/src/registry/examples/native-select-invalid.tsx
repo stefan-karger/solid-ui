@@ -1,7 +1,4 @@
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "~/registry/ui/native-select"
+import { NativeSelect, NativeSelectOption } from "~/registry/ui/native-select"
 
 export default function NativeSelectInvalid() {
   return (

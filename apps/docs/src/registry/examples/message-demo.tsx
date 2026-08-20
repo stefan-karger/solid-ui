@@ -1,12 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar";
-import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from "~/registry/ui/bubble";
-import { Marker, MarkerContent } from "~/registry/ui/marker";
-import {
-  Message,
-  MessageAvatar,
-  MessageContent,
-  MessageFooter,
-} from "~/registry/ui/message";
+import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
+import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from "~/registry/ui/bubble"
+import { Marker, MarkerContent } from "~/registry/ui/marker"
+import { Message, MessageAvatar, MessageContent, MessageFooter } from "~/registry/ui/message"
 
 export default function MessageDemo() {
   return (
@@ -14,7 +9,7 @@ export default function MessageDemo() {
       <Message align="end">
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@me" />
+            <AvatarImage alt="@me" src="https://github.com/shadcn.png" />
             <AvatarFallback>ME</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -27,7 +22,7 @@ export default function MessageDemo() {
       <Message>
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/evilrabbit.png" alt="@rabbit" />
+            <AvatarImage alt="@rabbit" src="https://github.com/evilrabbit.png" />
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -40,7 +35,7 @@ export default function MessageDemo() {
       <Message align="end">
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@me" />
+            <AvatarImage alt="@me" src="https://github.com/shadcn.png" />
             <AvatarFallback>ME</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -54,7 +49,7 @@ export default function MessageDemo() {
       <Message>
         <MessageAvatar>
           <Avatar>
-            <AvatarImage src="https://github.com/evilrabbit.png" alt="@rabbit" />
+            <AvatarImage alt="@rabbit" src="https://github.com/evilrabbit.png" />
             <AvatarFallback>R</AvatarFallback>
           </Avatar>
         </MessageAvatar>
@@ -78,5 +73,5 @@ export default function MessageDemo() {
         </MarkerContent>
       </Marker>
     </div>
-  );
+  )
 }

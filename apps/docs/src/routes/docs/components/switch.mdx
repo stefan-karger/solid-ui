@@ -43,10 +43,48 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
+import { Label } from "~/components/ui/label";
 import { Switch } from "~/components/ui/switch";
 ```
 
-```tsx
-<Switch />
+```tsx showLineNumbers
+<div class="flex items-center gap-3">
+  <Switch id="airplane-mode" />
+  <Label for="airplane-mode">Airplane Mode</Label>
+</div>
 ```
+
+## Examples
+
+### Description
+
+<ComponentPreview name="switch-description" />
+
+### Choice Card
+
+Card-style selection where `FieldLabel` wraps the entire `Field` for a clickable card pattern.
+
+<ComponentPreview name="switch-choice-card" />
+
+### Disabled
+
+Add the `disabled` prop to `Switch` to disable it. Add `data-disabled` to `Field` for disabled styling.
+
+<ComponentPreview name="switch-disabled" />
+
+### Invalid
+
+Add `aria-invalid` to `Switch` to indicate an invalid state. Add `data-invalid` to `Field` for styling.
+
+<ComponentPreview name="switch-invalid" />
+
+### Size
+
+Use the `size` prop to change the size of the switch.
+
+<ComponentPreview name="switch-sizes" />
+
+## API Reference
+
+`Switch` wraps [`@kobalte/core/switch`](https://kobalte.dev/docs/core/components/switch), which implements the [WAI-ARIA switch role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/switch_role), including keyboard, disabled, and form behavior. See the [Kobalte API reference](https://kobalte.dev/docs/core/components/switch#api-reference) for the full set of props, such as `checked`, `defaultChecked`, `onChange`, `disabled`, `required`, `readOnly`, `name`, and `value`.

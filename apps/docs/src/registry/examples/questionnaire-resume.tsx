@@ -1,4 +1,6 @@
-import { toast } from "solid-sonner";
+import { toast } from "solid-sonner"
+
+import { Button } from "~/registry/ui/button"
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -12,31 +14,30 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Button } from "~/registry/ui/button";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "change", required: true },
   { name: "verification", required: true },
-  { name: "notes" },
-] as const;
+  { name: "notes" }
+] as const
 
 export default function QuestionnaireResume() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
     const answers = {
       change: formData.get("change"),
       verification: formData.getAll("verification"),
-      notes: formData.get("notes"),
-    };
+      notes: formData.get("notes")
+    }
 
     toast("Draft updated", {
-      description: `Migration: ${answers.change ?? "None"} · Verification: ${answers.verification.join(", ") || "None"} · Notes: ${answers.notes || "None"}`,
-    });
+      description: `Migration: ${answers.change ?? "None"} · Verification: ${answers.verification.join(", ") || "None"} · Notes: ${answers.notes || "None"}`
+    })
   }
 
   return (
@@ -57,7 +58,7 @@ export default function QuestionnaireResume() {
             This answer was saved during the previous session.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="incremental" defaultChecked>
+            <QuestionnaireChoice defaultChecked value="incremental">
               Incremental migration
             </QuestionnaireChoice>
             <QuestionnaireChoice value="cutover">Single cutover</QuestionnaireChoice>
@@ -65,16 +66,16 @@ export default function QuestionnaireResume() {
           <QuestionnaireError />
         </QuestionnaireItem>
 
-        <QuestionnaireItem name="verification" multiple required>
+        <QuestionnaireItem multiple name="verification" required>
           <QuestionnaireTitle>How should the migration be verified?</QuestionnaireTitle>
           <QuestionnaireDescription>
             These checks were selected during the previous session.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="tests" defaultChecked>
+            <QuestionnaireChoice defaultChecked value="tests">
               Run migration tests
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="typecheck" defaultChecked>
+            <QuestionnaireChoice defaultChecked value="typecheck">
               Run the typecheck
             </QuestionnaireChoice>
             <QuestionnaireChoice value="manual">Perform a manual smoke test</QuestionnaireChoice>
@@ -101,5 +102,5 @@ export default function QuestionnaireResume() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

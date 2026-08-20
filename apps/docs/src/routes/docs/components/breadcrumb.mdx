@@ -3,6 +3,8 @@ title: Breadcrumb
 description: Displays the path to the current resource using a hierarchy of links.
 ---
 
+The Breadcrumb component is built on top of [Kobalte Breadcrumbs](https://kobalte.dev/docs/core/components/breadcrumbs), which provides accessible navigation semantics for the current location.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -42,7 +44,7 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -53,7 +55,7 @@ import {
 } from "~/components/ui/breadcrumb";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
@@ -61,92 +63,122 @@ import {
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Components</BreadcrumbPage>
+      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
 ```
 
-## Examples
+## Composition
 
-### Custom Separator
+Use the following composition to build a `Breadcrumb`:
 
-You can use a custom separator by passing it as children to `BreadcrumbSeparator`.
-
-::::tab-group[separator]
-:::tab[Preview]
-
-<ComponentPreview name="breadcrumb-separator" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/breadcrumb-separator" frame=none showLineNumbers
-
+```text
+Breadcrumb
+└── BreadcrumbList
+    ├── BreadcrumbItem
+    │   └── BreadcrumbLink
+    ├── BreadcrumbSeparator
+    ├── BreadcrumbItem
+    │   └── BreadcrumbLink
+    ├── BreadcrumbSeparator
+    └── BreadcrumbItem
+        └── BreadcrumbPage
 ```
 
-:::
-::::
+## Examples
 
----
+### Basic
+
+A basic breadcrumb with a home link and a components link.
+
+<ComponentPreview name="breadcrumb-basic" previewClass="min-h-48" />
+
+### Custom separator
+
+Use custom children in `<BreadcrumbSeparator />` to create a custom separator.
+
+<ComponentPreview name="breadcrumb-separator" previewClass="min-h-48" />
 
 ### Dropdown
 
-You can compose `Breadcrumb` with a `DropdownMenu` to create a breadcrumb with a dropdown menu.
+Compose `<BreadcrumbItem />` with a `<DropdownMenu />` to create a dropdown in the breadcrumb.
 
-::::tab-group[dropdown]
-:::tab[Preview]
-
-<ComponentPreview name="breadcrumb-dropdown" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/breadcrumb-dropdown" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
----
+<ComponentPreview name="breadcrumb-dropdown" previewClass="min-h-48" />
 
 ### Collapsed
 
-We provide a `<BreadcrumbEllipsis />` component to show a collapsed state when the breadcrumb is too long.
+Use `<BreadcrumbEllipsis />` to show a collapsed state when the breadcrumb is too long.
 
-::::tab-group[collapsed]
-:::tab[Preview]
+<ComponentPreview name="breadcrumb-ellipsis" previewClass="min-h-48 p-2" />
 
-<ComponentPreview name="breadcrumb-collapsed" />
+### Link component
 
-:::
-:::tab[Code]
+To use a custom link component from your routing library, pass it with the `as` prop on `<BreadcrumbLink />`.
 
-```file="~/registry/examples/breadcrumb-collapsed" frame=none showLineNumbers
+<ComponentPreview name="breadcrumb-link" previewClass="min-h-48" />
 
-```
+## API Reference
 
-:::
-::::
+### Breadcrumb
 
----
+The `Breadcrumb` component is the root navigation element that wraps all breadcrumb components.
 
-### Link Component
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-Use the `BreadcrumbLink` component to render breadcrumb links.
+### BreadcrumbList
 
-::::tab-group[link]
-:::tab[Preview]
+The `BreadcrumbList` component displays the ordered list of breadcrumb items.
 
-<ComponentPreview name="breadcrumb-link" />
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-:::
-:::tab[Code]
+### BreadcrumbItem
 
-```file="~/registry/examples/breadcrumb-link" frame=none showLineNumbers
+The `BreadcrumbItem` component wraps individual breadcrumb items.
 
-```
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-:::
-::::
+### BreadcrumbLink
+
+The `BreadcrumbLink` component displays a clickable link in the breadcrumb.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### BreadcrumbPage
+
+The `BreadcrumbPage` component displays the current page in the breadcrumb.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### BreadcrumbSeparator
+
+The `BreadcrumbSeparator` component displays a separator between breadcrumb items. You can pass custom children to override the default separator icon.
+
+| Prop       | Type          | Default |
+| ---------- | ------------- | ------- |
+| `children` | `JSX.Element` | -       |
+| `class`    | `string`      | -       |
+
+### BreadcrumbEllipsis
+
+The `BreadcrumbEllipsis` component displays an ellipsis indicator for collapsed breadcrumb items.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+For all primitive props and navigation behavior, see the [Kobalte Breadcrumbs API reference](https://kobalte.dev/docs/core/components/breadcrumbs#api-reference).

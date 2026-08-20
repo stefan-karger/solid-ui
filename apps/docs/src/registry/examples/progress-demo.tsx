@@ -12,5 +12,5 @@ export default function ProgressDemo() {
     })
   })
 
-  return <Progress value={progress()} class="w-[60%]" />
+  return <Progress class="w-[60%]" value={progress()} />
 }

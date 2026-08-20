@@ -52,7 +52,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "~/components/ui/pagination";
 ```
 
 ```tsx showLineNumbers
@@ -105,79 +105,74 @@ Pagination
 
 A simple pagination with only page numbers.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="pagination-simple" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/pagination-simple" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Icons Only
 
 Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page selector.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="pagination-icons-only" />
 
-:::
-:::tab[Code]
+## API Reference
 
-```file="~/registry/examples/pagination-icons-only" frame=none showLineNumbers
+### Pagination
 
-```
+The root navigation element for the pagination controls. It renders a semantic `<nav>` with an accessible pagination label.
 
-:::
-::::
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-### Tanstack Router
+### PaginationContent
 
-By default the `<PaginationLink />` component will render an `<a />` tag.
+The list that contains pagination items.
 
-To use the TanStack Router `<Link />` component, make the following updates to `pagination.tsx`.
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-```diff showLineNumbers /typeof Link/ {1}
-+ import { Link } from "@tanstack/solid-router"
+### PaginationItem
 
-- type PaginationLinkProps = ... & ComponentProps<"a">
-+ type PaginationLinkProps = ... & ComponentProps<typeof Link>
+An individual pagination list item.
 
-const PaginationLink = ({...props }: ) => (
-  <PaginationItem>
--   <a>
-+   <Link>
-      // ...
--   </a>
-+   </Link>
-  </PaginationItem>
-)
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
 
-```
+### PaginationLink
 
-### RTL
+A page link. Set `isActive` to announce the current page with `aria-current="page"`.
 
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
+| Prop       | Type                  | Default  |
+| ---------- | --------------------- | -------- |
+| `isActive` | `boolean`             | `false`  |
+| `size`     | `ButtonProps["size"]` | `"icon"` |
+| `class`    | `string`              | -        |
 
-::::tab-group[example3]
-:::tab[Preview]
+### PaginationPrevious
 
-<ComponentPreview name="pagination-rtl" />
+A link to the previous page.
 
-:::
-:::tab[Code]
+| Prop    | Type     | Default      |
+| ------- | -------- | ------------ |
+| `text`  | `string` | `"Previous"` |
+| `class` | `string` | -            |
 
-```file="~/registry/examples/pagination-rtl" frame=none showLineNumbers
+### PaginationNext
 
-```
+A link to the next page.
 
-:::
-::::
+| Prop    | Type     | Default  |
+| ------- | -------- | -------- |
+| `text`  | `string` | `"Next"` |
+| `class` | `string` | -        |
+
+### PaginationEllipsis
+
+An inaccessible visual indicator that more pages are available.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+Pagination is a native Solid composition of semantic HTML elements, so it does not expose a Kobalte or Corvu primitive API.

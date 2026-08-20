@@ -43,7 +43,7 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   InputGroup,
   InputGroupAddon,
@@ -54,14 +54,151 @@ import {
 } from "~/components/ui/input-group";
 ```
 
-```tsx
+```tsx showLineNumbers
 <InputGroup>
   <InputGroupInput placeholder="Search..." />
   <InputGroupAddon>
     <SearchIcon />
   </InputGroupAddon>
-  <InputGroupAddon align="inline-end">
-    <InputGroupButton>Search</InputGroupButton>
-  </InputGroupAddon>
 </InputGroup>
 ```
+
+## Composition
+
+Use the following composition to build an `InputGroup`:
+
+```text
+InputGroup
+├── InputGroupInput or InputGroupTextarea
+├── InputGroupAddon
+├── InputGroupButton
+└── InputGroupText
+```
+
+## Examples
+
+### Align
+
+Use the `align` prop on `InputGroupAddon` to position the addon relative to the input.
+
+#### inline-start
+
+Use `align="inline-start"` to position the addon at the start of the input. This is the default.
+
+<ComponentPreview name="input-group-inline-start" previewClass="h-48" />
+
+#### inline-end
+
+Use `align="inline-end"` to position the addon at the end of the input.
+
+<ComponentPreview name="input-group-inline-end" previewClass="h-48" />
+
+#### block-start
+
+Use `align="block-start"` to position the addon above the input.
+
+<ComponentPreview name="input-group-block-start" previewClass="h-96" />
+
+#### block-end
+
+Use `align="block-end"` to position the addon below the input.
+
+<ComponentPreview name="input-group-block-end" previewClass="h-[26rem]" />
+
+### Icon
+
+<ComponentPreview name="input-group-icon" previewClass="h-80" />
+
+### Text
+
+<ComponentPreview name="input-group-text" previewClass="h-80" />
+
+### Button
+
+<ComponentPreview name="input-group-button" previewClass="h-72" />
+
+### Kbd
+
+<ComponentPreview name="input-group-kbd" previewClass="h-40" />
+
+### Dropdown
+
+<ComponentPreview name="input-group-dropdown" previewClass="h-56" />
+
+### Spinner
+
+<ComponentPreview name="input-group-spinner" previewClass="h-80" />
+
+### Textarea
+
+<ComponentPreview name="input-group-textarea" previewClass="h-96" />
+
+### Custom Input
+
+Add the `data-slot="input-group-control"` attribute to a custom input for automatic focus state handling.
+
+<ComponentPreview name="input-group-custom" previewClass="h-56" />
+
+## API Reference
+
+### InputGroup
+
+The main component that wraps inputs and addons.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<InputGroup>
+  <InputGroupInput />
+  <InputGroupAddon />
+</InputGroup>
+```
+
+### InputGroupAddon
+
+Displays icons, text, buttons, or other content alongside inputs. Place the addon after its input in the DOM and use `align` to position it visually.
+
+| Prop    | Type                                                             | Default          |
+| ------- | ---------------------------------------------------------------- | ---------------- |
+| `align` | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
+| `class` | `string`                                                         |                  |
+
+```tsx
+<InputGroupAddon align="inline-end">
+  <SearchIcon />
+</InputGroupAddon>
+```
+
+For `<InputGroupInput />`, use the `inline-start` or `inline-end` alignment. For `<InputGroupTextarea />`, use the `block-start` or `block-end` alignment.
+
+### InputGroupButton
+
+Displays buttons within input groups.
+
+| Prop      | Type                                                                          | Default   |
+| --------- | ----------------------------------------------------------------------------- | --------- |
+| `size`    | `"xs" \| "icon-xs" \| "sm" \| "icon-sm"`                                      | `"xs"`    |
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"ghost"` |
+| `class`   | `string`                                                                      |           |
+
+```tsx
+<InputGroupButton>Button</InputGroupButton>
+```
+
+### InputGroupInput
+
+Replacement for `<Input />` when building input groups. It applies input-group styles and `data-slot="input-group-control"` for focus state handling.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+### InputGroupTextarea
+
+Replacement for `<Textarea />` when building input groups. It applies textarea-group styles and `data-slot="input-group-control"` for focus state handling.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |

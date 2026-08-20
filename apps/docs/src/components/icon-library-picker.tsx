@@ -104,7 +104,7 @@ export function IconLibraryPicker() {
             <span class="text-muted-foreground text-xs">Icon Library</span>
             <span class="truncate font-medium">{selectedLibrary().title}</span>
           </div>
-          <span class="-translate-y-1/2 pointer-events-none absolute top-1/2 right-4 flex size-4 select-none items-center justify-center [&_svg]:size-4">
+          <span class="pointer-events-none absolute top-1/2 right-4 flex size-4 -translate-y-1/2 select-none items-center justify-center [&_svg]:size-4">
             {logos[selectedLibrary().name]}
           </span>
         </PickerTrigger>
@@ -140,7 +140,7 @@ export function IconLibraryPicker() {
           </PickerRadioGroup>
         </PickerContent>
       </Picker>
-      <LockButton class="-translate-y-1/2 absolute top-1/2 right-10" param="iconLibrary" />
+      <LockButton class="absolute top-1/2 right-10 -translate-y-1/2" param="iconLibrary" />
     </div>
   )
 }

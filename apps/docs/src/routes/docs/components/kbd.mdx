@@ -43,111 +43,50 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-### Composition
+```tsx showLineNumbers
+import { Kbd } from "~/components/ui/kbd";
+```
+
+```tsx showLineNumbers
+<Kbd>Ctrl</Kbd>
+```
+
+## Composition
 
 Use the following composition to build `Kbd` and `KbdGroup`:
 
-```plaintext
+```text
 Kbd
 KbdGroup
 ├── Kbd
 └── Kbd
 ```
 
+## Examples
+
 ### Group
 
 Use the `KbdGroup` component to group keyboard keys together.
 
-::::tab-group[example1]
-:::tab[Preview]
-
 <ComponentPreview name="kbd-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/kbd-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Button
 
 Use the `Kbd` component inside a `Button` component to display a keyboard key inside a button.
 
-::::tab-group[example2]
-:::tab[Preview]
-
 <ComponentPreview name="kbd-button" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/kbd-button" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Tooltip
 
 You can use the `Kbd` component inside a `Tooltip` component to display a tooltip with a keyboard key.
 
-::::tab-group[example3]
-:::tab[Preview]
-
 <ComponentPreview name="kbd-tooltip" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/kbd-tooltip" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ### Input Group
 
 You can use the `Kbd` component inside a `InputGroupAddon` component to display a keyboard key inside an input group.
 
-::::tab-group[example4]
-:::tab[Preview]
-
 <ComponentPreview name="kbd-input-group" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/kbd-input-group" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="kbd-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/kbd-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 
@@ -157,7 +96,7 @@ Use the `Kbd` component to display a keyboard key.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <Kbd>Ctrl</Kbd>
@@ -169,7 +108,7 @@ Use the `KbdGroup` component to group `Kbd` components together.
 
 | Prop    | Type     | Default |
 | ------- | -------- | ------- |
-| `class` | `string` |         |
+| `class` | `string` | ``      |
 
 ```tsx
 <KbdGroup>

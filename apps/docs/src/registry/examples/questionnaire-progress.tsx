@@ -1,5 +1,7 @@
-import { Index } from "solid-js";
-import { toast } from "solid-sonner";
+import { Index } from "solid-js"
+
+import { toast } from "solid-sonner"
+
 import {
   QuestionnaireActions,
   QuestionnaireChoice,
@@ -11,26 +13,26 @@ import {
   QuestionnaireProgress,
   QuestionnaireRoot,
   QuestionnaireSubmit,
-  QuestionnaireTitle,
-} from "~/registry/ui/questionnaire";
-import { Toaster } from "~/registry/ui/toast";
+  QuestionnaireTitle
+} from "~/registry/ui/questionnaire"
+import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "scope", required: true },
   { name: "strategy", required: true },
   { name: "tests", required: true },
-  { name: "delivery", required: true },
-] as const;
+  { name: "delivery", required: true }
+] as const
 
 export default function QuestionnaireProgressDemo() {
   function handleSubmit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget)
 
     toast("Pull request plan ready", {
-      description: `Scope: ${formData.get("scope") ?? "None"} · Commits: ${formData.get("strategy") ?? "None"} · Tests: ${formData.get("tests") ?? "None"} · Delivery: ${formData.get("delivery") ?? "None"}`,
-    });
+      description: `Scope: ${formData.get("scope") ?? "None"} · Commits: ${formData.get("strategy") ?? "None"} · Tests: ${formData.get("tests") ?? "None"} · Delivery: ${formData.get("delivery") ?? "None"}`
+    })
   }
 
   return (
@@ -45,7 +47,7 @@ export default function QuestionnaireProgressDemo() {
         <QuestionnaireProgress class="w-full">
           {(state) => (
             <>
-              <div class="mb-2 flex gap-1.5" aria-hidden="true">
+              <div aria-hidden="true" class="mb-2 flex gap-1.5">
                 <Index each={Array.from({ length: state.total })}>
                   {(_, index) => (
                     <span
@@ -112,5 +114,5 @@ export default function QuestionnaireProgressDemo() {
         </QuestionnaireActions>
       </QuestionnaireRoot>
     </>
-  );
+  )
 }

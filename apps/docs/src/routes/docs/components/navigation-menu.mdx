@@ -3,6 +3,8 @@ title: Navigation Menu
 description: A collection of links for navigating websites.
 ---
 
+The Navigation Menu component uses [Kobalte Navigation Menu](https://kobalte.dev/docs/core/components/navigation-menu) for accessible navigation, keyboard, and focus behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -50,7 +52,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "~/components/ui/navigation-menu";
 ```
 
 ```tsx showLineNumbers
@@ -58,7 +60,7 @@ import {
   <NavigationMenuItem>
     <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
     <NavigationMenuContent>
-      <NavigationMenuLink>Link</NavigationMenuLink>
+      <NavigationMenuLink href="/docs">Link</NavigationMenuLink>
     </NavigationMenuContent>
   </NavigationMenuItem>
 </NavigationMenu>
@@ -66,23 +68,23 @@ import {
 
 ## Composition
 
+`NavigationMenu` renders its own list wrapper internally, so items are placed directly inside it.
 Use the following composition to build a `NavigationMenu`:
 
 ```text
 NavigationMenu
-│   ├── NavigationMenuItem
-│   │   ├── NavigationMenuTrigger
-│   │   └── NavigationMenuContent
-│   │       ├── NavigationMenuLink
-│   │       └── NavigationMenuLink
-│   └── NavigationMenuItem
+├── NavigationMenuItem
+│   ├── NavigationMenuTrigger
+│   └── NavigationMenuContent
+│       ├── NavigationMenuLink
 │       └── NavigationMenuLink
-└── NavigationMenuIndicator
+└── NavigationMenuItem
+    └── NavigationMenuLink
 ```
 
 ## Examples
 
-## Link Component
+### Link Component
 
 Use the `as` prop to compose a custom link component such as TanStack/solid-router `Link`.
 
@@ -110,7 +112,7 @@ export function NavigationMenuDemo() {
 }
 ```
 
-## RTL
+### RTL
 
 To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
 
@@ -131,4 +133,4 @@ To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
 
 ## API Reference
 
-See the [Kobalte UI Navigation Menu](https://kobalte.dev/docs/core/components/navigation-menu) documentation.
+See the [Kobalte Navigation Menu API reference](https://kobalte.dev/docs/core/components/navigation-menu#api-reference) for primitive props, keyboard behavior, and accessibility details.

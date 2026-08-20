@@ -1,3 +1,5 @@
+import { createSignal, For, Show } from "solid-js"
+
 import {
   ArrowUpIcon,
   GlobeIcon,
@@ -5,11 +7,10 @@ import {
   PaperclipIcon,
   PlusIcon,
   RotateCwIcon,
-  TelescopeIcon,
-} from "lucide-solid";
-import { createSignal, For, Show } from "solid-js";
-import { MessageScroller, MessageScrollerButton, MessageScrollerContent, MessageScrollerProvider, MessageScrollerViewport } from "~/registry/ui/message-scroller";
-import { Button } from "~/registry/ui/button";
+  TelescopeIcon
+} from "lucide-solid"
+
+import { Button } from "~/registry/ui/button"
 import {
   Card,
   CardAction,
@@ -17,34 +18,38 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
-} from "~/registry/ui/card";
+  CardTitle
+} from "~/registry/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/registry/ui/dropdown-menu";
-import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group";
-import { Slider } from "~/registry/ui/slider";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip";
+  DropdownMenuTrigger
+} from "~/registry/ui/dropdown-menu"
+import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group"
 import {
-  createScriptedChat,
-  MessageAnimated,
-  scrollBehaviorScript,
-} from "./message-scroller-utils";
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerProvider,
+  MessageScrollerViewport
+} from "~/registry/ui/message-scroller"
+import { Slider } from "~/registry/ui/slider"
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 
-const DEFAULT_PEEK = 64;
+import { createScriptedChat, MessageAnimated, scrollBehaviorScript } from "./message-scroller-utils"
+
+const DEFAULT_PEEK = 64
 
 export default function MessageScrollerPreviousContext() {
-  const [peek, setPeek] = createSignal(DEFAULT_PEEK);
+  const [peek, setPeek] = createSignal(DEFAULT_PEEK)
   // One turn is already on screen so the peek band has something to preserve.
   const chat = createScriptedChat({
     delayMs: 35,
     initialCount: 2,
-    script: scrollBehaviorScript,
-  });
+    script: scrollBehaviorScript
+  })
 
   return (
     <MessageScrollerProvider scrollMargin={24} scrollPreviousItemPeek={peek()}>
@@ -57,14 +62,14 @@ export default function MessageScrollerPreviousContext() {
               <Tooltip>
                 <TooltipTrigger as="span" class="inline-block w-fit">
                   <Button
-                    variant="outline"
-                    size="icon"
                     aria-label="Reset context example"
                     disabled={chat.isBusy()}
                     onClick={() => {
-                      chat.reset();
-                      setPeek(DEFAULT_PEEK);
+                      chat.reset()
+                      setPeek(DEFAULT_PEEK)
                     }}
+                    size="icon"
+                    variant="outline"
                   >
                     <RotateCwIcon />
                   </Button>
@@ -93,8 +98,8 @@ export default function MessageScrollerPreviousContext() {
             <form
               class="w-full"
               onSubmit={(event) => {
-                event.preventDefault();
-                chat.send();
+                event.preventDefault()
+                chat.send()
               }}
             >
               <InputGroup>
@@ -104,13 +109,13 @@ export default function MessageScrollerPreviousContext() {
                     data-status={chat.status()}
                   >
                     <Show
-                      when={chat.nextMessage()}
-                      keyed
                       fallback={
                         <span class="text-muted-foreground">
                           No messages queued. Reset the context.
                         </span>
                       }
+                      keyed
+                      when={chat.nextMessage()}
                     >
                       {(message) => message.text}
                     </Show>
@@ -119,10 +124,10 @@ export default function MessageScrollerPreviousContext() {
                 <InputGroupAddon align="block-end" class="pt-1">
                   <DropdownMenu placement="top-start">
                     <DropdownMenuTrigger
-                      as={InputGroupButton}
                       aria-label="Add files"
-                      type="button"
+                      as={InputGroupButton}
                       size="icon-sm"
+                      type="button"
                       variant="outline"
                     >
                       <PlusIcon />
@@ -151,20 +156,20 @@ export default function MessageScrollerPreviousContext() {
                     <span class="text-muted-foreground text-xs tabular-nums">{peek()}px</span>
                     <Slider
                       aria-label="Previous context peek"
-                      value={[peek()]}
-                      minValue={64}
-                      maxValue={128}
-                      step={1}
                       disabled={chat.isBusy()}
+                      maxValue={128}
+                      minValue={64}
                       onChange={(value) => setPeek(value[0] ?? DEFAULT_PEEK)}
+                      step={1}
+                      value={[peek()]}
                     />
                   </div>
                   <InputGroupButton
+                    class="ml-auto"
+                    disabled={!chat.nextMessage() || chat.isBusy()}
+                    size="icon-sm"
                     type="submit"
                     variant="default"
-                    size="icon-sm"
-                    disabled={!chat.nextMessage() || chat.isBusy()}
-                    class="ml-auto"
                   >
                     <ArrowUpIcon />
                     <span class="sr-only">Send</span>
@@ -179,5 +184,5 @@ export default function MessageScrollerPreviousContext() {
         </div>
       </div>
     </MessageScrollerProvider>
-  );
+  )
 }

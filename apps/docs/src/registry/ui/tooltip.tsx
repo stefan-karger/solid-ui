@@ -38,4 +38,4 @@ const TooltipContent = <T extends ValidComponent = "div">(
   )
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, type TooltipContentProps }
+export { Tooltip, TooltipContent, type TooltipContentProps, TooltipTrigger }

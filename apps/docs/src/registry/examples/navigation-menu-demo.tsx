@@ -1,51 +1,53 @@
-import { CircleAlert, CircleCheck, CircleDashed } from "lucide-solid";
-import type { ComponentProps, JSX } from "solid-js";
-import { For, splitProps } from "solid-js";
+import type { ComponentProps, JSX } from "solid-js"
+import { For, splitProps } from "solid-js"
+
+import { CircleAlert, CircleCheck, CircleDashed } from "lucide-solid"
+
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "~/registry/ui/navigation-menu";
+  navigationMenuTriggerStyle
+} from "~/registry/ui/navigation-menu"
 
 const components = [
   {
     title: "Alert Dialog",
-    href: "/docs/components/alert-dialog",
+    href: "/docs/components/kobalte/alert-dialog",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "A modal dialog that interrupts the user with important content and expects a response."
   },
   {
     title: "Hover Card",
-    href: "/docs/components/hover-card",
-    description: "For sighted users to preview content available behind a link.",
+    href: "/docs/components/kobalte/hover-card",
+    description: "For sighted users to preview content available behind a link."
   },
   {
     title: "Progress",
-    href: "/docs/components/progress",
+    href: "/docs/components/kobalte/progress",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar."
   },
   {
     title: "Scroll Area",
-    href: "/docs/components/scroll-area",
-    description: "Visually or semantically separates content.",
+    href: "/docs/components/kobalte/scroll-area",
+    description: "Visually or semantically separates content."
   },
   {
     title: "Tabs",
-    href: "/docs/components/tabs",
+    href: "/docs/components/kobalte/tabs",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time."
   },
   {
     title: "Tooltip",
-    href: "/docs/components/tooltip",
+    href: "/docs/components/kobalte/tooltip",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it."
+  }
+]
 
 export default function NavigationMenuDemo() {
   return (
@@ -53,7 +55,7 @@ export default function NavigationMenuDemo() {
       <NavigationMenuItem>
         <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul class="w-96 rounded-md border border-solid border-border bg-popover p-2">
+          <ul class="w-96 rounded-md border border-border border-solid bg-popover p-2">
             <ListItem href="/docs" title="Introduction">
               Re-usable components built with Tailwind CSS.
             </ListItem>
@@ -69,7 +71,7 @@ export default function NavigationMenuDemo() {
       <NavigationMenuItem class="hidden md:flex">
         <NavigationMenuTrigger>Components</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul class="grid w-[400px] gap-2 rounded-md border border-solid border-border bg-popover p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+          <ul class="grid w-[400px] gap-2 rounded-md border border-border border-solid bg-popover p-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
             <For each={components}>
               {(component) => (
                 <ListItem href={component.href} title={component.title}>
@@ -83,25 +85,25 @@ export default function NavigationMenuDemo() {
       <NavigationMenuItem>
         <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul class="grid w-[200px] rounded-md  border border-solid border-border bg-popover p-2">
+          <ul class="grid w-[200px] rounded-md border border-border border-solid bg-popover p-2">
             <li>
               <NavigationMenuLink
-                href="/docs/components/alert"
                 class="flex-row items-center gap-2"
+                href="/docs/components/kobalte/alert"
               >
                 <CircleAlert />
                 Backlog
               </NavigationMenuLink>
               <NavigationMenuLink
-                href="/docs/components/progress"
                 class="flex-row items-center gap-2"
+                href="/docs/components/kobalte/progress"
               >
                 <CircleDashed />
                 To Do
               </NavigationMenuLink>
               <NavigationMenuLink
-                href="/docs/components/checkbox"
                 class="flex-row items-center gap-2"
+                href="/docs/components/kobalte/checkbox"
               >
                 <CircleCheck />
                 Done
@@ -111,31 +113,31 @@ export default function NavigationMenuDemo() {
         </NavigationMenuContent>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink href="/docs" class={navigationMenuTriggerStyle()}>
+        <NavigationMenuLink class={navigationMenuTriggerStyle()} href="/docs">
           Docs
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenu>
-  );
+  )
 }
 
 type ListItemProps = ComponentProps<"li"> & {
-  children: JSX.Element;
-  href: string;
-  title: string;
-};
+  children: JSX.Element
+  href: string
+  title: string
+}
 
 function ListItem(props: ListItemProps) {
-  const [local, others] = splitProps(props, ["children", "href", "title"]);
+  const [local, others] = splitProps(props, ["children", "href", "title"])
 
   return (
     <li {...others}>
       <NavigationMenuLink href={local.href}>
         <div class="flex flex-col gap-1 text-sm">
-          <div class="leading-none font-medium">{local.title}</div>
+          <div class="font-medium leading-none">{local.title}</div>
           <div class="line-clamp-2 text-muted-foreground">{local.children}</div>
         </div>
       </NavigationMenuLink>
     </li>
-  );
+  )
 }

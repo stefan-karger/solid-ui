@@ -1,10 +1,10 @@
 import {
+  CircleQuestionMarkIcon,
   FileIcon,
   FolderIcon,
-  CircleQuestionMarkIcon,
   SaveIcon,
   SettingsIcon,
-  TrashIcon,
+  TrashIcon
 } from "lucide-solid"
 
 import {
@@ -15,7 +15,7 @@ import {
   MenubarMenu,
   MenubarSeparator,
   MenubarShortcut,
-  MenubarTrigger,
+  MenubarTrigger
 } from "~/registry/ui/menubar"
 
 export default function MenubarIcons() {

@@ -4,7 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 export default function TooltipDisabled() {
   return (
     <Tooltip>
-      <TooltipTrigger as={Button<"button">} variant="outline" disabled>
+      <TooltipTrigger as={Button<"button">} disabled variant="outline">
         Hover
       </TooltipTrigger>
       <TooltipContent>

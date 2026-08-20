@@ -1,18 +1,14 @@
-import { createSignal, For } from "solid-js";
-import { Bar, BarChart, CartesianGrid, XAxis } from "solid-recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/registry/ui/card";
+import { createSignal, For } from "solid-js"
+
+import { Bar, BarChart, CartesianGrid, XAxis } from "solid-recharts"
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
-} from "~/registry/ui/chart";
+  ChartTooltipContent
+} from "~/registry/ui/chart"
 
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
@@ -44,24 +40,24 @@ const chartData = [
   { date: "2024-04-27", desktop: 383, mobile: 420 },
   { date: "2024-04-28", desktop: 122, mobile: 180 },
   { date: "2024-04-29", desktop: 315, mobile: 240 },
-  { date: "2024-04-30", desktop: 454, mobile: 380 },
-];
+  { date: "2024-04-30", desktop: 454, mobile: 380 }
+]
 
 const chartConfig = {
   views: { label: "Page Views" },
   desktop: { label: "Desktop", color: "var(--chart-2)" },
-  mobile: { label: "Mobile", color: "var(--chart-1)" },
-} satisfies ChartConfig;
+  mobile: { label: "Mobile", color: "var(--chart-1)" }
+} satisfies ChartConfig
 
-type SeriesKey = "desktop" | "mobile";
+type SeriesKey = "desktop" | "mobile"
 
 const totals = {
   desktop: chartData.reduce((sum, item) => sum + item.desktop, 0),
-  mobile: chartData.reduce((sum, item) => sum + item.mobile, 0),
-};
+  mobile: chartData.reduce((sum, item) => sum + item.mobile, 0)
+}
 
 export default function ChartDemo() {
-  const [activeChart, setActiveChart] = createSignal<SeriesKey>("desktop");
+  const [activeChart, setActiveChart] = createSignal<SeriesKey>("desktop")
 
   return (
     <Card class="w-full py-0 pb-4">
@@ -74,14 +70,14 @@ export default function ChartDemo() {
           <For each={["desktop", "mobile"] as const}>
             {(chart) => (
               <button
-                type="button"
-                data-active={String(activeChart() === chart)}
                 aria-pressed={activeChart() === chart}
                 class="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+                data-active={String(activeChart() === chart)}
                 onClick={() => setActiveChart(chart)}
+                type="button"
               >
-                <span class="text-xs text-muted-foreground">{chartConfig[chart].label}</span>
-                <span class="text-lg leading-none font-bold sm:text-3xl">
+                <span class="text-muted-foreground text-xs">{chartConfig[chart].label}</span>
+                <span class="font-bold text-lg leading-none sm:text-3xl">
                   {totals[chart].toLocaleString()}
                 </span>
               </button>
@@ -90,35 +86,35 @@ export default function ChartDemo() {
         </div>
       </CardHeader>
       <CardContent class="px-2 sm:p-6">
-        <ChartContainer config={chartConfig} class="aspect-auto h-[250px] w-full">
+        <ChartContainer class="aspect-auto h-[250px] w-full" config={chartConfig}>
           <BarChart accessibilityLayer data={chartData} margin={{ left: 12, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="date"
-              tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              dataKey="date"
               minTickGap={32}
               tickFormatter={(value) =>
                 new Date(String(value)).toLocaleDateString("en-US", {
                   month: "short",
-                  day: "numeric",
+                  day: "numeric"
                 })
               }
+              tickLine={false}
+              tickMargin={8}
             />
             <ChartTooltip
               content={(props) => (
                 <ChartTooltipContent
                   {...props}
                   class="w-[150px]"
-                  nameKey="views"
                   labelFormatter={(value) =>
                     new Date(String(value)).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                      year: "numeric",
+                      year: "numeric"
                     })
                   }
+                  nameKey="views"
                 />
               )}
             />
@@ -127,5 +123,5 @@ export default function ChartDemo() {
         </ChartContainer>
       </CardContent>
     </Card>
-  );
+  )
 }

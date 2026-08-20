@@ -1,8 +1,4 @@
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "~/registry/ui/field"
+import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
 
 export default function InputRequired() {
@@ -11,11 +7,7 @@ export default function InputRequired() {
       <FieldLabel for="input-required">
         Required Field <span class="text-destructive">*</span>
       </FieldLabel>
-      <Input
-        id="input-required"
-        placeholder="This field is required"
-        required
-      />
+      <Input id="input-required" placeholder="This field is required" required />
       <FieldDescription>This field must be filled out.</FieldDescription>
     </Field>
   )

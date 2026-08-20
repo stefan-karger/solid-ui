@@ -1,4 +1,4 @@
-import { DownloadIcon, FileTextIcon } from "lucide-solid";
+import { DownloadIcon, FileTextIcon } from "lucide-solid"
 
 import {
   Attachment,
@@ -7,10 +7,10 @@ import {
   AttachmentContent,
   AttachmentDescription,
   AttachmentMedia,
-  AttachmentTitle,
-} from "~/registry/ui/attachment";
-import { Bubble, BubbleContent } from "~/registry/ui/bubble";
-import { Message, MessageContent } from "~/registry/ui/message";
+  AttachmentTitle
+} from "~/registry/ui/attachment"
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Message, MessageContent } from "~/registry/ui/message"
 
 export default function MessageAttachmentDemo() {
   return (
@@ -20,8 +20,8 @@ export default function MessageAttachmentDemo() {
           <Attachment orientation="vertical">
             <AttachmentMedia variant="image">
               <img
-                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80"
                 alt="Workspace"
+                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80"
               />
             </AttachmentMedia>
           </Attachment>
@@ -49,10 +49,10 @@ export default function MessageAttachmentDemo() {
             </AttachmentContent>
             <AttachmentActions>
               <AttachmentAction
-                type="button"
-                title="Download"
                 aria-label="Download"
                 size="icon-sm"
+                title="Download"
+                type="button"
                 variant="secondary"
               >
                 <DownloadIcon />
@@ -69,5 +69,5 @@ export default function MessageAttachmentDemo() {
         </MessageContent>
       </Message>
     </div>
-  );
+  )
 }

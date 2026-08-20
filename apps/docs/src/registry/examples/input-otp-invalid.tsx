@@ -1,29 +1,25 @@
 import { createSignal } from "solid-js"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "~/registry/ui/input-otp"
+
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
 
 export default function InputOTPInvalid() {
   const [value, setValue] = createSignal("000000")
 
   return (
-    <InputOTP maxLength={6} value={value()} onValueChange={setValue}>
+    <InputOTP maxLength={6} onValueChange={setValue} value={value()}>
       <InputOTPGroup>
-        <InputOTPSlot index={0} aria-invalid />
-        <InputOTPSlot index={1} aria-invalid />
+        <InputOTPSlot aria-invalid index={0} />
+        <InputOTPSlot aria-invalid index={1} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot index={2} aria-invalid />
-        <InputOTPSlot index={3} aria-invalid />
+        <InputOTPSlot aria-invalid index={2} />
+        <InputOTPSlot aria-invalid index={3} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot index={4} aria-invalid />
-        <InputOTPSlot index={5} aria-invalid />
+        <InputOTPSlot aria-invalid index={4} />
+        <InputOTPSlot aria-invalid index={5} />
       </InputOTPGroup>
     </InputOTP>
   )

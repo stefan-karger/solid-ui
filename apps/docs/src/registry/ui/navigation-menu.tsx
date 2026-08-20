@@ -1,3 +1,6 @@
+import type { ComponentProps, JSX, ValidComponent } from "solid-js"
+import { mergeProps, splitProps } from "solid-js"
+
 import {
   Content,
   Menu,
@@ -7,14 +10,13 @@ import {
   Portal,
   Root,
   Trigger,
-  Viewport,
-} from "@kobalte/core/navigation-menu";
-import type { PolymorphicProps } from "@kobalte/core/polymorphic";
-import { cva } from "class-variance-authority";
-import { ChevronDown } from "lucide-solid";
-import type { ComponentProps, JSX, ValidComponent } from "solid-js";
-import { mergeProps, splitProps } from "solid-js";
-import { cn } from "~/lib/utils";
+  Viewport
+} from "@kobalte/core/navigation-menu"
+import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+import { cva } from "class-variance-authority"
+import { ChevronDown } from "lucide-solid"
+
+import { cn } from "~/lib/utils"
 
 type NavigationMenuProps<T extends ValidComponent = "ul"> = PolymorphicProps<
   T,
@@ -27,16 +29,16 @@ const NavigationMenu = <T extends ValidComponent = "ul">(props: NavigationMenuPr
   const [local, others] = splitProps(mergedProps as NavigationMenuProps, ["class", "children"])
   return (
     <Root
-      data-slot="navigation-menu"
       class={cn(
-        "group/navigation-menu relative cn-navigation-menu flex max-w-max flex-1 items-center justify-center",
-        local.class,
+        "group/navigation-menu cn-navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+        local.class
       )}
+      data-slot="navigation-menu"
       {...others}
     >
       <div
-        data-slot="navigation-menu-list"
         class="group cn-navigation-menu-list flex flex-1 list-none items-center justify-center"
+        data-slot="navigation-menu-list"
       >
         {local.children}
       </div>
@@ -52,8 +54,8 @@ const NavigationMenuItem = (props: NavigationMenuItemProps) => {
   return (
     <Menu>
       <div
+        class={cn("cn-navigation-menu-item relative", local.class)}
         data-slot="navigation-menu-item"
-        class={cn("relative cn-navigation-menu-item", local.class)}
         {...others}
       />
     </Menu>
@@ -61,7 +63,7 @@ const NavigationMenuItem = (props: NavigationMenuItemProps) => {
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group/navigation-menu-trigger cn-navigation-menu-trigger inline-flex h-9 w-max items-center justify-center outline-none disabled:pointer-events-none",
+  "group/navigation-menu-trigger cn-navigation-menu-trigger inline-flex h-9 w-max items-center justify-center outline-none disabled:pointer-events-none"
 )
 
 type NavigationMenuTriggerProps<T extends ValidComponent = "div"> = PolymorphicProps<
@@ -71,17 +73,17 @@ type NavigationMenuTriggerProps<T extends ValidComponent = "div"> = PolymorphicP
   Pick<ComponentProps<T>, "class" | "children">
 
 const NavigationMenuTrigger = <T extends ValidComponent = "div">(
-  props: NavigationMenuTriggerProps<T>,
+  props: NavigationMenuTriggerProps<T>
 ) => {
   const [local, others] = splitProps(props as NavigationMenuTriggerProps, ["class", "children"])
   return (
     <Trigger
-      data-slot="navigation-menu-trigger"
       class={cn(navigationMenuTriggerStyle(), "group", local.class)}
+      data-slot="navigation-menu-trigger"
       {...others}
     >
       {local.children}
-      <ChevronDown class="cn-navigation-menu-trigger-icon" aria-hidden="true" />
+      <ChevronDown aria-hidden="true" class="cn-navigation-menu-trigger-icon" />
     </Trigger>
   )
 }
@@ -93,17 +95,17 @@ type NavigationMenuContentProps<T extends ValidComponent = "ul"> = PolymorphicPr
   Pick<ComponentProps<T>, "class" | "children">
 
 const NavigationMenuContent = <T extends ValidComponent = "ul">(
-  props: NavigationMenuContentProps<T>,
+  props: NavigationMenuContentProps<T>
 ) => {
   const [local, others] = splitProps(props as NavigationMenuContentProps, ["class"])
   return (
     <Portal>
       <Content
-        data-slot="navigation-menu-content"
         class={cn(
-          "absolute top-0 cn-navigation-menu-content h-full w-auto origin-(--kb-menu-content-transform-origin) **:data-[slot=navigation-menu-link]:focus:outline-none **:data-[slot=navigation-menu-link]:focus:ring-0",
-          local.class,
+          "cn-navigation-menu-content absolute top-0 h-full w-auto origin-(--kb-menu-content-transform-origin) **:data-[slot=navigation-menu-link]:focus:outline-none **:data-[slot=navigation-menu-link]:focus:ring-0",
+          local.class
         )}
+        data-slot="navigation-menu-content"
         {...others}
       />
     </Portal>
@@ -119,8 +121,8 @@ const NavigationMenuLink = (props: NavigationMenuLinkProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <a
-      data-slot="navigation-menu-link"
       class={cn("cn-navigation-menu-link", local.class)}
+      data-slot="navigation-menu-link"
       {...others}
     />
   )
@@ -134,14 +136,14 @@ const NavigationMenuIndicator = (props: NavigationMenuIndicatorProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      data-slot="navigation-menu-indicator"
       class={cn(
-        "top-full z-1 cn-navigation-menu-indicator flex h-1.5 items-end justify-center overflow-hidden",
-        local.class,
+        "cn-navigation-menu-indicator top-full z-1 flex h-1.5 items-end justify-center overflow-hidden",
+        local.class
       )}
+      data-slot="navigation-menu-indicator"
       {...others}
     >
-      <div class="relative top-[60%] cn-navigation-menu-indicator-arrow h-2 w-2 rotate-45" />
+      <div class="cn-navigation-menu-indicator-arrow relative top-[60%] h-2 w-2 rotate-45" />
     </div>
   )
 }
@@ -153,5 +155,5 @@ export {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  navigationMenuTriggerStyle
 }

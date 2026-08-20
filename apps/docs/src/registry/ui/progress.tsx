@@ -1,45 +1,110 @@
-import * as ProgressPrimitive from "@kobalte/core/progress"
-import { mergeProps, splitProps } from "solid-js"
+import { type ComponentProps, splitProps, type ValidComponent } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import type { Component, JSX, ValidComponent } from "solid-js"
+import {
+  Fill,
+  Label,
+  type ProgressFillProps,
+  type ProgressLabelProps,
+  type ProgressRootProps,
+  type ProgressTrackProps,
+  type ProgressValueLabelProps,
+  Root,
+  Track,
+  ValueLabel
+} from "@kobalte/core/progress"
 
-import { Label } from "~/registry/ui/label"
 import { cn } from "~/lib/utils"
 
-type ProgressRootProps<T extends ValidComponent = "div"> =
-  ProgressPrimitive.ProgressRootProps<T> & { children?: JSX.Element; class?: string }
+type ProgressProps<T extends ValidComponent = "div"> = PolymorphicProps<T, ProgressRootProps<T>> &
+  Pick<ComponentProps<T>, "class" | "children">
 
-const Progress = <T extends ValidComponent = "div">(
-  rawProps: PolymorphicProps<T, ProgressRootProps<T>>
-) => {
-  const props = mergeProps({ as: "div" } as ProgressRootProps, rawProps)
-  const [local, others] = splitProps(props, ["children", "class", "as"])
+const Progress = <T extends ValidComponent = "div">(props: ProgressProps<T>) => {
+  const [local, others] = splitProps(props as ProgressProps, ["class", "children"])
   return (
-    <ProgressPrimitive.Root
-      as={local.as}
-      class={cn("cn-progress", local.class)}
+    <Root
+      class={cn("cn-progress-root flex flex-wrap gap-3", local.class)}
       data-slot="progress"
       {...others}
     >
-      <div class="flex flex-1">
-        {local.children}
-      </div>
-      <ProgressPrimitive.Track class="cn-progress-track relative h-2 w-full overflow-hidden rounded-full bg-secondary">
-        <ProgressPrimitive.Fill class="cn-progress-indicator h-full w-(--kb-progress-fill-width) flex-1 bg-primary transition-all" />
-      </ProgressPrimitive.Track>
-    </ProgressPrimitive.Root>
+      {local.children}
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
+    </Root>
   )
 }
 
-const ProgressLabel: Component<ProgressPrimitive.ProgressLabelProps> = (props) => {
-  return <ProgressPrimitive.Label as={Label} class="cn-progress-label" {...props} />
+type ProgressTrackComponentProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  ProgressTrackProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const ProgressTrack = <T extends ValidComponent = "div">(props: ProgressTrackComponentProps<T>) => {
+  const [local, others] = splitProps(props as ProgressTrackComponentProps, ["class"])
+  return (
+    <Track
+      class={cn(
+        "cn-progress-track relative flex w-full items-center overflow-x-hidden",
+        local.class
+      )}
+      data-slot="progress-track"
+      {...others}
+    />
+  )
 }
 
-const ProgressValue: Component<ProgressPrimitive.ProgressValueLabelProps> = (
-  props
+type ProgressIndicatorProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  ProgressFillProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const ProgressIndicator = <T extends ValidComponent = "div">(props: ProgressIndicatorProps<T>) => {
+  const [local, others] = splitProps(props as ProgressIndicatorProps, ["class"])
+  return (
+    <Fill
+      class={cn(
+        "cn-progress-indicator h-full w-(--kb-progress-fill-width) transition-all",
+        local.class
+      )}
+      data-slot="progress-indicator"
+      {...others}
+    />
+  )
+}
+
+type ProgressLabelComponentProps<T extends ValidComponent = "span"> = PolymorphicProps<
+  T,
+  ProgressLabelProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const ProgressLabel = <T extends ValidComponent = "span">(
+  props: ProgressLabelComponentProps<T>
 ) => {
-  return <ProgressPrimitive.ValueLabel as={Label} class="cn-progress-value" {...props} />
+  const [local, others] = splitProps(props as ProgressLabelComponentProps, ["class"])
+  return (
+    <Label class={cn("cn-progress-label", local.class)} data-slot="progress-label" {...others} />
+  )
 }
 
-export { Progress, ProgressLabel, ProgressValue }
+type ProgressValueProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  ProgressValueLabelProps<T>
+> &
+  Pick<ComponentProps<T>, "class">
+
+const ProgressValue = <T extends ValidComponent = "div">(props: ProgressValueProps<T>) => {
+  const [local, others] = splitProps(props as ProgressValueProps, ["class"])
+  return (
+    <ValueLabel
+      class={cn("cn-progress-value", local.class)}
+      data-slot="progress-value"
+      {...others}
+    />
+  )
+}
+
+export { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue }

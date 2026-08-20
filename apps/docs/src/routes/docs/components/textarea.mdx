@@ -43,11 +43,11 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
-import { Textarea } from "@/components/ui/textarea";
+```tsx showLineNumbers
+import { Textarea } from "~/components/ui/textarea";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Textarea />
 ```
 
@@ -57,93 +57,26 @@ import { Textarea } from "@/components/ui/textarea";
 
 Use `Field`, `FieldLabel`, and `FieldDescription` to create a textarea with a label and description.
 
-::::tab-group[example1]
-:::tab[Preview]
+<ComponentPreview name="textarea-field" previewClass="*:max-w-xs" />
 
-<ComponentPreview name="textarea-field" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/textarea-field" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-## Disabled
+### Disabled
 
 Use the `disabled` prop to disable the textarea. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
 
-::::tab-group[example2]
-:::tab[Preview]
-
-<ComponentPreview name="textarea-disabled" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/textarea-disabled" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="textarea-disabled" previewClass="*:max-w-xs" />
 
 ### Invalid
 
 Use the `aria-invalid` prop to mark the textarea as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
 
-::::tab-group[example3]
-:::tab[Preview]
-
-<ComponentPreview name="textarea-invalid" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/textarea-invalid" frame=none showLineNumbers
-
-```
-
-:::
-::::
+<ComponentPreview name="textarea-invalid" previewClass="*:max-w-xs" />
 
 ### Button
 
 Pair with `Button` to create a textarea with a submit button.
 
-::::tab-group[example4]
-:::tab[Preview]
+<ComponentPreview name="textarea-button" previewClass="*:max-w-xs" />
 
-<ComponentPreview name="textarea-button" />
+## API Reference
 
-:::
-:::tab[Code]
-
-```file="~/registry/examples/textarea-button" frame=none showLineNumbers
-
-```
-
-:::
-::::
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example5]
-:::tab[Preview]
-
-<ComponentPreview name="textarea-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/textarea-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
+`Textarea` is a styled native textarea element. See the [HTML textarea element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea) for its native props, keyboard behavior, and accessibility semantics.

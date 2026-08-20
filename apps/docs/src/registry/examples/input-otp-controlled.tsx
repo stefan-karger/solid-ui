@@ -1,19 +1,12 @@
 import { createSignal, Show } from "solid-js"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "~/registry/ui/input-otp"
+
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/registry/ui/input-otp"
 
 export default function InputOTPControlled() {
   const [value, setValue] = createSignal("")
   return (
     <div class="space-y-2">
-      <InputOTP
-        maxLength={6}
-        value={value()}
-        onValueChange={setValue}
-      >
+      <InputOTP maxLength={6} onValueChange={setValue} value={value()}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
@@ -24,7 +17,7 @@ export default function InputOTPControlled() {
         </InputOTPGroup>
       </InputOTP>
       <div class="text-center text-sm">
-        <Show when={value() && value().length} fallback={<>Enter your one-time password.</>}>
+        <Show fallback={<>Enter your one-time password.</>} when={value() && value().length}>
           You entered: {value()}
         </Show>
       </div>
