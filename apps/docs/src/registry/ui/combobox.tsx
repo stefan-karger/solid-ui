@@ -70,7 +70,7 @@ type ComboboxInputProps<
     getChipLabel?: (value: O) => string
   }
 
-const ComboboxInput = <O, T extends ValidComponent = "input">(
+const ComboboxInput = <O extends string | {}, T extends ValidComponent = "input">(
   rawProps: ComboboxInputProps<O, T>
 ) => {
   const props = mergeProps(
@@ -191,11 +191,7 @@ type ComboboxTriggerProps<T extends ValidComponent = "button"> = PolymorphicProp
 const ComboboxTrigger = <T extends ValidComponent = "button">(
   rawProps: ComboboxTriggerProps<T>
 ) => {
-<<<<<<< HEAD
-  const props = mergeProps({ size: "default" }, rawProps)
-=======
   const props = mergeProps({ size: "default" } as const, rawProps)
->>>>>>> feature/combobox
   const [local, others] = splitProps(props as ComboboxTriggerProps, ["class", "children", "size"])
 
   return (
