@@ -1,9 +1,9 @@
 ---
 title: Combobox
-description: Autocomplete input with a list of suggestions.
+description: Autocomplete input with single or multiple selection.
 ---
 
-The Combobox component is built on top of [Kobalte Combobox](https://kobalte.dev/docs/core/components/combobox), which provides the accessible autocomplete primitive and keyboard navigation.
+The Combobox component is built on top of [Kobalte Combobox](https://kobalte.dev/docs/core/components/combobox). It supports accessible autocomplete, keyboard navigation, grouped options, and single or multiple selection.
 
 ::::tab-group[preview]
 :::tab[Preview]
@@ -52,8 +52,7 @@ import {
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-  ComboboxList,
-} from "@/components/ui/combobox";
+} from "~/components/ui/combobox";
 ```
 
 ```tsx showLineNumbers
@@ -67,39 +66,6 @@ const frameworks = [
   "Astro",
 ];
 
-export default function ComboboxBasic() {
-  return (
-    <Combobox
-      options={frameworks}
-      placeholder="Select a framework..."
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue}</ComboboxItem>
-      )}
-    >
-      <ComboboxInput placeholder="Select a framework..." />
-      <ComboboxContent>
-        <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
-      </ComboboxContent>
-    </Combobox>
-  );
-}
-```
-
-## Usage
-
-```tsx showLineNumbers
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-} from "~/components/ui/combobox";
-
-const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
-```
-
-```tsx showLineNumbers
 <Combobox
   options={frameworks}
   placeholder="Select a framework..."
@@ -111,16 +77,14 @@ const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
   <ComboboxContent>
     <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
   </ComboboxContent>
-</Combobox>
+</Combobox>;
 ```
-
-See the [Kobalte Combobox documentation](https://kobalte.dev/docs/core/components/combobox) for primitive-level options, accessibility, and keyboard behavior.
 
 ## Composition
 
-### Simple
+### Default
 
-A single-line input and a flat list rendered from `options` via `itemComponent` (see [Basic](#basic)).
+For normal use, compose an input and content inside the root. Options are rendered by `itemComponent`, so `ComboboxContent` does not need an explicit list component.
 
 ```text
 Combobox
@@ -129,7 +93,24 @@ Combobox
     └── ComboboxEmpty
 ```
 
-### With Groups
+With no selected multiple values, `ComboboxInput` renders only the text input and its configured actions.
+
+### Automatic chips
+
+When `multiple` is enabled, `ComboboxInput` renders the chip components internally:
+
+```text
+ComboboxInput
+└── Kobalte Combobox.Control
+    ├── ComboboxChips (only when values are selected)
+    │   └── ComboboxChip × selected option
+    ├── Kobalte Combobox.Input
+    └── clear and trigger actions
+```
+
+You do not need to place `ComboboxChips` or `ComboboxChip` in your JSX. Do not repeat `multiple`, `options`, or option metadata on `ComboboxInput`; it reads those values from the parent `Combobox`.
+
+### Grouped options
 
 Group `options` with `optionGroupChildren`, and render a section heading (and an optional separator) from `sectionComponent` (see [Groups](#groups)).
 
@@ -145,12 +126,13 @@ sectionComponent renders, per group:
     └── ComboboxSectionLabel
 ```
 
-## Custom Items
+## Object Options
 
-Use `optionValue` and `optionTextValue` when your options are objects.
+Keep all option metadata on the root `Combobox`. `optionValue` identifies an option, `optionTextValue` provides its searchable text, and `optionLabel` provides its display label. In multiple mode, `optionLabel` also supplies the generated chip text.
 
 ```tsx showLineNumbers
 type Framework = {
+  disabled?: boolean;
   label: string;
   value: string;
 };
@@ -165,6 +147,7 @@ const frameworks: Framework[] = [
   options={frameworks}
   optionValue="value"
   optionTextValue="label"
+  optionLabel="label"
   placeholder="Select a framework..."
   itemComponent={(props) => (
     <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
@@ -177,9 +160,27 @@ const frameworks: Framework[] = [
 </Combobox>;
 ```
 
+Each option metadata prop also accepts a function when a property key is not sufficient:
+
+```tsx showLineNumbers
+<Combobox<Framework>
+  options={frameworks}
+  optionValue={(option) => option.value}
+  optionTextValue={(option) => option.label}
+  optionLabel={(option) => option.label}
+  optionDisabled={(option) => option.disabled ?? false}
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+  )}
+>
+  <ComboboxInput />
+  <ComboboxContent />
+</Combobox>
+```
+
 ## Multiple Selection
 
-Use `multiple` (with a `T[]` `value`/`defaultValue`) for multi-select behavior. The input text reflects the selection the same way single-select does.
+Use `multiple` with an array `value` or `defaultValue`. `ComboboxInput` automatically renders one removable chip for each selected option while keeping the text input available for further filtering.
 
 ```tsx showLineNumbers
 import {
@@ -205,6 +206,62 @@ import {
   </ComboboxContent>
 </Combobox>;
 ```
+
+For object options, set `optionLabel` on `Combobox`. The same label resolver is used for both Kobalte's input behavior and the generated chip text.
+
+```tsx showLineNumbers
+type Country = {
+  label: string;
+  value: string;
+};
+
+<Combobox<Country>
+  multiple
+  options={countries}
+  optionValue="value"
+  optionTextValue="label"
+  optionLabel="label"
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+  )}
+>
+  <ComboboxInput placeholder="Select countries..." />
+  <ComboboxContent />
+</Combobox>;
+```
+
+Disabled and read-only comboboxes still render their selected chips, but chip removal and the clear action are disabled.
+
+## Custom Control State
+
+`ComboboxControl` accepts the option type as its first generic. Provide it when using the control state render prop so `selectedOptions()` is typed correctly.
+
+```tsx showLineNumbers
+import * as ComboboxPrimitive from "@kobalte/core/combobox";
+import { ComboboxControl } from "~/components/ui/combobox";
+
+<Combobox<Country>
+  options={countries}
+  optionLabel="label"
+  itemComponent={(props) => (
+    <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
+  )}
+>
+  <ComboboxControl<Country>>
+    {(state) => (
+      <>
+        <ComboboxPrimitive.Input placeholder="Select a country..." />
+        <span aria-live="polite">
+          {state.selectedOptions().length} selected
+        </span>
+      </>
+    )}
+  </ComboboxControl>
+  <ComboboxContent />
+</Combobox>;
+```
+
+TypeScript cannot infer the option type of a child component from the parent `Combobox`, so the explicit `Country` generic is required in this composition.
 
 ## Examples
 
@@ -238,6 +295,12 @@ You can render a custom component inside `ComboboxItem` via `itemComponent`.
 
 <ComponentPreview name="combobox-custom" />
 
+### With Icons
+
+A simple combobox with input group icons.
+
+<ComponentPreview name="combobox-icons" />
+
 ### Invalid
 
 Use the `validationState="invalid"` prop to make the combobox invalid.
@@ -264,4 +327,60 @@ Add an addon to the combobox by placing `InputGroupAddon` inside `ComboboxInput`
 
 ## API Reference
 
-See the [Kobalte Combobox API reference](https://kobalte.dev/docs/core/components/combobox#api-reference) for primitive props, keyboard behavior, and accessibility details.
+### Combobox
+
+The root is the single source of truth for options, option metadata, and selection mode.
+
+| Prop                  | Type                                                              | Default          | Description                                                   |
+| --------------------- | ----------------------------------------------------------------- | ---------------- | ------------------------------------------------------------- |
+| `options`             | `(O \| OptGroup)[]`                                               | -                | Options or option groups available for selection              |
+| `optionValue`         | `PropertyKey \| ((option: Exclude<O, null>) => string \| number)` | -                | Resolves the stable value for an object option                |
+| `optionTextValue`     | `PropertyKey \| ((option: Exclude<O, null>) => string)`           | -                | Resolves the option text used for filtering and accessibility |
+| `optionLabel`         | `PropertyKey \| ((option: Exclude<O, null>) => string)`           | `String(option)` | Resolves the display label and generated chip text            |
+| `optionDisabled`      | `PropertyKey \| ((option: Exclude<O, null>) => boolean)`          | -                | Determines whether an option is disabled                      |
+| `optionGroupChildren` | `PropertyKey`                                                     | -                | Identifies the child-options property on an option group      |
+| `itemComponent`       | `(props: { item }) => JSX.Element`                                | -                | Renders a `ComboboxItem` for each option                      |
+| `sectionComponent`    | `(props: { section }) => JSX.Element`                             | -                | Renders the section wrapper for each option group             |
+| `multiple`            | `boolean`                                                         | `false`          | Enables array values and automatic selected-option chips      |
+| `value`               | `O \| O[] \| null`                                                | -                | Controlled selected option or options                         |
+| `defaultValue`        | `O \| O[]`                                                        | -                | Initially selected option or options                          |
+| `disabled`            | `boolean`                                                         | `false`          | Disables input, selection changes, clearing, and chip removal |
+| `readOnly`            | `boolean`                                                         | `false`          | Prevents selection changes, clearing, and chip removal        |
+| `sameWidth`           | `boolean`                                                         | `true`           | Matches the content width to the control                      |
+| `gutter`              | `number`                                                          | `8`              | Sets the space between the control and content                |
+| `placement`           | `Placement`                                                       | `"bottom"`       | Sets the preferred content placement                          |
+| `triggerMode`         | `"focus" \| "input" \| "manual"`                                  | `"input"`        | Determines which interaction opens the content                |
+| `defaultFilter`       | `"startsWith" \| "endsWith" \| "contains"`                        | `"contains"`     | Selects Kobalte's default filtering strategy                  |
+
+The root also accepts the remaining [Kobalte Combobox root props](https://kobalte.dev/docs/core/components/combobox#api-reference).
+
+### ComboboxInput
+
+`ComboboxInput` renders the Kobalte control, input, optional actions, and automatic multiple-selection chips.
+
+| Prop          | Type          | Default | Description                                                |
+| ------------- | ------------- | ------- | ---------------------------------------------------------- |
+| `showTrigger` | `boolean`     | `true`  | Shows the dropdown trigger action                          |
+| `showClear`   | `boolean`     | `false` | Shows a clear action when one or more options are selected |
+| `disabled`    | `boolean`     | `false` | Disables this input and its actions                        |
+| `children`    | `JSX.Element` | -       | Adds custom input-group content before the text input      |
+| `class`       | `string`      | -       | Adds classes to the surrounding input-group control        |
+
+Native input and Kobalte input props such as `id`, `name`, `placeholder`, and `aria-*` are forwarded to the underlying input.
+
+### ComboboxChips and ComboboxChip
+
+These components implement `ComboboxInput`'s automatic multiple-selection display. `ComboboxChips` renders only when `multiple` is true and at least one option is selected. Each `ComboboxChip`:
+
+- resolves its text from the root `optionLabel` configuration;
+- removes its corresponding option through Kobalte's control state;
+- provides an accessible `Remove {label}` button; and
+- respects root and input disabled or read-only state.
+
+They are exported so their implementation and styles can be customized in registry-owned code, but they do not need to be manually composed for standard usage.
+
+### ComboboxControl
+
+Use `ComboboxControl<Option>` for custom Kobalte control composition. Its child can be a JSX element or a render function receiving `ComboboxControlState<Option>`.
+
+See the [Kobalte Combobox API reference](https://kobalte.dev/docs/core/components/combobox#api-reference) for primitive-level props, keyboard behavior, and accessibility details.

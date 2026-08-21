@@ -46,9 +46,8 @@ export default function ComboboxMultiple() {
         )}
         multiple
         options={frameworks}
-        placeholder="Select a framework..."
       >
-        <ComboboxInput multiple placeholder="Select a framework..." />
+        <ComboboxInput placeholder="Multiple string..." />
         <ComboboxContent>
           <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
         </ComboboxContent>
@@ -61,13 +60,8 @@ export default function ComboboxMultiple() {
         optionLabel="label"
         options={countries}
         optionValue="value"
-        placeholder="Search countries..."
       >
-        <ComboboxInput<(typeof countries)[number]>
-          getChipLabel={(v) => v.label}
-          multiple
-          placeholder="Search countries..."
-        />
+        <ComboboxInput placeholder="Multiple Object..." />
         <ComboboxContent>
           <ComboboxEmpty>No countries found.</ComboboxEmpty>
         </ComboboxContent>
