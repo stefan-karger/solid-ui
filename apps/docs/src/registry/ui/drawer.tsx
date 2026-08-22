@@ -84,23 +84,23 @@ const DrawerContent = <T extends ValidComponent = "div">(
 }
 
 const DrawerHeader: Component<ComponentProps<"div">> = (props) => {
-  const [, rest] = splitProps(props, ["class"])
+  const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn("cn-drawer-header flex flex-col gap-1.5 p-4", props.class)}
+      class={cn("cn-drawer-header flex flex-col gap-1.5 p-4", local.class)}
       data-slot="drawer-header"
-      {...rest}
+      {...others}
     />
   )
 }
 
 const DrawerFooter: Component<ComponentProps<"div">> = (props) => {
-  const [, rest] = splitProps(props, ["class"])
+  const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn("cn-drawer-footer mt-auto flex flex-col gap-2 p-4", props.class)}
+      class={cn("cn-drawer-footer mt-auto flex flex-col gap-2 p-4", local.class)}
       data-slot="drawer-footer"
-      {...rest}
+      {...others}
     />
   )
 }
@@ -110,12 +110,12 @@ type DrawerTitleProps<T extends ValidComponent = "div"> = LabelProps<T> & { clas
 const DrawerTitle = <T extends ValidComponent = "div">(
   props: DynamicProps<T, DrawerTitleProps<T>>
 ) => {
-  const [, rest] = splitProps(props as DrawerTitleProps, ["class"])
+  const [local, others] = splitProps(props as DrawerTitleProps<T>, ["class"])
   return (
     <DrawerPrimitive.Label
-      class={cn("cn-drawer-title font-semibold text-foreground", props.class)}
+      class={cn("cn-drawer-title font-semibold text-foreground", local.class)}
       data-slot="drawer-title"
-      {...rest}
+      {...others}
     />
   )
 }
@@ -127,12 +127,12 @@ type DrawerDescriptionProps<T extends ValidComponent = "div"> = DescriptionProps
 const DrawerDescription = <T extends ValidComponent = "div">(
   props: DynamicProps<T, DrawerDescriptionProps<T>>
 ) => {
-  const [, rest] = splitProps(props as DrawerDescriptionProps, ["class"])
+  const [local, others] = splitProps(props as DrawerDescriptionProps<T>, ["class"])
   return (
     <DrawerPrimitive.Description
-      class={cn("cn-drawer-description text-muted-foreground text-sm", props.class)}
+      class={cn("cn-drawer-description text-muted-foreground text-sm", local.class)}
       data-slot="drawer-description"
-      {...rest}
+      {...others}
     />
   )
 }
