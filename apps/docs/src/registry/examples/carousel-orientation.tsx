@@ -12,11 +12,11 @@ import {
 export default function CarouselOrientation() {
   return (
     <Carousel
+      class="w-full max-w-xs"
       opts={{
         align: "start"
       }}
       orientation="vertical"
-      class="w-full max-w-xs"
     >
       <CarouselContent class="-mt-1 h-[200px]">
         <For each={Array.from({ length: 5 })}>
@@ -25,7 +25,7 @@ export default function CarouselOrientation() {
               <div class="p-1">
                 <Card>
                   <CardContent class="flex items-center justify-center p-6">
-                    <span class="text-3xl font-semibold">{index() + 1}</span>
+                    <span class="font-semibold text-3xl">{index() + 1}</span>
                   </CardContent>
                 </Card>
               </div>

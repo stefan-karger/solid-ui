@@ -1,0 +1,202 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+---
+
+The Menubar component is built on top of [Kobalte Menubar](https://kobalte.dev/docs/core/components/menubar), which provides accessible menu, keyboard, and focus behavior.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/menubar-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add menubar
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/menubar.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Menubar,
+  MenubarContent,
+  MenubarGroup,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "~/components/ui/menubar";
+```
+
+```tsx showLineNumbers
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarGroup>
+        <MenubarItem>
+          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>New Window</MenubarItem>
+      </MenubarGroup>
+      <MenubarSeparator />
+      <MenubarGroup>
+        <MenubarItem>Share</MenubarItem>
+        <MenubarItem>Print</MenubarItem>
+      </MenubarGroup>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+See the [Kobalte Menubar documentation](https://kobalte.dev/docs/core/components/menubar) for primitive-level options, accessibility, and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `Menubar`:
+
+```text
+Menubar
+├── MenubarMenu
+│   ├── MenubarTrigger
+│   └── MenubarContent
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarItem
+│       │   └── MenubarItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarCheckboxItem
+│       │   └── MenubarCheckboxItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   └── MenubarRadioGroup
+│       │       ├── MenubarRadioItem
+│       │       └── MenubarRadioItem
+│       └── MenubarSub
+│           ├── MenubarSubTrigger
+│           └── MenubarSubContent
+│               └── MenubarGroup
+│                   ├── MenubarLabel
+│                   ├── MenubarItem
+│                   └── MenubarItem
+└── MenubarMenu
+    ├── MenubarTrigger
+    └── MenubarContent
+        └── MenubarGroup
+            ├── MenubarLabel
+            ├── MenubarItem
+            └── MenubarItem
+```
+
+## Examples
+
+### Checkbox
+
+Use `MenubarCheckboxItem` for toggleable options.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-checkbox" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/menubar-checkbox" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Radio
+
+Use `MenubarRadioGroup` and `MenubarRadioItem` for single-select options.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-radio" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/menubar-radio" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Submenu
+
+Use `MenubarSub`, `MenubarSubTrigger`, and `MenubarSubContent` for nested menus.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-submenu" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/menubar-submenu" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Icons
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="menubar-icons" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/menubar-icons" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Menubar API reference](https://kobalte.dev/docs/core/components/menubar#api-reference) for primitive props, keyboard behavior, and accessibility details.

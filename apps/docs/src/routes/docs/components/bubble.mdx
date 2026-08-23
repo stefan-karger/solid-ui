@@ -1,0 +1,383 @@
+---
+title: Bubble
+description: Displays conversational content in a message bubble. Supports variants, alignment, grouping, reactions, and collapsible content.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/bubble-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+The `Bubble` component displays framed conversational content. Use it for chat text, short structured output, quoted replies, suggestions, and reactions.
+
+For full-featured chat interfaces, use the [`Message`](/docs/components/message) component. `Bubble` is intentionally scoped to the bubble surface. Place avatars, names, timestamps, metadata, and message-level actions in [`Message`](/docs/components/message).
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add bubble
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+class-variance-authority
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/bubble.tsx" showLineNumbers
+
+```
+
+## Composition
+
+Use the following composition to build a bubble:
+
+```text
+Bubble
+├── BubbleContent
+└── BubbleReactions
+```
+
+Use `BubbleGroup` to group consecutive bubbles from the same sender:
+
+```text
+BubbleGroup
+├── Bubble
+│   └── BubbleContent
+└── Bubble
+    └── BubbleContent
+```
+
+## Features
+
+- Seven visual variants, from a strong primary bubble to unframed ghost content.
+- Start and end alignment for sender and receiver bubbles.
+- Reactions that anchor to the bubble edge with configurable side and alignment.
+- Bubbles size to their content, up to 80% of the container width.
+- Polymorphic content via `as` for link and button bubbles.
+- Customizable styling through the `class` prop on every part.
+
+## Usage
+
+```tsx showLineNumbers
+import { Bubble, BubbleContent, BubbleReactions } from "~/components/ui/bubble";
+```
+
+```tsx showLineNumbers
+<Bubble>
+  <BubbleContent>
+    I checked the registry output and removed the stale route.
+  </BubbleContent>
+  <BubbleReactions role="img" aria-label="Reaction: thumbs up">
+    <span>👍</span>
+  </BubbleReactions>
+</Bubble>
+```
+
+## Composition
+
+Use the following composition to build a bubble:
+
+```text
+Bubble
+├── BubbleContent
+└── BubbleReactions
+```
+
+Use `BubbleGroup` to group consecutive bubbles from the same sender:
+
+```text
+BubbleGroup
+├── Bubble
+│   └── BubbleContent
+└── Bubble
+    └── BubbleContent
+```
+
+## Features
+
+- Seven visual variants, from a strong primary bubble to unframed ghost content.
+- Start and end alignment for sender and receiver bubbles.
+- Reactions that anchor to the bubble edge with configurable side and alignment.
+- Bubbles size to their content, up to 80% of the container width.
+- Polymorphic content via `as` for link and button bubbles.
+- Customizable styling through the `class` prop on every part.
+
+## Examples
+
+### Variants
+
+Use `variant` to change the visual treatment of the bubble.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-variants" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-variants" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+| Variant       | Description                                            |
+| ------------- | ------------------------------------------------------ |
+| `default`     | A strong primary bubble, usually for the current user. |
+| `secondary`   | The standard neutral bubble for conversation content.  |
+| `muted`       | A lower-emphasis bubble for quiet supporting content.  |
+| `tinted`      | A subtle primary-tinted bubble.                        |
+| `outline`     | A bordered bubble for secondary or rich content.       |
+| `ghost`       | Unframed content for assistant text or rich content.   |
+| `destructive` | A destructive bubble for error or failed actions.      |
+
+A bubble sizes to its content, up to 80% of the container width. The `ghost` variant removes the max-width so assistant text and rich content can span the full row.
+
+### Alignment
+
+Use `align` on `Bubble` to align the bubble to the start or end of the conversation.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-alignment" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-alignment" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+| align   | Description                                        |
+| ------- | -------------------------------------------------- |
+| `start` | Align the bubble to the start of the conversation. |
+| `end`   | Align the bubble to the end of the conversation.   |
+
+When building chat interfaces, you will often apply alignment to a surrounding message component rather than directly to `Bubble`.
+
+### Bubble Group
+
+Use `BubbleGroup` to group consecutive bubbles from the same sender. Set `align` on each `Bubble`, not on `BubbleGroup`.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-group-demo" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-group-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Links and Buttons
+
+Turn a bubble into a link or button with the `as` prop on `BubbleContent`.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-link-button" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-link-button" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx showLineNumbers
+<Bubble variant="muted">
+  <BubbleContent as="button" type="button" onClick={onReply}>
+    Click here
+  </BubbleContent>
+</Bubble>
+```
+
+### Reactions
+
+Use `BubbleReactions` for bubble reactions or quick action buttons. Use `side` and `align` to position the row. Reactions overlap the bubble edge, so leave vertical space between rows.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-reactions" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-reactions" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Show More / Collapsible
+
+Long bubble content can be composed with [`Collapsible`](/docs/components/collapsible) to provide a show more or show less interaction.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-collapsible" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-collapsible" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Tooltip
+
+Wrap a bubble action in a [`Tooltip`](/docs/components/tooltip) to reveal metadata on hover or keyboard focus, such as when a message was read.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-tooltip" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-tooltip" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Popover
+
+Pair a bubble action with a [`Popover`](/docs/components/popover) to surface more information on demand, such as the full error message for a failed action.
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-popover" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-popover" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Accessibility
+
+`Bubble` renders the presentational message surface. Keep conversation-level semantics on the surrounding container and follow the guidance below.
+
+### Labeling reactions
+
+Group decorative emoji reactions as a single image with a descriptive `aria-label` so assistive technology announces the reaction set once.
+
+```tsx showLineNumbers
+<BubbleReactions role="img" aria-label="Reactions: thumbs up, fire, and 8 more">
+  <span>👍</span>
+  <span>🔥</span>
+  <span>+8</span>
+</BubbleReactions>
+```
+
+When reactions are interactive, render buttons and give icon-only buttons an `aria-label`.
+
+```tsx showLineNumbers
+<BubbleReactions>
+  <Button aria-label="Thumbs up" variant="secondary" size="icon-xs">
+    <ThumbsUpIcon />
+  </Button>
+</BubbleReactions>
+```
+
+### Interactive bubbles
+
+When a bubble is clickable, render it as a real `<button>` or `<a>` with `as` so it is focusable and exposes the correct role. `BubbleContent` supplies a visible focus ring for interactive elements, and the bubble text provides its accessible name.
+
+```tsx showLineNumbers
+<Bubble variant="muted" align="end">
+  <BubbleContent as="button" type="button" onClick={onReply}>
+    I forgot my password
+  </BubbleContent>
+</Bubble>
+```
+
+### Meaning beyond color
+
+Bubble variants signal role and tone with color. Pair them with text, alignment, or icons so meaning is not conveyed by color alone. For a `destructive` bubble, keep the error context in the message text rather than relying on the color treatment.
+
+## API Reference
+
+### Bubble
+
+The root bubble wrapper.
+
+| Prop      | Type                                                                                       | Default     | Description                                      |
+| --------- | ------------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------ |
+| `variant` | `"default" \| "secondary" \| "muted" \| "tinted" \| "outline" \| "ghost" \| "destructive"` | `"default"` | The bubble visual treatment.                     |
+| `align`   | `"start" \| "end"`                                                                         | `"start"`   | The inline alignment of the bubble.              |
+| `class`   | `string`                                                                                   | -           | Additional classes to apply to the root element. |
+
+### BubbleContent
+
+The bubble content wrapper.
+
+| Prop    | Type             | Default | Description                                                          |
+| ------- | ---------------- | ------- | -------------------------------------------------------------------- |
+| `as`    | `ValidComponent` | `"div"` | Render the content as a different element, such as a link or button. |
+| `class` | `string`         | -       | Additional classes to apply to the content element.                  |
+
+### BubbleReactions
+
+Displays overlapped reactions for a bubble.
+
+| Prop    | Type                | Default    | Description                                      |
+| ------- | ------------------- | ---------- | ------------------------------------------------ |
+| `side`  | `"top" \| "bottom"` | `"bottom"` | The side of the bubble to anchor the reactions.  |
+| `align` | `"start" \| "end"`  | `"end"`    | The inline alignment of the reactions.           |
+| `class` | `string`            | -          | Additional classes to apply to the reaction row. |
+
+### BubbleGroup
+
+Groups consecutive bubbles from the same sender.
+
+| Prop    | Type     | Default | Description                                    |
+| ------- | -------- | ------- | ---------------------------------------------- |
+| `class` | `string` | -       | Additional classes to apply to the group root. |

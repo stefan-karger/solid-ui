@@ -1,0 +1,117 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+---
+
+The Separator component is built on top of [Kobalte Separator](https://kobalte.dev/docs/core/components/separator), which provides the accessible separator primitive.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="separator-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/separator-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add separator
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/separator.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Separator } from "~/components/ui/separator";
+```
+
+```tsx showLineNumbers
+<Separator />
+```
+
+## Examples
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical separator.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="separator-vertical" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/separator-vertical" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Menu
+
+Vertical separators between menu items with descriptions.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="separator-menu" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/separator-menu" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### List
+
+Horizontal separators between list items.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="separator-list" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/separator-list" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Separator API reference](https://kobalte.dev/docs/core/components/separator#api-reference) for primitive props, accessibility, and separator semantics.

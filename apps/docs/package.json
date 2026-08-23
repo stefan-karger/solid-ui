@@ -7,13 +7,16 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "registry:build": "tsx ./src/scripts/build-registry.ts",
-    "icons:build": "tsx ./src/scripts/build-icons.ts",
+    "build:registry": "tsx ./src/scripts/build-registry.ts",
+    "build:icons": "tsx ./src/scripts/build-icons.ts",
     "release": "changeset version"
   },
   "dependencies": {
     "@corvu/calendar": "^0.1.2",
     "@corvu/drawer": "^0.2.4",
+    "@corvu/otp-field": "^0.1.4",
+    "@corvu/resizable": "^0.2.5",
+    "@date-fns/tz": "^1.5.0",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource-variable/geist-mono": "^5.2.7",
     "@kobalte/core": "^0.13.11",
@@ -26,15 +29,20 @@
     "chokidar": "^5.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk-solid": "^1.1.2",
+    "date-fns": "^4.4.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-solid": "^8.6.0",
+    "input-otp": "^1.4.2",
     "lucide-solid": "^0.575.0",
     "rimraf": "^6.0.1",
     "solid-js": "^1.9.9",
+    "solid-recharts": "^1.0.1",
+    "solid-sonner": "^0.3.1",
     "tailwind-merge": "^3.3.1",
-    "vinxi": "^0.5.7",
-    "zod": "^4.1.12"
+    "valibot": "^1.4.2",
+    "vinxi": "^0.5.7"
   },
   "engines": {
     "node": ">=22"

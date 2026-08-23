@@ -1,4 +1,5 @@
-import { IconArrowUp } from "~/components/icons"
+import { ArrowUpIcon } from "lucide-solid"
+
 import { Button } from "~/registry/ui/button"
 
 export default function ButtonSizes() {
@@ -9,13 +10,13 @@ export default function ButtonSizes() {
           Small
         </Button>
         <Button aria-label="Submit" size="icon-sm" variant="outline">
-          <IconArrowUp />
+          <ArrowUpIcon />
         </Button>
       </div>
       <div class="flex items-start gap-2">
         <Button variant="outline">Default</Button>
         <Button aria-label="Submit" size="icon" variant="outline">
-          <IconArrowUp />
+          <ArrowUpIcon />
         </Button>
       </div>
       <div class="flex items-start gap-2">
@@ -23,7 +24,7 @@ export default function ButtonSizes() {
           Large
         </Button>
         <Button aria-label="Submit" size="icon-lg" variant="outline">
-          <IconArrowUp />
+          <ArrowUpIcon />
         </Button>
       </div>
     </div>

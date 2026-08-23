@@ -43,10 +43,109 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Slider } from "~/components/ui/slider";
 ```
 
-```tsx
-<Slider defaultValue={[33]} step={1} />
+```tsx showLineNumbers
+<Slider defaultValue={[33]} maxValue={100} step={1} />
 ```
+
+## Examples
+
+### Range
+
+Use an array with two values for a range slider.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="slider-range" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/slider-range" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Multiple Thumbs
+
+Use an array with multiple values for multiple thumbs.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="slider-multiple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/slider-multiple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical slider.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="slider-vertical" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/slider-vertical" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Controlled
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="slider-controlled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/slider-controlled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to disable the slider.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="slider-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/slider-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Slider API reference](https://kobalte.dev/docs/core/components/slider#api-reference) for the pinned public API, keyboard behavior, and accessibility contract.

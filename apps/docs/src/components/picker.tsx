@@ -239,17 +239,17 @@ const PickerShortcut: Component<ComponentProps<"span">> = (props) => {
 
 export {
   Picker,
-  PickerPortal,
-  PickerTrigger,
   PickerContent,
   PickerGroup,
-  PickerLabel,
   PickerItem,
+  PickerLabel,
+  PickerPortal,
   PickerRadioGroup,
   PickerRadioItem,
   PickerSeparator,
   PickerShortcut,
   PickerSub,
+  PickerSubContent,
   PickerSubTrigger,
-  PickerSubContent
+  PickerTrigger
 }

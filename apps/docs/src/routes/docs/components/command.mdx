@@ -1,0 +1,183 @@
+---
+title: Command
+description: Command menu for search and quick actions.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview
+  name="command-demo"
+  align="start"
+  previewClass="h-[24.5rem]"
+/>
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/command-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## About
+
+The `<Command />` component is built with [cmdk-solid](https://github.com/create-signal/cmdk-solid), and `CommandDialog` composes [Kobalte Dialog](https://kobalte.dev/docs/core/components/dialog) for accessible modal and keyboard behavior.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add command
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+cmdk-solid lucide-solid @kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/command.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "~/components/ui/command";
+```
+
+```tsx showLineNumbers
+<Command class="max-w-sm rounded-lg border">
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem value="calendar">Calendar</CommandItem>
+      <CommandItem value="search-emoji">Search Emoji</CommandItem>
+      <CommandItem value="calculator">Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem value="profile">Profile</CommandItem>
+      <CommandItem value="billing">Billing</CommandItem>
+      <CommandItem value="settings">Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## Composition
+
+Use the following composition to build a `Command`:
+
+```text
+Command
+├── CommandInput
+└── CommandList
+    ├── CommandEmpty
+    ├── CommandGroup
+    │   ├── CommandItem
+    │   └── CommandItem
+    ├── CommandSeparator
+    └── CommandGroup
+        ├── CommandItem
+        └── CommandItem
+```
+
+## Examples
+
+### Basic
+
+A simple command menu in a dialog.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="command-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/command-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Shortcuts
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="command-shortcuts" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/command-shortcuts" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Groups
+
+A command menu with groups, icons, and separators.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="command-groups" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/command-groups" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Scrollable
+
+Scrollable command menu with multiple items.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="command-scrollable" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/command-scrollable" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+For command props, filtering, and keyboard behavior, see the [cmdk-solid API reference](https://github.com/create-signal/cmdk-solid#readme).

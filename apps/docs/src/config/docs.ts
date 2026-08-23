@@ -24,15 +24,6 @@ export const docsConfig: Config = {
   ],
   sidebarNav: [
     {
-      title: "Sections",
-      items: [
-        {
-          title: "Components",
-          href: "/docs/components"
-        }
-      ]
-    },
-    {
       title: "Components",
       items: [
         {
@@ -52,6 +43,10 @@ export const docsConfig: Config = {
           href: "/docs/components/aspect-ratio"
         },
         {
+          title: "Attachment",
+          href: "/docs/components/attachment"
+        },
+        {
           title: "Avatar",
           href: "/docs/components/avatar"
         },
@@ -64,12 +59,20 @@ export const docsConfig: Config = {
           href: "/docs/components/breadcrumb"
         },
         {
+          title: "Bubble",
+          href: "/docs/components/bubble"
+        },
+        {
           title: "Button",
           href: "/docs/components/button"
         },
         {
           title: "Button Group",
           href: "/docs/components/button-group"
+        },
+        {
+          title: "Calendar",
+          href: "/docs/components/calendar"
         },
         {
           title: "Card",
@@ -81,6 +84,10 @@ export const docsConfig: Config = {
           status: "new"
         },
         {
+          title: "Chart",
+          href: "/docs/components/chart"
+        },
+        {
           title: "Checkbox",
           href: "/docs/components/checkbox"
         },
@@ -89,48 +96,193 @@ export const docsConfig: Config = {
           href: "/docs/components/collapsible"
         },
         {
-          title: "Dialog",
-          href: "/docs/components/dialog"
+          title: "Combobox",
+          href: "/docs/components/combobox"
+        },
+        {
+          title: "Command",
+          href: "/docs/components/command"
+        },
+        {
+          title: "Direction",
+          href: "/docs/components/direction"
         },
         {
           title: "Context Menu",
           href: "/docs/components/context-menu"
         },
         {
+          title: "Date Picker",
+          href: "/docs/components/date-picker"
+        },
+        {
+          title: "Dialog",
+          href: "/docs/components/dialog"
+        },
+        {
+          title: "Drawer",
+          href: "/docs/components/drawer"
+        },
+        {
           title: "Dropdown Menu",
           href: "/docs/components/dropdown-menu"
+        },
+        {
+          title: "Empty",
+          href: "/docs/components/empty"
         },
         {
           title: "Field",
           href: "/docs/components/field"
         },
         {
+          title: "Hover Card",
+          href: "/docs/components/hover-card"
+        },
+        {
+          title: "Input",
+          href: "/docs/components/input"
+        },
+        {
           title: "Input Group",
           href: "/docs/components/input-group"
+        },
+        {
+          title: "Input OTP",
+          href: "/docs/components/input-otp"
+        },
+        {
+          title: "Item",
+          href: "/docs/components/item"
+        },
+        {
+          title: "Kbd",
+          href: "/docs/components/kbd"
         },
         {
           title: "Label",
           href: "/docs/components/label"
         },
         {
+          title: "Marker",
+          href: "/docs/components/marker"
+        },
+        {
+          title: "Menubar",
+          href: "/docs/components/menubar"
+        },
+        {
+          title: "Message",
+          href: "/docs/components/message"
+        },
+        {
+          title: "Message Scroller",
+          href: "/docs/components/message-scroller"
+        },
+        {
+          title: "Native Select",
+          href: "/docs/components/native-select"
+        },
+        {
+          title: "Navigation Menu",
+          href: "/docs/components/navigation-menu"
+        },
+        {
+          title: "Pagination",
+          href: "/docs/components/pagination"
+        },
+        {
+          title: "Popover",
+          href: "/docs/components/popover"
+        },
+        {
+          title: "Progress",
+          href: "/docs/components/progress"
+        },
+        {
+          title: "Questionnaire",
+          href: "/docs/components/questionnaire"
+        },
+        {
           title: "Radio Group",
           href: "/docs/components/radio-group"
+        },
+        {
+          title: "Resizable",
+          href: "/docs/components/resizable"
+        },
+        {
+          title: "Scroll Area",
+          href: "/docs/components/scroll-area"
         },
         {
           title: "Select",
           href: "/docs/components/select"
         },
         {
+          title: "Separator",
+          href: "/docs/components/separator"
+        },
+        {
+          title: "Sheet",
+          href: "/docs/components/sheet"
+        },
+        {
+          title: "Sidebar",
+          href: "/docs/components/sidebar"
+        },
+        {
+          title: "Skeleton",
+          href: "/docs/components/skeleton"
+        },
+        {
           title: "Slider",
           href: "/docs/components/slider"
+        },
+        {
+          title: "Spinner",
+          href: "/docs/components/spinner"
         },
         {
           title: "Switch",
           href: "/docs/components/switch"
         },
         {
+          title: "Table",
+          href: "/docs/components/table"
+        },
+        {
+          title: "Tabs",
+          href: "/docs/components/tabs"
+        },
+        {
+          title: "Textarea",
+          href: "/docs/components/textarea"
+        },
+        {
+          title: "Toast",
+          href: "/docs/components/toast"
+        },
+        {
+          title: "Toggle",
+          href: "/docs/components/toggle"
+        },
+        {
+          title: "Toggle Group",
+          href: "/docs/components/toggle-group"
+        },
+        {
           title: "Tooltip",
           href: "/docs/components/tooltip"
+        }
+      ]
+    },
+    {
+      title: "Sections",
+      items: [
+        {
+          title: "Components",
+          href: "/docs/components"
         }
       ]
     }

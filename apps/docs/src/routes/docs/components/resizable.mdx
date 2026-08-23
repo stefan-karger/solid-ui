@@ -1,0 +1,117 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with keyboard support.
+---
+
+The `Resizable` component is built on top of [Corvu Resizable](https://corvu.dev/docs/primitives/resizable) by [Jasmin](https://github.com/GiyoMoon).
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="resizable-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/resizable-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add resizable
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/resizable.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "~/components/ui/resizable";
+```
+
+```tsx showLineNumbers
+<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel initialSize={0.25}>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel initialSize={0.75}>Two</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+## Composition
+
+Use the following composition to build a `ResizablePanelGroup`:
+
+```text
+ResizablePanelGroup
+├── ResizablePanel
+├── ResizableHandle
+└── ResizablePanel
+```
+
+## Examples
+
+### Vertical
+
+Use `orientation="vertical"` for vertical resizing.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="resizable-vertical" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/resizable-vertical" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Handle
+
+Use the `withHandle` prop on `ResizableHandle` to show a visible handle.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="resizable-handle" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/resizable-handle" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Corvu Resizable documentation](https://corvu.dev/docs/primitives/resizable#api-reference) for the primitive API.

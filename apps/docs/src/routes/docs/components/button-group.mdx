@@ -42,22 +42,37 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
-import { ButtonGroup } from "~/components/ui/button-group";
+```tsx showLineNumbers
+import {
+  ButtonGroup,
+  ButtonGroupSeparator,
+  ButtonGroupText,
+} from "~/components/ui/button-group";
 ```
 
-```tsx
+```tsx showLineNumbers
 <ButtonGroup>
   <Button>Button 1</Button>
   <Button>Button 2</Button>
 </ButtonGroup>
 ```
 
+## Composition
+
+Use the following composition to build a `ButtonGroup`:
+
+```text
+ButtonGroup
+├── Button or Input
+├── ButtonGroupSeparator
+└── ButtonGroupText
+```
+
 ## Accessibility
 
-- The button group has `role="group"` for proper semantic meaning
-- Use Tab key to navigate between buttons
-- Apply `aria-label` or `aria-labelledby` to the ButtonGroup for clear identification
+- The `ButtonGroup` component has the `role` attribute set to `group`.
+- Use `Tab` to navigate between the buttons in the group.
+- Use `aria-label` or `aria-labelledby` to label the button group.
 
 ```tsx showLineNumbers
 <ButtonGroup aria-label="Button group">
@@ -75,7 +90,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Orientation
 
-::::tab-group[orientation]
+Set the `orientation` prop to change the button group layout.
+
+::::tab-group[example1]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-orientation" />
@@ -92,7 +109,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Size
 
-::::tab-group[size]
+Control the size of buttons using the `size` prop on individual buttons.
+
+::::tab-group[example2]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-size" />
@@ -109,7 +128,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Nested
 
-::::tab-group[nested]
+Nest `<ButtonGroup>` components to create button groups with spacing.
+
+::::tab-group[example3]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-nested" />
@@ -126,7 +147,11 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Separator
 
-::::tab-group[separator]
+The `ButtonGroupSeparator` component visually divides buttons within a group.
+
+Buttons with variant `outline` do not need a separator since they have a border. For other variants, a separator is recommended to improve the visual hierarchy.
+
+::::tab-group[example4]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-separator" />
@@ -143,7 +168,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Split
 
-::::tab-group[split]
+Create a split button group by adding two buttons separated by a `ButtonGroupSeparator`.
+
+::::tab-group[example5]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-split" />
@@ -160,7 +187,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Input
 
-::::tab-group[input]
+Wrap an `Input` component with buttons.
+
+::::tab-group[example6]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-input" />
@@ -177,7 +206,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Input Group
 
-::::tab-group[input-group]
+Wrap an `InputGroup` component to create complex input layouts.
+
+::::tab-group[example7]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-input-group" />
@@ -194,7 +225,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Dropdown Menu
 
-::::tab-group[dropdown-menu]
+Create a split button group with a `DropdownMenu` component.
+
+::::tab-group[example8]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-dropdown-menu" />
@@ -211,7 +244,9 @@ import { ButtonGroup } from "~/components/ui/button-group";
 
 ### Select
 
-::::tab-group[select]
+Pair with a `Select` component.
+
+::::tab-group[example9]
 :::tab[Preview]
 
 <ComponentPreview name="button-group-select" />
@@ -220,6 +255,25 @@ import { ButtonGroup } from "~/components/ui/button-group";
 :::tab[Code]
 
 ```file="~/registry/examples/button-group-select" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Popover
+
+Use with a `Popover` component.
+
+::::tab-group[example10]
+:::tab[Preview]
+
+<ComponentPreview name="button-group-popover" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/button-group-popover" frame=none showLineNumbers
 
 ```
 
@@ -272,9 +326,9 @@ The `ButtonGroupSeparator` component visually divides buttons within a group.
 
 Use this component to display text within a button group.
 
-| Prop      | Type      | Default |
-| --------- | --------- | ------- |
-| `asChild` | `boolean` | `false` |
+| Prop | Type             | Default |
+| ---- | ---------------- | ------- |
+| `as` | `ValidComponent` | `"div"` |
 
 ```tsx
 <ButtonGroup>
@@ -286,18 +340,18 @@ Use this component to display text within a button group.
 Use the `as` prop to render a custom component as the text, for example a label.
 
 ```tsx showLineNumbers
-import { ButtonGroupText } from "~/components/ui/button-group"
-import { Label } from "~/components/ui/label"
+import { ButtonGroup, ButtonGroupText } from "~/components/ui/button-group";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 
 export function ButtonGroupTextDemo() {
   return (
     <ButtonGroup>
-      <ButtonGroupText as={Label} htmlFor="name">
+      <ButtonGroupText as={Label} for="name">
         Text
       </ButtonGroupText>
       <Input placeholder="Type something here..." id="name" />
     </ButtonGroup>
-  )
+  );
 }
 ```
-

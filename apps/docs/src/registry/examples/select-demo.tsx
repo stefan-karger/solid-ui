@@ -1,24 +1,28 @@
-import { createSignal } from "solid-js"
-
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
 
+const items = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" }
+]
+
 export default function SelectDemo() {
-  const [value, setValue] = createSignal("")
   return (
-    <div class="flex-col">
-      <Select
-        itemComponent={(props) => <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>}
-        onChange={setValue}
-        options={["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"]}
-        placeholder="Select a fruit…"
-        value={value()}
-      >
-        <SelectTrigger aria-label="Fruit" class="w-[180px]">
-          <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>
-        </SelectTrigger>
-        <SelectContent />
-      </Select>
-      <p class="pt-2 text-gray-500 text-sm">Your favorite fruit is: {value()}</p>
-    </div>
+    <Select
+      itemComponent={(props) => (
+        <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
+      )}
+      options={items}
+      optionTextValue="label"
+      optionValue="value"
+      placeholder="Select a fruit"
+    >
+      <SelectTrigger aria-label="Fruit" class="w-full max-w-48">
+        <SelectValue<(typeof items)[number]>>{(state) => state.selectedOption().label}</SelectValue>
+      </SelectTrigger>
+      <SelectContent />
+    </Select>
   )
 }

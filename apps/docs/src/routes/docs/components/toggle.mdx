@@ -1,0 +1,134 @@
+---
+title: Toggle
+description: A two-state button that can be either on or off.
+---
+
+The Toggle component is built on top of [Kobalte Toggle Button](https://kobalte.dev/docs/core/components/toggle-button), which provides accessible pressed, disabled, and keyboard interaction behavior.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/toggle-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add toggle
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/toggle.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Toggle } from "~/components/ui/toggle";
+```
+
+```tsx showLineNumbers
+<Toggle>Toggle</Toggle>
+```
+
+## Examples
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-outline" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-outline" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Text
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-with-text" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-with-text" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Size
+
+Use the `size` prop to change the size of the toggle.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-sizes" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-sizes" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Add the `disabled` prop to prevent interaction.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="toggle-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/toggle-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+For primitive props and keyboard behavior, see the [Kobalte Toggle Button API reference](https://kobalte.dev/docs/core/components/toggle-button#api-reference).

@@ -1,0 +1,308 @@
+---
+title: Input
+description: A text input component for forms and user data entry with built-in styling and accessibility features.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="input-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/input-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add input
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/input.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Input } from "~/components/ui/input";
+```
+
+```tsx showLineNumbers
+<Input />
+```
+
+## Examples
+
+### Basic
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="input-basic" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Field
+
+Use `Field`, `FieldLabel`, and `FieldDescription` to create an input with a label and description.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="input-field" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-field" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Field Group
+
+Use `FieldGroup` to show multiple `Field` blocks and to build forms.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="input-field-group" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-field-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to disable the input. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="input-disabled" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use the `aria-invalid` prop to mark the input as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="input-invalid" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### File
+
+Use the `type="file"` prop to create a file input.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="input-file" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-file" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Inline
+
+Use `Field` with `orientation="horizontal"` to create an inline input. Pair with `Button` to create a search input with a button.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="input-inline" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-inline" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Grid
+
+Use a grid layout to place multiple inputs side by side.
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="input-grid" previewClass="p-6" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-grid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Required
+
+Use the `required` attribute to indicate required inputs.
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="input-required" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-required" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Badge
+
+Use `Badge` in the label to highlight a recommended field.
+
+::::tab-group[example10]
+:::tab[Preview]
+
+<ComponentPreview name="input-badge" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-badge" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Input Group
+
+To add icons, text, or buttons inside an input, use the `InputGroup` component. See the [Input Group](/docs/components/input-group) component for more examples.
+
+::::tab-group[example11]
+:::tab[Preview]
+
+<ComponentPreview name="input-input-group" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-input-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Button Group
+
+To add buttons to an input, use the `ButtonGroup` component. See the [Button Group](/docs/components/button-group) component for more examples.
+
+::::tab-group[example12]
+:::tab[Preview]
+
+<ComponentPreview name="input-button-group" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-button-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Form
+
+A full form example with multiple inputs, a select, and a button.
+
+::::tab-group[example13]
+:::tab[Preview]
+
+<ComponentPreview name="input-form" previewClass="h-[32rem]" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-form" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+`Input` is a styled native input element. See the [HTML input element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input) for its native props, keyboard behavior, and accessibility semantics.
+
+| Prop           | Type     | Default |
+| -------------- | -------- | ------- |
+| `class`        | `string` |         |
+| `defaultValue` | `string` |         |

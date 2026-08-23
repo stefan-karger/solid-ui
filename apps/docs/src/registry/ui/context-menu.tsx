@@ -262,19 +262,19 @@ const ContextMenuRadioItem = <T extends ValidComponent = "div">(
 
 export {
   ContextMenu,
-  ContextMenuTrigger,
-  ContextMenuPortal,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuShortcut,
-  ContextMenuLabel,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubTrigger,
-  ContextMenuSubContent,
   ContextMenuCheckboxItem,
+  ContextMenuContent,
   ContextMenuGroup,
   ContextMenuGroupLabel,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
   ContextMenuRadioGroup,
-  ContextMenuRadioItem
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger
 }

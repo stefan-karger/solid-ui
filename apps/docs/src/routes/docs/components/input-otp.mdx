@@ -1,0 +1,250 @@
+---
+title: Input OTP
+description: Accessible one-time password component with copy-paste functionality.
+---
+
+The Input OTP component is built on top of [Corvu OTP Field](https://corvu.dev/docs/primitives/otp-field), which provides the accessible one-time password input primitive with copy-paste support.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add input-otp
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@corvu/otp-field
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/input-otp.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "~/components/ui/input-otp";
+```
+
+```tsx showLineNumbers
+<InputOTP maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+## Composition
+
+Use the following composition to build an `InputOTP`:
+
+```text
+InputOTP
+├── InputOTPGroup
+│   ├── InputOTPSlot
+│   ├── InputOTPSlot
+│   └── InputOTPSlot
+├── InputOTPSeparator
+├── InputOTPGroup
+│   ├── InputOTPSlot
+│   ├── InputOTPSlot
+│   └── InputOTPSlot
+├── InputOTPSeparator
+└── InputOTPGroup
+    ├── InputOTPSlot
+    └── InputOTPSlot
+```
+
+The input only accepts digits by default (Corvu OTP Field's built-in `^\d*$` pattern). Use the `pattern` prop to customize the accepted characters.
+
+## Examples
+
+### Pattern
+
+Use the `pattern` prop to define a custom regex for the accepted characters. The default only accepts digits; this example also accepts letters. Pass `null` to allow all characters.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-pattern" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-pattern" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Alphanumeric
+
+Accept both letters and numbers with an alphanumeric pattern.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-alphanumeric" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-alphanumeric" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Separator
+
+Use the `<InputOTPSeparator />` component to add a separator between input groups.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-separator" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-separator" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to disable the input.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Controlled
+
+Use the `value` and `onValueChange` props to control the input value.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-controlled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-controlled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use `aria-invalid` on the slots to show an error state.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Four Digits
+
+A common pattern for PIN codes: set `maxLength={4}`.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-four-digits" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-four-digits" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Form
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="input-otp-form" previewClass="h-[30rem]" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/input-otp-form" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Corvu OTP Field API reference](https://corvu.dev/docs/primitives/otp-field#api-reference) for primitive props, keyboard interactions, and accessibility details.

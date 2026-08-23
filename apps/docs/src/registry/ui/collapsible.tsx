@@ -60,4 +60,4 @@ const CollapsibleContent = <T extends ValidComponent = "div">(
   )
 }
 
-export { Collapsible, CollapsibleTrigger, CollapsibleContent }
+export { Collapsible, CollapsibleContent, CollapsibleTrigger }

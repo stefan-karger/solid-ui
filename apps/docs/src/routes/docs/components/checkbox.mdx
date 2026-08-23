@@ -46,10 +46,165 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Checkbox } from "~/components/ui/checkbox";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Checkbox />
 ```
+
+## Examples
+
+### Checked State
+
+Use `defaultChecked` for uncontrolled checkboxes, or `checked` and `onChange` to control the state.
+
+```tsx showLineNumbers
+import { createSignal } from "solid-js";
+
+const [checked, setChecked] = createSignal(false);
+
+<Checkbox checked={checked()} onChange={setChecked} />;
+```
+
+### Invalid State
+
+Set `aria-invalid` on the checkbox and `data-invalid` on the field wrapper to show the invalid styles.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Basic
+
+Pair the checkbox with `Field` and `FieldLabel` for proper layout and labeling.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Description
+
+Use `FieldContent` and `FieldDescription` for helper text.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-description" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-description" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to prevent interaction and add the `data-disabled` attribute to the `<Field>` component for disabled styles.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Group
+
+Use multiple fields to create a checkbox list.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-group" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Table
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="checkbox-table" previewClass="p-4 md:p-8" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/checkbox-table" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+`Checkbox` is built on top of [`@kobalte/core/checkbox`](https://kobalte.dev/docs/core/components/checkbox), which implements the [WAI-ARIA checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/), including keyboard, disabled, indeterminate, and form behavior.
+
+### Checkbox
+
+| Prop              | Type                         | Default |
+| ----------------- | ---------------------------- | ------- |
+| `checked`         | `boolean`                    | -       |
+| `defaultChecked`  | `boolean`                    | `false` |
+| `onChange`        | `(checked: boolean) => void` | -       |
+| `indeterminate`   | `boolean`                    | `false` |
+| `disabled`        | `boolean`                    | `false` |
+| `readOnly`        | `boolean`                    | `false` |
+| `required`        | `boolean`                    | `false` |
+| `name`            | `string`                     | -       |
+| `value`           | `string`                     | `"on"`  |
+| `validationState` | `"valid" \| "invalid"`       | -       |
+| `class`           | `string`                     | -       |
+
+### CheckboxLabel
+
+Renders a `<label>` associated with the checkbox's hidden input. Place it as a sibling of `Checkbox` inside the same `Field`.
+
+| Prop       | Type          | Default |
+| ---------- | ------------- | ------- |
+| `class`    | `string`      | -       |
+| `children` | `JSX.Element` | -       |

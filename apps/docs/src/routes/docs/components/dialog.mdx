@@ -6,6 +6,8 @@ links:
   api: https://kobalte.dev/docs/core/components/dialog#api-reference
 ---
 
+The Dialog component is built on top of [Kobalte Dialog](https://kobalte.dev/docs/core/components/dialog), which provides accessible modal, focus-management, and keyboard behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -46,7 +48,7 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Dialog,
   DialogContent,
@@ -55,11 +57,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
+import { Button } from "~/components/ui/button";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Dialog>
-  <DialogTrigger>Open</DialogTrigger>
+  <DialogTrigger as={Button} variant="outline">
+    Open
+  </DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -72,19 +77,32 @@ import {
 </Dialog>
 ```
 
+## Composition
+
+Use the following composition to build a `Dialog`:
+
+```text
+Dialog
+├── DialogTrigger
+└── DialogContent
+    ├── DialogHeader
+    │   ├── DialogTitle
+    │   └── DialogDescription
+    └── DialogFooter
+```
+
 ## Examples
 
-### Custom close button
+### Custom Close Button
 
-Use the `DialogClose` component to create a custom close button.
+Replace the default close control with your own button.
 
-::::tab-group[close-button]
+::::tab-group[example1]
 :::tab[Preview]
 
 <ComponentPreview name="dialog-close-button" />
 
 :::
-
 :::tab[Code]
 
 ```file="~/registry/examples/dialog-close-button" frame=none showLineNumbers
@@ -94,34 +112,63 @@ Use the `DialogClose` component to create a custom close button.
 :::
 ::::
 
-## Notes
+### No Close Button
 
-To use the `Dialog` component from within a `Context Menu` or `Dropdown Menu`, you must encase the `Context Menu` or
-`Dropdown Menu` component in the `Dialog` component. See the [Dropdown Menu Dialog example](/docs/components/dropdown-menu#dialog) for more details.
+Use `showCloseButton={false}` to hide the close button.
 
-```tsx title="components/example-dialog-context-menu.tsx" {1, 26}
-<Dialog>
-  <ContextMenu>
-    <ContextMenuTrigger>Right click</ContextMenuTrigger>
-    <ContextMenuContent>
-      <ContextMenuItem>Open</ContextMenuItem>
-      <ContextMenuItem>Download</ContextMenuItem>
-      <DialogTrigger as={ContextMenuItem}>
-        <span>Delete</span>
-      </DialogTrigger>
-    </ContextMenuContent>
-  </ContextMenu>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Are you absolutely sure?</DialogTitle>
-      <DialogDescription>
-        This action cannot be undone. Are you sure you want to permanently
-        delete this file from our servers?
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <Button type="submit">Confirm</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="dialog-no-close-button" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dialog-no-close-button" frame=none showLineNumbers
+
 ```
+
+:::
+::::
+
+### Sticky Footer
+
+Keep actions visible while the content scrolls.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="dialog-sticky-footer" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dialog-sticky-footer" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Scrollable Content
+
+Long content can scroll while the header stays in view.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="dialog-scrollable-content" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dialog-scrollable-content" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+For all primitive props and keyboard interactions, see the [Kobalte Dialog API reference](https://kobalte.dev/docs/core/components/dialog#api-reference).

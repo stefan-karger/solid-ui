@@ -6,6 +6,8 @@ links:
   api: https://kobalte.dev/docs/core/components/context-menu#api-reference
 ---
 
+The Context Menu component is built on top of [Kobalte Context Menu](https://kobalte.dev/docs/core/components/context-menu), which provides accessible context-menu, keyboard, and focus behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -50,8 +52,6 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuLabel,
-  ContextMenuSeparator,
   ContextMenuTrigger,
 } from "~/components/ui/context-menu";
 ```
@@ -60,8 +60,6 @@ import {
 <ContextMenu>
   <ContextMenuTrigger>Right click here</ContextMenuTrigger>
   <ContextMenuContent>
-    <ContextMenuLabel>Actions</ContextMenuLabel>
-    <ContextMenuSeparator />
     <ContextMenuItem>Profile</ContextMenuItem>
     <ContextMenuItem>Billing</ContextMenuItem>
     <ContextMenuItem>Team</ContextMenuItem>
@@ -70,11 +68,141 @@ import {
 </ContextMenu>
 ```
 
+See the [Kobalte Context Menu documentation](https://kobalte.dev/docs/core/components/context-menu) for primitive-level options, accessibility, and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `ContextMenu`:
+
+```text
+ContextMenu
+├── ContextMenuTrigger
+└── ContextMenuContent
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuItem
+    │   └── ContextMenuItem
+    ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuCheckboxItem
+    │   └── ContextMenuCheckboxItem
+    ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   └── ContextMenuRadioGroup
+    │       ├── ContextMenuRadioItem
+    │       └── ContextMenuRadioItem
+    └── ContextMenuSub
+        ├── ContextMenuSubTrigger
+        └── ContextMenuSubContent
+            └── ContextMenuGroup
+                ├── ContextMenuItem
+                └── ContextMenuItem
+```
+
 ## Examples
+
+### Basic
+
+A simple context menu with a few actions.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Submenu
+
+Use `ContextMenuSub` to nest secondary actions.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-submenu" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-submenu" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Shortcuts
+
+Add `ContextMenuShortcut` to show keyboard hints.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-shortcuts" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-shortcuts" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Groups
+
+Group related actions and separate them with dividers.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-groups" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-groups" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-icons" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-icons" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Checkboxes
 
-::::tab-group[checkboxes]
+Use `ContextMenuCheckboxItem` for toggles.
+
+::::tab-group[example6]
 :::tab[Preview]
 
 <ComponentPreview name="context-menu-checkboxes" />
@@ -89,19 +217,63 @@ import {
 :::
 ::::
 
-### Radio Group
+### Radio
 
-::::tab-group[radio-group]
+Use `ContextMenuRadioItem` for exclusive choices.
+
+::::tab-group[example7]
 :::tab[Preview]
 
-<ComponentPreview name="context-menu-radio-group" />
+<ComponentPreview name="context-menu-radio" />
 
 :::
 :::tab[Code]
 
-```file="~/registry/examples/context-menu-radio-group" frame=none showLineNumbers
+```file="~/registry/examples/context-menu-radio" frame=none showLineNumbers
 
 ```
 
 :::
 ::::
+
+### Destructive
+
+Use `variant="destructive"` to style the menu item as destructive.
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-destructive" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-destructive" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Sides
+
+Control menu placement by passing a `placement` prop to `ContextMenu`.
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="context-menu-sides" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/context-menu-sides" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Context Menu API reference](https://kobalte.dev/docs/core/components/context-menu#api-reference) for primitive props, keyboard behavior, and accessibility details.

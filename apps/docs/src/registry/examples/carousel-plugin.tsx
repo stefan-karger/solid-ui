@@ -1,4 +1,5 @@
 import { For } from "solid-js"
+
 import Autoplay from "embla-carousel-autoplay"
 
 import { Card, CardContent } from "~/registry/ui/card"
@@ -15,10 +16,10 @@ export default function CarouselPlugin() {
 
   return (
     <Carousel
-      plugins={[plugin]}
       class="w-full max-w-xs"
       onMouseEnter={plugin.stop}
       onMouseLeave={() => plugin.play()}
+      plugins={[plugin]}
     >
       <CarouselContent>
         <For each={Array.from({ length: 5 })}>
@@ -27,7 +28,7 @@ export default function CarouselPlugin() {
               <div class="p-1">
                 <Card>
                   <CardContent class="flex aspect-square items-center justify-center p-6">
-                    <span class="text-4xl font-semibold">{index() + 1}</span>
+                    <span class="font-semibold text-4xl">{index() + 1}</span>
                   </CardContent>
                 </Card>
               </div>

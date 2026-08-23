@@ -1,0 +1,255 @@
+---
+title: Native Select
+description: A styled native HTML select element with consistent design system integration.
+links:
+  doc: https://kobalte.dev/docs/core/components/button
+  api: https://kobalte.dev/docs/core/components/button#api-reference
+---
+
+For a styled select component, see the [Select](/docs/components/select) component.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add native-select
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/native-select.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  NativeSelect,
+  NativeSelectOptGroup,
+  NativeSelectOption,
+} from "~/components/ui/native-select";
+```
+
+```tsx showLineNumbers
+<NativeSelect>
+  <NativeSelectOption value="">Select a fruit</NativeSelectOption>
+  <NativeSelectOption value="apple">Apple</NativeSelectOption>
+  <NativeSelectOption value="banana">Banana</NativeSelectOption>
+  <NativeSelectOption value="blueberry">Blueberry</NativeSelectOption>
+  <NativeSelectOption value="pineapple">Pineapple</NativeSelectOption>
+</NativeSelect>
+```
+
+## Composition
+
+### Simple
+
+Options placed directly under `NativeSelect` (no `NativeSelectOptGroup`).
+
+```text
+NativeSelect
+├── NativeSelectOption
+├── NativeSelectOption
+├── NativeSelectOption
+└── NativeSelectOption
+```
+
+### With groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelectOptGroup
+│   ├── NativeSelectOption
+│   └── NativeSelectOption
+└── NativeSelectOptGroup
+    ├── NativeSelectOption
+    └── NativeSelectOption
+```
+
+## Examples
+
+### Groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-groups" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-groups" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Sizes
+
+Use the `size` prop to switch between the default and small select sizes.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-sizes" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-sizes" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Field
+
+Use with the Field component for proper form labeling and descriptions.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-field" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-field" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Add the `disabled` prop to the `NativeSelect` component to disable the select.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-disabled" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the `Field` component for styling.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="native-select-invalid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/native-select-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Native Select vs Select
+
+- Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns.
+- Use `Select` for custom styling, animations, or complex interactions.
+
+## Accessibility
+
+- The component maintains all native HTML select accessibility features.
+- Screen readers can navigate through options using arrow keys.
+- The chevron icon is marked as `aria-hidden="true"` to avoid duplication.
+- Use `aria-label` or `aria-labelledby` for additional context when needed.
+
+```tsx showLineNumbers
+<NativeSelect aria-label="Choose your preferred language">
+  <NativeSelectOption value="en">English</NativeSelectOption>
+  <NativeSelectOption value="es">Spanish</NativeSelectOption>
+  <NativeSelectOption value="fr">French</NativeSelectOption>
+</NativeSelect>
+```
+
+## API Reference
+
+### NativeSelect
+
+The main select component that wraps the native HTML select element.
+
+| Prop           | Type                | Default     |
+| -------------- | ------------------- | ----------- |
+| `size`         | `"sm" \| "default"` | `"default"` |
+| `class`        | `string`            | -           |
+| `defaultValue` | `string`            | -           |
+
+```tsx
+<NativeSelect>
+  <NativeSelectOption value="option1">Option 1</NativeSelectOption>
+  <NativeSelectOption value="option2">Option 2</NativeSelectOption>
+</NativeSelect>
+```
+
+### NativeSelectOption
+
+Represents an individual option within the select.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `value`    | `string`  | -       |
+| `disabled` | `boolean` | `false` |
+
+### NativeSelectOptGroup
+
+Groups related options together for better organization.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `label`    | `string`  | -       |
+| `disabled` | `boolean` | `false` |
+
+```tsx
+<NativeSelectOptGroup label="Fruits">
+  <NativeSelectOption value="apple">Apple</NativeSelectOption>
+  <NativeSelectOption value="banana">Banana</NativeSelectOption>
+</NativeSelectOptGroup>
+```

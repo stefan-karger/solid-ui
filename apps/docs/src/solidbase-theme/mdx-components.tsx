@@ -9,8 +9,8 @@ import {
 } from "solid-js"
 
 import { cookieStorage, makePersisted, messageSync } from "@solid-primitives/storage"
+import { TerminalIcon } from "lucide-solid"
 
-import { IconTerminal } from "~/components/icons"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/registry/ui/tabs"
 
 export const h1 = (props: ComponentProps<"h1">) => {
@@ -176,13 +176,13 @@ export function DirectiveContainer(
           <Tabs class="gap-0" onChange={setOpenTab} value={openTab?.()}>
             <div class="flex items-center gap-2 border-border/50 border-b px-3 py-1">
               <div class="flex size-4 items-center justify-center rounded-[1px] bg-foreground opacity-70">
-                <IconTerminal class="size-3 text-white dark:text-black" />
+                <TerminalIcon class="size-3 text-white dark:text-black" />
               </div>
               <TabsList class="rounded-none bg-transparent p-0">
                 <For each={tabNames}>
                   {(title) => (
                     <TabsTrigger
-                      class="h-7 border border-transparent pt-0.5 data-[selected]:border-input data-[selected]:bg-accent data-[selected]:shadow-none"
+                      class="h-7 border border-transparent pt-0.5 data-[selected]:border-input data-[selected]:bg-accent data-[selected]:shadow-none!"
                       value={title}
                     >
                       {title}
@@ -215,7 +215,7 @@ export function DirectiveContainer(
           <For each={tabNames}>
             {(title) => (
               <TabsTrigger
-                class="rounded-none border-0 bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[selected]:bg-transparent data-[selected]:text-foreground data-[selected]:shadow-none dark:data-[selected]:bg-transparent dark:data-[selected]:text-foreground"
+                class="rounded-none border-0 border-transparent border-b-2 border-solid bg-transparent px-0 pb-3 text-base text-muted-foreground hover:text-primary data-[selected]:border-foreground data-[selected]:border-b-2 data-[selected]:border-solid data-[selected]:bg-transparent data-[selected]:text-foreground data-[selected]:shadow-none! dark:data-[selected]:bg-transparent dark:data-[selected]:text-foreground"
                 value={title}
               >
                 {title}

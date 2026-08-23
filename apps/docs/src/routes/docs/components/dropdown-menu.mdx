@@ -6,10 +6,15 @@ links:
   api: https://kobalte.dev/docs/core/components/dropdown-menu#api-reference
 ---
 
+The Dropdown Menu component is built on top of [Kobalte Dropdown Menu](https://kobalte.dev/docs/core/components/dropdown-menu), which provides accessible menu, keyboard, and focus behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
-<ComponentPreview name="dropdown-menu-demo" />
+<ComponentPreview
+  name="dropdown-menu-demo"
+  description="A dropdown menu with icons, shortcuts, and submenu items."
+/>
 
 :::
 :::tab[Code]
@@ -34,7 +39,7 @@ solidui-cli@latest add dropdown-menu
 Install the following dependencies:
 
 ```package-install
-@kobalte/core
+@kobalte/core lucide-solid
 ```
 
 Copy and paste the following code into your project.
@@ -46,9 +51,11 @@ Copy and paste the following code into your project.
 ## Usage
 
 ```tsx showLineNumbers
+import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -58,23 +65,141 @@ import {
 
 ```tsx showLineNumbers
 <DropdownMenu>
-  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+  <DropdownMenuTrigger as={Button} variant="outline">
+    Open
+  </DropdownMenuTrigger>
   <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuGroup>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+    </DropdownMenuGroup>
     <DropdownMenuSeparator />
-    <DropdownMenuItem>Profile</DropdownMenuItem>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>
-    <DropdownMenuItem>Subscription</DropdownMenuItem>
+    <DropdownMenuGroup>
+      <DropdownMenuItem>Team</DropdownMenuItem>
+      <DropdownMenuItem>Subscription</DropdownMenuItem>
+    </DropdownMenuGroup>
   </DropdownMenuContent>
 </DropdownMenu>
 ```
 
+See the [Kobalte Dropdown Menu documentation](https://kobalte.dev/docs/core/components/dropdown-menu) for primitive-level options, accessibility, and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `DropdownMenu`:
+
+```text
+DropdownMenu
+├── DropdownMenuTrigger
+└── DropdownMenuContent
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuItem
+    │   └── DropdownMenuItem
+    ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuCheckboxItem
+    │   └── DropdownMenuCheckboxItem
+    ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   └── DropdownMenuRadioGroup
+    │       ├── DropdownMenuRadioItem
+    │       └── DropdownMenuRadioItem
+    └── DropdownMenuSub
+        ├── DropdownMenuSubTrigger
+        └── DropdownMenuSubContent
+            └── DropdownMenuGroup
+                ├── DropdownMenuLabel
+                ├── DropdownMenuItem
+                └── DropdownMenuItem
+```
+
 ## Examples
+
+### Basic
+
+A basic dropdown menu with labels and separators.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Submenu
+
+Use `DropdownMenuSub` to nest secondary actions.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-submenu" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-submenu" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Shortcuts
+
+Add `DropdownMenuShortcut` to show keyboard hints.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-shortcuts" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-shortcuts" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-icons" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-icons" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Checkboxes
 
-::::tab-group[preview]
+Use `DropdownMenuCheckboxItem` for toggles.
+
+::::tab-group[example5]
 :::tab[Preview]
 
 <ComponentPreview name="dropdown-menu-checkboxes" />
@@ -89,9 +214,30 @@ import {
 :::
 ::::
 
+### Checkboxes Icons
+
+Add icons to checkbox items.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-checkboxes-icons" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-checkboxes-icons" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Radio Group
 
-::::tab-group[preview]
+Use `DropdownMenuRadioGroup` for exclusive choices.
+
+::::tab-group[example7]
 :::tab[Preview]
 
 <ComponentPreview name="dropdown-menu-radio-group" />
@@ -106,31 +252,82 @@ import {
 :::
 ::::
 
-### Dialog
+### Radio Icons
 
-This example shows how to open a dialog from a dropdown menu.
+Show radio options with icons.
 
-Use `modal={false}` on the `DropdownMenu` component.
-
-```tsx showLineNumbers
-<DropdownMenu modal={false}>
-  <DropdownMenuTrigger as={Button<"button">} variant="outline">
-    Actions
-  </DropdownMenuTrigger>
-</DropdownMenu>
-```
-
-::::tab-group[preview]
+::::tab-group[example8]
 :::tab[Preview]
 
-<ComponentPreview name="dropdown-menu-dialog" />
+<ComponentPreview name="dropdown-menu-radio-icons" />
 
 :::
 :::tab[Code]
 
-```file="~/registry/examples/dropdown-menu-dialog" frame=none showLineNumbers
+```file="~/registry/examples/dropdown-menu-radio-icons" frame=none showLineNumbers
 
 ```
 
 :::
 ::::
+
+### Destructive
+
+Use `variant="destructive"` for irreversible actions.
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-destructive" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-destructive" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Avatar
+
+An account switcher dropdown triggered by an avatar.
+
+::::tab-group[example10]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-avatar" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-avatar" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Complex
+
+A richer example combining groups, icons, and submenus.
+
+::::tab-group[example11]
+:::tab[Preview]
+
+<ComponentPreview name="dropdown-menu-complex" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/dropdown-menu-complex" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Dropdown Menu API reference](https://kobalte.dev/docs/core/components/dropdown-menu#api-reference) for primitive props, keyboard behavior, and accessibility details.

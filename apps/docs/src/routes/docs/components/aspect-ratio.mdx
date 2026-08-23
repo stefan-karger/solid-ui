@@ -45,12 +45,63 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { AspectRatio } from "~/components/ui/aspect-ratio";
 ```
 
-```tsx
+```tsx showLineNumbers
 <AspectRatio ratio={16 / 9}>
-  <img src="..." alt="..." />
+  <img src="..." alt="Example" class="rounded-md object-cover" />
 </AspectRatio>
 ```
+
+## Examples
+
+### Square
+
+A square aspect ratio using `ratio={1 / 1}` is useful for displaying square images.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="aspect-ratio-square" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/aspect-ratio-square" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Portrait
+
+A portrait aspect ratio using `ratio={9 / 16}` is useful for displaying portrait images.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="aspect-ratio-portrait" previewClass="min-h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/aspect-ratio-portrait" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### AspectRatio
+
+Displays content within a desired ratio.
+
+| Prop    | Type     | Default | Required |
+| ------- | -------- | ------- | -------- |
+| `ratio` | `number` | -       | Yes      |
+| `class` | `string` | -       | No       |
