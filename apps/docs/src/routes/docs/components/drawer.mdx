@@ -146,25 +146,77 @@ The drawer sets data attributes on `DrawerContent` and `DrawerOverlay` you can t
 
 Use the `side` prop to set the side the drawer opens from. Available options are `top`, `right`, `bottom`, and `left`. Defaults to `bottom`.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-position" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-position" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Swipe Handle
 
 `DrawerContent` renders a swipe handle automatically when the drawer opens from the `bottom`, the default side. Other sides render no handle.
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-swipe-handle" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-swipe-handle" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Nested
 
 Open drawers from inside another drawer. Parent drawers stay mounted and stack behind the frontmost drawer.
 
+::::tab-group[example3]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-nested" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-nested" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Non Modal
 
 Set `modal={false}` to allow interaction with the rest of the page while the drawer is open. Combine with `closeOnOutsidePointer={false}` to prevent the drawer from closing on outside presses.
 
+::::tab-group[example4]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-non-modal" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-non-modal" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Snap Points
 
@@ -172,13 +224,39 @@ Use `snapPoints` to snap a drawer to preset heights. Numbers between `0` and `1`
 
 Track the active snap point with the controlled `activeSnapPoint` and `onActiveSnapPointChange` props. While the drawer is transitioning between snap points, it carries a `data-snapping` attribute you can style with the `data-snapping:` variant.
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-snap-points" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-snap-points" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Responsive
 
 You can combine the `Dialog` and `Drawer` components to create a responsive dialog. This renders a `Dialog` component on desktop and a `Drawer` on mobile.
 
+::::tab-group[example6]
+:::tab[Preview]
+
 <ComponentPreview name="drawer-dialog" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/drawer-dialog" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## API Reference
 

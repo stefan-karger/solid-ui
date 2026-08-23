@@ -52,37 +52,115 @@ import { Badge } from "~/components/ui/badge";
 
 Use the `variant` prop to change the variant of the badge.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview name="badge-variants" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-variants" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Status Variants
 
 Each semantic color ships in two treatments. `*-light` fills the badge with a tinted surface, and `*-outline` keeps the badge on the page background with only the border and the label carrying the color. Both read against the same `--primary`, `--destructive`, `--success`, `--warning` and `--info` tokens, so they follow the active theme.
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview name="badge-status" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-status" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### With Icon
 
 You can render an icon inside the badge. Use `data-icon="inline-start"` to render the icon on the left and `data-icon="inline-end"` to render the icon on the right.
 
+::::tab-group[example3]
+:::tab[Preview]
+
 <ComponentPreview name="badge-icon" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### With Spinner
 
 You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
 
+::::tab-group[example4]
+:::tab[Preview]
+
 <ComponentPreview name="badge-spinner" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-spinner" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Link
 
 Use the `as` prop to render a link as a badge.
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview name="badge-link" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-link" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Custom Colors
 
 You can customize the colors of a badge by adding custom classes such as `bg-green-50 dark:bg-green-800` to the `Badge` component.
 
+::::tab-group[example6]
+:::tab[Preview]
+
 <ComponentPreview name="badge-colors" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/badge-colors" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## API Reference
 

@@ -191,6 +191,9 @@ Every visual treatment is a prop on the single `Sidebar` component — there are
 
 Set `variant="floating"` for a card-like panel with rounded corners and padding from the window edges.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview
   name="sidebar-floating"
   align="start"
@@ -198,9 +201,22 @@ Set `variant="floating"` for a card-like panel with rounded corners and padding 
   previewClass="h-[42rem] p-0"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/sidebar-floating" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Inset
 
 Set `variant="inset"` and wrap the primary content in `SidebarInset`.
+
+::::tab-group[example2]
+:::tab[Preview]
 
 <ComponentPreview
   name="sidebar-inset"
@@ -209,9 +225,22 @@ Set `variant="inset"` and wrap the primary content in `SidebarInset`.
   previewClass="h-[42rem] p-0"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/sidebar-inset" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Icon collapse
 
 Set `collapsible="icon"` to collapse the sidebar to its icon rail instead of hiding it.
+
+::::tab-group[example3]
+:::tab[Preview]
 
 <ComponentPreview
   name="sidebar-icon"
@@ -219,6 +248,16 @@ Set `collapsible="icon"` to collapse the sidebar to its icon rail instead of hid
   contained
   previewClass="h-[42rem] p-0"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/sidebar-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## API Reference
 

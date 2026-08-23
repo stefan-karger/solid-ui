@@ -82,7 +82,20 @@ Marker
 
 Use `variant` to switch between an inline marker, bordered row, and labeled separator.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview name="marker-variants" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-variants" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 | Variant     | Description                                          |
 | ----------- | ---------------------------------------------------- |
@@ -95,40 +108,118 @@ Use `variant` to switch between an inline marker, bordered row, and labeled sepa
 Set `role="status"` and include a [`Spinner`](/docs/components/spinner) for streaming or
 in-progress markers so updates are announced.
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview name="marker-status" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-status" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Shimmer
 
 Add the `shimmer` utility class to `MarkerContent` for an animated streaming-text effect.
 
+::::tab-group[example3]
+:::tab[Preview]
+
 <ComponentPreview name="marker-shimmer" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-shimmer" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Separator
 
 Use the `separator` variant for labeled dividers, such as dates or section breaks, in a
 conversation.
 
+::::tab-group[example4]
+:::tab[Preview]
+
 <ComponentPreview name="marker-separator" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-separator" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Border
 
 Use the `border` variant for status rows that should keep the default marker alignment while
 separating the next row.
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview name="marker-border" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-border" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### With Icon
 
 Use `MarkerIcon` to render an icon alongside the content. Use `flex-col` to stack the icon above
 the content.
 
+::::tab-group[example6]
+:::tab[Preview]
+
 <ComponentPreview name="marker-icon" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Links and Buttons
 
 Turn a marker into a link or button with the `as` prop on `Marker`.
 
+::::tab-group[example7]
+:::tab[Preview]
+
 <ComponentPreview name="marker-link-button" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/marker-link-button" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers
 import { Marker, MarkerContent } from "~/components/ui/marker";

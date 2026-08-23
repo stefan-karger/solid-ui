@@ -132,47 +132,177 @@ The `Field` family is designed for composing accessible forms. A typical field i
 
 ### Input
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview name="field-input" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-input" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Textarea
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview name="field-textarea" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-textarea" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Select
 
+::::tab-group[example3]
+:::tab[Preview]
+
 <ComponentPreview name="field-select" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-select" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Slider
 
+::::tab-group[example4]
+:::tab[Preview]
+
 <ComponentPreview name="field-slider" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-slider" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Fieldset
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview name="field-fieldset" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-fieldset" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Checkbox
 
+::::tab-group[example6]
+:::tab[Preview]
+
 <ComponentPreview name="field-checkbox" previewClass="h-[32rem]" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-checkbox" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Radio
 
+::::tab-group[example7]
+:::tab[Preview]
+
 <ComponentPreview name="field-radio" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-radio" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Switch
 
+::::tab-group[example8]
+:::tab[Preview]
+
 <ComponentPreview name="field-switch" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-switch" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Choice Card
 
 Wrap `Field` components inside `FieldLabel` to create selectable field groups. This works with `RadioGroupItem`, `Checkbox`, and `Switch` components.
 
+::::tab-group[example9]
+:::tab[Preview]
+
 <ComponentPreview name="field-choice-card" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-choice-card" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Field Group
 
 Stack `Field` components with `FieldGroup`. Add `FieldSeparator` to divide them.
 
-<ComponentPreview name="field-group" previewClass="h-96" />
+::::tab-group[example10]
+:::tab[Preview]
+
+<ComponentPreview name="field-group-example" previewClass="h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-group-example" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Responsive Layout
 
@@ -180,10 +310,23 @@ Stack `Field` components with `FieldGroup`. Add `FieldSeparator` to divide them.
 - **Horizontal fields:** Set `orientation="horizontal"` on `Field` to align the label and control side-by-side. Pair with `FieldContent` to keep descriptions aligned.
 - **Responsive fields:** Set `orientation="responsive"` for automatic column layouts inside container-aware parents. `FieldGroup` provides the `@container/field-group` container used by the component styles.
 
+::::tab-group[example11]
+:::tab[Preview]
+
 <ComponentPreview
   name="field-responsive"
   previewClass="h-[650px] p-6 md:h-[500px] md:p-10"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/field-responsive" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## Accessibility
 

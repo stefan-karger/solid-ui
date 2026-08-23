@@ -88,7 +88,20 @@ Carousel
 
 To set the size of the items, use the `basis` utility class on `<CarouselItem />`.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview name="carousel-size" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers {4-6}
 // 33% of the carousel width.
@@ -116,7 +129,20 @@ To set the size of the items, use the `basis` utility class on `<CarouselItem />
 
 To set item spacing, use a `pl-[VALUE]` utility on `<CarouselItem />` and a negative `-ml-[VALUE]` on `<CarouselContent />`.
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview name="carousel-spacing" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-spacing" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers /-ml-4/ /pl-4/
 <Carousel>
@@ -142,7 +168,20 @@ To set item spacing, use a `pl-[VALUE]` utility on `<CarouselItem />` and a nega
 
 Use the `orientation` prop to set the carousel orientation.
 
+::::tab-group[example3]
+:::tab[Preview]
+
 <ComponentPreview name="carousel-orientation" previewClass="h-[32rem]" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/carousel-orientation" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers /vertical | horizontal/
 <Carousel orientation="vertical | horizontal">

@@ -74,8 +74,6 @@ BubbleGroup
 - Polymorphic content via `as` for link and button bubbles.
 - Customizable styling through the `class` prop on every part.
 
-## Examples
-
 ## Usage
 
 ```tsx showLineNumbers
@@ -128,7 +126,20 @@ BubbleGroup
 
 Use `variant` to change the visual treatment of the bubble.
 
-<ComponentPreview name="bubble-variants" previewClass="h-auto style-rhea" />
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-variants" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-variants" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 | Variant       | Description                                            |
 | ------------- | ------------------------------------------------------ |
@@ -146,7 +157,20 @@ A bubble sizes to its content, up to 80% of the container width. The `ghost` var
 
 Use `align` on `Bubble` to align the bubble to the start or end of the conversation.
 
-<ComponentPreview name="bubble-alignment" previewClass="h-auto style-rhea" />
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-alignment" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-alignment" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 | align   | Description                                        |
 | ------- | -------------------------------------------------- |
@@ -159,13 +183,39 @@ When building chat interfaces, you will often apply alignment to a surrounding m
 
 Use `BubbleGroup` to group consecutive bubbles from the same sender. Set `align` on each `Bubble`, not on `BubbleGroup`.
 
-<ComponentPreview name="bubble-group-demo" previewClass="h-auto style-rhea" />
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-group-demo" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-group-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Links and Buttons
 
 Turn a bubble into a link or button with the `as` prop on `BubbleContent`.
 
-<ComponentPreview name="bubble-link-button" previewClass="h-auto style-rhea" />
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-link-button" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-link-button" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers
 <Bubble variant="muted">
@@ -179,25 +229,77 @@ Turn a bubble into a link or button with the `as` prop on `BubbleContent`.
 
 Use `BubbleReactions` for bubble reactions or quick action buttons. Use `side` and `align` to position the row. Reactions overlap the bubble edge, so leave vertical space between rows.
 
-<ComponentPreview name="bubble-reactions" previewClass="h-auto style-rhea" />
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-reactions" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-reactions" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Show More / Collapsible
 
 Long bubble content can be composed with [`Collapsible`](/docs/components/collapsible) to provide a show more or show less interaction.
 
-<ComponentPreview name="bubble-collapsible" previewClass="h-auto style-rhea" />
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-collapsible" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-collapsible" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Tooltip
 
 Wrap a bubble action in a [`Tooltip`](/docs/components/tooltip) to reveal metadata on hover or keyboard focus, such as when a message was read.
 
-<ComponentPreview name="bubble-tooltip" previewClass="h-auto style-rhea" />
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-tooltip" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-tooltip" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Popover
 
 Pair a bubble action with a [`Popover`](/docs/components/popover) to surface more information on demand, such as the full error message for a failed action.
 
-<ComponentPreview name="bubble-popover" previewClass="h-auto style-rhea" />
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="bubble-popover" previewClass="h-auto" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/bubble-popover" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## Accessibility
 

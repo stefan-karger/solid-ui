@@ -131,10 +131,23 @@ MessageScroller.Provider
 
 Mark the row that starts a meaningful exchange with `scrollAnchor`. It can be a user prompt, a system marker, or a group-chat event; it is not tied to a role. A newly appended anchor settles near the top of the viewport and leaves room for its response below.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview
   name="message-scroller-anchoring"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-anchoring" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Group Chat
 
@@ -146,28 +159,67 @@ Group-chat turn boundaries are often markers rather than a participant message. 
 </MessageScroller.Item>
 ```
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview
   name="message-scroller-group-chat"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-group-chat" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Keeping Context Visible
 
 `scrollPreviousItemPeek` keeps a slice of the prior item above a newly anchored row. This makes a new turn feel connected to the conversation that led into it.
+
+::::tab-group[example3]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-previous-context"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-previous-context" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Following the Live Edge
 
 With `autoScroll`, streamed output remains visible only while the reader is already at the live edge. Scrolling with a wheel, touch, keyboard, scrollbar, or a direct message jump releases the view. `MessageScroller.Button` returns to the latest reply and re-engages follow-output.
+
+::::tab-group[example4]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-streaming"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-streaming" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 Calling `scrollToEnd`, or pressing `MessageScroller.Button`, re-engages follow-output when `autoScroll` is enabled. The root and viewport expose `data-autoscrolling` while that programmatic scroll to the latest message runs, so you can apply styles during the transition.
 
@@ -175,28 +227,67 @@ Calling `scrollToEnd`, or pressing `MessageScroller.Button`, re-engages follow-o
 
 Use `defaultScrollPosition="last-anchor"` to reopen at the last meaningful turn. It falls back to the end when no anchor exists or the final anchored turn already fits in view. Use `"start"` or `"end"` when those positions better match the product.
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview
   name="message-scroller-opening-position"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-opening-position" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Loading Earlier Messages
 
 `preserveScrollOnPrepend` is enabled by default on the viewport. Give rows stable `messageId` values so the component can preserve a specific visible row when older messages are loaded above it.
+
+::::tab-group[example6]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-load-history"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-load-history" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Animating New Messages
 
 Animate a `MessageScroller.Item` with transform and opacity. Avoid height, margin, and padding animation because layout changes can fight the scroller's position work. Respect reduced-motion preferences while preserving the same scroll behavior.
+
+::::tab-group[example7]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-animation"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-animation" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Jumping to Messages
 
@@ -210,28 +301,67 @@ scrollToMessage("message-id", { align: "start", behavior: "smooth" });
 
 `scrollToMessage` uses the row `messageId`. It returns `false` when a target is not mounted and cannot be queued; a `true` result means the scroll ran or was queued.
 
+::::tab-group[example8]
+:::tab[Preview]
+
 <ComponentPreview
   name="message-scroller-commands"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-commands" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Tracking the Reader's Position
 
 `useMessageScrollerVisibility` reports the current anchored turn and the message ids currently visible in document order. Tracking is pay-for-what-you-use: it only runs while a consumer subscribes, and rows need `messageId` values to participate.
+
+::::tab-group[example9]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-visibility"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-visibility" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Reading Scroll State
 
 `useMessageScrollerScrollable` reports whether the viewport can still scroll toward the start or end. The opposite tells you that the corresponding edge has been reached. For styles, prefer the root `data-scrollable` state.
+
+::::tab-group[example10]
+:::tab[Preview]
 
 <ComponentPreview
   name="message-scroller-scrollable"
   previewClass="h-auto bg-surface p-4 dark:bg-background sm:p-10"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/message-scroller-scrollable" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ## Performance
 

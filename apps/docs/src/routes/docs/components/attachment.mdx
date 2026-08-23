@@ -114,49 +114,114 @@ AttachmentGroup
 Set `variant="image"` on `AttachmentMedia` and render an `<img>` inside it. Use
 `orientation="vertical"` to stack the media above the content.
 
+::::tab-group[example1]
+:::tab[Preview]
+
 <ComponentPreview
   name="attachment-image"
   previewClass="h-auto bg-surface dark:bg-background"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/attachment-image" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### States
 
 Set `state` to reflect the upload lifecycle. `uploading` and `processing` shimmer the title, and
 `error` switches to a destructive treatment.
 
+::::tab-group[example2]
+:::tab[Preview]
+
 <ComponentPreview
-  name="attachment-states"
+  name="attachment-state"
   previewClass="h-auto bg-surface dark:bg-background"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/attachment-state" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ### Sizes
 
 Use `size` to switch between `default`, `sm`, and `xs`.
+
+::::tab-group[example3]
+:::tab[Preview]
 
 <ComponentPreview
   name="attachment-size"
   previewClass="h-auto bg-surface dark:bg-background"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/attachment-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Group
 
 Wrap attachments in `AttachmentGroup` to lay them out in a horizontally scrollable, snapping row
 with an edge fade.
+
+::::tab-group[example4]
+:::tab[Preview]
 
 <ComponentPreview
   name="attachment-group"
   previewClass="h-auto bg-surface dark:bg-background"
 />
 
+:::
+:::tab[Code]
+
+```file="~/registry/examples/attachment-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
 ### Trigger
 
 Add an `AttachmentTrigger` to make the whole card open a link or dialog. It fills the card behind
 the actions, so the actions stay clickable.
 
+::::tab-group[example5]
+:::tab[Preview]
+
 <ComponentPreview
   name="attachment-trigger"
   previewClass="h-auto bg-surface dark:bg-background"
 />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/attachment-trigger" frame=none showLineNumbers
+
+```
+
+:::
+::::
 
 ```tsx showLineNumbers
 <Dialog>
