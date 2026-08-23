@@ -169,7 +169,7 @@
 //           data-lang={dir === "rtl" ? language : undefined}
 //         >
 //           <ul class="w-96">
-//             <ListItem href="/docs" title={t.introduction}>
+//             <ListItem href="/docs/components" title={t.introduction}>
 //               {t.introductionDesc}
 //             </ListItem>
 //             <ListItem href="/docs/installation" title={t.installation}>
@@ -218,7 +218,7 @@
 //         </NavigationMenuContent>
 //       </NavigationMenuItem>
 //       <NavigationMenuItem>
-//         <NavigationMenuLink class={navigationMenuTriggerStyle()} data-lang={dir === "rtl" ? language : undefined} as={"a"} href="/docs">{t.docs}</NavigationMenuLink>
+//         <NavigationMenuLink class={navigationMenuTriggerStyle()} data-lang={dir === "rtl" ? language : undefined} as={"a"} href="/docs/components">{t.docs}</NavigationMenuLink>
 //       </NavigationMenuItem>
 //     </NavigationMenu>
 //   )

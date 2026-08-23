@@ -76,7 +76,7 @@ export default function CardSpacing() {
                   <Label for="card-spacing-password">Password</Label>
                   <a
                     class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    href="/docs"
+                    href="/docs/components"
                   >
                     Forgot your password?
                   </a>

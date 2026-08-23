@@ -60,7 +60,7 @@ import {
   <NavigationMenuItem>
     <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
     <NavigationMenuContent>
-      <NavigationMenuLink href="/docs">Link</NavigationMenuLink>
+      <NavigationMenuLink href="/docs/components">Link</NavigationMenuLink>
     </NavigationMenuContent>
   </NavigationMenuItem>
 </NavigationMenu>
@@ -102,7 +102,7 @@ export function NavigationMenuDemo() {
     <NavigationMenuItem>
       <NavigationMenuLink
         as={Link}
-        to="/docs"
+        to="/docs/components"
         class={navigationMenuTriggerStyle()}
       >
         Documentation
@@ -111,25 +111,6 @@ export function NavigationMenuDemo() {
   );
 }
 ```
-
-### RTL
-
-To enable RTL support in solid-ui, see the [RTL configuration guide](/docs/rtl).
-
-::::tab-group[example1]
-:::tab[Preview]
-
-<ComponentPreview name="navigation-menu-rtl" />
-
-:::
-:::tab[Code]
-
-```file="~/registry/examples/navigation-menu-rtl" frame=none showLineNumbers
-
-```
-
-:::
-::::
 
 ## API Reference
 

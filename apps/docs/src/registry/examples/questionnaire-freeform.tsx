@@ -12,7 +12,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
@@ -34,39 +33,36 @@ export default function QuestionnaireFreeform() {
   }
 
   return (
-    <>
-      <Toaster />
-      <QuestionnaireRoot
-        class="mx-auto max-w-md"
-        items={items}
-        onSubmit={handleSubmit}
-        shortcuts="letters"
-      >
-        <QuestionnaireItem name="approach" required>
-          <QuestionnaireTitle>How should the agent approach this refactor?</QuestionnaireTitle>
-          <QuestionnaireDescription>
-            Choose a strategy or write a more specific instruction.
-          </QuestionnaireDescription>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice value="incremental">
-              Make the smallest safe change
-            </QuestionnaireChoice>
-            <QuestionnaireChoice value="module">Refactor one module at a time</QuestionnaireChoice>
-            <QuestionnaireChoice value="rewrite">
-              Replace the implementation completely
-            </QuestionnaireChoice>
-            <QuestionnaireInput
-              aria-label="Another refactoring approach"
-              placeholder="Describe another approach…"
-            />
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+    <QuestionnaireRoot
+      class="mx-auto max-w-md"
+      items={items}
+      onSubmit={handleSubmit}
+      shortcuts="letters"
+    >
+      <QuestionnaireItem name="approach" required>
+        <QuestionnaireTitle>How should the agent approach this refactor?</QuestionnaireTitle>
+        <QuestionnaireDescription>
+          Choose a strategy or write a more specific instruction.
+        </QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice value="incremental">
+            Make the smallest safe change
+          </QuestionnaireChoice>
+          <QuestionnaireChoice value="module">Refactor one module at a time</QuestionnaireChoice>
+          <QuestionnaireChoice value="rewrite">
+            Replace the implementation completely
+          </QuestionnaireChoice>
+          <QuestionnaireInput
+            aria-label="Another refactoring approach"
+            placeholder="Describe another approach…"
+          />
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <QuestionnaireActions>
-          <QuestionnaireSubmit>Use this approach</QuestionnaireSubmit>
-        </QuestionnaireActions>
-      </QuestionnaireRoot>
-    </>
+      <QuestionnaireActions>
+        <QuestionnaireSubmit>Use this approach</QuestionnaireSubmit>
+      </QuestionnaireActions>
+    </QuestionnaireRoot>
   )
 }

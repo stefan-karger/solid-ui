@@ -18,7 +18,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const questionnaireItems = [
   {
@@ -91,58 +90,53 @@ export default function QuestionnaireDemo() {
   }
 
   return (
-    <>
-      <Toaster />
-      <QuestionnaireRoot
-        class="mx-auto max-w-md"
-        defaultItem="direction"
-        items={questionnaireItems}
-        onSubmit={handleSubmit}
-        shortcuts="letters"
-      >
-        <QuestionnaireProgress />
-        <For each={questionnaireItems}>
-          {(question) => (
-            <QuestionnaireItem
-              multiple={"multiple" in question && question.multiple}
-              name={question.name}
-              required={question.required}
-            >
-              <QuestionnaireTitle>{question.title}</QuestionnaireTitle>
-              <QuestionnaireDescription>{question.description}</QuestionnaireDescription>
-              <QuestionnaireChoices>
-                <For each={question.choices}>
-                  {(choice) => (
-                    <QuestionnaireChoice value={choice.value}>
-                      <span class="font-medium">{choice.label}</span>
-                      <Show when={"description" in choice ? choice.description : undefined}>
-                        {(description) => (
-                          <span class="text-muted-foreground">{description()}</span>
-                        )}
-                      </Show>
-                    </QuestionnaireChoice>
-                  )}
-                </For>
-                <Show when={"input" in question ? question.input : undefined}>
-                  {(input) => (
-                    <QuestionnaireInput
-                      aria-label={input().label}
-                      placeholder={input().placeholder}
-                    />
-                  )}
-                </Show>
-              </QuestionnaireChoices>
-              <QuestionnaireError />
-            </QuestionnaireItem>
-          )}
-        </For>
-        <QuestionnaireActions>
-          <QuestionnairePrevious />
-          <QuestionnaireSkip />
-          <QuestionnaireNext>Next</QuestionnaireNext>
-          <QuestionnaireSubmit>Save plan</QuestionnaireSubmit>
-        </QuestionnaireActions>
-      </QuestionnaireRoot>
-    </>
+    <QuestionnaireRoot
+      class="mx-auto max-w-md"
+      defaultItem="direction"
+      items={questionnaireItems}
+      onSubmit={handleSubmit}
+      shortcuts="letters"
+    >
+      <QuestionnaireProgress />
+      <For each={questionnaireItems}>
+        {(question) => (
+          <QuestionnaireItem
+            multiple={"multiple" in question && question.multiple}
+            name={question.name}
+            required={question.required}
+          >
+            <QuestionnaireTitle>{question.title}</QuestionnaireTitle>
+            <QuestionnaireDescription>{question.description}</QuestionnaireDescription>
+            <QuestionnaireChoices>
+              <For each={question.choices}>
+                {(choice) => (
+                  <QuestionnaireChoice value={choice.value}>
+                    <span class="font-medium">{choice.label}</span>
+                    <Show when={"description" in choice ? choice.description : undefined}>
+                      {(description) => <span class="text-muted-foreground">{description()}</span>}
+                    </Show>
+                  </QuestionnaireChoice>
+                )}
+              </For>
+              <Show when={"input" in question ? question.input : undefined}>
+                {(input) => (
+                  <QuestionnaireInput
+                    aria-label={input().label}
+                    placeholder={input().placeholder}
+                  />
+                )}
+              </Show>
+            </QuestionnaireChoices>
+            <QuestionnaireError />
+          </QuestionnaireItem>
+        )}
+      </For>
+      <QuestionnaireActions>
+        <QuestionnairePrevious />
+        <QuestionnaireSkip />
+        <QuestionnaireNext>Next</QuestionnaireNext>
+        <QuestionnaireSubmit>Save plan</QuestionnaireSubmit>
+      </QuestionnaireActions>
+    </QuestionnaireRoot>
   )
 }

@@ -20,7 +20,7 @@ export default function BreadcrumbSeparator() {
           <Slash />
         </BreadcrumbSeparatorComponent>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+          <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparatorComponent>
           <Slash />

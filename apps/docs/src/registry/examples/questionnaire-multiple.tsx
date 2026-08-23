@@ -11,7 +11,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
@@ -33,32 +32,29 @@ export default function QuestionnaireMultiple() {
   }
 
   return (
-    <>
-      <Toaster />
-      <QuestionnaireRoot
-        class="mx-auto max-w-md"
-        items={items}
-        onSubmit={handleSubmit}
-        shortcuts="letters"
-      >
-        <QuestionnaireItem multiple name="context" required>
-          <QuestionnaireTitle>What context should the agent inspect?</QuestionnaireTitle>
-          <QuestionnaireDescription>
-            Select every source that may affect the implementation.
-          </QuestionnaireDescription>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice value="source">Relevant source files</QuestionnaireChoice>
-            <QuestionnaireChoice value="tests">Existing tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="docs">Architecture documentation</QuestionnaireChoice>
-            <QuestionnaireChoice value="history">Recent commit history</QuestionnaireChoice>
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+    <QuestionnaireRoot
+      class="mx-auto max-w-md"
+      items={items}
+      onSubmit={handleSubmit}
+      shortcuts="letters"
+    >
+      <QuestionnaireItem multiple name="context" required>
+        <QuestionnaireTitle>What context should the agent inspect?</QuestionnaireTitle>
+        <QuestionnaireDescription>
+          Select every source that may affect the implementation.
+        </QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice value="source">Relevant source files</QuestionnaireChoice>
+          <QuestionnaireChoice value="tests">Existing tests</QuestionnaireChoice>
+          <QuestionnaireChoice value="docs">Architecture documentation</QuestionnaireChoice>
+          <QuestionnaireChoice value="history">Recent commit history</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <QuestionnaireActions>
-          <QuestionnaireSubmit>Share context</QuestionnaireSubmit>
-        </QuestionnaireActions>
-      </QuestionnaireRoot>
-    </>
+      <QuestionnaireActions>
+        <QuestionnaireSubmit>Share context</QuestionnaireSubmit>
+      </QuestionnaireActions>
+    </QuestionnaireRoot>
   )
 }

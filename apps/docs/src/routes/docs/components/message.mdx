@@ -74,9 +74,8 @@ import {
 ```
 
 **Note:** `Message` owns the row layout—avatar, alignment, header, and footer. Render the visible
-message surface inside it with [`Bubble`](/docs/components/kobalte/bubble). For the scroll
-container around a conversation, use
-[`MessageScroller`](/create?item=message-scroller).
+message surface inside it with [`Bubble`](/docs/components/bubble). For the scroll
+container around a conversation, use [`MessageScroller`](/docs/components/message-scroller).
 
 ## Composition
 
@@ -165,7 +164,7 @@ Action buttons in `MessageFooter` are usually icon-only, so give each one an `ar
 
 ### Status updates
 
-For in-progress messages, use a [`Marker`](/docs/components/kobalte/marker) with `role="status"`
+For in-progress messages, use a [`Marker`](/docs/components/marker) with `role="status"`
 so assistive tech announces the update as it appears.
 
 ```tsx showLineNumbers

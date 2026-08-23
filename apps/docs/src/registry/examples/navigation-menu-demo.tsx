@@ -15,35 +15,35 @@ import {
 const components = [
   {
     title: "Alert Dialog",
-    href: "/docs/components/kobalte/alert-dialog",
+    href: "/docs/components/alert-dialog",
     description:
       "A modal dialog that interrupts the user with important content and expects a response."
   },
   {
     title: "Hover Card",
-    href: "/docs/components/kobalte/hover-card",
+    href: "/docs/components/hover-card",
     description: "For sighted users to preview content available behind a link."
   },
   {
     title: "Progress",
-    href: "/docs/components/kobalte/progress",
+    href: "/docs/components/progress",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar."
   },
   {
     title: "Scroll Area",
-    href: "/docs/components/kobalte/scroll-area",
+    href: "/docs/components/scroll-area",
     description: "Visually or semantically separates content."
   },
   {
     title: "Tabs",
-    href: "/docs/components/kobalte/tabs",
+    href: "/docs/components/tabs",
     description:
       "A set of layered sections of content—known as tab panels—that are displayed one at a time."
   },
   {
     title: "Tooltip",
-    href: "/docs/components/kobalte/tooltip",
+    href: "/docs/components/tooltip",
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it."
   }
@@ -56,7 +56,7 @@ export default function NavigationMenuDemo() {
         <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
         <NavigationMenuContent>
           <ul class="w-96 rounded-md border border-border border-solid bg-popover p-2">
-            <ListItem href="/docs" title="Introduction">
+            <ListItem href="/docs/components" title="Introduction">
               Re-usable components built with Tailwind CSS.
             </ListItem>
             <ListItem href="/docs/installation" title="Installation">
@@ -87,23 +87,20 @@ export default function NavigationMenuDemo() {
         <NavigationMenuContent>
           <ul class="grid w-[200px] rounded-md border border-border border-solid bg-popover p-2">
             <li>
-              <NavigationMenuLink
-                class="flex-row items-center gap-2"
-                href="/docs/components/kobalte/alert"
-              >
+              <NavigationMenuLink class="flex-row items-center gap-2" href="/docs/components/alert">
                 <CircleAlert />
                 Backlog
               </NavigationMenuLink>
               <NavigationMenuLink
                 class="flex-row items-center gap-2"
-                href="/docs/components/kobalte/progress"
+                href="/docs/components/progress"
               >
                 <CircleDashed />
                 To Do
               </NavigationMenuLink>
               <NavigationMenuLink
                 class="flex-row items-center gap-2"
-                href="/docs/components/kobalte/checkbox"
+                href="/docs/components/checkbox"
               >
                 <CircleCheck />
                 Done
@@ -113,7 +110,7 @@ export default function NavigationMenuDemo() {
         </NavigationMenuContent>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink class={navigationMenuTriggerStyle()} href="/docs">
+        <NavigationMenuLink class={navigationMenuTriggerStyle()} href="/docs/components">
           Docs
         </NavigationMenuLink>
       </NavigationMenuItem>

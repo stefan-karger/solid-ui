@@ -3754,7 +3754,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-validation",
     type: "registry:example",
-    dependencies: ["solid-sonner", "zod"],
+    dependencies: ["solid-sonner", "valibot"],
     registryDependencies: ["card", "questionnaire", "toast"],
     files: [
       {

@@ -16,7 +16,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "scope", required: true },
@@ -45,7 +44,6 @@ export default function QuestionnaireControlled() {
 
   return (
     <div class="relative mx-auto flex h-full w-full max-w-md flex-col">
-      <Toaster />
       <p class="absolute end-0 top-0 text-muted-foreground text-sm" role="status">
         Current checkpoint: {itemLabels[item()]}
       </p>

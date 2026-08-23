@@ -15,7 +15,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "permission", required: true },
@@ -53,43 +52,38 @@ export default function QuestionnaireNavigationState() {
   }
 
   return (
-    <>
-      <Toaster />
-      <QuestionnaireRoot
-        class="mx-auto max-w-md"
-        defaultItem="permission"
-        items={items}
-        onSubmit={handleSubmit}
-      >
-        <QuestionnaireProgress />
+    <QuestionnaireRoot
+      class="mx-auto max-w-md"
+      defaultItem="permission"
+      items={items}
+      onSubmit={handleSubmit}
+    >
+      <QuestionnaireProgress />
 
-        <QuestionnaireItem name="permission" required>
-          <QuestionnaireTitle>What may the agent modify?</QuestionnaireTitle>
-          <QuestionnaireDescription>
-            Next is disabled until useQuestionnaire() reports the active item as answered.
-          </QuestionnaireDescription>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice value="files">Project files</QuestionnaireChoice>
-            <QuestionnaireChoice value="tests">Project files and tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="config">
-              Files, tests, and configuration
-            </QuestionnaireChoice>
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+      <QuestionnaireItem name="permission" required>
+        <QuestionnaireTitle>What may the agent modify?</QuestionnaireTitle>
+        <QuestionnaireDescription>
+          Next is disabled until useQuestionnaire() reports the active item as answered.
+        </QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice value="files">Project files</QuestionnaireChoice>
+          <QuestionnaireChoice value="tests">Project files and tests</QuestionnaireChoice>
+          <QuestionnaireChoice value="config">Files, tests, and configuration</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <QuestionnaireItem name="verification" required>
-          <QuestionnaireTitle>What must pass before completion?</QuestionnaireTitle>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice value="tests">Tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="types">Tests and types</QuestionnaireChoice>
-            <QuestionnaireChoice value="all">Tests, types, and visual QA</QuestionnaireChoice>
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+      <QuestionnaireItem name="verification" required>
+        <QuestionnaireTitle>What must pass before completion?</QuestionnaireTitle>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice value="tests">Tests</QuestionnaireChoice>
+          <QuestionnaireChoice value="types">Tests and types</QuestionnaireChoice>
+          <QuestionnaireChoice value="all">Tests, types, and visual QA</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <NavigationActions />
-      </QuestionnaireRoot>
-    </>
+      <NavigationActions />
+    </QuestionnaireRoot>
   )
 }

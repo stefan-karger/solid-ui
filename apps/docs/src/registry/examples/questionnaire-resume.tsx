@@ -16,7 +16,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   { name: "change", required: true },
@@ -41,66 +40,63 @@ export default function QuestionnaireResume() {
   }
 
   return (
-    <>
-      <Toaster />
-      <QuestionnaireRoot
-        class="mx-auto max-w-md"
-        defaultItem="verification"
-        items={items}
-        onReset={() => toast("Saved answers restored")}
-        onSubmit={handleSubmit}
-      >
-        <QuestionnaireProgress />
+    <QuestionnaireRoot
+      class="mx-auto max-w-md"
+      defaultItem="verification"
+      items={items}
+      onReset={() => toast("Saved answers restored")}
+      onSubmit={handleSubmit}
+    >
+      <QuestionnaireProgress />
 
-        <QuestionnaireItem name="change" required>
-          <QuestionnaireTitle>What kind of migration is this?</QuestionnaireTitle>
-          <QuestionnaireDescription>
-            This answer was saved during the previous session.
-          </QuestionnaireDescription>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice defaultChecked value="incremental">
-              Incremental migration
-            </QuestionnaireChoice>
-            <QuestionnaireChoice value="cutover">Single cutover</QuestionnaireChoice>
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+      <QuestionnaireItem name="change" required>
+        <QuestionnaireTitle>What kind of migration is this?</QuestionnaireTitle>
+        <QuestionnaireDescription>
+          This answer was saved during the previous session.
+        </QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice defaultChecked value="incremental">
+            Incremental migration
+          </QuestionnaireChoice>
+          <QuestionnaireChoice value="cutover">Single cutover</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <QuestionnaireItem multiple name="verification" required>
-          <QuestionnaireTitle>How should the migration be verified?</QuestionnaireTitle>
-          <QuestionnaireDescription>
-            These checks were selected during the previous session.
-          </QuestionnaireDescription>
-          <QuestionnaireChoices>
-            <QuestionnaireChoice defaultChecked value="tests">
-              Run migration tests
-            </QuestionnaireChoice>
-            <QuestionnaireChoice defaultChecked value="typecheck">
-              Run the typecheck
-            </QuestionnaireChoice>
-            <QuestionnaireChoice value="manual">Perform a manual smoke test</QuestionnaireChoice>
-          </QuestionnaireChoices>
-          <QuestionnaireError />
-        </QuestionnaireItem>
+      <QuestionnaireItem multiple name="verification" required>
+        <QuestionnaireTitle>How should the migration be verified?</QuestionnaireTitle>
+        <QuestionnaireDescription>
+          These checks were selected during the previous session.
+        </QuestionnaireDescription>
+        <QuestionnaireChoices>
+          <QuestionnaireChoice defaultChecked value="tests">
+            Run migration tests
+          </QuestionnaireChoice>
+          <QuestionnaireChoice defaultChecked value="typecheck">
+            Run the typecheck
+          </QuestionnaireChoice>
+          <QuestionnaireChoice value="manual">Perform a manual smoke test</QuestionnaireChoice>
+        </QuestionnaireChoices>
+        <QuestionnaireError />
+      </QuestionnaireItem>
 
-        <QuestionnaireItem name="notes">
-          <QuestionnaireTitle>Anything else the agent should remember?</QuestionnaireTitle>
-          <QuestionnaireDescription>This note was saved with the draft.</QuestionnaireDescription>
-          <QuestionnaireInput
-            aria-label="Saved migration note"
-            defaultValue="Keep the existing public API stable."
-          />
-        </QuestionnaireItem>
+      <QuestionnaireItem name="notes">
+        <QuestionnaireTitle>Anything else the agent should remember?</QuestionnaireTitle>
+        <QuestionnaireDescription>This note was saved with the draft.</QuestionnaireDescription>
+        <QuestionnaireInput
+          aria-label="Saved migration note"
+          defaultValue="Keep the existing public API stable."
+        />
+      </QuestionnaireItem>
 
-        <QuestionnaireActions>
-          <Button type="reset" variant="outline">
-            Reset changes
-          </Button>
-          <QuestionnairePrevious />
-          <QuestionnaireNext>Next</QuestionnaireNext>
-          <QuestionnaireSubmit>Update draft</QuestionnaireSubmit>
-        </QuestionnaireActions>
-      </QuestionnaireRoot>
-    </>
+      <QuestionnaireActions>
+        <Button type="reset" variant="outline">
+          Reset changes
+        </Button>
+        <QuestionnairePrevious />
+        <QuestionnaireNext>Next</QuestionnaireNext>
+        <QuestionnaireSubmit>Update draft</QuestionnaireSubmit>
+      </QuestionnaireActions>
+    </QuestionnaireRoot>
   )
 }

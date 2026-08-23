@@ -15,7 +15,6 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { Toaster } from "~/registry/ui/toast"
 
 const items = [
   {
@@ -40,7 +39,6 @@ export default function QuestionnaireShortcuts() {
 
   return (
     <div class="relative mx-auto flex h-full w-full max-w-md flex-col">
-      <Toaster />
       <NativeSelect
         aria-label="Shortcut style"
         class="absolute end-0 top-0"

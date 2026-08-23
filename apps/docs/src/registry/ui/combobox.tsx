@@ -445,5 +445,7 @@ export {
   ComboboxSection,
   ComboboxSectionLabel,
   ComboboxSeparator,
-  ComboboxTrigger
+  ComboboxTrigger,
+  useComboboxRootContext,
+  useComboboxSelectionContext
 }
