@@ -1,5 +1,16 @@
 # 2026-09-07
 
+Preserved exact command and highlighted code-block markup to prevent formatting and hydration differences in the docs. Added a hydrated registry button to the MDX component showcase and updated Kobalte to the compatible alpha release.
+
+## Affected files
+
+- `apps/docs/src/components/code-block-command.astro`
+- `apps/docs/src/components/docs/pre.astro`
+- `apps/docs/src/components/test-button.tsx`
+- `apps/docs/src/content/docs/mdx-components.mdx`
+
+# 2026-09-07
+
 Added the initial Solid UI component registry with schemas, dependency metadata, shared utilities, a responsive mobile hook, and a broad set of Kobalte-based UI components. Updated the docs workspace to consume the registry through the new source alias, added Solid 2 compatibility adjustments for Lucide icons, and standardized TypeScript and Astro formatting across the repository.
 
 ## Affected files

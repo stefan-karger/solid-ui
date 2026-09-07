@@ -8,5 +8,6 @@ minimumReleaseAgeExclude:
   - "@solidjs/web@2.0.0-rc.6"
   - solid-js@2.0.0-rc.6
   - astro@7.3.1
+  - "@kobalte/core@2.0.0-alpha.2"
 patchedDependencies:
   lucide-solid@1.41.0: patches/lucide-solid@1.41.0.patch

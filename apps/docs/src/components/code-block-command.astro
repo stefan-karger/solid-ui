@@ -84,14 +84,8 @@ const instanceId = `code-block-command-${randomUUID()}`
             role="tabpanel"
             tabindex="0"
           >
-            <pre class="px-4 py-3.5">
-              <code
-                class="relative font-mono text-sm leading-none text-foreground"
-                data-language="bash"
-              >
-                {commands[packageManager]}
-              </code>
-            </pre>
+            {/* prettier-ignore */}
+            <pre class="px-4 py-3.5"><code class="relative block font-mono text-sm leading-none text-foreground" data-language="bash" set:text={commands[packageManager]} /></pre>
           </div>
         )
       })
