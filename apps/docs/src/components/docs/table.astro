@@ -1,18 +1,18 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import { cn } from "@/lib/utils";
+import { cn } from "~/lib/utils"
 
-type Props = HTMLAttributes<"table">;
+type Props = HTMLAttributes<"table">
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...props } = Astro.props
 ---
 
 <div class="no-scrollbar my-6 w-full overflow-y-auto rounded-xl border">
   <table
     class={cn(
       "relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0",
-      className,
+      className
     )}
     {...props}
   >

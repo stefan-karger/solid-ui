@@ -1,17 +1,17 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import { cn } from "@/lib/utils";
+import { cn } from "~/lib/utils"
 
-type Props = HTMLAttributes<"td">;
+type Props = HTMLAttributes<"td">
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...props } = Astro.props
 ---
 
 <td
   class={cn(
     "px-4 py-2 text-left whitespace-nowrap [[align=center]]:text-center [[align=right]]:text-right",
-    className,
+    className
   )}
   {...props}
 >

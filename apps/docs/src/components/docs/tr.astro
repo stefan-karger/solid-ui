@@ -1,11 +1,11 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import { cn } from "@/lib/utils";
+import { cn } from "~/lib/utils"
 
-type Props = HTMLAttributes<"tr">;
+type Props = HTMLAttributes<"tr">
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...props } = Astro.props
 ---
 
 <tr class={cn("m-0 border-b", className)} {...props}>

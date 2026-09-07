@@ -1,26 +1,26 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import { cn } from "@/lib/utils";
+import { cn } from "~/lib/utils"
 
-type Props = HTMLAttributes<"h2">;
+type Props = HTMLAttributes<"h2">
 
-const { class: className, id, ...props } = Astro.props;
-const slotContent = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+const { class: className, id, ...props } = Astro.props
+const slotContent = Astro.slots.has("default") ? await Astro.slots.render("default") : ""
 const generatedId = slotContent
   .replace(/<[^>]+>/g, "")
   .replace(/ /g, "-")
   .replace(/'/g, "")
   .replace(/\?/g, "")
-  .toLowerCase();
-const headingId = id || generatedId || undefined;
+  .toLowerCase()
+const headingId = id || generatedId || undefined
 ---
 
 <h2
   id={headingId}
   class={cn(
     "mt-10 scroll-m-28 font-heading text-xl font-medium tracking-tight first:mt-0 lg:mt-12 [&+h3]:mt-6! [&+p]:mt-4! [&+.steps]:mt-0! [&+.steps>h3]:mt-4! [&+]*:[code]:text-xl",
-    className,
+    className
   )}
   {...props}
 >

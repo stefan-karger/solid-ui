@@ -1,12 +1,12 @@
 ---
 // oxlint-disable-next-line import/no-unassigned-import
-import "@/styles/global.css";
+import "~/styles/global.css"
 
 type Props = {
-  title?: string;
-};
+  title?: string
+}
 
-const { title = "Solid UI" } = Astro.props;
+const { title = "Solid UI" } = Astro.props
 ---
 
 <!doctype html>
@@ -24,10 +24,10 @@ const { title = "Solid UI" } = Astro.props;
     </main>
 
     <script>
-      import { initializeCopyButtons } from "@/lib/copy-buttons";
+      import { initializeCopyButtons } from "~/lib/copy-buttons"
 
-      initializeCopyButtons();
-      document.addEventListener("astro:page-load", initializeCopyButtons);
+      initializeCopyButtons()
+      document.addEventListener("astro:page-load", initializeCopyButtons)
     </script>
   </body>
 </html>

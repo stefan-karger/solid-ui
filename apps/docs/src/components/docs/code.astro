@@ -1,24 +1,19 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import CopyButton from "@/components/copy-button.astro";
-import { cn } from "@/lib/utils";
+import CopyButton from "~/components/copy-button.astro"
+import { cn } from "~/lib/utils"
 
 type Props = HTMLAttributes<"code"> & {
-  __raw__?: string;
-  __src__?: string;
-};
+  __raw__?: string
+  __src__?: string
+}
 
-const {
-  class: className,
-  __raw__: code,
-  __src__: src,
-  ...props
-} = Astro.props;
+const { class: className, __raw__: code, __src__: src, ...props } = Astro.props
 
-const hasRawCode = Boolean(code);
-const isInline = !hasRawCode;
-const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim() : "";
+const hasRawCode = Boolean(code)
+const isInline = !hasRawCode
+const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim() : ""
 ---
 
 {
@@ -26,7 +21,7 @@ const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim(
     <code
       class={cn(
         "relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
-        className,
+        className
       )}
       {...props}
     >

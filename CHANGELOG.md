@@ -1,5 +1,25 @@
 # 2026-09-07
 
+Added the initial Solid UI component registry with schemas, dependency metadata, shared utilities, a responsive mobile hook, and a broad set of Kobalte-based UI components. Updated the docs workspace to consume the registry through the new source alias, added Solid 2 compatibility adjustments for Lucide icons, and standardized TypeScript and Astro formatting across the repository.
+
+## Affected files
+
+- `apps/docs/src/components/**/*.astro`
+- `apps/docs/src/components/mdx-components.ts`
+- `apps/docs/src/content.config.ts`
+- `apps/docs/src/content/docs/mdx-components.mdx`
+- `apps/docs/src/layouts/docs-layout.astro`
+- `apps/docs/src/lib/*.ts`
+- `apps/docs/src/pages/docs/[...slug].astro`
+- `apps/docs/src/registry/hooks/*.ts`
+- `apps/docs/src/registry/lib/*.ts`
+- `apps/docs/src/registry/ui/*.tsx`
+- `apps/docs/src/registry/index.ts`
+- `apps/docs/src/registry/schema.ts`
+- `packages/astro-solid2/src/*.ts`
+
+# 2026-09-07
+
 Removed the end-to-end suite and the counter fixtures now that the Astro Solid 2 integration is stable. Replaced the hydration playground at the root route with a minimal Hello World page.
 
 ## Affected files

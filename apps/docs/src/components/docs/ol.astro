@@ -1,11 +1,11 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from "astro/types"
 
-import { cn } from "@/lib/utils";
+import { cn } from "~/lib/utils"
 
-type Props = HTMLAttributes<"ol">;
+type Props = HTMLAttributes<"ol">
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...props } = Astro.props
 ---
 
 <ol class={cn("my-6 ml-6 list-decimal", className)} {...props}>

@@ -1,18 +1,19 @@
-import { defineConfig } from "oxfmt";
+import { defineConfig } from "oxfmt"
 
 export default defineConfig({
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
-  semi: true,
+  semi: false,
   singleQuote: false,
-  trailingComma: "all",
+  trailingComma: "none",
   sortImports: true,
   sortPackageJson: {
-    sortScripts: true,
+    sortScripts: true
   },
   sortTailwindcss: {
-    stylesheet: "./apps/docs/src/styles/global.css",
+    functions: ["clsx", "cva", "cn"],
+    stylesheet: "./apps/docs/src/styles/global.css"
   },
   ignorePatterns: [
     "**/*.astro",
@@ -21,6 +22,6 @@ export default defineConfig({
     "**/.astro/**",
     "**/.turbo/**",
     "**/coverage/**",
-    "pnpm-lock.yaml",
-  ],
-});
+    "pnpm-lock.yaml"
+  ]
+})

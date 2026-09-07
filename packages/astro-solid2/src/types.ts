@@ -1,5 +1,5 @@
-import type { SSRResult } from "astro";
+import type { SSRResult } from "astro"
 
 export type RendererContext = {
-  result: SSRResult;
-};
+  result: SSRResult
+}

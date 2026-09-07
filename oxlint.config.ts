@@ -1,4 +1,4 @@
-import { defineConfig } from "oxlint";
+import { defineConfig } from "oxlint"
 
 export default defineConfig({
   categories: {
@@ -8,7 +8,7 @@ export default defineConfig({
     pedantic: "off",
     style: "off",
     restriction: "off",
-    nursery: "off",
+    nursery: "off"
   },
   plugins: ["typescript", "unicorn", "import", "vitest", "oxc"],
   ignorePatterns: [
@@ -16,21 +16,21 @@ export default defineConfig({
     "**/dist/**",
     "**/.astro/**",
     "**/.turbo/**",
-    "**/coverage/**",
+    "**/coverage/**"
   ],
   overrides: [
     {
       files: ["**/*.test.{ts,tsx}"],
       env: {
         browser: true,
-        node: true,
-      },
+        node: true
+      }
     },
     {
       files: ["**/*.astro"],
       rules: {
-        "no-unused-vars": "off",
-      },
-    },
-  ],
-});
+        "no-unused-vars": "off"
+      }
+    }
+  ]
+})

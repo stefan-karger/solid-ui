@@ -1,15 +1,15 @@
 ---
-import { randomUUID } from "node:crypto";
+import { randomUUID } from "node:crypto"
 
-const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const;
-const DEFAULT_PACKAGE_MANAGER = "pnpm";
+const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const
+const DEFAULT_PACKAGE_MANAGER = "pnpm"
 
-type PackageManager = (typeof PACKAGE_MANAGERS)[number];
+type PackageManager = (typeof PACKAGE_MANAGERS)[number]
 
-type Props = Record<PackageManager, string>;
+type Props = Record<PackageManager, string>
 
-const commands = Astro.props;
-const instanceId = `code-block-command-${randomUUID()}`;
+const commands = Astro.props
+const instanceId = `code-block-command-${randomUUID()}`
 ---
 
 <div
@@ -40,9 +40,9 @@ const instanceId = `code-block-command-${randomUUID()}`;
     <div aria-label="Package manager" class="flex items-center" role="tablist">
       {
         PACKAGE_MANAGERS.map((packageManager) => {
-          const isActive = packageManager === DEFAULT_PACKAGE_MANAGER;
-          const tabId = `${instanceId}-${packageManager}-tab`;
-          const panelId = `${instanceId}-${packageManager}-panel`;
+          const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
+          const tabId = `${instanceId}-${packageManager}-tab`
+          const panelId = `${instanceId}-${packageManager}-panel`
 
           return (
             <button
@@ -59,7 +59,7 @@ const instanceId = `code-block-command-${randomUUID()}`;
             >
               {packageManager}
             </button>
-          );
+          )
         })
       }
     </div>
@@ -68,9 +68,9 @@ const instanceId = `code-block-command-${randomUUID()}`;
   <div class="no-scrollbar overflow-x-auto">
     {
       PACKAGE_MANAGERS.map((packageManager) => {
-        const isActive = packageManager === DEFAULT_PACKAGE_MANAGER;
-        const tabId = `${instanceId}-${packageManager}-tab`;
-        const panelId = `${instanceId}-${packageManager}-panel`;
+        const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
+        const tabId = `${instanceId}-${packageManager}-tab`
+        const panelId = `${instanceId}-${packageManager}-panel`
 
         return (
           <div
@@ -84,9 +84,16 @@ const instanceId = `code-block-command-${randomUUID()}`;
             role="tabpanel"
             tabindex="0"
           >
-            <pre class="px-4 py-3.5"><code class="relative font-mono text-sm leading-none text-foreground" data-language="bash">{commands[packageManager]}</code></pre>
+            <pre class="px-4 py-3.5">
+              <code
+                class="relative font-mono text-sm leading-none text-foreground"
+                data-language="bash"
+              >
+                {commands[packageManager]}
+              </code>
+            </pre>
           </div>
-        );
+        )
       })
     }
   </div>
@@ -130,172 +137,168 @@ const instanceId = `code-block-command-${randomUUID()}`;
 </div>
 
 <script>
-  import { copyToClipboard } from "@/lib/clipboard";
+  import { copyToClipboard } from "~/lib/clipboard"
 
-  const STORAGE_KEY = "solid-ui-package-manager";
-  const CHANGE_EVENT = "solid-ui:package-manager-change";
-  const DEFAULT_PACKAGE_MANAGER = "pnpm";
-  type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
+  const STORAGE_KEY = "solid-ui-package-manager"
+  const CHANGE_EVENT = "solid-ui:package-manager-change"
+  const DEFAULT_PACKAGE_MANAGER = "pnpm"
+  type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
-  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set(["pnpm", "npm", "yarn", "bun"]);
-  const copyOperationIds = new WeakMap<HTMLButtonElement, number>();
-  const copyResetTimers = new WeakMap<HTMLButtonElement, number>();
+  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set(["pnpm", "npm", "yarn", "bun"])
+  const copyOperationIds = new WeakMap<HTMLButtonElement, number>()
+  const copyResetTimers = new WeakMap<HTMLButtonElement, number>()
 
   function isPackageManager(value: string | undefined): value is PackageManager {
-    return value !== undefined && PACKAGE_MANAGERS.has(value);
+    return value !== undefined && PACKAGE_MANAGERS.has(value)
   }
 
   function nextCopyOperation(copyButton: HTMLButtonElement) {
-    const operationId = (copyOperationIds.get(copyButton) ?? 0) + 1;
-    copyOperationIds.set(copyButton, operationId);
-    return operationId;
+    const operationId = (copyOperationIds.get(copyButton) ?? 0) + 1
+    copyOperationIds.set(copyButton, operationId)
+    return operationId
   }
 
   function resetCopyFeedback(root: HTMLElement) {
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]");
-    if (!copyButton) return;
+    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
+    if (!copyButton) return
 
-    nextCopyOperation(copyButton);
+    nextCopyOperation(copyButton)
 
-    const resetTimer = copyResetTimers.get(copyButton);
-    if (resetTimer !== undefined) window.clearTimeout(resetTimer);
-    copyResetTimers.delete(copyButton);
+    const resetTimer = copyResetTimers.get(copyButton)
+    if (resetTimer !== undefined) window.clearTimeout(resetTimer)
+    copyResetTimers.delete(copyButton)
 
-    delete copyButton.dataset.copied;
-    copyButton.setAttribute("aria-label", "Copy command");
-    root.querySelector<SVGElement>("[data-copy-icon]")?.classList.remove("hidden");
-    root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden");
+    delete copyButton.dataset.copied
+    copyButton.setAttribute("aria-label", "Copy command")
+    root.querySelector<SVGElement>("[data-copy-icon]")?.classList.remove("hidden")
+    root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden")
 
-    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]");
-    if (copyStatus) copyStatus.textContent = "";
+    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
+    if (copyStatus) copyStatus.textContent = ""
   }
 
-  function setPackageManager(
-    root: HTMLElement,
-    packageManager: PackageManager,
-    focus = false,
-  ) {
-    if (root.dataset.packageManager !== packageManager) resetCopyFeedback(root);
+  function setPackageManager(root: HTMLElement, packageManager: PackageManager, focus = false) {
+    if (root.dataset.packageManager !== packageManager) resetCopyFeedback(root)
 
-    root.dataset.packageManager = packageManager;
+    root.dataset.packageManager = packageManager
 
     for (const tab of root.querySelectorAll<HTMLElement>("[data-command-tab]")) {
-      const isActive = tab.dataset.packageManager === packageManager;
-      tab.dataset.state = isActive ? "active" : "inactive";
-      tab.setAttribute("aria-selected", String(isActive));
-      tab.tabIndex = isActive ? 0 : -1;
-      if (isActive && focus) tab.focus();
+      const isActive = tab.dataset.packageManager === packageManager
+      tab.dataset.state = isActive ? "active" : "inactive"
+      tab.setAttribute("aria-selected", String(isActive))
+      tab.tabIndex = isActive ? 0 : -1
+      if (isActive && focus) tab.focus()
     }
 
     for (const panel of root.querySelectorAll<HTMLElement>("[data-command-panel]")) {
-      const isActive = panel.dataset.packageManager === packageManager;
-      panel.dataset.state = isActive ? "active" : "inactive";
-      panel.hidden = !isActive;
+      const isActive = panel.dataset.packageManager === packageManager
+      panel.dataset.state = isActive ? "active" : "inactive"
+      panel.hidden = !isActive
     }
   }
 
   function persistPackageManager(packageManager: PackageManager) {
     try {
-      localStorage.setItem(STORAGE_KEY, packageManager);
+      localStorage.setItem(STORAGE_KEY, packageManager)
     } catch {
       // Storage may be disabled; the command block remains fully functional.
     }
 
-    window.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: packageManager }));
+    window.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: packageManager }))
   }
 
   function getStoredPackageManager() {
     try {
-      const storedValue = localStorage.getItem(STORAGE_KEY) ?? undefined;
-      return isPackageManager(storedValue) ? storedValue : undefined;
+      const storedValue = localStorage.getItem(STORAGE_KEY) ?? undefined
+      return isPackageManager(storedValue) ? storedValue : undefined
     } catch {
-      return undefined;
+      return undefined
     }
   }
 
   function synchronizePackageManager(packageManager: PackageManager) {
     for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
-      setPackageManager(root, packageManager);
+      setPackageManager(root, packageManager)
     }
   }
 
   function handlePackageManagerChange(event: Event) {
-    const packageManager = (event as CustomEvent<unknown>).detail;
+    const packageManager = (event as CustomEvent<unknown>).detail
     if (typeof packageManager === "string" && isPackageManager(packageManager)) {
-      synchronizePackageManager(packageManager);
+      synchronizePackageManager(packageManager)
     }
   }
 
   function initializeCommandBlock(root: HTMLElement) {
-    if (root.dataset.initialized === "true") return;
-    root.dataset.initialized = "true";
+    if (root.dataset.initialized === "true") return
+    root.dataset.initialized = "true"
 
-    const tabs = [...root.querySelectorAll<HTMLElement>("[data-command-tab]")];
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]");
+    const tabs = [...root.querySelectorAll<HTMLElement>("[data-command-tab]")]
+    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
 
-    setPackageManager(root, getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER);
+    setPackageManager(root, getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER)
 
     for (const [index, tab] of tabs.entries()) {
       tab.addEventListener("click", () => {
-        const packageManager = tab.dataset.packageManager;
-        if (!isPackageManager(packageManager)) return;
-        setPackageManager(root, packageManager);
-        persistPackageManager(packageManager);
-      });
+        const packageManager = tab.dataset.packageManager
+        if (!isPackageManager(packageManager)) return
+        setPackageManager(root, packageManager)
+        persistPackageManager(packageManager)
+      })
 
       tab.addEventListener("keydown", (event) => {
-        let nextIndex: number | undefined;
-        if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
-        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === "Home") nextIndex = 0;
-        if (event.key === "End") nextIndex = tabs.length - 1;
-        if (nextIndex === undefined) return;
+        let nextIndex: number | undefined
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length
+        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length
+        if (event.key === "Home") nextIndex = 0
+        if (event.key === "End") nextIndex = tabs.length - 1
+        if (nextIndex === undefined) return
 
-        event.preventDefault();
-        const packageManager = tabs[nextIndex]?.dataset.packageManager;
-        if (!isPackageManager(packageManager)) return;
-        setPackageManager(root, packageManager, true);
-        persistPackageManager(packageManager);
-      });
+        event.preventDefault()
+        const packageManager = tabs[nextIndex]?.dataset.packageManager
+        if (!isPackageManager(packageManager)) return
+        setPackageManager(root, packageManager, true)
+        persistPackageManager(packageManager)
+      })
     }
 
     copyButton?.addEventListener("click", async () => {
       const activePanel = root.querySelector<HTMLElement>(
-        `[data-command-panel][data-package-manager="${root.dataset.packageManager}"]`,
-      );
-      const command = activePanel?.dataset.command;
-      if (!command) return;
+        `[data-command-panel][data-package-manager="${root.dataset.packageManager}"]`
+      )
+      const command = activePanel?.dataset.command
+      if (!command) return
 
-      const operationId = nextCopyOperation(copyButton);
+      const operationId = nextCopyOperation(copyButton)
       if (!(await copyToClipboard(command)) || copyOperationIds.get(copyButton) !== operationId) {
-        return;
+        return
       }
 
-      copyButton.dataset.copied = "true";
-      copyButton.setAttribute("aria-label", "Command copied");
-      root.querySelector<SVGElement>("[data-copy-icon]")?.classList.add("hidden");
-      root.querySelector<SVGElement>("[data-check-icon]")?.classList.remove("hidden");
+      copyButton.dataset.copied = "true"
+      copyButton.setAttribute("aria-label", "Command copied")
+      root.querySelector<SVGElement>("[data-copy-icon]")?.classList.add("hidden")
+      root.querySelector<SVGElement>("[data-check-icon]")?.classList.remove("hidden")
 
-      const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]");
-      if (copyStatus) copyStatus.textContent = "Command copied";
+      const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
+      if (copyStatus) copyStatus.textContent = "Command copied"
 
-      const previousResetTimer = copyResetTimers.get(copyButton);
-      if (previousResetTimer !== undefined) window.clearTimeout(previousResetTimer);
+      const previousResetTimer = copyResetTimers.get(copyButton)
+      if (previousResetTimer !== undefined) window.clearTimeout(previousResetTimer)
 
       copyResetTimers.set(
         copyButton,
-        window.setTimeout(() => resetCopyFeedback(root), 2000),
-      );
-    });
+        window.setTimeout(() => resetCopyFeedback(root), 2000)
+      )
+    })
   }
 
   function initializeCommandBlocks() {
     for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
-      initializeCommandBlock(root);
+      initializeCommandBlock(root)
     }
   }
 
-  window.addEventListener(CHANGE_EVENT, handlePackageManagerChange);
-  initializeCommandBlocks();
-  document.addEventListener("astro:page-load", initializeCommandBlocks);
+  window.addEventListener(CHANGE_EVENT, handlePackageManagerChange)
+  initializeCommandBlocks()
+  document.addEventListener("astro:page-load", initializeCommandBlocks)
 </script>

@@ -1,0 +1,88 @@
+diff --git a/dist/source/Icon.jsx b/dist/source/Icon.jsx
+index cc1bc2304e09824c461fec3c4454ec4fdd7681ad..9f48349fb9d36467e17b2774da6dff3c4188a9d7 100644
+--- a/dist/source/Icon.jsx
++++ b/dist/source/Icon.jsx
+@@ -6,8 +6,8 @@
+ */
+ 
+ // src/Icon.tsx
+-import { For, splitProps, useContext } from "solid-js";
+-import { Dynamic } from "solid-js/web";
++import { For, omit, useContext } from "solid-js";
++import { Dynamic } from "@solidjs/web";
+ import defaultAttributes from "./defaultAttributes";
+ import { LucideContext } from "./context";
+ 
+@@ -43,7 +43,8 @@ var toPascalCase = (string) => {
+ 
+ // src/Icon.tsx
+ var Icon = (props) => {
+-  const [localProps, rest] = splitProps(props, [
++  const localProps = props;
++  const rest = omit(props,
+     "color",
+     "size",
+     "strokeWidth",
+@@ -52,7 +53,7 @@ var Icon = (props) => {
+     "name",
+     "iconNode",
+     "absoluteStrokeWidth"
+-  ]);
++  );
+   const globalProps = useContext(LucideContext);
+   return <svg
+     {...defaultAttributes}
+diff --git a/dist/source/context.jsx b/dist/source/context.jsx
+index 9c8935a68018d64f0ceead94d626fc189fd9c43d..043f9cc2f9f3ac1d96aac5cafcabeae84104398b 100644
+--- a/dist/source/context.jsx
++++ b/dist/source/context.jsx
+@@ -6,7 +6,7 @@
+ */
+ 
+ // src/context.tsx
+-import { createContext, splitProps } from "solid-js";
++import { createContext, omit } from "solid-js";
+ var LucideContext = createContext({
+   size: 24,
+   color: "currentColor",
+@@ -15,14 +15,8 @@ var LucideContext = createContext({
+   class: ""
+ });
+ function LucideProvider(props) {
+-  const [value, rest] = splitProps(props, [
+-    "size",
+-    "color",
+-    "strokeWidth",
+-    "absoluteStrokeWidth",
+-    "class"
+-  ]);
+-  return <LucideContext.Provider value={value}>{rest.children}</LucideContext.Provider>;
++  const value = omit(props, "children");
++  return <LucideContext value={value}>{props.children}</LucideContext>;
+ }
+ export {
+   LucideContext,
+diff --git a/dist/types/types.d.ts b/dist/types/types.d.ts
+index 0753bd8790f96c6525c0dd88f90d515811696446..ea36fe22fa7646ef7d63d3937abb88bc9f9a714d 100644
+--- a/dist/types/types.d.ts
++++ b/dist/types/types.d.ts
+@@ -1,4 +1,4 @@
+-import { JSX } from 'solid-js/jsx-runtime';
++import { JSX } from '@solidjs/web';
+ export type IconNode = [elementName: keyof JSX.IntrinsicElements, attrs: Record<string, string>][];
+ export type SVGAttributes = Partial<JSX.SvgSVGAttributes<SVGSVGElement>>;
+ export interface LucideProps extends SVGAttributes {
+diff --git a/package.json b/package.json
+index 81e2f482ad7dc30c937b45c760b2c76f08e7fecb..8dfc8385ee34e95fdde2e0bdbbc6541db022e3e4 100644
+--- a/package.json
++++ b/package.json
+@@ -74,7 +74,8 @@
+     "@lucide/shared": "1.0.0"
+   },
+   "peerDependencies": {
+-    "solid-js": "^1.4.7"
++    "@solidjs/web": "^2.0.0-rc.0",
++    "solid-js": "^2.0.0-rc.0"
+   },
+   "scripts": {
+     "build": "pnpm clean && pnpm copy:license && pnpm build:icons && pnpm build:bundle",
