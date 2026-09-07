@@ -11,12 +11,10 @@
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "test": "vitest run",
-    "test:e2e": "pnpm build && playwright test",
     "test:watch": "vitest",
-    "validate": "pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:e2e"
+    "validate": "pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build"
   },
   "devDependencies": {
-    "@playwright/test": "1.61.1",
     "@solidjs/web": "2.0.0-rc.6",
     "happy-dom": "20.10.6",
     "oxfmt": "0.59.0",

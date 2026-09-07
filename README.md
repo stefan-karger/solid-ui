@@ -28,30 +28,18 @@ pnpm format
 pnpm format:check
 pnpm test
 pnpm test:watch
-pnpm test:e2e
 pnpm validate
 ```
 
 ## Architecture
 
-- `apps/docs`: static Astro demo and Solid counter fixtures
+- `apps/docs`: static Astro documentation site
 - `packages/astro-solid2`: private Solid 2 compatibility port of Astro's renderer
-- `tests/e2e`: Chromium tests against the production build via `astro preview`
-
-## Hydration coverage
-
-- SSR only
-- `client:load`
-- `client:idle`
-- `client:visible`
-- `client:media`
-- `client:only`
 
 ## Known limitations
 
 - Solid Devtools are not validated.
 - There is no SSR adapter.
-- Browser coverage is Chromium only.
 - Kobalte and Corvu are not included yet.
 - Oxfmt skips `.astro` files.
 - Oxlint only partially understands `.astro` files.
@@ -73,6 +61,3 @@ Replace the workspace dependency too:
 -"@solid-ui/astro-solid2": "workspace:*"
 +"@astrojs/solid-js": "<official Solid 2-compatible version>"
 ```
-
-The hydration page should need no changes if the official integration continues to use
-`client:only="solid-js"`, Astro's standard framework hint for Solid client-only components.

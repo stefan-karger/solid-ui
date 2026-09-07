@@ -21,8 +21,6 @@ export default defineConfig({
     "**/.astro/**",
     "**/.turbo/**",
     "**/coverage/**",
-    "**/playwright-report/**",
-    "**/test-results/**",
     "pnpm-lock.yaml",
   ],
 });

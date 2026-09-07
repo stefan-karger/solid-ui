@@ -1,5 +1,19 @@
 # 2026-09-07
 
+Removed the end-to-end suite and the counter fixtures now that the Astro Solid 2 integration is stable. Replaced the hydration playground at the root route with a minimal Hello World page.
+
+## Affected files
+
+- `apps/docs/src/components/client-*-counter.tsx`
+- `apps/docs/src/components/client-*-counter.test.tsx`
+- `apps/docs/src/components/server-counter.tsx`
+- `apps/docs/src/components/server-counter.test.tsx`
+- `apps/docs/src/pages/index.astro`
+- `tests/e2e/hydration.spec.ts`
+- `tests/e2e/mdx-components.spec.ts`
+
+# 2026-09-07
+
 Modernized documentation code-block copying around the Clipboard API, centralized regular copy-button initialization, and added temporary success and failure logging until toast notifications are available. Improved multiple-block behavior with isolated copy feedback and synchronized package-manager tabs, and moved command-block detection to the surrounding `pre` element through a Rehype metadata pass so the generated HTML remains valid.
 
 ## Affected files

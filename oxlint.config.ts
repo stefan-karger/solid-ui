@@ -17,12 +17,10 @@ export default defineConfig({
     "**/.astro/**",
     "**/.turbo/**",
     "**/coverage/**",
-    "**/playwright-report/**",
-    "**/test-results/**",
   ],
   overrides: [
     {
-      files: ["**/*.test.{ts,tsx}", "tests/**/*.ts"],
+      files: ["**/*.test.{ts,tsx}"],
       env: {
         browser: true,
         node: true,

@@ -15,13 +15,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "playwright-report",
-    "test-results",
-    ".astro",
-    ".turbo"
-  ]
+  "exclude": ["node_modules", "dist", "coverage", ".astro", ".turbo"]
 }

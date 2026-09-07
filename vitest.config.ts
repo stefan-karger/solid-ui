@@ -16,7 +16,7 @@ export default defineConfig({
   test: {
     environment: "happy-dom",
     include: ["apps/**/*.test.{ts,tsx}", "packages/**/*.test.{ts,tsx}"],
-    exclude: ["tests/e2e/**", "**/node_modules/**", "**/dist/**"],
+    exclude: ["**/node_modules/**", "**/dist/**"],
     server: {
       deps: {
         inline: ["solid-js", "@solidjs/web", "@solidjs/signals"],
