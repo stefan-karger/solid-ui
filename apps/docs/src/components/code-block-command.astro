@@ -130,16 +130,52 @@ const instanceId = `code-block-command-${randomUUID()}`;
 </div>
 
 <script>
+  import { copyToClipboard } from "@/lib/clipboard";
+
   const STORAGE_KEY = "solid-ui-package-manager";
   const CHANGE_EVENT = "solid-ui:package-manager-change";
-  const PACKAGE_MANAGERS = new Set(["pnpm", "npm", "yarn", "bun"]);
+  const DEFAULT_PACKAGE_MANAGER = "pnpm";
+  type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 
-  function isPackageManager(value: string | undefined): value is string {
+  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set(["pnpm", "npm", "yarn", "bun"]);
+  const copyOperationIds = new WeakMap<HTMLButtonElement, number>();
+  const copyResetTimers = new WeakMap<HTMLButtonElement, number>();
+
+  function isPackageManager(value: string | undefined): value is PackageManager {
     return value !== undefined && PACKAGE_MANAGERS.has(value);
   }
 
-  function setPackageManager(root: HTMLElement, packageManager: string, focus = false) {
-    if (!isPackageManager(packageManager)) return;
+  function nextCopyOperation(copyButton: HTMLButtonElement) {
+    const operationId = (copyOperationIds.get(copyButton) ?? 0) + 1;
+    copyOperationIds.set(copyButton, operationId);
+    return operationId;
+  }
+
+  function resetCopyFeedback(root: HTMLElement) {
+    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]");
+    if (!copyButton) return;
+
+    nextCopyOperation(copyButton);
+
+    const resetTimer = copyResetTimers.get(copyButton);
+    if (resetTimer !== undefined) window.clearTimeout(resetTimer);
+    copyResetTimers.delete(copyButton);
+
+    delete copyButton.dataset.copied;
+    copyButton.setAttribute("aria-label", "Copy command");
+    root.querySelector<SVGElement>("[data-copy-icon]")?.classList.remove("hidden");
+    root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden");
+
+    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]");
+    if (copyStatus) copyStatus.textContent = "";
+  }
+
+  function setPackageManager(
+    root: HTMLElement,
+    packageManager: PackageManager,
+    focus = false,
+  ) {
+    if (root.dataset.packageManager !== packageManager) resetCopyFeedback(root);
 
     root.dataset.packageManager = packageManager;
 
@@ -158,7 +194,7 @@ const instanceId = `code-block-command-${randomUUID()}`;
     }
   }
 
-  function persistPackageManager(packageManager: string) {
+  function persistPackageManager(packageManager: PackageManager) {
     try {
       localStorage.setItem(STORAGE_KEY, packageManager);
     } catch {
@@ -177,36 +213,17 @@ const instanceId = `code-block-command-${randomUUID()}`;
     }
   }
 
-  function legacyCopy(value: string) {
-    const textArea = document.createElement("textarea");
-    textArea.value = value;
-    textArea.readOnly = true;
-    textArea.style.position = "fixed";
-    textArea.style.opacity = "0";
-    document.body.append(textArea);
-    textArea.select();
-
-    let copied = false;
-    try {
-      const execCommand = Reflect.get(document, "execCommand");
-      copied =
-        typeof execCommand === "function" && Reflect.apply(execCommand, document, ["copy"]);
-    } finally {
-      textArea.remove();
+  function synchronizePackageManager(packageManager: PackageManager) {
+    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+      setPackageManager(root, packageManager);
     }
-    return copied;
   }
 
-  async function copy(value: string) {
-    if (navigator.clipboard?.writeText) {
-      try {
-        await navigator.clipboard.writeText(value);
-        return true;
-      } catch {
-        return legacyCopy(value);
-      }
+  function handlePackageManagerChange(event: Event) {
+    const packageManager = (event as CustomEvent<unknown>).detail;
+    if (typeof packageManager === "string" && isPackageManager(packageManager)) {
+      synchronizePackageManager(packageManager);
     }
-    return legacyCopy(value);
   }
 
   function initializeCommandBlock(root: HTMLElement) {
@@ -215,12 +232,8 @@ const instanceId = `code-block-command-${randomUUID()}`;
 
     const tabs = [...root.querySelectorAll<HTMLElement>("[data-command-tab]")];
     const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]");
-    const copyIcon = root.querySelector<SVGElement>("[data-copy-icon]");
-    const checkIcon = root.querySelector<SVGElement>("[data-check-icon]");
-    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]");
-    let copyResetTimer: number | undefined;
 
-    setPackageManager(root, getStoredPackageManager() ?? "pnpm");
+    setPackageManager(root, getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER);
 
     for (const [index, tab] of tabs.entries()) {
       tab.addEventListener("click", () => {
@@ -246,36 +259,43 @@ const instanceId = `code-block-command-${randomUUID()}`;
       });
     }
 
-    window.addEventListener(CHANGE_EVENT, (event) => {
-      const packageManager = (event as CustomEvent<unknown>).detail;
-      if (typeof packageManager === "string") setPackageManager(root, packageManager);
-    });
-
     copyButton?.addEventListener("click", async () => {
       const activePanel = root.querySelector<HTMLElement>(
         `[data-command-panel][data-package-manager="${root.dataset.packageManager}"]`,
       );
       const command = activePanel?.dataset.command;
-      if (!command || !(await copy(command))) return;
+      if (!command) return;
+
+      const operationId = nextCopyOperation(copyButton);
+      if (!(await copyToClipboard(command)) || copyOperationIds.get(copyButton) !== operationId) {
+        return;
+      }
 
       copyButton.dataset.copied = "true";
       copyButton.setAttribute("aria-label", "Command copied");
-      copyIcon?.classList.add("hidden");
-      checkIcon?.classList.remove("hidden");
+      root.querySelector<SVGElement>("[data-copy-icon]")?.classList.add("hidden");
+      root.querySelector<SVGElement>("[data-check-icon]")?.classList.remove("hidden");
+
+      const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]");
       if (copyStatus) copyStatus.textContent = "Command copied";
 
-      window.clearTimeout(copyResetTimer);
-      copyResetTimer = window.setTimeout(() => {
-        delete copyButton.dataset.copied;
-        copyButton.setAttribute("aria-label", "Copy command");
-        copyIcon?.classList.remove("hidden");
-        checkIcon?.classList.add("hidden");
-        if (copyStatus) copyStatus.textContent = "";
-      }, 2000);
+      const previousResetTimer = copyResetTimers.get(copyButton);
+      if (previousResetTimer !== undefined) window.clearTimeout(previousResetTimer);
+
+      copyResetTimers.set(
+        copyButton,
+        window.setTimeout(() => resetCopyFeedback(root), 2000),
+      );
     });
   }
 
-  for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
-    initializeCommandBlock(root);
+  function initializeCommandBlocks() {
+    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+      initializeCommandBlock(root);
+    }
   }
+
+  window.addEventListener(CHANGE_EVENT, handlePackageManagerChange);
+  initializeCommandBlocks();
+  document.addEventListener("astro:page-load", initializeCommandBlocks);
 </script>

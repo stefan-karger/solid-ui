@@ -1,45 +1,24 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-import CodeBlockCommand from "@/components/code-block-command.astro";
 import CopyButton from "@/components/copy-button.astro";
 import { cn } from "@/lib/utils";
 
 type Props = HTMLAttributes<"code"> & {
   __raw__?: string;
   __src__?: string;
-  __npm__?: string;
-  __yarn__?: string;
-  __pnpm__?: string;
-  __bun__?: string;
 };
 
 const {
   class: className,
   __raw__: code,
   __src__: src,
-  __npm__: npm,
-  __yarn__: yarn,
-  __pnpm__: pnpm,
-  __bun__: bun,
   ...props
 } = Astro.props;
 
-const commandProps =
-  npm && yarn && pnpm && bun
-    ? {
-        npm,
-        yarn,
-        pnpm,
-        bun,
-      }
-    : undefined;
-
-const isCommandBlock = Boolean(commandProps);
 const hasRawCode = Boolean(code);
-const isInline = !hasRawCode && !isCommandBlock;
-const blockCodeContent =
-  !isInline && !isCommandBlock ? (await Astro.slots.render("default")).trim() : "";
+const isInline = !hasRawCode;
+const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim() : "";
 ---
 
 {
@@ -53,8 +32,6 @@ const blockCodeContent =
     >
       <slot />
     </code>
-  ) : commandProps ? (
-    <CodeBlockCommand {...commandProps} />
   ) : (
     <>
       {code && <CopyButton value={code} />}

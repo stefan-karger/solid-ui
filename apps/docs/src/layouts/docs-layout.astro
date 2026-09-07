@@ -22,5 +22,12 @@ const { title = "Solid UI" } = Astro.props;
     <main class="min-h-svh">
       <slot />
     </main>
+
+    <script>
+      import { initializeCopyButtons } from "@/lib/copy-buttons";
+
+      initializeCopyButtons();
+      document.addEventListener("astro:page-load", initializeCopyButtons);
+    </script>
   </body>
 </html>

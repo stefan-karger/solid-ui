@@ -1,3 +1,21 @@
+# 2026-09-07
+
+Modernized documentation code-block copying around the Clipboard API, centralized regular copy-button initialization, and added temporary success and failure logging until toast notifications are available. Improved multiple-block behavior with isolated copy feedback and synchronized package-manager tabs, and moved command-block detection to the surrounding `pre` element through a Rehype metadata pass so the generated HTML remains valid.
+
+## Affected files
+
+- `apps/docs/astro.config.ts`
+- `apps/docs/src/components/code-block-command.astro`
+- `apps/docs/src/components/copy-button.astro`
+- `apps/docs/src/components/docs/code.astro`
+- `apps/docs/src/components/docs/pre.astro`
+- `apps/docs/src/content/docs/mdx-components.mdx`
+- `apps/docs/src/layouts/docs-layout.astro`
+- `apps/docs/src/lib/clipboard.ts`
+- `apps/docs/src/lib/command-metadata.ts`
+- `apps/docs/src/lib/copy-buttons.ts`
+- `tests/e2e/mdx-components.spec.ts`
+
 # 2026-09-04
 
 Added an MDX-powered documentation route with custom prose components, syntax highlighting, copy controls, and accessible package-manager command tabs. Expanded the docs design foundation with multiple themes and typography tokens, refreshed the Astro/Solid playground, normalized component filenames, and added end-to-end coverage for the new experience.

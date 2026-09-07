@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { rehypePrettyCode } from "rehype-pretty-code";
 
+import { rehypeCommandMetadata } from "./src/lib/command-metadata";
 import { transformers } from "./src/lib/highlight-code";
 
 export default defineConfig({
@@ -27,6 +28,7 @@ export default defineConfig({
             transformers,
           },
         ],
+        rehypeCommandMetadata,
       ],
     }),
     syntaxHighlight: false,
