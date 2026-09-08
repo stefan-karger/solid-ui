@@ -1,3 +1,14 @@
+# 2026-09-08
+
+Ported all 283 examples supported by the current UI registry, registered them with the docs app, and migrated their SolidJS, Kobalte, DOM, and icon usage to the 2.x-compatible APIs. Added a dependency-grouped compatibility checklist for the seven blocked components and their 50 remaining examples.
+
+## Affected files
+
+- `apps/docs/src/registry/examples/_registry.ts`
+- `apps/docs/src/registry/examples/*.tsx`
+- `apps/docs/src/registry/index.ts`
+- `TODO.md`
+
 # 2026-09-07
 
 Preserved exact command and highlighted code-block markup to prevent formatting and hydration differences in the docs. Added a hydrated registry button to the MDX component showcase and updated Kobalte to the compatible alpha release.
