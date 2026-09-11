@@ -1,0 +1,121 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+component: true
+---
+
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add hover-card
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="hover-card" title="components/ui/hover-card.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/components/ui/hover-card"
+```
+
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>
+    SolidJS - Simple and performant reactivity for building user interfaces.
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Composition
+
+Use the following composition to build a `HoverCard`:
+
+```text
+HoverCard
+├── HoverCardTrigger
+└── HoverCardContent
+```
+
+## Trigger Delays
+
+Use `openDelay` and `closeDelay` on `HoverCard` to control when content opens and closes.
+
+```tsx showLineNumbers
+<HoverCard openDelay={100} closeDelay={200}>
+  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
+
+## Positioning
+
+Use `placement` on `HoverCard` to choose where the content appears.
+
+```tsx showLineNumbers
+<HoverCard placement="left" gutter={8}>
+  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
+
+## Examples
+
+### Basic
+
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
+
+### Sides
+
+<ComponentPreview name="hover-card-sides" previewClassName="h-[22rem]" />
+
+## API Reference
+
+### Core Parts
+
+| Part               | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `HoverCard`        | Root component that manages delays and floating state.    |
+| `HoverCardTrigger` | Interactive trigger that opens content on hover or focus. |
+| `HoverCardContent` | Floating card content rendered inside a portal.           |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/hover-card) documentation for more information.

@@ -1,20 +1,33 @@
 diff --git a/dist/source/Icon.jsx b/dist/source/Icon.jsx
-index cc1bc2304e09824c461fec3c4454ec4fdd7681ad..9f48349fb9d36467e17b2774da6dff3c4188a9d7 100644
+index cc1bc2304e09824c461fec3c4454ec4fdd7681ad..f5da0ed 100644
 --- a/dist/source/Icon.jsx
 +++ b/dist/source/Icon.jsx
-@@ -6,8 +6,8 @@
+@@ -6,8 +6,7 @@
  */
  
  // src/Icon.tsx
 -import { For, splitProps, useContext } from "solid-js";
 -import { Dynamic } from "solid-js/web";
-+import { For, omit, useContext } from "solid-js";
-+import { Dynamic } from "@solidjs/web";
++import { omit, useContext } from "solid-js";
  import defaultAttributes from "./defaultAttributes";
  import { LucideContext } from "./context";
  
-@@ -43,7 +43,8 @@ var toPascalCase = (string) => {
+@@ -41,9 +40,22 @@ var toPascalCase = (string) => {
+   return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+ };
  
++var renderIconNode = (elementName, attrs) => {
++  switch (elementName) {
++    case "circle": return <circle {...attrs} />;
++    case "ellipse": return <ellipse {...attrs} />;
++    case "line": return <line {...attrs} />;
++    case "path": return <path {...attrs} />;
++    case "polygon": return <polygon {...attrs} />;
++    case "polyline": return <polyline {...attrs} />;
++    case "rect": return <rect {...attrs} />;
++  }
++};
++
  // src/Icon.tsx
  var Icon = (props) => {
 -  const [localProps, rest] = splitProps(props, [
@@ -23,7 +36,7 @@ index cc1bc2304e09824c461fec3c4454ec4fdd7681ad..9f48349fb9d36467e17b2774da6dff3c
      "color",
      "size",
      "strokeWidth",
-@@ -52,7 +53,7 @@ var Icon = (props) => {
+@@ -52,7 +64,7 @@ var Icon = (props) => {
      "name",
      "iconNode",
      "absoluteStrokeWidth"
@@ -32,6 +45,22 @@ index cc1bc2304e09824c461fec3c4454ec4fdd7681ad..9f48349fb9d36467e17b2774da6dff3c
    const globalProps = useContext(LucideContext);
    return <svg
      {...defaultAttributes}
+@@ -77,14 +89,7 @@ var Icon = (props) => {
+     aria-hidden={!localProps.children && !hasA11yProp(rest) ? "true" : void 0}
+     {...rest}
+   >
+-      <For each={localProps.iconNode}>
+-        {([elementName, attrs]) => {
+-    return <Dynamic
+-      component={elementName}
+-      {...attrs}
+-    />;
+-  }}
+-      </For>
++      {localProps.iconNode.map(([elementName, attrs]) => renderIconNode(elementName, attrs))}
+     </svg>;
+ };
+ var Icon_default = Icon;
 diff --git a/dist/source/context.jsx b/dist/source/context.jsx
 index 9c8935a68018d64f0ceead94d626fc189fd9c43d..043f9cc2f9f3ac1d96aac5cafcabeae84104398b 100644
 --- a/dist/source/context.jsx

@@ -1,0 +1,156 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+component: true
+---
+
+<ComponentPreview
+  name="accordion-demo"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add accordion
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="accordion" title="components/ui/accordion.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "~/components/ui/accordion"
+```
+
+```tsx showLineNumbers
+<Accordion collapsible defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Composition
+
+Use the following composition to build an `Accordion`:
+
+```text
+Accordion
+└── AccordionItem
+    ├── AccordionTrigger
+    └── AccordionContent
+```
+
+## Examples
+
+### Basic
+
+By default, one item can be open at a time. Add `collapsible` to allow closing the currently open item.
+
+<ComponentPreview
+  name="accordion-basic"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
+/>
+
+### Multiple
+
+Use `type="multiple"` to allow multiple items to be open at the same time.
+
+<ComponentPreview
+  name="accordion-multiple"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-[36rem] md:h-[30rem]"
+/>
+
+### Disabled
+
+Use the `disabled` prop on `AccordionItem` to disable individual items.
+
+<ComponentPreview
+  name="accordion-disabled"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
+/>
+
+### Borders
+
+Add `border` to the `Accordion` and `border-b last:border-b-0` to the `AccordionItem` to add borders to the items.
+
+<ComponentPreview
+  name="accordion-borders"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-96 md:h-80"
+/>
+
+### Card
+
+Wrap the `Accordion` in a `Card` component.
+
+<ComponentPreview
+  name="accordion-card"
+  previewClassName="*:data-[slot=accordion]:max-w-sm h-[32rem] md:h-[28rem]"
+/>
+
+## API Reference
+
+### Core Parts
+
+| Part               | Description                                      |
+| ------------------ | ------------------------------------------------ |
+| `Accordion`        | Root container that manages expanded state.      |
+| `AccordionItem`    | Individual collapsible section in the accordion. |
+| `AccordionTrigger` | Interactive header button for an item.           |
+| `AccordionContent` | Expandable panel content for the active item.    |
+
+### Accordion
+
+| Prop           | Type       |
+| -------------- | ---------- |
+| `collapsible`  | `boolean`  |
+| `multiple`     | `boolean`  |
+| `value`        | `string[]` |
+| `defaultValue` | `string[]` |
+
+### AccordionItem
+
+| Prop       | Type      |
+| ---------- | --------- |
+| `value`    | `string`  |
+| `disabled` | `boolean` |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/accordion#api-reference) documentation for more information.

@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  variant?: "default" | "destructive"
+}
+
+const { class: className, role = "note", variant = "default", ...props } = Astro.props
+---
+
+<div
+  class={cn("group/alert cn-alert", `cn-alert-variant-${variant}`, className)}
+  data-slot="alert"
+  role={role}
+  {...props}
+>
+  <slot />
+</div>

@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"a">
+
+const { class: className, ...props } = Astro.props
+---
+
+<a
+  class={cn(
+    "flex w-full flex-col items-center rounded-2xl bg-surface p-6 text-surface-foreground outline-none transition-colors hover:bg-surface/80 focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:p-10",
+    className
+  )}
+  data-not-typeset
+  {...props}
+>
+  <slot />
+</a>

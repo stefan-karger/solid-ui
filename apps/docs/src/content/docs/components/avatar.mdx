@@ -1,0 +1,198 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+component: true
+---
+
+<ComponentPreview name="avatar-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add avatar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependency:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="avatar" title="components/ui/avatar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
+```
+
+```tsx showLineNumbers
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```
+
+## Composition
+
+Use the following composition to build an `Avatar`:
+
+```text
+Avatar
+├── AvatarImage
+├── AvatarFallback
+└── AvatarBadge
+```
+
+Use the following composition to build an `AvatarGroup`:
+
+```text
+AvatarGroup
+├── Avatar
+│   ├── AvatarImage
+│   └── AvatarFallback
+├── Avatar
+│   ├── AvatarImage
+│   └── AvatarFallback
+└── AvatarGroupCount
+```
+
+## Examples
+
+### Basic
+
+A basic avatar with image and fallback content.
+
+<ComponentPreview name="avatar-basic" />
+
+### Badge
+
+Use `AvatarBadge` to show status indicators.
+
+<ComponentPreview name="avatar-badge" />
+
+Use the `class` prop to customize badge colors and sizing.
+
+```tsx showLineNumbers
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+  <AvatarBadge class="bg-green-600 dark:bg-green-800" />
+</Avatar>
+```
+
+### Badge with Icon
+
+Render icons inside `AvatarBadge`.
+
+<ComponentPreview name="avatar-badge-icon" />
+
+### Avatar Group
+
+Use `AvatarGroup` to overlap multiple avatars.
+
+<ComponentPreview name="avatar-group" />
+
+### Avatar Group Count
+
+Use `AvatarGroupCount` to display extra-member counts.
+
+<ComponentPreview name="avatar-group-count" />
+
+### Avatar Group with Icon
+
+You can also render icons inside `AvatarGroupCount`.
+
+<ComponentPreview name="avatar-group-count-icon" />
+
+### Sizes
+
+Use the `size` prop on `Avatar` to change the avatar size.
+
+<ComponentPreview name="avatar-size" />
+
+### Dropdown
+
+Use `Avatar` as the trigger for a dropdown menu.
+
+<ComponentPreview name="avatar-dropdown" />
+
+## API Reference
+
+### Avatar
+
+Root container for avatar image and fallback content.
+
+| Prop    | Type                        | Default     |
+| ------- | --------------------------- | ----------- |
+| `size`  | `"default" \| "sm" \| "lg"` | `"default"` |
+| `class` | `string`                    | -           |
+
+### AvatarImage
+
+Image element displayed when `src` loads successfully.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `src`   | `string` | -       |
+| `alt`   | `string` | -       |
+| `class` | `string` | -       |
+
+### AvatarFallback
+
+Fallback element rendered when the image is unavailable.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarBadge
+
+Badge indicator positioned on top of the avatar.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarGroup
+
+Container for overlapping avatars.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarGroupCount
+
+Count indicator for additional avatars in a group.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/image) documentation for more information.

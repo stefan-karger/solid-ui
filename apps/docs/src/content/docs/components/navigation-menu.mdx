@@ -1,0 +1,143 @@
+---
+title: Navigation Menu
+description: A collection of links for navigating websites.
+component: true
+---
+
+<ComponentPreview name="navigation-menu-demo" previewClassName="h-96" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add navigation-menu
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="navigation-menu" title="components/ui/navigation-menu.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from "~/components/ui/navigation-menu"
+```
+
+```tsx showLineNumbers
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul class="w-96">
+          <NavigationMenuLink href="/docs">Introduction</NavigationMenuLink>
+        </ul>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuTrigger as="a" href="/docs" class={navigationMenuTriggerStyle()}>
+      Docs
+    </NavigationMenuTrigger>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+## Composition
+
+Use the following composition to build a `NavigationMenu`:
+
+```text
+NavigationMenu
+├── NavigationMenuList
+│   ├── NavigationMenuItem
+│   │   ├── NavigationMenuTrigger
+│   │   └── NavigationMenuContent
+│   │       ├── NavigationMenuLink
+│   │       └── NavigationMenuLink
+│   └── NavigationMenuTrigger as="a"
+└── NavigationMenuIndicator
+```
+
+Top-level links are rendered directly with `NavigationMenuTrigger as="a"`. Use `NavigationMenuLink` for focusable links inside `NavigationMenuContent` panels.
+
+## Link
+
+Use `NavigationMenuTrigger` with `as="a"` as a direct top-level item for links so keyboard navigation remains fully integrated.
+
+```tsx showLineNumbers
+<NavigationMenuList>
+  <NavigationMenuTrigger as="a" href="/docs" class={navigationMenuTriggerStyle()}>
+    Docs
+  </NavigationMenuTrigger>
+</NavigationMenuList>
+```
+
+## Keyboard Notes
+
+- Use `NavigationMenuItem` only for trigger + content pairs.
+- Use top-level links as direct `NavigationMenuTrigger as="a"` elements inside `NavigationMenuList`.
+- Use `NavigationMenuLink` inside `NavigationMenuContent` panels for focusable arrow-key items.
+
+## API Reference
+
+### Core Parts
+
+| Part                         | Description                                     |
+| ---------------------------- | ----------------------------------------------- |
+| `NavigationMenu`             | Root container that manages menu state.         |
+| `NavigationMenuList`         | List wrapper that groups top-level items.       |
+| `NavigationMenuItem`         | Menu container for trigger + content pairs.     |
+| `NavigationMenuTrigger`      | Interactive control that opens submenu content. |
+| `NavigationMenuContent`      | Floating content panel for each item.           |
+| `NavigationMenuViewport`     | Optional viewport wrapper for popup content.    |
+| `NavigationMenuLink`         | Focusable menu item link inside content panels. |
+| `navigationMenuTriggerStyle` | Shared trigger classes for custom links.        |
+
+### NavigationMenu
+
+| Option     | Type      | Default | Description                                        |
+| ---------- | --------- | ------- | -------------------------------------------------- |
+| `viewport` | `boolean` | `true`  | Controls whether the built-in viewport is rendered |
+
+### NavigationMenuTrigger
+
+| Option     | Type      | Default | Description                                         |
+| ---------- | --------- | ------- | --------------------------------------------------- |
+| `showIcon` | `boolean` | `auto`  | Shows chevron by default except when `href` is set. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/navigation-menu) documentation for more information.

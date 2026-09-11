@@ -1,0 +1,106 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+component: true
+---
+
+<ComponentPreview name="badge-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add badge
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependency:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="badge" title="components/ui/badge.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Badge } from "~/components/ui/badge"
+```
+
+```tsx
+<Badge variant="default | outline | secondary | destructive">Badge</Badge>
+```
+
+## Examples
+
+### Variants
+
+Use the `variant` prop to change the variant of the badge.
+
+<ComponentPreview name="badge-variants" />
+
+### Icon
+
+You can render an icon inside the badge. Use `data-icon="inline-start"` to render the icon on the left and `data-icon="inline-end"` to render the icon on the right.
+
+<ComponentPreview name="badge-icon" />
+
+### Spinner
+
+You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
+
+<ComponentPreview name="badge-spinner" />
+
+### Link
+
+Use the `as` prop to render a link as a badge.
+
+<ComponentPreview name="badge-link" />
+
+### Custom Colors
+
+You can customize the colors of a badge by adding custom classes such as `bg-green-50 dark:bg-green-800` to the `Badge` component.
+
+<ComponentPreview name="badge-colors" />
+
+## API Reference
+
+### Core Parts
+
+| Part    | Description                          |
+| ------- | ------------------------------------ |
+| `Badge` | Root element that displays badge UI. |
+
+### Badge
+
+| Prop      | Type                                                                          | Default     |
+| --------- | ----------------------------------------------------------------------------- | ----------- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"` | `"default"` |
+| `class`   | `string`                                                                      | -           |
+| `as`      | `ValidComponent`                                                              | `"span"`    |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/badge) documentation for more information.

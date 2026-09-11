@@ -1,0 +1,118 @@
+---
+title: Progress
+description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+component: true
+---
+
+<ComponentPreview name="progress-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add progress
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="progress" title="components/ui/progress.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Progress } from "~/components/ui/progress"
+```
+
+```tsx showLineNumbers
+<Progress value={65} />
+```
+
+## Labels
+
+Use `ProgressLabel` and `ProgressValue` for contextual messaging and value output.
+
+```tsx showLineNumbers
+import { Progress, ProgressLabel, ProgressValue } from "~/components/ui/progress"
+
+export function UploadProgress() {
+  return (
+    <Progress value={42} class="grid gap-2">
+      <div class="flex items-center gap-2">
+        <ProgressLabel>Uploading files</ProgressLabel>
+        <ProgressValue />
+      </div>
+    </Progress>
+  )
+}
+```
+
+## Custom Value Labels
+
+Use `getValueLabel` to replace the default percentage text.
+
+```tsx showLineNumbers
+<Progress
+  value={3}
+  minValue={0}
+  maxValue={10}
+  getValueLabel={({ value, max }) => `${value} of ${max} tasks completed`}
+  class="grid gap-2"
+>
+  <div class="flex items-center gap-2">
+    <ProgressLabel>Processing tasks</ProgressLabel>
+    <ProgressValue />
+  </div>
+</Progress>
+```
+
+## Examples
+
+### With Label
+
+<ComponentPreview name="progress-label" />
+
+### Controlled
+
+<ComponentPreview name="progress-controlled" />
+
+## API Reference
+
+### Core Parts
+
+| Part            | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `Progress`      | Root container that manages progress state and ARIA attributes. |
+| `ProgressLabel` | Accessible text label associated with the progress bar.         |
+| `ProgressValue` | Formatted value label generated from progress state.            |
+
+`Progress` renders the track and indicator internally.
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/progress) documentation for more information.

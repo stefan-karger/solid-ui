@@ -1,0 +1,170 @@
+---
+title: Command
+description: Command menu for search and quick actions.
+component: true
+---
+
+<ComponentPreview name="command-demo" previewClassName="h-[24.5rem]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add command
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="command" title="components/ui/command.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator
+} from "~/components/ui/command"
+```
+
+```tsx showLineNumbers
+<Command
+  options={options()}
+  onInputChange={(query) => setOptions(queryEmojiData(query))}
+  onChange={(result) => setEmoji(result)}
+  optionValue="name"
+  optionLabel="name"
+  placeholder="Search an emoji…"
+  itemComponent={(props) => (
+    <CommandItem item={props.item}>{props.item.rawValue.label}</CommandItem>
+  )}
+  sectionComponent={(props) => (
+    <>
+      {props.section.index > 0 ? <CommandSeparator /> : null}
+      <CommandGroup>
+        <CommandGroupLabel>{props.section.rawValue.heading}</CommandGroupLabel>
+      </CommandGroup>
+    </>
+  )}
+>
+  <CommandInput />
+  <CommandList />
+  <CommandEmpty>No results found.</CommandEmpty>
+</Command>
+```
+
+## Composition
+
+Use the following composition to build a `Command`:
+
+```text
+Command
+├── CommandInput
+├── CommandList
+│   ├── CommandGroup
+│   │   ├── CommandGroupLabel
+│   │   ├── CommandItem
+│   │   └── CommandItem
+│   ├── CommandSeparator
+│   └── CommandGroup
+│       └── CommandItem
+└── CommandEmpty
+```
+
+## Dialog Usage
+
+Use `CommandDialog` when you want a command palette rendered in a dialog.
+
+```tsx showLineNumbers
+import { Command, CommandDialog, CommandInput, CommandList } from "~/components/ui/command"
+
+export function CommandPalette() {
+  return (
+    <CommandDialog open={open()} onOpenChange={setOpen}>
+      <Command options={commands()} optionValue="value" optionLabel="label" optionTextValue="label">
+        <CommandInput placeholder="Search commands..." />
+        <CommandList />
+      </Command>
+    </CommandDialog>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+A simple command menu in a dialog.
+
+<ComponentPreview name="command-basic" />
+
+### Shortcuts
+
+<ComponentPreview name="command-shortcuts" />
+
+### Groups
+
+A command menu with groups, icons, and separators.
+
+<ComponentPreview name="command-groups" />
+
+### Scrollable
+
+Scrollable command menu with multiple items.
+
+<ComponentPreview name="command-scrollable" />
+
+## API Reference
+
+### Core Parts
+
+| Part                     | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `Command`                | Root searchable command container.                             |
+| `CommandDialog`          | Dialog wrapper for palette-style command menus.                |
+| `CommandInput`           | Search input field with integrated icon.                       |
+| `CommandList`            | Listbox container for command results.                         |
+| `CommandEmpty`           | Empty state shown when no command matches.                     |
+| `CommandGroup`           | Section wrapper for grouped commands.                          |
+| `CommandGroupLabel`      | Label for a command section.                                   |
+| `CommandSeparator`       | Visual divider between command groups.                         |
+| `CommandItem`            | Selectable command row.                                        |
+| `CommandItemLabel`       | Primary label region inside a command item.                    |
+| `CommandItemDescription` | Secondary description region inside a command item.            |
+| `CommandShortcut`        | Right-aligned keyboard shortcut text inside a command item.    |
+| `CommandContent`         | Optional content wrapper from the underlying search primitive. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/search) documentation for more information.

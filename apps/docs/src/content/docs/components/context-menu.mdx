@@ -1,0 +1,166 @@
+---
+title: Context Menu
+description: Displays a menu of actions triggered by a right click.
+component: true
+---
+
+<ComponentPreview
+  name="context-menu-demo"
+  description="A context menu with shortcuts, toggles, and nested submenu items."
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add context-menu
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="context-menu" title="components/ui/context-menu.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger
+} from "~/components/ui/context-menu"
+```
+
+```tsx showLineNumbers
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Profile</ContextMenuItem>
+    <ContextMenuItem>Billing</ContextMenuItem>
+    <ContextMenuItem>Team</ContextMenuItem>
+    <ContextMenuItem>Subscription</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Composition
+
+Use the following composition to build a `ContextMenu`:
+
+```text
+ContextMenu
+├── ContextMenuTrigger
+└── ContextMenuContent
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   └── ContextMenuItem
+    ├── ContextMenuCheckboxItem
+    ├── ContextMenuRadioGroup
+    │   └── ContextMenuRadioItem
+    ├── ContextMenuSeparator
+    └── ContextMenuSub
+        ├── ContextMenuSubTrigger
+        └── ContextMenuSubContent
+            └── ContextMenuItem
+```
+
+## Examples
+
+### Basic
+
+A simple context menu with a few actions.
+
+<ComponentPreview name="context-menu-basic" />
+
+### Submenu
+
+Use `ContextMenuSub` to nest secondary actions.
+
+<ComponentPreview name="context-menu-submenu" />
+
+### Shortcuts
+
+Add `ContextMenuShortcut` to show keyboard hints.
+
+<ComponentPreview name="context-menu-shortcuts" />
+
+### Groups
+
+Group related actions and separate them with dividers.
+
+<ComponentPreview name="context-menu-groups" />
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+<ComponentPreview name="context-menu-icons" />
+
+### Checkboxes
+
+Use `ContextMenuCheckboxItem` for toggles.
+
+<ComponentPreview name="context-menu-checkboxes" />
+
+### Radio
+
+Use `ContextMenuRadioItem` for exclusive choices.
+
+<ComponentPreview name="context-menu-radio" />
+
+### Destructive
+
+Use `variant="destructive"` to style the menu item as destructive.
+
+<ComponentPreview name="context-menu-destructive" />
+
+## API Reference
+
+### Core Parts
+
+| Part                      | Description                                         |
+| ------------------------- | --------------------------------------------------- |
+| `ContextMenu`             | Root container that manages right-click open state. |
+| `ContextMenuTrigger`      | Element that listens for right-click or long press. |
+| `ContextMenuContent`      | Floating menu content rendered in a portal.         |
+| `ContextMenuGroup`        | Group wrapper for related items.                    |
+| `ContextMenuLabel`        | Non-interactive label for a group.                  |
+| `ContextMenuItem`         | Standard action item with optional variants/inset.  |
+| `ContextMenuShortcut`     | Right-aligned text for keyboard hints.              |
+| `ContextMenuSeparator`    | Visual separator between groups.                    |
+| `ContextMenuSub`          | Wrapper for nested submenus.                        |
+| `ContextMenuSubTrigger`   | Trigger item that opens a submenu.                  |
+| `ContextMenuSubContent`   | Floating submenu content panel.                     |
+| `ContextMenuCheckboxItem` | Toggle item with checked indicator.                 |
+| `ContextMenuRadioGroup`   | Group container for mutually-exclusive options.     |
+| `ContextMenuRadioItem`    | Radio item used inside `ContextMenuRadioGroup`.     |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/context-menu) documentation for more information.

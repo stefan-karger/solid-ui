@@ -1,3 +1,24 @@
+# 2026-09-11
+
+Added registry-backed component documentation with live and isolated previews, consumer-ready source
+views, component navigation, and interactive MDX widgets for tabs, accordions, callouts, steps, code,
+images, and the registry directory. Extended the Solid 2 Astro renderer to resolve lazy preview assets and added broad rendering, navigation, source-transformation, and interaction coverage.
+
+## Affected files
+
+- `README.md`
+- `apps/docs/public/images/*.png`
+- `apps/docs/src/components/**/*.astro`
+- `apps/docs/src/components/registry-preview.tsx`
+- `apps/docs/src/content/docs/**/*.mdx`
+- `apps/docs/src/layouts/*.astro`
+- `apps/docs/src/lib/*.{ts,test.ts}`
+- `apps/docs/src/pages/{docs,view}/**/*.astro`
+- `apps/docs/src/registry/examples/{_registry,button-interactive,button-rtl}.tsx`
+- `apps/docs/src/registry/{index,schema}.ts`
+- `packages/astro-solid2/src/{index,server,server.test}.ts`
+- `patches/lucide-solid@1.41.0.patch`
+
 # 2026-09-08
 
 Ported all 283 examples supported by the current UI registry, registered them with the docs app, and migrated their SolidJS, Kobalte, DOM, and icon usage to the 2.x-compatible APIs. Added a dependency-grouped compatibility checklist for the seven blocked components and their 50 remaining examples.

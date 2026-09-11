@@ -1,0 +1,158 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import CodeCollapsible from "~/components/code-collapsible.astro"
+import ComponentCode from "~/components/component-code.astro"
+import RegistryPreview from "~/components/registry-preview"
+import { highlightCode } from "~/lib/highlight-code"
+import { getRegistrySource, resolvePreview } from "~/lib/registry.server"
+import { cn } from "~/lib/utils"
+
+type Props = Omit<HTMLAttributes<"div">, "align"> & {
+  name: string
+  align?: "start" | "center" | "end"
+  previewClassName?: string
+  hideCode?: boolean
+  caption?: string
+  file?: string
+  direction?: "ltr" | "rtl"
+  locale?: string
+  type?: "block" | "component" | "example"
+}
+
+const {
+  name,
+  align = "center",
+  previewClassName,
+  hideCode = false,
+  caption,
+  file,
+  direction = "ltr",
+  locale,
+  type,
+  class: className,
+  ...props
+} = Astro.props
+if (!name) throw new Error("[registry] ComponentPreview requires a name")
+if (direction !== "ltr" && direction !== "rtl") {
+  throw new Error(`[registry] ComponentPreview received invalid direction "${direction}"`)
+}
+if (locale !== undefined && !locale.trim()) {
+  throw new Error("[registry] ComponentPreview locale must be a non-empty string")
+}
+
+const resolvedLocale = locale?.trim() ?? (direction === "rtl" ? "ar" : "en-US")
+
+const descriptor = resolvePreview(name)
+const isBlock = type === "block"
+if (isBlock && !descriptor.blockPreview) {
+  throw new Error(`[registry] Block preview "${name}" is not allow-listed`)
+}
+if (!isBlock && descriptor.type === "registry:block") {
+  throw new Error(
+    `[registry] Preview "${name}" has type "registry:block" and must use type="block"`
+  )
+}
+
+const alignmentClasses = {
+  start: "items-start justify-start text-left",
+  center: "items-center justify-center text-center",
+  end: "items-end justify-end text-right"
+} as const
+
+const source =
+  hideCode || isBlock
+    ? undefined
+    : await getRegistrySource({ name, file: file ?? descriptor.filePath })
+const highlightedCode = source ? await highlightCode(source.code, source.language) : undefined
+const blockPreviewClassName = previewClassName ?? "aspect-[4/2.5] min-h-[24rem]"
+const blockHref = `/view/${encodeURIComponent(name)}`
+---
+
+{
+  isBlock ? (
+    <div
+      class={cn(
+        "relative mt-4 w-full overflow-hidden rounded-xl border bg-background md:-mx-1",
+        blockPreviewClassName,
+        className
+      )}
+      data-slot="component-preview"
+      {...props}
+    >
+      <iframe
+        class="absolute inset-0 h-full w-full border-0 bg-background md:hidden"
+        loading="lazy"
+        src={blockHref}
+        title={`${name} preview`}
+      />
+      <div class="absolute inset-0 hidden w-[1600px] bg-background md:block">
+        <iframe
+          class="size-full border-0 bg-background"
+          loading="lazy"
+          src={blockHref}
+          title={`${name} preview`}
+        />
+      </div>
+    </div>
+  ) : (
+    <figure
+      class="group/preview-figure flex min-w-0 flex-col data-[hide-code=true]:gap-4"
+      data-hide-code={hideCode ? "true" : "false"}
+    >
+      <div
+        class={cn(
+          "group relative mt-4 mb-12 flex flex-col overflow-hidden rounded-2xl border",
+          className
+        )}
+        data-slot="component-preview"
+        {...props}
+      >
+        <div data-slot="preview">
+          <div
+            class={cn(
+              "preview relative flex h-72 w-full flex-col p-10",
+              alignmentClasses[align],
+              previewClassName
+            )}
+            data-align={align}
+            dir={direction}
+            lang={resolvedLocale}
+          >
+            {descriptor.clientOnly ? (
+              <RegistryPreview
+                direction={direction}
+                locale={resolvedLocale}
+                moduleId={descriptor.moduleId}
+                client:only="solid-js"
+              />
+            ) : (
+              <RegistryPreview
+                direction={direction}
+                locale={resolvedLocale}
+                moduleId={descriptor.moduleId}
+                client:visible={{ rootMargin: "200px" }}
+              />
+            )}
+          </div>
+        </div>
+        {source && highlightedCode && (
+          <CodeCollapsible variant="preview" data-slot="code">
+            <ComponentCode
+              code={source.code}
+              highlightedCode={highlightedCode}
+              language={source.language}
+              copyClass="right-4 group-data-[expanded=false]/code-collapsible:hidden"
+              class="m-0! rounded-none! border-t [&_pre]:max-h-72"
+            />
+          </CodeCollapsible>
+        )}
+      </div>
+      {caption && (
+        <figcaption class="-mt-8 text-center text-sm text-muted-foreground group-data-[hide-code=true]/preview-figure:mt-0">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
+}

@@ -1,0 +1,539 @@
+---
+title: Sidebar
+description: A composable, themeable and customizable sidebar component.
+component: true
+---
+
+<figure class="flex flex-col gap-4">
+  <ComponentPreview name="sidebar-demo" type="block" class="w-full" />
+  <p class="text-center text-sm text-muted-foreground">A sidebar that collapses to icons.</p>
+</figure>
+
+Sidebars are one of the most complex components to build. They are central to any application and often contain a lot of moving parts.
+
+We now have a solid foundation to build on top of. Composable. Themeable. Customizable.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add sidebar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following files into your project.</Step>
+
+<ComponentSource name="sidebar" title="components/ui/sidebar.tsx" />
+
+<ComponentSource name="use-mobile" title="components/hooks/use-mobile.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Structure
+
+A `Sidebar` component is composed of the following parts:
+
+- `SidebarProvider` handles collapsible state.
+- `Sidebar` is the sidebar container.
+- `SidebarHeader` and `SidebarFooter` stay at the top and bottom of the sidebar.
+- `SidebarContent` is the scrollable content area.
+- `SidebarGroup` defines a section inside `SidebarContent`.
+- `SidebarTrigger` toggles the sidebar.
+
+<img
+  src="/images/sidebar-structure.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar structure"
+  class="mt-6 w-full overflow-hidden rounded-lg border dark:hidden"
+/>
+<img
+  src="/images/sidebar-structure-dark.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar structure"
+  class="mt-6 hidden w-full overflow-hidden rounded-lg border dark:block"
+/>
+
+## Usage
+
+```tsx showLineNumbers title="app/layout.tsx"
+import { AppSidebar } from "~/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+
+export default function Layout(props: { children: any }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {props.children}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
+
+```tsx showLineNumbers title="components/app-sidebar.tsx"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader
+} from "~/components/ui/sidebar"
+
+export function AppSidebar() {
+  return (
+    <Sidebar>
+      <SidebarHeader />
+      <SidebarContent>
+        <SidebarGroup />
+        <SidebarGroup />
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
+  )
+}
+```
+
+## Composition
+
+Use the following composition to build a `Sidebar` layout:
+
+```text
+SidebarProvider
+├── Sidebar
+│   ├── SidebarHeader
+│   ├── SidebarContent
+│   │   └── SidebarGroup
+│   │       ├── SidebarGroupLabel
+│   │       ├── SidebarGroupAction
+│   │       └── SidebarGroupContent
+│   │           └── SidebarMenu
+│   │               └── SidebarMenuItem
+│   │                   ├── SidebarMenuButton
+│   │                   ├── SidebarMenuAction
+│   │                   ├── SidebarMenuBadge
+│   │                   └── SidebarMenuSub
+│   │                       └── SidebarMenuSubItem
+│   ├── SidebarFooter
+│   └── SidebarRail
+├── SidebarInset
+└── SidebarTrigger
+```
+
+## SidebarProvider
+
+Wrap your app in `SidebarProvider` so `Sidebar`, `SidebarTrigger`, and
+`useSidebar` can share the same open state.
+
+### Props
+
+| Name           | Type                      | Description                                  |
+| -------------- | ------------------------- | -------------------------------------------- |
+| `defaultOpen`  | `boolean`                 | Default open state of the sidebar.           |
+| `open`         | `boolean`                 | Open state of the sidebar (controlled).      |
+| `onOpenChange` | `(open: boolean) => void` | Sets open state of the sidebar (controlled). |
+
+### Width
+
+If you have a single sidebar in your app, update the width constants inside
+`sidebar.tsx`:
+
+```tsx showLineNumbers title="components/ui/sidebar.tsx"
+const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH_MOBILE = "18rem"
+```
+
+If you need to override widths per layout, use CSS variables on
+`SidebarProvider`:
+
+```tsx showLineNumbers
+<SidebarProvider
+  style={{
+    "--sidebar-width": "20rem",
+    "--sidebar-width-mobile": "20rem"
+  }}
+>
+  <Sidebar />
+</SidebarProvider>
+```
+
+### Keyboard Shortcut
+
+Use `Cmd+B` on macOS or `Ctrl+B` on Windows and Linux to toggle the sidebar.
+
+```tsx showLineNumbers title="components/ui/sidebar.tsx"
+const SIDEBAR_KEYBOARD_SHORTCUT = "b"
+```
+
+## Sidebar
+
+The main `Sidebar` component renders the responsive, collapsible sidebar shell.
+
+### Props
+
+| Property      | Type                                 | Description                        |
+| ------------- | ------------------------------------ | ---------------------------------- |
+| `side`        | `"left" \| "right"`                  | The side of the sidebar.           |
+| `variant`     | `"sidebar" \| "floating" \| "inset"` | The visual variant of the sidebar. |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"`    | The collapsible behavior.          |
+
+| Prop        | Description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `offcanvas` | A collapsible sidebar that slides in from the left or right. |
+| `icon`      | A sidebar that collapses to icons.                           |
+| `none`      | A non-collapsible sidebar.                                   |
+
+<Callout>
+  **Note:** If you use the `inset` variant, wrap your page content in `SidebarInset`.
+</Callout>
+
+```tsx showLineNumbers
+<SidebarProvider>
+  <Sidebar variant="inset" />
+  <SidebarInset>
+    <main>{children}</main>
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## useSidebar
+
+Use `useSidebar` when you need to read or control the shared sidebar state.
+
+```tsx showLineNumbers
+import { useSidebar } from "~/components/ui/sidebar"
+
+export function AppSidebar() {
+  const { state, open, setOpen, openMobile, setOpenMobile, isMobile, toggleSidebar } = useSidebar()
+}
+```
+
+| Property        | Type                                  | Description                             |
+| --------------- | ------------------------------------- | --------------------------------------- |
+| `state`         | `Accessor<"expanded" \| "collapsed">` | The current desktop visual state.       |
+| `open`          | `Accessor<boolean>`                   | Whether the desktop sidebar is open.    |
+| `setOpen`       | `(open: boolean \| updater) => void`  | Sets the desktop open state.            |
+| `openMobile`    | `Accessor<boolean>`                   | Whether the mobile sidebar is open.     |
+| `setOpenMobile` | `(open: boolean \| updater) => void`  | Sets the mobile open state.             |
+| `isMobile`      | `Accessor<boolean>`                   | Whether the current layout is mobile.   |
+| `toggleSidebar` | `() => void`                          | Toggles desktop or mobile sidebar state |
+
+## SidebarHeader
+
+Use `SidebarHeader` to add a sticky header region to the sidebar.
+
+```tsx showLineNumbers title="components/app-sidebar.tsx"
+<Sidebar>
+  <SidebarHeader>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger as={SidebarMenuButton} class="">
+            Select Workspace
+            <ChevronDownIcon class="ml-auto" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class="w-(--kb-popper-anchor-width)">
+            <DropdownMenuItem>
+              <span>Acme Inc</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarHeader>
+</Sidebar>
+```
+
+## SidebarFooter
+
+Use `SidebarFooter` to add a sticky footer region to the sidebar.
+
+```tsx showLineNumbers
+<Sidebar>
+  <SidebarFooter>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton>
+          <User2Icon /> Username
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarFooter>
+</Sidebar>
+```
+
+## SidebarContent
+
+`SidebarContent` wraps the scrollable body of the sidebar.
+
+```tsx showLineNumbers
+<Sidebar>
+  <SidebarContent>
+    <SidebarGroup />
+    <SidebarGroup />
+  </SidebarContent>
+</Sidebar>
+```
+
+## SidebarGroup
+
+Use `SidebarGroup` to create a section inside the sidebar.
+
+A `SidebarGroup` can contain a `SidebarGroupLabel`, a `SidebarGroupContent`, and
+an optional `SidebarGroupAction`.
+
+```tsx showLineNumbers
+<SidebarGroup>
+  <SidebarGroupLabel>Application</SidebarGroupLabel>
+  <SidebarGroupAction>
+    <PlusIcon /> <span class="sr-only">Add Project</span>
+  </SidebarGroupAction>
+  <SidebarGroupContent />
+</SidebarGroup>
+```
+
+To make a `SidebarGroup` collapsible, wrap it in `Collapsible`.
+
+```tsx showLineNumbers
+<Collapsible defaultOpen>
+  <SidebarGroup>
+    <CollapsibleTrigger as={SidebarGroupLabel} class="group/collapsible-trigger w-full">
+      Help
+      <ChevronDownIcon class="ml-auto transition-transform group-data-[expanded]/collapsible-trigger:rotate-180" />
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <SidebarGroupContent />
+    </CollapsibleContent>
+  </SidebarGroup>
+</Collapsible>
+```
+
+## SidebarMenu
+
+Use `SidebarMenu` to build menus inside a `SidebarGroup`.
+
+<img
+  src="/images/sidebar-menu.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar menu"
+  class="mt-6 w-full overflow-hidden rounded-lg border dark:hidden"
+/>
+<img
+  src="/images/sidebar-menu-dark.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar menu"
+  class="mt-6 hidden w-full overflow-hidden rounded-lg border dark:block"
+/>
+
+```tsx showLineNumbers
+<SidebarMenu>
+  {projects.map((project) => (
+    <SidebarMenuItem>
+      <SidebarMenuButton as="a" href={project.url}>
+        <project.icon />
+        <span>{project.name}</span>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  ))}
+</SidebarMenu>
+```
+
+## SidebarMenuButton
+
+`SidebarMenuButton` renders the main interactive control for a menu item.
+
+By default it renders a button, but you can change the underlying element with
+the `as` prop.
+
+Use `isActive` to mark the current route.
+
+```tsx showLineNumbers
+<SidebarMenuButton as="a" href="#" isActive>
+  Home
+</SidebarMenuButton>
+```
+
+## SidebarMenuAction
+
+Use `SidebarMenuAction` for secondary actions aligned to a menu item.
+
+```tsx showLineNumbers
+<SidebarMenuItem>
+  <SidebarMenuButton as="a" href="#">
+    <HomeIcon />
+    <span>Home</span>
+  </SidebarMenuButton>
+  <SidebarMenuAction>
+    <PlusIcon /> <span class="sr-only">Add Project</span>
+  </SidebarMenuAction>
+</SidebarMenuItem>
+```
+
+## SidebarMenuSub
+
+Use `SidebarMenuSub` to render nested items under a menu entry.
+
+```tsx showLineNumbers
+<SidebarMenuItem>
+  <SidebarMenuButton />
+  <SidebarMenuSub>
+    <SidebarMenuSubItem>
+      <SidebarMenuSubButton as="a" href="#" />
+    </SidebarMenuSubItem>
+  </SidebarMenuSub>
+</SidebarMenuItem>
+```
+
+## SidebarMenuBadge
+
+Use `SidebarMenuBadge` to show counts or status beside a menu item.
+
+```tsx showLineNumbers
+<SidebarMenuItem>
+  <SidebarMenuButton />
+  <SidebarMenuBadge>24</SidebarMenuBadge>
+</SidebarMenuItem>
+```
+
+## SidebarMenuSkeleton
+
+Use `SidebarMenuSkeleton` for loading states.
+
+```tsx showLineNumbers
+<SidebarMenu>
+  <For each={Array.from({ length: 5 })}>
+    {() => (
+      <SidebarMenuItem>
+        <SidebarMenuSkeleton />
+      </SidebarMenuItem>
+    )}
+  </For>
+</SidebarMenu>
+```
+
+## SidebarTrigger
+
+Use `SidebarTrigger` to render the default toggle button.
+
+```tsx showLineNumbers
+import { useSidebar } from "~/components/ui/sidebar"
+
+export function CustomTrigger() {
+  const { toggleSidebar } = useSidebar()
+
+  return <button onClick={toggleSidebar}>Toggle Sidebar</button>
+}
+```
+
+## SidebarRail
+
+`SidebarRail` renders the narrow interactive rail used to toggle the sidebar on
+desktop.
+
+```tsx showLineNumbers
+<Sidebar>
+  <SidebarHeader />
+  <SidebarContent>
+    <SidebarGroup />
+  </SidebarContent>
+  <SidebarFooter />
+  <SidebarRail />
+</Sidebar>
+```
+
+## Controlled Sidebar
+
+Use `open` and `onOpenChange` when you need to control the sidebar externally.
+
+```tsx showLineNumbers
+import { createSignal } from "solid-js"
+
+export function AppSidebar() {
+  const [open, setOpen] = createSignal(false)
+
+  return (
+    <SidebarProvider open={open()} onOpenChange={setOpen}>
+      <Sidebar />
+    </SidebarProvider>
+  )
+}
+```
+
+## Theming
+
+Use the following CSS variables to theme the sidebar.
+
+```css
+@layer base {
+  :root {
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.141 0.005 285.823);
+    --sidebar-primary: oklch(0.21 0.006 285.885);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.967 0.001 286.375);
+    --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+    --sidebar-border: oklch(0.92 0.004 286.32);
+    --sidebar-ring: oklch(0.705 0.015 286.067);
+  }
+
+  .dark {
+    --sidebar: oklch(0.21 0.006 285.885);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.92 0.004 286.32);
+    --sidebar-primary-foreground: oklch(0.21 0.006 285.885);
+    --sidebar-accent: oklch(0.274 0.006 286.033);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.552 0.016 285.938);
+  }
+}
+```
+
+## Styling
+
+Use data attributes to style the sidebar across different states.
+
+```tsx
+<Sidebar collapsible="icon">
+  <SidebarContent>
+    <SidebarGroup class="group-data-[collapsible=icon]:hidden" />
+  </SidebarContent>
+</Sidebar>
+```
+
+```tsx
+<SidebarMenuItem>
+  <SidebarMenuButton />
+  <SidebarMenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
+</SidebarMenuItem>
+```

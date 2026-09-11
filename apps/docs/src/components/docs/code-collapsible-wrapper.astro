@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import CodeCollapsible from "~/components/code-collapsible.astro"
+
+type Props = HTMLAttributes<"div">
+
+const props = Astro.props
+---
+
+<CodeCollapsible variant="source" {...props}>
+  <slot />
+</CodeCollapsible>

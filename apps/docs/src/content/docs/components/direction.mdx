@@ -1,0 +1,95 @@
+---
+title: Direction
+description: A provider component that sets the text direction for your application.
+component: true
+---
+
+The `DirectionProvider` component sets the reading direction for your application. Use it to
+support both left-to-right and right-to-left interfaces from a single component tree.
+
+<ComponentPreview name="direction-demo" previewClassName="h-auto p-6" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add direction
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="direction" title="components/ui/direction.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DirectionProvider } from "~/components/ui/direction"
+```
+
+```tsx showLineNumbers
+<html lang="ar" dir="rtl">
+  <body>
+    <DirectionProvider direction="rtl">{/* Your app content */}</DirectionProvider>
+  </body>
+</html>
+```
+
+## useDirection
+
+Use `useDirection()` to read the current direction from context.
+
+```tsx showLineNumbers
+import { useDirection } from "~/components/ui/direction"
+
+const Example = () => {
+  const direction = useDirection()
+
+  return <div>Current direction: {direction()}</div>
+}
+```
+
+## API Reference
+
+### Core Parts
+
+| Name                | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `DirectionProvider` | Provides direction context to child content.     |
+| `useDirection`      | Returns a getter for the current text direction. |
+
+### DirectionProvider
+
+| Prop        | Type             |
+| ----------- | ---------------- |
+| `direction` | `"ltr" \| "rtl"` |
+| `locale`    | `string`         |
+
+See the [Kobalte](https://kobalte.dev/docs/core/utilities/i18n) documentation for more information.

@@ -1,0 +1,123 @@
+---
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
+component: true
+---
+
+<ComponentPreview name="popover-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add popover
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="popover" title="components/ui/popover.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger
+} from "~/components/ui/popover"
+```
+
+```tsx showLineNumbers
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverHeader>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverDescription>Description text here.</PopoverDescription>
+    </PopoverHeader>
+  </PopoverContent>
+</Popover>
+```
+
+## Composition
+
+Use the following composition to build a `Popover`:
+
+```text
+Popover
+├── PopoverTrigger
+└── PopoverContent
+    └── PopoverHeader
+        ├── PopoverTitle
+        └── PopoverDescription
+```
+
+## Examples
+
+### Basic
+
+A simple popover with a header, title, and description.
+
+<ComponentPreview name="popover-basic" />
+
+### Alignments
+
+Use the `align` prop on `PopoverContent` to control the horizontal alignment.
+
+<ComponentPreview name="popover-alignments" />
+
+### Form
+
+A popover with form fields inside.
+
+<ComponentPreview name="popover-form" />
+
+## API Reference
+
+### Core Parts
+
+| Part                 | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| `Popover`            | Root component that manages open state and positioning.  |
+| `PopoverTrigger`     | Interactive element used to toggle the popover content.  |
+| `PopoverAnchor`      | Optional anchor for custom positioning targets.          |
+| `PopoverContent`     | Floating content rendered in a portal near the trigger.  |
+| `PopoverHeader`      | Layout helper for title and description blocks.          |
+| `PopoverTitle`       | Accessible title for the content region.                 |
+| `PopoverDescription` | Supporting description text for contextual information.  |
+| `PopoverCloseButton` | Optional close control for dismissible content patterns. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/popover) documentation for more information.

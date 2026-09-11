@@ -1,0 +1,77 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+component: true
+---
+
+<ComponentPreview name="aspect-ratio-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add aspect-ratio
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="aspect-ratio" title="components/ui/aspect-ratio.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from "~/components/ui/aspect-ratio"
+```
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <Image src="..." alt="Image" className="rounded-md object-cover" />
+</AspectRatio>
+```
+
+## Examples
+
+### Square
+
+A square aspect ratio component using the `ratio={1 / 1}` prop. This is useful for displaying images in a square format.
+
+<ComponentPreview name="aspect-ratio-square" />
+
+### Portrait
+
+A portrait aspect ratio component using the `ratio={9 / 16}` prop. This is useful for displaying images in a portrait format.
+
+<ComponentPreview name="aspect-ratio-portrait" previewClassName="h-96" />
+
+## API Reference
+
+### AspectRatio
+
+The `AspectRatio` component displays content within a desired ratio.
+
+| Prop    | Type     |
+| ------- | -------- |
+| `ratio` | `number` |
+| `class` | `string` |

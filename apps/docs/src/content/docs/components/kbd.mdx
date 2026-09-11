@@ -1,0 +1,116 @@
+---
+title: Kbd
+description: Used to display textual user input from keyboard.
+component: true
+---
+
+<ComponentPreview name="kbd-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add kbd
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="kbd" title="components/ui/kbd.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Kbd } from "~/components/ui/kbd"
+```
+
+```tsx
+<Kbd>Ctrl</Kbd>
+```
+
+## Composition
+
+Use the following composition to build `Kbd` and `KbdGroup`:
+
+```text
+KbdGroup
+├── Kbd
+├── Kbd
+└── Kbd
+```
+
+## Examples
+
+### Group
+
+Use `KbdGroup` to group keyboard keys together.
+
+<ComponentPreview name="kbd-group" />
+
+### Button
+
+Use `Kbd` inside `Button` to display keyboard shortcuts in button labels.
+
+<ComponentPreview name="kbd-button" />
+
+### Tooltip
+
+Use `Kbd` inside `TooltipContent` to show shortcuts for actions.
+
+<ComponentPreview name="kbd-tooltip" />
+
+### Input Group
+
+Use `Kbd` inside `InputGroupAddon` to display shortcuts next to an input.
+
+<ComponentPreview name="kbd-input-group" />
+
+## API Reference
+
+### Kbd
+
+Use `Kbd` to display a keyboard key or shortcut.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+```tsx showLineNumbers
+<Kbd>Ctrl</Kbd>
+```
+
+### KbdGroup
+
+Use `KbdGroup` to group multiple `Kbd` elements together.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+```tsx showLineNumbers
+<KbdGroup>
+  <Kbd>Ctrl</Kbd>
+  <Kbd>B</Kbd>
+</KbdGroup>
+```

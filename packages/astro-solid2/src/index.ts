@@ -1,3 +1,4 @@
+import { generateHydrationScript } from "@solidjs/web"
 import type { AstroIntegration, AstroIntegrationLogger, AstroRenderer } from "astro"
 import type { Plugin, PluginOption } from "vite"
 import solid, { type Options as ViteSolidPluginOptions } from "vite-plugin-solid"
@@ -78,6 +79,12 @@ export default function (options: Options = {}): AstroIntegration {
 
         addRenderer(getContainerRendererImpl())
         updateConfig({ vite: getViteConfiguration(options, devtoolsPlugin) })
+        injectScript(
+          "head-inline",
+          generateHydrationScript()
+            .replace(/^<script>/, "")
+            .replace(/<\/script><!--xs-->$/, "")
+        )
         if (devtoolsPlugin) injectScript("page", 'import "solid-devtools";')
       },
       "astro:config:done": ({ logger, config }) => {

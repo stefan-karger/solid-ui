@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"button">
+
+const { class: className, ...props } = Astro.props
+---
+
+<h3 class="flex" data-slot="accordion-header">
+  <button
+    {...props}
+    class={cn(
+      "group/accordion-trigger cn-accordion-trigger relative flex flex-1 items-start justify-between border border-transparent transition-all outline-none disabled:pointer-events-none disabled:opacity-50",
+      className
+    )}
+    data-accordion-trigger
+    data-slot="accordion-trigger"
+    type="button"
+  >
+    <slot />
+    <svg
+      aria-hidden="true"
+      class="cn-accordion-trigger-icon pointer-events-none shrink-0 duration-300 group-aria-expanded/accordion-trigger:rotate-180"
+      data-slot="accordion-trigger-icon"
+      fill="none"
+      focusable="false"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </button>
+</h3>

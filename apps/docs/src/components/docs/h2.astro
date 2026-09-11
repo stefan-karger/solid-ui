@@ -1,19 +1,14 @@
 ---
 import type { HTMLAttributes } from "astro/types"
 
+import { createHeadingId } from "~/lib/heading-ids"
 import { cn } from "~/lib/utils"
 
 type Props = HTMLAttributes<"h2">
 
 const { class: className, id, ...props } = Astro.props
 const slotContent = Astro.slots.has("default") ? await Astro.slots.render("default") : ""
-const generatedId = slotContent
-  .replace(/<[^>]+>/g, "")
-  .replace(/ /g, "-")
-  .replace(/'/g, "")
-  .replace(/\?/g, "")
-  .toLowerCase()
-const headingId = id || generatedId || undefined
+const headingId = id === undefined ? createHeadingId(slotContent) || undefined : id
 ---
 
 <h2
@@ -24,5 +19,22 @@ const headingId = id || generatedId || undefined
   )}
   {...props}
 >
-  <slot />
+  {
+    headingId ? (
+      <a
+        class="group/heading inline-flex items-baseline gap-2 no-underline outline-none"
+        href={`#${headingId}`}
+      >
+        <Fragment set:html={slotContent} />
+        <span
+          aria-hidden="true"
+          class="text-muted-foreground opacity-0 transition-opacity group-hover/heading:opacity-100 group-focus-within/heading:opacity-100"
+        >
+          #
+        </span>
+      </a>
+    ) : (
+      <Fragment set:html={slotContent} />
+    )
+  }
 </h2>

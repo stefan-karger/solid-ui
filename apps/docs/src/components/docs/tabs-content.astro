@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  value: string
+}
+
+const { class: className, value, ...props } = Astro.props
+---
+
+<div
+  role="tabpanel"
+  data-tabs-content
+  data-state="inactive"
+  data-value={value}
+  class={cn(
+    "relative [&_h3.font-heading]:text-base [&_h3.font-heading]:font-medium *:[figure]:first:mt-0 [&>.steps]:mt-6",
+    className
+  )}
+  {...props}
+>
+  <slot />
+</div>

@@ -1,0 +1,111 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+component: true
+---
+
+<ComponentPreview name="tabs-demo" previewClassName="h-96" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add tabs
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="tabs" title="components/ui/tabs.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+```
+
+```tsx showLineNumbers
+<Tabs defaultValue="account" class="w-[400px]">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Make changes to your account here.</TabsContent>
+  <TabsContent value="password">Change your password here.</TabsContent>
+</Tabs>
+```
+
+## Composition
+
+Use the following composition to build `Tabs`:
+
+```text
+Tabs
+├── TabsList
+│   ├── TabsTrigger
+│   └── TabsTrigger
+├── TabsContent
+└── TabsContent
+```
+
+## Examples
+
+### Line
+
+Use the `variant="line"` prop on `TabsList` for a line style.
+
+<ComponentPreview name="tabs-line" />
+
+### Vertical
+
+Use `orientation="vertical"` for vertical tabs.
+
+<ComponentPreview name="tabs-vertical" />
+
+### Disabled
+
+<ComponentPreview name="tabs-disabled" />
+
+### Icons
+
+<ComponentPreview name="tabs-icons" />
+
+## API Reference
+
+### Core Parts
+
+| Part          | Description                                            |
+| ------------- | ------------------------------------------------------ |
+| `Tabs`        | Root container that manages selected state and layout. |
+| `TabsList`    | Wrapper around trigger items.                          |
+| `TabsTrigger` | Interactive tab button that selects a panel.           |
+| `TabsContent` | Panel content associated with a trigger value.         |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/tabs) documentation for more information.

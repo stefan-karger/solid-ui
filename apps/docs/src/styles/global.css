@@ -145,6 +145,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) * 1.8);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -287,10 +288,14 @@
     }
   }
 
+  [data-docs-tabs][data-tabs-enhanced="true"] [data-tabs-content][data-state="inactive"] {
+    display: none;
+  }
+
   [data-rehype-pretty-code-figure] {
     background-color: var(--color-code);
     color: var(--color-code-foreground);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-2xl);
     border-width: 0px;
     border-color: var(--border);
     margin-top: calc(var(--spacing) * 6);
@@ -303,6 +308,14 @@
     &:has([data-rehype-pretty-code-title]) [data-slot="copy-button"] {
       top: calc(var(--spacing) * 1.5) !important;
     }
+  }
+
+  [data-rehype-pretty-code-figure] code,
+  [data-rehype-pretty-code-figure] code span {
+    font-variant-ligatures: none;
+    font-feature-settings:
+      "liga" 0,
+      "calt" 0;
   }
 
   [data-rehype-pretty-code-title] {
@@ -346,9 +359,9 @@
   }
 
   [data-line] {
-    padding-top: calc(var(--spacing) * 0.5);
-    padding-bottom: calc(var(--spacing) * 0.5);
-    min-height: calc(var(--spacing) * 1);
+    padding-top: calc(var(--spacing) * 0.25);
+    padding-bottom: calc(var(--spacing) * 0.25);
+    min-height: calc(var(--spacing) * 0.875);
     width: 100%;
     display: inline-block;
   }
@@ -385,6 +398,41 @@
     padding-block: 0.1rem;
     font-family: var(--font-mono);
     font-size: 0.8rem;
+  }
+
+  [data-code-collapsible]:not([data-code-enhanced="true"]) [data-code-control] {
+    display: none;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"] [data-code-top-control] {
+    display: flex;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"] [data-code-reveal] {
+    display: flex;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="true"] [data-code-reveal] {
+    display: none;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"] [data-code-content] {
+    overflow: hidden;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"][data-variant="preview"]
+    [data-code-content] {
+    max-height: 6.75rem;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"][data-variant="preview"]
+    [data-slot="copy-button"] {
+    display: none;
+  }
+
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"][data-variant="source"]
+    [data-code-content] {
+    max-height: 16rem;
   }
 }
 

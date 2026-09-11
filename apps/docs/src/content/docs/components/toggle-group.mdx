@@ -1,0 +1,121 @@
+---
+title: Toggle Group
+description: A set of two-state buttons that can be toggled on or off.
+component: true
+---
+
+<ComponentPreview name="toggle-group-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add toggle-group
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="toggle-group" title="components/ui/toggle-group.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group"
+```
+
+```tsx showLineNumbers
+<ToggleGroup defaultValue="a">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+  <ToggleGroupItem value="c">C</ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Composition
+
+Use the following composition to build a `ToggleGroup`:
+
+```text
+ToggleGroup
+├── ToggleGroupItem
+├── ToggleGroupItem
+└── ToggleGroupItem
+```
+
+## Examples
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+<ComponentPreview name="toggle-group-outline" />
+
+### Size
+
+Use the `size` prop to change the size of the toggle group.
+
+<ComponentPreview name="toggle-group-sizes" />
+
+### Spacing
+
+Use `spacing` to add spacing between toggle group items.
+
+<ComponentPreview name="toggle-group-spacing" />
+
+### Vertical
+
+Use `orientation="vertical"` for vertical toggle groups.
+
+<ComponentPreview name="toggle-group-vertical" />
+
+### Disabled
+
+<ComponentPreview name="toggle-group-disabled" />
+
+### Custom
+
+A custom toggle group example.
+
+<ComponentPreview
+  name="toggle-group-font-weight-selector"
+  previewClassName="*:data-[slot=field-group]:max-w-xs"
+/>
+
+## API Reference
+
+### Core Parts
+
+| Part              | Description                                         |
+| ----------------- | --------------------------------------------------- |
+| `ToggleGroup`     | Root container that manages single/multiple select. |
+| `ToggleGroupItem` | Toggle item that inherits group variant and size.   |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/toggle-group) documentation for more information.

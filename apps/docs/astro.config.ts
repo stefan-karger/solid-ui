@@ -8,7 +8,7 @@ import { defineConfig } from "astro/config"
 import { rehypePrettyCode } from "rehype-pretty-code"
 
 import { rehypeCommandMetadata } from "./src/lib/command-metadata"
-import { transformers } from "./src/lib/highlight-code"
+import { DARK_CODE_THEME, LIGHT_CODE_THEME, transformers } from "./src/lib/highlight-code"
 
 export default defineConfig({
   output: "static",
@@ -24,7 +24,7 @@ export default defineConfig({
         [
           rehypePrettyCode,
           {
-            theme: { dark: "github-dark", light: "github-light-default" },
+            theme: { dark: DARK_CODE_THEME, light: LIGHT_CODE_THEME },
             transformers
           }
         ],
@@ -36,9 +36,16 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
-      alias: {
-        "~": fileURLToPath(new URL("./src", import.meta.url))
-      }
+      alias: [
+        { find: "solid-js/web", replacement: "@solidjs/web" },
+        {
+          find: /^lucide-solid$/,
+          replacement: fileURLToPath(
+            new URL("./node_modules/lucide-solid/dist/source/lucide-solid.jsx", import.meta.url)
+          )
+        },
+        { find: "~", replacement: fileURLToPath(new URL("./src", import.meta.url)) }
+      ]
     }
   }
 })

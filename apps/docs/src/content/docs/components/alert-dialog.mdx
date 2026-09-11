@@ -1,0 +1,159 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+component: true
+---
+
+<ComponentPreview name="alert-dialog-demo" previewClassName="h-56" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add alert-dialog
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="alert-dialog" title="components/ui/alert-dialog.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "~/components/ui/alert-dialog"
+import { Button } from "~/components/ui/button"
+```
+
+```tsx showLineNumbers
+<AlertDialog>
+  <AlertDialogTrigger as={Button} variant="outline">
+    Show Dialog
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Composition
+
+Use the following composition to build an `AlertDialog`:
+
+```text
+AlertDialog
+├── AlertDialogTrigger
+└── AlertDialogContent
+    ├── AlertDialogHeader
+    │   ├── AlertDialogTitle
+    │   ├── AlertDialogDescription
+    │   └── AlertDialogMedia
+    └── AlertDialogFooter
+        ├── AlertDialogCancel
+        └── AlertDialogAction
+```
+
+## Examples
+
+### Basic
+
+A basic alert dialog with a title, description, and cancel and continue buttons.
+
+<ComponentPreview name="alert-dialog-basic" previewClassName="h-56" />
+
+### Small
+
+Use the `size="sm"` prop to render a compact alert dialog.
+
+<ComponentPreview name="alert-dialog-small" previewClassName="h-56" />
+
+### Media
+
+Use `AlertDialogMedia` to add a visual cue such as an icon.
+
+<ComponentPreview name="alert-dialog-media" previewClassName="h-56" />
+
+### Small with Media
+
+Combine `size="sm"` with `AlertDialogMedia` for compact confirmation flows.
+
+<ComponentPreview name="alert-dialog-small-media" previewClassName="h-56" />
+
+### Destructive
+
+Use `variant="destructive"` on the trigger and action to highlight irreversible operations.
+
+<ComponentPreview name="alert-dialog-destructive" previewClassName="h-56" />
+
+## API Reference
+
+### Core Parts
+
+| Part                     | Description                                                      |
+| ------------------------ | ---------------------------------------------------------------- |
+| `AlertDialog`            | Root component that manages open state and accessibility wiring. |
+| `AlertDialogTrigger`     | Interactive element used to open the alert dialog.               |
+| `AlertDialogContent`     | Overlay + content container rendered in a portal.                |
+| `AlertDialogHeader`      | Layout wrapper for title, description, and optional media.       |
+| `AlertDialogMedia`       | Optional visual element shown before heading content.            |
+| `AlertDialogTitle`       | Accessible heading for the alert dialog content.                 |
+| `AlertDialogDescription` | Supporting text for the dialog action context.                   |
+| `AlertDialogFooter`      | Action layout container for cancel/confirm controls.             |
+| `AlertDialogCancel`      | Close button styled for dismissive actions.                      |
+| `AlertDialogAction`      | Close button styled for primary or destructive confirmation.     |
+
+### size
+
+Use the `size` props on the `AlertDialogContent` component to control the size of the alert dialog. It accepts the following values:
+
+| Prop   | Type                | Default     |
+| ------ | ------------------- | ----------- |
+| `size` | `"default" \| "sm"` | `"default"` |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/alert-dialog) documentation for more information.

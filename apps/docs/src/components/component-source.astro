@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import CodeCollapsible from "~/components/code-collapsible.astro"
+import ComponentCode from "~/components/component-code.astro"
+import { highlightCode } from "~/lib/highlight-code"
+import { getRegistrySource } from "~/lib/registry.server"
+
+type Props = Omit<HTMLAttributes<"figure">, "title"> & {
+  name: string
+  file?: string
+  title?: string
+  language?: string
+  collapsible?: boolean
+}
+
+const { name, file, title, language, collapsible = true, class: className, ...props } = Astro.props
+if (!name) throw new Error("[registry] ComponentSource requires a name")
+
+const source = await getRegistrySource({ name, ...(file ? { file } : {}) })
+const resolvedLanguage = language ?? source.language
+const highlightedCode = await highlightCode(source.code, resolvedLanguage)
+---
+
+{
+  collapsible ? (
+    <CodeCollapsible variant="source" class={className} {...props}>
+      <ComponentCode
+        code={source.code}
+        highlightedCode={highlightedCode}
+        language={resolvedLanguage}
+        title={title ?? source.displayPath}
+        class="m-0! md:mx-0!"
+      />
+    </CodeCollapsible>
+  ) : (
+    <ComponentCode
+      code={source.code}
+      highlightedCode={highlightedCode}
+      language={resolvedLanguage}
+      title={title ?? source.displayPath}
+      class={className}
+      {...props}
+    />
+  )
+}

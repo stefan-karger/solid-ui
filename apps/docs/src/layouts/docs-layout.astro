@@ -24,10 +24,24 @@ const { title = "Solid UI" } = Astro.props
     </main>
 
     <script>
+      import { initializeCodeCollapsibles } from "~/lib/code-collapsibles"
       import { initializeCopyButtons } from "~/lib/copy-buttons"
+      import { initializeDocsAccordions } from "~/lib/docs-accordions"
+      import { initializeDocsTabs } from "~/lib/docs-tabs"
+      import { initializeDirectoryBrowsers } from "~/lib/directory-browser"
 
+      initializeDirectoryBrowsers()
+      initializeDocsAccordions()
+      initializeCodeCollapsibles()
       initializeCopyButtons()
-      document.addEventListener("astro:page-load", initializeCopyButtons)
+      initializeDocsTabs()
+      document.addEventListener("astro:page-load", () => {
+        initializeDirectoryBrowsers()
+        initializeDocsAccordions()
+        initializeCodeCollapsibles()
+        initializeCopyButtons()
+        initializeDocsTabs()
+      })
     </script>
   </body>
 </html>

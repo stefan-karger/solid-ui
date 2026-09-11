@@ -1,0 +1,84 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+component: true
+---
+
+<ComponentPreview name="separator-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add separator
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="separator" title="components/ui/separator.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Separator } from "~/components/ui/separator"
+```
+
+```tsx
+<Separator />
+```
+
+## Examples
+
+### Vertical
+
+<ComponentPreview name="separator-vertical" />
+
+### Menu
+
+Use separators to group related actions.
+
+<ComponentPreview name="separator-menu" />
+
+### List
+
+Use separators between list rows for visual structure.
+
+<ComponentPreview name="separator-list" />
+
+## API Reference
+
+### Core Parts
+
+| Part        | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| `Separator` | Divider element that supports horizontal and vertical. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/separator) documentation for more information.

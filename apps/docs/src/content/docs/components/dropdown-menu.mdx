@@ -1,0 +1,200 @@
+---
+title: Dropdown Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+component: true
+---
+
+<ComponentPreview
+  name="dropdown-menu-demo"
+  description="A dropdown menu with icons, shortcuts, and nested submenu items."
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add dropdown-menu
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="dropdown-menu" title="components/ui/dropdown-menu.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { Button } from "~/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu"
+```
+
+```tsx showLineNumbers
+<DropdownMenu>
+  <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+    Open
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuGroup>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Support</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Composition
+
+Use the following composition to build a `DropdownMenu`:
+
+```text
+DropdownMenu
+├── DropdownMenuTrigger
+└── DropdownMenuContent
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   └── DropdownMenuItem
+    ├── DropdownMenuCheckboxItem
+    ├── DropdownMenuRadioGroup
+    │   └── DropdownMenuRadioItem
+    ├── DropdownMenuSeparator
+    └── DropdownMenuSub
+        ├── DropdownMenuSubTrigger
+        └── DropdownMenuSubContent
+            └── DropdownMenuItem
+```
+
+## Examples
+
+### Basic
+
+A basic dropdown menu with labels and separators.
+
+<ComponentPreview name="dropdown-menu-basic" />
+
+### Submenu
+
+Use `DropdownMenuSub` to nest secondary actions.
+
+<ComponentPreview name="dropdown-menu-submenu" />
+
+### Shortcuts
+
+Add `DropdownMenuShortcut` to show keyboard hints.
+
+<ComponentPreview name="dropdown-menu-shortcuts" />
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+<ComponentPreview name="dropdown-menu-icons" />
+
+### Checkboxes
+
+Use `DropdownMenuCheckboxItem` for toggleable options.
+
+<ComponentPreview name="dropdown-menu-checkboxes" />
+
+### Checkboxes Icons
+
+Add icons to checkbox items.
+
+<ComponentPreview name="dropdown-menu-checkboxes-icons" />
+
+### Radio Group
+
+Use `DropdownMenuRadioGroup` for exclusive choices.
+
+<ComponentPreview name="dropdown-menu-radio-group" />
+
+### Radio Icons
+
+Show radio options with icons.
+
+<ComponentPreview name="dropdown-menu-radio-icons" />
+
+### Destructive
+
+Use `variant="destructive"` for irreversible actions.
+
+<ComponentPreview name="dropdown-menu-destructive" />
+
+### Avatar
+
+An account switcher dropdown triggered by avatar-style controls.
+
+<ComponentPreview name="dropdown-menu-avatar" />
+
+### Complex
+
+A richer example combining groups, icons, shortcuts, and nested submenus.
+
+<ComponentPreview name="dropdown-menu-complex" align="start" />
+
+## API Reference
+
+### Core Parts
+
+| Part                       | Description                                              |
+| -------------------------- | -------------------------------------------------------- |
+| `DropdownMenu`             | Root container that manages menu open state.             |
+| `DropdownMenuTrigger`      | Trigger element that opens and closes the menu.          |
+| `DropdownMenuContent`      | Floating menu content rendered in a portal.              |
+| `DropdownMenuGroup`        | Group wrapper for related items.                         |
+| `DropdownMenuLabel`        | Non-interactive label for a menu group.                  |
+| `DropdownMenuItem`         | Standard action item with optional variants and inset.   |
+| `DropdownMenuShortcut`     | Right-aligned text for keyboard shortcuts.               |
+| `DropdownMenuSeparator`    | Visual separator between groups or action sections.      |
+| `DropdownMenuSub`          | Wrapper for nested submenus.                             |
+| `DropdownMenuSubTrigger`   | Trigger item that opens a submenu.                       |
+| `DropdownMenuSubContent`   | Floating content panel for submenu items.                |
+| `DropdownMenuCheckboxItem` | Toggle item with checked indicator.                      |
+| `DropdownMenuRadioGroup`   | Group container for mutually exclusive radio selections. |
+| `DropdownMenuRadioItem`    | Radio item used inside `DropdownMenuRadioGroup`.         |
+
+### DropdownMenuItem
+
+| Prop      | Type                         | Default     |
+| --------- | ---------------------------- | ----------- |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+| `inset`   | `boolean`                    | `false`     |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/dropdown-menu) documentation for more information.

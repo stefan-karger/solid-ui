@@ -1,0 +1,210 @@
+---
+title: Empty
+description: Use the Empty component to display an empty state.
+component: true
+---
+
+<ComponentPreview name="empty-demo" previewClassName="h-96 p-0" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add empty
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="empty" title="components/ui/empty.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle
+} from "~/components/ui/empty"
+```
+
+```tsx showLineNumbers
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">
+      <Icon />
+    </EmptyMedia>
+    <EmptyTitle>No projects yet</EmptyTitle>
+    <EmptyDescription>
+      You haven&apos;t created any projects yet. Get started by creating your first project.
+    </EmptyDescription>
+  </EmptyHeader>
+  <EmptyContent>
+    <Button>Create project</Button>
+  </EmptyContent>
+</Empty>
+```
+
+## Composition
+
+Use the following composition to build an `Empty` state:
+
+```text
+Empty
+├── EmptyHeader
+│   ├── EmptyMedia
+│   ├── EmptyTitle
+│   └── EmptyDescription
+└── EmptyContent
+```
+
+## Examples
+
+### Outline
+
+Use `EmptyMedia` with `variant="icon"` and an outline-style action.
+
+<ComponentPreview name="empty-outline" previewClassName="h-96 p-6 md:p-10" />
+
+### Background
+
+Use the `bg-*` and `bg-gradient-*` utilities to add a background to the empty state.
+
+<ComponentPreview name="empty-background" previewClassName="h-96 p-0" />
+
+### Avatar
+
+Use the `EmptyMedia` component to display an avatar in the empty state.
+
+<ComponentPreview name="empty-avatar" previewClassName="h-96 p-0" />
+
+### Avatar Group
+
+Use the `EmptyMedia` component to display an avatar group in the empty state.
+
+<ComponentPreview name="empty-avatar-group" previewClassName="h-96 p-0" />
+
+### Input Group
+
+You can add an `InputGroup` component to the `EmptyContent` component.
+
+<ComponentPreview name="empty-input-group" previewClassName="h-96 p-0" />
+
+## API Reference
+
+### Empty
+
+The main component of the empty state. Wraps the `EmptyHeader` and `EmptyContent` components.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<Empty>
+  <EmptyHeader />
+  <EmptyContent />
+</Empty>
+```
+
+### EmptyHeader
+
+The `EmptyHeader` component wraps the empty media, title, and description.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<EmptyHeader>
+  <EmptyMedia />
+  <EmptyTitle />
+  <EmptyDescription />
+</EmptyHeader>
+```
+
+### EmptyMedia
+
+Use the `EmptyMedia` component to display the media of the empty state such as an icon or an image. You can also use it to display other components such as an avatar.
+
+| Prop      | Type                  | Default   |
+| --------- | --------------------- | --------- |
+| `variant` | `"default" \| "icon"` | `default` |
+| `class`   | `string`              |           |
+
+```tsx
+<EmptyMedia variant="icon">
+  <Icon />
+</EmptyMedia>
+```
+
+```tsx
+<EmptyMedia>
+  <Avatar>
+    <AvatarImage src="..." />
+    <AvatarFallback>CN</AvatarFallback>
+  </Avatar>
+</EmptyMedia>
+```
+
+### EmptyTitle
+
+Use the `EmptyTitle` component to display the title of the empty state.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<EmptyTitle>No data</EmptyTitle>
+```
+
+### EmptyDescription
+
+Use the `EmptyDescription` component to display the description of the empty state.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<EmptyDescription>You do not have any notifications.</EmptyDescription>
+```
+
+### EmptyContent
+
+Use the `EmptyContent` component to display the content of the empty state such as a button, input or a link.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
+
+```tsx
+<EmptyContent>
+  <Button>Add Project</Button>
+</EmptyContent>
+```

@@ -1,0 +1,152 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+component: true
+---
+
+<ComponentPreview name="menubar-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add menubar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="menubar" title="components/ui/menubar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Menubar,
+  MenubarContent,
+  MenubarGroup,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger
+} from "~/components/ui/menubar"
+```
+
+```tsx showLineNumbers
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarGroup>
+        <MenubarItem>
+          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>New Window</MenubarItem>
+      </MenubarGroup>
+      <MenubarSeparator />
+      <MenubarGroup>
+        <MenubarItem>Share</MenubarItem>
+        <MenubarItem>Print</MenubarItem>
+      </MenubarGroup>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+## Composition
+
+Use the following composition to build a `Menubar`:
+
+```text
+Menubar
+└── MenubarMenu
+    ├── MenubarTrigger
+    └── MenubarContent
+        ├── MenubarGroup
+        │   ├── MenubarLabel
+        │   └── MenubarItem
+        ├── MenubarCheckboxItem
+        ├── MenubarRadioGroup
+        │   └── MenubarRadioItem
+        ├── MenubarSeparator
+        └── MenubarSub
+            ├── MenubarSubTrigger
+            └── MenubarSubContent
+                └── MenubarItem
+```
+
+## Examples
+
+### Checkbox
+
+Use `MenubarCheckboxItem` for toggleable options.
+
+<ComponentPreview name="menubar-checkbox" />
+
+### Radio
+
+Use `MenubarRadioGroup` and `MenubarRadioItem` for single-select options.
+
+<ComponentPreview name="menubar-radio" />
+
+### Submenu
+
+Use `MenubarSub`, `MenubarSubTrigger`, and `MenubarSubContent` for nested menus.
+
+<ComponentPreview name="menubar-submenu" />
+
+### With Icons
+
+<ComponentPreview name="menubar-icons" />
+
+## API Reference
+
+### Core Parts
+
+| Part                  | Description                                                    |
+| --------------------- | -------------------------------------------------------------- |
+| `Menubar`             | Root container for the menubar and all menu groups.            |
+| `MenubarMenu`         | Individual top-level menu wrapper inside the menubar.          |
+| `MenubarTrigger`      | Trigger button that opens a menu's content.                    |
+| `MenubarContent`      | Floating menu panel rendered in a portal.                      |
+| `MenubarGroup`        | Groups related menu items within content.                      |
+| `MenubarItem`         | Standard interactive menu action item.                         |
+| `MenubarCheckboxItem` | Toggleable menu item with built-in checked indicator.          |
+| `MenubarRadioGroup`   | Group container for mutually-exclusive radio menu items.       |
+| `MenubarRadioItem`    | Single-select option used inside `MenubarRadioGroup`.          |
+| `MenubarSub`          | Wrapper for a nested submenu.                                  |
+| `MenubarSubTrigger`   | Trigger for opening a submenu.                                 |
+| `MenubarSubContent`   | Floating content panel for submenu items.                      |
+| `MenubarSeparator`    | Visual separator between groups of items.                      |
+| `MenubarLabel`        | Non-interactive section label for grouped items.               |
+| `MenubarShortcut`     | Right-aligned helper text for keyboard shortcuts or meta info. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/menubar) documentation for more information.

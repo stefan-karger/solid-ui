@@ -1,0 +1,73 @@
+---
+title: Label
+description: Renders an accessible label associated with controls.
+component: true
+---
+
+<ComponentPreview name="label-demo" />
+
+<Callout>
+  For form fields, use the [Field](/docs/components/field) component which includes built-in label,
+  description, and error handling.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add label
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="label" title="components/ui/label.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Label } from "~/components/ui/label"
+```
+
+```tsx
+<Label for="email">Email address</Label>
+```
+
+## Label in Field
+
+For form fields, use the [Field](/docs/components/field) component which
+includes built-in `FieldLabel`, `FieldDescription`, and `FieldError` components.
+
+```tsx
+<Field>
+  <FieldLabel for="email">Your email address</FieldLabel>
+  <Input id="email" />
+</Field>
+```
+
+<ComponentPreview name="field-demo" previewClassName="h-[44rem]" />
+
+## API Reference
+
+See the [HTML label element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) documentation for more information.

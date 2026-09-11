@@ -1,0 +1,97 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+component: true
+---
+
+<ComponentPreview name="tooltip-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add tooltip
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="tooltip" title="components/ui/tooltip.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip"
+```
+
+```tsx showLineNumbers
+<Tooltip>
+  <TooltipTrigger as="button">Hover</TooltipTrigger>
+  <TooltipContent>
+    <p>Add to library</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+## Composition
+
+Use the following composition to build a `Tooltip`:
+
+```text
+Tooltip
+├── TooltipTrigger
+└── TooltipContent
+```
+
+## Examples
+
+### Side
+
+<ComponentPreview name="tooltip-sides" />
+
+### With Keyboard Shortcut
+
+<ComponentPreview name="tooltip-keyboard" />
+
+### Disabled Button
+
+<ComponentPreview name="tooltip-disabled" />
+
+## API Reference
+
+### Core Parts
+
+| Part             | Description                                              |
+| ---------------- | -------------------------------------------------------- |
+| `Tooltip`        | Root component that controls tooltip state and behavior. |
+| `TooltipTrigger` | Interactive element that opens tooltip content.          |
+| `TooltipContent` | Floating content rendered in a portal near the trigger.  |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/tooltip) documentation for more information.

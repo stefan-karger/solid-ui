@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  lucide-solid@1.41.0: 2c2ee21c9d66dfe7f8a6760438c05ae5a541981c2754426eda12a57fb0a72267
+  lucide-solid@1.41.0: d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c
 
 importers:
 
@@ -145,7 +145,7 @@ importers:
         version: 2.1.1
       lucide-solid:
         specifier: 1.41.0
-        version: 1.41.0(patch_hash=2c2ee21c9d66dfe7f8a6760438c05ae5a541981c2754426eda12a57fb0a72267)(solid-js@2.0.0-rc.6)
+        version: 1.41.0(patch_hash=d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c)(solid-js@2.0.0-rc.6)
       rehype-pretty-code:
         specifier: 0.14.5
         version: 0.14.5(shiki@4.4.3)
@@ -5659,7 +5659,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-solid@1.41.0(patch_hash=2c2ee21c9d66dfe7f8a6760438c05ae5a541981c2754426eda12a57fb0a72267)(solid-js@2.0.0-rc.6):
+  lucide-solid@1.41.0(patch_hash=d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c)(solid-js@2.0.0-rc.6):
     dependencies:
       solid-js: 2.0.0-rc.6
 

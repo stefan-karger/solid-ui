@@ -398,6 +398,29 @@ export const examples: Registry["items"] = [
     ]
   },
   {
+    name: "button-rtl",
+    type: "registry:example",
+    dependencies: ["@kobalte/core"],
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-rtl.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "button-interactive",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button-interactive.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "button-size",
     type: "registry:example",
     registryDependencies: ["button"],
@@ -521,6 +544,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-group-demo",
     type: "registry:example",
+    meta: { docs: { clientOnly: true } },
     registryDependencies: ["button", "button-group"],
     files: [
       {
@@ -1192,6 +1216,7 @@ export const examples: Registry["items"] = [
   {
     name: "dialog-demo",
     type: "registry:example",
+    meta: { docs: { clientOnly: true } },
     registryDependencies: ["button", "dialog", "input", "label"],
     files: [
       {
@@ -2303,6 +2328,7 @@ export const examples: Registry["items"] = [
   {
     name: "sidebar-demo",
     type: "registry:example",
+    meta: { docs: { blockPreview: true } },
     registryDependencies: ["sidebar"],
     files: [
       {

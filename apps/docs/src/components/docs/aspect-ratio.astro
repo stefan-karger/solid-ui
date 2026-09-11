@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  ratio: number
+}
+
+const { ratio, class: className, style, ...props } = Astro.props
+
+if (typeof ratio !== "number" || !Number.isFinite(ratio) || ratio <= 0) {
+  throw new Error("[AspectRatio] `ratio` must be a positive finite number.")
+}
+
+const ratioStyle =
+  style && typeof style === "object"
+    ? { "--ratio": ratio, ...style }
+    : `--ratio: ${ratio};${typeof style === "string" ? style : ""}`
+---
+
+<div
+  class={cn("relative aspect-(--ratio) overflow-hidden", className)}
+  data-slot="aspect-ratio"
+  style={ratioStyle}
+  {...props}
+>
+  <slot />
+</div>

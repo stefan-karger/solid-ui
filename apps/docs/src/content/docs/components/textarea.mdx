@@ -1,0 +1,80 @@
+---
+title: Textarea
+description: Displays a form textarea or a component that looks like a textarea.
+component: true
+---
+
+<ComponentPreview name="textarea-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add textarea
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="textarea" title="components/ui/textarea.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Textarea } from "~/components/ui/textarea"
+```
+
+```tsx
+<Textarea />
+```
+
+## Examples
+
+### Field
+
+Use `Field`, `FieldLabel`, and `FieldDescription` to create a textarea with a label and description.
+
+<ComponentPreview name="textarea-field" />
+
+### Disabled
+
+Use the `disabled` prop to disable the textarea. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
+
+<ComponentPreview name="textarea-disabled" />
+
+### Invalid
+
+Use the `aria-invalid` prop to mark the textarea as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
+
+<ComponentPreview name="textarea-invalid" />
+
+### Button
+
+Pair with `Button` to create a textarea with a submit button.
+
+<ComponentPreview name="textarea-button" />
+
+API Reference
+
+All native `textarea` attributes are forwarded to the root element.

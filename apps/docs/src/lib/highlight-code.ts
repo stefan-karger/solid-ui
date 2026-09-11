@@ -1,4 +1,49 @@
-import type { ShikiTransformer } from "shiki"
+import {
+  createHighlighter,
+  type BundledLanguage,
+  type Highlighter,
+  type ShikiTransformer
+} from "shiki"
+
+export const LIGHT_CODE_THEME = "github-light-default"
+export const DARK_CODE_THEME = "github-dark"
+
+const registryLanguages = ["tsx", "ts", "jsx", "js", "css", "json", "text"] as const
+let highlighterPromise: Promise<Highlighter> | undefined
+
+function getHighlighter() {
+  highlighterPromise ??= createHighlighter({
+    themes: [LIGHT_CODE_THEME, DARK_CODE_THEME],
+    langs: [...registryLanguages]
+  })
+  return highlighterPromise
+}
+
+export async function highlightCode(code: string, language: string): Promise<string> {
+  const highlighter = await getHighlighter()
+  const lang = registryLanguages.includes(language as (typeof registryLanguages)[number])
+    ? (language as BundledLanguage)
+    : "text"
+
+  return highlighter.codeToHtml(code, {
+    lang,
+    themes: { light: LIGHT_CODE_THEME, dark: DARK_CODE_THEME },
+    transformers: [
+      {
+        pre(node) {
+          node.properties["class"] =
+            "no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0 !bg-transparent"
+        },
+        code(node) {
+          node.properties["data-line-numbers"] = ""
+        },
+        line(node) {
+          node.properties["data-line"] = ""
+        }
+      }
+    ]
+  })
+}
 
 export const transformers = [
   {

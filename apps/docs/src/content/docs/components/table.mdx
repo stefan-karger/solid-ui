@@ -1,0 +1,123 @@
+---
+title: Table
+description: A responsive table component.
+component: true
+---
+
+<ComponentPreview name="table-demo" previewClassName="h-[30rem]" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add table
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="table" title="components/ui/table.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "~/components/ui/table"
+```
+
+```tsx showLineNumbers
+<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead class="w-[120px]">Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead>Method</TableHead>
+      <TableHead class="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell class="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell>
+      <TableCell class="text-right">$250.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Composition
+
+Use the following composition to build a `Table`:
+
+```text
+Table
+├── TableCaption
+├── TableHeader
+│   └── TableRow
+│       └── TableHead
+├── TableBody
+│   └── TableRow
+│       └── TableCell
+└── TableFooter
+    └── TableRow
+        └── TableCell
+```
+
+## Examples
+
+### Footer
+
+Use the `<TableFooter />` component to add a footer to the table.
+
+<ComponentPreview name="table-footer" />
+
+### Actions
+
+A table showing actions for each row using a `<DropdownMenu />` component.
+
+<ComponentPreview name="table-actions" />
+
+## API Reference
+
+### Core Parts
+
+| Part           | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| `Table`        | Responsive wrapper and table root element.            |
+| `TableHeader`  | Header section that groups heading rows.              |
+| `TableBody`    | Main body section for data rows.                      |
+| `TableFooter`  | Footer section for totals and aggregate values.       |
+| `TableRow`     | Row element shared by header, body, and footer.       |
+| `TableHead`    | Header cell for column labels.                        |
+| `TableCell`    | Standard body or footer cell.                         |
+| `TableCaption` | Caption text shown below the table for extra context. |

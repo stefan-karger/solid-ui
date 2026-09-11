@@ -1,0 +1,96 @@
+---
+title: Slider
+description: An input where the user selects a value from within a given range.
+component: true
+---
+
+<ComponentPreview name="slider-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add slider
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="slider" title="components/ui/slider.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Slider } from "~/components/ui/slider"
+```
+
+```tsx
+<Slider defaultValue={[33]} max={100} step={1} />
+```
+
+## Examples
+
+### Range
+
+Use an array with two values for a range slider.
+
+<ComponentPreview name="slider-range" />
+
+### Multiple
+
+Use an array with multiple values for multiple thumbs.
+
+<ComponentPreview name="slider-multiple" />
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical slider.
+
+<ComponentPreview name="slider-vertical" />
+
+### Controlled
+
+<ComponentPreview name="slider-controlled" />
+
+### Disabled
+
+Use the `disabled` prop to disable the slider.
+
+<ComponentPreview name="slider-disabled" />
+
+## API Reference
+
+### Core Parts
+
+| Part     | Description                                                       |
+| -------- | ----------------------------------------------------------------- |
+| `Slider` | Slider root with built-in track, fill, thumbs, and hidden inputs. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/slider) documentation for more information.

@@ -1,0 +1,157 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+component: true
+---
+
+<ComponentPreview name="button-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add button
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="button" title="components/ui/button.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Button } from "~/components/ui/button"
+```
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+## Cursor
+
+Tailwind v4 [switched](https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor) from `cursor: pointer` to `cursor: default` for native button elements.
+To use pointer cursors for interactive buttons, add this base style:
+
+```css showLineNumbers title="globals.css"
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+```
+
+## Examples
+
+### Size
+
+Use the `size` prop to change the size of the button.
+
+<ComponentPreview name="button-size" />
+
+### Default
+
+<ComponentPreview name="button-default" />
+
+### Outline
+
+<ComponentPreview name="button-outline" />
+
+### Secondary
+
+<ComponentPreview name="button-secondary" />
+
+### Ghost
+
+<ComponentPreview name="button-ghost" />
+
+### Destructive
+
+<ComponentPreview name="button-destructive" />
+
+### Link
+
+<ComponentPreview name="button-link" />
+
+### With Icon
+
+Add `data-icon="inline-start"` or `data-icon="inline-end"` to icons to apply directional spacing.
+
+<ComponentPreview name="button-with-icon" />
+
+### Interactive
+
+Use the `onClick` event to respond to button interactions.
+
+<ComponentPreview name="button-interactive" />
+
+### Rounded
+
+Use the `rounded-full` class to make the button rounded.
+
+<ComponentPreview name="button-rounded" />
+
+### Spinner
+
+Render a `<Spinner />` component inside the button for pending actions. Add `data-icon="inline-start"` or `data-icon="inline-end"` to the spinner for the correct directional spacing.
+
+<ComponentPreview name="button-spinner" />
+
+### Group
+
+To create a button group, use the `ButtonGroup` component.
+
+<ComponentPreview name="button-group-demo" />
+
+### As
+
+Use the `as` prop to render another element with button styles.
+
+<ComponentPreview name="button-aschild" />
+
+## RTL
+
+Preview direction is scoped to the component example; the surrounding documentation remains left-to-right.
+
+<ComponentPreview name="button-rtl" direction="rtl" />
+
+## API Reference
+
+The `Button` component wraps Kobalte's button primitive with variant and size styles.
+
+| Prop      | Type                                                                                 | Default     |
+| --------- | ------------------------------------------------------------------------------------ | ----------- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"`        | `"default"` |
+| `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
+| `as`      | `ValidComponent`                                                                     | `"button"`  |
+| `class`   | `string`                                                                             | -           |
+
+See the [Kobalte documentation](https://kobalte.dev/docs/core/components/button#api-reference) for more information.

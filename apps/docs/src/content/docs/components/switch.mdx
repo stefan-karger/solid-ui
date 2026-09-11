@@ -1,0 +1,98 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+component: true
+---
+
+<ComponentPreview name="switch-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add switch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @kobalte/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="switch" title="components/ui/switch.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Switch } from "~/components/ui/switch"
+```
+
+```tsx
+<Switch />
+```
+
+## Examples
+
+### Description
+
+<ComponentPreview name="switch-description" />
+
+### Choice Card
+
+Card-style selection where `FieldLabel` wraps the entire `Field` for a clickable card pattern.
+
+<ComponentPreview name="switch-choice-card" />
+
+### Disabled
+
+Add the `disabled` prop to `Switch` to prevent user interaction. Add `data-disabled` to `Field` when
+you want disabled styles on related field content.
+
+<ComponentPreview name="switch-disabled" />
+
+### Invalid
+
+Add `aria-invalid` to `Switch` to indicate an invalid state. Add `data-invalid` to `Field` for
+matching field-level styles.
+
+<ComponentPreview name="switch-invalid" />
+
+### Sizes
+
+Use the `size` prop to change the size of the switch.
+
+<ComponentPreview name="switch-sizes" />
+
+## API Reference
+
+### Core Parts
+
+| Part     | Description                                                         |
+| -------- | ------------------------------------------------------------------- |
+| `Switch` | Root switch primitive with hidden input, visual control, and thumb. |
+
+See the [Kobalte](https://kobalte.dev/docs/core/components/switch) documentation for more information.

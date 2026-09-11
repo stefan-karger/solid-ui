@@ -9,7 +9,9 @@ const docs = defineCollection({
   }),
   schema: z.object({
     title: z.string(),
-    description: z.string()
+    description: z.string(),
+    component: z.boolean().optional(),
+    new: z.boolean().optional()
   })
 })
 

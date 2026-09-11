@@ -8,4 +8,8 @@ test-results
 .vitest-dump
 .DS_Store
 *.local
+
 /docs/
+/plans/
+.agents/
+skills-lock.json

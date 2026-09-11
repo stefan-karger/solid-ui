@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  value: string
+  disabled?: boolean
+}
+
+const { class: className, value, disabled = false, ...props } = Astro.props
+
+if (!value.trim() || value.includes(",")) {
+  throw new Error("[AccordionItem] `value` must be non-empty and cannot contain commas.")
+}
+---
+
+<div
+  class={cn("cn-accordion-item", className)}
+  data-accordion-item
+  data-disabled={disabled ? "" : undefined}
+  data-slot="accordion-item"
+  data-value={value}
+  {...props}
+>
+  <slot />
+</div>

@@ -1,0 +1,26 @@
+---
+// oxlint-disable-next-line import/no-unassigned-import
+import "~/styles/global.css"
+
+type Props = {
+  title?: string
+}
+
+const { title = "Solid UI Preview" } = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="layout-fixed style-nova">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-svh bg-background text-foreground antialiased">
+    <main class="min-h-svh">
+      <slot />
+    </main>
+  </body>
+</html>

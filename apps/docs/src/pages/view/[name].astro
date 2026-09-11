@@ -1,0 +1,24 @@
+---
+import RegistryPreview from "~/components/registry-preview"
+import PreviewLayout from "~/layouts/preview-layout.astro"
+import { getBlockPreviews, type PreviewDescriptor } from "~/lib/registry.server"
+
+export function getStaticPaths() {
+  return getBlockPreviews().map((descriptor) => ({
+    params: { name: descriptor.name },
+    props: { descriptor }
+  }))
+}
+
+type Props = {
+  descriptor: PreviewDescriptor
+}
+
+const { descriptor } = Astro.props
+---
+
+<PreviewLayout title={`${descriptor.name} Preview`}>
+  <div class="min-h-svh bg-background">
+    <RegistryPreview moduleId={descriptor.moduleId} client:only="solid-js" />
+  </div>
+</PreviewLayout>

@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  defaultValue?: string
+  storageKey?: string
+}
+
+const { defaultValue, storageKey, class: className, ...props } = Astro.props
+---
+
+<div
+  class={cn("relative flex w-full flex-col gap-2", className)}
+  data-docs-tabs
+  data-default-value={defaultValue}
+  data-storage-key={storageKey}
+  {...props}
+>
+  <slot />
+</div>
