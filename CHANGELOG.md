@@ -1,5 +1,16 @@
 # 2026-09-11
 
+Kept Combobox and Command keyboard highlighting synchronized with filtered collections, so the
+replacement first result remains announced and selectable when filtering removes the previous
+focus. Added DOM coverage for active-descendant state, Enter activation, and closing behavior.
+
+## Affected files
+
+- `apps/docs/src/registry/ui/{combobox,command}.tsx`
+- `apps/docs/src/registry/ui/auto-highlight.test.tsx`
+
+# 2026-09-11
+
 Added registry-backed component documentation with live and isolated previews, consumer-ready source
 views, component navigation, and interactive MDX widgets for tabs, accordions, callouts, steps, code,
 images, and the registry directory. Extended the Solid 2 Astro renderer to resolve lazy preview assets and added broad rendering, navigation, source-transformation, and interaction coverage.

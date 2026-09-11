@@ -117,8 +117,9 @@ const CommandList = <Option, OptGroup = never, T extends ValidComponent = "ul">(
   const others = omit(props as CommandListProps<Option>, "class", "autoHighlightFirst")
   const context = useComboboxContext()
   createEffect(
-    () => [local.autoHighlightFirst, context.isOpen()] as const,
-    ([autoHighlightFirst, isOpen]) => {
+    () => {
+      const autoHighlightFirst = local.autoHighlightFirst
+      const isOpen = context.isOpen()
       if (!autoHighlightFirst || !isOpen) {
         return
       }
@@ -128,14 +129,25 @@ const CommandList = <Option, OptGroup = never, T extends ValidComponent = "ul">(
       const listState = context.listState()
       const selectionManager = listState.selectionManager()
       const focusedKey = selectionManager.focusedKey()
+      const collection = listState.collection()
+
+      return {
+        collectionHasFocusedKey: focusedKey != null && collection.getItem(focusedKey) != null,
+        firstKey,
+        focusedKey,
+        selectionManager
+      }
+    },
+    (state) => {
+      if (state == null) return
+      const { collectionHasFocusedKey, firstKey, focusedKey, selectionManager } = state
       if (firstKey == null) {
         if (focusedKey != null) {
           selectionManager.setFocusedKey(undefined)
         }
         return
       }
-      const collection = listState.collection()
-      if (focusedKey == null || !collection.getItem(focusedKey)) {
+      if (!collectionHasFocusedKey) {
         selectionManager.setFocusedKey(firstKey)
       }
     }

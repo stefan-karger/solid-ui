@@ -216,8 +216,9 @@ const ComboboxAutoHighlightController = (
 ) => {
   const context = ComboboxPrimitive.useComboboxContext()
   createEffect(
-    () => [props.autoHighlight, context.isOpen()] as const,
-    ([autoHighlight, isOpen]) => {
+    () => {
+      const autoHighlight = props.autoHighlight
+      const isOpen = context.isOpen()
       if (!autoHighlight || !isOpen) {
         return
       }
@@ -227,14 +228,25 @@ const ComboboxAutoHighlightController = (
       const listState = context.listState()
       const selectionManager = listState.selectionManager()
       const focusedKey = selectionManager.focusedKey()
+      const collection = listState.collection()
+
+      return {
+        collectionHasFocusedKey: focusedKey != null && collection.getItem(focusedKey) != null,
+        firstKey,
+        focusedKey,
+        selectionManager
+      }
+    },
+    (state) => {
+      if (state == null) return
+      const { collectionHasFocusedKey, firstKey, focusedKey, selectionManager } = state
       if (firstKey == null) {
         if (focusedKey != null) {
           selectionManager.setFocusedKey(undefined)
         }
         return
       }
-      const collection = listState.collection()
-      if (focusedKey == null || !collection.getItem(focusedKey)) {
+      if (!collectionHasFocusedKey) {
         selectionManager.setFocusedKey(firstKey)
       }
     }
