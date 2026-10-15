@@ -99,7 +99,7 @@ export const init = new Command()
       const packageManager = await getPackageManager(cwd)
       await execa(packageManager, [
         "add",
-        packageManager === "deno" ? "--npm" : "",
+        ...(packageManager === "deno" ? ["--npm"] : []),
         ...PROJECT_DEPENDENCIES,
       ], { cwd });
 

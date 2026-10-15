@@ -150,7 +150,7 @@ export const add = new Command()
           const packageManager = await getPackageManager(cwd)
           await execa(packageManager, [
             "add",
-            packageManager === "deno" ? "--npm" : "",
+            ...(packageManager === "deno" ? ["--npm"] : []),
             ...item.dependencies,
           ], { cwd });
         }
