@@ -6,6 +6,8 @@ links:
   api: https://kobalte.dev/docs/core/components/alert-dialog#api-reference
 ---
 
+The Alert Dialog component is built on top of [Kobalte Alert Dialog](https://kobalte.dev/docs/core/components/alert-dialog), which provides accessible modal and keyboard behavior for consequential actions.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -58,17 +60,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
+import { Button } from "~/components/ui/button";
 ```
 
 ```tsx showLineNumbers
 <AlertDialog>
-  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogTrigger as={Button} variant="outline">
+    Show Dialog
+  </AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
         This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
+        from our servers.
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
@@ -78,3 +83,129 @@ import {
   </AlertDialogContent>
 </AlertDialog>
 ```
+
+## Composition
+
+Use the following composition to build an `AlertDialog`:
+
+```text
+AlertDialog
+├── AlertDialogTrigger
+└── AlertDialogContent
+    ├── AlertDialogHeader
+    │   ├── AlertDialogMedia
+    │   ├── AlertDialogTitle
+    │   └── AlertDialogDescription
+    └── AlertDialogFooter
+        ├── AlertDialogCancel
+        └── AlertDialogAction
+```
+
+## Examples
+
+### Basic
+
+A basic alert dialog with a title, description, and cancel and continue buttons.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="alert-dialog-basic" previewClass="h-56" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/alert-dialog-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Small
+
+Use the `size="sm"` prop to make the alert dialog smaller.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="alert-dialog-small" previewClass="h-56" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/alert-dialog-small" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Media
+
+Use the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="alert-dialog-media" previewClass="h-56" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/alert-dialog-media" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Small with Media
+
+Use the `size="sm"` prop to make the alert dialog smaller and the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="alert-dialog-small-media" previewClass="h-56" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/alert-dialog-small-media" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Destructive
+
+Use the `AlertDialogAction` component to add a destructive action button to the alert dialog.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="alert-dialog-destructive" previewClass="h-56" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/alert-dialog-destructive" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### size
+
+Use the `size` prop on the `AlertDialogContent` component to control the size of the alert dialog. It accepts the following values:
+
+| Prop   | Type                | Default     |
+| ------ | ------------------- | ----------- |
+| `size` | `"default" \| "sm"` | `"default"` |
+
+For all primitive props and keyboard interactions, see the [Kobalte Alert Dialog API reference](https://kobalte.dev/docs/core/components/alert-dialog#api-reference).

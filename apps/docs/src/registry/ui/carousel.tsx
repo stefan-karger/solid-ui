@@ -209,8 +209,8 @@ const CarouselPrevious = <T extends ValidComponent = "button">(
       class={cn(
         "cn-carousel-previous absolute touch-manipulation",
         orientation === "horizontal"
-          ? "-left-12 -translate-y-1/2 top-1/2"
-          : "-top-12 -translate-x-1/2 left-1/2 rotate-90",
+          ? "top-1/2 -left-12 -translate-y-1/2"
+          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         local.class
       )}
       data-slot="carousel-previous"
@@ -242,8 +242,8 @@ const CarouselNext = <T extends ValidComponent = "button">(
       class={cn(
         "cn-carousel-next absolute touch-manipulation",
         orientation === "horizontal"
-          ? "-right-12 -translate-y-1/2 top-1/2"
-          : "-bottom-12 -translate-x-1/2 left-1/2 rotate-90",
+          ? "top-1/2 -right-12 -translate-y-1/2"
+          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         local.class
       )}
       data-slot="carousel-next"
@@ -260,11 +260,11 @@ const CarouselNext = <T extends ValidComponent = "button">(
 }
 
 export {
-  type CarouselApi,
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
   useCarousel
 }

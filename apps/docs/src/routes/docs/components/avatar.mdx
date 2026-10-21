@@ -6,10 +6,12 @@ links:
   api: https://kobalte.dev/docs/core/components/image#api-reference
 ---
 
+The Avatar component is built on top of [Kobalte Image](https://kobalte.dev/docs/core/components/image), which provides accessible image loading and fallback behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
-<ComponentPreview name="avatar-demo" />
+<ComponentPreview name="avatar-demo" previewClass="h-72" />
 
 :::
 
@@ -46,13 +48,258 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 ```
 
 ```tsx showLineNumbers
 <Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" />
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
   <AvatarFallback>CN</AvatarFallback>
 </Avatar>
 ```
+
+## Composition
+
+Use the following composition to build an `Avatar`:
+
+```text
+Avatar
+├── AvatarImage
+├── AvatarFallback
+└── AvatarBadge
+```
+
+Use the following composition to build an `AvatarGroup`:
+
+```text
+AvatarGroup
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+└── AvatarGroupCount
+```
+
+## Examples
+
+### Basic
+
+A basic avatar component with an image and a fallback.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-basic" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Badge
+
+Use the `AvatarBadge` component to add a badge to the avatar. The badge is positioned at the bottom right of the avatar.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-badge" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-badge" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+Use the `class` prop to add custom styles to the badge, such as custom colors and sizes.
+
+```tsx showLineNumbers
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+  <AvatarBadge class="bg-green-600 dark:bg-green-800" />
+</Avatar>
+```
+
+### Badge with Icon
+
+You can also use an icon inside `<AvatarBadge>`.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-badge-icon" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-badge-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Avatar Group
+
+Use the `AvatarGroup` component to add a group of avatars.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-group" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Avatar Group Count
+
+Use `<AvatarGroupCount>` to add a count to the group.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-group-count" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-group-count" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Avatar Group with Icon
+
+You can also use an icon inside `<AvatarGroupCount>`.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-group-count-icon" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-group-count-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Sizes
+
+Use the `size` prop to change the size of the avatar.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-size" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Dropdown
+
+You can use the `Avatar` component as a trigger for a dropdown menu.
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="avatar-dropdown" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/avatar-dropdown" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Avatar
+
+The `Avatar` component is the root component that wraps the avatar image and fallback.
+
+| Prop    | Type                        | Default     |
+| ------- | --------------------------- | ----------- |
+| `size`  | `"default" \| "sm" \| "lg"` | `"default"` |
+| `class` | `string`                    | -           |
+
+### AvatarImage
+
+The `AvatarImage` component displays the avatar image. It accepts all Kobalte Image Img props.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `src`   | `string` | -       |
+| `alt`   | `string` | -       |
+| `class` | `string` | -       |
+
+### AvatarFallback
+
+The `AvatarFallback` component displays a fallback when the image fails to load. It accepts all Kobalte Image Fallback props.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarBadge
+
+The `AvatarBadge` component displays a badge indicator on the avatar, typically positioned at the bottom right.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarGroup
+
+The `AvatarGroup` component displays a group of avatars with overlapping styling.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### AvatarGroupCount
+
+The `AvatarGroupCount` component displays a count indicator in an avatar group, typically showing the number of additional avatars.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+For all primitive props and fallback behavior, see the [Kobalte Image API reference](https://kobalte.dev/docs/core/components/image#api-reference).

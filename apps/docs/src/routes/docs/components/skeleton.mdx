@@ -1,0 +1,149 @@
+---
+title: Skeleton
+description: Use to show a placeholder while content is loading.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add skeleton
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/skeleton.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Skeleton } from "~/components/ui/skeleton";
+```
+
+```tsx showLineNumbers
+<Skeleton class="h-[20px] w-[100px] rounded-full" />
+```
+
+## Examples
+
+### Avatar
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-avatar" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-avatar" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Card
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-card" previewClass="h-80" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-card" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Text
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-text" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-text" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Form
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-form" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-form" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Table
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="skeleton-table" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/skeleton-table" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Skeleton
+
+Displays a placeholder while content is loading.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |

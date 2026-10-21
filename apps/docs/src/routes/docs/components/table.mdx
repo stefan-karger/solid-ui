@@ -1,0 +1,199 @@
+---
+title: Table
+description: A responsive table component.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="table-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/table-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add table
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/table.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
+```
+
+```tsx showLineNumbers
+<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead class="w-[100px]">Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead>Method</TableHead>
+      <TableHead class="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell class="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell>
+      <TableCell class="text-right">$250.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Composition
+
+Use the following composition to build a `Table`:
+
+```text
+Table
+├── TableCaption
+├── TableHeader
+│   └── TableRow
+│       ├── TableHead
+│       ├── TableHead
+│       ├── TableHead
+│       └── TableHead
+├── TableBody
+│   ├── TableRow
+│   │   ├── TableCell
+│   │   ├── TableCell
+│   │   ├── TableCell
+│   │   └── TableCell
+│   └── TableRow
+│       ├── TableCell
+│       ├── TableCell
+│       ├── TableCell
+│       └── TableCell
+└── TableFooter
+```
+
+## Examples
+
+### Footer
+
+Use the `<TableFooter />` component to add a footer to the table.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="table-footer" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/table-footer" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Actions
+
+A table showing actions for each row using a `<DropdownMenu />` component.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="table-actions" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/table-actions" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Data Table
+
+You can use the `<Table />` component to build more complex data tables. Combine it with [@tanstack/solid-table](https://tanstack.com/table/v8) to create tables with sorting, filtering, and pagination.
+
+## API Reference
+
+### Table
+
+A responsive native `<table>` wrapped in a scrollable container. It forwards standard table attributes.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableCaption
+
+A native `<caption>` that describes the table.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableHeader and TableBody
+
+Native `<thead>` and `<tbody>` sections.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableFooter
+
+A native `<tfoot>` for summary rows.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableRow
+
+A native `<tr>` row.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### TableHead and TableCell
+
+Native `<th>` and `<td>` cells.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |

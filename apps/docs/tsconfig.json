@@ -2,7 +2,7 @@
   "compilerOptions": {
     // Environment setup & latest features
     "lib": ["esnext", "dom"],
-    "types": ["vinxi/types/client"],
+    "types": ["vite/client"],
     "target": "esnext",
     "module": "esnext",
     "moduleDetection": "force",
@@ -29,5 +29,5 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts", "*.mts"]
 }

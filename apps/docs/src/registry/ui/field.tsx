@@ -1,9 +1,9 @@
+import type { ComponentProps, JSX } from "solid-js"
 import {
-  type Component,
-  type ComponentProps,
   createMemo,
   For,
   mergeProps,
+  children as resolveChildren,
   Show,
   splitProps
 } from "solid-js"
@@ -14,15 +14,15 @@ import { cn } from "~/lib/utils"
 import { Label } from "~/registry/ui/label"
 import { Separator } from "~/registry/ui/separator"
 
-const FieldSet: Component<ComponentProps<"fieldset">> = (props) => {
+type FieldSetProps = ComponentProps<"fieldset"> & {
+  class?: string | undefined
+}
+
+const FieldSet = (props: FieldSetProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <fieldset
-      class={cn(
-        "flex flex-col gap-6",
-        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
-        local.class
-      )}
+      class={cn("cn-field-set flex flex-col", local.class)}
       data-slot="field-set"
       {...others}
     />
@@ -30,19 +30,17 @@ const FieldSet: Component<ComponentProps<"fieldset">> = (props) => {
 }
 
 type FieldLegendProps = ComponentProps<"legend"> & {
+  class?: string | undefined
   variant?: "legend" | "label"
 }
 
-const FieldLegend: Component<FieldLegendProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "variant"])
+const FieldLegend = (props: FieldLegendProps) => {
+  const mergedProps = mergeProps({ variant: "legend" } as const, props)
+  const [local, others] = splitProps(mergedProps, ["class", "variant"])
+
   return (
     <legend
-      class={cn(
-        "mb-3 font-medium",
-        "data-[variant=legend]:text-base",
-        "data-[variant=label]:text-sm",
-        local.class
-      )}
+      class={cn("cn-field-legend", local.class)}
       data-slot="field-legend"
       data-variant={local.variant}
       {...others}
@@ -50,12 +48,16 @@ const FieldLegend: Component<FieldLegendProps> = (props) => {
   )
 }
 
-const FieldGroup: Component<ComponentProps<"div">> = (props) => {
+type FieldGroupProps = ComponentProps<"div"> & {
+  class?: string | undefined
+}
+
+const FieldGroup = (props: FieldGroupProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
       class={cn(
-        "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4",
+        "group/field-group @container/field-group cn-field-group flex w-full flex-col",
         local.class
       )}
       data-slot="field-group"
@@ -64,20 +66,14 @@ const FieldGroup: Component<ComponentProps<"div">> = (props) => {
   )
 }
 
-const fieldVariants = cva("group/field flex w-full gap-3 data-[invalid=true]:text-destructive", {
+const fieldVariants = cva("group/field cn-field flex w-full", {
   variants: {
     orientation: {
-      vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],
-      horizontal: [
-        "flex-row items-center",
-        "[&>[data-slot=field-label]]:flex-auto",
-        "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px"
-      ],
-      responsive: [
-        "@md/field-group:flex-row flex-col @md/field-group:items-center @md/field-group:[&>*]:w-auto [&>*]:w-full [&>.sr-only]:w-auto",
-        "@md/field-group:[&>[data-slot=field-label]]:flex-auto",
-        "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px"
-      ]
+      vertical: "cn-field-orientation-vertical flex-col *:w-full [&>.sr-only]:w-auto",
+      horizontal:
+        "cn-field-orientation-horizontal flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+      responsive:
+        "cn-field-orientation-responsive @md/field-group:flex-row flex-col @md/field-group:items-center *:w-full @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px"
     }
   },
   defaultVariants: {
@@ -85,11 +81,15 @@ const fieldVariants = cva("group/field flex w-full gap-3 data-[invalid=true]:tex
   }
 })
 
-type FieldProps = ComponentProps<"div"> & VariantProps<typeof fieldVariants>
+type FieldProps = ComponentProps<"div"> &
+  VariantProps<typeof fieldVariants> & {
+    class?: string | undefined
+  }
 
-const Field: Component<FieldProps> = (rawProps) => {
-  const props = mergeProps<FieldProps[]>({ orientation: "vertical" }, rawProps)
-  const [local, others] = splitProps(props, ["class", "orientation"])
+const Field = (props: FieldProps) => {
+  const mergedProps = mergeProps({ orientation: "vertical" } as const, props)
+  const [local, others] = splitProps(mergedProps, ["class", "orientation"])
+
   return (
     <div
       class={cn(fieldVariants({ orientation: local.orientation }), local.class)}
@@ -101,25 +101,35 @@ const Field: Component<FieldProps> = (rawProps) => {
   )
 }
 
-const FieldContent: Component<ComponentProps<"div">> = (props) => {
+type FieldContentProps = ComponentProps<"div"> & {
+  class?: string | undefined
+}
+
+const FieldContent = (props: FieldContentProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn("group/field-content flex flex-1 flex-col gap-1.5 leading-snug", local.class)}
+      class={cn(
+        "group/field-content cn-field-content flex flex-1 flex-col leading-snug",
+        local.class
+      )}
       data-slot="field-content"
       {...others}
     />
   )
 }
 
-const FieldLabel: Component<ComponentProps<typeof Label>> = (props) => {
+type FieldLabelProps = ComponentProps<typeof Label> & {
+  class?: string | undefined
+}
+
+const FieldLabel = (props: FieldLabelProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <Label
       class={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled]/field:opacity-50",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",
-        "has-data-[checked]:border-primary has-data-[checked]:bg-primary/5 dark:has-data-[checked]:bg-primary/10",
+        "group/field-label peer/field-label cn-field-label flex w-fit",
+        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         local.class
       )}
       data-slot="field-label"
@@ -128,27 +138,32 @@ const FieldLabel: Component<ComponentProps<typeof Label>> = (props) => {
   )
 }
 
-const FieldTitle: Component<ComponentProps<"div">> = (props) => {
+type FieldTitleProps = ComponentProps<"div"> & {
+  class?: string | undefined
+}
+
+const FieldTitle = (props: FieldTitleProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <div
-      class={cn(
-        "flex w-fit items-center gap-2 font-medium text-sm leading-snug group-data-[disabled]/field:opacity-50",
-        local.class
-      )}
+      class={cn("cn-field-title flex w-fit items-center", local.class)}
       data-slot="field-label"
       {...others}
     />
   )
 }
 
-const FieldDescription: Component<ComponentProps<"p">> = (props) => {
+type FieldDescriptionProps = ComponentProps<"p"> & {
+  class?: string | undefined
+}
+
+const FieldDescription = (props: FieldDescriptionProps) => {
   const [local, others] = splitProps(props, ["class"])
   return (
     <p
       class={cn(
-        "font-normal text-muted-foreground text-sm leading-normal group-has-[[data-orientation=horizontal]]/field:text-balance",
-        "nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5 last:mt-0",
+        "cn-field-description font-normal leading-normal group-has-data-horizontal/field:text-balance",
+        "nth-last-2:-mt-1 last:mt-0",
         "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
         local.class
       )}
@@ -158,41 +173,52 @@ const FieldDescription: Component<ComponentProps<"p">> = (props) => {
   )
 }
 
-const FieldSeparator: Component<ComponentProps<"div">> = (props) => {
+type FieldSeparatorProps = ComponentProps<"div"> & {
+  class?: string | undefined
+  children?: JSX.Element
+}
+
+const FieldSeparator = (props: FieldSeparatorProps) => {
   const [local, others] = splitProps(props, ["class", "children"])
+  const resolvedChildren = resolveChildren(() => local.children)
+
   return (
     <div
-      class={cn(
-        "-my-2 group-data-[variant=outline]/field-group:-mb-2 relative h-5 text-sm",
-        local.class
-      )}
-      data-content={!!local.children}
+      class={cn("cn-field-separator relative", local.class)}
+      data-content={!!resolvedChildren()}
       data-slot="field-separator"
       {...others}
     >
       <Separator class="absolute inset-0 top-1/2" />
-      {local.children && (
-        <span
-          class="relative mx-auto block w-fit bg-background px-2 text-muted-foreground"
-          data-slot="field-separator-content"
-        >
-          {local.children}
-        </span>
-      )}
+      <Show when={resolvedChildren()}>
+        {(content) => (
+          <span
+            class="cn-field-separator-content relative mx-auto block w-fit bg-background"
+            data-slot="field-separator-content"
+          >
+            {content()}
+          </span>
+        )}
+      </Show>
     </div>
   )
 }
 
 type FieldErrorProps = ComponentProps<"div"> & {
+  class?: string | undefined
+  children?: JSX.Element
   errors?: Array<{ message?: string } | undefined>
 }
 
-const FieldError: Component<FieldErrorProps> = (props) => {
+const FieldError = (props: FieldErrorProps) => {
   const [local, others] = splitProps(props, ["class", "children", "errors"])
+  const resolvedChildren = resolveChildren(() => local.children)
 
   const content = createMemo(() => {
-    if (local.children) {
-      return local.children
+    const childContent = resolvedChildren()
+
+    if (childContent) {
+      return childContent
     }
 
     if (!local.errors?.length) {
@@ -208,7 +234,11 @@ const FieldError: Component<FieldErrorProps> = (props) => {
     return (
       <ul class="ml-4 flex list-disc flex-col gap-1">
         <For each={uniqueErrors}>
-          {(error) => <Show when={error?.message}>{(message) => <li>{message()}</li>}</Show>}
+          {(error) => (
+            <Show when={error?.message}>
+              <li>{error?.message}</li>
+            </Show>
+          )}
         </For>
       </ul>
     )
@@ -216,14 +246,14 @@ const FieldError: Component<FieldErrorProps> = (props) => {
 
   return (
     <Show when={content()}>
-      {(content) => (
+      {(resolvedContent) => (
         <div
-          class={cn("font-normal text-destructive text-sm", local.class)}
+          class={cn("cn-field-error font-normal", local.class)}
           data-slot="field-error"
           role="alert"
           {...others}
         >
-          {content()}
+          {resolvedContent()}
         </div>
       )}
     </Show>
@@ -232,13 +262,13 @@ const FieldError: Component<FieldErrorProps> = (props) => {
 
 export {
   Field,
-  FieldLabel,
+  FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
+  FieldLabel,
   FieldLegend,
   FieldSeparator,
   FieldSet,
-  FieldContent,
   FieldTitle
 }

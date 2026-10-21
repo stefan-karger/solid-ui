@@ -1,16 +1,17 @@
 import { createSignal } from "solid-js"
 
 import {
-  IconArchive,
-  IconArrowLeft,
-  IconCalendarPlus,
-  IconClock,
-  IconDots,
-  IconFilterPlus,
-  IconMailCheck,
-  IconTag,
-  IconTrash
-} from "~/components/icons"
+  ArchiveIcon,
+  ArrowLeftIcon,
+  CalendarPlusIcon,
+  ClockIcon,
+  EllipsisIcon,
+  ListFilterPlusIcon,
+  MailCheckIcon,
+  TagIcon,
+  TrashIcon
+} from "lucide-solid"
+
 import { Button } from "~/registry/ui/button"
 import { ButtonGroup } from "~/registry/ui/button-group"
 import {
@@ -34,7 +35,7 @@ export default function ButttonGroupDemo() {
     <ButtonGroup>
       <ButtonGroup class="hidden sm:flex">
         <Button aria-label="Go Back" size="icon" variant="outline">
-          <IconArrowLeft />
+          <ArrowLeftIcon />
         </Button>
       </ButtonGroup>
       <ButtonGroup>
@@ -50,36 +51,36 @@ export default function ButttonGroupDemo() {
             size="icon"
             variant="outline"
           >
-            <IconDots />
+            <EllipsisIcon />
           </DropdownMenuTrigger>
           <DropdownMenuContent class="w-52">
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <IconMailCheck />
+                <MailCheckIcon />
                 Mark as Read
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <IconArchive />
+                <ArchiveIcon />
                 Archive
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <IconClock />
+                <ClockIcon />
                 Snooze
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <IconCalendarPlus />
+                <CalendarPlusIcon />
                 Add to Calendar
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <IconFilterPlus />
+                <ListFilterPlusIcon />
                 Add to List
               </DropdownMenuItem>
               <DropdownMenuSub overlap>
                 <DropdownMenuSubTrigger>
-                  <IconTag />
+                  <TagIcon />
                   Label As...
                 </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
@@ -96,7 +97,7 @@ export default function ButttonGroupDemo() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem variant="destructive">
-                <IconTrash />
+                <TrashIcon />
                 Trash
               </DropdownMenuItem>
             </DropdownMenuGroup>

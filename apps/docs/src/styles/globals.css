@@ -6,6 +6,7 @@
 
 @import "~/styles/expressive-code.css";
 
+@import "../registry/styles/utilities.css";
 @import "../registry/styles/style-vega.css" layer(base);
 @import "../registry/styles/style-nova.css" layer(base);
 @import "../registry/styles/style-lyra.css" layer(base);
@@ -17,6 +18,8 @@
 
 :root {
   --radius: 0.625rem;
+  --font-sans: "Geist Variable", sans-serif;
+  --font-mono: "Geist Mono Variable", monospace;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);

@@ -52,7 +52,8 @@
     "execa": "^9.4.0",
     "recast": "^0.23.9",
     "ts-morph": "^20.0.0",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "valibot": "^1.4.2"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

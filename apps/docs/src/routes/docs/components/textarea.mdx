@@ -1,0 +1,134 @@
+---
+title: Textarea
+description: Displays a form textarea or a component that looks like a textarea.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="textarea-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/textarea-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add textarea
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/textarea.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { Textarea } from "~/components/ui/textarea";
+```
+
+```tsx showLineNumbers
+<Textarea />
+```
+
+## Examples
+
+### Field
+
+Use `Field`, `FieldLabel`, and `FieldDescription` to create a textarea with a label and description.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="textarea-field" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/textarea-field" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Disabled
+
+Use the `disabled` prop to disable the textarea. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="textarea-disabled" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/textarea-disabled" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Invalid
+
+Use the `aria-invalid` prop to mark the textarea as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="textarea-invalid" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/textarea-invalid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Button
+
+Pair with `Button` to create a textarea with a submit button.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="textarea-button" previewClass="*:max-w-xs" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/textarea-button" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+`Textarea` is a styled native textarea element. See the [HTML textarea element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea) for its native props, keyboard behavior, and accessibility semantics.

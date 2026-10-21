@@ -1,42 +1,30 @@
 import { createSignal } from "solid-js"
 
-import { Building2, CreditCard, Wallet } from "lucide-solid"
-
 import { Button } from "~/registry/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuGroupLabel,
+  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from "~/registry/ui/dropdown-menu"
 
 export default function DropdownMenuRadioGroupDemo() {
-  const [paymentMethod, setPaymentMethod] = createSignal("card")
-
+  const [position, setPosition] = createSignal("bottom")
   return (
     <DropdownMenu>
       <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
-        Payment Method
+        Open
       </DropdownMenuTrigger>
-      <DropdownMenuContent class="min-w-56">
+      <DropdownMenuContent class="w-32">
         <DropdownMenuGroup>
-          <DropdownMenuGroupLabel>Select Payment Method</DropdownMenuGroupLabel>
-          <DropdownMenuRadioGroup onChange={setPaymentMethod} value={paymentMethod()}>
-            <DropdownMenuRadioItem value="card">
-              <CreditCard />
-              Credit Card
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="paypal">
-              <Wallet />
-              PayPal
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="bank">
-              <Building2 />
-              Bank Transfer
-            </DropdownMenuRadioItem>
+          <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+          <DropdownMenuRadioGroup onChange={setPosition} value={position()}>
+            <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuGroup>
       </DropdownMenuContent>

@@ -18,7 +18,7 @@ const Checkbox = <T extends ValidComponent = "div">(
       <CheckboxPrimitive.Input data-slot="checkbox-input" id={local.id} />
       <CheckboxPrimitive.Control
         class={cn(
-          "cn-checkbox after:-inset-x-3 after:-inset-y-2 relative shrink-0 outline-none after:absolute group-data-disabled/checkbox:cursor-not-allowed group-data-disabled/checkbox:opacity-50",
+          "cn-checkbox relative shrink-0 outline-none after:absolute after:-inset-x-3 after:-inset-y-2 group-data-disabled/checkbox:cursor-not-allowed group-data-disabled/checkbox:opacity-50",
           local.class
         )}
         data-slot="checkbox"

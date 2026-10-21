@@ -2,9 +2,9 @@ import {
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
+  ContextMenuGroup,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuPortal,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
   ContextMenuSeparator,
@@ -14,58 +14,53 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger
 } from "~/registry/ui/context-menu"
-import { createSignal } from "solid-js"
 
 export default function ContextMenuDemo() {
-  const [bookmarksChecked, setBookmarksChecked] = createSignal(true)
-  const [urlsChecked, setUrlsChecked] = createSignal(false)
-  const [person, setPerson] = createSignal("pedro")
-
   return (
     <ContextMenu>
-      <ContextMenuTrigger>Right click here</ContextMenuTrigger>
-      <ContextMenuContent class="w-64">
-        <ContextMenuItem>
-          Back
-          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem disabled>
-          Forward
-          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          Reload
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuSub overlap>
-          <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
-          <ContextMenuPortal>
-            <ContextMenuSubContent class="w-48">
-              <ContextMenuItem>
-                Save Page As...
-                <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
-              </ContextMenuItem>
-              <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-              <ContextMenuItem>Name Window...</ContextMenuItem>
+      <ContextMenuTrigger class="flex aspect-video w-full max-w-xs items-center justify-center rounded-xl border border-dashed text-sm">
+        <span class="pointer-fine:inline-block hidden">Right click here</span>
+        <span class="pointer-coarse:inline-block hidden">Long press here</span>
+      </ContextMenuTrigger>
+      <ContextMenuContent class="w-48">
+        <ContextMenuGroup>
+          <ContextMenuItem>
+            Back<ContextMenuShortcut>⌘[</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem disabled>
+            Forward<ContextMenuShortcut>⌘]</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            Reload<ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
+            <ContextMenuSubContent class="w-44">
+              <ContextMenuGroup>
+                <ContextMenuItem>Save Page...</ContextMenuItem>
+                <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+                <ContextMenuItem>Name Window...</ContextMenuItem>
+              </ContextMenuGroup>
               <ContextMenuSeparator />
               <ContextMenuItem>Developer Tools</ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
             </ContextMenuSubContent>
-          </ContextMenuPortal>
-        </ContextMenuSub>
+          </ContextMenuSub>
+        </ContextMenuGroup>
         <ContextMenuSeparator />
-        <ContextMenuCheckboxItem checked={bookmarksChecked()} onChange={setBookmarksChecked}>
-          Show Bookmarks Bar
-          <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
-        </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem checked={urlsChecked()} onChange={setUrlsChecked}>
-          Show Full URLs
-        </ContextMenuCheckboxItem>
+        <ContextMenuGroup>
+          <ContextMenuCheckboxItem checked>Show Bookmarks</ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        </ContextMenuGroup>
         <ContextMenuSeparator />
-        <ContextMenuLabel>People</ContextMenuLabel>
-        <ContextMenuRadioGroup value={person()} onChange={setPerson}>
-          <ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
-          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
-        </ContextMenuRadioGroup>
+        <ContextMenuGroup>
+          <ContextMenuRadioGroup value="pedro">
+            <ContextMenuLabel>People</ContextMenuLabel>
+            <ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
+        </ContextMenuGroup>
       </ContextMenuContent>
     </ContextMenu>
   )
