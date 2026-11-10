@@ -35,30 +35,34 @@
     "shadcn",
     "tremor"
   ],
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
+  },
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
     "release": "changeset version",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
     "pub:release": "pnpm build && pnpm publish --access public"
   },
   "dependencies": {
-    "@antfu/ni": "^0.23.0",
-    "@babel/core": "^7.25.2",
-    "@babel/parser": "^7.25.6",
-    "@babel/plugin-transform-typescript": "^7.25.2",
-    "@clack/prompts": "^0.10.0",
-    "chalk": "^5.4.1",
-    "commander": "^12.1.0",
-    "execa": "^9.4.0",
-    "recast": "^0.23.9",
-    "ts-morph": "^20.0.0",
+    "@antfu/ni": "^30.6.0",
+    "@babel/core": "^8.1.0",
+    "@babel/parser": "^8.1.0",
+    "@babel/plugin-transform-typescript": "^8.0.6",
+    "@clack/prompts": "^1.8.1",
+    "chalk": "^6.0.1",
+    "commander": "^15.1.0",
+    "execa": "^10.2.1",
+    "package-manager-detector": "^1.9.0",
+    "recast": "^0.24.3",
+    "ts-morph": "^28.0.0",
     "tsconfig-paths": "^4.2.0",
-    "valibot": "^1.4.2"
+    "valibot": "^1.5.0"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.5",
-    "@types/node": "^20.14.12",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.2"
+    "@types/node": "^22.20.5",
+    "tsdown": "^0.23.7",
+    "typescript": "^7.0.2"
   }
 }

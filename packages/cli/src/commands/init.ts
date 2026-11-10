@@ -4,7 +4,6 @@ import path from "node:path"
 
 import * as p from "@clack/prompts"
 import { Command } from "commander"
-import { execa } from "execa"
 import * as v from "valibot"
 
 import type { RawConfig } from "~/utils/config"
@@ -17,7 +16,7 @@ import {
   resolveConfigPaths
 } from "~/utils/config"
 import { getPackageInfo } from "~/utils/get-package-info"
-import { getPackageManager } from "~/utils/get-package-manager"
+import { installDependencies } from "~/utils/get-package-manager"
 import { handleError, headline, highlight, subtle } from "~/utils/logger"
 import * as templates from "~/utils/templates"
 
@@ -89,12 +88,7 @@ export const init = new Command()
 
       spinner.start(`Installing dependencies...`)
 
-      const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, [
-        "add",
-        packageManager === "deno" ? "--npm" : "",
-        ...PROJECT_DEPENDENCIES,
-      ], { cwd });
+      await installDependencies(cwd, PROJECT_DEPENDENCIES)
 
       spinner.stop(`Dependencies installed.`)
 
