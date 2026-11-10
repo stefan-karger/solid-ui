@@ -18,11 +18,25 @@ type Config = {
 export const docsConfig: Config = {
   mainNav: [
     {
+      title: "Docs",
+      href: "/docs/installation"
+    },
+    {
       title: "Components",
       href: "/docs/components"
     }
   ],
   sidebarNav: [
+    {
+      title: "Getting Started",
+      items: [
+        {
+          title: "Installation",
+          href: "/docs/installation",
+          status: "updated"
+        }
+      ]
+    },
     {
       title: "Components",
       items: [

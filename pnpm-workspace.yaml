@@ -4,3 +4,12 @@ packages:
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
+# @kobalte/solidbase 0.6.x imports these without declaring them.
+packageExtensions:
+  '@kobalte/solidbase':
+    dependencies:
+      resolve: ^1.22.10
+      esbuild: ^0.25.0
+# SolidStart 2 needs @solidjs/router 0.16; solidbase pins 0.15, which loads a second router.
+overrides:
+  '@kobalte/solidbase>@solidjs/router': ^0.16.1
