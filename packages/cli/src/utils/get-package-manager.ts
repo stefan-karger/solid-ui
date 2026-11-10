@@ -1,13 +1,25 @@
-import { detect } from "@antfu/ni"
+import { execa } from "execa"
+import { type Agent, detect, resolveCommand } from "package-manager-detector"
 
-export async function getPackageManager(
-  targetDir: string
-): Promise<"yarn" | "pnpm" | "bun" | "npm" | "deno"> {
-  const packageManager = await detect({ programmatic: true, cwd: targetDir })
+export async function getPackageManager(targetDir: string): Promise<Agent> {
+  const result = await detect({ cwd: targetDir })
+  return result?.agent ?? "npm"
+}
 
-  if (packageManager === "yarn@berry") return "yarn"
-  if (packageManager === "pnpm@6") return "pnpm"
-  if (packageManager === "bun") return "bun"
+/**
+ * Installs `dependencies` in `cwd` with the project's package manager,
+ * using that manager's own add syntax (e.g. `npm i`, `pnpm add`, `deno add npm:<pkg>`).
+ */
+export async function installDependencies(cwd: string, dependencies: string[]) {
+  if (!dependencies.length) {
+    return
+  }
 
-  return packageManager ?? "npm"
+  const agent = await getPackageManager(cwd)
+  const resolved = resolveCommand(agent, "add", dependencies)
+  if (!resolved) {
+    throw new Error(`${agent} does not support adding dependencies.`)
+  }
+
+  await execa(resolved.command, resolved.args, { cwd })
 }

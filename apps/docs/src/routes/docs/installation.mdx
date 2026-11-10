@@ -1,0 +1,117 @@
+---
+title: Installation
+description: Set up solid-ui in a SolidStart 2 app with Vite 8 and Tailwind CSS v4.
+---
+
+These steps target **SolidStart 2** (Vite 8 + Nitro 3) and **Tailwind CSS v4**.
+Tailwind v4 is configured in CSS, so there is no `tailwind.config.js` and no PostCSS setup.
+
+## Create a project
+
+```package-create
+solid@latest
+```
+
+Pick the **SolidStart** template, or start from any app whose `vite.config.ts` already uses `solidStart()` from `@solidjs/start/config`.
+
+## Add Tailwind CSS
+
+```package-install-dev
+tailwindcss @tailwindcss/vite tw-animate-css
+```
+
+Register the Tailwind Vite plugin next to SolidStart and Nitro in `vite.config.ts`:
+
+```ts title="vite.config.ts"
+import { solidStart } from "@solidjs/start/config"
+import tailwindcss from "@tailwindcss/vite"
+import { nitro } from "nitro/vite"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [solidStart(), tailwindcss(), nitro()]
+})
+```
+
+Import your global stylesheet once, in `src/app.tsx`:
+
+```tsx title="src/app.tsx"
+import "./app.css"
+```
+
+## Configure the path alias
+
+The components import from `~/`, which SolidStart already maps to `src/`. Make sure `tsconfig.json` knows about it:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  }
+}
+```
+
+## Run the CLI
+
+```package-exec
+solidui-cli@latest init
+```
+
+`init` writes `ui.config.json`, a Tailwind v4 `src/app.css` (theme tokens, `@theme inline`, a `dark` variant, and `tw-animate-css`), and `~/lib/utils`, then installs `class-variance-authority`, `clsx`, `tailwind-merge`, and `tw-animate-css`.
+
+## Manual setup
+
+Prefer to wire it yourself? Install the helpers:
+
+```package-install
+class-variance-authority clsx tailwind-merge
+```
+
+Add `src/lib/utils.ts`:
+
+```ts title="src/lib/utils.ts"
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+Then start `src/app.css` with the Tailwind and animation imports and a `dark` variant. Copy the theme tokens from `init` (or from this site's `globals.css`) below them.
+
+```css title="src/app.css"
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-kb-theme="dark"], [data-kb-theme="dark"] *));
+```
+
+## Dark mode
+
+The `dark` variant matches a `.dark` class or Kobalte's `data-kb-theme="dark"` on any ancestor, usually `<html>`.
+If your app already switches themes with another attribute, such as `data-theme="dark"`, point the variant at it instead:
+
+```css title="src/app.css"
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+```
+
+Put the dark token block on the same selector so the CSS variables switch too.
+
+## Add components
+
+```package-exec
+solidui-cli@latest add button input dialog
+```
+
+You can now import them:
+
+```tsx title="src/routes/index.tsx"
+import { Button } from "~/components/ui/button"
+
+export default function Home() {
+  return <Button>Click me</Button>
+}
+```

@@ -26,7 +26,7 @@ export function StylePicker() {
           </div>
           <Show when={style().icon}>
             {(icon) => (
-              <div class="-translate-y-1/2 pointer-events-none absolute top-1/2 right-4 flex size-4 select-none items-center justify-center">
+              <div class="pointer-events-none absolute top-1/2 right-4 flex size-4 -translate-y-1/2 select-none items-center justify-center">
                 {icon()}
               </div>
             )}
@@ -71,7 +71,7 @@ export function StylePicker() {
           </PickerRadioGroup>
         </PickerContent>
       </Picker>
-      <LockButton class="-translate-y-1/2 absolute top-1/2 right-10" param="style" />
+      <LockButton class="absolute top-1/2 right-10 -translate-y-1/2" param="style" />
     </div>
   )
 }

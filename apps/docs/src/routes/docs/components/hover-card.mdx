@@ -1,0 +1,137 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+---
+
+The Hover Card component is built on top of [Kobalte Hover Card](https://kobalte.dev/docs/core/components/hover-card), which provides accessible hover, focus, and keyboard behavior.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="hover-card-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/hover-card-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add hover-card
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/hover-card.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "~/components/ui/hover-card";
+```
+
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>
+    The React Framework – created and maintained by @vercel.
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Composition
+
+Use the following composition to build a `HoverCard`:
+
+```text
+HoverCard
+├── HoverCardTrigger
+└── HoverCardContent
+```
+
+## Trigger Delays
+
+Use `openDelay` and `closeDelay` on the `HoverCard` to control when the card opens and closes.
+
+```tsx
+<HoverCard openDelay={10} closeDelay={100}>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
+
+## Positioning
+
+Use the `placement` prop on HoverCard to control placement.
+
+```tsx
+<HoverCard placement="bottom">
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
+
+## Examples
+
+### Basic
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="hover-card-demo" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/hover-card-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Placement
+
+Use the `placement` prop on HoverCard to control positioning of the hover card content.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="hover-card-placement" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/hover-card-placement" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+See the [Kobalte Hover Card API reference](https://kobalte.dev/docs/core/components/hover-card#api-reference) for primitive props, keyboard behavior, and accessibility details.

@@ -4,26 +4,24 @@ import path from "node:path"
 
 import * as p from "@clack/prompts"
 import { Command } from "commander"
-import { execa } from "execa"
 import * as v from "valibot"
 
 import type { RawConfig } from "~/utils/config"
 import {
   DEFAULT_COMPONENTS,
   DEFAULT_CSS_FILE,
-  DEFAULT_TAILWIND_CONFIG,
   DEFAULT_TAILWIND_PREFIX,
   DEFAULT_UTILS,
   RawConfigSchema,
   resolveConfigPaths
 } from "~/utils/config"
 import { getPackageInfo } from "~/utils/get-package-info"
-import { getPackageManager } from "~/utils/get-package-manager"
+import { installDependencies } from "~/utils/get-package-manager"
 import { handleError, headline, highlight, subtle } from "~/utils/logger"
 import * as templates from "~/utils/templates"
 
 const PROJECT_DEPENDENCIES = [
-  "tailwindcss-animate",
+  "tw-animate-css",
   "class-variance-authority",
   "clsx",
   "tailwind-merge"
@@ -78,12 +76,6 @@ export const init = new Command()
 
       const extension = config.tsx ? "ts" : "js"
 
-      await writeFile(
-        config.resolvedPaths.tailwindConfig,
-        templates.TAILWIND_CONFIG.replace("<%- prefix %>", config.tailwind.prefix),
-        "utf-8"
-      )
-
       await writeFile(config.resolvedPaths.tailwindCss, templates.TAILWIND_CSS, "utf-8")
 
       await writeFile(
@@ -96,14 +88,18 @@ export const init = new Command()
 
       spinner.start(`Installing dependencies...`)
 
-      const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, [
-        "add",
-        packageManager === "deno" ? "--npm" : "",
-        ...PROJECT_DEPENDENCIES,
-      ], { cwd });
+      await installDependencies(cwd, PROJECT_DEPENDENCIES)
 
       spinner.stop(`Dependencies installed.`)
+
+      p.note(
+        [
+          `Tailwind CSS v4 is configured in ${highlight(rawConfig.tailwind.css)}.`,
+          `Make sure ${highlight("tailwindcss")} and ${highlight("@tailwindcss/vite")} are installed and`,
+          `${highlight("tailwindcss()")} is in the plugins of your vite.config.ts.`
+        ].join("\n"),
+        "Next steps"
+      )
 
       p.outro(
         `${highlight("Success!")} Project initialization completed. You may now add components.`
@@ -125,11 +121,6 @@ async function promptForConfig(): Promise<RawConfig> {
         p.text({
           message: `Where is your ${highlight("global CSS")} file? ${subtle("(this file will be overwritten)")}`,
           initialValue: DEFAULT_CSS_FILE
-        }),
-      tailwindConfig: () =>
-        p.text({
-          message: `Where is your ${highlight("Tailwind config")} located? ${subtle("(this file will be overwritten)")}`,
-          initialValue: DEFAULT_TAILWIND_CONFIG
         }),
       tailwindPrefix: () =>
         p.text({
@@ -160,7 +151,6 @@ async function promptForConfig(): Promise<RawConfig> {
     tsx: options.typescript,
     tailwind: {
       css: options.cssFile,
-      config: options.tailwindConfig,
       prefix: options.tailwindPrefix
     },
     aliases: {

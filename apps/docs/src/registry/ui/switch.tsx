@@ -1,34 +1,39 @@
-import type { Component, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { type ComponentProps, mergeProps, splitProps, type ValidComponent } from "solid-js"
 
+import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as SwitchPrimitive from "@kobalte/core/switch"
 
 import { cn } from "~/lib/utils"
 
-type SwitchProps<T extends ValidComponent = "div"> = SwitchPrimitive.SwitchRootProps<T> & {
-  class?: string
-}
+type SwitchProps<T extends ValidComponent = "div"> = PolymorphicProps<
+  T,
+  SwitchPrimitive.SwitchRootProps<T>
+> &
+  Pick<ComponentProps<T>, "class" | "children"> & {
+    size?: "sm" | "default"
+  }
 
-const Switch: Component<SwitchProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
+const Switch = <T extends ValidComponent = "div">(props: SwitchProps<T>) => {
+  const mergedProps = mergeProps({ size: "default" as const }, props)
+  const [local, others] = splitProps(mergedProps as SwitchProps, ["class", "size", "id"])
   return (
-    <SwitchPrimitive.Root data-slot="switch" {...others}>
-      <SwitchPrimitive.Input
-        class={cn(
-          "outline-none [&:focus-visible+div]:border-ring [&:focus-visible+div]:ring-[3px] [&:focus-visible+div]:ring-ring/50"
-        )}
-      />
+    <SwitchPrimitive.Root
+      class={cn(
+        "peer group/switch cn-switch relative inline-flex items-center outline-none transition-all data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        local.class
+      )}
+      data-size={local.size}
+      data-slot="switch"
+      {...others}
+    >
+      <SwitchPrimitive.Input class="peer sr-only" data-slot="switch-input" id={local.id} />
       <SwitchPrimitive.Control
-        class={cn(
-          "inline-flex h-[1.15rem] w-8 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-input shadow-xs transition-all data-[disabled]:cursor-not-allowed data-[checked]:bg-primary data-[disabled]:opacity-50 dark:bg-input/80 dark:data-[checked]:bg-primary",
-          local.class
-        )}
+        class="absolute inset-0 flex cursor-pointer items-center rounded-full transition-colors data-disabled:cursor-not-allowed"
         data-slot="switch-control"
+        onClick={(e) => e.preventDefault()}
       >
         <SwitchPrimitive.Thumb
-          class={cn(
-            "pointer-events-none block size-4 translate-x-0 rounded-full bg-background shadow-lg ring-0 transition-transform data-[checked]:translate-x-[calc(100%-2px)] dark:bg-foreground dark:data-[checked]:bg-primary-foreground"
-          )}
+          class="cn-switch-thumb pointer-events-none block rounded-full ring-0 transition-transform"
           data-slot="switch-thumb"
         />
       </SwitchPrimitive.Control>

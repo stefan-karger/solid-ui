@@ -6,6 +6,8 @@ links:
   api: https://kobalte.dev/docs/core/components/collapsible#api-reference
 ---
 
+The Collapsible component is built on top of [Kobalte Collapsible](https://kobalte.dev/docs/core/components/collapsible), which provides the accessible disclosure primitive and keyboard behavior.
+
 ::::tab-group[preview]
 :::tab[Preview]
 
@@ -45,15 +47,15 @@ Copy and paste the following code into your project.
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
+  CollapsibleTrigger,
 } from "~/components/ui/collapsible";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Collapsible>
   <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
   <CollapsibleContent>
@@ -62,3 +64,89 @@ import {
   </CollapsibleContent>
 </Collapsible>
 ```
+
+## Examples
+
+### Composition
+
+Use the following composition to build a `Collapsible`:
+
+```text
+Collapsible
+├── CollapsibleTrigger
+└── CollapsibleContent
+```
+
+### Controlled State
+
+Use the `open` and `onOpenChange` props to control the state.
+
+```tsx showLineNumbers
+import { createSignal } from "solid-js";
+
+const [open, setOpen] = createSignal(false);
+
+<Collapsible open={open()} onOpenChange={setOpen}>
+  <CollapsibleTrigger>Toggle</CollapsibleTrigger>
+  <CollapsibleContent>Content</CollapsibleContent>
+</Collapsible>;
+```
+
+### Basic
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="collapsible-basic" align="start" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/collapsible-basic" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Settings Panel
+
+Use a trigger button to reveal additional settings.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="collapsible-settings" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/collapsible-settings" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### File Tree
+
+Use nested collapsibles to build a file tree.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="collapsible-file-tree" previewClass="h-[36rem]" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/collapsible-file-tree" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+For primitive props, keyboard behavior, and accessibility details, see the [Kobalte Collapsible API reference](https://kobalte.dev/docs/core/components/collapsible#api-reference).

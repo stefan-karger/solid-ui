@@ -44,7 +44,8 @@ export const transformTwPrefix: Transformer = async ({ sourceFile, config }) => 
 
   // Find all jsx attributes with the name class.
   sourceFile.getDescendantsOfKind(SyntaxKind.JsxAttribute).forEach((node) => {
-    if (node.getName() === "class") {
+    // getNameNode() can also be a namespaced name (e.g. `xlink:href`), so compare its text.
+    if (node.getNameNode().getText() === "class") {
       // class="..."
       if (node.getInitializer()?.isKind(SyntaxKind.StringLiteral)) {
         const value = node.getInitializer()

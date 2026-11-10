@@ -13,13 +13,13 @@ async function main() {
 
   const packageInfo = getPackageInfo()
 
-  new Command()
+  await new Command()
     .name("solidui-cli")
     .description("add SolidUI components to your project")
     .version(packageInfo.version || "0.0.0", "-v, --version", "display the version number")
     .addCommand(init)
     .addCommand(add)
-    .parse()
+    .parseAsync()
 }
 
 main()

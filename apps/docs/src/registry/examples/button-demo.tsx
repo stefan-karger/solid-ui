@@ -1,4 +1,5 @@
-import { IconArrowUp } from "~/components/icons"
+import { ArrowUpIcon } from "lucide-solid"
+
 import { Button } from "~/registry/ui/button"
 
 export default function ButtonDemo() {
@@ -6,7 +7,7 @@ export default function ButtonDemo() {
     <div class="flex flex-wrap items-center gap-2 md:flex-row">
       <Button variant="outline">Button</Button>
       <Button aria-label="Submit" size="icon" variant="outline">
-        <IconArrowUp />
+        <ArrowUpIcon />
       </Button>
     </div>
   )

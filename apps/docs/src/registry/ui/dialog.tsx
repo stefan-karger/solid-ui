@@ -1,4 +1,4 @@
-import type { Component, ComponentProps, JSX, ParentComponent, ValidComponent } from "solid-js"
+import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js"
 import { mergeProps, Show, splitProps } from "solid-js"
 
 import * as DialogPrimitive from "@kobalte/core/dialog"
@@ -12,7 +12,12 @@ const Dialog: Component<DialogPrimitive.DialogRootProps> = (props) => (
   <DialogPrimitive.Root data-slot="dialog" {...props} />
 )
 
-const DialogTrigger: ParentComponent<DialogPrimitive.DialogTriggerProps> = (props) => (
+type DialogTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
+  T,
+  DialogPrimitive.DialogTriggerProps<T>
+>
+
+const DialogTrigger = <T extends ValidComponent = "button">(props: DialogTriggerProps<T>) => (
   <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 )
 
@@ -61,7 +66,7 @@ const DialogContent = <T extends ValidComponent = "div">(
       <DialogOverlay />
       <DialogPrimitive.Content
         class={cn(
-          "cn-dialog-content -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 w-full",
+          "cn-dialog-content fixed top-1/2 left-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2",
           local.class
         )}
         data-slot="dialog-content"
@@ -147,11 +152,11 @@ const DialogDescription = <T extends ValidComponent = "p">(
 
 export {
   Dialog,
-  DialogTrigger,
   DialogClose,
   DialogContent,
-  DialogHeader,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-  DialogDescription
+  DialogTrigger
 }

@@ -1,0 +1,418 @@
+---
+title: Chart
+description: Beautiful charts. Built using Solid Recharts. Copy and paste into your apps.
+---
+
+The Chart component is built with [Solid Recharts](https://github.com/yumemi-thomas/solid-recharts), a SolidJS port of Recharts. It provides configuration-aware colors, tooltips, and legends while leaving chart composition in your hands.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="chart-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/chart-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+Charts work with the rest of the component library and are fully customizable.
+
+## Component
+
+Use Solid Recharts primitives to build a chart, then add Zaidan's `ChartTooltip` and `ChartLegend` only where they are useful. The wrapper does not hide the underlying chart library, so upgrades and custom composition remain straightforward.
+
+```tsx showLineNumbers /ChartContainer/ /ChartTooltipContent/
+import { Bar, BarChart } from "solid-recharts";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "~/components/ui/chart";
+
+export function MyChart() {
+  return (
+    <ChartContainer config={chartConfig} class="min-h-50">
+      <BarChart data={data} accessibilityLayer>
+        <Bar dataKey="value" />
+        <ChartTooltip content={(props) => <ChartTooltipContent {...props} />} />
+      </BarChart>
+    </ChartContainer>
+  );
+}
+```
+
+## Updating to Solid Recharts
+
+Use `var(--chart-1)` rather than `hsl(var(--chart-1))` when referencing chart tokens. Keep a height, `min-h-*`, or `aspect-*` class on `ChartContainer` so `ResponsiveContainer` can measure on first render. The Solid port uses `class` and native Solid event handlers in place of React-only props and synthetic events.
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add chart
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+solid-recharts
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/chart.tsx" showLineNumbers
+
+```
+
+## Your First Chart
+
+Build a bar chart with a grid, axis, tooltip, and legend.
+
+### Define the data
+
+The following data represents the number of desktop and mobile users for each month. Your data can use any shape; map each field with `dataKey`.
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
+```
+
+### Define the chart config
+
+The chart config holds human-readable labels, icons, and color tokens.
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+import type { ChartConfig } from "~/components/ui/chart";
+
+const chartConfig = {
+  desktop: { label: "Desktop", color: "#2563eb" },
+  mobile: { label: "Mobile", color: "#60a5fa" },
+} satisfies ChartConfig;
+```
+
+### Build the chart
+
+Give `ChartContainer` a height, minimum height, or aspect ratio so its responsive container can measure on first render.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="chart-example" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-example" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Add a Grid
+
+Add `CartesianGrid` to show horizontal guides.
+
+```tsx showLineNumbers
+import { Bar, BarChart, CartesianGrid } from "solid-recharts";
+
+<ChartContainer config={chartConfig} class="min-h-[200px] w-full">
+  <BarChart accessibilityLayer data={chartData}>
+    <CartesianGrid vertical={false} />
+    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+  </BarChart>
+</ChartContainer>;
+```
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="chart-example-grid" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-example-grid" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Add an Axis
+
+Use `XAxis` to label the data points.
+
+```tsx showLineNumbers
+import { Bar, BarChart, CartesianGrid, XAxis } from "solid-recharts";
+
+<ChartContainer config={chartConfig} class="min-h-[200px] w-full">
+  <BarChart accessibilityLayer data={chartData}>
+    <CartesianGrid vertical={false} />
+    <XAxis
+      dataKey="month"
+      tickLine={false}
+      tickMargin={10}
+      axisLine={false}
+      tickFormatter={(value) => String(value).slice(0, 3)}
+    />
+    <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+    <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+  </BarChart>
+</ChartContainer>;
+```
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="chart-example-axis" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-example-axis" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Add Tooltip
+
+`ChartTooltip` accepts a function so Solid Recharts can inject its active payload into `ChartTooltipContent`.
+
+```tsx showLineNumbers
+import { ChartTooltip, ChartTooltipContent } from "~/components/ui/chart";
+
+<ChartTooltip content={(props) => <ChartTooltipContent {...props} />} />;
+```
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="chart-example-tooltip" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-example-tooltip" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+Hover a bar to see the tooltip.
+
+### Add Legend
+
+Use the same function-form composition to add a legend.
+
+```tsx showLineNumbers
+import { ChartLegend, ChartLegendContent } from "~/components/ui/chart";
+
+<ChartLegend content={(props) => <ChartLegendContent {...props} />} />;
+```
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="chart-example-legend" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/chart-example-legend" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Chart Config
+
+Chart config is intentionally decoupled from chart data. This lets labels, icons, colors, and remote data evolve independently.
+
+```tsx showLineNumbers /ChartConfig/
+import { Monitor } from "lucide-solid";
+import type { ChartConfig } from "~/components/ui/chart";
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    icon: Monitor,
+    color: "#2563eb",
+  },
+  mobile: {
+    label: "Mobile",
+    theme: {
+      light: "#60a5fa",
+      dark: "#2563eb",
+    },
+  },
+} satisfies ChartConfig;
+```
+
+## Theming
+
+Use CSS variables (recommended) or direct hex, hsl, or oklch colors. Reference configured colors in chart primitives as `var(--color-KEY)`.
+
+### CSS Variables
+
+Define chart tokens in your CSS, then reference them from the config.
+
+```css title="app.css" showLineNumbers
+:root {
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+}
+
+.dark {
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+}
+```
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartConfig = {
+  desktop: { label: "Desktop", color: "var(--chart-1)" },
+  mobile: { label: "Mobile", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+```
+
+### Direct colors
+
+Use the color format that fits your application when CSS tokens are not appropriate.
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartConfig = {
+  desktop: { label: "Desktop", color: "#2563eb" },
+  mobile: { label: "Mobile", color: "hsl(220 98% 61%)" },
+  tablet: { label: "Tablet", color: "oklch(0.5 0.2 240)" },
+  laptop: { label: "Laptop", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+```
+
+### Using colors
+
+Use `var(--color-KEY)` in chart components, data, and Tailwind classes.
+
+```tsx
+<Bar dataKey="desktop" fill="var(--color-desktop)" />
+```
+
+```tsx title="components/example-chart.tsx" showLineNumbers
+const chartData = [
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+];
+```
+
+```tsx
+<LabelList class="fill-(--color-desktop)" />
+```
+
+## Tooltip
+
+Use `hideLabel`, `hideIndicator`, and `indicator` to customize tooltip content. Use `labelKey` and `nameKey` when the chart data uses different field names.
+
+```tsx
+<ChartTooltip
+  content={(props) => (
+    <ChartTooltipContent {...props} labelKey="visitors" nameKey="browser" />
+  )}
+/>
+```
+
+| Prop            | Type                          | Description                              |
+| --------------- | ----------------------------- | ---------------------------------------- |
+| `labelKey`      | `string`                      | Config or data key to use for the label. |
+| `nameKey`       | `string`                      | Config or data key to use for the name.  |
+| `indicator`     | `"dot" \| "line" \| "dashed"` | Indicator style.                         |
+| `hideLabel`     | `boolean`                     | Hides the label.                         |
+| `hideIndicator` | `boolean`                     | Hides the indicator.                     |
+
+### Colors
+
+Tooltip colors are resolved automatically from `chartConfig`.
+
+### Custom keys
+
+Pass `labelKey` and `nameKey` when data uses a different key for the tooltip label or series name.
+
+```tsx showLineNumbers
+const chartData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+];
+
+const chartConfig = {
+  visitors: { label: "Total Visitors" },
+  chrome: { label: "Chrome", color: "var(--chart-1)" },
+  safari: { label: "Safari", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+```
+
+## Legend
+
+```tsx
+import { ChartLegend, ChartLegendContent } from "~/components/ui/chart";
+
+<ChartLegend
+  content={(props) => <ChartLegendContent {...props} nameKey="browser" />}
+/>;
+```
+
+`nameKey` maps a legend item to a different config key.
+
+### Colors
+
+Colors are automatically referenced from the chart config.
+
+### Custom keys
+
+```tsx showLineNumbers
+const chartData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+];
+
+const chartConfig = {
+  chrome: { label: "Chrome", color: "var(--chart-1)" },
+  safari: { label: "Safari", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+
+<ChartLegend
+  content={(props) => <ChartLegendContent {...props} nameKey="browser" />}
+/>;
+```
+
+## Accessibility
+
+Set `accessibilityLayer` on the Solid Recharts chart component to enable its keyboard navigation and screen-reader descriptions.
+
+```tsx
+<BarChart accessibilityLayer data={chartData}>
+  {/* ... */}
+</BarChart>
+```
+
+## API Reference
+
+Chart composes [Solid Recharts](https://github.com/yumemi-thomas/solid-recharts#readme), whose chart primitives preserve the [Recharts API](https://recharts.github.io/en-US/api/). Refer to that API and the exported Zaidan `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` types for composition details.

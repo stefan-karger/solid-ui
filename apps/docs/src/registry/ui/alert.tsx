@@ -86,4 +86,4 @@ const AlertAction = <T extends ValidComponent = "div">(
   return <div class={cn("cn-alert-action", local.class)} data-slot="alert-action" {...others} />
 }
 
-export { Alert, AlertTitle, AlertDescription, AlertAction, alertVariants }
+export { Alert, AlertAction, AlertDescription, AlertTitle, alertVariants }

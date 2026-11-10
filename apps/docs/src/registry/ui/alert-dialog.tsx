@@ -55,7 +55,7 @@ const AlertDialogContent = <T extends ValidComponent = "div">(
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
         class={cn(
-          "cn-alert-dialog-content group/alert-dialog-content -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 grid w-full outline-none",
+          "cn-alert-dialog-content group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 outline-none",
           local.class
         )}
         data-size={local.size}

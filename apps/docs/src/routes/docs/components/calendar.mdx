@@ -1,0 +1,407 @@
+---
+title: Calendar
+description: A calendar component that allows users to select a date or a range of dates.
+---
+
+The Calendar component is built on top of [Corvu Calendar](https://corvu.dev/docs/primitives/calendar/), which provides the accessible calendar primitive and keyboard navigation.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/calendar-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add calendar
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@corvu/calendar @date-fns/tz date-fns lucide-solid
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/calendar.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { createSignal } from "solid-js";
+import { Calendar } from "~/components/ui/calendar";
+
+const [date, setDate] = createSignal<Date>();
+```
+
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  selected={date()}
+  onSelect={setDate}
+  class="rounded-lg border"
+/>
+```
+
+See the [Corvu Calendar documentation](https://corvu.dev/docs/primitives/calendar) for primitive-level options and behavior.
+
+### Date Picker
+
+You can use the `<Calendar>` component to build a date picker by combining it with `<Popover>` and `<Button>` components. See the Date Picker examples below.
+
+### Custom Cell Size
+
+You can customize the size of calendar cells using the `--cell-size` CSS variable. You can also make it responsive by using breakpoint-specific values:
+
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  value={date()}
+  onValueChange={setDate}
+  class="rounded-lg border [--cell-size:--spacing(11)] md:[--cell-size:--spacing(12)]"
+/>
+```
+
+### Week Numbers
+
+Display ISO week numbers alongside the calendar using the `weekNumbers` prop:
+
+```tsx showLineNumbers
+<Calendar mode="single" value={date()} onValueChange={setDate} weekNumbers />
+```
+
+### Custom Cells
+
+Use the `customCell` prop to add custom content to each day cell. This is useful for displaying metadata like prices, events, or availability indicators:
+
+```tsx showLineNumbers
+import { Show } from "solid-js";
+import { Calendar, type CustomCellProps } from "~/components/ui/calendar";
+
+const renderPriceCell = (props: CustomCellProps) => {
+  const price = getPriceForDate(props.date);
+
+  return (
+    <Show when={price !== null && !props.isOutsideMonth}>
+      <span
+        class={`text-[0.65rem] ${props.isSelected ? "text-primary-foreground/80" : "text-muted-foreground"}`}
+      >
+        ${price}
+      </span>
+    </Show>
+  );
+};
+
+<Calendar
+  mode="single"
+  value={date()}
+  onValueChange={setDate}
+  customCell={renderPriceCell}
+  class="[--cell-size:--spacing(11)]"
+/>;
+```
+
+### Month/Year Selection
+
+Enable dropdown selection for month and year using the `monthYearSelection` prop:
+
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  value={date()}
+  onValueChange={setDate}
+  monthYearSelection
+  startYear={1990}
+  endYear={2030}
+/>
+```
+
+### Combining with Time Inputs
+
+You can combine the calendar with time inputs to create a date-time picker:
+
+```tsx showLineNumbers
+import { createSignal } from "solid-js";
+import { Calendar } from "~/components/ui/calendar";
+import { Input } from "~/components/ui/input";
+
+const [date, setDate] = createSignal<Date | null>(null);
+const [time, setTime] = createSignal("10:30");
+
+<div>
+  <Calendar mode="single" value={date()} onValueChange={setDate} />
+  <Input
+    type="time"
+    value={time()}
+    onInput={(e) => setTime(e.currentTarget.value)}
+  />
+</div>;
+```
+
+### Styling Disabled Dates
+
+You can style disabled dates differently using the `disabled` prop and CSS selectors:
+
+```tsx showLineNumbers
+import { Calendar } from "~/components/ui/calendar";
+
+const bookedDates = [new Date(2024, 0, 15), new Date(2024, 0, 20)];
+
+const isBooked = (day: Date) => {
+  return bookedDates.some(
+    (booked) => booked.toDateString() === day.toDateString(),
+  );
+};
+
+<Calendar
+  mode="single"
+  disabled={isBooked}
+  class="**:data-[disabled=true]:line-through **:data-[disabled=true]:opacity-30"
+/>;
+```
+
+## Examples
+
+### Single
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-single" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-single" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Multiple
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-multiple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-multiple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Range
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-range" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-range" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Range Multiple Months
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-range-multiple-months" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-range-multiple-months" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Week Numbers
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-week-numbers" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-week-numbers" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Custom Cell (Pricing)
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-custom-cell" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-custom-cell" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Time
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-with-time" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-with-time" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Booked Dates
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-booked-dates" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-booked-dates" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### With Presets
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-presets" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-presets" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Date Picker Simple
+
+::::tab-group[example10]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-simple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-simple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Date Picker with Dropdowns
+
+::::tab-group[example11]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-with-dropdowns" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-with-dropdowns" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Date Picker Range
+
+::::tab-group[example12]
+:::tab[Preview]
+
+<ComponentPreview name="calendar-date-picker-with-range" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/calendar-date-picker-with-range" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Calendar
+
+The Calendar wrapper follows the [Corvu Calendar API reference](https://corvu.dev/docs/primitives/calendar#api-reference) and adds the DayPicker-compatible props shown below.
+
+| Prop              | Type                                                             | Default   | Description                              |
+| ----------------- | ---------------------------------------------------------------- | --------- | ---------------------------------------- |
+| `mode`            | `"single" \| "multiple" \| "range"`                              | -         | Selection mode.                          |
+| `selected`        | `Date \| Date[] \| { from: Date; to?: Date }`                    | -         | Controlled selected value.               |
+| `onSelect`        | `(selected, triggerDate, modifiers, event) => void`              | -         | Called after selection changes.          |
+| `month`           | `Date`                                                           | -         | Controlled month to display.             |
+| `onMonthChange`   | `(month: Date) => void`                                          | -         | Called when the displayed month changes. |
+| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | Caption presentation.                    |
+| `numberOfMonths`  | `number`                                                         | `1`       | Number of visible months.                |
+| `showOutsideDays` | `boolean`                                                        | `true`    | Whether adjacent-month days are visible. |
+| `showWeekNumber`  | `boolean`                                                        | `false`   | Whether to show ISO week numbers.        |
+| `disabled`        | `CalendarMatcher \| CalendarMatcher[]`                           | -         | Dates that cannot be selected.           |
+| `class`           | `string`                                                         | -         | Additional classes on the root element.  |
+
+For primitive props, keyboard behavior, and accessibility details, see the [Corvu Calendar API reference](https://corvu.dev/docs/primitives/calendar#api-reference).

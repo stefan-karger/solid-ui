@@ -109,4 +109,4 @@ const AccordionContent = <T extends ValidComponent = "div">(
   )
 }
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger }

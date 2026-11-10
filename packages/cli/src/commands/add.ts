@@ -4,11 +4,10 @@ import path from "node:path"
 
 import * as p from "@clack/prompts"
 import { Command } from "commander"
-import { execa } from "execa"
 import * as v from "valibot"
 
 import { getConfig } from "~/utils/config"
-import { getPackageManager } from "~/utils/get-package-manager"
+import { installDependencies } from "~/utils/get-package-manager"
 import { handleError, highlight } from "~/utils/logger"
 import { fetchTree, getRegistryIndex, resolveTree } from "~/utils/registry"
 import { transform } from "~/utils/transformers"
@@ -25,7 +24,7 @@ export const add = new Command()
   .description("add components to your project")
   .argument("[components...]", "the components to add")
   .option("-c, --cwd <cwd>", "the working directory", process.cwd())
-  .option("-o --overwrite", "overwrite existing files", false)
+  .option("-o, --overwrite", "overwrite existing files", false)
   .option("-a, --all", "add all available components", false)
   .action(async (components, opts) => {
     try {
@@ -96,7 +95,7 @@ export const add = new Command()
         )
         if (existingComponent.length && !options.overwrite) {
           if (selectedComponents.includes(item.name)) {
-            spinner.stop()
+            spinner.clear()
 
             const prompts = await p.group(
               {
@@ -146,14 +145,7 @@ export const add = new Command()
         }
 
         // install dependencies
-        if (item.dependencies?.length) {
-          const packageManager = await getPackageManager(cwd)
-          await execa(packageManager, [
-            "add",
-            packageManager === "deno" ? "--npm" : "",
-            ...item.dependencies,
-          ], { cwd });
-        }
+        await installDependencies(cwd, item.dependencies ?? [])
       }
 
       spinner.stop("Done.")

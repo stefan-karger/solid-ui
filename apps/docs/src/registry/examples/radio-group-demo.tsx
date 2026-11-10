@@ -3,18 +3,18 @@ import { RadioGroup, RadioGroupItem } from "~/registry/ui/radio-group"
 
 export default function RadioGroupDemo() {
   return (
-    <RadioGroup defaultValue="comfortable">
+    <RadioGroup class="w-fit" defaultValue="comfortable">
       <div class="flex items-center gap-3">
-        <RadioGroupItem id="r1" value="default" />
-        <Label for="r1">Default</Label>
+        <RadioGroupItem id="radio-group-demo-default" value="default" />
+        <Label for="radio-group-demo-default">Default</Label>
       </div>
       <div class="flex items-center gap-3">
-        <RadioGroupItem id="r2" value="comfortable" />
-        <Label for="r2">Comfortable</Label>
+        <RadioGroupItem id="radio-group-demo-comfortable" value="comfortable" />
+        <Label for="radio-group-demo-comfortable">Comfortable</Label>
       </div>
       <div class="flex items-center gap-3">
-        <RadioGroupItem id="r3" value="compact" />
-        <Label for="r3">Compact</Label>
+        <RadioGroupItem id="radio-group-demo-compact" value="compact" />
+        <Label for="radio-group-demo-compact">Compact</Label>
       </div>
     </RadioGroup>
   )

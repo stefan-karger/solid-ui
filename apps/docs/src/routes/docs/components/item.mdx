@@ -1,0 +1,354 @@
+---
+title: Item
+description: A versatile component for displaying content with media, title, description, and actions.
+---
+
+The `ItemSeparator` component is built on top of [Kobalte Separator](https://kobalte.dev/docs/core/components/separator), which provides the accessible separator primitive.
+
+The `Item` component is a straightforward flex container that can house nearly any type of content. Use it to display a title, description, and actions. Group it with `ItemGroup` to create a list of items.
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="item-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/item-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add item
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/item.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "~/components/ui/item";
+```
+
+```tsx showLineNumbers
+<Item>
+  <ItemMedia variant="icon">
+    <Icon />
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>Title</ItemTitle>
+    <ItemDescription>Description</ItemDescription>
+  </ItemContent>
+  <ItemActions>
+    <Button>Action</Button>
+  </ItemActions>
+</Item>
+```
+
+## Composition
+
+Use the following composition to build an `Item`:
+
+```text
+ItemGroup
+└── Item
+    ├── ItemHeader
+    ├── ItemMedia
+    ├── ItemContent
+    │   ├── ItemTitle
+    │   └── ItemDescription
+    ├── ItemActions
+    └── ItemFooter
+```
+
+## Item vs Field
+
+Use `Field` if you need to display a form input such as a checkbox, input, radio, or select.
+
+If you only need to display content such as a title, description, and actions, use `Item`.
+
+## Examples
+
+### Variant
+
+Use the `variant` prop to change the visual style of the item.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="item-variant" previewClass="h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-variant" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Size
+
+Use the `size` prop to change the size of the item. Available sizes are `default`, `sm`, and `xs`.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="item-size" previewClass="h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-size" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icon
+
+Use `ItemMedia` with `variant="icon"` to display an icon.
+
+::::tab-group[example3]
+:::tab[Preview]
+
+<ComponentPreview name="item-icon" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-icon" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Avatar
+
+Wrap an `Avatar` in `ItemMedia` to display an avatar.
+
+::::tab-group[example4]
+:::tab[Preview]
+
+<ComponentPreview name="item-avatar" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-avatar" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Image
+
+Use `ItemMedia` with `variant="image"` to display an image.
+
+::::tab-group[example5]
+:::tab[Preview]
+
+<ComponentPreview name="item-image" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-image" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Group
+
+Use `ItemGroup` to group related items together.
+
+::::tab-group[example6]
+:::tab[Preview]
+
+<ComponentPreview name="item-group" previewClass="h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-group" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Header
+
+Use `ItemHeader` to add a header above the item content.
+
+::::tab-group[example7]
+:::tab[Preview]
+
+<ComponentPreview name="item-header" previewClass="h-96" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-header" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Link
+
+Set `as="a"` to render the item as a link. The hover and focus states apply to the anchor element.
+
+::::tab-group[example8]
+:::tab[Preview]
+
+<ComponentPreview name="item-link" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-link" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+```tsx showLineNumbers
+<Item as="a" href="/dashboard">
+  <ItemMedia variant="icon">
+    <Home />
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>Dashboard</ItemTitle>
+    <ItemDescription>Overview of your account and activity.</ItemDescription>
+  </ItemContent>
+</Item>
+```
+
+### Dropdown
+
+::::tab-group[example9]
+:::tab[Preview]
+
+<ComponentPreview name="item-dropdown" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/item-dropdown" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Item
+
+The main component for displaying content with media, title, description, and actions.
+
+| Prop      | Type                                | Default     |
+| --------- | ----------------------------------- | ----------- |
+| `variant` | `"default" \| "outline" \| "muted"` | `"default"` |
+| `size`    | `"default" \| "sm" \| "xs"`         | `"default"` |
+| `as`      | `ValidComponent`                    | `"div"`     |
+| `class`   | `string`                            | -           |
+
+### ItemGroup
+
+A container that groups related items together with consistent styling.
+
+```tsx
+<ItemGroup>
+  <Item />
+  <ItemSeparator />
+  <Item />
+</ItemGroup>
+```
+
+### ItemSeparator
+
+A separator between items in a group. It accepts [Kobalte Separator props](https://kobalte.dev/docs/core/components/separator#api-reference).
+
+### ItemMedia
+
+Use `ItemMedia` to display media content such as icons, images, or avatars.
+
+| Prop      | Type                             | Default     |
+| --------- | -------------------------------- | ----------- |
+| `variant` | `"default" \| "icon" \| "image"` | `"default"` |
+| `class`   | `string`                         | -           |
+
+```tsx
+<ItemMedia variant="icon">
+  <Icon />
+</ItemMedia>
+```
+
+### ItemContent
+
+Wraps the title and description of the item.
+
+```tsx
+<ItemContent>
+  <ItemTitle>Title</ItemTitle>
+  <ItemDescription>Description</ItemDescription>
+</ItemContent>
+```
+
+### ItemTitle
+
+Displays the title of the item.
+
+### ItemDescription
+
+Displays the description of the item.
+
+### ItemActions
+
+Container for action buttons or other interactive elements.
+
+### ItemHeader
+
+Displays a header above the item content.
+
+### ItemFooter
+
+Displays a footer below the item content.

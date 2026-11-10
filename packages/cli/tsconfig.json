@@ -1,16 +1,18 @@
 {
-	"exclude": ["node_modules", "dist"],
+  "include": ["src", "tsdown.config.ts"],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false,
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "noEmit": false,
+    // tsdown emits the build; tsc only type-checks.
+    "noEmit": true,
+    "isolatedModules": true,
+    // TypeScript 6+ no longer loads every @types package by default.
+    "types": ["node"],
+    // Some dependency typings (e.g. @babel/core -> convert-source-map) are not self-contained.
+    "skipLibCheck": true,
     "allowArbitraryExtensions": true,
     "strict": true,
-    "baseUrl": "./",
-    "outDir": "./dist",
     "paths": {
       "~/*": ["./src/*"]
     }

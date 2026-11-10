@@ -1,0 +1,113 @@
+---
+title: Scroll Area
+description: Augments native scroll functionality for custom, cross-browser styling.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add scroll-area
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/scroll-area.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
+```
+
+```tsx showLineNumbers
+<ScrollArea class="h-[200px] w-[350px] rounded-md border p-4">
+  Your scrollable content here.
+</ScrollArea>
+```
+
+## Composition
+
+`ScrollArea` renders its own viewport and a vertical `ScrollBar` internally, so most usages only need
+the root:
+
+```text
+ScrollArea
+└── ScrollBar (horizontal, opt-in)
+```
+
+## Examples
+
+### Horizontal
+
+Add a `ScrollBar` with `orientation="horizontal"` as a direct child for horizontal scrolling. The
+vertical scrollbar is always present internally and simply stays hidden when its axis doesn't overflow.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="scroll-area-horizontal" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/scroll-area-horizontal" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### ScrollArea
+
+The root container. It renders a scrollable viewport around its children, a vertical `ScrollBar`, and
+a corner element, and shows/hides scrollbars based on hover state and overflow.
+
+| Prop       | Type          | Default |
+| ---------- | ------------- | ------- |
+| `class`    | `string`      | -       |
+| `children` | `JSX.Element` | -       |
+
+All other props are forwarded to the root `div`.
+
+### ScrollBar
+
+A scrollbar track and thumb for one axis. It is always mounted, but stays visually hidden
+(`opacity-0`, non-interactive) unless its axis overflows and the scroll area is hovered or the thumb
+is being dragged.
+
+| Prop          | Type                         | Default      |
+| ------------- | ---------------------------- | ------------ |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `class`       | `string`                     | -            |
+
+ScrollArea is a native SolidJS implementation and does not build on a Kobalte or Corvu primitive, so it does not expose a primitive API to link to.

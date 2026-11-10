@@ -1,0 +1,204 @@
+---
+title: Pagination
+description: Pagination with page navigation, next and previous links.
+---
+
+::::tab-group[preview]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-demo" />
+
+:::
+
+:::tab[Code]
+
+```file="~/registry/examples/pagination-demo" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## Installation
+
+### CLI
+
+```package-exec
+solidui-cli@latest add pagination
+```
+
+### Manual
+
+Install the following dependencies:
+
+```package-install
+@kobalte/core
+```
+
+Copy and paste the following code into your project.
+
+```file="~/registry/ui/pagination.tsx" showLineNumbers
+
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "~/components/ui/pagination";
+```
+
+```tsx showLineNumbers
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>
+        2
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+## Composition
+
+Use the following composition to build a `Pagination`:
+
+```text
+Pagination
+└── PaginationContent
+    ├── PaginationItem
+    │   └── PaginationPrevious
+    ├── PaginationItem
+    │   └── PaginationLink
+    ├── PaginationItem
+    │   └── PaginationEllipsis
+    └── PaginationItem
+        └── PaginationNext
+```
+
+## Examples
+
+### Simple
+
+A simple pagination with only page numbers.
+
+::::tab-group[example1]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-simple" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/pagination-simple" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+### Icons Only
+
+Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page selector.
+
+::::tab-group[example2]
+:::tab[Preview]
+
+<ComponentPreview name="pagination-icons-only" />
+
+:::
+:::tab[Code]
+
+```file="~/registry/examples/pagination-icons-only" frame=none showLineNumbers
+
+```
+
+:::
+::::
+
+## API Reference
+
+### Pagination
+
+The root navigation element for the pagination controls. It renders a semantic `<nav>` with an accessible pagination label.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### PaginationContent
+
+The list that contains pagination items.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### PaginationItem
+
+An individual pagination list item.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+### PaginationLink
+
+A page link. Set `isActive` to announce the current page with `aria-current="page"`.
+
+| Prop       | Type                  | Default  |
+| ---------- | --------------------- | -------- |
+| `isActive` | `boolean`             | `false`  |
+| `size`     | `ButtonProps["size"]` | `"icon"` |
+| `class`    | `string`              | -        |
+
+### PaginationPrevious
+
+A link to the previous page.
+
+| Prop    | Type     | Default      |
+| ------- | -------- | ------------ |
+| `text`  | `string` | `"Previous"` |
+| `class` | `string` | -            |
+
+### PaginationNext
+
+A link to the next page.
+
+| Prop    | Type     | Default  |
+| ------- | -------- | -------- |
+| `text`  | `string` | `"Next"` |
+| `class` | `string` | -        |
+
+### PaginationEllipsis
+
+An inaccessible visual indicator that more pages are available.
+
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` | -       |
+
+Pagination is a native Solid composition of semantic HTML elements, so it does not expose a Kobalte or Corvu primitive API.
