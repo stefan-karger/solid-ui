@@ -38,63 +38,59 @@ const instanceId = `code-block-command-${randomUUID()}`
     </div>
 
     <div aria-label="Package manager" class="flex items-center" role="tablist">
-      {
-        PACKAGE_MANAGERS.map((packageManager) => {
-          const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
-          const tabId = `${instanceId}-${packageManager}-tab`
-          const panelId = `${instanceId}-${packageManager}-panel`
-
-          return (
-            <button
-              aria-controls={panelId}
-              aria-selected={isActive ? "true" : "false"}
-              class="h-7 rounded-md border border-transparent px-2 pt-0.5 font-mono text-sm text-muted-foreground shadow-none outline-none transition-colors hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=active]:border-input data-[state=active]:bg-background data-[state=active]:text-foreground"
-              data-command-tab
-              data-package-manager={packageManager}
-              data-state={isActive ? "active" : "inactive"}
-              id={tabId}
-              role="tab"
-              tabindex={isActive ? 0 : -1}
-              type="button"
-            >
-              {packageManager}
-            </button>
-          )
-        })
-      }
-    </div>
-  </div>
-
-  <div class="no-scrollbar overflow-x-auto">
-    {
-      PACKAGE_MANAGERS.map((packageManager) => {
+      {PACKAGE_MANAGERS.map((packageManager) => {
         const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
         const tabId = `${instanceId}-${packageManager}-tab`
         const panelId = `${instanceId}-${packageManager}-panel`
 
         return (
-          <div
-            aria-labelledby={tabId}
-            data-command-panel
-            data-command={commands[packageManager]}
+          <button
+            aria-controls={panelId}
+            aria-selected={isActive ? "true" : "false"}
+            class="h-7 rounded-md border border-transparent px-2 pt-0.5 font-mono text-sm text-muted-foreground shadow-none transition-colors outline-none hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=active]:border-input data-[state=active]:bg-background data-[state=active]:text-foreground"
+            data-command-tab
             data-package-manager={packageManager}
             data-state={isActive ? "active" : "inactive"}
-            hidden={!isActive}
-            id={panelId}
-            role="tabpanel"
-            tabindex="0"
+            id={tabId}
+            role="tab"
+            tabindex={isActive ? 0 : -1}
+            type="button"
           >
-            {/* prettier-ignore */}
-            <pre class="px-4 py-3.5"><code class="relative block font-mono text-sm leading-none text-foreground" data-language="bash" set:text={commands[packageManager]} /></pre>
-          </div>
+            {packageManager}
+          </button>
         )
-      })
-    }
+      })}
+    </div>
+  </div>
+
+  <div class="no-scrollbar overflow-x-auto">
+    {PACKAGE_MANAGERS.map((packageManager) => {
+      const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
+      const tabId = `${instanceId}-${packageManager}-tab`
+      const panelId = `${instanceId}-${packageManager}-panel`
+
+      return (
+        <div
+          aria-labelledby={tabId}
+          data-command-panel
+          data-command={commands[packageManager]}
+          data-package-manager={packageManager}
+          data-state={isActive ? "active" : "inactive"}
+          hidden={!isActive}
+          id={panelId}
+          role="tabpanel"
+          tabindex="0"
+        >
+          {/* prettier-ignore */}
+          <pre class="px-4 py-3.5"><code class="relative block font-mono text-sm leading-none text-foreground" data-language="bash" set:text={commands[packageManager]} /></pre>
+        </div>
+      )
+    })}
   </div>
 
   <button
     aria-label="Copy command"
-    class="absolute top-2 right-2 z-10 flex size-7 items-center justify-center rounded-md text-code-foreground opacity-70 outline-none transition-[color,opacity,box-shadow] hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    class="absolute top-2 right-2 z-10 flex size-7 items-center justify-center rounded-md text-code-foreground opacity-70 transition-[color,opacity,box-shadow] outline-none hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
     data-copy-command
     data-slot="copy-button"
     type="button"

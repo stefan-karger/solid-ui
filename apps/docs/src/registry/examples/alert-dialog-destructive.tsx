@@ -17,7 +17,7 @@ import { Button } from "~/registry/ui/button"
 export default function AlertDialogDestructive() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger as={Button} variant="destructive">
+      <AlertDialogTrigger render={(partProps) => <Button {...partProps} variant="destructive" />}>
         Delete Chat
       </AlertDialogTrigger>
       <AlertDialogContent size="sm">

@@ -4,7 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 export default function TooltipDisabled() {
   return (
     <Tooltip>
-      <TooltipTrigger as="span" class="inline-block w-fit">
+      <TooltipTrigger render={(partProps) => <span {...partProps} />} class="inline-block w-fit">
         <Button variant="outline" disabled>
           Disabled
         </Button>

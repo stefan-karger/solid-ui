@@ -29,6 +29,18 @@ npx solidui-cli@latest add item
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add separator
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="item" title="components/ui/item.tsx" />
@@ -104,39 +116,37 @@ Use the `size` prop to adjust spacing density. Available sizes are `default`, `s
 
 <ComponentPreview name="item-size" previewClassName="h-96" />
 
-## Examples
-
-### Icon
+## Icon
 
 Use `ItemMedia` with `variant="icon"` to display icons.
 
 <ComponentPreview name="item-icon" />
 
-### Avatar
+## Avatar
 
 You can use `ItemMedia` with `variant="avatar"` to display an avatar.
 
 <ComponentPreview name="item-avatar" />
 
-### Image
+## Image
 
 Use `ItemMedia` with `variant="image"` for thumbnail-driven rows.
 
 <ComponentPreview name="item-image" />
 
-### Group
+## Group
 
 Use `ItemGroup` to group related items together.
 
 <ComponentPreview name="item-group" previewClassName="h-96" />
 
-### Header
+## Header
 
 Use `ItemHeader` to add a header above the item content.
 
 <ComponentPreview name="item-header" previewClassName="h-96" />
 
-### Link
+## Link
 
 Use the polymorphic `as` prop to render the item as a link. The hover and focus states will be applied to the anchor element.
 
@@ -154,7 +164,7 @@ Use the polymorphic `as` prop to render the item as a link. The hover and focus 
 </Item>
 ```
 
-### Dropdown
+## Dropdown
 
 <ComponentPreview name="item-dropdown" />
 

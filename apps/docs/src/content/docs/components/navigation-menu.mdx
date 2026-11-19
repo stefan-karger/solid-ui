@@ -4,7 +4,7 @@ description: A collection of links for navigating websites.
 component: true
 ---
 
-<ComponentPreview name="navigation-menu-demo" previewClassName="h-96" />
+<ComponentPreview name="navigation-menu-demo" previewClassName="h-96" class="overflow-visible" />
 
 ## Installation
 
@@ -30,7 +30,7 @@ npx solidui-cli@latest add navigation-menu
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core class-variance-authority lucide-solid
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -70,9 +70,11 @@ import {
         </ul>
       </NavigationMenuContent>
     </NavigationMenuItem>
-    <NavigationMenuTrigger as="a" href="/docs" class={navigationMenuTriggerStyle()}>
-      Docs
-    </NavigationMenuTrigger>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="/docs" class={navigationMenuTriggerStyle()}>
+        Docs
+      </NavigationMenuLink>
+    </NavigationMenuItem>
   </NavigationMenuList>
 </NavigationMenu>
 ```
@@ -89,33 +91,18 @@ NavigationMenu
 │   │   └── NavigationMenuContent
 │   │       ├── NavigationMenuLink
 │   │       └── NavigationMenuLink
-│   └── NavigationMenuTrigger as="a"
+│   └── NavigationMenuItem
+│       └── NavigationMenuLink
 └── NavigationMenuIndicator
 ```
 
-Top-level links are rendered directly with `NavigationMenuTrigger as="a"`. Use `NavigationMenuLink` for focusable links inside `NavigationMenuContent` panels.
+Use `NavigationMenuItem` around each top-level entry. A direct link uses `NavigationMenuLink`; a popup uses `NavigationMenuTrigger` and `NavigationMenuContent`.
 
-## Link
+## Link Component
 
-Use `NavigationMenuTrigger` with `as="a"` as a direct top-level item for links so keyboard navigation remains fully integrated.
-
-```tsx showLineNumbers
-<NavigationMenuList>
-  <NavigationMenuTrigger as="a" href="/docs" class={navigationMenuTriggerStyle()}>
-    Docs
-  </NavigationMenuTrigger>
-</NavigationMenuList>
-```
-
-## Keyboard Notes
-
-- Use `NavigationMenuItem` only for trigger + content pairs.
-- Use top-level links as direct `NavigationMenuTrigger as="a"` elements inside `NavigationMenuList`.
-- Use `NavigationMenuLink` inside `NavigationMenuContent` panels for focusable arrow-key items.
+Use the `render` prop to compose a custom link component such as Next.js `Link`.
 
 ## API Reference
-
-### Core Parts
 
 | Part                         | Description                                     |
 | ---------------------------- | ----------------------------------------------- |
@@ -127,17 +114,3 @@ Use `NavigationMenuTrigger` with `as="a"` as a direct top-level item for links s
 | `NavigationMenuViewport`     | Optional viewport wrapper for popup content.    |
 | `NavigationMenuLink`         | Focusable menu item link inside content panels. |
 | `navigationMenuTriggerStyle` | Shared trigger classes for custom links.        |
-
-### NavigationMenu
-
-| Option     | Type      | Default | Description                                        |
-| ---------- | --------- | ------- | -------------------------------------------------- |
-| `viewport` | `boolean` | `true`  | Controls whether the built-in viewport is rendered |
-
-### NavigationMenuTrigger
-
-| Option     | Type      | Default | Description                                         |
-| ---------- | --------- | ------- | --------------------------------------------------- |
-| `showIcon` | `boolean` | `auto`  | Shows chevron by default except when `href` is set. |
-
-See the [Kobalte](https://kobalte.dev/docs/core/components/navigation-menu) documentation for more information.

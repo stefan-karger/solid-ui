@@ -1,6 +1,9 @@
-import solidRenderer from "@solid-ui/astro-solid2/server.js"
+import solidRenderer from "@astrojs/solid-js/server.js"
 import { experimental_AstroContainer as AstroContainer } from "astro/container"
 import { beforeAll, describe, expect, it } from "vitest"
+
+// Compile the lazy SSR fixture during collection, outside the render timeout.
+import "~/registry/examples/button-demo"
 
 import ComponentPreview from "../component-preview.astro"
 
@@ -14,7 +17,7 @@ describe("ComponentPreview", () => {
     container.addServerRenderer({ renderer: solidRenderer })
     container.addClientRenderer({
       name: solidRenderer.name,
-      entrypoint: "@solid-ui/astro-solid2/client.js"
+      entrypoint: "@astrojs/solid-js/client.js"
     })
   })
 
@@ -65,6 +68,16 @@ describe("ComponentPreview", () => {
 
     expect(html).toContain("<figure")
     expect(html).toContain('data-slot="preview"')
+    expect(html).toContain('aria-label="Submit"')
     expect(html).not.toContain('data-slot="code"')
+  }, 30_000)
+
+  it("renders UI SDK controls as markup rather than escaped HTML", async () => {
+    const html = await container.renderToString(ComponentPreview, {
+      props: { name: "combobox-demo", hideCode: true }
+    })
+
+    expect(html).toContain('role="combobox"')
+    expect(html).not.toContain("&lt;input")
   }, 30_000)
 })

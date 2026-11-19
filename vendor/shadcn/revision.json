@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/shadcn-ui/ui",
+  "revision": "968d8cb9dc42ae5d52e8fd356cf84596ec832a26",
+  "path": "apps/v4/registry/styles",
+  "files": {
+    "style-nova.css": "fd9803ec398290c306b377a46a769cad0c7ff024bf6a626993c113cacc20f16e",
+    "style-vega.css": "10fa07bd61b429ae2c14c572ba9975f6e991d68a04f8fec7e354a062597e0d4e",
+    "style-mira.css": "cdde6d38ee43c94cb6785672455adeea7fe195cc57772dc52b41acb5a1789732",
+    "style-maia.css": "8d518bcb26fad2904e7048e7be4c708814168c5e4ee29f1228945f91efd694a1",
+    "style-lyra.css": "be24110aafbd07d794ced58f15512c640ab3dfa5733beb850e83f968457a9b52",
+    "style-luma.css": "35c0578be1623049da1f11729ae43a2a7884dcc17b948fc72dcdf4f1be3c0484",
+    "style-sera.css": "c26380d5023bb63d25c03c94cae223e0a4f133f6bae0a63f77b8e4ac17483ba0",
+    "style-rhea.css": "bac4eff75a0e21d9dd90ce40634937f54730471d8f7fa50ca67b317892cf908f"
+  },
+  "utilities": {
+    "file": "tailwind.css",
+    "sha256": "4c371f7a1ff5d219ae2f7ff28bd256b4346fd546fe46fbae22092e57db2f0fae",
+    "start": "/* scroll-fade */"
+  }
+}

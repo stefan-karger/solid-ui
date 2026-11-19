@@ -19,7 +19,7 @@ export default function FieldSlider() {
           class="mt-2 w-full"
           max={1000}
           min={0}
-          onChange={setValue}
+          onValueChange={setValue}
           step={10}
           value={value()}
         />

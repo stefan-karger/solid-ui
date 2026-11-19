@@ -1,0 +1,15 @@
+  .cn-delta-bar {
+    @apply h-1.5 rounded-full bg-muted;
+  }
+
+  .cn-delta-bar-indicator-decrease {
+    @apply rounded-l-full;
+  }
+
+  .cn-delta-bar-indicator-increase {
+    @apply rounded-r-full;
+  }
+
+  .cn-delta-bar-marker {
+    @apply h-3 w-1 shrink-0 rounded-full ring-1 ring-background;
+  }

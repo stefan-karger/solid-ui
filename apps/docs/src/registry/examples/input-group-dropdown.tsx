@@ -25,10 +25,10 @@ export default function InputGroupDropdown() {
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
             <DropdownMenuTrigger
-              as={InputGroupButton}
+              render={(partProps) => (
+                <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+              )}
               aria-label="More"
-              size="icon-xs"
-              variant="ghost"
             >
               <EllipsisIcon class="size-4" />
             </DropdownMenuTrigger>
@@ -47,7 +47,10 @@ export default function InputGroupDropdown() {
         <InputGroupInput placeholder="Enter search query" />
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
-            <DropdownMenuTrigger as={InputGroupButton} class="pr-1.5 text-xs" variant="ghost">
+            <DropdownMenuTrigger
+              render={(partProps) => <InputGroupButton {...partProps} variant="ghost" />}
+              class="pr-1.5 text-xs"
+            >
               {scope()}
               <ChevronDownIcon class="size-3" />
             </DropdownMenuTrigger>

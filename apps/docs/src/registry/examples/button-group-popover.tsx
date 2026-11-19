@@ -20,11 +20,14 @@ export default function ButtonGroupPopover() {
         <BotIcon class="size-4" />
         Copilot
       </Button>
-      <Popover placement="bottom-end">
-        <PopoverTrigger as={Button} aria-label="Open Popover" size="icon" variant="outline">
+      <Popover>
+        <PopoverTrigger
+          render={(partProps) => <Button {...partProps} size="icon" variant="outline" />}
+          aria-label="Open Popover"
+        >
           <ChevronDownIcon class="size-4" />
         </PopoverTrigger>
-        <PopoverContent class="rounded-xl text-sm">
+        <PopoverContent side="bottom" align="end" class="rounded-xl text-sm">
           <PopoverHeader>
             <PopoverTitle>Start a new task with Copilot</PopoverTitle>
             <PopoverDescription>Describe your task in natural language.</PopoverDescription>

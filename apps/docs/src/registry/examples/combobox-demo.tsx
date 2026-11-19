@@ -1,15 +1,13 @@
+import { For } from "solid-js"
+
 import {
   Combobox,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
-  ComboboxHiddenSelect,
   ComboboxInput,
   ComboboxItem,
-  ComboboxList,
-  ComboboxTrigger
+  ComboboxList
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
 
 type Framework = {
   value: string
@@ -27,24 +25,24 @@ const frameworks: Framework[] = [
 export default function ComboboxDemo() {
   return (
     <Combobox<Framework>
-      options={frameworks}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      placeholder="Select a framework"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
+      itemToLabel={(option) => String(option["label"])}
+      itemToValue={(option) => String(option["value"])}
     >
-      <ComboboxHiddenSelect />
-      <ComboboxControl class="max-w-sm">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxTrigger />
-        </InputGroupAddon>
-      </ComboboxControl>
+      <ComboboxInput
+        class="w-full max-w-sm"
+        placeholder="Select a framework"
+        aria-label="Select a framework"
+      />
       <ComboboxContent>
-        <ComboboxList />
+        <ComboboxList>
+          <For each={frameworks}>
+            {(option) => (
+              <ComboboxItem value={option} label={option["label"]}>
+                {option.label}
+              </ComboboxItem>
+            )}
+          </For>
+        </ComboboxList>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
       </ComboboxContent>
     </Combobox>

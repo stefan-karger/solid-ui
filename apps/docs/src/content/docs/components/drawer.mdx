@@ -1,0 +1,95 @@
+---
+title: Drawer
+description: A drawer component for React.
+component: true
+new: true
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## About
+
+Drawer is built on top of [Vaul](https://github.com/emilkowalski/vaul) by [emilkowalski](https://twitter.com/emilkowalski).
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add drawer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="drawer" title="components/ui/drawer.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Drawer } from "~/components/ui/drawer"
+```
+
+Use `side`, `snapPoints`, and `defaultSnapPoint` from the SDK. Content renders in place using the browser top layer. The SDK owns positioning and movement. There is no portal or Vaul compatibility layer.
+
+See the [UI SDK drawer API](https://ui-sdk.dev/docs/solid/components/drawer) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `Drawer`:
+
+```text
+Drawer
+├── DrawerTrigger
+└── DrawerContent
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    └── DrawerFooter
+```
+
+## Scrollable Content
+
+Keep actions visible while the content scrolls.
+
+<ComponentPreview name="drawer-scrollable-content" />
+
+## Sides
+
+<ComponentPreview name="drawer-sides" />
+
+## Responsive Dialog
+
+You can combine the `Dialog` and `Drawer` components to create a responsive dialog. This renders a `Dialog` component on desktop and a `Drawer` on mobile.
+
+<ComponentPreview name="drawer-dialog" />
+
+## API Reference
+
+See the [Vaul documentation](https://vaul.emilkowal.ski/getting-started) for the full API reference.

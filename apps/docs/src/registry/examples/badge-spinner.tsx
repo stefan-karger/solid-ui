@@ -1,21 +1,16 @@
-import { LoaderCircleIcon, LoaderIcon, RefreshCwIcon } from "lucide-solid"
-
 import { Badge } from "~/registry/ui/badge"
+import { Spinner } from "~/registry/ui/spinner"
 
-export default function BadgeSpinner() {
+export default function BadgeWithSpinner() {
   return (
-    <div class="flex flex-wrap items-center gap-2">
-      <Badge>
-        <LoaderCircleIcon class="size-3 animate-spin" data-icon="inline-start" />
-        Syncing
+    <div class="flex flex-wrap gap-2">
+      <Badge variant="destructive">
+        <Spinner data-icon="inline-start" />
+        Deleting
       </Badge>
       <Badge variant="secondary">
-        <LoaderIcon class="size-3 animate-spin" data-icon="inline-start" />
-        Processing
-      </Badge>
-      <Badge variant="destructive">
-        <RefreshCwIcon class="size-3 animate-spin" data-icon="inline-start" />
-        Retrying
+        Generating
+        <Spinner data-icon="inline-end" />
       </Badge>
     </div>
   )

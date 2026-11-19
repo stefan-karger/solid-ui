@@ -1,73 +1,76 @@
+import { For, Show } from "solid-js"
+
 import {
   Combobox,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
+  ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
+  ComboboxLabel,
   ComboboxList,
-  ComboboxSection,
-  ComboboxSectionLabel,
-  ComboboxTrigger
+  ComboboxSeparator
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
 
-type App = {
-  value: string
-  label: string
-}
-
-type AppGroup = {
-  group: string
-  items: App[]
-}
-
-const appGroups: AppGroup[] = [
+const timezones = [
   {
-    group: "Communication",
+    value: "Americas",
     items: [
-      { value: "slack", label: "Slack" },
-      { value: "teams", label: "Microsoft Teams" },
-      { value: "discord", label: "Discord" }
+      "(GMT-5) New York",
+      "(GMT-8) Los Angeles",
+      "(GMT-6) Chicago",
+      "(GMT-5) Toronto",
+      "(GMT-8) Vancouver",
+      "(GMT-3) São Paulo"
     ]
   },
   {
-    group: "Productivity",
+    value: "Europe",
     items: [
-      { value: "notion", label: "Notion" },
-      { value: "linear", label: "Linear" },
-      { value: "figma", label: "Figma" }
+      "(GMT+0) London",
+      "(GMT+1) Paris",
+      "(GMT+1) Berlin",
+      "(GMT+1) Rome",
+      "(GMT+1) Madrid",
+      "(GMT+1) Amsterdam"
+    ]
+  },
+  {
+    value: "Asia/Pacific",
+    items: [
+      "(GMT+9) Tokyo",
+      "(GMT+8) Shanghai",
+      "(GMT+8) Singapore",
+      "(GMT+4) Dubai",
+      "(GMT+11) Sydney",
+      "(GMT+9) Seoul"
     ]
   }
-]
+] as const
 
-export default function ComboboxGroups() {
+export default function ComboboxWithGroupsAndSeparator() {
   return (
-    <Combobox<App, AppGroup>
-      options={appGroups}
-      optionGroupChildren="items"
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      placeholder="Search apps"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
-      sectionComponent={(props) => (
-        <ComboboxSection>
-          <ComboboxSectionLabel>{props.section.rawValue.group}</ComboboxSectionLabel>
-        </ComboboxSection>
-      )}
-    >
-      <ComboboxControl class="max-w-sm">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxTrigger />
-        </InputGroupAddon>
-      </ComboboxControl>
+    <Combobox<string>>
+      <ComboboxInput placeholder="Select a timezone" aria-label="Select a timezone" />
       <ComboboxContent>
-        <ComboboxList />
-        <ComboboxEmpty>No app found.</ComboboxEmpty>
+        <ComboboxEmpty>No timezones found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={timezones}>
+            {(group, index) => (
+              <>
+                <Show when={index() !== 0}>
+                  <ComboboxSeparator />
+                </Show>
+                <ComboboxGroup>
+                  <ComboboxLabel>{group.value}</ComboboxLabel>
+                  <For each={group.items}>
+                    {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+                  </For>
+                </ComboboxGroup>
+              </>
+            )}
+          </For>
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   )

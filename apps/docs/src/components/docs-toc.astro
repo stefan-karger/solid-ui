@@ -1,0 +1,56 @@
+---
+import type { MarkdownHeading } from "astro"
+type Props = { headings: MarkdownHeading[]; showTitle?: boolean }
+const { headings, showTitle = true } = Astro.props
+const entries = headings.filter((heading) => heading.depth === 2 || heading.depth === 3)
+---
+
+{entries.length > 0 && (
+  <nav aria-label="On this page" class="grid gap-2 text-xs" data-docs-toc>
+    {showTitle && <p class="mb-2 font-medium text-foreground">On this page</p>}
+    {entries.map((heading) => (
+      <a
+        href={`#${heading.slug}`}
+        data-toc-id={heading.slug}
+        class:list={[
+          "text-muted-foreground transition-colors hover:text-foreground aria-[current=location]:text-foreground",
+          { "pl-3": heading.depth === 3 }
+        ]}
+      >
+        {heading.text}
+      </a>
+    ))}
+  </nav>
+)}
+<script>
+  function initializeToc() {
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-toc-id]"))
+    const headings = links
+      .map((link) => document.getElementById(link.dataset.tocId!))
+      .filter((node): node is HTMLElement => node !== null)
+    if (!headings.length) return
+    function update() {
+      const current =
+        headings.filter((node) => node.getBoundingClientRect().top <= 128).at(-1) ?? headings[0]!
+      for (const link of links) {
+        if (link.dataset.tocId === current.id) link.setAttribute("aria-current", "location")
+        else link.removeAttribute("aria-current")
+      }
+    }
+    let queued = false
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (queued) return
+        queued = true
+        requestAnimationFrame(() => {
+          update()
+          queued = false
+        })
+      },
+      { passive: true }
+    )
+    update()
+  }
+  initializeToc()
+</script>

@@ -11,32 +11,26 @@ export default function AvatarDemo() {
   return (
     <div class="flex flex-row flex-wrap items-center gap-6 md:gap-12">
       <Avatar>
-        <AvatarImage
-          alt="@stefan-karger"
-          class="grayscale"
-          src="https://github.com/stefan-karger.png"
-        />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" class="grayscale" />
+        <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-
       <Avatar>
-        <AvatarImage alt="@ryansolid" src="https://github.com/ryansolid.png" />
-        <AvatarFallback>RC</AvatarFallback>
+        <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+        <AvatarFallback>ER</AvatarFallback>
         <AvatarBadge class="bg-green-600 dark:bg-green-800" />
       </Avatar>
-
       <AvatarGroup class="grayscale">
         <Avatar>
-          <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-          <AvatarFallback>SK</AvatarFallback>
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <Avatar>
-          <AvatarImage alt="@carere" src="https://github.com/carere.png" />
-          <AvatarFallback>KA</AvatarFallback>
+          <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+          <AvatarFallback>LR</AvatarFallback>
         </Avatar>
         <Avatar>
-          <AvatarImage alt="@ryansolid" src="https://github.com/ryansolid.png" />
-          <AvatarFallback>RC</AvatarFallback>
+          <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+          <AvatarFallback>ER</AvatarFallback>
         </Avatar>
         <AvatarGroupCount>+3</AvatarGroupCount>
       </AvatarGroup>

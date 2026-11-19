@@ -30,7 +30,13 @@ npx solidui-cli@latest add button-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install class-variance-authority
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add separator
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -84,32 +90,30 @@ ButtonGroup
 </ButtonGroup>
 ```
 
-## Button Group vs Toggle Group
+## ButtonGroup vs ToggleGroup
 
 - Use `ButtonGroup` for grouped action buttons.
 - Use `ToggleGroup` when each control represents a selected or pressed state.
 
-## Examples
-
-### Orientation
+## Orientation
 
 Set the `orientation` prop to switch between horizontal and vertical layouts.
 
 <ComponentPreview name="button-group-orientation" />
 
-### Size
+## Size
 
 Set `size` on each `Button` to build compact or spacious groups.
 
 <ComponentPreview name="button-group-size" />
 
-### Nested
+## Nested
 
 Nest groups to combine segmented controls with separate action clusters.
 
 <ComponentPreview name="button-group-nested" />
 
-### Separator
+## Separator
 
 Use `ButtonGroupSeparator` to add a visual divider between adjacent controls.
 
@@ -117,47 +121,41 @@ Buttons with variant `outline` do not need a separator since they have a border.
 
 <ComponentPreview name="button-group-separator" />
 
-### Split
+## Split
 
 Create a split button group by adding two buttons separated by a `ButtonGroupSeparator`.
 
 <ComponentPreview name="button-group-split" />
 
-### Input
+## Input
 
 Wrap an `Input` component with buttons.
 
 <ComponentPreview name="button-group-input" />
 
-### Input Group
+## Input Group
 
 Compose nested controls by combining `ButtonGroup` with `InputGroup`.
 
 <ComponentPreview name="button-group-input-group" />
 
-### Dropdown Menu
+## Dropdown Menu
 
 Create a split button group with a `DropdownMenu` component.
 
 <ComponentPreview name="button-group-dropdown" />
 
-### Select
+## Select
 
 Pair with a `Select` component.
 
 <ComponentPreview name="button-group-select" />
 
-### Popover
+## Popover
 
 Use with a `Popover` component.
 
 <ComponentPreview name="button-group-popover" />
-
-### Text as Label
-
-Render `ButtonGroupText` as a custom component with the `as` prop.
-
-<ComponentPreview name="button-group-text" />
 
 ## API Reference
 

@@ -22,14 +22,12 @@ const classes = cn(
 )
 ---
 
-{
-  href ? (
-    <a class={classes} data-not-typeset data-slot="button" href={href} {...props}>
-      <slot />
-    </a>
-  ) : (
-    <button {...props} class={classes} data-not-typeset data-slot="button" type="button">
-      <slot />
-    </button>
-  )
-}
+{href ? (
+  <a class={classes} data-not-typeset data-slot="button" href={href} {...props}>
+    <slot />
+  </a>
+) : (
+  <button {...props} class={classes} data-not-typeset data-slot="button" type="button">
+    <slot />
+  </button>
+)}

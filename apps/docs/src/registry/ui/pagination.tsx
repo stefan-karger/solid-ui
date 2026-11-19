@@ -1,60 +1,51 @@
-import { type ComponentProps } from "@solidjs/web"
+import type { ComponentProps } from "@solidjs/web"
 import { ChevronLeftIcon, ChevronRightIcon, Ellipsis } from "lucide-solid"
-import { merge, omit } from "solid-js"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import { Button, type ButtonProps } from "~/registry/ui/button"
 
 type PaginationProps = ComponentProps<"nav">
 
-const Pagination = (props: PaginationProps) => {
-  const others = omit(props, "class")
-  return (
-    <nav
-      aria-label="pagination"
-      data-slot="pagination"
-      class={cn("cn-pagination mx-auto flex w-full justify-center", props.class)}
-      {...others}
-    />
-  )
-}
+const Pagination = (props: PaginationProps) => (
+  <nav
+    aria-label="pagination"
+    data-slot="pagination"
+    {...props}
+    class={cn("cn-pagination mx-auto flex w-full justify-center", props.class)}
+  />
+)
 
 type PaginationContentProps = ComponentProps<"ul">
 
-const PaginationContent = (props: PaginationContentProps) => {
-  const others = omit(props, "class")
-  return (
-    <ul
-      data-slot="pagination-content"
-      class={cn("cn-pagination-content flex items-center", props.class)}
-      {...others}
-    />
-  )
-}
+const PaginationContent = (props: PaginationContentProps) => (
+  <ul
+    data-slot="pagination-content"
+    {...props}
+    class={cn("cn-pagination-content flex items-center", props.class)}
+  />
+)
 
 type PaginationItemProps = ComponentProps<"li">
 
-const PaginationItem = (props: PaginationItemProps) => {
-  return <li data-slot="pagination-item" {...props} />
-}
+const PaginationItem = (props: PaginationItemProps) => <li data-slot="pagination-item" {...props} />
 
-type PaginationLinkProps = Omit<ButtonProps<"a">, "variant"> & {
+type PaginationLinkProps = Omit<ButtonProps<"a">, "as" | "variant"> & {
   isActive?: boolean
 }
 
-const PaginationLink = (rawProps: PaginationLinkProps) => {
-  const local = merge({ size: "icon" as const }, rawProps)
-  const others = omit(rawProps, "class", "isActive", "size")
+const PaginationLink = (props: PaginationLinkProps) => {
+  const others = omit(props, "isActive", "size")
   return (
     <Button
       as="a"
-      variant={local.isActive ? "outline" : "ghost"}
-      size={local.size}
-      class={cn("cn-pagination-link", local.class)}
-      aria-current={local.isActive ? "page" : undefined}
+      variant={props.isActive ? "outline" : "ghost"}
+      size={props.size === undefined ? "icon" : props.size}
+      aria-current={props.isActive ? "page" : undefined}
       data-slot="pagination-link"
-      data-active={local.isActive}
+      data-active={props.isActive}
       {...others}
+      class={cn("cn-pagination-link", props.class)}
     />
   )
 }
@@ -95,20 +86,17 @@ const PaginationNext = (props: PaginationNextProps) => {
 
 type PaginationEllipsisProps = ComponentProps<"span">
 
-const PaginationEllipsis = (props: PaginationEllipsisProps) => {
-  const others = omit(props, "class")
-  return (
-    <span
-      aria-hidden="true"
-      data-slot="pagination-ellipsis"
-      class={cn("cn-pagination-ellipsis flex items-center justify-center", props.class)}
-      {...others}
-    >
-      <Ellipsis />
-      <span class="sr-only">More pages</span>
-    </span>
-  )
-}
+const PaginationEllipsis = (props: PaginationEllipsisProps) => (
+  <span
+    aria-hidden="true"
+    data-slot="pagination-ellipsis"
+    {...props}
+    class={cn("cn-pagination-ellipsis flex items-center justify-center", props.class)}
+  >
+    <Ellipsis />
+    <span class="sr-only">More pages</span>
+  </span>
+)
 
 export {
   Pagination,

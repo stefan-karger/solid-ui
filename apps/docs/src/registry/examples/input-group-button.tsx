@@ -47,7 +47,11 @@ export default function InputGroupButtonExample() {
       <InputGroup class="[--radius:9999px]">
         <InputGroupAddon>
           <Popover>
-            <PopoverTrigger as={InputGroupButton} size="icon-xs" variant="secondary">
+            <PopoverTrigger
+              render={(partProps) => (
+                <InputGroupButton {...partProps} size="icon-xs" variant="secondary" />
+              )}
+            >
               <InfoIcon class="size-4" />
             </PopoverTrigger>
             <PopoverContent class="rounded-xl text-sm">

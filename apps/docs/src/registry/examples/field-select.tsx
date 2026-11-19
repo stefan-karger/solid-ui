@@ -1,3 +1,5 @@
+import { For } from "solid-js"
+
 import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
 
@@ -23,18 +25,23 @@ export default function FieldSelect() {
       <Field>
         <FieldLabel for="field-select-department">Department</FieldLabel>
         <Select<Department>
-          options={departments}
-          optionValue="value"
-          optionTextValue="label"
+          itemToLabel={(option) => String(option["label"])}
+          itemToValue={(option) => String(option["value"])}
+
           placeholder="Choose department"
-          itemComponent={(props) => (
-            <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-          )}
         >
-          <SelectTrigger class="w-full" id="field-select-department">
-            <SelectValue<Department>>{(state) => state.selectedOption()?.label}</SelectValue>
+          <SelectTrigger aria-label="Choose department" class="w-full" id="field-select-department">
+            <SelectValue />
           </SelectTrigger>
-          <SelectContent />
+          <SelectContent>
+            <For each={departments}>
+              {(option) => (
+                <SelectItem value={option} label={option["label"]}>
+                  {option.label}
+                </SelectItem>
+              )}
+            </For>
+          </SelectContent>
         </Select>
         <FieldDescription>Select your department or area of work.</FieldDescription>
       </Field>

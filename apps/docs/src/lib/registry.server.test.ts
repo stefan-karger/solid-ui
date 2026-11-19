@@ -117,7 +117,7 @@ describe("registry catalog", () => {
   it("prepares the RTL Button example for display", async () => {
     const source = await getRegistrySource({ name: "button-rtl" })
 
-    expect(source.code).toContain("data-provider-direction={locale.direction()}")
+    expect(source.code).toContain("data-provider-direction={direction()}")
     expect(source.code).not.toMatch(/\bcn-[a-z0-9-]+\b/)
   })
 

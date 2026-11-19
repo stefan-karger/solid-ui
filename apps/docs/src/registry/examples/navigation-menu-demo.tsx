@@ -79,9 +79,11 @@ export default function NavigationMenuDemo() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuTrigger as="a" href="/docs" class={navigationMenuTriggerStyle()}>
-          Docs
-        </NavigationMenuTrigger>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/docs" class={navigationMenuTriggerStyle()}>
+            Docs
+          </NavigationMenuLink>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )

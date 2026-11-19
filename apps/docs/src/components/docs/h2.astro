@@ -14,27 +14,25 @@ const headingId = id === undefined ? createHeadingId(slotContent) || undefined :
 <h2
   id={headingId}
   class={cn(
-    "mt-10 scroll-m-28 font-heading text-xl font-medium tracking-tight first:mt-0 lg:mt-12 [&+h3]:mt-6! [&+p]:mt-4! [&+.steps]:mt-0! [&+.steps>h3]:mt-4! [&+]*:[code]:text-xl",
+    "[&+]*:[code]:text-xl mt-10 scroll-m-28 font-heading text-xl font-medium tracking-tight first:mt-0 lg:mt-12 [&+.steps]:mt-0! [&+.steps>h3]:mt-4! [&+h3]:mt-6! [&+p]:mt-4!",
     className
   )}
   {...props}
 >
-  {
-    headingId ? (
-      <a
-        class="group/heading inline-flex items-baseline gap-2 no-underline outline-none"
-        href={`#${headingId}`}
-      >
-        <Fragment set:html={slotContent} />
-        <span
-          aria-hidden="true"
-          class="text-muted-foreground opacity-0 transition-opacity group-hover/heading:opacity-100 group-focus-within/heading:opacity-100"
-        >
-          #
-        </span>
-      </a>
-    ) : (
+  {headingId ? (
+    <a
+      class="group/heading inline-flex items-baseline gap-2 no-underline outline-none"
+      href={`#${headingId}`}
+    >
       <Fragment set:html={slotContent} />
-    )
-  }
+      <span
+        aria-hidden="true"
+        class="text-muted-foreground opacity-0 transition-opacity group-focus-within/heading:opacity-100 group-hover/heading:opacity-100"
+      >
+        #
+      </span>
+    </a>
+  ) : (
+    <Fragment set:html={slotContent} />
+  )}
 </h2>

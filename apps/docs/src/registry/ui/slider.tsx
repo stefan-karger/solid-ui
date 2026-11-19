@@ -1,78 +1,45 @@
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as SliderPrimitive from "@kobalte/core/slider"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
-import { createMemo, For, merge, omit, untrack } from "solid-js"
+import type { ComponentProps } from "@solidjs/web"
+import {
+  Slider as SdkSlider,
+  SliderTrack as SdkSliderTrack,
+  SliderIndicator as SdkSliderIndicator,
+  SliderThumb as SdkSliderThumb,
+  SliderControl as SdkSliderControl
+} from "@ui-sdk/solid/slider"
+import { createMemo, For, merge } from "solid-js"
 
 import { cn } from "~/lib/utils"
+type SliderProps = Omit<ComponentProps<typeof SdkSlider<number[]>>, "class"> & { class?: string }
+const Slider = (props: SliderProps) => {
+  const local = merge({ min: 0, max: 100, defaultValue: [50] }, props)
 
-type SliderProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  Omit<SliderPrimitive.SliderRootProps<T>, "minValue" | "maxValue">
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    min?: number
-    max?: number
-  }
-
-const Slider = <T extends ValidComponent = "div">(rawProps: SliderProps<T>) => {
-  const local = merge(
-    {
-      defaultValue: [50],
-      min: 0,
-      max: 100,
-      step: 1,
-      orientation: "horizontal" as const
-    },
-    rawProps
-  ) as SliderProps
-  const others = omit(
-    rawProps as SliderProps,
-    "class",
-    "value",
-    "defaultValue",
-    "min",
-    "max",
-    "orientation",
-    "step"
-  )
-  const thumbs = createMemo(() => {
-    if (Array.isArray(untrack(() => local.value))) return untrack(() => local.value)
-    if (Array.isArray(local.defaultValue)) return local.defaultValue
-    return [local.min]
-  })
+  const thumbCount = createMemo(() => (local.value ?? local.defaultValue).length)
   return (
-    <SliderPrimitive.Root
-      data-slot="slider"
+    <SdkSlider<number[]>
+      defaultValue={local.defaultValue}
+      min={local.min}
+      max={local.max}
+      {...props}
       class={cn(
-        "cn-slider relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-5 data-[orientation=vertical]:flex-col",
-        local.class
+        "w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto",
+        props.class
       )}
-      {...(local.value === undefined ? {} : { value: local.value })}
-      {...(local.defaultValue === undefined ? {} : { defaultValue: local.defaultValue })}
-      minValue={local.min ?? 0}
-      maxValue={local.max ?? 100}
-      orientation={local.orientation ?? "horizontal"}
-      step={local.step ?? 1}
-      {...others}
     >
-      <SliderPrimitive.Track
-        data-slot="slider-track"
-        class="cn-slider-track relative grow overflow-hidden"
-      >
-        <SliderPrimitive.Fill
-          data-slot="slider-range"
-          class="cn-slider-range absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
-        />
-      </SliderPrimitive.Track>
-      <For each={thumbs()}>
-        {() => (
-          <SliderPrimitive.Thumb data-slot="slider-thumb" class="cn-slider-thumb block">
-            <SliderPrimitive.Input />
-          </SliderPrimitive.Thumb>
-        )}
-      </For>
-    </SliderPrimitive.Root>
+      <SdkSliderControl class="cn-slider relative flex w-full touch-none items-center select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-disabled:opacity-50">
+        <SdkSliderTrack class="cn-slider-track relative grow select-none">
+          <SdkSliderIndicator class="cn-slider-range data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
+          <For each={Array.from({ length: thumbCount() }, (_, index) => index)}>
+            {(index) => (
+              <SdkSliderThumb
+                index={index}
+                aria-label={`Value ${index + 1}`}
+                class="cn-slider-thumb block shrink-0 select-none disabled:pointer-events-none disabled:opacity-50"
+              />
+            )}
+          </For>
+        </SdkSliderTrack>
+      </SdkSliderControl>
+    </SdkSlider>
   )
 }
-
 export { Slider, type SliderProps }

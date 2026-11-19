@@ -8,7 +8,7 @@ type Props = HTMLAttributes<"table">
 const { class: className, ...props } = Astro.props
 ---
 
-<div class="no-scrollbar my-6 w-full overflow-y-auto rounded-xl border">
+<div class="my-6 no-scrollbar w-full overflow-y-auto rounded-xl border">
   <table
     class={cn(
       "relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0",

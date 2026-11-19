@@ -1,0 +1,124 @@
+---
+title: Carousel
+description: A carousel with motion and swipe built using Embla.
+component: true
+new: true
+---
+
+<ComponentPreview name="carousel-demo" previewClassName="h-80 sm:h-[32rem]" />
+
+## About
+
+The carousel component is built using the [Embla Carousel](https://www.embla-carousel.com/) library.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add carousel
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="carousel" title="components/ui/carousel.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Carousel } from "~/components/ui/carousel"
+```
+
+Compose `CarouselViewport` and `CarouselContent` under `Carousel`, then render explicit `CarouselItem` children. Native SDK `page`, `onPageChange`, `loop`, `slidesPerPage`, and `controller` replace Embla options and callbacks. Give vertical viewports an explicit height.
+
+See the [UI SDK carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `Carousel`:
+
+```text
+Carousel
+├── CarouselContent
+│   ├── CarouselItem
+│   └── CarouselItem
+├── CarouselPrevious
+└── CarouselNext
+```
+
+## Sizes
+
+To set the size of the items, you can use the `basis` utility class on the `<CarouselItem />`.
+
+<ComponentPreview name="carousel-size" />
+
+## Spacing
+
+To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
+
+<ComponentPreview name="carousel-spacing" />
+
+## Orientation
+
+Use the `orientation` prop to set the orientation of the carousel.
+
+<ComponentPreview name="carousel-orientation" previewClassName="h-[32rem]" />
+
+## Options
+
+You can pass options to the carousel using the `opts` prop. See the [Embla Carousel docs](https://www.embla-carousel.com/api/options/) for more information.
+
+## API
+
+Use a state and the `setApi` props to get an instance of the carousel API.
+
+<ComponentPreview name="carousel-api" previewClassName="sm:h-[32rem]" />
+
+## Events
+
+You can listen to events using the api instance from `setApi`.
+
+See the [Embla Carousel docs](https://www.embla-carousel.com/api/events/) for more information on using events.
+
+## Plugins
+
+You can use the `plugins` prop to add plugins to the carousel.
+
+<ComponentPreview name="carousel-plugin" previewClassName="sm:h-[32rem]" />
+
+## API Reference
+
+See the [Embla Carousel docs](https://www.embla-carousel.com/api/) for more information on props and plugins.

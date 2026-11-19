@@ -46,7 +46,9 @@ export default function CollapsibleSettings() {
               </Field>
             </CollapsibleContent>
           </FieldGroup>
-          <CollapsibleTrigger as={Button<"button">} variant="outline" size="icon">
+          <CollapsibleTrigger
+            render={(partProps) => <Button {...partProps} variant="outline" size="icon" />}
+          >
             <Show when={isOpen()} fallback={<MaximizeIcon />}>
               <MinimizeIcon />
             </Show>

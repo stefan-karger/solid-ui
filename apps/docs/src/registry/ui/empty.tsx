@@ -6,32 +6,26 @@ import { cn } from "~/lib/utils"
 
 type EmptyProps = ComponentProps<"div">
 
-const Empty = (props: EmptyProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn(
-        "cn-empty flex w-full min-w-0 flex-1 flex-col items-center justify-center text-center text-balance",
-        props.class
-      )}
-      data-slot="empty"
-      {...others}
-    />
-  )
-}
+const Empty = (props: EmptyProps) => (
+  <div
+    data-slot="empty"
+    {...props}
+    class={cn(
+      "cn-empty flex w-full min-w-0 flex-1 flex-col items-center justify-center text-center text-balance",
+      props.class
+    )}
+  />
+)
 
 type EmptyHeaderProps = ComponentProps<"div">
 
-const EmptyHeader = (props: EmptyHeaderProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-empty-header flex max-w-sm flex-col items-center", props.class)}
-      data-slot="empty-header"
-      {...others}
-    />
-  )
-}
+const EmptyHeader = (props: EmptyHeaderProps) => (
+  <div
+    data-slot="empty-header"
+    {...props}
+    class={cn("cn-empty-header flex max-w-sm flex-col items-center", props.class)}
+  />
+)
 
 const emptyMediaVariants = cva(
   "cn-empty-media flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -65,42 +59,35 @@ const EmptyMedia = (rawProps: EmptyMediaProps) => {
 
 type EmptyTitleProps = ComponentProps<"div">
 
-const EmptyTitle = (props: EmptyTitleProps) => {
-  const others = omit(props, "class")
-  return <div class={cn("cn-empty-title", props.class)} data-slot="empty-title" {...others} />
-}
+const EmptyTitle = (props: EmptyTitleProps) => (
+  <div data-slot="empty-title" {...props} class={cn("cn-empty-title", props.class)} />
+)
 
 type EmptyDescriptionProps = ComponentProps<"p">
 
-const EmptyDescription = (props: EmptyDescriptionProps) => {
-  const others = omit(props, "class")
-  return (
-    <p
-      class={cn(
-        "cn-empty-description text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
-        props.class
-      )}
-      data-slot="empty-description"
-      {...others}
-    />
-  )
-}
+const EmptyDescription = (props: EmptyDescriptionProps) => (
+  <p
+    data-slot="empty-description"
+    {...props}
+    class={cn(
+      "cn-empty-description text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+      props.class
+    )}
+  />
+)
 
 type EmptyContentProps = ComponentProps<"div">
 
-const EmptyContent = (props: EmptyContentProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn(
-        "cn-empty-content flex w-full max-w-sm min-w-0 flex-col items-center text-balance",
-        props.class
-      )}
-      data-slot="empty-content"
-      {...others}
-    />
-  )
-}
+const EmptyContent = (props: EmptyContentProps) => (
+  <div
+    data-slot="empty-content"
+    {...props}
+    class={cn(
+      "cn-empty-content flex w-full max-w-sm min-w-0 flex-col items-center text-balance",
+      props.class
+    )}
+  />
+)
 
 export {
   Empty,
@@ -108,8 +95,8 @@ export {
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
-  EmptyTitle,
   emptyMediaVariants,
+  EmptyTitle,
   type EmptyContentProps,
   type EmptyDescriptionProps,
   type EmptyHeaderProps,

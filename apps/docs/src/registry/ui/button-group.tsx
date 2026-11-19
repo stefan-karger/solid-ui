@@ -1,6 +1,6 @@
-import { Dynamic, type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { dynamic, type ComponentProps, type ValidComponent } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
-import { omit } from "solid-js"
+import { isStatic, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import { Separator } from "~/registry/ui/separator"
@@ -11,9 +11,9 @@ const buttonGroupVariants = cva(
     variants: {
       orientation: {
         horizontal:
-          "cn-button-group-orientation-horizontal [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:first-child)>[data-slot=select-trigger]]:rounded-l-none [&>*:not(:first-child)>[data-slot=select-trigger]]:border-l-0 [&>*:not(:last-child)]:rounded-r-none [&>*:not(:last-child)>[data-slot=select-trigger]]:rounded-r-none",
+          "cn-button-group-orientation-horizontal *:data-slot:rounded-r-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:rounded-l-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:border-l-0",
         vertical:
-          "cn-button-group-orientation-vertical flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:first-child)>[data-slot=select-trigger]]:rounded-t-none [&>*:not(:first-child)>[data-slot=select-trigger]]:border-t-0 [&>*:not(:last-child)]:rounded-b-none [&>*:not(:last-child)>[data-slot=select-trigger]]:rounded-b-none"
+          "cn-button-group-orientation-vertical flex-col *:data-slot:rounded-b-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:rounded-t-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:border-t-0"
       }
     },
     defaultVariants: {
@@ -45,9 +45,9 @@ type ButtonGroupTextProps<T extends ValidComponent = "div"> = {
 const ButtonGroupText = <T extends ValidComponent = "div">(rawProps: ButtonGroupTextProps<T>) => {
   const props = rawProps as ButtonGroupTextProps
   const others = omit(props, "as", "class")
+  const Comp = dynamic(() => props.as ?? "div", { static: isStatic(props, "as") })
   return (
-    <Dynamic
-      component={props.as ?? "div"}
+    <Comp
       data-slot="button-group-text"
       class={cn("cn-button-group-text flex items-center [&_svg]:pointer-events-none", props.class)}
       {...others}
@@ -72,4 +72,4 @@ const ButtonGroupSeparator = (props: ButtonGroupSeparatorProps) => {
   )
 }
 
-export { ButtonGroup, ButtonGroupText, ButtonGroupSeparator, buttonGroupVariants }
+export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants }

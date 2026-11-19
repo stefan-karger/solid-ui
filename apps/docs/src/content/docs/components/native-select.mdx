@@ -4,7 +4,9 @@ description: A styled native HTML select element with consistent design system i
 component: true
 ---
 
-<Callout variant="info" showIcon>
+import { InfoIcon } from "lucide-solid"
+
+<Callout variant="info" icon={<InfoIcon class="translate-y-[3px]!" />}>
   For a styled select component, see the [Select](/docs/components/select) component.
 </Callout>
 
@@ -30,6 +32,12 @@ npx solidui-cli@latest add native-select
 <TabsContent value="manual">
 
 <Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-solid
+```
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -76,21 +84,45 @@ NativeSelect
     └── NativeSelectOption
 ```
 
-## Examples
+### Simple
 
-### Groups
+Options placed directly under `NativeSelect` (no `NativeSelectOptGroup`).
+
+```text
+NativeSelect
+├── NativeSelectOption
+├── NativeSelectOption
+├── NativeSelectOption
+└── NativeSelectOption
+```
+
+### With groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelectOptGroup
+│   ├── NativeSelectOption
+│   └── NativeSelectOption
+└── NativeSelectOptGroup
+    ├── NativeSelectOption
+    └── NativeSelectOption
+```
+
+## Groups
 
 Use `NativeSelectOptGroup` to organize options into categories.
 
 <ComponentPreview name="native-select-groups" />
 
-### Disabled
+## Disabled
 
 Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
 <ComponentPreview name="native-select-disabled" />
 
-### Invalid
+## Invalid
 
 Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the Field component for styling.
 
@@ -102,14 +134,6 @@ Use `aria-invalid` to show validation errors and the `data-invalid` attribute to
 - Use `Select` for custom styling, animations, or complex interactions.
 
 ## API Reference
-
-### Core Parts
-
-| Part                   | Description                                            |
-| ---------------------- | ------------------------------------------------------ |
-| `NativeSelect`         | Wrapper around the native `select` element and icon.   |
-| `NativeSelectOption`   | Individual option rendered as a native `option` node.  |
-| `NativeSelectOptGroup` | Groups related options using native `optgroup` markup. |
 
 ### NativeSelect
 

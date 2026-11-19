@@ -25,7 +25,11 @@ export default function ButtonGroupDropdown() {
     <ButtonGroup>
       <Button variant="outline">Follow</Button>
       <DropdownMenu>
-        <DropdownMenuTrigger as={Button} aria-label="More options" class="!pl-2" variant="outline">
+        <DropdownMenuTrigger
+          render={(partProps) => <Button {...partProps} variant="outline" />}
+          aria-label="More options"
+          class="!pl-2"
+        >
           <ChevronDownIcon class="size-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent class="[--radius:1rem]">

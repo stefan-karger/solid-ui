@@ -10,7 +10,7 @@ export default function CollapsibleBasic() {
         <ChevronDownIcon class="size-4 shrink-0 text-muted-foreground transition-transform group-data-[expanded]/collapsible-trigger:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent class="px-4 pb-4 text-sm text-muted-foreground">
-        Yes. It is built with Kobalte primitives, so it supports keyboard navigation and controlled
+        Yes. It is built with UI SDK components, so it supports keyboard navigation and controlled
         or uncontrolled state.
       </CollapsibleContent>
     </Collapsible>

@@ -1,3 +1,5 @@
+import { For } from "solid-js"
+
 import {
   Select,
   SelectContent,
@@ -24,23 +26,26 @@ const fruits: Fruit[] = [
 export default function SelectDemo() {
   return (
     <Select<Fruit>
-      options={fruits}
-      optionValue="value"
-      optionTextValue="label"
+      itemToLabel={(option) => String(option["label"])}
+      itemToValue={(option) => String(option["value"])}
+
       placeholder="Select a fruit"
-      itemComponent={(props) => (
-        <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-      )}
-      sectionComponent={() => (
+    >
+      <SelectTrigger aria-label="Select a fruit" class="w-full max-w-48">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
+          <For each={fruits}>
+            {(option) => (
+              <SelectItem value={option} label={option["label"]}>
+                {option.label}
+              </SelectItem>
+            )}
+          </For>
         </SelectGroup>
-      )}
-    >
-      <SelectTrigger class="w-full max-w-48">
-        <SelectValue<Fruit>>{(state) => state.selectedOption()?.label}</SelectValue>
-      </SelectTrigger>
-      <SelectContent />
+      </SelectContent>
     </Select>
   )
 }

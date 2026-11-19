@@ -32,12 +32,15 @@ const people = [
 
 export default function ItemDropdown() {
   return (
-    <DropdownMenu placement="bottom-end">
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Select
         <ChevronDownIcon class="size-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent class="w-56">
+      <DropdownMenuContent side="bottom" align="end" class="w-56">
         <DropdownMenuGroup>
           <For each={people}>
             {(person) => (

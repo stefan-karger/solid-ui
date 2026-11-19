@@ -11,7 +11,7 @@ import {
 export default function DialogNoCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger as={Button} variant="outline">
+      <DialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         No Close Button
       </DialogTrigger>
       <DialogContent showCloseButton={false}>

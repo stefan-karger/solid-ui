@@ -20,7 +20,10 @@ export default function DropdownMenuCheckboxesIcons() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Notifications
       </DropdownMenuTrigger>
       <DropdownMenuContent class="min-w-56">
@@ -28,7 +31,7 @@ export default function DropdownMenuCheckboxesIcons() {
           <DropdownMenuLabel>Notification Preferences</DropdownMenuLabel>
           <DropdownMenuCheckboxItem
             checked={notifications().email}
-            onChange={(checked) =>
+            onCheckedChange={(checked) =>
               setNotifications((prev) => ({ ...prev, email: checked === true }))
             }
           >
@@ -37,14 +40,16 @@ export default function DropdownMenuCheckboxesIcons() {
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
             checked={notifications().sms}
-            onChange={(checked) => setNotifications((prev) => ({ ...prev, sms: checked === true }))}
+            onCheckedChange={(checked) =>
+              setNotifications((prev) => ({ ...prev, sms: checked === true }))
+            }
           >
             <MessageSquareIcon class="size-4" />
             SMS notifications
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
             checked={notifications().push}
-            onChange={(checked) =>
+            onCheckedChange={(checked) =>
               setNotifications((prev) => ({ ...prev, push: checked === true }))
             }
           >

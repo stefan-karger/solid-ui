@@ -1,3 +1,5 @@
+import { For } from "solid-js"
+
 import { Button } from "~/registry/ui/button"
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
@@ -38,18 +40,22 @@ export default function InputForm() {
           <Field>
             <FieldLabel for="form-country">Country</FieldLabel>
             <Select<Country>
+              itemToLabel={(option) => String(option["label"])}
+              itemToValue={(option) => String(option["value"])}
               defaultValue={countries[0]!}
-              options={countries}
-              optionValue="value"
-              optionTextValue="label"
-              itemComponent={(props) => (
-                <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-              )}
             >
-              <SelectTrigger id="form-country" class="w-full">
-                <SelectValue<Country>>{(state) => state.selectedOption()?.label}</SelectValue>
+              <SelectTrigger aria-label="Select an option" id="form-country" class="w-full">
+                <SelectValue />
               </SelectTrigger>
-              <SelectContent />
+              <SelectContent>
+                <For each={countries}>
+                  {(option) => (
+                    <SelectItem value={option} label={option["label"]}>
+                      {option.label}
+                    </SelectItem>
+                  )}
+                </For>
+              </SelectContent>
             </Select>
           </Field>
         </div>

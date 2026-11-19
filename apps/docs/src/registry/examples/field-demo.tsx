@@ -1,3 +1,5 @@
+import { For } from "solid-js"
+
 import { Button } from "~/registry/ui/button"
 import { Checkbox } from "~/registry/ui/checkbox"
 import {
@@ -37,32 +39,28 @@ export default function FieldDemo() {
               <div class="grid grid-cols-3 gap-4">
                 <Field>
                   <FieldLabel for="checkout-exp-month">Month</FieldLabel>
-                  <Select<string>
-                    options={months}
-                    placeholder="MM"
-                    itemComponent={(props) => (
-                      <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
-                    )}
-                  >
-                    <SelectTrigger class="w-full" id="checkout-exp-month">
-                      <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>
+                  <Select<string> placeholder="MM">
+                    <SelectTrigger aria-label="MM" class="w-full" id="checkout-exp-month">
+                      <SelectValue />
                     </SelectTrigger>
-                    <SelectContent />
+                    <SelectContent>
+                      <For each={months}>
+                        {(option) => <SelectItem value={option}>{option}</SelectItem>}
+                      </For>
+                    </SelectContent>
                   </Select>
                 </Field>
                 <Field>
                   <FieldLabel for="checkout-exp-year">Year</FieldLabel>
-                  <Select<string>
-                    options={years}
-                    placeholder="YYYY"
-                    itemComponent={(props) => (
-                      <SelectItem item={props.item}>{props.item.rawValue}</SelectItem>
-                    )}
-                  >
-                    <SelectTrigger class="w-full" id="checkout-exp-year">
-                      <SelectValue<string>>{(state) => state.selectedOption()}</SelectValue>
+                  <Select<string> placeholder="YYYY">
+                    <SelectTrigger aria-label="YYYY" class="w-full" id="checkout-exp-year">
+                      <SelectValue />
                     </SelectTrigger>
-                    <SelectContent />
+                    <SelectContent>
+                      <For each={years}>
+                        {(option) => <SelectItem value={option}>{option}</SelectItem>}
+                      </For>
+                    </SelectContent>
                   </Select>
                 </Field>
                 <Field>

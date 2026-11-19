@@ -12,7 +12,9 @@ const pageCount = Math.max(1, Math.ceil(registryDirectoryEntries.length / DIRECT
   data-registry-directory
   data-not-typeset
 >
-  <h2 class="sr-only" id="registry-directory-heading">Registry listings</h2>
+  <h2 class="sr-only" id="registry-directory-heading">
+    Registry listings
+  </h2>
 
   <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
     <label class="grid gap-2 text-sm font-medium" for="registry-directory-search">
@@ -27,62 +29,58 @@ const pageCount = Math.max(1, Math.ceil(registryDirectoryEntries.length / DIRECT
       />
     </label>
     <p aria-live="polite" class="text-sm text-muted-foreground" data-directory-count>
-      {
-        `${registryDirectoryEntries.length} ${registryDirectoryEntries.length === 1 ? "registry" : "registries"}`
-      }
+      {`${registryDirectoryEntries.length} ${registryDirectoryEntries.length === 1 ? "registry" : "registries"}`}
     </p>
   </div>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2" data-directory-entries>
-    {
-      registryDirectoryEntries.map((entry) => (
-        <article
-          class="flex min-w-0 flex-col rounded-xl border bg-card p-5 text-card-foreground"
-          data-directory-entry
-          data-search-text={[entry.name, entry.description, ...(entry.tags ?? [])].join(" ")}
-        >
-          <div class="flex items-start gap-3">
-            {entry.logo ? (
-              <img
-                alt=""
-                class="size-10 shrink-0 rounded-md border object-contain"
-                decoding="async"
-                loading="lazy"
-                src={entry.logo}
-              />
-            ) : (
-              <span
-                aria-hidden="true"
-                class="grid size-10 shrink-0 place-items-center rounded-md border bg-muted text-sm font-semibold uppercase"
-              >
-                {entry.name.slice(0, 2)}
-              </span>
-            )}
-            <div class="min-w-0">
-              <h3 class="font-semibold tracking-tight">{entry.name}</h3>
-              <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{entry.description}</p>
-            </div>
+    {registryDirectoryEntries.map((entry) => (
+      <article
+        class="flex min-w-0 flex-col rounded-xl border bg-card p-5 text-card-foreground"
+        data-directory-entry
+        data-search-text={[entry.name, entry.description, ...(entry.tags ?? [])].join(" ")}
+      >
+        <div class="flex items-start gap-3">
+          {entry.logo ? (
+            <img
+              alt=""
+              class="size-10 shrink-0 rounded-md border object-contain"
+              decoding="async"
+              loading="lazy"
+              src={entry.logo}
+            />
+          ) : (
+            <span
+              aria-hidden="true"
+              class="grid size-10 shrink-0 place-items-center rounded-md border bg-muted text-sm font-semibold uppercase"
+            >
+              {entry.name.slice(0, 2)}
+            </span>
+          )}
+          <div class="min-w-0">
+            <h3 class="font-semibold tracking-tight">{entry.name}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{entry.description}</p>
           </div>
+        </div>
 
-          {entry.tags?.length ? (
-            <ul aria-label="Tags" class="mt-4 flex flex-wrap gap-2">
-              {entry.tags.map((tag) => (
-                <li class="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">{tag}</li>
-              ))}
-            </ul>
-          ) : null}
+        {entry.tags?.length ? (
+          <ul aria-label="Tags" class="mt-4 flex flex-wrap gap-2">
+            {entry.tags.map((tag) => (
+              <li class="rounded-full bg-muted px-2 py-1 text-xs text-muted-foreground">{tag}</li>
+            ))}
+          </ul>
+        ) : null}
 
-          <div class="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-5 text-sm font-medium">
-            <a class="underline underline-offset-4" href={entry.homepage}>
-              Homepage
-            </a>
-            <a class="underline underline-offset-4" href={entry.registryUrl}>
-              Registry
-            </a>
-          </div>
-        </article>
-      ))
-    }
+        <div class="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-5 text-sm font-medium">
+          <a class="underline underline-offset-4" href={entry.homepage}>
+            Homepage
+          </a>
+          <a class="underline underline-offset-4" href={entry.registryUrl}>
+            Registry
+          </a>
+        </div>
+      </article>
+    ))}
   </div>
 
   <p
@@ -98,17 +96,15 @@ const pageCount = Math.max(1, Math.ceil(registryDirectoryEntries.length / DIRECT
     hidden={pageCount <= 1}
     data-directory-pagination
   >
-    {
-      Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
-        <a
-          aria-current={page === 1 ? "page" : "false"}
-          class="grid size-9 place-items-center rounded-md border text-sm aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
-          data-directory-page={page}
-          href={directoryStateSearch({ page, query: "" }) || "/docs/directory"}
-        >
-          {page}
-        </a>
-      ))
-    }
+    {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
+      <a
+        aria-current={page === 1 ? "page" : "false"}
+        class="grid size-9 place-items-center rounded-md border text-sm aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
+        data-directory-page={page}
+        href={directoryStateSearch({ page, query: "" }) || "/docs/directory"}
+      >
+        {page}
+      </a>
+    ))}
   </nav>
 </section>

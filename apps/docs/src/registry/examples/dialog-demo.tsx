@@ -20,7 +20,7 @@ export default function DialogDemo() {
           event.preventDefault()
         }}
       >
-        <DialogTrigger as={Button} variant="outline">
+        <DialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
           Open Dialog
         </DialogTrigger>
         <DialogContent class="sm:max-w-[425px]">
@@ -41,7 +41,7 @@ export default function DialogDemo() {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose as={Button} variant="outline">
+            <DialogClose render={(partProps) => <Button {...partProps} variant="outline" />}>
               Cancel
             </DialogClose>
             <Button type="submit">Save changes</Button>

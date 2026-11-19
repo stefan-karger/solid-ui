@@ -26,7 +26,10 @@ export default function BreadcrumbDropdown() {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <DropdownMenu>
-            <DropdownMenuTrigger as="button" class="flex items-center gap-1">
+            <DropdownMenuTrigger
+              render={(partProps) => <button {...partProps} />}
+              class="flex items-center gap-1"
+            >
               Components
               <ChevronDownIcon class="size-3.5" />
             </DropdownMenuTrigger>

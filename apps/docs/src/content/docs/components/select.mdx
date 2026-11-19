@@ -30,7 +30,7 @@ npx solidui-cli@latest add select
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -47,43 +47,32 @@ npm install @kobalte/core
 
 ## Usage
 
-```tsx showLineNumbers
+```tsx
 import {
   Select,
   SelectContent,
+  SelectGroup,
+  SelectLabel,
   SelectItem,
   SelectTrigger,
   SelectValue
 } from "~/components/ui/select"
-```
 
-```tsx showLineNumbers
-type Fruit = {
-  label: string
-  value: string
-}
-
-const fruits: Fruit[] = [
-  { label: "Apple", value: "apple" },
-  { label: "Banana", value: "banana" },
-  { label: "Blueberry", value: "blueberry" }
-]
-
-<Select<Fruit>
-  options={fruits}
-  optionValue="value"
-  optionTextValue="label"
-  placeholder="Select a fruit"
-  itemComponent={(props) => (
-    <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-  )}
->
-  <SelectTrigger class="w-full max-w-48">
-    <SelectValue<Fruit>>{(state) => state.selectedOption()?.label}</SelectValue>
+;<Select placeholder="Select a fruit">
+  <SelectTrigger aria-label="Fruit">
+    <SelectValue />
   </SelectTrigger>
-  <SelectContent />
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Fruits</SelectLabel>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+    </SelectGroup>
+  </SelectContent>
 </Select>
 ```
+
+Use `value` and `onValueChange` for a controlled selection. Object values use `itemToValue` and `itemToLabel`. Compose items inside `SelectContent`; groups use `SelectGroup` and `SelectLabel`.
 
 ## Composition
 
@@ -94,56 +83,39 @@ Select
 ├── SelectTrigger
 │   └── SelectValue
 └── SelectContent
-    ├── SelectItem
+    ├── SelectGroup
+    │   ├── SelectLabel
+    │   ├── SelectItem
+    │   └── SelectItem
     ├── SelectSeparator
     └── SelectGroup
         ├── SelectLabel
+        ├── SelectItem
         └── SelectItem
 ```
 
-## Examples
+## Align Item With Trigger
 
-### Groups
+Use the `position` prop on `SelectContent` to control alignment. When `position="item-aligned"` (default), the popup positions so the selected item appears over the trigger. When `position="popper"`, the popup aligns to the trigger edge.
+
+<ComponentPreview name="select-align-item" />
+
+## Groups
 
 <ComponentPreview name="select-groups" />
 
-### Scrollable
+## Scrollable
 
 <ComponentPreview name="select-scrollable" />
 
-### Disabled
+## Disabled
 
 <ComponentPreview name="select-disabled" />
 
-### Invalid
-
-Add the `data-invalid` attribute to the Field component and the `aria-invalid` attribute to the SelectTrigger component to show an error state.
-
-```tsx showLineNumbers
-<Field data-invalid>
-  <FieldLabel>Fruit</FieldLabel>
-  <SelectTrigger aria-invalid>
-    <SelectValue />
-  </SelectTrigger>
-</Field>
-```
+## Invalid
 
 <ComponentPreview name="select-invalid" />
 
 ## API Reference
 
-### Core Parts
-
-| Part                 | Description                                                        |
-| -------------------- | ------------------------------------------------------------------ |
-| `Select`             | Root component that manages state, collection, and popup behavior. |
-| `SelectTrigger`      | Button element that toggles and anchors the popup.                 |
-| `SelectValue`        | Displays placeholder text or the selected option label.            |
-| `SelectContent`      | Popup container rendered in a portal.                              |
-| `SelectGroup`        | Section wrapper for grouped options.                               |
-| `SelectLabel`        | Group label shown inside content.                                  |
-| `SelectItem`         | Selectable option row.                                             |
-| `SelectSeparator`    | Visual separator between groups.                                   |
-| `SelectHiddenSelect` | Hidden native select for form integration.                         |
-
-See the [Kobalte](https://kobalte.dev/docs/core/components/select) documentation for more information.
+See the [Radix UI Select](https://www.radix-ui.com/docs/primitives/components/select#api-reference) documentation.

@@ -27,10 +27,10 @@ npx solidui-cli@latest add avatar
 
 <Steps class="mb-0 pt-2">
 
-<Step>Install the following dependency:</Step>
+<Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -82,15 +82,13 @@ AvatarGroup
 └── AvatarGroupCount
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A basic avatar with image and fallback content.
 
 <ComponentPreview name="avatar-basic" />
 
-### Badge
+## Badge
 
 Use `AvatarBadge` to show status indicators.
 
@@ -106,37 +104,52 @@ Use the `class` prop to customize badge colors and sizing.
 </Avatar>
 ```
 
-### Badge with Icon
+## Badge with Icon
 
 Render icons inside `AvatarBadge`.
 
-<ComponentPreview name="avatar-badge-icon" />
+<ComponentPreview
+  name="avatar-badge-icon"
 
-### Avatar Group
+/>
+
+## Avatar Group
 
 Use `AvatarGroup` to overlap multiple avatars.
 
-<ComponentPreview name="avatar-group" />
+<ComponentPreview
+  name="avatar-group"
 
-### Avatar Group Count
+/>
+
+## Avatar Group Count
 
 Use `AvatarGroupCount` to display extra-member counts.
 
-<ComponentPreview name="avatar-group-count" />
+<ComponentPreview
+  name="avatar-group-count"
 
-### Avatar Group with Icon
+/>
+
+## Avatar Group with Icon
 
 You can also render icons inside `AvatarGroupCount`.
 
-<ComponentPreview name="avatar-group-count-icon" />
+<ComponentPreview
+  name="avatar-group-count-icon"
 
-### Sizes
+/>
+
+## Sizes
 
 Use the `size` prop on `Avatar` to change the avatar size.
 
-<ComponentPreview name="avatar-size" />
+<ComponentPreview
+  name="avatar-size"
 
-### Dropdown
+/>
+
+## Dropdown
 
 Use `Avatar` as the trigger for a dropdown menu.
 
@@ -195,4 +208,4 @@ Count indicator for additional avatars in a group.
 | ------- | -------- | ------- |
 | `class` | `string` | -       |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/image) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/avatar) documentation for more information.

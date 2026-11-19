@@ -23,6 +23,7 @@ const INTERNAL_ALIASES = [
 ] as const
 
 const SCRIPT_LANGUAGES = new Set<RegistrySourceLanguage>(["tsx", "ts", "jsx", "js"])
+const preparedStyleMaps = new Map<string, Map<string, string>>()
 
 export function inferRegistryLanguage(path: string): RegistrySourceLanguage {
   const extension = path.split(".").pop()?.toLowerCase()
@@ -72,12 +73,16 @@ export function extractStyleMap(styleCss: string, styleName: string): Map<string
     }
 
     const body = styleCss.slice(selector.lastIndex, cursor - 1)
-    const utilities = [...body.matchAll(/@apply\s+([^;]+);/g)]
+    const utilities = [...body.matchAll(/@apply\s+([^;]+?)(?:;|$)/g)]
       .map((apply) => apply[1]!.trim())
       .filter(Boolean)
       .join(" ")
 
     if (!utilities) {
+      if (!body.replace(/\/\*[\s\S]*?\*\//g, "").trim()) {
+        selector.lastIndex = cursor
+        continue
+      }
       throw new Error(
         `[registry-source] .${token} has no @apply declaration in style-${styleName}.css`
       )
@@ -155,11 +160,11 @@ export async function prepareRegistrySource(
         `[registry-source] Missing style-${options.styleName}.css while preparing ${options.registryPath}`
       )
     }
-    code = replaceSemanticTokens(
-      code,
-      extractStyleMap(options.styleCss, options.styleName),
-      options.registryPath
-    )
+    const styleMap =
+      preparedStyleMaps.get(options.styleCss) ??
+      extractStyleMap(options.styleCss, options.styleName)
+    preparedStyleMaps.set(options.styleCss, styleMap)
+    code = replaceSemanticTokens(code, styleMap, options.registryPath)
   }
 
   if (/~\/registry\/(?:ui|lib|hooks)\//.test(code)) {

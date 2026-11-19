@@ -4,7 +4,7 @@ description: A window overlaid on either the primary window or another dialog wi
 component: true
 ---
 
-<ComponentPreview name="dialog-demo" />
+<ComponentPreview name="dialog-demo" description="A dialog for editing profile details." />
 
 ## Installation
 
@@ -30,7 +30,13 @@ npx solidui-cli@latest add dialog
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -60,7 +66,7 @@ import {
 
 ```tsx showLineNumbers
 <Dialog>
-  <DialogTrigger as="button">Open</DialogTrigger>
+  <DialogTrigger render={(partProps) => <button {...partProps} />}>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -87,35 +93,31 @@ Dialog
     └── DialogFooter
 ```
 
-## Examples
-
-### Custom Close Button
+## Custom Close Button
 
 Replace the default top-right control with a close action in the footer.
 
 <ComponentPreview name="dialog-close-button" />
 
-### No Close Button
+## No Close Button
 
 Use `showCloseButton={false}` to hide the close button in the corner.
 
 <ComponentPreview name="dialog-no-close-button" />
 
-### Sticky Footer
+## Sticky Footer
 
 Keep actions visible while the content scrolls.
 
 <ComponentPreview name="dialog-sticky-footer" />
 
-### Scrollable Content
+## Scrollable Content
 
 Long content can scroll while the dialog remains centered.
 
 <ComponentPreview name="dialog-scrollable-content" />
 
 ## API Reference
-
-### Core Parts
 
 | Part                | Description                                                   |
 | ------------------- | ------------------------------------------------------------- |
@@ -128,4 +130,4 @@ Long content can scroll while the dialog remains centered.
 | `DialogFooter`      | Footer container for actions, usually confirm/cancel buttons. |
 | `DialogClose`       | Interactive element used to close the dialog.                 |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/dialog) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/dialog) documentation for more information.

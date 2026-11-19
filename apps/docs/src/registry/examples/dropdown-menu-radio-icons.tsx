@@ -17,13 +17,16 @@ export default function DropdownMenuRadioIcons() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Payment Method
       </DropdownMenuTrigger>
       <DropdownMenuContent class="min-w-56">
         <DropdownMenuGroup>
           <DropdownMenuLabel>Select Payment Method</DropdownMenuLabel>
-          <DropdownMenuRadioGroup onChange={setPaymentMethod} value={paymentMethod()}>
+          <DropdownMenuRadioGroup onValueChange={setPaymentMethod} value={paymentMethod()}>
             <DropdownMenuRadioItem value="card">
               <CreditCardIcon class="size-4" />
               Credit Card

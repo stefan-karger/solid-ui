@@ -4,6 +4,8 @@ description: Add addons, buttons, and helper content to inputs.
 component: true
 ---
 
+import { InfoIcon } from "lucide-solid"
+
 <ComponentPreview name="input-group-demo" previewClassName="h-[26rem]" />
 
 ## Installation
@@ -26,6 +28,12 @@ npx solidui-cli@latest add input-group
 <TabsContent value="manual">
 
 <Steps class="mb-0 pt-2">
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button input textarea
+```
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -107,37 +115,35 @@ Use `align="block-end"` to place the addon below a textarea-like control.
 
 <ComponentPreview name="input-group-block-end" previewClassName="h-[26rem]" />
 
-## Examples
-
-### Icon
+## Icon
 
 <ComponentPreview name="input-group-icon" previewClassName="h-80" />
 
-### Text
+## Text
 
 <ComponentPreview name="input-group-text" previewClassName="h-80" />
 
-### Button
+## Button
 
 <ComponentPreview name="input-group-button" previewClassName="h-72" />
 
-### Kbd
+## Kbd
 
 <ComponentPreview name="input-group-kbd" previewClassName="h-40" />
 
-### Dropdown
+## Dropdown
 
 <ComponentPreview name="input-group-dropdown" previewClassName="h-56" />
 
-### Spinner
+## Spinner
 
 <ComponentPreview name="input-group-spinner" previewClassName="h-80" />
 
-### Textarea
+## Textarea
 
 <ComponentPreview name="input-group-textarea" previewClassName="h-96" />
 
-### Custom Input
+## Custom Input
 
 Add `data-slot="input-group-control"` to a custom control for automatic focus state handling.
 
@@ -242,3 +248,9 @@ All other props are forwarded to the underlying `<Textarea />`.
   </InputGroupAddon>
 </InputGroup>
 ```
+
+## Changelog
+
+### 2025-10-06 `InputGroup`
+
+Add the `min-w-0` class to the `InputGroup` component. See [diff](https://github.com/shadcn-ui/ui/pull/8341/files#diff-0e2ee95d0050ca4c5d82339df86c54e14a6739dc4638fdda0eec8f73aebc2da9).

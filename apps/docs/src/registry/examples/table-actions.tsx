@@ -46,12 +46,15 @@ export default function TableActions() {
               <TableCell class="font-medium">{product.name}</TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell class="text-right">
-                <DropdownMenu placement="bottom-end">
-                  <DropdownMenuTrigger as={Button} class="size-8" size="icon" variant="ghost">
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    render={(partProps) => <Button {...partProps} size="icon" variant="ghost" />}
+                    class="size-8"
+                  >
                     <EllipsisIcon />
                     <span class="sr-only">Open menu</span>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent side="bottom" align="end">
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Duplicate</DropdownMenuItem>
                     <DropdownMenuSeparator />

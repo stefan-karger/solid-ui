@@ -18,25 +18,28 @@ export default function DropdownMenuCheckboxes() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Checkboxes
       </DropdownMenuTrigger>
       <DropdownMenuContent class="min-w-40">
         <DropdownMenuGroup>
           <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-          <DropdownMenuCheckboxItem checked={showStatusBar()} onChange={setShowStatusBar}>
+          <DropdownMenuCheckboxItem checked={showStatusBar()} onCheckedChange={setShowStatusBar}>
             <LayoutPanelTopIcon class="size-4" />
             Status Bar
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
             checked={showActivityBar()}
             disabled
-            onChange={setShowActivityBar}
+            onCheckedChange={setShowActivityBar}
           >
             <ActivityIcon class="size-4" />
             Activity Bar
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem checked={showPanel()} onChange={setShowPanel}>
+          <DropdownMenuCheckboxItem checked={showPanel()} onCheckedChange={setShowPanel}>
             <PanelLeftIcon class="size-4" />
             Panel
           </DropdownMenuCheckboxItem>

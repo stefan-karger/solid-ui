@@ -6,6 +6,7 @@ component: true
 
 <ComponentPreview
   name="accordion-demo"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
 />
 
@@ -33,7 +34,7 @@ npx solidui-cli@latest add accordion
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -79,56 +80,57 @@ Accordion
     └── AccordionContent
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 By default, one item can be open at a time. Add `collapsible` to allow closing the currently open item.
 
 <ComponentPreview
   name="accordion-basic"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
 />
 
-### Multiple
+## Multiple
 
 Use `type="multiple"` to allow multiple items to be open at the same time.
 
 <ComponentPreview
   name="accordion-multiple"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-[36rem] md:h-[30rem]"
 />
 
-### Disabled
+## Disabled
 
 Use the `disabled` prop on `AccordionItem` to disable individual items.
 
 <ComponentPreview
   name="accordion-disabled"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-[300px]"
 />
 
-### Borders
+## Borders
 
 Add `border` to the `Accordion` and `border-b last:border-b-0` to the `AccordionItem` to add borders to the items.
 
 <ComponentPreview
   name="accordion-borders"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-96 md:h-80"
 />
 
-### Card
+## Card
 
 Wrap the `Accordion` in a `Card` component.
 
 <ComponentPreview
   name="accordion-card"
+  align="start"
   previewClassName="*:data-[slot=accordion]:max-w-sm h-[32rem] md:h-[28rem]"
 />
 
 ## API Reference
-
-### Core Parts
 
 | Part               | Description                                      |
 | ------------------ | ------------------------------------------------ |
@@ -136,21 +138,3 @@ Wrap the `Accordion` in a `Card` component.
 | `AccordionItem`    | Individual collapsible section in the accordion. |
 | `AccordionTrigger` | Interactive header button for an item.           |
 | `AccordionContent` | Expandable panel content for the active item.    |
-
-### Accordion
-
-| Prop           | Type       |
-| -------------- | ---------- |
-| `collapsible`  | `boolean`  |
-| `multiple`     | `boolean`  |
-| `value`        | `string[]` |
-| `defaultValue` | `string[]` |
-
-### AccordionItem
-
-| Prop       | Type      |
-| ---------- | --------- |
-| `value`    | `string`  |
-| `disabled` | `boolean` |
-
-See the [Kobalte](https://kobalte.dev/docs/core/components/accordion#api-reference) documentation for more information.

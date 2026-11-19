@@ -11,7 +11,10 @@ export default function CollapsibleDemo() {
     <Collapsible open={isOpen()} onOpenChange={setIsOpen} class="flex w-[350px] flex-col gap-2">
       <div class="flex items-center justify-between gap-4 px-4">
         <h4 class="text-sm font-semibold">Order #4189</h4>
-        <CollapsibleTrigger as={Button} variant="ghost" size="icon" class="size-8">
+        <CollapsibleTrigger
+          render={(partProps) => <Button {...partProps} variant="ghost" size="icon" />}
+          class="size-8"
+        >
           <ChevronsUpDown />
           <span class="sr-only">Toggle details</span>
         </CollapsibleTrigger>

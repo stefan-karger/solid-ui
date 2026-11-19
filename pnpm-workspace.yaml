@@ -3,11 +3,25 @@ packages:
   - "packages/*"
 allowBuilds:
   esbuild: true
-minimumReleaseAgeExclude:
-  - "@solidjs/signals@2.0.0-rc.6"
-  - "@solidjs/web@2.0.0-rc.6"
-  - solid-js@2.0.0-rc.6
-  - astro@7.3.1
-  - "@kobalte/core@2.0.0-alpha.2"
+overrides:
+  "@astrojs/solid-js-renderer": "file:vendor/astro-solid/astrojs-solid-js-renderer-0.2.0-pr.17891.bbf9faa.tgz"
+  # Keep signals and both compiler backends aligned with the runtime.
+  "solid-js@2.0.1>@solidjs/signals": "2.0.1"
+  "@solidjs/vite-plugin@3.0.1>@solidjs/compiler": "2.0.1"
+  "@solidjs/vite-plugin@3.0.1>@solidjs/babel-plugin": "2.0.1"
+peerDependencyRules:
+  allowedVersions:
+    # The local Lucide patch ports the Solid 1 implementation to Solid 2.
+    "lucide-solid@1.41.0>solid-js": "2.0.1"
 patchedDependencies:
+  "@astrojs/solid-js-renderer@0.2.0-pr.17891.bbf9faa": patches/@astrojs__solid-js-renderer@0.2.0-pr.17891.bbf9faa.patch
+  "@astrojs/solid-js@8.0.0-pr.17891.bbf9faa": patches/@astrojs__solid-js@8.0.0-pr.17891.bbf9faa.patch
   lucide-solid@1.41.0: patches/lucide-solid@1.41.0.patch
+
+# Release-age exceptions authorized for the UI SDK / Astro / Solid migration.
+minimumReleaseAgeExclude:
+  - "@ui-sdk/*"
+  - "astro"
+  - "@astrojs/*"
+  - "solid-js"
+  - "@solidjs/*"

@@ -56,12 +56,15 @@ const content = {
 
 function TranslationPopover() {
   return (
-    <Popover placement="bottom-end">
-      <PopoverTrigger as={Button} variant="ghost" size="icon-sm" class="ml-auto size-7">
+    <Popover>
+      <PopoverTrigger
+        render={(partProps) => <Button {...partProps} variant="ghost" size="icon-sm" />}
+        class="ml-auto size-7"
+      >
         <CircleAlertIcon />
         <span class="sr-only">Toggle</span>
       </PopoverTrigger>
-      <PopoverContent class="w-56 text-xs">
+      <PopoverContent side="bottom" align="end" class="w-56 text-xs">
         <div>
           I used AI to translate the text for demonstration purposes. It&apos;s not perfect and may
           contain errors.
@@ -136,7 +139,7 @@ export default function DirectionDemo() {
   return (
     <Tabs
       class="flex w-full max-w-sm flex-col items-center gap-4"
-      onChange={(value) => setLanguage(value as Language)}
+      onValueChange={(value) => setLanguage(value as Language)}
       value={language()}
     >
       <TabsList class="w-full">

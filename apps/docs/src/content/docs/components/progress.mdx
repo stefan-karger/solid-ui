@@ -30,7 +30,7 @@ npx solidui-cli@latest add progress
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -55,57 +55,15 @@ import { Progress } from "~/components/ui/progress"
 <Progress value={65} />
 ```
 
-## Labels
-
-Use `ProgressLabel` and `ProgressValue` for contextual messaging and value output.
-
-```tsx showLineNumbers
-import { Progress, ProgressLabel, ProgressValue } from "~/components/ui/progress"
-
-export function UploadProgress() {
-  return (
-    <Progress value={42} class="grid gap-2">
-      <div class="flex items-center gap-2">
-        <ProgressLabel>Uploading files</ProgressLabel>
-        <ProgressValue />
-      </div>
-    </Progress>
-  )
-}
-```
-
-## Custom Value Labels
-
-Use `getValueLabel` to replace the default percentage text.
-
-```tsx showLineNumbers
-<Progress
-  value={3}
-  minValue={0}
-  maxValue={10}
-  getValueLabel={({ value, max }) => `${value} of ${max} tasks completed`}
-  class="grid gap-2"
->
-  <div class="flex items-center gap-2">
-    <ProgressLabel>Processing tasks</ProgressLabel>
-    <ProgressValue />
-  </div>
-</Progress>
-```
-
-## Examples
-
-### With Label
+## Label
 
 <ComponentPreview name="progress-label" />
 
-### Controlled
+## Controlled
 
 <ComponentPreview name="progress-controlled" />
 
 ## API Reference
-
-### Core Parts
 
 | Part            | Description                                                     |
 | --------------- | --------------------------------------------------------------- |
@@ -115,4 +73,4 @@ Use `getValueLabel` to replace the default percentage text.
 
 `Progress` renders the track and indicator internally.
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/progress) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/progress) documentation for more information.

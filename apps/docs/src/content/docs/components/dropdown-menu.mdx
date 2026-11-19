@@ -6,7 +6,7 @@ component: true
 
 <ComponentPreview
   name="dropdown-menu-demo"
-  description="A dropdown menu with icons, shortcuts, and nested submenu items."
+  description="A dropdown menu with icons, shortcuts and sub menu items."
 />
 
 ## Installation
@@ -33,7 +33,7 @@ npx solidui-cli@latest add dropdown-menu
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -65,7 +65,10 @@ import {
 
 ```tsx showLineNumbers
 <DropdownMenu>
-  <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+  <DropdownMenuTrigger
+    render={(partProps) => <Button {...partProps} variant="outline" />}
+    class="w-fit"
+  >
     Open
   </DropdownMenuTrigger>
   <DropdownMenuContent>
@@ -101,77 +104,73 @@ DropdownMenu
             └── DropdownMenuItem
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A basic dropdown menu with labels and separators.
 
 <ComponentPreview name="dropdown-menu-basic" />
 
-### Submenu
+## Submenu
 
 Use `DropdownMenuSub` to nest secondary actions.
 
 <ComponentPreview name="dropdown-menu-submenu" />
 
-### Shortcuts
+## Shortcuts
 
 Add `DropdownMenuShortcut` to show keyboard hints.
 
 <ComponentPreview name="dropdown-menu-shortcuts" />
 
-### Icons
+## Icons
 
 Combine icons with labels for quick scanning.
 
 <ComponentPreview name="dropdown-menu-icons" />
 
-### Checkboxes
+## Checkboxes
 
 Use `DropdownMenuCheckboxItem` for toggleable options.
 
 <ComponentPreview name="dropdown-menu-checkboxes" />
 
-### Checkboxes Icons
+## Checkboxes Icons
 
 Add icons to checkbox items.
 
 <ComponentPreview name="dropdown-menu-checkboxes-icons" />
 
-### Radio Group
+## Radio Group
 
 Use `DropdownMenuRadioGroup` for exclusive choices.
 
 <ComponentPreview name="dropdown-menu-radio-group" />
 
-### Radio Icons
+## Radio Icons
 
 Show radio options with icons.
 
 <ComponentPreview name="dropdown-menu-radio-icons" />
 
-### Destructive
+## Destructive
 
 Use `variant="destructive"` for irreversible actions.
 
 <ComponentPreview name="dropdown-menu-destructive" />
 
-### Avatar
+## Avatar
 
 An account switcher dropdown triggered by avatar-style controls.
 
 <ComponentPreview name="dropdown-menu-avatar" />
 
-### Complex
+## Complex
 
 A richer example combining groups, icons, shortcuts, and nested submenus.
 
-<ComponentPreview name="dropdown-menu-complex" align="start" />
+<ComponentPreview name="dropdown-menu-complex" />
 
 ## API Reference
-
-### Core Parts
 
 | Part                       | Description                                              |
 | -------------------------- | -------------------------------------------------------- |
@@ -189,12 +188,3 @@ A richer example combining groups, icons, shortcuts, and nested submenus.
 | `DropdownMenuCheckboxItem` | Toggle item with checked indicator.                      |
 | `DropdownMenuRadioGroup`   | Group container for mutually exclusive radio selections. |
 | `DropdownMenuRadioItem`    | Radio item used inside `DropdownMenuRadioGroup`.         |
-
-### DropdownMenuItem
-
-| Prop      | Type                         | Default     |
-| --------- | ---------------------------- | ----------- |
-| `variant` | `"default" \| "destructive"` | `"default"` |
-| `inset`   | `boolean`                    | `false`     |
-
-See the [Kobalte](https://kobalte.dev/docs/core/components/dropdown-menu) documentation for more information.

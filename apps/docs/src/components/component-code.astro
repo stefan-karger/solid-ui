@@ -11,6 +11,7 @@ type Props = Omit<HTMLAttributes<"figure">, "title"> & {
   language: string
   title?: string
   copyClass?: string
+  registryPath?: string
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   language,
   title,
   copyClass,
+  registryPath,
   class: className,
   ...props
 } = Astro.props
@@ -27,20 +29,20 @@ const {
 <figure
   class={cn("relative [&_pre]:min-w-0 [&_pre]:overflow-auto", className)}
   data-rehype-pretty-code-figure
+  data-registry-path={registryPath}
+  data-source-style={registryPath ? "nova" : undefined}
   {...props}
 >
-  {
-    title && (
-      <figcaption
-        class="flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:opacity-70"
-        data-language={language}
-        data-rehype-pretty-code-title
-      >
-        <LanguageIcon language={language} />
-        {title}
-      </figcaption>
-    )
-  }
+  {title && (
+    <figcaption
+      class="flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:opacity-70"
+      data-language={language}
+      data-rehype-pretty-code-title
+    >
+      <LanguageIcon language={language} />
+      {title}
+    </figcaption>
+  )}
   <CopyButton value={code} class={copyClass} />
-  <div data-not-typeset set:html={highlightedCode} />
+  <div data-not-typeset data-source-content set:html={highlightedCode} />
 </figure>

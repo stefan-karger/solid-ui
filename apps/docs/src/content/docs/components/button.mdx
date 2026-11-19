@@ -30,7 +30,7 @@ npx solidui-cli@latest add button
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install class-variance-authority
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -69,83 +69,75 @@ To use pointer cursors for interactive buttons, add this base style:
 }
 ```
 
-## Examples
-
-### Size
+## Size
 
 Use the `size` prop to change the size of the button.
 
 <ComponentPreview name="button-size" />
 
-### Default
+## Default
 
 <ComponentPreview name="button-default" />
 
-### Outline
+## Outline
 
 <ComponentPreview name="button-outline" />
 
-### Secondary
+## Secondary
 
 <ComponentPreview name="button-secondary" />
 
-### Ghost
+## Ghost
 
 <ComponentPreview name="button-ghost" />
 
-### Destructive
+## Destructive
 
 <ComponentPreview name="button-destructive" />
 
-### Link
+## Link
 
 <ComponentPreview name="button-link" />
 
-### With Icon
+## Icon
+
+<ComponentPreview name="button-icon" />
+
+## With Icon
 
 Add `data-icon="inline-start"` or `data-icon="inline-end"` to icons to apply directional spacing.
 
 <ComponentPreview name="button-with-icon" />
 
-### Interactive
-
-Use the `onClick` event to respond to button interactions.
-
-<ComponentPreview name="button-interactive" />
-
-### Rounded
+## Rounded
 
 Use the `rounded-full` class to make the button rounded.
 
 <ComponentPreview name="button-rounded" />
 
-### Spinner
+## Spinner
 
 Render a `<Spinner />` component inside the button for pending actions. Add `data-icon="inline-start"` or `data-icon="inline-end"` to the spinner for the correct directional spacing.
 
 <ComponentPreview name="button-spinner" />
 
-### Group
+## Button Group
 
 To create a button group, use the `ButtonGroup` component.
 
 <ComponentPreview name="button-group-demo" />
 
-### As
+## As Child
 
 Use the `as` prop to render another element with button styles.
 
 <ComponentPreview name="button-aschild" />
 
-## RTL
-
-Preview direction is scoped to the component example; the surrounding documentation remains left-to-right.
-
-<ComponentPreview name="button-rtl" direction="rtl" />
-
 ## API Reference
 
-The `Button` component wraps Kobalte's button primitive with variant and size styles.
+### Button
+
+`Button` renders a native button by default and accepts its HTML attributes. Set `as` to choose another element or component.
 
 | Prop      | Type                                                                                 | Default     |
 | --------- | ------------------------------------------------------------------------------------ | ----------- |
@@ -153,5 +145,3 @@ The `Button` component wraps Kobalte's button primitive with variant and size st
 | `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
 | `as`      | `ValidComponent`                                                                     | `"button"`  |
 | `class`   | `string`                                                                             | -           |
-
-See the [Kobalte documentation](https://kobalte.dev/docs/core/components/button#api-reference) for more information.

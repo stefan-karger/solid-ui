@@ -30,7 +30,7 @@ npx solidui-cli@latest add switch
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -55,33 +55,31 @@ import { Switch } from "~/components/ui/switch"
 <Switch />
 ```
 
-## Examples
-
-### Description
+## Description
 
 <ComponentPreview name="switch-description" />
 
-### Choice Card
+## Choice Card
 
 Card-style selection where `FieldLabel` wraps the entire `Field` for a clickable card pattern.
 
 <ComponentPreview name="switch-choice-card" />
 
-### Disabled
+## Disabled
 
 Add the `disabled` prop to `Switch` to prevent user interaction. Add `data-disabled` to `Field` when
 you want disabled styles on related field content.
 
 <ComponentPreview name="switch-disabled" />
 
-### Invalid
+## Invalid
 
 Add `aria-invalid` to `Switch` to indicate an invalid state. Add `data-invalid` to `Field` for
 matching field-level styles.
 
 <ComponentPreview name="switch-invalid" />
 
-### Sizes
+## Size
 
 Use the `size` prop to change the size of the switch.
 
@@ -89,10 +87,8 @@ Use the `size` prop to change the size of the switch.
 
 ## API Reference
 
-### Core Parts
-
 | Part     | Description                                                         |
 | -------- | ------------------------------------------------------------------- |
 | `Switch` | Root switch primitive with hidden input, visual control, and thumb. |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/switch) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/switch) documentation for more information.

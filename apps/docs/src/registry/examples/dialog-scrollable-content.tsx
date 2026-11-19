@@ -13,7 +13,7 @@ import {
 export default function DialogScrollableContent() {
   return (
     <Dialog>
-      <DialogTrigger as={Button} variant="outline">
+      <DialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Scrollable Content
       </DialogTrigger>
       <DialogContent>

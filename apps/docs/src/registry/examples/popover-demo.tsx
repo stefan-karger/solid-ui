@@ -7,7 +7,7 @@ import { Label } from "../ui/label"
 export default function PopoverDemo() {
   return (
     <Popover>
-      <PopoverTrigger as={Button} variant="outline">
+      <PopoverTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Open popover
       </PopoverTrigger>
       <PopoverContent class="w-80">

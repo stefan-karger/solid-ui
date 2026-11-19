@@ -1,0 +1,121 @@
+---
+title: Sonner
+description: An opinionated toast component for React.
+component: true
+new: true
+---
+
+<ComponentPreview name="sonner-demo" />
+
+## About
+
+Sonner is built and maintained by [emilkowalski](https://twitter.com/emilkowalski).
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Run the following command:</Step>
+
+```bash
+npx solidui-cli@latest add sonner
+```
+
+<Step>Add the Toaster component</Step>
+
+```astro title="src/layouts/Layout.astro"
+---
+import { Toaster } from "~/components/ui/sonner"
+---
+
+<html lang="en">
+  <body>
+    <main>
+      <slot />
+    </main>
+    <Toaster client:load />
+  </body>
+</html>
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sonner" title="components/ui/sonner.tsx" />
+
+<Step>Add the Toaster component</Step>
+
+```astro title="src/layouts/Layout.astro"
+---
+import { Toaster } from "~/components/ui/sonner"
+---
+
+<html lang="en">
+  <body>
+    <main>
+      <slot />
+    </main>
+    <Toaster client:load />
+  </body>
+</html>
+```
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Toaster, toast } from "~/components/ui/sonner"
+```
+
+Use `toast` with the default `Toaster`, or create a separate queue with `createToaster()` and pass it to `<Toaster toaster={queue} />`.
+
+## Types
+
+<ComponentPreview name="sonner-types" />
+
+## Description
+
+<ComponentPreview name="sonner-description" />
+
+## Position
+
+Use `side` and `align` on `Toaster` to position the toast stack.
+
+<ComponentPreview name="sonner-position" />
+
+## API Reference
+
+See the [UI SDK Toast API](https://ui-sdk.dev/docs/solid/components/toast) for notification options and keyboard behavior.

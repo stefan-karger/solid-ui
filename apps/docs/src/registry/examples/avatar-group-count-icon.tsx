@@ -8,23 +8,23 @@ import {
   AvatarImage
 } from "~/registry/ui/avatar"
 
-export default function AvatarGroupCountIcon() {
+export default function AvatarGroupCountIconExample() {
   return (
     <AvatarGroup class="grayscale">
       <Avatar>
-        <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage alt="@carere" src="https://github.com/carere.png" />
-        <AvatarFallback>KA</AvatarFallback>
+        <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+        <AvatarFallback>LR</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage alt="@ryansolid" src="https://github.com/ryansolid.png" />
-        <AvatarFallback>RC</AvatarFallback>
+        <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+        <AvatarFallback>ER</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>
-        <PlusIcon class="size-3" />
+        <PlusIcon />
       </AvatarGroupCount>
     </AvatarGroup>
   )

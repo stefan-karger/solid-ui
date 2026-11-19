@@ -1,0 +1,245 @@
+---
+title: Questionnaire
+description: A multi-step questionnaire with single-choice, multiple-choice, freeform, and skippable questions.
+component: true
+new: true
+---
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-demo"
+  previewClassName="min-h-[560px] p-4 sm:p-8"
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add questionnaire
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="questionnaire" title="components/ui/questionnaire.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Questionnaire } from "~/components/ui/questionnaire"
+```
+
+Pass ordered question IDs as `steps`, and required IDs as `required`. Each `QuestionnaireItem` has a matching `value`. Choices default to a radio group; `multiple` uses a checkbox group. `QuestionnaireInput` edits a text answer. `onComplete` receives a record of strings or string arrays. `value` and `onValueChange` control answers; `step` and `onStepChange` control navigation. Required answers prevent Next, Skip, and completion. Titles, descriptions, progress, errors, and focus connect to the active step. This Solid composition replaces the React-only questionnaire package.
+
+## Composition
+
+```text
+Questionnaire
+├── QuestionnaireProgress
+├── QuestionnaireItem
+│   ├── QuestionnaireTitle
+│   ├── QuestionnaireDescription
+│   ├── QuestionnaireChoices
+│   │   ├── QuestionnaireChoice
+│   │   └── QuestionnaireInput
+│   └── QuestionnaireError
+└── QuestionnaireActions
+    ├── QuestionnairePrevious
+    ├── QuestionnaireSkip
+    ├── QuestionnaireNext
+    └── QuestionnaireSubmit
+```
+
+Questionnaire owns the ordered items, active item, answer state, validation,
+progress, and navigation. The containing page, card, dialog, or drawer owns
+close and cancellation behavior, persistence, transport, and branching.
+
+## Server Rendering
+
+Pass `items` to server-render the active item, progress, actions, and answer
+shortcuts. Use `useQuestionnaire` to read the active step and answers when building custom controls.
+
+## Multiple Selection
+
+Use `multiple` for an item that accepts more than one fixed answer.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-multiple"
+  previewClassName="min-h-[420px] p-4 sm:p-8"
+/>
+
+## Freeform Answer
+
+Compose `QuestionnaireInput` with fixed choices when the user can provide another answer.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-freeform"
+  previewClassName="min-h-[420px] p-4 sm:p-8"
+/>
+
+## Explicit Skip
+
+Add `QuestionnaireSkip` when an optional item may be intentionally left unanswered.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-skip"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Shortcuts
+
+Assign a letter or number key to each answer with `shortcuts`.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-shortcuts"
+  previewClassName="min-h-[480px] p-4 sm:p-8"
+/>
+
+## Custom Validation
+
+Combine controlled navigation with an external schema such as Zod to return to an invalid item and present its error.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-validation"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Controlled
+
+Control the active item from host state, such as returning to an invalid step.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-controlled"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Resume
+
+Restore a saved active item and default answers, then reset changes back to that saved state.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-resume"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Conditional Items
+
+Disable items that do not apply to the user's earlier answers.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-conditional"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Navigation State
+
+Read item status to opt into disabled navigation and custom action styling.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-navigation-state"
+  previewClassName="min-h-[480px] p-4 sm:p-8"
+/>
+
+## Custom Progress
+
+Use the Progress render state to build a custom progress indicator.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-progress"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Animated Items
+
+Animate the active item while keeping progress and navigation stationary.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-animated"
+  previewClassName="min-h-[520px] p-4 sm:p-8"
+/>
+
+## Card
+
+Compose Questionnaire with Card slots while keeping the question title and description semantic.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-card"
+  previewClassName="min-h-[560px] p-4 sm:p-8"
+/>
+
+## Dialog
+
+Compose Questionnaire inside a Dialog while keeping cancellation and dismissal host-owned.
+
+<ComponentPreview
+  align="end"
+  name="questionnaire-dialog"
+  previewClassName="min-h-[320px] p-4 sm:p-8"
+/>
+
+## Accessibility
+
+`QuestionnaireItem` renders a `fieldset`, and `QuestionnaireTitle` renders its
+`legend`. Descriptions and active errors are associated with the current item,
+and invalid items and answer controls expose `aria-invalid`.
+
+Fixed choices preserve native radio and checkbox behavior. Progress is exposed
+as a named progressbar, navigation uses real buttons, and inactive items and
+actions are hidden and inert. Successful navigation focuses the newly active
+item; failed validation focuses an available answer control.
+
+Always give `QuestionnaireInput` an accessible name with a visible label,
+`aria-label`, or `aria-labelledby`. A visible label lets readers identify what each field asks for.
+
+## Unstyled
+
+Use native forms and `useQuestionnaire` to build custom controls around the questionnaire state.
+
+## API Reference
+
+The root takes `steps`, `required`, `value`, `defaultValue`, `step`, and `defaultStep`. Subscribe with `onValueChange`, `onStepChange`, and `onComplete`. Navigation buttons also accept the Button `size` and `variant` props. `QuestionnaireActions` is a layout wrapper.

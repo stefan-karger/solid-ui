@@ -1,35 +1,28 @@
 import { type ComponentProps } from "@solidjs/web"
-import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
 type KbdProps = ComponentProps<"kbd">
 
-const Kbd = (props: KbdProps) => {
-  const others = omit(props, "class")
-  return (
-    <kbd
-      class={cn(
-        "cn-kbd pointer-events-none inline-flex items-center justify-center select-none",
-        props.class
-      )}
-      data-slot="kbd"
-      {...others}
-    />
-  )
-}
+const Kbd = (props: KbdProps) => (
+  <kbd
+    data-slot="kbd"
+    {...props}
+    class={cn(
+      "cn-kbd pointer-events-none inline-flex items-center justify-center select-none",
+      props.class
+    )}
+  />
+)
 
-type KbdGroupProps = ComponentProps<"div">
+type KbdGroupProps = ComponentProps<"span">
 
-const KbdGroup = (props: KbdGroupProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-kbd-group inline-flex items-center", props.class)}
-      data-slot="kbd-group"
-      {...others}
-    />
-  )
-}
+const KbdGroup = (props: KbdGroupProps) => (
+  <span
+    data-slot="kbd-group"
+    {...props}
+    class={cn("cn-kbd-group inline-flex items-center", props.class)}
+  />
+)
 
-export { Kbd, KbdGroup, type KbdProps, type KbdGroupProps }
+export { Kbd, KbdGroup, type KbdGroupProps, type KbdProps }

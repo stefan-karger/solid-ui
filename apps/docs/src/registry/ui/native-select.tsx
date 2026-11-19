@@ -13,7 +13,10 @@ const NativeSelect = (rawProps: NativeSelectProps) => {
   const others = omit(rawProps, "class", "size")
   return (
     <div
-      class={cn("group/native-select relative w-fit has-[select:disabled]:opacity-50", local.class)}
+      class={cn(
+        "cn-native-select-wrapper group/native-select relative w-fit has-[select:disabled]:opacity-50",
+        local.class
+      )}
       data-size={local.size}
       data-slot="native-select-wrapper"
     >
@@ -32,13 +35,12 @@ const NativeSelect = (rawProps: NativeSelectProps) => {
   )
 }
 
-const NativeSelectOption = (props: ComponentProps<"option">) => {
-  return <option data-slot="native-select-option" {...props} />
-}
+const NativeSelectOption = (props: ComponentProps<"option">) => (
+  <option data-slot="native-select-option" {...props} />
+)
 
-const NativeSelectOptGroup = (props: ComponentProps<"optgroup">) => {
-  const others = omit(props, "class")
-  return <optgroup data-slot="native-select-optgroup" class={cn(props.class)} {...others} />
-}
+const NativeSelectOptGroup = (props: ComponentProps<"optgroup">) => (
+  <optgroup data-slot="native-select-optgroup" {...props} class={cn(props.class)} />
+)
 
 export { NativeSelect, NativeSelectOptGroup, NativeSelectOption, type NativeSelectProps }

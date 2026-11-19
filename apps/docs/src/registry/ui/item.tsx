@@ -1,37 +1,31 @@
-import { Dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
+import { dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
-import { merge, omit } from "solid-js"
+import { isStatic, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import { Separator, type SeparatorProps } from "~/registry/ui/separator"
 
 type ItemGroupProps = ComponentProps<"div">
 
-const ItemGroup = (props: ItemGroupProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("group/item-group cn-item-group flex w-full flex-col", props.class)}
-      data-slot="item-group"
-      role="list"
-      {...others}
-    />
-  )
-}
+const ItemGroup = (props: ItemGroupProps) => (
+  <div
+    data-slot="item-group"
+    role="list"
+    {...props}
+    class={cn("group/item-group cn-item-group flex w-full flex-col", props.class)}
+  />
+)
 
 type ItemSeparatorProps = SeparatorProps
 
-const ItemSeparator = (props: ItemSeparatorProps) => {
-  const others = omit(props, "class")
-  return (
-    <Separator
-      class={cn("cn-item-separator", props.class)}
-      data-slot="item-separator"
-      orientation="horizontal"
-      {...others}
-    />
-  )
-}
+const ItemSeparator = (props: ItemSeparatorProps) => (
+  <Separator
+    data-slot="item-separator"
+    orientation="horizontal"
+    {...props}
+    class={cn("cn-item-separator", props.class)}
+  />
+)
 
 const itemVariants = cva(
   "group/item cn-item flex w-full flex-wrap items-center transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors",
@@ -68,10 +62,10 @@ const Item = <T extends ValidComponent = "div">(rawProps: ItemProps<T>) => {
     rawProps
   ) as ItemProps
   const others = omit(rawProps as ItemProps, "as", "class", "variant", "size")
+  const Comp = dynamic(() => local.as ?? "div", { static: isStatic(rawProps, "as") })
   return (
-    <Dynamic
+    <Comp
       class={cn(itemVariants({ variant: local.variant, size: local.size }), local.class)}
-      component={local.as}
       data-size={local.size}
       data-slot="item"
       data-variant={local.variant}
@@ -113,99 +107,81 @@ const ItemMedia = (rawProps: ItemMediaProps) => {
 
 type ItemContentProps = ComponentProps<"div">
 
-const ItemContent = (props: ItemContentProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn(
-        "cn-item-content flex flex-1 flex-col [&+[data-slot=item-content]]:flex-none",
-        props.class
-      )}
-      data-slot="item-content"
-      {...others}
-    />
-  )
-}
+const ItemContent = (props: ItemContentProps) => (
+  <div
+    data-slot="item-content"
+    {...props}
+    class={cn(
+      "cn-item-content flex flex-1 flex-col [&+[data-slot=item-content]]:flex-none",
+      props.class
+    )}
+  />
+)
 
 type ItemTitleProps = ComponentProps<"div">
 
-const ItemTitle = (props: ItemTitleProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-item-title line-clamp-1 flex w-fit items-center", props.class)}
-      data-slot="item-title"
-      {...others}
-    />
-  )
-}
+const ItemTitle = (props: ItemTitleProps) => (
+  <div
+    data-slot="item-title"
+    {...props}
+    class={cn("cn-item-title line-clamp-1 flex w-fit items-center", props.class)}
+  />
+)
 
 type ItemDescriptionProps = ComponentProps<"p">
 
-const ItemDescription = (props: ItemDescriptionProps) => {
-  const others = omit(props, "class")
-  return (
-    <p
-      class={cn(
-        "cn-item-description line-clamp-2 font-normal [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
-        props.class
-      )}
-      data-slot="item-description"
-      {...others}
-    />
-  )
-}
+const ItemDescription = (props: ItemDescriptionProps) => (
+  <p
+    data-slot="item-description"
+    {...props}
+    class={cn(
+      "cn-item-description line-clamp-2 font-normal [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+      props.class
+    )}
+  />
+)
 
 type ItemActionsProps = ComponentProps<"div">
 
-const ItemActions = (props: ItemActionsProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-item-actions flex items-center", props.class)}
-      data-slot="item-actions"
-      {...others}
-    />
-  )
-}
+const ItemActions = (props: ItemActionsProps) => (
+  <div
+    data-slot="item-actions"
+    {...props}
+    class={cn("cn-item-actions flex items-center", props.class)}
+  />
+)
 
 type ItemHeaderProps = ComponentProps<"div">
 
-const ItemHeader = (props: ItemHeaderProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-item-header flex basis-full items-center justify-between", props.class)}
-      data-slot="item-header"
-      {...others}
-    />
-  )
-}
+const ItemHeader = (props: ItemHeaderProps) => (
+  <div
+    data-slot="item-header"
+    {...props}
+    class={cn("cn-item-header flex basis-full items-center justify-between", props.class)}
+  />
+)
 
 type ItemFooterProps = ComponentProps<"div">
 
-const ItemFooter = (props: ItemFooterProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-item-footer flex basis-full items-center justify-between", props.class)}
-      data-slot="item-footer"
-      {...others}
-    />
-  )
-}
+const ItemFooter = (props: ItemFooterProps) => (
+  <div
+    data-slot="item-footer"
+    {...props}
+    class={cn("cn-item-footer flex basis-full items-center justify-between", props.class)}
+  />
+)
 
 export {
   Item,
-  ItemMedia,
-  ItemContent,
   ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
   ItemGroup,
+  ItemHeader,
+  ItemMedia,
+  itemMediaVariants,
   ItemSeparator,
   ItemTitle,
-  ItemDescription,
-  ItemHeader,
-  ItemFooter,
-  itemVariants,
-  itemMediaVariants
+  itemVariants
 }

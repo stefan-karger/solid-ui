@@ -20,7 +20,10 @@ export default function SheetSide() {
       <For each={SHEET_SIDES}>
         {(side) => (
           <Sheet>
-            <SheetTrigger as={Button} class="capitalize" variant="outline">
+            <SheetTrigger
+              render={(partProps) => <Button {...partProps} variant="outline" />}
+              class="capitalize"
+            >
               {side}
             </SheetTrigger>
             <SheetContent
@@ -49,7 +52,7 @@ export default function SheetSide() {
               </div>
               <SheetFooter>
                 <Button type="submit">Save changes</Button>
-                <SheetClose as={Button} variant="outline">
+                <SheetClose render={(partProps) => <Button {...partProps} variant="outline" />}>
                   Cancel
                 </SheetClose>
               </SheetFooter>

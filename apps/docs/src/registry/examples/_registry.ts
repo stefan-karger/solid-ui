@@ -2,6 +2,264 @@ import type { Registry } from "~/registry/schema"
 
 export const examples: Registry["items"] = [
   {
+    name: "attachment-states",
+    type: "registry:example",
+    registryDependencies: ["attachment", "spinner"],
+    files: [{ path: "examples/attachment-states.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-demo",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [
+      {
+        path: "examples/calendar-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-range",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [
+      {
+        path: "examples/calendar-range.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "calendar-multiple",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [
+      {
+        path: "examples/calendar-multiple.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "date-picker-demo",
+    type: "registry:example",
+    registryDependencies: ["button", "calendar", "popover"],
+    files: [
+      {
+        path: "examples/date-picker-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "carousel-demo",
+    type: "registry:example",
+    registryDependencies: ["carousel"],
+    files: [
+      {
+        path: "examples/carousel-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-demo",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button"],
+    files: [
+      {
+        path: "examples/drawer-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "drawer-sides",
+    type: "registry:example",
+    registryDependencies: ["drawer", "button"],
+    files: [
+      {
+        path: "examples/drawer-sides.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-demo",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "input-otp-disabled",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [
+      {
+        path: "examples/input-otp-disabled.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "resizable-demo",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [
+      {
+        path: "examples/resizable-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "resizable-vertical",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [
+      {
+        path: "examples/resizable-vertical.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "scroll-area-demo",
+    type: "registry:example",
+    registryDependencies: ["scroll-area", "separator"],
+    files: [
+      {
+        path: "examples/scroll-area-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "bubble-demo",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [
+      {
+        path: "examples/bubble-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-demo",
+    type: "registry:example",
+    registryDependencies: ["message", "bubble"],
+    files: [
+      {
+        path: "examples/message-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "attachment-demo",
+    type: "registry:example",
+    registryDependencies: ["attachment", "spinner"],
+    files: [
+      {
+        path: "examples/attachment-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "marker-demo",
+    type: "registry:example",
+    registryDependencies: ["marker", "spinner"],
+    files: [
+      {
+        path: "examples/marker-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "code-block-demo",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block", "use-highlighted-code"],
+    files: [
+      {
+        path: "examples/code-block-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "code-block-diff",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [
+      {
+        path: "examples/code-block-diff.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "trace-demo",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "code-block", "message", "trace"],
+    files: [
+      {
+        path: "examples/trace-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "message-scroller-demo",
+    type: "registry:example",
+    registryDependencies: [
+      "bubble",
+      "button",
+      "card",
+      "dropdown-menu",
+      "empty",
+      "input-group",
+      "message",
+      "message-scroller",
+      "tooltip"
+    ],
+    files: [
+      {
+        path: "examples/message-scroller-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "questionnaire-demo",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [
+      {
+        path: "examples/questionnaire-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
+    name: "sonner-demo",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [
+      {
+        path: "examples/sonner-demo.tsx",
+        type: "registry:example"
+      }
+    ]
+  },
+  {
     name: "accordion-basic",
     type: "registry:example",
     registryDependencies: ["accordion"],
@@ -367,7 +625,7 @@ export const examples: Registry["items"] = [
   {
     name: "badge-spinner",
     type: "registry:example",
-    registryDependencies: ["badge"],
+    registryDependencies: ["badge", "spinner"],
     files: [
       {
         path: "examples/badge-spinner.tsx",
@@ -400,8 +658,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-rtl",
     type: "registry:example",
-    dependencies: ["@kobalte/core"],
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "direction"],
     files: [
       {
         path: "examples/button-rtl.tsx",
@@ -533,7 +790,7 @@ export const examples: Registry["items"] = [
   {
     name: "button-spinner",
     type: "registry:example",
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "spinner"],
     files: [
       {
         path: "examples/button-spinner.tsx",
@@ -798,7 +1055,7 @@ export const examples: Registry["items"] = [
   {
     name: "checkbox-invalid",
     type: "registry:example",
-    registryDependencies: ["checkbox"],
+    registryDependencies: ["checkbox", "field"],
     files: [
       {
         path: "examples/checkbox-invalid.tsx",
@@ -963,7 +1220,7 @@ export const examples: Registry["items"] = [
   {
     name: "combobox-custom",
     type: "registry:example",
-    registryDependencies: ["combobox"],
+    registryDependencies: ["combobox", "item"],
     files: [
       {
         path: "examples/combobox-custom.tsx",
@@ -1007,7 +1264,7 @@ export const examples: Registry["items"] = [
   {
     name: "combobox-popup",
     type: "registry:example",
-    registryDependencies: ["combobox"],
+    registryDependencies: ["button", "combobox"],
     files: [
       {
         path: "examples/combobox-popup.tsx",
@@ -2141,7 +2398,7 @@ export const examples: Registry["items"] = [
   {
     name: "progress-label",
     type: "registry:example",
-    registryDependencies: ["progress"],
+    registryDependencies: ["field", "progress"],
     files: [
       {
         path: "examples/progress-label.tsx",
@@ -3055,7 +3312,7 @@ export const examples: Registry["items"] = [
   {
     name: "textarea-invalid",
     type: "registry:example",
-    registryDependencies: ["textarea"],
+    registryDependencies: ["field", "textarea"],
     files: [
       {
         path: "examples/textarea-invalid.tsx",
@@ -3139,5 +3396,819 @@ export const examples: Registry["items"] = [
         type: "registry:example"
       }
     ]
+  },
+  {
+    name: "attachment-group",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    files: [{ path: "examples/attachment-group.tsx", type: "registry:example" }]
+  },
+  {
+    name: "attachment-sizes",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    files: [{ path: "examples/attachment-sizes.tsx", type: "registry:example" }]
+  },
+  {
+    name: "attachment-trigger",
+    type: "registry:example",
+    registryDependencies: ["attachment", "dialog"],
+    files: [{ path: "examples/attachment-trigger.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-alignment",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [{ path: "examples/bubble-alignment.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-group-demo",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [{ path: "examples/bubble-group-demo.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-reactions",
+    type: "registry:example",
+    registryDependencies: ["sonner", "bubble", "button"],
+    files: [{ path: "examples/bubble-reactions.tsx", type: "registry:example" }]
+  },
+  {
+    name: "card-edge-to-edge",
+    type: "registry:example",
+    registryDependencies: ["button", "card"],
+    files: [{ path: "examples/card-edge-to-edge.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-basic",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-basic.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-destructive",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-destructive.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-floating-actions",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-floating-actions.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-header",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-header.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-height",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-height.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-highlighted-lines",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-highlighted-lines.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-line-numbers",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-line-numbers.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-size",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-size.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-trace",
+    type: "registry:example",
+    registryDependencies: ["code-block", "trace"],
+    files: [{ path: "examples/code-block-trace.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-wrap",
+    type: "registry:example",
+    registryDependencies: ["code-block"],
+    files: [{ path: "examples/code-block-wrap.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-border",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [{ path: "examples/marker-border.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-icon",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [{ path: "examples/marker-icon.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-separator",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [{ path: "examples/marker-separator.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-shimmer",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [{ path: "examples/marker-shimmer.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-status",
+    type: "registry:example",
+    registryDependencies: ["marker", "spinner"],
+    files: [{ path: "examples/marker-status.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-variants",
+    type: "registry:example",
+    registryDependencies: ["marker"],
+    files: [{ path: "examples/marker-variants.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-actions",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "message"],
+    files: [{ path: "examples/message-actions.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-attachment",
+    type: "registry:example",
+    registryDependencies: ["attachment", "bubble", "message"],
+    files: [{ path: "examples/message-attachment.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-avatar",
+    type: "registry:example",
+    registryDependencies: ["avatar", "bubble", "message"],
+    files: [{ path: "examples/message-avatar.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-group",
+    type: "registry:example",
+    registryDependencies: ["avatar", "bubble", "message"],
+    files: [{ path: "examples/message-group.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-header-footer",
+    type: "registry:example",
+    registryDependencies: ["bubble", "message"],
+    files: [{ path: "examples/message-header-footer.tsx", type: "registry:example" }]
+  },
+  {
+    name: "resizable-handle",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [{ path: "examples/resizable-handle.tsx", type: "registry:example" }]
+  },
+  {
+    name: "sonner-description",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-description.tsx", type: "registry:example" }]
+  },
+  {
+    name: "sonner-position",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-position.tsx", type: "registry:example" }]
+  },
+  {
+    name: "sonner-types",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-types.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-collapsible",
+    type: "registry:example",
+    registryDependencies: ["code-block", "trace"],
+    files: [{ path: "examples/trace-collapsible.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-commit",
+    type: "registry:example",
+    registryDependencies: ["code-block", "sheet", "trace"],
+    files: [{ path: "examples/trace-commit.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-dialog",
+    type: "registry:example",
+    registryDependencies: ["dialog", "trace"],
+    files: [{ path: "examples/trace-dialog.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-group",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-group.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-link",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-link.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-sheet",
+    type: "registry:example",
+    registryDependencies: ["sheet", "trace"],
+    files: [{ path: "examples/trace-sheet.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-sources",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-sources.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-static",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-static.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-status",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-status.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-steps",
+    type: "registry:example",
+    registryDependencies: ["badge", "code-block", "trace"],
+    files: [{ path: "examples/trace-steps.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-turn",
+    type: "registry:example",
+    registryDependencies: ["code-block", "trace"],
+    files: [{ path: "examples/trace-turn.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-blockquote",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-blockquote.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-demo",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-demo.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-h1",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-h1.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-h2",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-h2.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-h3",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-h3.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-h4",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-h4.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-inline-code",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-inline-code.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-large",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-large.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-lead",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-lead.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-list",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-list.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-muted",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-muted.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-p",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-p.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-small",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-small.tsx", type: "registry:example" }]
+  },
+  {
+    name: "typography-table",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [{ path: "examples/typography-table.tsx", type: "registry:example" }]
+  },
+  {
+    name: "attachment-image",
+    type: "registry:example",
+    registryDependencies: ["attachment"],
+    files: [{ path: "examples/attachment-image.tsx", type: "registry:example" }]
+  },
+  {
+    name: "scroll-area-horizontal-demo",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    files: [{ path: "examples/scroll-area-horizontal-demo.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-collapsible",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "collapsible"],
+    files: [{ path: "examples/bubble-collapsible.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-popover",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "popover"],
+    files: [{ path: "examples/bubble-popover.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-tooltip",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "tooltip"],
+    files: [{ path: "examples/bubble-tooltip.tsx", type: "registry:example" }]
+  },
+  {
+    name: "card-spacing",
+    type: "registry:example",
+    registryDependencies: ["button", "card", "input", "label", "toggle-group"],
+    files: [{ path: "examples/card-spacing.tsx", type: "registry:example" }]
+  },
+  {
+    name: "carousel-orientation",
+    type: "registry:example",
+    registryDependencies: ["card", "carousel"],
+    files: [{ path: "examples/carousel-orientation.tsx", type: "registry:example" }]
+  },
+  {
+    name: "carousel-size",
+    type: "registry:example",
+    registryDependencies: ["card", "carousel"],
+    files: [{ path: "examples/carousel-size.tsx", type: "registry:example" }]
+  },
+  {
+    name: "carousel-spacing",
+    type: "registry:example",
+    registryDependencies: ["card", "carousel"],
+    files: [{ path: "examples/carousel-spacing.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-ansi",
+    type: "registry:example",
+    registryDependencies: ["code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-ansi.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-highlighting",
+    type: "registry:example",
+    registryDependencies: ["code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-highlighting.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-languages",
+    type: "registry:example",
+    registryDependencies: ["code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-languages.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-start-line",
+    type: "registry:example",
+    registryDependencies: ["code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-start-line.tsx", type: "registry:example" }]
+  },
+  {
+    name: "drawer-scrollable-content",
+    type: "registry:example",
+    registryDependencies: ["button", "drawer"],
+    files: [{ path: "examples/drawer-scrollable-content.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-alphanumeric",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [{ path: "examples/input-otp-alphanumeric.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-controlled",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [{ path: "examples/input-otp-controlled.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-form",
+    type: "registry:example",
+    registryDependencies: ["button", "card", "field", "input-otp"],
+    files: [{ path: "examples/input-otp-form.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-four-digits",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [{ path: "examples/input-otp-four-digits.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-invalid",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [{ path: "examples/input-otp-invalid.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-pattern",
+    type: "registry:example",
+    registryDependencies: ["field", "input-otp"],
+    files: [{ path: "examples/input-otp-pattern.tsx", type: "registry:example" }]
+  },
+  {
+    name: "input-otp-separator",
+    type: "registry:example",
+    registryDependencies: ["input-otp"],
+    files: [{ path: "examples/input-otp-separator.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-open",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block", "trace"],
+    files: [{ path: "examples/trace-open.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-variants",
+    type: "registry:example",
+    registryDependencies: ["bubble"],
+    files: [{ path: "examples/bubble-variants.tsx", type: "registry:example" }]
+  },
+  {
+    name: "bubble-link-button",
+    type: "registry:example",
+    registryDependencies: ["bubble", "sonner"],
+    files: [{ path: "examples/bubble-link-button.tsx", type: "registry:example" }]
+  },
+  {
+    name: "marker-link-button",
+    type: "registry:example",
+    registryDependencies: ["marker", "sonner"],
+    files: [{ path: "examples/marker-link-button.tsx", type: "registry:example" }]
+  },
+  {
+    name: "carousel-api",
+    type: "registry:example",
+    registryDependencies: ["card", "carousel"],
+    files: [{ path: "examples/carousel-api.tsx", type: "registry:example" }]
+  },
+  {
+    name: "carousel-plugin",
+    type: "registry:example",
+    registryDependencies: ["card", "carousel"],
+    files: [{ path: "examples/carousel-plugin.tsx", type: "registry:example" }]
+  },
+  {
+    name: "select-align-item",
+    type: "registry:example",
+    registryDependencies: ["field", "select", "switch"],
+    files: [{ path: "examples/select-align-item.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-basic",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [{ path: "examples/calendar-basic.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-booked-dates",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [{ path: "examples/calendar-booked-dates.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-presets",
+    type: "registry:example",
+    registryDependencies: ["calendar", "button"],
+    files: [{ path: "examples/calendar-presets.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-time",
+    type: "registry:example",
+    registryDependencies: ["calendar", "field", "input-group"],
+    files: [{ path: "examples/calendar-time.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-caption",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [{ path: "examples/calendar-caption.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-custom-days",
+    type: "registry:example",
+    registryDependencies: ["calendar"],
+    files: [{ path: "examples/calendar-custom-days.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-basic",
+    type: "registry:example",
+    registryDependencies: ["button", "calendar", "field", "popover"],
+    files: [{ path: "examples/date-picker-basic.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-range",
+    type: "registry:example",
+    registryDependencies: ["button", "calendar", "field", "popover"],
+    files: [{ path: "examples/date-picker-range.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-dob",
+    type: "registry:example",
+    registryDependencies: ["button", "calendar", "field", "popover"],
+    files: [{ path: "examples/date-picker-dob.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-input",
+    type: "registry:example",
+    registryDependencies: ["calendar", "field", "input-group", "popover"],
+    files: [{ path: "examples/date-picker-input.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-time",
+    type: "registry:example",
+    registryDependencies: ["button", "calendar", "field", "input", "popover"],
+    files: [{ path: "examples/date-picker-time.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-multiple",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-multiple.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-freeform",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-freeform.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-animated",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-animated.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-controlled",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-controlled.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-resume",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner", "button"],
+    files: [{ path: "examples/questionnaire-resume.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-skip",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-skip.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-actions",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block"],
+    files: [{ path: "examples/code-block-actions.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-example",
+    title: "Message Scroller",
+    type: "registry:example",
+    registryDependencies: [
+      "message-scroller",
+      "message",
+      "bubble",
+      "marker",
+      "button",
+      "card",
+      "message-scroller-demo"
+    ],
+    files: [{ path: "examples/message-scroller-example.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-anchoring",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-anchoring.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-group-chat",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-group-chat.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-previous-context",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-previous-context.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-streaming",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-streaming.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-opening-position",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-opening-position.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-load-history",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-load-history.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-animation",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-animation.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-commands",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-commands.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-visibility",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-visibility.tsx", type: "registry:example" }]
+  },
+  {
+    name: "message-scroller-scrollable",
+    type: "registry:example",
+    registryDependencies: ["message-scroller-example"],
+    files: [{ path: "examples/message-scroller-scrollable.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-shortcuts",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-shortcuts.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-validation",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-validation.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-conditional",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-conditional.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-navigation-state",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-navigation-state.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-progress",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner"],
+    files: [{ path: "examples/questionnaire-progress.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-card",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner", "card"],
+    files: [{ path: "examples/questionnaire-card.tsx", type: "registry:example" }]
+  },
+  {
+    name: "questionnaire-dialog",
+    type: "registry:example",
+    registryDependencies: ["questionnaire", "sonner", "dialog", "button"],
+    files: [{ path: "examples/questionnaire-dialog.tsx", type: "registry:example" }]
+  },
+  {
+    name: "calendar-week-numbers",
+    type: "registry:example",
+    registryDependencies: ["calendar", "card"],
+    files: [{ path: "examples/calendar-week-numbers.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-chat",
+    type: "registry:example",
+    registryDependencies: ["bubble", "code-block", "message", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-chat.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-markdown",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "code-block", "message", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-markdown.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-show-more-scroll",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-show-more-scroll.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-show-more",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-show-more.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-streaming",
+    type: "registry:example",
+    registryDependencies: ["button", "code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-streaming.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-tabs",
+    type: "registry:example",
+    registryDependencies: ["code-block", "tabs", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-tabs.tsx", type: "registry:example" }]
+  },
+  {
+    name: "code-block-typeset",
+    type: "registry:example",
+    registryDependencies: ["code-block", "use-highlighted-code"],
+    files: [{ path: "examples/code-block-typeset.tsx", type: "registry:example" }]
+  },
+  {
+    name: "date-picker-natural-language",
+    type: "registry:example",
+    dependencies: ["chrono-node"],
+    registryDependencies: ["calendar", "field", "input-group", "popover"],
+    files: [{ path: "examples/date-picker-natural-language.tsx", type: "registry:example" }]
+  },
+  {
+    name: "drawer-dialog",
+    type: "registry:example",
+    registryDependencies: ["button", "dialog", "drawer", "input", "label", "use-mobile"],
+    files: [{ path: "examples/drawer-dialog.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-description",
+    type: "registry:example",
+    registryDependencies: ["trace"],
+    files: [{ path: "examples/trace-description.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-thinking",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "message", "trace"],
+    files: [{ path: "examples/trace-thinking.tsx", type: "registry:example" }]
+  },
+  {
+    name: "trace-tool-calls",
+    type: "registry:example",
+    registryDependencies: ["bubble", "button", "message", "trace"],
+    files: [{ path: "examples/trace-tool-calls.tsx", type: "registry:example" }]
   }
 ]

@@ -1,309 +1,211 @@
-import * as ContextMenuPrimitive from "@kobalte/core/context-menu"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Menu as SdkMenu,
+  MenuContextTrigger as SdkMenuContextTrigger,
+  MenuContent as SdkMenuContent,
+  MenuGroup as SdkMenuGroup,
+  MenuGroupLabel as SdkMenuGroupLabel,
+  MenuItem as SdkMenuItem,
+  MenuSub as SdkMenuSub,
+  MenuSubTrigger as SdkMenuSubTrigger,
+  MenuSubContent as SdkMenuSubContent,
+  MenuCheckboxItem as SdkMenuCheckboxItem,
+  MenuItemIndicator as SdkMenuItemIndicator,
+  MenuRadioGroup as SdkMenuRadioGroup,
+  MenuRadioItem as SdkMenuRadioItem,
+  MenuSeparator as SdkMenuSeparator
+} from "@ui-sdk/solid/menu"
 import { CheckIcon, ChevronRightIcon } from "lucide-solid"
-import { merge, omit } from "solid-js"
+import { createUniqueId, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-type ContextMenuProps = ContextMenuPrimitive.ContextMenuRootProps
-
-const ContextMenu = (props: ContextMenuProps) => {
-  return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />
+type ContextMenuProps = ComponentProps<typeof SdkMenu>
+const ContextMenu = (props: ContextMenuProps) => <SdkMenu {...props} />
+type ContextMenuTriggerProps = Omit<ComponentProps<typeof SdkMenuContextTrigger>, "class"> & {
+  class?: string
 }
-
-type ContextMenuTriggerProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuTriggerProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuTrigger = <T extends ValidComponent = "div">(
-  props: ContextMenuTriggerProps<T>
-) => {
-  const others = omit(props as ContextMenuTriggerProps, "class")
-  return (
-    <ContextMenuPrimitive.Trigger
-      class={cn("cn-context-menu-trigger select-none", props.class)}
-      data-slot="context-menu-trigger"
-      {...others}
+const ContextMenuTrigger = (props: ContextMenuTriggerProps) => (
+  <SdkMenuContextTrigger
+    {...props}
+    class={cn("cn-context-menu-trigger select-none", props.class)}
+  />
+)
+type ContextMenuContentProps = Omit<ComponentProps<typeof SdkMenuContent>, "class"> & {
+  class?: string
+}
+const ContextMenuContent = (props: ContextMenuContentProps) => (
+  <>
+    <SdkMenuContent
+      {...props}
+      class={cn(
+        "cn-context-menu-content z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
+        props.class
+      )}
     />
-  )
+  </>
+)
+type ContextMenuGroupProps = Omit<ComponentProps<typeof SdkMenuGroup>, "class"> & {
+  class?: string
 }
-
-type ContextMenuPortalProps = ContextMenuPrimitive.ContextMenuPortalProps
-
-const ContextMenuPortal = (props: ContextMenuPortalProps) => {
-  return <ContextMenuPrimitive.Portal data-slot="context-menu-portal" {...props} />
+const ContextMenuGroup = (props: ContextMenuGroupProps) => (
+  <SdkMenuGroup {...props} class={props.class} />
+)
+type ContextMenuLabelProps = (Omit<ComponentProps<typeof SdkMenuGroupLabel>, "class"> & {
+  class?: string
+}) & {
+  inset?: boolean
 }
-
-type ContextMenuContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuContent = <T extends ValidComponent = "div">(
-  props: ContextMenuContentProps<T>
-) => {
-  const others = omit(props as ContextMenuContentProps, "class")
+const ContextMenuLabel = (props: ContextMenuLabelProps) => {
+  const others = omit(props, "class", "inset")
   return (
-    <ContextMenuPrimitive.Portal>
-      <ContextMenuPrimitive.Content
-        class={cn(
-          "cn-context-menu-content z-50 max-h-(--kb-popper-available-height) origin-(--kb-menu-content-transform-origin) overflow-x-hidden overflow-y-auto outline-none",
-          props.class
-        )}
-        data-slot="context-menu-content"
-        {...others}
-      />
-    </ContextMenuPrimitive.Portal>
-  )
-}
-
-type ContextMenuGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuGroupProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuGroup = <T extends ValidComponent = "div">(props: ContextMenuGroupProps<T>) => {
-  const others = omit(props as ContextMenuGroupProps, "class")
-  return (
-    <ContextMenuPrimitive.Group class={props.class} data-slot="context-menu-group" {...others} />
-  )
-}
-
-type ContextMenuLabelProps<T extends ValidComponent = "span"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuGroupLabelProps<T>
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    inset?: boolean
-  }
-
-const ContextMenuLabel = <T extends ValidComponent = "span">(props: ContextMenuLabelProps<T>) => {
-  const others = omit(props as ContextMenuLabelProps, "class", "inset")
-  return (
-    <ContextMenuPrimitive.GroupLabel
+    <SdkMenuGroupLabel
       class={cn("cn-context-menu-label data-inset:pl-8", props.class)}
-      data-slot="context-menu-label"
       data-inset={props.inset}
       {...others}
     />
   )
 }
-
-type ContextMenuItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    inset?: boolean
-    variant?: "default" | "destructive"
-  }
-
-const ContextMenuItem = <T extends ValidComponent = "div">(rawProps: ContextMenuItemProps<T>) => {
+type ContextMenuItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
+  class?: string
+}) & {
+  inset?: boolean
+  variant?: "default" | "destructive"
+}
+const ContextMenuItem = (rawProps: ContextMenuItemProps) => {
   const local = merge(
-    { variant: "default" } as ContextMenuItemProps<T>,
+    { variant: "default" } as ContextMenuItemProps,
     rawProps
   ) as ContextMenuItemProps
-  const others = omit(rawProps as ContextMenuItemProps, "class", "inset", "variant")
+  const others = omit(rawProps, "class", "inset", "variant")
   return (
-    <ContextMenuPrimitive.Item
+    <SdkMenuItem
       class={cn(
-        "group/context-menu-item cn-context-menu-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group/context-menu-item cn-context-menu-item relative flex cursor-default items-center outline-hidden select-none data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         local.class
       )}
-      data-slot="context-menu-item"
       data-inset={local.inset}
       data-variant={local.variant}
       {...others}
     />
   )
 }
-
-type ContextMenuSubProps = ContextMenuPrimitive.ContextMenuSubProps
-
-const ContextMenuSub = (props: ContextMenuSubProps) => {
-  return <ContextMenuPrimitive.Sub data-slot="context-menu-sub" {...props} />
+type ContextMenuSubProps = ComponentProps<typeof SdkMenuSub>
+const ContextMenuSub = (props: ContextMenuSubProps) => <SdkMenuSub {...props} />
+type ContextMenuSubTriggerProps = (Omit<ComponentProps<typeof SdkMenuSubTrigger>, "class"> & {
+  class?: string
+}) & {
+  inset?: boolean
 }
-
-type ContextMenuSubTriggerProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuSubTriggerProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children"> & {
-    inset?: boolean
-  }
-
-const ContextMenuSubTrigger = <T extends ValidComponent = "div">(
-  props: ContextMenuSubTriggerProps<T>
-) => {
-  const others = omit(props as ContextMenuSubTriggerProps, "class", "children", "inset")
+const ContextMenuSubTrigger = (props: ContextMenuSubTriggerProps) => {
+  const others = omit(props, "class", "children", "inset")
   return (
-    <ContextMenuPrimitive.SubTrigger
+    <SdkMenuSubTrigger
       class={cn(
         "cn-context-menu-sub-trigger flex cursor-default items-center outline-hidden select-none data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         props.class
       )}
-      data-slot="context-menu-sub-trigger"
       data-inset={props.inset}
       {...others}
     >
       {props.children}
       <ChevronRightIcon class="ml-auto" />
-    </ContextMenuPrimitive.SubTrigger>
+    </SdkMenuSubTrigger>
   )
 }
-
-type ContextMenuSubContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuSubContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuSubContent = <T extends ValidComponent = "div">(
-  props: ContextMenuSubContentProps<T>
-) => {
-  const others = omit(props as ContextMenuSubContentProps, "class")
-  return (
-    <ContextMenuPrimitive.Portal>
-      <ContextMenuPrimitive.SubContent
-        class={cn(
-          "cn-context-menu-sub-content cn-context-menu-subcontent z-50 max-h-(--kb-popper-available-height) origin-(--kb-menu-content-transform-origin) overflow-x-hidden overflow-y-auto outline-none",
-          props.class
-        )}
-        data-slot="context-menu-sub-content"
-        {...others}
-      />
-    </ContextMenuPrimitive.Portal>
-  )
+type ContextMenuSubContentProps = Omit<ComponentProps<typeof SdkMenuSubContent>, "class"> & {
+  class?: string
 }
-
-type ContextMenuCheckboxItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuCheckboxItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const ContextMenuCheckboxItem = <T extends ValidComponent = "div">(
-  props: ContextMenuCheckboxItemProps<T>
-) => {
-  const others = omit(props as ContextMenuCheckboxItemProps, "class", "children")
+const ContextMenuSubContent = (props: ContextMenuSubContentProps) => (
+  <>
+    <SdkMenuSubContent
+      {...props}
+      class={cn(
+        "cn-context-menu-content cn-context-menu-sub-content cn-context-menu-subcontent z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
+        props.class
+      )}
+    />
+  </>
+)
+type ContextMenuCheckboxItemProps = Omit<
+  Omit<ComponentProps<typeof SdkMenuCheckboxItem>, "value"> & {
+    value?: string
+  },
+  "class"
+> & {
+  class?: string
+}
+const ContextMenuCheckboxItem = (props: ContextMenuCheckboxItemProps) => {
+  const others = omit(props, "class", "children", "value")
+  const value = createUniqueId()
   return (
-    <ContextMenuPrimitive.CheckboxItem
+    <SdkMenuCheckboxItem
+      value={props.value ?? value}
       class={cn(
         "cn-context-menu-checkbox-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         props.class
       )}
-      data-slot="context-menu-checkbox-item"
       {...others}
     >
       <span class="cn-context-menu-item-indicator pointer-events-none">
-        <ContextMenuPrimitive.ItemIndicator>
+        <SdkMenuItemIndicator>
           <CheckIcon />
-        </ContextMenuPrimitive.ItemIndicator>
+        </SdkMenuItemIndicator>
       </span>
       {props.children}
-    </ContextMenuPrimitive.CheckboxItem>
+    </SdkMenuCheckboxItem>
   )
 }
-
-type ContextMenuRadioGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuRadioGroupProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuRadioGroup = <T extends ValidComponent = "div">(
-  props: ContextMenuRadioGroupProps<T>
-) => {
-  const others = omit(props as ContextMenuRadioGroupProps, "class")
-  return (
-    <ContextMenuPrimitive.RadioGroup
-      class={props.class}
-      data-slot="context-menu-radio-group"
-      {...others}
-    />
-  )
+type ContextMenuRadioGroupProps = Omit<ComponentProps<typeof SdkMenuRadioGroup>, "class"> & {
+  class?: string
 }
-
-type ContextMenuRadioItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuRadioItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const ContextMenuRadioItem = <T extends ValidComponent = "div">(
-  props: ContextMenuRadioItemProps<T>
-) => {
-  const others = omit(props as ContextMenuRadioItemProps, "class", "children")
+const ContextMenuRadioGroup = (props: ContextMenuRadioGroupProps) => (
+  <SdkMenuRadioGroup {...props} class={props.class} />
+)
+type ContextMenuRadioItemProps = Omit<ComponentProps<typeof SdkMenuRadioItem>, "class"> & {
+  class?: string
+}
+const ContextMenuRadioItem = (props: ContextMenuRadioItemProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <ContextMenuPrimitive.RadioItem
+    <SdkMenuRadioItem
       class={cn(
         "cn-context-menu-radio-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         props.class
       )}
-      data-slot="context-menu-radio-item"
       {...others}
     >
       <span class="cn-context-menu-item-indicator pointer-events-none">
-        <ContextMenuPrimitive.ItemIndicator>
+        <SdkMenuItemIndicator>
           <CheckIcon />
-        </ContextMenuPrimitive.ItemIndicator>
+        </SdkMenuItemIndicator>
       </span>
       {props.children}
-    </ContextMenuPrimitive.RadioItem>
+    </SdkMenuRadioItem>
   )
 }
-
-type ContextMenuSeparatorProps<T extends ValidComponent = "hr"> = PolymorphicProps<
-  T,
-  ContextMenuPrimitive.ContextMenuSeparatorProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ContextMenuSeparator = <T extends ValidComponent = "hr">(
-  props: ContextMenuSeparatorProps<T>
-) => {
-  const others = omit(props as ContextMenuSeparatorProps, "class")
-  return (
-    <ContextMenuPrimitive.Separator
-      class={cn("cn-context-menu-separator", props.class)}
-      data-slot="context-menu-separator"
-      {...others}
-    />
-  )
+type ContextMenuSeparatorProps = Omit<ComponentProps<typeof SdkMenuSeparator>, "class"> & {
+  class?: string
 }
-
+const ContextMenuSeparator = (props: ContextMenuSeparatorProps) => (
+  <SdkMenuSeparator {...props} class={cn("cn-context-menu-separator", props.class)} />
+)
 type ContextMenuShortcutProps = ComponentProps<"span">
-
-const ContextMenuShortcut = (props: ContextMenuShortcutProps) => {
-  const others = omit(props, "class")
-  return (
-    <span
-      class={cn("cn-context-menu-shortcut", props.class)}
-      data-slot="context-menu-shortcut"
-      {...others}
-    />
-  )
-}
-
+const ContextMenuShortcut = (props: ContextMenuShortcutProps) => (
+  <span {...props} class={cn("cn-context-menu-shortcut", props.class)} />
+)
 export {
   ContextMenu,
-  ContextMenuTrigger,
-  ContextMenuContent,
-  ContextMenuItem,
   ContextMenuCheckboxItem,
-  ContextMenuRadioItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
   ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
-  ContextMenuGroup,
-  ContextMenuPortal,
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
-  ContextMenuRadioGroup
+  ContextMenuTrigger
 }

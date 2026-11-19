@@ -1,66 +1,50 @@
 import { For } from "solid-js"
 
+import { ComboboxValue, ComboboxChips } from "~/registry/ui/combobox"
 import {
   Combobox,
   ComboboxChip,
   ComboboxChipInput,
   ComboboxChipRemove,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
   ComboboxItem,
   ComboboxList
 } from "~/registry/ui/combobox"
 
-type Tag = {
-  value: string
-  label: string
-}
-
-const tags: Tag[] = [
-  { value: "design", label: "Design" },
-  { value: "marketing", label: "Marketing" },
-  { value: "engineering", label: "Engineering" },
-  { value: "sales", label: "Sales" },
-  { value: "support", label: "Support" }
-]
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const
 
 export default function ComboboxMultiple() {
   return (
-    <Combobox<Tag>
-      multiple
-      options={tags}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      defaultValue={[tags[0]!]}
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
-    >
-      <ComboboxControl<Tag> class="max-w-md" variant="chips">
-        {(state) => (
-          <>
-            <For each={state.selectedOptions()}>
-              {(option) => (
-                <ComboboxChip>
-                  {option.label}
-                  <ComboboxChipRemove
-                    onClick={(event) => {
-                      event.preventDefault()
-                      state.remove(option)
-                    }}
-                  />
-                </ComboboxChip>
-              )}
-            </For>
-            <ComboboxChipInput class="min-w-24" placeholder="Add a tag" />
-          </>
-        )}
-      </ComboboxControl>
+    <Combobox<string, true> multiple autoHighlight defaultValue={[frameworks[0]]}>
+      <ComboboxChips class="w-full max-w-xs">
+        <ComboboxValue>
+          {(state) => (
+            <>
+              <For each={state.value as string[]}>
+                {(option) => (
+                  <ComboboxChip value={option}>
+                    {option}
+                    <ComboboxChipRemove aria-label={`Remove ${option}`} />
+                  </ComboboxChip>
+                )}
+              </For>
+            </>
+          )}
+        </ComboboxValue>
+        <ComboboxChipInput aria-label="Frameworks" class="min-w-24" placeholder="Add a framework" />
+      </ComboboxChips>
       <ComboboxContent>
-        <ComboboxList />
-        <ComboboxEmpty>No tag found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={frameworks}>
+            {(option) => (
+              <ComboboxItem value={option} label={option}>
+                {option}
+              </ComboboxItem>
+            )}
+          </For>
+        </ComboboxList>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
       </ComboboxContent>
     </Combobox>
   )

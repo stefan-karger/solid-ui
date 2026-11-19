@@ -20,7 +20,7 @@ export default function MenubarRadio() {
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup onChange={setUser} value={user()}>
+          <MenubarRadioGroup onValueChange={setUser} value={user()}>
             <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
             <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
             <MenubarRadioItem value="luis">Luis</MenubarRadioItem>
@@ -33,7 +33,7 @@ export default function MenubarRadio() {
       <MenubarMenu>
         <MenubarTrigger>Theme</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup onChange={setTheme} value={theme()}>
+          <MenubarRadioGroup onValueChange={setTheme} value={theme()}>
             <MenubarRadioItem value="light">Light</MenubarRadioItem>
             <MenubarRadioItem value="dark">Dark</MenubarRadioItem>
             <MenubarRadioItem value="system">System</MenubarRadioItem>

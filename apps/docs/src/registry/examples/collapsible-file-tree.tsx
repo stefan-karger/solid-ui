@@ -66,10 +66,8 @@ const renderItem = (item: FileTreeItem): JSX.Element => {
     return (
       <Collapsible>
         <CollapsibleTrigger
-          as={Button}
+          render={(partProps) => <Button {...partProps} size="sm" variant="ghost" />}
           class="group/collapsible-trigger w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"
-          size="sm"
-          variant="ghost"
         >
           <ChevronRightIcon class="size-4 transition-transform group-data-[expanded]/collapsible-trigger:rotate-90" />
           <FolderIcon class="size-4" />

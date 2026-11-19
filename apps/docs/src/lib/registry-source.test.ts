@@ -17,6 +17,18 @@ const styleCss = `
 }`
 
 describe("registry source preparation", () => {
+  it("accepts empty upstream theme placeholders", () => {
+    expect(
+      extractStyleMap(".cn-placeholder {} .cn-button { @apply rounded-md; }", "test").get(
+        "cn-button"
+      )
+    ).toBe("rounded-md")
+  })
+  it("reads an upstream apply declaration without a final semicolon", () => {
+    expect(extractStyleMap(".cn-button { @apply rounded-md }", "test").get("cn-button")).toBe(
+      "rounded-md"
+    )
+  })
   it("extracts style utilities through nested blocks", () => {
     expect(extractStyleMap(styleCss, "test").get("cn-button")).toBe(
       "rounded-md text-sm [&_svg:not([class*='size-'])]:size-4"

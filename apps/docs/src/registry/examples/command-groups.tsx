@@ -1,13 +1,13 @@
-import { Dynamic } from "@solidjs/web"
 import {
   Calculator,
   Calendar,
   CreditCard,
-  Settings,
   FaceSlightlySmilingIcon,
+  Settings,
   User,
   type LucideIcon
 } from "lucide-solid"
+import { For } from "solid-js"
 import { createMemo, createSignal, Show } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -93,34 +93,34 @@ export default function CommandGroups() {
         Open Menu
       </Button>
       <CommandDialog onOpenChange={handleOpenChange} open={open()}>
-        <Command<CommandOption, CommandGroupOption>
-          onInputChange={setQuery}
-          placeholder="Type a command or search..."
-          options={filteredOptions()}
-          optionGroupChildren="items"
-          optionValue="value"
-          optionTextValue="label"
-          optionLabel="label"
-          itemComponent={(props) => (
-            <CommandItem item={props.item}>
-              <Dynamic class="size-4" component={props.item.rawValue.icon} />
-              <span>{props.item.rawValue.label}</span>
-              <Show when={props.item.rawValue.shortcut}>
-                {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
-              </Show>
-            </CommandItem>
-          )}
-          sectionComponent={(props) => (
-            <>
-              {props.section.index > 0 ? <CommandSeparator /> : null}
-              <CommandGroup>
-                <CommandGroupLabel>{props.section.rawValue.heading}</CommandGroupLabel>
-              </CommandGroup>
-            </>
-          )}
-        >
-          <CommandInput />
-          <CommandList />
+        <Command onQueryChange={setQuery}>
+          <CommandInput
+            placeholder="Type a command or search..."
+            aria-label="Type a command or search..."
+          />
+          <CommandList>
+            <For each={filteredOptions()}>
+              {(group, groupIndex) => (
+                <>
+                  {groupIndex() > 0 ? <CommandSeparator /> : null}
+                  <CommandGroup>
+                    <CommandGroupLabel>{group.heading}</CommandGroupLabel>
+                    <For each={group["items"]}>
+                      {(option) => (
+                        <CommandItem value={option["value"]} label={option["label"]}>
+                          <option.icon class="size-4" />
+                          <span>{option.label}</span>
+                          <Show when={option.shortcut}>
+                            {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
+                          </Show>
+                        </CommandItem>
+                      )}
+                    </For>
+                  </CommandGroup>
+                </>
+              )}
+            </For>
+          </CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
         </Command>
       </CommandDialog>

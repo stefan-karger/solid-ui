@@ -13,7 +13,7 @@ const { value, class: className, ...props } = Astro.props
 <button
   aria-label="Copy code"
   class={cn(
-    "absolute top-3 right-2 z-10 flex size-7 items-center justify-center rounded-md bg-code text-code-foreground opacity-70 outline-none transition-[color,opacity,box-shadow] hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+    "absolute top-3 right-2 z-10 flex size-7 items-center justify-center rounded-md bg-code text-code-foreground opacity-70 transition-[color,opacity,box-shadow] outline-none hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
     className
   )}
   data-copy-button
@@ -49,5 +49,7 @@ const { value, class: className, ...props } = Astro.props
   >
     <path d="M20 6 9 17l-5-5"></path>
   </svg>
-  <span aria-live="polite" class="sr-only" data-copy-status>Copy code</span>
+  <span aria-live="polite" class="sr-only" data-copy-status>
+    Copy code
+  </span>
 </button>

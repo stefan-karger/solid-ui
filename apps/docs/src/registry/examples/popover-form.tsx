@@ -12,11 +12,11 @@ import {
 
 export default function PopoverForm() {
   return (
-    <Popover placement="bottom-start">
-      <PopoverTrigger as={Button} variant="outline">
+    <Popover>
+      <PopoverTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Set dimensions
       </PopoverTrigger>
-      <PopoverContent class="w-64">
+      <PopoverContent side="bottom" align="start" class="w-64">
         <PopoverHeader>
           <PopoverTitle>Dimensions</PopoverTitle>
           <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>

@@ -15,7 +15,7 @@ import { Label } from "~/registry/ui/label"
 export default function DialogCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger as={Button} variant="outline">
+      <DialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Share
       </DialogTrigger>
       <DialogContent class="sm:max-w-md" showCloseButton={false}>
@@ -36,7 +36,7 @@ export default function DialogCloseButton() {
           </div>
         </div>
         <DialogFooter class="sm:justify-start">
-          <DialogClose as={Button} type="button">
+          <DialogClose render={(partProps) => <Button {...partProps} />} type="button">
             Close
           </DialogClose>
         </DialogFooter>

@@ -1,16 +1,16 @@
-import { Polymorphic, type PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
+import { dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
 import { PanelLeftIcon } from "lucide-solid"
 import {
+  isStatic,
   createContext,
   createMemo,
   createSignal,
   Match,
   merge,
+  omit,
   onSettled,
   Show,
-  omit,
   Switch,
   useContext,
   type Accessor,
@@ -25,6 +25,13 @@ import { Separator } from "~/registry/ui/separator"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "~/registry/ui/sheet"
 import { Skeleton } from "~/registry/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
+
+type PolymorphicProps<T extends ValidComponent, P> = Omit<P, "as" | "class" | "children"> &
+  Omit<ComponentProps<T>, keyof P | "as" | "class" | "children" | "onChange"> & {
+    as?: T
+    class?: string | undefined
+    children?: JSX.Element
+  }
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 
@@ -253,7 +260,6 @@ const SidebarTrigger = (props: SidebarTriggerProps) => {
 }
 
 const SidebarRail = (props: ComponentProps<"button">) => {
-  const others = omit(props, "class")
   const { toggleSidebar } = useSidebar()
   return (
     <button
@@ -263,6 +269,7 @@ const SidebarRail = (props: ComponentProps<"button">) => {
       tabindex={-1}
       onClick={toggleSidebar}
       title="Toggle Sidebar"
+      {...props}
       class={cn(
         "cn-sidebar-rail absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
@@ -272,101 +279,76 @@ const SidebarRail = (props: ComponentProps<"button">) => {
         "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
         props.class
       )}
-      {...others}
     />
   )
 }
 
-const SidebarInset = (props: ComponentProps<"main">) => {
-  const others = omit(props, "class")
-  return (
-    <main
-      data-slot="sidebar-inset"
-      class={cn("cn-sidebar-inset relative flex w-full flex-1 flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarInset = (props: ComponentProps<"main">) => (
+  <main
+    data-slot="sidebar-inset"
+    {...props}
+    class={cn("cn-sidebar-inset relative flex w-full flex-1 flex-col", props.class)}
+  />
+)
 
-const SidebarInput = (props: ComponentProps<typeof Input>) => {
-  const others = omit(props, "class")
-  return (
-    <Input
-      data-slot="sidebar-input"
-      data-sidebar="input"
-      class={cn("cn-sidebar-input", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarInput = (props: ComponentProps<typeof Input>) => (
+  <Input
+    data-slot="sidebar-input"
+    data-sidebar="input"
+    {...props}
+    class={cn("cn-sidebar-input", props.class)}
+  />
+)
 
-const SidebarHeader = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-header"
-      data-sidebar="header"
-      class={cn("cn-sidebar-header flex flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarHeader = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="sidebar-header"
+    data-sidebar="header"
+    {...props}
+    class={cn("cn-sidebar-header flex flex-col", props.class)}
+  />
+)
 
-const SidebarFooter = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-footer"
-      data-sidebar="footer"
-      class={cn("cn-sidebar-footer flex flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarFooter = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="sidebar-footer"
+    data-sidebar="footer"
+    {...props}
+    class={cn("cn-sidebar-footer flex flex-col", props.class)}
+  />
+)
 
-type SidebarSeparatorProps<T extends ValidComponent = "hr"> = PolymorphicProps<
-  T,
-  ComponentProps<typeof Separator<T>>
->
+type SidebarSeparatorProps = ComponentProps<typeof Separator>
 
-const SidebarSeparator = <T extends ValidComponent = "hr">(props: SidebarSeparatorProps<T>) => {
-  const others = omit(props as SidebarSeparatorProps, "class")
-  return (
-    <Separator
-      data-slot="sidebar-separator"
-      data-sidebar="separator"
-      class={cn("cn-sidebar-separator w-auto", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarSeparator = (props: SidebarSeparatorProps) => (
+  <Separator
+    data-slot="sidebar-separator"
+    data-sidebar="separator"
+    {...props}
+    class={cn("cn-sidebar-separator w-auto", props.class)}
+  />
+)
 
-const SidebarContent = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-content"
-      data-sidebar="content"
-      class={cn(
-        "cn-sidebar-content flex min-h-0 flex-1 flex-col overflow-auto group-data-[collapsible=icon]:overflow-hidden",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const SidebarContent = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="sidebar-content"
+    data-sidebar="content"
+    {...props}
+    class={cn(
+      "cn-sidebar-content flex min-h-0 flex-1 flex-col overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+      props.class
+    )}
+  />
+)
 
-const SidebarGroup = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-group"
-      data-sidebar="group"
-      class={cn("cn-sidebar-group relative flex w-full min-w-0 flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarGroup = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="sidebar-group"
+    data-sidebar="group"
+    {...props}
+    class={cn("cn-sidebar-group relative flex w-full min-w-0 flex-col", props.class)}
+  />
+)
 
 type SidebarGroupLabelProps<T extends ValidComponent = "div"> = PolymorphicProps<
   T,
@@ -374,10 +356,10 @@ type SidebarGroupLabelProps<T extends ValidComponent = "div"> = PolymorphicProps
 >
 
 const SidebarGroupLabel = <T extends ValidComponent = "div">(props: SidebarGroupLabelProps<T>) => {
-  const others = omit(props as SidebarGroupLabelProps, "class")
+  const others = omit(props as SidebarGroupLabelProps, "class", "as")
+  const Comp = dynamic(() => props.as ?? "div", { static: isStatic(props, "as") })
   return (
-    <Polymorphic<SidebarGroupLabelProps>
-      as="div"
+    <Comp
       data-slot="sidebar-group-label"
       data-sidebar="group-label"
       class={cn(
@@ -397,10 +379,10 @@ type SidebarGroupActionProps<T extends ValidComponent = "button"> = PolymorphicP
 const SidebarGroupAction = <T extends ValidComponent = "button">(
   props: SidebarGroupActionProps<T>
 ) => {
-  const others = omit(props as SidebarGroupActionProps, "class")
+  const others = omit(props as SidebarGroupActionProps, "class", "as")
+  const Comp = dynamic(() => props.as ?? "button", { static: isStatic(props, "as") })
   return (
-    <Polymorphic<SidebarGroupActionProps>
-      as="button"
+    <Comp
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       class={cn(
@@ -412,41 +394,32 @@ const SidebarGroupAction = <T extends ValidComponent = "button">(
   )
 }
 
-const SidebarGroupContent = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-group-content"
-      data-sidebar="group-content"
-      class={cn("cn-sidebar-group-content w-full", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarGroupContent = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="sidebar-group-content"
+    data-sidebar="group-content"
+    {...props}
+    class={cn("cn-sidebar-group-content w-full", props.class)}
+  />
+)
 
-const SidebarMenu = (props: ComponentProps<"ul">) => {
-  const others = omit(props, "class")
-  return (
-    <ul
-      data-slot="sidebar-menu"
-      data-sidebar="menu"
-      class={cn("cn-sidebar-menu flex w-full min-w-0 flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarMenu = (props: ComponentProps<"ul">) => (
+  <ul
+    data-slot="sidebar-menu"
+    data-sidebar="menu"
+    {...props}
+    class={cn("cn-sidebar-menu flex w-full min-w-0 flex-col", props.class)}
+  />
+)
 
-const SidebarMenuItem = (props: ComponentProps<"li">) => {
-  const others = omit(props, "class")
-  return (
-    <li
-      data-slot="sidebar-menu-item"
-      data-sidebar="menu-item"
-      class={cn("group/menu-item relative", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarMenuItem = (props: ComponentProps<"li">) => (
+  <li
+    data-slot="sidebar-menu-item"
+    data-sidebar="menu-item"
+    {...props}
+    class={cn("group/menu-item relative", props.class)}
+  />
+)
 
 const sidebarMenuButtonVariants = cva(
   "peer/menu-button cn-sidebar-menu-button flex w-full items-center overflow-hidden outline-hidden disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
@@ -489,16 +462,17 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
     rawProps as SidebarMenuButtonProps,
     "isActive",
     "tooltip",
+    "as",
     "variant",
     "size",
     "class"
   )
   const { isMobile, state } = useSidebar()
+  const Comp = dynamic(() => local.as ?? "button", { static: isStatic(rawProps, "as") })
   const MenuButton = (menuButtonProps: SidebarMenuButtonProps) => {
-    const forwardedProps = omit(menuButtonProps, "class")
+    const forwardedProps = omit(menuButtonProps, "class", "as")
     return (
-      <Polymorphic<SidebarMenuButtonProps>
-        as="button"
+      <Comp
         data-slot="sidebar-menu-button"
         data-sidebar="menu-button"
         data-size={local.size}
@@ -515,9 +489,9 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
   }
   return (
     <Show fallback={<MenuButton />} when={local.tooltip}>
-      <Tooltip placement="right">
-        <TooltipTrigger as={MenuButton} class="w-full" />
-        <TooltipContent hidden={state() !== "collapsed" || isMobile()}>
+      <Tooltip>
+        <TooltipTrigger render={MenuButton} class="w-full" />
+        <TooltipContent side="right" align="center" hidden={state() !== "collapsed" || isMobile()}>
           {local.tooltip}
         </TooltipContent>
       </Tooltip>
@@ -530,19 +504,24 @@ type SidebarMenuActionProps<T extends ValidComponent = "button"> = ComponentProp
 }
 
 const SidebarMenuAction = <T extends ValidComponent = "button">(
-  rawProps: PolymorphicProps<T, SidebarMenuActionProps<T>>
+  rawProps: PolymorphicProps<T, SidebarMenuActionProps>
 ) => {
   const local = merge({ showOnHover: false }, rawProps) as SidebarMenuActionProps
-  const others = omit(rawProps as SidebarMenuActionProps, "class", "showOnHover")
+  const others = omit(
+    rawProps as PolymorphicProps<"button", SidebarMenuActionProps>,
+    "class",
+    "as",
+    "showOnHover"
+  )
+  const Comp = dynamic(() => rawProps.as ?? "button", { static: isStatic(rawProps, "as") })
   return (
-    <Polymorphic<SidebarMenuActionProps>
-      as="button"
+    <Comp
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
       class={cn(
         "cn-sidebar-menu-action flex items-center justify-center outline-hidden transition-transform group-data-[collapsible=icon]:hidden after:absolute after:-inset-2 md:after:hidden [&>svg]:shrink-0",
         local.showOnHover &&
-          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground data-open:opacity-100 md:opacity-0",
+          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 peer-data-active/menu-button:text-sidebar-accent-foreground md:opacity-0 data-open:opacity-100",
         local.class
       )}
       {...others}
@@ -550,20 +529,17 @@ const SidebarMenuAction = <T extends ValidComponent = "button">(
   )
 }
 
-const SidebarMenuBadge: Component<ComponentProps<"div">> = (props) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sidebar-menu-badge"
-      data-sidebar="menu-badge"
-      class={cn(
-        "cn-sidebar-menu-badge flex items-center justify-center tabular-nums select-none group-data-[collapsible=icon]:hidden",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const SidebarMenuBadge: Component<ComponentProps<"div">> = (props) => (
+  <div
+    data-slot="sidebar-menu-badge"
+    data-sidebar="menu-badge"
+    {...props}
+    class={cn(
+      "cn-sidebar-menu-badge flex items-center justify-center tabular-nums select-none group-data-[collapsible=icon]:hidden",
+      props.class
+    )}
+  />
+)
 
 type SidebarMenuSkeletonProps = ComponentProps<"div"> & {
   showIcon?: boolean
@@ -594,29 +570,23 @@ const SidebarMenuSkeleton: Component<SidebarMenuSkeletonProps> = (rawProps) => {
   )
 }
 
-const SidebarMenuSub: Component<ComponentProps<"ul">> = (props) => {
-  const others = omit(props, "class")
-  return (
-    <ul
-      data-slot="sidebar-menu-sub"
-      data-sidebar="menu-sub"
-      class={cn("cn-sidebar-menu-sub flex min-w-0 flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarMenuSub: Component<ComponentProps<"ul">> = (props) => (
+  <ul
+    data-slot="sidebar-menu-sub"
+    data-sidebar="menu-sub"
+    {...props}
+    class={cn("cn-sidebar-menu-sub flex min-w-0 flex-col", props.class)}
+  />
+)
 
-const SidebarMenuSubItem: Component<ComponentProps<"li">> = (props) => {
-  const others = omit(props, "class")
-  return (
-    <li
-      data-slot="sidebar-menu-sub-item"
-      data-sidebar="menu-sub-item"
-      class={cn("group/menu-sub-item relative", props.class)}
-      {...others}
-    />
-  )
-}
+const SidebarMenuSubItem: Component<ComponentProps<"li">> = (props) => (
+  <li
+    data-slot="sidebar-menu-sub-item"
+    data-sidebar="menu-sub-item"
+    {...props}
+    class={cn("group/menu-sub-item relative", props.class)}
+  />
+)
 
 type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> = ComponentProps<T> & {
   size?: "sm" | "md"
@@ -624,13 +594,19 @@ type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> = ComponentProps<
 }
 
 const SidebarMenuSubButton = <T extends ValidComponent = "a">(
-  rawProps: PolymorphicProps<T, SidebarMenuSubButtonProps<T>>
+  rawProps: PolymorphicProps<T, SidebarMenuSubButtonProps>
 ) => {
   const local = merge({ size: "md" }, rawProps) as SidebarMenuSubButtonProps
-  const others = omit(rawProps as SidebarMenuSubButtonProps, "size", "isActive", "class")
+  const others = omit(
+    rawProps as PolymorphicProps<"a", SidebarMenuSubButtonProps>,
+    "size",
+    "isActive",
+    "class",
+    "as"
+  )
+  const Comp = dynamic(() => rawProps.as ?? "a", { static: isStatic(rawProps, "as") })
   return (
-    <Polymorphic<SidebarMenuSubButtonProps>
-      as="a"
+    <Comp
       data-slot="sidebar-menu-sub-button"
       data-sidebar="menu-sub-button"
       data-size={local.size}

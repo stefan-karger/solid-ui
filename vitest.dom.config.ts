@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url"
 
-import solid from "vite-plugin-solid"
+import solid from "@solidjs/vite-plugin"
 import { defineProject } from "vitest/config"
 
 export default defineProject({
@@ -11,7 +11,7 @@ export default defineProject({
   },
   plugins: [
     solid({
-      hot: false,
+      refresh: false,
       ssr: false
     })
   ],
@@ -21,8 +21,11 @@ export default defineProject({
     }
   },
   test: {
+    // Persistent transforms retain stale import.meta.glob file lists after ports.
+    fsModuleCache: false,
     name: "dom",
     environment: "happy-dom",
+    setupFiles: ["./tests/setup-dom.ts"],
     css: {
       include: [/style-nova\.css/]
     },
@@ -30,7 +33,17 @@ export default defineProject({
     exclude: ["**/node_modules/**", "**/dist/**", "**/*.render.test.ts"],
     server: {
       deps: {
-        inline: ["solid-js", "@solidjs/web", "@solidjs/signals"]
+        // Keep UI SDK and the tests on the same Solid instance.
+        inline: [
+          "@astrojs/solid-js",
+          "@astrojs/solid-js-renderer",
+          "solid-js",
+          "@solidjs/web",
+          "@solidjs/signals",
+          "@ui-sdk/solid",
+          "@ui-sdk/core",
+          /[/\\]@solid-primitives[/\\]/
+        ]
       }
     }
   }

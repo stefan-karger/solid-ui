@@ -1,0 +1,92 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with keyboard support.
+component: true
+new: true
+---
+
+<ComponentPreview name="resizable-demo" previewClassName="h-80" />
+
+## About
+
+The `Resizable` component styles [UI SDK Resizable](https://ui-sdk.dev/docs/solid/components/resizable) panels and handles.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add resizable
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core lucide-solid
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="resizable" title="components/ui/resizable.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ResizablePanelGroup } from "~/components/ui/resizable"
+```
+
+Use `orientation`, `onLayoutChange`, and `onLayoutCommit` on `ResizablePanelGroup`. Each panel accepts `defaultSize`, `minSize`, `maxSize`, and `collapsible`. Percentages are numbers. Name each handle with `aria-label`. Native SDK controllers replace React panel refs.
+
+See the [UI SDK resizable API](https://ui-sdk.dev/docs/solid/components/resizable) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `ResizablePanelGroup`:
+
+```text
+ResizablePanelGroup
+├── ResizablePanel
+├── ResizableHandle
+└── ResizablePanel
+```
+
+## Vertical
+
+<ComponentPreview name="resizable-vertical" />
+
+## Handle
+
+Use the `withHandle` prop on `ResizableHandle` to show a visible handle.
+
+<ComponentPreview name="resizable-handle" />
+
+## API Reference
+
+See the [UI SDK Resizable API](https://ui-sdk.dev/docs/solid/components/resizable) for layout, sizing, and keyboard controls.
+
+## Changelog
+
+### 2025-02-02 `react-resizable-panels` v4
+
+This change applies to shadcn’s React version. In Solid, use `orientation` for the axis and numeric percentages for panel sizes.

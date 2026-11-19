@@ -20,15 +20,19 @@ export default function PopoverAlignments() {
     <div class="flex gap-6">
       <For each={placements}>
         {(item) => (
-          <Popover placement={item.placement}>
-            <PopoverTrigger as={Button} size="sm" variant="outline">
+          <Popover>
+            <PopoverTrigger
+              render={(partProps) => <Button {...partProps} size="sm" variant="outline" />}
+            >
               {item.label}
             </PopoverTrigger>
-            <PopoverContent class="w-56">
-              <PopoverTitle>{item.label} aligned</PopoverTitle>
-              <PopoverDescription>
-                Uses <code>{item.placement}</code> placement to align content.
-              </PopoverDescription>
+            <PopoverContent
+              side={item.placement.split("-")[0] as "top" | "bottom" | "left" | "right"}
+              align={(item.placement.split("-")[1] ?? "center") as "start" | "center" | "end"}
+              class="w-56"
+            >
+              <PopoverTitle>{item.label}</PopoverTitle>
+              <PopoverDescription>Aligned to {item.label.toLowerCase()}</PopoverDescription>
             </PopoverContent>
           </Popover>
         )}

@@ -27,6 +27,12 @@ npx solidui-cli@latest add spinner
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-solid
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="spinner" title="components/ui/spinner.tsx" />
@@ -78,40 +84,28 @@ const Spinner = (props: ComponentProps<"svg">) => {
 export { Spinner }
 ```
 
-## Examples
-
-### Size
+## Size
 
 Use the `size-*` utility class to change the size of the spinner.
 
 <ComponentPreview name="spinner-size" />
 
-### Button
+## Button
 
 Add a spinner to a button to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
 <ComponentPreview name="spinner-button" />
 
-### Badge
+## Badge
 
 Add a spinner to a badge to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
 <ComponentPreview name="spinner-badge" />
 
-### Input Group
+## Input Group
 
 <ComponentPreview name="spinner-input-group" />
 
-### Empty
+## Empty
 
 <ComponentPreview name="spinner-empty" />
-
-## API Reference
-
-### Core Parts
-
-| Part      | Description                                |
-| --------- | ------------------------------------------ |
-| `Spinner` | Animated loading indicator with SVG output |
-
-All native `svg` attributes are forwarded to the spinner element.

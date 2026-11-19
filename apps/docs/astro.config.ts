@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url"
 
 import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
-import solid from "@solid-ui/astro-solid2"
+import solid from "@astrojs/solid-js"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import { rehypePrettyCode } from "rehype-pretty-code"
@@ -12,12 +12,7 @@ import { DARK_CODE_THEME, LIGHT_CODE_THEME, transformers } from "./src/lib/highl
 
 export default defineConfig({
   output: "static",
-  integrations: [
-    mdx(),
-    solid({
-      devtools: false
-    })
-  ],
+  integrations: [mdx(), solid()],
   markdown: {
     processor: unified({
       rehypePlugins: [
@@ -34,6 +29,7 @@ export default defineConfig({
     syntaxHighlight: false
   },
   vite: {
+    optimizeDeps: { exclude: ["@ui-sdk/core"] },
     plugins: [tailwindcss()],
     resolve: {
       alias: [

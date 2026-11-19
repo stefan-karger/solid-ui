@@ -1,61 +1,44 @@
-import * as AccordionPrimitive from "@kobalte/core/accordion"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+import type { JSX } from "@solidjs/web"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Accordion as SdkAccordion,
+  AccordionItem as SdkAccordionItem,
+  AccordionHeader as SdkAccordionHeader,
+  AccordionTrigger as SdkAccordionTrigger,
+  AccordionPanel as SdkAccordionPanel
+} from "@ui-sdk/solid/accordion"
 import { ChevronDownIcon } from "lucide-solid"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-type AccordionProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  AccordionPrimitive.AccordionRootProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const Accordion = <T extends ValidComponent = "div">(props: AccordionProps<T>) => {
-  const others = omit(props as AccordionProps, "class")
-  return (
-    <AccordionPrimitive.Root
-      class={cn("cn-accordion flex w-full flex-col", props.class)}
-      data-slot="accordion"
-      {...others}
-    />
-  )
+type AccordionProps = Omit<ComponentProps<typeof SdkAccordion>, "class" | "children"> & {
+  children?: JSX.Element
+  class?: string
 }
-
-type AccordionItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  AccordionPrimitive.AccordionItemProps
-> &
-  Pick<ComponentProps<T>, "class">
-
-const AccordionItem = <T extends ValidComponent = "div">(props: AccordionItemProps<T>) => {
-  const others = omit(props as AccordionItemProps, "class")
-  return (
-    <AccordionPrimitive.Item
-      class={cn("cn-accordion-item", props.class)}
-      data-slot="accordion-item"
-      {...others}
-    />
-  )
+const Accordion = (props: AccordionProps) => (
+  <SdkAccordion {...props} class={cn("cn-accordion flex w-full flex-col", props.class)} />
+)
+type AccordionItemProps = Omit<ComponentProps<typeof SdkAccordionItem>, "class" | "children"> & {
+  children?: JSX.Element
+  class?: string
 }
-
-type AccordionTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  AccordionPrimitive.AccordionTriggerProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const AccordionTrigger = <T extends ValidComponent = "button">(props: AccordionTriggerProps<T>) => {
-  const others = omit(props as AccordionTriggerProps, "class", "children")
+const AccordionItem = (props: AccordionItemProps) => (
+  <SdkAccordionItem {...props} class={cn("cn-accordion-item", props.class)} />
+)
+type AccordionTriggerProps = Omit<
+  ComponentProps<typeof SdkAccordionTrigger>,
+  "class" | "children"
+> & { children?: JSX.Element; class?: string }
+const AccordionTrigger = (props: AccordionTriggerProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <AccordionPrimitive.Header class="flex" data-slot="accordion-header">
-      <AccordionPrimitive.Trigger
+    <SdkAccordionHeader class="flex">
+      <SdkAccordionTrigger
         class={cn(
           "group/accordion-trigger cn-accordion-trigger relative flex flex-1 items-start justify-between border border-transparent transition-all outline-none disabled:pointer-events-none disabled:opacity-50",
           props.class
         )}
-        data-slot="accordion-trigger"
+
         {...others}
       >
         {props.children}
@@ -63,36 +46,31 @@ const AccordionTrigger = <T extends ValidComponent = "button">(props: AccordionT
           class="cn-accordion-trigger-icon pointer-events-none shrink-0 duration-300 group-aria-expanded/accordion-trigger:rotate-180"
           data-slot="accordion-trigger-icon"
         />
-      </AccordionPrimitive.Trigger>
-    </AccordionPrimitive.Header>
+      </SdkAccordionTrigger>
+    </SdkAccordionHeader>
   )
 }
-
-type AccordionContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  AccordionPrimitive.AccordionContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const AccordionContent = <T extends ValidComponent = "div">(props: AccordionContentProps<T>) => {
-  const others = omit(props as AccordionContentProps, "class", "children")
+type AccordionContentProps = Omit<
+  ComponentProps<typeof SdkAccordionPanel>,
+  "class" | "children"
+> & { children?: JSX.Element; class?: string }
+const AccordionContent = (props: AccordionContentProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <AccordionPrimitive.Content
-      class="cn-accordion-content overflow-hidden"
-      data-slot="accordion-content"
+    <SdkAccordionPanel
+      class="cn-accordion-content overflow-hidden [--radix-accordion-content-height:var(--accordion-panel-height)]"
       {...others}
     >
       <div
         class={cn(
-          "cn-accordion-content-inner h-(--kb-collapsible-content-height) [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          "cn-accordion-content-inner h-(--accordion-panel-height) [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
           props.class
         )}
         data-slot="accordion-content-inner"
       >
         {props.children}
       </div>
-    </AccordionPrimitive.Content>
+    </SdkAccordionPanel>
   )
 }
-
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger }

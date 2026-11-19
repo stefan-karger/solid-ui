@@ -55,7 +55,10 @@ export default function DropdownMenuComplex() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Complex Menu
       </DropdownMenuTrigger>
       <DropdownMenuContent class="w-56">
@@ -132,7 +135,7 @@ export default function DropdownMenuComplex() {
           <DropdownMenuLabel>View</DropdownMenuLabel>
           <DropdownMenuCheckboxItem
             checked={notifications().email}
-            onChange={(checked) =>
+            onCheckedChange={(checked) =>
               setNotifications((prev) => ({ ...prev, email: checked === true }))
             }
           >
@@ -141,7 +144,9 @@ export default function DropdownMenuComplex() {
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
             checked={notifications().sms}
-            onChange={(checked) => setNotifications((prev) => ({ ...prev, sms: checked === true }))}
+            onCheckedChange={(checked) =>
+              setNotifications((prev) => ({ ...prev, sms: checked === true }))
+            }
           >
             <LayoutPanelTopIcon class="size-4" />
             Show Status Bar
@@ -154,7 +159,7 @@ export default function DropdownMenuComplex() {
             <DropdownMenuSubContent>
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                <DropdownMenuRadioGroup onChange={setTheme} value={theme()}>
+                <DropdownMenuRadioGroup onValueChange={setTheme} value={theme()}>
                   <DropdownMenuRadioItem value="light">
                     <SunIcon class="size-4" />
                     Light
@@ -212,7 +217,7 @@ export default function DropdownMenuComplex() {
                       <DropdownMenuLabel>Notification Types</DropdownMenuLabel>
                       <DropdownMenuCheckboxItem
                         checked={notifications().push}
-                        onChange={(checked) =>
+                        onCheckedChange={(checked) =>
                           setNotifications((prev) => ({ ...prev, push: checked === true }))
                         }
                       >
@@ -221,7 +226,7 @@ export default function DropdownMenuComplex() {
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
                         checked={notifications().email}
-                        onChange={(checked) =>
+                        onCheckedChange={(checked) =>
                           setNotifications((prev) => ({ ...prev, email: checked === true }))
                         }
                       >

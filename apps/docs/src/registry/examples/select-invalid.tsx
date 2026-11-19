@@ -1,3 +1,5 @@
+import { For } from "solid-js"
+
 import { Field, FieldError, FieldLabel } from "~/registry/ui/field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
 
@@ -19,19 +21,28 @@ export default function SelectInvalid() {
     <Field class="max-w-48" data-invalid>
       <FieldLabel for="select-invalid-fruit">Fruit</FieldLabel>
       <Select<Fruit>
-        options={fruits}
-        optionValue="value"
-        optionTextValue="label"
+        itemToLabel={(option) => String(option["label"])}
+        itemToValue={(option) => String(option["value"])}
+
         placeholder="Select a fruit"
-        validationState="invalid"
-        itemComponent={(props) => (
-          <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-        )}
       >
-        <SelectTrigger aria-invalid="true" class="w-full" id="select-invalid-fruit">
-          <SelectValue<Fruit>>{(state) => state.selectedOption()?.label}</SelectValue>
+        <SelectTrigger
+          aria-label="Select a fruit"
+          aria-invalid="true"
+          class="w-full"
+          id="select-invalid-fruit"
+        >
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent />
+        <SelectContent>
+          <For each={fruits}>
+            {(option) => (
+              <SelectItem value={option} label={option["label"]}>
+                {option.label}
+              </SelectItem>
+            )}
+          </For>
+        </SelectContent>
       </Select>
       <FieldError>Please select a fruit.</FieldError>
     </Field>

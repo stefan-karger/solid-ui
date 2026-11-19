@@ -1,0 +1,16 @@
+const REGEXP_ONLY_DIGITS = /[0-9]/
+
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/registry/ui/input-otp"
+
+export default function InputOTPFourDigits() {
+  return (
+    <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
+      </InputOTPGroup>
+    </InputOTP>
+  )
+}

@@ -30,7 +30,13 @@ npx solidui-cli@latest add pagination
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install lucide-solid
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -105,33 +111,46 @@ Pagination
         └── PaginationNext
 ```
 
-## Examples
-
-### Simple
+## Simple
 
 A simple pagination with only page numbers.
 
 <ComponentPreview name="pagination-simple" />
 
-### Icons Only
+## Icons Only
 
 Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page selector.
 
 <ComponentPreview name="pagination-icons-only" />
 
-## API Reference
+## Next.js
 
-### Core Parts
+By default the `<PaginationLink />` component will render an `<a />` tag.
 
-| Part                 | Description                                                   |
-| -------------------- | ------------------------------------------------------------- |
-| `Pagination`         | Navigation landmark container with `aria-label="pagination"`. |
-| `PaginationContent`  | Flex list wrapper for pagination items.                       |
-| `PaginationItem`     | List item container for individual controls.                  |
-| `PaginationLink`     | Link-styled control built on top of `Button`.                 |
-| `PaginationPrevious` | Preconfigured previous-page action with label and icon.       |
-| `PaginationNext`     | Preconfigured next-page action with label and icon.           |
-| `PaginationEllipsis` | Non-interactive overflow indicator.                           |
+To use the Next.js `<Link />` component, make the following updates to `pagination.tsx`.
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/pagination) documentation for
-more information.
+```diff showLineNumbers /typeof Link/ {1}
++ import Link from "next/link"
+
+- type PaginationLinkProps = ... & ComponentProps<"a">
++ type PaginationLinkProps = ... & ComponentProps<typeof Link>
+
+const PaginationLink = ({...props }: ) => (
+  <PaginationItem>
+-   <a>
++   <Link>
+      // ...
+-   </a>
++   </Link>
+  </PaginationItem>
+)
+
+```
+
+<Callout class="mt-6">
+
+**Note:** We are making updates to the cli to automatically do this for you.
+
+</Callout>
+
+## Changelog

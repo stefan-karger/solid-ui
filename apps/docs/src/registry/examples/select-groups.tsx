@@ -1,3 +1,4 @@
+import { For } from "solid-js"
 import { Show } from "solid-js"
 
 import {
@@ -42,30 +43,36 @@ const foods: FoodGroup[] = [
 
 export default function SelectGroups() {
   return (
-    <Select<FoodOption, FoodGroup>
-      options={foods}
-      optionGroupChildren="options"
-      optionValue="value"
-      optionTextValue="label"
-      placeholder="Select a food"
-      itemComponent={(props) => (
-        <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-      )}
-      sectionComponent={(props) => (
-        <>
-          <Show when={props.section.index !== 0}>
-            <SelectSeparator />
-          </Show>
-          <SelectGroup>
-            <SelectLabel>{props.section.rawValue.label}</SelectLabel>
-          </SelectGroup>
-        </>
-      )}
+    <Select<FoodOption>
+      itemToLabel={(option) => String(option["label"])}
+      itemToValue={(option) => String(option["value"])}
+
+      placeholder="Select a fruit"
     >
-      <SelectTrigger class="w-full max-w-52">
-        <SelectValue<FoodOption>>{(state) => state.selectedOption()?.label}</SelectValue>
+      <SelectTrigger aria-label="Select a fruit" class="w-full max-w-52">
+        <SelectValue />
       </SelectTrigger>
-      <SelectContent />
+      <SelectContent>
+        <For each={foods}>
+          {(group, groupIndex) => (
+            <>
+              <Show when={groupIndex() !== 0}>
+                <SelectSeparator />
+              </Show>
+              <SelectGroup>
+                <SelectLabel>{group.label}</SelectLabel>
+                <For each={group["options"]}>
+                  {(option) => (
+                    <SelectItem value={option} label={option["label"]}>
+                      {option.label}
+                    </SelectItem>
+                  )}
+                </For>
+              </SelectGroup>
+            </>
+          )}
+        </For>
+      </SelectContent>
     </Select>
   )
 }

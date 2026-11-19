@@ -27,27 +27,21 @@ const isPreview = variant === "preview"
     <slot />
   </div>
 
-  {
-    !isPreview && (
-      <div
-        class="absolute top-1.5 right-9 z-20 items-center"
-        data-code-control
-        data-code-top-control
+  {!isPreview && (
+    <div class="absolute top-1.5 right-9 z-20 items-center" data-code-control data-code-top-control>
+      <button
+        class="inline-flex h-7 items-center rounded-md px-2 text-sm text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        data-code-toggle
+        type="button"
       >
-        <button
-          class="inline-flex h-7 items-center rounded-md px-2 text-sm text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
-          data-code-toggle
-          type="button"
-        >
-          <span data-code-label-collapsed>Expand</span>
-          <span data-code-label-expanded hidden>
-            Collapse
-          </span>
-        </button>
-        <span aria-hidden="true" class="mx-1.5 h-4 w-px bg-border" />
-      </div>
-    )
-  }
+        <span data-code-label-collapsed>Expand</span>
+        <span data-code-label-expanded hidden>
+          Collapse
+        </span>
+      </button>
+      <span aria-hidden="true" class="mx-1.5 h-4 w-px bg-border" />
+    </div>
+  )}
 
   <div
     class={cn(
@@ -57,13 +51,10 @@ const isPreview = variant === "preview"
     data-code-control
     data-code-reveal
   >
-    <div
-      class="pointer-events-none absolute inset-0 bg-linear-to-t from-code via-code/60 to-transparent"
-    >
-    </div>
+    <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-code via-code/60 to-transparent"></div>
     <button
       class={cn(
-        "relative z-10 inline-flex items-center justify-center text-sm font-medium outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "relative z-10 inline-flex items-center justify-center text-sm font-medium transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         isPreview
           ? "h-8 rounded-lg border border-input bg-background px-3 text-foreground hover:bg-muted"
           : "h-8 rounded-md px-3 text-muted-foreground hover:text-foreground"
@@ -72,7 +63,9 @@ const isPreview = variant === "preview"
       type="button"
     >
       <span data-code-label-collapsed>{isPreview ? "View Code" : "Expand"}</span>
-      <span data-code-label-expanded hidden>Collapse</span>
+      <span data-code-label-expanded hidden>
+        Collapse
+      </span>
     </button>
   </div>
 </div>

@@ -12,7 +12,10 @@ import {
 export default function DropdownMenuDestructive() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Actions
       </DropdownMenuTrigger>
       <DropdownMenuContent>

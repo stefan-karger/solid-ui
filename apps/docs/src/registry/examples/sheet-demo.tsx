@@ -15,7 +15,7 @@ import {
 export default function SheetDemo() {
   return (
     <Sheet>
-      <SheetTrigger as={Button} variant="outline">
+      <SheetTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Open
       </SheetTrigger>
       <SheetContent>
@@ -37,7 +37,7 @@ export default function SheetDemo() {
         </div>
         <SheetFooter>
           <Button type="submit">Save changes</Button>
-          <SheetClose as={Button} variant="outline">
+          <SheetClose render={(partProps) => <Button {...partProps} variant="outline" />}>
             Close
           </SheetClose>
         </SheetFooter>

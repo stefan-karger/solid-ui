@@ -32,11 +32,10 @@ export default function ButtonGroupInputGroup() {
               <TooltipTrigger
                 aria-label="Voice Mode"
                 aria-pressed={voiceEnabled() ? "true" : "false"}
-                as={InputGroupButton}
+                render={(partProps) => <InputGroupButton {...partProps} size="icon-xs" />}
                 class="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
                 data-active={voiceEnabled()}
                 onClick={() => setVoiceEnabled((value) => !value)}
-                size="icon-xs"
               >
                 <AudioLinesIcon class="size-4" />
               </TooltipTrigger>

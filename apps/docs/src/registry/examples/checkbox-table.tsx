@@ -62,9 +62,8 @@ export default function CheckboxInTable() {
             <Checkbox
               id="select-all-checkbox"
               name="select-all-checkbox"
-              checked={allChecked()}
-              indeterminate={someChecked() && !allChecked()}
-              onChange={handleSelectAll}
+              checked={someChecked() && !allChecked() ? "indeterminate" : allChecked()}
+              onCheckedChange={(checked) => handleSelectAll(checked === true)}
             />
           </TableHead>
           <TableHead>Name</TableHead>
@@ -81,7 +80,7 @@ export default function CheckboxInTable() {
                   id={`row-${row.id}-checkbox`}
                   name={`row-${row.id}-checkbox`}
                   checked={selectedRows().has(row.id)}
-                  onChange={(checked) => handleSelectRow(row.id, checked === true)}
+                  onCheckedChange={(checked) => handleSelectRow(row.id, checked === true)}
                 />
               </TableCell>
               <TableCell class="font-medium">{row.name}</TableCell>

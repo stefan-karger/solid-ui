@@ -1,68 +1,42 @@
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as ProgressPrimitive from "@kobalte/core/progress"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Progress as SdkProgress,
+  ProgressTrack as SdkProgressTrack,
+  ProgressIndicator as SdkProgressIndicator,
+  ProgressLabel as SdkProgressLabel,
+  ProgressValue as SdkProgressValue
+} from "@ui-sdk/solid/progress"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-type ProgressProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ProgressPrimitive.ProgressRootProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const Progress = <T extends ValidComponent = "div">(props: ProgressProps<T>) => {
-  const others = omit(props as ProgressProps, "class", "children")
+type ProgressProps = Omit<ComponentProps<typeof SdkProgress>, "class"> & {
+  class?: string
+}
+const Progress = (props: ProgressProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <ProgressPrimitive.Root data-slot="progress" class={cn("w-full", props.class)} {...others}>
+    <SdkProgress class={cn("w-full", props.class)} {...others}>
       {props.children}
-      <ProgressPrimitive.Track
-        data-slot="progress-track"
-        class={cn("cn-progress cn-progress-track relative overflow-hidden")}
-      >
-        <ProgressPrimitive.Fill
-          data-slot="progress-indicator"
-          class={cn("cn-progress-indicator h-full w-(--kb-progress-fill-width) transition-all")}
+      <SdkProgressTrack class={cn("cn-progress cn-progress-track relative overflow-hidden")}>
+        <SdkProgressIndicator
+          class={cn("cn-progress-indicator h-full w-(--progress-value) transition-all")}
         />
-      </ProgressPrimitive.Track>
-    </ProgressPrimitive.Root>
+      </SdkProgressTrack>
+    </SdkProgress>
   )
 }
-
-type ProgressLabelProps<T extends ValidComponent = "span"> = PolymorphicProps<
-  T,
-  ProgressPrimitive.ProgressLabelProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const ProgressLabel = <T extends ValidComponent = "span">(props: ProgressLabelProps<T>) => {
-  const others = omit(props as ProgressLabelProps, "class")
-  return (
-    <ProgressPrimitive.Label
-      data-slot="progress-label"
-      class={cn("cn-progress-label", props.class)}
-      {...others}
-    />
-  )
+type ProgressLabelProps = Omit<ComponentProps<typeof SdkProgressLabel>, "class"> & {
+  class?: string
 }
-
-type ProgressValueProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ProgressPrimitive.ProgressValueLabelProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const ProgressValue = <T extends ValidComponent = "div">(props: ProgressValueProps<T>) => {
-  const others = omit(props as ProgressValueProps, "class")
-  return (
-    <ProgressPrimitive.ValueLabel
-      data-slot="progress-value"
-      class={cn("cn-progress-value", props.class)}
-      {...others}
-    />
-  )
+const ProgressLabel = (props: ProgressLabelProps) => (
+  <SdkProgressLabel {...props} class={cn("cn-progress-label", props.class)} />
+)
+type ProgressValueProps = Omit<ComponentProps<typeof SdkProgressValue>, "class"> & {
+  class?: string
 }
-
+const ProgressValue = (props: ProgressValueProps) => (
+  <SdkProgressValue {...props} class={cn("cn-progress-value", props.class)} />
+)
 export {
   Progress,
   ProgressLabel,

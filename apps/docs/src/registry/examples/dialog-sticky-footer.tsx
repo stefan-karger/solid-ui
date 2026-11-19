@@ -15,7 +15,7 @@ import {
 export default function DialogStickyFooter() {
   return (
     <Dialog>
-      <DialogTrigger as={Button} variant="outline">
+      <DialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
         Sticky Footer
       </DialogTrigger>
       <DialogContent>
@@ -40,7 +40,7 @@ export default function DialogStickyFooter() {
           </For>
         </div>
         <DialogFooter>
-          <DialogClose as={Button} variant="outline">
+          <DialogClose render={(partProps) => <Button {...partProps} variant="outline" />}>
             Close
           </DialogClose>
         </DialogFooter>

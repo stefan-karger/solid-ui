@@ -3,12 +3,11 @@
 The work-in-progress SolidJS 2 version of [Solid UI](https://www.solid-ui.com/).
 
 This repository is rebuilding Solid UI's copy-and-own component registry and documentation
-experience around SolidJS 2, Astro, Tailwind CSS, and Kobalte. It also contains a temporary local
-Astro renderer used until Astro's official Solid integration supports the SolidJS 2 versions
-targeted here.
+experience around SolidJS 2, Astro, Tailwind CSS, and UI SDK. It uses reproducible local builds of Astro's official Solid 2 pull request until those packages
+are published.
 
 > [!WARNING]
-> This project is experimental. It currently depends on release-candidate, alpha, and patched
+> This project is experimental. It currently depends on beta and patched
 > packages and should not yet be treated as a stable production release.
 
 ## Goal
@@ -21,7 +20,7 @@ The goal is to:
 - Expose consumer-ready component source that can be copied directly or installed through the
   Solid UI CLI.
 - Complete the remaining components as their ecosystem dependencies add SolidJS 2 support.
-- Remove the local Astro renderer once the official integration can replace it.
+- Switch the pinned Astro PR packages to published releases once Solid 2 support ships.
 
 The Astro compatibility package is migration infrastructure, not part of the intended product.
 
@@ -29,27 +28,37 @@ The Astro compatibility package is migration infrastructure, not part of the int
 
 At the current migration snapshot:
 
-- 48 UI components are registered.
-- 284 component examples are registered.
+- 63 UI components are registered.
+- 442 component examples are registered.
 - Registry-backed live previews and source-code displays are implemented.
 - Preview markup is rendered during the static Astro build and hydrated when it approaches the
   viewport.
-- The documentation foundation is working, but component documentation is still at an early
-  stage.
-- Seven components and 50 examples remain blocked by dependency compatibility.
+- Docs include sidebar and mobile navigation, page contents, and persistent light/dark and style controls.
+- The docs and previews use the Solid color palette through shared shadcn tokens.
+- All eight current shadcn styles are available in upstream order: Vega, Nova, Maia, Lyra, Mira, Luma, Sera, Rhea.
+- Supported new shadcn families include messages, attachments, bubbles, traces, code blocks, questionnaires, and native SDK scrolling and notifications.
+- Chart and Data Table still need Solid 2-compatible implementations.
 
 See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
 [CHANGELOG.md](./CHANGELOG.md) for recent progress.
 
 ### Compatibility constraints
 
-- SolidJS and `@solidjs/web` are pinned to `2.0.0-rc.6`.
-- Kobalte is available through its SolidJS 2-compatible alpha.
-- Some Corvu integrations and other ecosystem packages remain blocked.
-- Lucide Solid currently requires a local compatibility patch.
-- The docs application currently produces a static site; no SSR deployment adapter is configured.
-- Solid Devtools have not been validated.
-- Astro files use Prettier because Oxfmt and Oxlint do not yet provide complete Astro support.
+- The docs and tests pin `solid-js`, `@solidjs/web`, and `@solidjs/signals` to `2.0.1`.
+- UI SDK Solid and Core are pinned to `0.1.0-beta.10`. Kobalte and Corvu are not runtime dependencies.
+- The official `@solidjs/vite-plugin@3.0.1` uses both compiler backends at `2.0.1`.
+- Astro is pinned to 7.4.12, Vite to 8.3.8, MDX to 8.1.6, and Tailwind to 4.3.5.
+- Published Astro Solid packages still require Solid 1. The docs use PR #17891 at `bbf9faa`, with tested client fixes and an early hydration bootstrap. See [provenance and replacement steps](./vendor/astro-solid/README.md).
+- UI SDK Core stays out of Vite dependency prebundling to preserve shared behavior identity.
+- UI SDK popups use the browser top layer. Themes use its state attributes and CSS variables. Declare `@layer ui-sdk;` before Tailwind in consumer stylesheets too.
+- Lucide Solid still needs the local compatibility patch and source alias. See [patches/README.md](./patches/README.md). Solid and UI SDK use their published runtime code.
+- The docs build a static site. No deployment SSR adapter is configured.
+- Solid Devtools remain optional and unvalidated with Solid 2.
+- Oxfmt owns formatting. ESLint checks TypeScript, Astro, accessibility, Solid 2, and tests.
+
+### Interaction regression coverage
+
+Tests cover dialog Escape and close-button dismissal, focus restoration, menus, keyboard tabs, Combobox, and Select. Adapter tests cover SSR, async failures, lazy components, slot normalization and escaping, unique island IDs, client-only fallbacks, prop reconciliation, and unmount cleanup. Playwright tests run against Astro dev and a production fixture. Hydration errors and browser console errors fail the suite.
 
 ## Repository structure
 
@@ -59,7 +68,7 @@ See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
 | `apps/docs/src/registry/ui`       | Solid UI component implementations                |
 | `apps/docs/src/registry/examples` | Live component examples                           |
 | `apps/docs/src/content/docs`      | MDX component documentation                       |
-| `packages/astro-solid2`           | Private, temporary Astro renderer for SolidJS 2   |
+| `vendor/astro-solid`              | Pinned official Astro Solid 2 source and packages |
 | `patches`                         | Temporary dependency compatibility patches        |
 | `TODO.md`                         | Components blocked on SolidJS 2 ecosystem support |
 
@@ -67,13 +76,23 @@ See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
 
 ### Requirements
 
-- Node.js 24
-- pnpm 11.13.1
+- Node.js 24.22.0
+- pnpm 12.14.0
+
+The root `package.json` pins both tools. `pnpm install` downloads the pinned Node.js runtime,
+and repository scripts use it even when the machine's default Node.js version differs.
+Check the project runtime with `pnpm exec node --version` and the package manager with
+`pnpm --version`.
+
+On another computer, install pnpm 12.14.0 or update an existing installation with
+`pnpm self-update 12.14.0`, then run the setup commands below. A system-wide Node.js update
+on Windows may require an administrator; the project runtime does not.
 
 ### Setup
 
 ```bash
 pnpm install
+pnpm exec playwright install chromium
 pnpm dev
 ```
 
@@ -87,7 +106,11 @@ Run the complete repository validation before submitting changes:
 pnpm validate
 ```
 
-This checks formatting, linting, TypeScript/Astro diagnostics, tests, and the production build.
+This verifies upstream source hashes and reproducible Astro archives, then checks formatting, linting, TypeScript/Astro diagnostics, unit and SSR tests, the docs production build, and browser tests in dev and production mode.
+
+Oxfmt owns formatting, import ordering, package.json ordering, and Tailwind class sorting.
+ESLint owns linting. The recommended VS Code extensions use the same tools, including for
+Astro files. Repository text files use LF line endings on every platform.
 
 Individual commands are also available:
 
@@ -97,10 +120,18 @@ pnpm lint
 pnpm check
 pnpm test
 pnpm test:watch
+pnpm test:adapter
 pnpm build
 ```
 
 ## Contributing to the migration
+
+SDK imports use named aliases such as `Dialog as SdkDialog`, and components compose
+the SDK parts directly. Collection examples render explicit items and groups.
+The eight shadcn theme inputs stay unchanged in `vendor/shadcn`; run
+`pnpm themes:generate` after changing their revision or the SDK mapping.
+`pnpm validate` checks the generated output. See [SHADCN_PARITY.md](./SHADCN_PARITY.md)
+for the import convention, native collection APIs, and intentional SDK differences.
 
 When adding or updating a registry component:
 
@@ -115,14 +146,13 @@ checks documented in [TODO.md](./TODO.md) before beginning a port.
 
 ## Temporary Astro integration
 
-`packages/astro-solid2` is a private compatibility port of Astro's Solid renderer. It is consumed
-directly from TypeScript, is not published, and is not synchronized with Astro upstream.
+The docs import `@astrojs/solid-js` from reproducible archives built from the official
+[Solid 2 PR](https://github.com/withastro/astro/pull/17891). The former private adapter
+has been removed. The raw upstream source stays unchanged; pnpm applies the small
+client regression patch separately.
 
-It should be deleted—not evolved into a maintained fork—when Astro's official Solid integration
-supports the SolidJS 2 target used by this repository.
-
-See [packages/astro-solid2/README.md](./packages/astro-solid2/README.md) for implementation details
-and attribution.
+See [vendor/astro-solid/README.md](./vendor/astro-solid/README.md) for the pinned commit,
+packaging process, test coverage, and steps to switch to published packages.
 
 ## License
 

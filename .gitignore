@@ -6,6 +6,7 @@ coverage
 playwright-report
 test-results
 .vitest-dump
+.eslintcache
 .DS_Store
 *.local
 

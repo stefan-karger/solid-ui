@@ -1,164 +1,102 @@
-import * as DialogPrimitive from "@kobalte/core/dialog"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Dialog as SdkDialog,
+  DialogTrigger as SdkDialogTrigger,
+  DialogClose as SdkDialogClose,
+  DialogBackdrop as SdkDialogBackdrop,
+  DialogContent as SdkDialogContent,
+  DialogTitle as SdkDialogTitle,
+  DialogDescription as SdkDialogDescription
+} from "@ui-sdk/solid/dialog"
 import { XIcon } from "lucide-solid"
-import { merge, Show, omit, type Component } from "solid-js"
+import { merge, omit, Show, type Component } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import { Button } from "~/registry/ui/button"
-
-type SheetProps = DialogPrimitive.DialogRootProps
-
-const Sheet: Component<SheetProps> = (props) => {
-  return <DialogPrimitive.Root data-slot="sheet" {...props} />
+type SheetProps = ComponentProps<typeof SdkDialog>
+const Sheet: Component<SheetProps> = (props) => <SdkDialog {...props} />
+type SheetTriggerProps = Omit<ComponentProps<typeof SdkDialogTrigger>, "class"> & {
+  class?: string
 }
-
-type SheetTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogTriggerProps<T>
->
-
-const SheetTrigger = <T extends ValidComponent = "button">(props: SheetTriggerProps<T>) => {
-  return <DialogPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+const SheetTrigger = (props: SheetTriggerProps) => <SdkDialogTrigger {...props} />
+type SheetCloseProps = Omit<ComponentProps<typeof SdkDialogClose>, "class"> & {
+  class?: string
 }
-
-type SheetCloseProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogCloseButtonProps<T>
->
-
-const SheetClose = <T extends ValidComponent = "button">(props: SheetCloseProps<T>) => {
-  return <DialogPrimitive.CloseButton data-slot="sheet-close" {...props} />
+const SheetClose = (props: SheetCloseProps) => <SdkDialogClose {...props} />
+type SheetOverlayProps = Omit<ComponentProps<typeof SdkDialogBackdrop>, "class"> & {
+  class?: string
 }
-
-type SheetPortalProps = DialogPrimitive.DialogPortalProps
-
-const SheetPortal = (props: SheetPortalProps) => {
-  return <DialogPrimitive.Portal data-slot="sheet-portal" {...props} />
+const SheetOverlay = (props: SheetOverlayProps) => (
+  <SdkDialogBackdrop
+    {...props}
+    class={cn("cn-sheet-overlay fixed inset-0 isolate z-50", props.class)}
+  />
+)
+type SheetContentProps = (Omit<ComponentProps<typeof SdkDialogContent>, "class"> & {
+  class?: string
+  "data-slot"?: string
+}) & {
+  side?: "top" | "right" | "bottom" | "left"
+  showCloseButton?: boolean
 }
-
-type SheetOverlayProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogOverlayProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const SheetOverlay = <T extends ValidComponent = "div">(props: SheetOverlayProps<T>) => {
-  const others = omit(props as SheetOverlayProps, "class")
-  return (
-    <DialogPrimitive.Overlay
-      data-slot="sheet-overlay"
-      class={cn("cn-sheet-overlay fixed inset-0 isolate z-50", props.class)}
-      {...others}
-    />
-  )
-}
-
-type SheetContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children"> & {
-    side?: "top" | "right" | "bottom" | "left"
-    showCloseButton?: boolean
+const SheetContent = (props: SheetContentProps) => {
+  const others = omit(props, "children", "side", "showCloseButton", "render", "data-slot")
+  const renderContent: SheetContentProps["render"] = (part, state) => {
+    const attributes = merge(part, () => ({ "data-slot": props["data-slot"] ?? "sheet-content" }))
+    return props.render ? props.render(attributes, state) : <div {...attributes} />
   }
-
-const SheetContent = <T extends ValidComponent = "div">(props: SheetContentProps<T>) => {
-  const local = merge(
-    {
-      side: "right",
-      showCloseButton: true
-    } as SheetContentProps,
-    props
-  ) as SheetContentProps
-  const others = omit(props as SheetContentProps, "class", "children", "side", "showCloseButton")
   return (
-    <SheetPortal>
+    <>
       <SheetOverlay />
-      <DialogPrimitive.Content
-        data-slot="sheet-content"
-        data-side={local.side}
-        class={cn("cn-sheet-content", local.class)}
+      <SdkDialogContent
+        data-side={props.side ?? "right"}
         {...others}
+        class={cn("cn-sheet-content", props.class)}
+        render={renderContent}
       >
-        {local.children}
-        <Show when={local.showCloseButton}>
-          <DialogPrimitive.CloseButton
-            as={Button}
-            variant="ghost"
-            size="icon-sm"
-            data-slot="sheet-close"
+        {props.children}
+        <Show when={props.showCloseButton !== false}>
+          <SdkDialogClose
+            render={(partProps) => <Button {...partProps} variant="ghost" size="icon-sm" />}
+
             class="cn-sheet-close"
           >
             <XIcon />
             <span class="sr-only">Close</span>
-          </DialogPrimitive.CloseButton>
+          </SdkDialogClose>
         </Show>
-      </DialogPrimitive.Content>
-    </SheetPortal>
+      </SdkDialogContent>
+    </>
   )
 }
-
 type SheetHeaderProps = ComponentProps<"div">
-
-const SheetHeader = (props: SheetHeaderProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sheet-header"
-      class={cn("cn-sheet-header flex flex-col", props.class)}
-      {...others}
-    />
-  )
-}
-
+const SheetHeader = (props: SheetHeaderProps) => (
+  <div
+    data-slot="sheet-header"
+    {...props}
+    class={cn("cn-sheet-header flex flex-col", props.class)}
+  />
+)
 type SheetFooterProps = ComponentProps<"div">
-
-const SheetFooter = (props: SheetFooterProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="sheet-footer"
-      class={cn("cn-sheet-footer mt-auto flex flex-col", props.class)}
-      {...others}
-    />
-  )
+const SheetFooter = (props: SheetFooterProps) => (
+  <div
+    data-slot="sheet-footer"
+    {...props}
+    class={cn("cn-sheet-footer mt-auto flex flex-col", props.class)}
+  />
+)
+type SheetTitleProps = Omit<ComponentProps<typeof SdkDialogTitle>, "class"> & {
+  class?: string
 }
-
-type SheetTitleProps<T extends ValidComponent = "h2"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogTitleProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const SheetTitle = <T extends ValidComponent = "h2">(props: SheetTitleProps<T>) => {
-  const others = omit(props as SheetTitleProps, "class")
-  return (
-    <DialogPrimitive.Title
-      data-slot="sheet-title"
-      class={cn("cn-sheet-title", props.class)}
-      {...others}
-    />
-  )
+const SheetTitle = (props: SheetTitleProps) => (
+  <SdkDialogTitle {...props} class={cn("cn-sheet-title", props.class)} />
+)
+type SheetDescriptionProps = Omit<ComponentProps<typeof SdkDialogDescription>, "class"> & {
+  class?: string
 }
-
-type SheetDescriptionProps<T extends ValidComponent = "p"> = PolymorphicProps<
-  T,
-  DialogPrimitive.DialogDescriptionProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const SheetDescription = <T extends ValidComponent = "p">(props: SheetDescriptionProps<T>) => {
-  const others = omit(props as SheetDescriptionProps, "class")
-  return (
-    <DialogPrimitive.Description
-      data-slot="sheet-description"
-      class={cn("cn-sheet-description", props.class)}
-      {...others}
-    />
-  )
-}
-
+const SheetDescription = (props: SheetDescriptionProps) => (
+  <SdkDialogDescription {...props} class={cn("cn-sheet-description", props.class)} />
+)
 export {
   Sheet,
   SheetClose,

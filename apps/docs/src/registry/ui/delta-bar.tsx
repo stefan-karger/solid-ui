@@ -1,5 +1,5 @@
 import { type ComponentProps } from "@solidjs/web"
-import { merge, Show, omit } from "solid-js"
+import { merge, omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
 

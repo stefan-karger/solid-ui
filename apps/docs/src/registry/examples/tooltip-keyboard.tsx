@@ -7,7 +7,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 export default function TooltipKeyboard() {
   return (
     <Tooltip>
-      <TooltipTrigger as={Button} variant="outline" size="icon-sm">
+      <TooltipTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" size="icon-sm" />}
+      >
         <SaveIcon />
       </TooltipTrigger>
       <TooltipContent>

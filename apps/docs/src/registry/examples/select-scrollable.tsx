@@ -1,3 +1,4 @@
+import { For } from "solid-js"
 import { Show } from "solid-js"
 
 import {
@@ -78,30 +79,36 @@ const timezones: TimezoneGroup[] = [
 
 export default function SelectScrollable() {
   return (
-    <Select<TimezoneOption, TimezoneGroup>
-      options={timezones}
-      optionGroupChildren="options"
-      optionValue="value"
-      optionTextValue="label"
+    <Select<TimezoneOption>
+      itemToLabel={(option) => String(option["label"])}
+      itemToValue={(option) => String(option["value"])}
+
       placeholder="Select a timezone"
-      itemComponent={(props) => (
-        <SelectItem item={props.item}>{props.item.rawValue.label}</SelectItem>
-      )}
-      sectionComponent={(props) => (
-        <>
-          <Show when={props.section.index !== 0}>
-            <SelectSeparator />
-          </Show>
-          <SelectGroup>
-            <SelectLabel>{props.section.rawValue.label}</SelectLabel>
-          </SelectGroup>
-        </>
-      )}
     >
-      <SelectTrigger class="w-full max-w-64">
-        <SelectValue<TimezoneOption>>{(state) => state.selectedOption()?.label}</SelectValue>
+      <SelectTrigger aria-label="Select a timezone" class="w-full max-w-64">
+        <SelectValue />
       </SelectTrigger>
-      <SelectContent class="no-scrollbar max-h-60" />
+      <SelectContent>
+        <For each={timezones}>
+          {(group, groupIndex) => (
+            <>
+              <Show when={groupIndex() !== 0}>
+                <SelectSeparator />
+              </Show>
+              <SelectGroup>
+                <SelectLabel>{group.label}</SelectLabel>
+                <For each={group["options"]}>
+                  {(option) => (
+                    <SelectItem value={option} label={option["label"]}>
+                      {option.label}
+                    </SelectItem>
+                  )}
+                </For>
+              </SelectGroup>
+            </>
+          )}
+        </For>
+      </SelectContent>
     </Select>
   )
 }

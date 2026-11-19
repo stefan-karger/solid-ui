@@ -30,7 +30,7 @@ npx solidui-cli@latest add breadcrumb
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install lucide-solid
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -93,15 +93,13 @@ Breadcrumb
         └── BreadcrumbPage
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A basic breadcrumb with a home link and a components link.
 
 <ComponentPreview name="breadcrumb-basic" />
 
-### Custom separator
+## Custom separator
 
 Pass the `separator` prop to `Breadcrumb` to override the separator for the entire trail.
 
@@ -125,19 +123,19 @@ Pass the `separator` prop to `Breadcrumb` to override the separator for the enti
 
 <ComponentPreview name="breadcrumb-separator" />
 
-### Dropdown
+## Dropdown
 
 Compose `BreadcrumbItem` with `DropdownMenu` to add branching navigation.
 
 <ComponentPreview name="breadcrumb-dropdown" />
 
-### Collapsed
+## Collapsed
 
 Use `BreadcrumbEllipsis` when the breadcrumb path is too long.
 
 <ComponentPreview name="breadcrumb-ellipsis" previewClassName="p-2" />
 
-### Link component
+## Link component
 
 Render custom routing links by passing a component to the `as` prop on `BreadcrumbLink`.
 
@@ -203,4 +201,4 @@ Collapsed overflow indicator.
 | ------- | -------- | ------- |
 | `class` | `string` | -       |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/breadcrumbs) documentation for more information.
+Breadcrumb uses native navigation, list, and link elements.
