@@ -25,7 +25,10 @@ export default function DropdownMenuRadioGroupExample() {
       <DropdownMenuContent class="min-w-44">
         <DropdownMenuGroup>
           <DropdownMenuLabel>Placement</DropdownMenuLabel>
-          <DropdownMenuRadioGroup onValueChange={setPosition} value={position()}>
+          <DropdownMenuRadioGroup
+            onValueChange={setPosition}
+            value={position()}
+          >
             <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="right" disabled>

@@ -22,7 +22,10 @@ function Actions() {
   return (
     <QuestionnaireActions>
       <QuestionnairePrevious />
-      <Show when={last()} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={last()}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Agent response</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -46,18 +49,28 @@ export default function QuestionnaireValidation() {
         onValueChange={() => setError("")}
         onComplete={(answers) => {
           if (answers.audience === "public" && answers.detail === "summary") {
-            setError("Public answers need enough context. Choose a complete answer.")
+            setError(
+              "Public answers need enough context. Choose a complete answer."
+            )
             setStep(0)
           } else toast("Agent response configured")
         }}
       >
         <QuestionnaireProgress />
         <QuestionnaireItem value="detail">
-          <QuestionnaireTitle>How much detail should the answer include?</QuestionnaireTitle>
-          <QuestionnaireDescription>Choose the response depth.</QuestionnaireDescription>
+          <QuestionnaireTitle>
+            How much detail should the answer include?
+          </QuestionnaireTitle>
+          <QuestionnaireDescription>
+            Choose the response depth.
+          </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="summary">Concise summary</QuestionnaireChoice>
-            <QuestionnaireChoice value="complete">Complete answer</QuestionnaireChoice>
+            <QuestionnaireChoice value="summary">
+              Concise summary
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="complete">
+              Complete answer
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
           <Show when={error()}>
@@ -73,7 +86,9 @@ export default function QuestionnaireValidation() {
           </QuestionnaireDescription>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="team">My team</QuestionnaireChoice>
-            <QuestionnaireChoice value="public">Public audience</QuestionnaireChoice>
+            <QuestionnaireChoice value="public">
+              Public audience
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

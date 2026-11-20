@@ -15,7 +15,10 @@ it("exposes the theme and documentation search controls to the UI SDK agent", as
         <DocsAppearance />
         <DocsSearch
           navigation={[
-            { title: "Components", links: [{ title: "Button", href: "/docs/components/button" }] }
+            {
+              title: "Components",
+              links: [{ title: "Button", href: "/docs/components/button" }]
+            }
           ]}
         />
       </>
@@ -23,10 +26,16 @@ it("exposes the theme and documentation search controls to the UI SDK agent", as
     host
   )
   try {
-    const entries = agent.snapshot().filter((entry) => !entry.offPage && entry.component !== "more")
+    const entries = agent
+      .snapshot()
+      .filter((entry) => !entry.offPage && entry.component !== "more")
     for (const entry of entries) expect(entry.label).toBeTruthy()
     expect(entries.map((entry) => entry.label)).toEqual(
-      expect.arrayContaining(["Toggle theme", "Preview style", "Search documentation"])
+      expect.arrayContaining([
+        "Toggle theme",
+        "Preview style",
+        "Search documentation"
+      ])
     )
     const result = await agent.act({
       steps: [
@@ -36,9 +45,11 @@ it("exposes the theme and documentation search controls to the UI SDK agent", as
     })
     expect(result).toMatchObject({ ok: true })
     expect(document.documentElement).toHaveProperty("dataset.colorMode", "dark")
-    expect(document.querySelector('[role="dialog"] input')?.getAttribute("aria-label")).toBe(
-      "Find a section or component"
-    )
+    expect(
+      document
+        .querySelector('[role="dialog"] input')
+        ?.getAttribute("aria-label")
+    ).toBe("Find a section or component")
   } finally {
     dispose()
     host.remove()

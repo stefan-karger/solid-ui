@@ -34,7 +34,9 @@ export default function CodeBlockStartLine() {
           <CodeBlockTitle>app/dashboard/page.tsx</CodeBlockTitle>
         </CodeBlockHeader>
         <CodeBlockContent lineNumbers startLine={995}>
-          <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+          <For each={lines()}>
+            {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+          </For>
         </CodeBlockContent>
       </CodeBlock>
     </div>

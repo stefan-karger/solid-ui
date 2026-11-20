@@ -10,7 +10,12 @@ import {
   CardHeader,
   CardTitle
 } from "~/registry/ui/card"
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 import { Progress } from "~/registry/ui/progress"
 import {
   Select,
@@ -73,7 +78,9 @@ export function PayoutThreshold() {
           </Field>
           <Field>
             <div class="flex items-baseline justify-between">
-              <FieldLabel id="min-payout-label">Minimum Payout Amount</FieldLabel>
+              <FieldLabel id="min-payout-label">
+                Minimum Payout Amount
+              </FieldLabel>
               <span class="text-2xl font-semibold tabular-nums">$2500.00</span>
             </div>
             <Progress

@@ -1,4 +1,10 @@
-import { FileCodeIcon, FileTextIcon, TableIcon, XIcon, type LucideIcon } from "lucide-solid"
+import {
+  FileCodeIcon,
+  FileTextIcon,
+  TableIcon,
+  XIcon,
+  type LucideIcon
+} from "lucide-solid"
 import { For } from "solid-js"
 
 import {

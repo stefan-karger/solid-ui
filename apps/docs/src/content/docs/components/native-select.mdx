@@ -7,7 +7,8 @@ component: true
 import { InfoIcon } from "lucide-solid"
 
 <Callout variant="info" icon={<InfoIcon class="translate-y-[3px]!" />}>
-  For a styled select component, see the [Select](/docs/components/select) component.
+  For a styled select component, see the [Select](/docs/components/select)
+  component.
 </Callout>
 
 <ComponentPreview name="native-select-demo" />
@@ -124,7 +125,7 @@ Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
 ## Invalid
 
-Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the Field component for styling.
+Set `aria-invalid` on `NativeSelect` and `data-invalid` on `Field` to show a validation error.
 
 <ComponentPreview name="native-select-invalid" />
 

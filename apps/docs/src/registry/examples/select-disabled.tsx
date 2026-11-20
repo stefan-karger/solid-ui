@@ -1,6 +1,12 @@
 import { For } from "solid-js"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 type Fruit = {
   label: string

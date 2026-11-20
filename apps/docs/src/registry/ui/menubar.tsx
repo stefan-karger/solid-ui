@@ -24,20 +24,32 @@ type MenubarProps = Omit<ComponentProps<typeof SdkMenubar>, "class"> & {
   class?: string
 }
 const Menubar = (props: MenubarProps) => (
-  <SdkMenubar {...props} class={cn("cn-menubar flex items-center", props.class)} />
+  <SdkMenubar
+    {...props}
+    class={cn("cn-menubar flex items-center", props.class)}
+  />
 )
 type MenubarMenuProps = ComponentProps<typeof SdkMenu>
 const MenubarMenu = (props: MenubarMenuProps) => <SdkMenu {...props} />
-type MenubarTriggerProps = Omit<ComponentProps<typeof SdkMenuTrigger>, "class"> & {
+type MenubarTriggerProps = Omit<
+  ComponentProps<typeof SdkMenuTrigger>,
+  "class"
+> & {
   class?: string
 }
 const MenubarTrigger = (props: MenubarTriggerProps) => (
   <SdkMenuTrigger
     {...props}
-    class={cn("cn-menubar-trigger flex items-center outline-hidden select-none", props.class)}
+    class={cn(
+      "cn-menubar-trigger flex items-center outline-hidden select-none",
+      props.class
+    )}
   />
 )
-type MenubarContentProps = Omit<ComponentProps<typeof SdkMenuContent>, "class"> & {
+type MenubarContentProps = Omit<
+  ComponentProps<typeof SdkMenuContent>,
+  "class"
+> & {
   class?: string
 }
 const MenubarContent = (props: MenubarContentProps) => (
@@ -54,7 +66,9 @@ const MenubarContent = (props: MenubarContentProps) => (
 type MenubarGroupProps = Omit<ComponentProps<typeof SdkMenuGroup>, "class"> & {
   class?: string
 }
-const MenubarGroup = (props: MenubarGroupProps) => <SdkMenuGroup {...props} class={props.class} />
+const MenubarGroup = (props: MenubarGroupProps) => (
+  <SdkMenuGroup {...props} class={props.class} />
+)
 type MenubarItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
   class?: string
 }) & {
@@ -62,7 +76,10 @@ type MenubarItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
   variant?: "default" | "destructive"
 }
 const MenubarItem = (rawProps: MenubarItemProps) => {
-  const local = merge({ variant: "default" } as MenubarItemProps, rawProps) as MenubarItemProps
+  const local = merge(
+    { variant: "default" } as MenubarItemProps,
+    rawProps
+  ) as MenubarItemProps
   const others = omit(rawProps, "class", "inset", "variant")
   return (
     <SdkMenuItem
@@ -109,13 +126,19 @@ const MenubarCheckboxItem = (props: MenubarCheckboxItemProps) => {
     </SdkMenuCheckboxItem>
   )
 }
-type MenubarRadioGroupProps = Omit<ComponentProps<typeof SdkMenuRadioGroup>, "class"> & {
+type MenubarRadioGroupProps = Omit<
+  ComponentProps<typeof SdkMenuRadioGroup>,
+  "class"
+> & {
   class?: string
 }
 const MenubarRadioGroup = (props: MenubarRadioGroupProps) => (
   <SdkMenuRadioGroup {...props} class={props.class} />
 )
-type MenubarRadioItemProps = Omit<ComponentProps<typeof SdkMenuRadioItem>, "class"> & {
+type MenubarRadioItemProps = Omit<
+  ComponentProps<typeof SdkMenuRadioItem>,
+  "class"
+> & {
   class?: string
 }
 const MenubarRadioItem = (props: MenubarRadioItemProps) => {
@@ -140,7 +163,10 @@ const MenubarRadioItem = (props: MenubarRadioItemProps) => {
     </SdkMenuRadioItem>
   )
 }
-type MenubarLabelProps = (Omit<ComponentProps<typeof SdkMenuGroupLabel>, "class"> & {
+type MenubarLabelProps = (Omit<
+  ComponentProps<typeof SdkMenuGroupLabel>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -155,11 +181,17 @@ const MenubarLabel = (props: MenubarLabelProps) => {
     />
   )
 }
-type MenubarSeparatorProps = Omit<ComponentProps<typeof SdkMenuSeparator>, "class"> & {
+type MenubarSeparatorProps = Omit<
+  ComponentProps<typeof SdkMenuSeparator>,
+  "class"
+> & {
   class?: string
 }
 const MenubarSeparator = (props: MenubarSeparatorProps) => (
-  <SdkMenuSeparator {...props} class={cn("cn-menubar-separator -mx-1 my-1 h-px", props.class)} />
+  <SdkMenuSeparator
+    {...props}
+    class={cn("cn-menubar-separator -mx-1 my-1 h-px", props.class)}
+  />
 )
 type MenubarShortcutProps = ComponentProps<"span">
 const MenubarShortcut = (props: MenubarShortcutProps) => (
@@ -171,7 +203,10 @@ const MenubarShortcut = (props: MenubarShortcutProps) => (
 )
 type MenubarSubProps = ComponentProps<typeof SdkMenuSub>
 const MenubarSub = (props: MenubarSubProps) => <SdkMenuSub {...props} />
-type MenubarSubTriggerProps = (Omit<ComponentProps<typeof SdkMenuSubTrigger>, "class"> & {
+type MenubarSubTriggerProps = (Omit<
+  ComponentProps<typeof SdkMenuSubTrigger>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -192,7 +227,10 @@ const MenubarSubTrigger = (props: MenubarSubTriggerProps) => {
     </SdkMenuSubTrigger>
   )
 }
-type MenubarSubContentProps = Omit<ComponentProps<typeof SdkMenuSubContent>, "class"> & {
+type MenubarSubContentProps = Omit<
+  ComponentProps<typeof SdkMenuSubContent>,
+  "class"
+> & {
   class?: string
 }
 const MenubarSubContent = (props: MenubarSubContentProps) => (

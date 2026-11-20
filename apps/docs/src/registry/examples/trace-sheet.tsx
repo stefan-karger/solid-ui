@@ -28,7 +28,9 @@ export default function TraceSheet() {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Explored 4 files</SheetTitle>
-            <SheetDescription>Files read while preparing the response.</SheetDescription>
+            <SheetDescription>
+              Files read while preparing the response.
+            </SheetDescription>
           </SheetHeader>
           <ul class="flex flex-col gap-2 px-6 font-mono text-xs">
             <li>apps/v4/lib/docs.ts</li>

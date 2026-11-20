@@ -22,7 +22,10 @@ function Actions() {
   return (
     <QuestionnaireActions>
       <QuestionnairePrevious />
-      <Show when={last()} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={last()}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Execution plan</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -32,7 +35,8 @@ function Actions() {
 export default function QuestionnaireConditional() {
   const toast = createToaster()
   const [cloud, setCloud] = createSignal(false)
-  const steps = () => (cloud() ? ["runtime", "environment", "approval"] : ["runtime", "approval"])
+  const steps = () =>
+    cloud() ? ["runtime", "environment", "approval"] : ["runtime", "approval"]
 
   return (
     <div class="w-full max-w-md text-start">
@@ -52,28 +56,44 @@ export default function QuestionnaireConditional() {
             Cloud runs add an environment question to this flow.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="local">Local workspace</QuestionnaireChoice>
-            <QuestionnaireChoice value="cloud">Cloud workspace</QuestionnaireChoice>
+            <QuestionnaireChoice value="local">
+              Local workspace
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="cloud">
+              Cloud workspace
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
         <Show when={cloud()}>
           <QuestionnaireItem value="environment">
-            <QuestionnaireTitle>Which cloud environment should it use?</QuestionnaireTitle>
+            <QuestionnaireTitle>
+              Which cloud environment should it use?
+            </QuestionnaireTitle>
             <QuestionnaireChoices>
               <QuestionnaireChoice value="preview">Preview</QuestionnaireChoice>
               <QuestionnaireChoice value="staging">Staging</QuestionnaireChoice>
-              <QuestionnaireChoice value="isolated">Isolated sandbox</QuestionnaireChoice>
+              <QuestionnaireChoice value="isolated">
+                Isolated sandbox
+              </QuestionnaireChoice>
             </QuestionnaireChoices>
             <QuestionnaireError />
           </QuestionnaireItem>
         </Show>
         <QuestionnaireItem value="approval">
-          <QuestionnaireTitle>When should the agent request approval?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            When should the agent request approval?
+          </QuestionnaireTitle>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="writes">Before writing files</QuestionnaireChoice>
-            <QuestionnaireChoice value="commands">Before running commands</QuestionnaireChoice>
-            <QuestionnaireChoice value="sensitive">Only for sensitive actions</QuestionnaireChoice>
+            <QuestionnaireChoice value="writes">
+              Before writing files
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="commands">
+              Before running commands
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="sensitive">
+              Only for sensitive actions
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

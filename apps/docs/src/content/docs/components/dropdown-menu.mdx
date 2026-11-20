@@ -93,15 +93,26 @@ DropdownMenu
 └── DropdownMenuContent
     ├── DropdownMenuGroup
     │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuItem
     │   └── DropdownMenuItem
-    ├── DropdownMenuCheckboxItem
-    ├── DropdownMenuRadioGroup
-    │   └── DropdownMenuRadioItem
     ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuCheckboxItem
+    │   └── DropdownMenuCheckboxItem
+    ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   └── DropdownMenuRadioGroup
+    │       ├── DropdownMenuRadioItem
+    │       └── DropdownMenuRadioItem
     └── DropdownMenuSub
         ├── DropdownMenuSubTrigger
         └── DropdownMenuSubContent
-            └── DropdownMenuItem
+            └── DropdownMenuGroup
+                ├── DropdownMenuLabel
+                ├── DropdownMenuItem
+                └── DropdownMenuItem
 ```
 
 ## Basic
@@ -130,7 +141,7 @@ Combine icons with labels for quick scanning.
 
 ## Checkboxes
 
-Use `DropdownMenuCheckboxItem` for toggleable options.
+Use `DropdownMenuCheckboxItem` for toggles.
 
 <ComponentPreview name="dropdown-menu-checkboxes" />
 
@@ -160,13 +171,13 @@ Use `variant="destructive"` for irreversible actions.
 
 ## Avatar
 
-An account switcher dropdown triggered by avatar-style controls.
+An account switcher dropdown triggered by an avatar.
 
 <ComponentPreview name="dropdown-menu-avatar" />
 
 ## Complex
 
-A richer example combining groups, icons, shortcuts, and nested submenus.
+A richer example combining groups, icons, and submenus.
 
 <ComponentPreview name="dropdown-menu-complex" />
 

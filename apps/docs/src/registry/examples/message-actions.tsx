@@ -1,4 +1,9 @@
-import { CopyIcon, RefreshCcwIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-solid"
+import {
+  CopyIcon,
+  RefreshCcwIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon
+} from "lucide-solid"
 
 import { Bubble, BubbleContent } from "~/registry/ui/bubble"
 import { Button } from "~/registry/ui/button"
@@ -10,7 +15,9 @@ export default function MessageActionsDemo() {
       <Message>
         <MessageContent>
           <Bubble variant="muted">
-            <BubbleContent>The install failure is coming from the workspace package.</BubbleContent>
+            <BubbleContent>
+              The install failure is coming from the workspace package.
+            </BubbleContent>
           </Bubble>
           <MessageFooter>
             <Button variant="ghost" size="icon" aria-label="Copy" title="Copy">
@@ -19,7 +26,12 @@ export default function MessageActionsDemo() {
             <Button variant="ghost" size="icon" aria-label="Like" title="Like">
               <ThumbsUpIcon />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Dislike" title="Dislike">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Dislike"
+              title="Dislike"
+            >
               <ThumbsDownIcon />
             </Button>
           </MessageFooter>
@@ -32,7 +44,12 @@ export default function MessageActionsDemo() {
           </Bubble>
           <MessageFooter class="gap-2">
             <span class="font-normal text-destructive">Failed to send</span>
-            <Button variant="ghost" size="icon-xs" title="Retry" aria-label="Retry">
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              title="Retry"
+              aria-label="Retry"
+            >
               <RefreshCcwIcon />
             </Button>
           </MessageFooter>

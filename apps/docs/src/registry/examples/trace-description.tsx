@@ -1,6 +1,12 @@
 import { FilePenIcon, SearchIcon, TerminalIcon } from "lucide-solid"
 
-import { Trace, TraceDescription, TraceIcon, TraceLine, TraceTitle } from "~/registry/ui/trace"
+import {
+  Trace,
+  TraceDescription,
+  TraceIcon,
+  TraceLine,
+  TraceTitle
+} from "~/registry/ui/trace"
 
 export default function TraceDescriptionDemo() {
   return (
@@ -9,7 +15,9 @@ export default function TraceDescriptionDemo() {
         <TraceIcon>
           <FilePenIcon />
         </TraceIcon>
-        <TraceTitle>Edited components/settings/notification-preferences-form.tsx</TraceTitle>
+        <TraceTitle>
+          Edited components/settings/notification-preferences-form.tsx
+        </TraceTitle>
         <TraceDescription class="font-mono">+48 −12</TraceDescription>
       </TraceLine>
       <TraceLine>

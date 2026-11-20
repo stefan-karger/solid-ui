@@ -7,7 +7,12 @@ type Props = HTMLAttributes<"div"> & {
   variant?: "default" | "destructive"
 }
 
-const { class: className, role = "note", variant = "default", ...props } = Astro.props
+const {
+  class: className,
+  role = "note",
+  variant = "default",
+  ...props
+} = Astro.props
 ---
 
 <div

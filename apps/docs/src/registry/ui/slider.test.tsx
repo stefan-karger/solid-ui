@@ -8,7 +8,10 @@ it("preserves focused thumbs while controlled values and the thumb count change"
   const host = document.createElement("div")
   document.body.append(host)
   const [value, setValue] = createSignal([30, 70])
-  const dispose = render(() => <Slider value={value()} onValueChange={setValue} />, host)
+  const dispose = render(
+    () => <Slider value={value()} onValueChange={setValue} />,
+    host
+  )
   try {
     await new Promise((resolve) => setTimeout(resolve, 0))
     const input = host.querySelector<HTMLInputElement>('input[type="range"]')!

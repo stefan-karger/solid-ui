@@ -1,6 +1,12 @@
 import { For } from "solid-js"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/registry/ui/card"
 import { Separator } from "~/registry/ui/separator"
 
 const chartData = [
@@ -36,7 +42,9 @@ export function PowerUsage() {
                   class="min-h-2 rounded-t bg-primary"
                   style={{ height: `${(item.usage / maxUsage) * 100}%` }}
                 />
-                <span class="text-center text-xs text-muted-foreground">{item.hour}</span>
+                <span class="text-center text-xs text-muted-foreground">
+                  {item.hour}
+                </span>
               </div>
             )}
           </For>

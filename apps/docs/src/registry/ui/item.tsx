@@ -1,4 +1,9 @@
-import { dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
+import {
+  dynamic,
+  type ComponentProps,
+  type JSX,
+  type ValidComponent
+} from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
 import { isStatic, merge, omit } from "solid-js"
 
@@ -12,7 +17,10 @@ const ItemGroup = (props: ItemGroupProps) => (
     data-slot="item-group"
     role="list"
     {...props}
-    class={cn("group/item-group cn-item-group flex w-full flex-col", props.class)}
+    class={cn(
+      "group/item-group cn-item-group flex w-full flex-col",
+      props.class
+    )}
   />
 )
 
@@ -62,10 +70,15 @@ const Item = <T extends ValidComponent = "div">(rawProps: ItemProps<T>) => {
     rawProps
   ) as ItemProps
   const others = omit(rawProps as ItemProps, "as", "class", "variant", "size")
-  const Comp = dynamic(() => local.as ?? "div", { static: isStatic(rawProps, "as") })
+  const Comp = dynamic(() => local.as ?? "div", {
+    static: isStatic(rawProps, "as")
+  })
   return (
     <Comp
-      class={cn(itemVariants({ variant: local.variant, size: local.size }), local.class)}
+      class={cn(
+        itemVariants({ variant: local.variant, size: local.size }),
+        local.class
+      )}
       data-size={local.size}
       data-slot="item"
       data-variant={local.variant}
@@ -90,7 +103,8 @@ const itemMediaVariants = cva(
   }
 )
 
-type ItemMediaProps = ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>
+type ItemMediaProps = ComponentProps<"div"> &
+  VariantProps<typeof itemMediaVariants>
 
 const ItemMedia = (rawProps: ItemMediaProps) => {
   const local = merge({ variant: "default" } as const, rawProps)
@@ -124,7 +138,10 @@ const ItemTitle = (props: ItemTitleProps) => (
   <div
     data-slot="item-title"
     {...props}
-    class={cn("cn-item-title line-clamp-1 flex w-fit items-center", props.class)}
+    class={cn(
+      "cn-item-title line-clamp-1 flex w-fit items-center",
+      props.class
+    )}
   />
 )
 
@@ -157,7 +174,10 @@ const ItemHeader = (props: ItemHeaderProps) => (
   <div
     data-slot="item-header"
     {...props}
-    class={cn("cn-item-header flex basis-full items-center justify-between", props.class)}
+    class={cn(
+      "cn-item-header flex basis-full items-center justify-between",
+      props.class
+    )}
   />
 )
 
@@ -167,7 +187,10 @@ const ItemFooter = (props: ItemFooterProps) => (
   <div
     data-slot="item-footer"
     {...props}
-    class={cn("cn-item-footer flex basis-full items-center justify-between", props.class)}
+    class={cn(
+      "cn-item-footer flex basis-full items-center justify-between",
+      props.class
+    )}
   />
 )
 

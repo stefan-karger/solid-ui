@@ -13,16 +13,26 @@ export default function FieldFieldset() {
     <div class="w-full max-w-sm">
       <FieldSet>
         <FieldLegend>Address Information</FieldLegend>
-        <FieldDescription>We need your address to deliver your order.</FieldDescription>
+        <FieldDescription>
+          We need your address to deliver your order.
+        </FieldDescription>
         <FieldGroup>
           <Field>
             <FieldLabel for="field-fieldset-street">Street Address</FieldLabel>
-            <Input id="field-fieldset-street" placeholder="123 Main St" type="text" />
+            <Input
+              id="field-fieldset-street"
+              placeholder="123 Main St"
+              type="text"
+            />
           </Field>
           <div class="grid grid-cols-2 gap-4">
             <Field>
               <FieldLabel for="field-fieldset-city">City</FieldLabel>
-              <Input id="field-fieldset-city" placeholder="New York" type="text" />
+              <Input
+                id="field-fieldset-city"
+                placeholder="New York"
+                type="text"
+              />
             </Field>
             <Field>
               <FieldLabel for="field-fieldset-zip">Postal Code</FieldLabel>

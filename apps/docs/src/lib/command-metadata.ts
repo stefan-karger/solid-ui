@@ -5,7 +5,12 @@ type HastNode = {
   type: string
 }
 
-const COMMAND_PROPERTIES = ["__npm__", "__yarn__", "__pnpm__", "__bun__"] as const
+const COMMAND_PROPERTIES = [
+  "__npm__",
+  "__yarn__",
+  "__pnpm__",
+  "__bun__"
+] as const
 
 function visit(node: HastNode) {
   if (node.type === "element" && node.tagName === "pre") {
@@ -13,7 +18,10 @@ function visit(node: HastNode) {
       (child) => child.type === "element" && child.tagName === "code"
     )
 
-    if (code?.properties && COMMAND_PROPERTIES.every((property) => code.properties?.[property])) {
+    if (
+      code?.properties &&
+      COMMAND_PROPERTIES.every((property) => code.properties?.[property])
+    ) {
       node.properties ??= {}
 
       for (const property of COMMAND_PROPERTIES) {

@@ -24,15 +24,25 @@ const SelectGroup = (
   }
 ) => <SdkSelectGroup {...props} class={cn("cn-select-group", props.class)} />
 const SelectLabel = (
-  props: Omit<ComponentProps<typeof SdkSelectGroupLabel>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkSelectGroupLabel>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkSelectGroupLabel {...props} class={cn("cn-select-label", props.class)} />
+) => (
+  <SdkSelectGroupLabel {...props} class={cn("cn-select-label", props.class)} />
+)
 const SelectValue = (
-  props: Omit<ComponentProps<typeof SdkSelectValue>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkSelectValue>, "class"> & {
+    class?: string
+  }
 ) => <SdkSelectValue {...props} class={cn("cn-select-value", props.class)} />
-type SelectTriggerProps = Omit<ComponentProps<typeof SdkSelectTrigger>, "class"> & {
+type SelectTriggerProps = Omit<
+  ComponentProps<typeof SdkSelectTrigger>,
+  "class"
+> & {
   class?: string
   size?: "sm" | "default"
 }
@@ -98,7 +108,10 @@ const SelectItem = (
   )
 }
 const SelectSeparator = (
-  props: Omit<ComponentProps<typeof SdkSelectSeparator>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkSelectSeparator>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }

@@ -2,7 +2,9 @@ import { readdirSync } from "node:fs"
 
 import { expect, test } from "@playwright/test"
 
-const pages = readdirSync("apps/docs/dist/docs/components", { withFileTypes: true })
+const pages = readdirSync("apps/docs/dist/docs/components", {
+  withFileTypes: true
+})
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .sort()
@@ -18,16 +20,26 @@ for (const slug of pages) {
     expect(response?.status()).toBe(200)
     const islands = page.locator("astro-island")
     for (const island of await islands.all()) {
-      await island.evaluate((node) => node.parentElement?.scrollIntoView({ block: "center" }))
+      await island.evaluate((node) =>
+        node.parentElement?.scrollIntoView({ block: "center" })
+      )
       await expect(island).not.toHaveAttribute("ssr", "", { timeout: 30_000 })
-      await expect(island).not.toContainText("The component preview could not be loaded.")
+      await expect(island).not.toContainText(
+        "The component preview could not be loaded."
+      )
     }
     if (slug === "navigation-menu") {
       const preview = page.locator('article[data-slot="docs"]')
-      await preview.getByRole("button", { name: "Getting started", exact: true }).click()
-      await expect(preview.getByRole("link", { name: /^Introduction/ })).toBeVisible()
+      await preview
+        .getByRole("button", { name: "Getting started", exact: true })
+        .click()
+      await expect(
+        preview.getByRole("link", { name: /^Introduction/ })
+      ).toBeVisible()
       await page.keyboard.press("Escape")
-      await expect(preview.getByRole("link", { name: /^Introduction/ })).toBeHidden()
+      await expect(
+        preview.getByRole("link", { name: /^Introduction/ })
+      ).toBeHidden()
     }
     expect(errors).toEqual([])
   })

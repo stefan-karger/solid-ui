@@ -23,7 +23,10 @@ const EmptyHeader = (props: EmptyHeaderProps) => (
   <div
     data-slot="empty-header"
     {...props}
-    class={cn("cn-empty-header flex max-w-sm flex-col items-center", props.class)}
+    class={cn(
+      "cn-empty-header flex max-w-sm flex-col items-center",
+      props.class
+    )}
   />
 )
 
@@ -42,7 +45,8 @@ const emptyMediaVariants = cva(
   }
 )
 
-type EmptyMediaProps = ComponentProps<"div"> & VariantProps<typeof emptyMediaVariants>
+type EmptyMediaProps = ComponentProps<"div"> &
+  VariantProps<typeof emptyMediaVariants>
 
 const EmptyMedia = (rawProps: EmptyMediaProps) => {
   const local = merge({ variant: "default" } as const, rawProps)
@@ -60,7 +64,11 @@ const EmptyMedia = (rawProps: EmptyMediaProps) => {
 type EmptyTitleProps = ComponentProps<"div">
 
 const EmptyTitle = (props: EmptyTitleProps) => (
-  <div data-slot="empty-title" {...props} class={cn("cn-empty-title", props.class)} />
+  <div
+    data-slot="empty-title"
+    {...props}
+    class={cn("cn-empty-title", props.class)}
+  />
 )
 
 type EmptyDescriptionProps = ComponentProps<"p">

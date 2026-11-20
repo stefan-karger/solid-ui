@@ -38,7 +38,9 @@ function Example(
       {...others}
     >
       {props.title ? (
-        <div class="px-1.5 py-2 text-xs font-medium text-muted-foreground">{props.title}</div>
+        <div class="px-1.5 py-2 text-xs font-medium text-muted-foreground">
+          {props.title}
+        </div>
       ) : null}
       <div
         data-slot="example-content"

@@ -1,7 +1,13 @@
 import { For } from "solid-js"
 
 import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 type Department = {
   label: string
@@ -30,7 +36,11 @@ export default function FieldSelect() {
 
           placeholder="Choose department"
         >
-          <SelectTrigger aria-label="Choose department" class="w-full" id="field-select-department">
+          <SelectTrigger
+            aria-label="Choose department"
+            class="w-full"
+            id="field-select-department"
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -43,7 +53,9 @@ export default function FieldSelect() {
             </For>
           </SelectContent>
         </Select>
-        <FieldDescription>Select your department or area of work.</FieldDescription>
+        <FieldDescription>
+          Select your department or area of work.
+        </FieldDescription>
       </Field>
     </div>
   )

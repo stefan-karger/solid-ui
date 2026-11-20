@@ -32,7 +32,10 @@ const Toggle = (props: ToggleProps) => {
   const others = omit(props, "variant", "size", "class")
   return (
     <SdkToggle
-      class={cn(toggleVariants({ variant: props.variant, size: props.size }), props.class)}
+      class={cn(
+        toggleVariants({ variant: props.variant, size: props.size }),
+        props.class
+      )}
 
       {...others}
     />

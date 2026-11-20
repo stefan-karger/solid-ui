@@ -40,7 +40,12 @@ export function Payments() {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={(part) => (
-                    <Button {...part} size="icon-sm" variant="ghost" aria-label="Account options" />
+                    <Button
+                      {...part}
+                      size="icon-sm"
+                      variant="ghost"
+                      aria-label="Account options"
+                    />
                   )}
                 >
                   <ShowcaseIcon name="MoreHorizontalCircle01Icon" />
@@ -71,9 +76,14 @@ export function Payments() {
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>Change transfer limit</ItemTitle>
-                <ItemDescription>Adjust how much you can send from your balance.</ItemDescription>
+                <ItemDescription>
+                  Adjust how much you can send from your balance.
+                </ItemDescription>
               </ItemContent>
-              <ShowcaseIcon name="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground" />
+              <ShowcaseIcon
+                name="ArrowRight01Icon"
+                class="size-4 shrink-0 text-muted-foreground"
+              />
             </Item>
           </div>
           <div role="listitem" class="w-full">
@@ -83,9 +93,14 @@ export function Payments() {
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>Scheduled transfers</ItemTitle>
-                <ItemDescription>Set up a transfer to send at a later date.</ItemDescription>
+                <ItemDescription>
+                  Set up a transfer to send at a later date.
+                </ItemDescription>
               </ItemContent>
-              <ShowcaseIcon name="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground" />
+              <ShowcaseIcon
+                name="ArrowRight01Icon"
+                class="size-4 shrink-0 text-muted-foreground"
+              />
             </Item>
           </div>
           <div role="listitem" class="w-full">
@@ -95,9 +110,14 @@ export function Payments() {
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>Recurring card payments</ItemTitle>
-                <ItemDescription>Manage your repeated card transactions.</ItemDescription>
+                <ItemDescription>
+                  Manage your repeated card transactions.
+                </ItemDescription>
               </ItemContent>
-              <ShowcaseIcon name="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground" />
+              <ShowcaseIcon
+                name="ArrowRight01Icon"
+                class="size-4 shrink-0 text-muted-foreground"
+              />
             </Item>
           </div>
         </ItemGroup>

@@ -8,7 +8,12 @@ import {
   ComboboxItem,
   ComboboxList
 } from "~/registry/ui/combobox"
-import { Item, ItemContent, ItemDescription, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemTitle
+} from "~/registry/ui/item"
 
 const countries = [
   { code: "", value: "", continent: "", label: "Select country" },
@@ -69,7 +74,10 @@ export default function ComboboxWithCustomItems() {
       itemToLabel={(country) => country.label}
       itemToValue={(country) => country.value}
     >
-      <ComboboxInput placeholder="Search countries..." aria-label="Search countries" />
+      <ComboboxInput
+        placeholder="Search countries..."
+        aria-label="Search countries"
+      />
       <ComboboxContent>
         <ComboboxEmpty>No countries found.</ComboboxEmpty>
         <ComboboxList>
@@ -78,7 +86,9 @@ export default function ComboboxWithCustomItems() {
               <ComboboxItem value={country} label={country.label}>
                 <Item size="xs" class="p-0">
                   <ItemContent>
-                    <ItemTitle class="whitespace-nowrap">{country.label}</ItemTitle>
+                    <ItemTitle class="whitespace-nowrap">
+                      {country.label}
+                    </ItemTitle>
                     <ItemDescription>
                       {country.continent} ({country.code})
                     </ItemDescription>

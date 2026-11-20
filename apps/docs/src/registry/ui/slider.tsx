@@ -9,11 +9,15 @@ import {
 import { createMemo, For, merge } from "solid-js"
 
 import { cn } from "~/lib/utils"
-type SliderProps = Omit<ComponentProps<typeof SdkSlider<number[]>>, "class"> & { class?: string }
+type SliderProps = Omit<ComponentProps<typeof SdkSlider<number[]>>, "class"> & {
+  class?: string
+}
 const Slider = (props: SliderProps) => {
   const local = merge({ min: 0, max: 100, defaultValue: [50] }, props)
 
-  const thumbCount = createMemo(() => (local.value ?? local.defaultValue).length)
+  const thumbCount = createMemo(
+    () => (local.value ?? local.defaultValue).length
+  )
   return (
     <SdkSlider<number[]>
       defaultValue={local.defaultValue}

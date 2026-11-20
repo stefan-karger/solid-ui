@@ -347,7 +347,12 @@ export const ui: Registry["items"] = [
   {
     name: "combobox",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority", "lucide-solid"],
+    dependencies: [
+      "@ui-sdk/solid",
+      "@ui-sdk/core",
+      "class-variance-authority",
+      "lucide-solid"
+    ],
     registryDependencies: ["button", "input-group"],
     files: [
       {
@@ -517,7 +522,12 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "navigation-menu",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority", "lucide-solid"],
+    dependencies: [
+      "@ui-sdk/solid",
+      "@ui-sdk/core",
+      "class-variance-authority",
+      "lucide-solid"
+    ],
     files: [
       {
         path: "ui/navigation-menu.tsx",

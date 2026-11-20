@@ -31,7 +31,10 @@ const Command = (
 ) => (
   <SdkCommand
     {...props}
-    class={cn("cn-command flex size-full flex-col overflow-hidden", props.class)}
+    class={cn(
+      "cn-command flex size-full flex-col overflow-hidden",
+      props.class
+    )}
   />
 )
 const CommandInput = (
@@ -52,7 +55,10 @@ const CommandInput = (
         )}
       />
       <InputGroupAddon>
-        <SearchIcon data-ui="command-input-icon" class="cn-command-input-icon" />
+        <SearchIcon
+          data-ui="command-input-icon"
+          class="cn-command-input-icon"
+        />
       </InputGroupAddon>
     </InputGroup>
   </div>
@@ -73,7 +79,12 @@ const CommandEmpty = (
     class?: string
     children?: JSX.Element
   }
-) => <SdkCommandEmpty {...props} class={cn("cn-command-empty empty:hidden", props.class)} />
+) => (
+  <SdkCommandEmpty
+    {...props}
+    class={cn("cn-command-empty empty:hidden", props.class)}
+  />
+)
 const CommandGroup = (
   props: Omit<ComponentProps<typeof SdkCommandGroup>, "class" | "children"> & {
     class?: string
@@ -82,17 +93,33 @@ const CommandGroup = (
 ) => <SdkCommandGroup {...props} class={cn("cn-command-group", props.class)} />
 const CommandGroupLabel = SdkCommandGroupLabel
 const CommandSeparator = (
-  props: Omit<ComponentProps<typeof SdkCommandSeparator>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkCommandSeparator>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkCommandSeparator {...props} class={cn("cn-command-separator", props.class)} />
+) => (
+  <SdkCommandSeparator
+    {...props}
+    class={cn("cn-command-separator", props.class)}
+  />
+)
 const CommandShortcut = (
-  props: Omit<ComponentProps<typeof SdkCommandShortcut>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkCommandShortcut>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkCommandShortcut {...props} class={cn("cn-command-shortcut", props.class)} />
+) => (
+  <SdkCommandShortcut
+    {...props}
+    class={cn("cn-command-shortcut", props.class)}
+  />
+)
 const CommandItem = (
   props: Omit<ComponentProps<typeof SdkCommandItem>, "class" | "children"> & {
     class?: string
@@ -108,7 +135,9 @@ const CommandItem = (
   />
 )
 const CommandItemLabel = SdkCommandItemText
-const CommandItemDescription = (props: ComponentProps<"span">) => <span {...props} />
+const CommandItemDescription = (props: ComponentProps<"span">) => (
+  <span {...props} />
+)
 type CommandDialogProps = ComponentProps<typeof Dialog> & {
   class?: string
   title?: string
@@ -116,11 +145,21 @@ type CommandDialogProps = ComponentProps<typeof Dialog> & {
   showCloseButton?: boolean
 }
 const CommandDialog = (props: CommandDialogProps) => {
-  const rest = omit(props, "class", "title", "description", "showCloseButton", "children")
+  const rest = omit(
+    props,
+    "class",
+    "title",
+    "description",
+    "showCloseButton",
+    "children"
+  )
   return (
     <Dialog {...rest}>
       <DialogContent
-        class={cn("cn-command-dialog top-1/3 translate-y-0 overflow-hidden p-0", props.class)}
+        class={cn(
+          "cn-command-dialog top-1/3 translate-y-0 overflow-hidden p-0",
+          props.class
+        )}
         showCloseButton={props.showCloseButton ?? false}
       >
         <DialogHeader class="sr-only">

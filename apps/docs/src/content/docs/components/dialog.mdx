@@ -4,7 +4,10 @@ description: A window overlaid on either the primary window or another dialog wi
 component: true
 ---
 
-<ComponentPreview name="dialog-demo" description="A dialog for editing profile details." />
+<ComponentPreview
+  name="dialog-demo"
+  description="A dialog for editing profile details."
+/>
 
 ## Installation
 
@@ -66,13 +69,15 @@ import {
 
 ```tsx showLineNumbers
 <Dialog>
-  <DialogTrigger render={(partProps) => <button {...partProps} />}>Open</DialogTrigger>
+  <DialogTrigger render={(partProps) => <button {...partProps} />}>
+    Open
+  </DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
       <DialogDescription>
-        This action cannot be undone. This will permanently delete your account and remove your data
-        from our servers.
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
@@ -95,13 +100,13 @@ Dialog
 
 ## Custom Close Button
 
-Replace the default top-right control with a close action in the footer.
+Replace the default close control with your own button.
 
 <ComponentPreview name="dialog-close-button" />
 
 ## No Close Button
 
-Use `showCloseButton={false}` to hide the close button in the corner.
+Use `showCloseButton={false}` to hide the close button.
 
 <ComponentPreview name="dialog-no-close-button" />
 
@@ -113,7 +118,7 @@ Keep actions visible while the content scrolls.
 
 ## Scrollable Content
 
-Long content can scroll while the dialog remains centered.
+Long content can scroll while the header stays in view.
 
 <ComponentPreview name="dialog-scrollable-content" />
 

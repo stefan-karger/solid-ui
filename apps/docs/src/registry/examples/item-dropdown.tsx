@@ -10,7 +10,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/registry/ui/dropdown-menu"
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle
+} from "~/registry/ui/item"
 
 const people = [
   {
@@ -49,12 +55,16 @@ export default function ItemDropdown() {
                   <ItemMedia>
                     <Avatar class="size-6.5">
                       <AvatarImage src={person.avatar} class="grayscale" />
-                      <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
+                      <AvatarFallback>
+                        {person.username.charAt(0)}
+                      </AvatarFallback>
                     </Avatar>
                   </ItemMedia>
                   <ItemContent class="gap-0">
                     <ItemTitle>{person.username}</ItemTitle>
-                    <ItemDescription class="leading-none">{person.twitter}</ItemDescription>
+                    <ItemDescription class="leading-none">
+                      {person.twitter}
+                    </ItemDescription>
                   </ItemContent>
                 </Item>
               </DropdownMenuItem>

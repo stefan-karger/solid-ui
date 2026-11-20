@@ -159,7 +159,10 @@ export default function DropdownMenuComplex() {
             <DropdownMenuSubContent>
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                <DropdownMenuRadioGroup onValueChange={setTheme} value={theme()}>
+                <DropdownMenuRadioGroup
+                  onValueChange={setTheme}
+                  value={theme()}
+                >
                   <DropdownMenuRadioItem value="light">
                     <SunIcon class="size-4" />
                     Light
@@ -218,7 +221,10 @@ export default function DropdownMenuComplex() {
                       <DropdownMenuCheckboxItem
                         checked={notifications().push}
                         onCheckedChange={(checked) =>
-                          setNotifications((prev) => ({ ...prev, push: checked === true }))
+                          setNotifications((prev) => ({
+                            ...prev,
+                            push: checked === true
+                          }))
                         }
                       >
                         <BellIcon class="size-4" />
@@ -227,7 +233,10 @@ export default function DropdownMenuComplex() {
                       <DropdownMenuCheckboxItem
                         checked={notifications().email}
                         onCheckedChange={(checked) =>
-                          setNotifications((prev) => ({ ...prev, email: checked === true }))
+                          setNotifications((prev) => ({
+                            ...prev,
+                            email: checked === true
+                          }))
                         }
                       >
                         <MailIcon class="size-4" />

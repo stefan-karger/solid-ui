@@ -6,7 +6,9 @@ import {
 } from "@ui-sdk/solid/radio"
 
 import { cn } from "~/lib/utils"
-type RadioGroupProps = Omit<ComponentProps<typeof SdkRadioGroup>, "class"> & { class?: string }
+type RadioGroupProps = Omit<ComponentProps<typeof SdkRadioGroup>, "class"> & {
+  class?: string
+}
 const RadioGroup = (props: RadioGroupProps) => (
   <SdkRadioGroup {...props} class={cn("cn-radio-group w-full", props.class)} />
 )
@@ -26,4 +28,9 @@ const RadioGroupItem = (props: RadioGroupItemProps) => (
     </SdkRadioIndicator>
   </SdkRadio>
 )
-export { RadioGroup, RadioGroupItem, type RadioGroupItemProps, type RadioGroupProps }
+export {
+  RadioGroup,
+  RadioGroupItem,
+  type RadioGroupItemProps,
+  type RadioGroupProps
+}

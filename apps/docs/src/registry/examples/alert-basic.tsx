@@ -8,7 +8,8 @@ export default function AlertBasic() {
       <CircleCheck class="size-4" />
       <AlertTitle>Account updated successfully</AlertTitle>
       <AlertDescription>
-        Your profile information has been saved. Changes will be reflected immediately.
+        Your profile information has been saved. Changes will be reflected
+        immediately.
       </AlertDescription>
     </Alert>
   )

@@ -30,12 +30,18 @@ export default function CalendarPresets() {
         value={value()}
         month={month()}
         onMonthChange={setMonth}
-        onValueChange={(next) => setValue(typeof next === "string" ? next : null)}
+        onValueChange={(next) =>
+          setValue(typeof next === "string" ? next : null)
+        }
       />
       <div class="flex max-w-72 flex-wrap gap-1">
         <For each={presets}>
           {(preset) => (
-            <Button variant="outline" size="sm" onClick={() => choose(preset.days)}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => choose(preset.days)}
+            >
               {preset.label}
             </Button>
           )}

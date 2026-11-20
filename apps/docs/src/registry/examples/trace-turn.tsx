@@ -1,4 +1,9 @@
-import { BrainIcon, ChevronRightIcon, FileTextIcon, TerminalIcon } from "lucide-solid"
+import {
+  BrainIcon,
+  ChevronRightIcon,
+  FileTextIcon,
+  TerminalIcon
+} from "lucide-solid"
 
 import { CodeBlock, CodeBlockContent } from "~/registry/ui/code-block"
 import {
@@ -34,7 +39,8 @@ export default function TraceTurn() {
                 </TraceLine>
               </TraceCollapsibleTrigger>
               <TraceCollapsibleContent class="whitespace-pre-wrap">
-                I should check which package managers are installed before I scaffold anything.
+                I should check which package managers are installed before I
+                scaffold anything.
               </TraceCollapsibleContent>
             </TraceCollapsible>
             <TraceCollapsible defaultOpen>

@@ -11,11 +11,18 @@ export default function AvatarDemo() {
   return (
     <div class="flex flex-row flex-wrap items-center gap-6 md:gap-12">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" class="grayscale" />
+        <AvatarImage
+          src="https://github.com/shadcn.png"
+          alt="@shadcn"
+          class="grayscale"
+        />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+        <AvatarImage
+          src="https://github.com/evilrabbit.png"
+          alt="@evilrabbit"
+        />
         <AvatarFallback>ER</AvatarFallback>
         <AvatarBadge class="bg-green-600 dark:bg-green-800" />
       </Avatar>
@@ -25,11 +32,17 @@ export default function AvatarDemo() {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <Avatar>
-          <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+          <AvatarImage
+            src="https://github.com/maxleiter.png"
+            alt="@maxleiter"
+          />
           <AvatarFallback>LR</AvatarFallback>
         </Avatar>
         <Avatar>
-          <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+          <AvatarImage
+            src="https://github.com/evilrabbit.png"
+            alt="@evilrabbit"
+          />
           <AvatarFallback>ER</AvatarFallback>
         </Avatar>
         <AvatarGroupCount>+3</AvatarGroupCount>

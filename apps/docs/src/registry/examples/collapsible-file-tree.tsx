@@ -4,7 +4,11 @@ import { For } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
 import { Card, CardContent, CardHeader } from "~/registry/ui/card"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "~/registry/ui/collapsible"
 import { Tabs, TabsList, TabsTrigger } from "~/registry/ui/tabs"
 
 type FileTreeItem = { name: string } | { name: string; items: FileTreeItem[] }
@@ -57,7 +61,9 @@ const fileTree: FileTreeItem[] = [
   { name: ".gitignore" }
 ]
 
-const hasChildren = (item: FileTreeItem): item is { name: string; items: FileTreeItem[] } => {
+const hasChildren = (
+  item: FileTreeItem
+): item is { name: string; items: FileTreeItem[] } => {
   return "items" in item
 }
 
@@ -66,7 +72,9 @@ const renderItem = (item: FileTreeItem): JSX.Element => {
     return (
       <Collapsible>
         <CollapsibleTrigger
-          render={(partProps) => <Button {...partProps} size="sm" variant="ghost" />}
+          render={(partProps) => (
+            <Button {...partProps} size="sm" variant="ghost" />
+          )}
           class="group/collapsible-trigger w-full justify-start transition-none hover:bg-accent hover:text-accent-foreground"
         >
           <ChevronRightIcon class="size-4 transition-transform group-data-[expanded]/collapsible-trigger:rotate-90" />
@@ -83,7 +91,11 @@ const renderItem = (item: FileTreeItem): JSX.Element => {
   }
 
   return (
-    <Button class="w-full justify-start gap-2 text-foreground" size="sm" variant="link">
+    <Button
+      class="w-full justify-start gap-2 text-foreground"
+      size="sm"
+      variant="link"
+    >
       <FileIcon class="size-4" />
       <span>{item.name}</span>
     </Button>

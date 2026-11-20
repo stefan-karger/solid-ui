@@ -14,21 +14,31 @@ export function InputOTP(
   return (
     <SdkOTPInput
       {...props}
-      class={cn("cn-input-otp flex items-center gap-2 has-disabled:opacity-50", props.class)}
+      class={cn(
+        "cn-input-otp flex items-center gap-2 has-disabled:opacity-50",
+        props.class
+      )}
     />
   )
 }
 
 export function InputOTPGroup(
-  props: Omit<ComponentProps<typeof SdkOTPInputGroup>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkOTPInputGroup>, "class"> & {
+    class?: string
+  }
 ) {
   return (
-    <SdkOTPInputGroup {...props} class={cn("cn-input-otp-group flex items-center", props.class)} />
+    <SdkOTPInputGroup
+      {...props}
+      class={cn("cn-input-otp-group flex items-center", props.class)}
+    />
   )
 }
 
 export function InputOTPSlot(
-  props: Omit<ComponentProps<typeof SdkOTPInputSlot>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkOTPInputSlot>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkOTPInputSlot
@@ -42,7 +52,14 @@ export function InputOTPSlot(
 }
 
 export function InputOTPSeparator(
-  props: Omit<ComponentProps<typeof SdkOTPInputSeparator>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkOTPInputSeparator>, "class"> & {
+    class?: string
+  }
 ) {
-  return <SdkOTPInputSeparator {...props} class={cn("cn-input-otp-separator", props.class)} />
+  return (
+    <SdkOTPInputSeparator
+      {...props}
+      class={cn("cn-input-otp-separator", props.class)}
+    />
+  )
 }

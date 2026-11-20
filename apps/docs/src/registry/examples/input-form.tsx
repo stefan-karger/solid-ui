@@ -1,9 +1,20 @@
 import { For } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 type Country = {
   label: string
@@ -22,13 +33,20 @@ export default function InputForm() {
       <FieldGroup>
         <Field>
           <FieldLabel for="form-name">Name</FieldLabel>
-          <Input id="form-name" placeholder="Evil Rabbit" required type="text" />
+          <Input
+            id="form-name"
+            placeholder="Evil Rabbit"
+            required
+            type="text"
+          />
         </Field>
 
         <Field>
           <FieldLabel for="form-email">Email</FieldLabel>
           <Input id="form-email" placeholder="john@example.com" type="email" />
-          <FieldDescription>We&apos;ll never share your email with anyone.</FieldDescription>
+          <FieldDescription>
+            We&apos;ll never share your email with anyone.
+          </FieldDescription>
         </Field>
 
         <div class="grid grid-cols-2 gap-4">
@@ -44,7 +62,11 @@ export default function InputForm() {
               itemToValue={(option) => String(option["value"])}
               defaultValue={countries[0]!}
             >
-              <SelectTrigger aria-label="Select an option" id="form-country" class="w-full">
+              <SelectTrigger
+                aria-label="Select an option"
+                id="form-country"
+                class="w-full"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

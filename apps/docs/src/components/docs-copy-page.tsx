@@ -13,7 +13,11 @@ import {
 
 const menuItems: { icon: string; label: string; service?: string }[] = [
   { icon: "markdown", label: "View as Markdown" },
-  { icon: "chatgpt", label: "Open in ChatGPT", service: "https://chatgpt.com/" },
+  {
+    icon: "chatgpt",
+    label: "Open in ChatGPT",
+    service: "https://chatgpt.com/"
+  },
   { icon: "claude", label: "Open in Claude", service: "https://claude.ai/new" },
   { icon: "scira", label: "Open in Scira", service: "https://scira.ai/" }
 ]
@@ -27,7 +31,10 @@ function promptUrl(service: string, pageUrl: string) {
   return url.href
 }
 
-export default function DocsCopyPage(props: { markdown: string; pagePath: string }) {
+export default function DocsCopyPage(props: {
+  markdown: string
+  pagePath: string
+}) {
   const [origin, setOrigin] = createSignal("")
   const [status, setStatus] = createSignal("")
   let resetTimer: ReturnType<typeof setTimeout> | undefined
@@ -54,7 +61,10 @@ export default function DocsCopyPage(props: { markdown: string; pagePath: string
           class="h-8 shadow-none md:h-7 md:text-[0.8rem]"
           onClick={copyPage}
         >
-          <Show when={status() === "Page copied"} fallback={<CopyIcon aria-hidden="true" />}>
+          <Show
+            when={status() === "Page copied"}
+            fallback={<CopyIcon aria-hidden="true" />}
+          >
             <CheckIcon aria-hidden="true" />
           </Show>
           Copy Page
@@ -82,7 +92,10 @@ export default function DocsCopyPage(props: { markdown: string; pagePath: string
                       {...part}
                       href={
                         item.service
-                          ? promptUrl(item.service, `${origin()}${props.pagePath}`)
+                          ? promptUrl(
+                              item.service,
+                              `${origin()}${props.pagePath}`
+                            )
                           : `${props.pagePath}.md`
                       }
                       target="_blank"
@@ -90,7 +103,11 @@ export default function DocsCopyPage(props: { markdown: string; pagePath: string
                     />
                   )}
                 >
-                  <svg class="size-4 text-muted-foreground" fill="none" aria-hidden="true">
+                  <svg
+                    class="size-4 text-muted-foreground"
+                    fill="none"
+                    aria-hidden="true"
+                  >
                     <use href={`/docs-copy-icons.svg#${item.icon}`} />
                   </svg>
                   {item.label}

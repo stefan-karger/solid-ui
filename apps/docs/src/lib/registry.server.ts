@@ -38,7 +38,11 @@ const registryDocsMetaSchema = z
   .strict()
   .optional()
 
-const previewTypes = new Set(["registry:example", "registry:component", "registry:block"])
+const previewTypes = new Set([
+  "registry:example",
+  "registry:component",
+  "registry:block"
+])
 const previewRootByType = {
   "registry:example": "examples/",
   "registry:component": "components/",
@@ -54,8 +58,16 @@ export type PreviewDescriptor = {
   blockPreview: boolean
 }
 
-export function normalizeRegistryPath(path: string, itemName = "unknown"): string {
-  if (!path || /^[a-zA-Z]:[\\/]/.test(path) || path.startsWith("/") || path.startsWith("\\")) {
+export function normalizeRegistryPath(
+  path: string,
+  itemName = "unknown"
+): string {
+  if (
+    !path ||
+    /^[a-zA-Z]:[\\/]/.test(path) ||
+    path.startsWith("/") ||
+    path.startsWith("\\")
+  ) {
     throw new Error(
       `[registry] Item "${itemName}" has an invalid absolute or empty path: "${path}"`
     )
@@ -63,8 +75,12 @@ export function normalizeRegistryPath(path: string, itemName = "unknown"): strin
 
   const normalized = path.replaceAll("\\", "/")
   const segments = normalized.split("/")
-  if (segments.some((segment) => !segment || segment === "." || segment === "..")) {
-    throw new Error(`[registry] Item "${itemName}" has an invalid path segment: "${path}"`)
+  if (
+    segments.some((segment) => !segment || segment === "." || segment === "..")
+  ) {
+    throw new Error(
+      `[registry] Item "${itemName}" has an invalid path segment: "${path}"`
+    )
   }
   return normalized
 }
@@ -117,10 +133,14 @@ export function validateRegistryCatalog(
       )
     }
     if (docsMeta?.clientOnly !== undefined && !previewTypes.has(item.type)) {
-      throw new Error(`[registry] Item "${item.name}" uses clientOnly but is not previewable`)
+      throw new Error(
+        `[registry] Item "${item.name}" uses clientOnly but is not previewable`
+      )
     }
     if (docsMeta?.blockPreview !== undefined && !previewTypes.has(item.type)) {
-      throw new Error(`[registry] Item "${item.name}" uses blockPreview but is not previewable`)
+      throw new Error(
+        `[registry] Item "${item.name}" uses blockPreview but is not previewable`
+      )
     }
     items.set(item.name, item)
   }
@@ -129,7 +149,10 @@ export function validateRegistryCatalog(
 }
 
 const availableModuleIds = new Set(Object.keys(rawRegistryFiles))
-const registryItems = validateRegistryCatalog(registrySchema.parse(registry), availableModuleIds)
+const registryItems = validateRegistryCatalog(
+  registrySchema.parse(registry),
+  availableModuleIds
+)
 const preparedSourceCache = new Map<string, Promise<PreparedRegistrySource>>()
 const styleSourceCache = new Map<string, Promise<string>>()
 
@@ -142,7 +165,8 @@ export function getRegistryItem(name: string): RegistryItem {
 export function getRegistryFile(name: string, file?: string): RegistryItemFile {
   const item = getRegistryItem(name)
   const files = item.files ?? []
-  if (!files.length) throw new Error(`[registry] Item "${name}" does not declare any files`)
+  if (!files.length)
+    throw new Error(`[registry] Item "${name}" does not declare any files`)
 
   if (!file) return files[0]!
   const selected = files.find((candidate) => candidate.path === file)
@@ -173,7 +197,9 @@ export function resolvePreview(name: string): PreviewDescriptor {
     )
   }
   if (!/\.(?:tsx|jsx)$/.test(normalizedPath)) {
-    throw new Error(`[registry] Preview "${name}" entry "${file.path}" must be a .tsx or .jsx file`)
+    throw new Error(
+      `[registry] Preview "${name}" entry "${file.path}" must be a .tsx or .jsx file`
+    )
   }
 
   return {
@@ -193,10 +219,15 @@ export function getBlockPreviews(): PreviewDescriptor[] {
     .filter((descriptor) => descriptor.blockPreview)
 }
 
-async function loadRawModule(moduleId: string, context: string): Promise<string> {
+async function loadRawModule(
+  moduleId: string,
+  context: string
+): Promise<string> {
   const loader = rawRegistryFiles[moduleId]
   if (!loader)
-    throw new Error(`[registry] Missing source module for ${context} (expected ${moduleId})`)
+    throw new Error(
+      `[registry] Missing source module for ${context} (expected ${moduleId})`
+    )
   return loader()
 }
 

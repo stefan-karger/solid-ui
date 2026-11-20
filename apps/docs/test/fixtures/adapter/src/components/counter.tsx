@@ -8,7 +8,8 @@ export default function Counter(props: {
 }) {
   const [count, setCount] = createSignal(untrack(() => props.initial))
   onCleanup(() => {
-    if (typeof window !== "undefined") window.dispatchEvent(new Event("counter:disposed"))
+    if (typeof window !== "undefined")
+      window.dispatchEvent(new Event("counter:disposed"))
   })
   return (
     <section>

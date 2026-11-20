@@ -85,7 +85,10 @@ const offsets = blocks.map((_, index) =>
 )
 const total = blocks.reduce((sum, block) => sum + block.code.length, 0)
 
-function StreamingBlock(props: { block: (typeof blocks)[number]; code: string }) {
+function StreamingBlock(props: {
+  block: (typeof blocks)[number]
+  code: string
+}) {
   const rows = () => props.code.split("\n")
   const source = () =>
     props.block.diff
@@ -119,7 +122,9 @@ function StreamingBlock(props: { block: (typeof blocks)[number]; code: string })
       </Show>
       <CodeBlockContent lineNumbers={props.block.lineNumbers ?? false}>
         <For each={lines()}>
-          {(line, index) => <CodeBlockLine variant={variant(index())}>{line}</CodeBlockLine>}
+          {(line, index) => (
+            <CodeBlockLine variant={variant(index())}>{line}</CodeBlockLine>
+          )}
         </For>
       </CodeBlockContent>
     </CodeBlock>
@@ -148,7 +153,10 @@ export default function CodeBlockStreaming() {
           const shown = () => length() - (offsets[index()] ?? 0)
           return (
             <Show when={shown() > 0}>
-              <StreamingBlock block={block} code={block.code.slice(0, shown())} />
+              <StreamingBlock
+                block={block}
+                code={block.code.slice(0, shown())}
+              />
             </Show>
           )
         }}

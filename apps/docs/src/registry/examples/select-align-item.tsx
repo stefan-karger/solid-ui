@@ -1,6 +1,12 @@
 import { createSignal } from "solid-js"
 
-import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 import {
   Select,
   SelectContent,
@@ -19,7 +25,9 @@ export default function SelectAlignItem() {
       <Field orientation="horizontal">
         <FieldContent>
           <FieldLabel for="align-item">Align Item</FieldLabel>
-          <FieldDescription>Toggle to align the item with the trigger.</FieldDescription>
+          <FieldDescription>
+            Toggle to align the item with the trigger.
+          </FieldDescription>
         </FieldContent>
         <Switch
           id="align-item"

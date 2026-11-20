@@ -1,6 +1,12 @@
 import { InboxIcon } from "lucide-solid"
 
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle
+} from "~/registry/ui/item"
 
 export default function ItemSize() {
   return (
@@ -11,7 +17,9 @@ export default function ItemSize() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Default Size</ItemTitle>
-          <ItemDescription>The standard size for most use cases.</ItemDescription>
+          <ItemDescription>
+            The standard size for most use cases.
+          </ItemDescription>
         </ItemContent>
       </Item>
 

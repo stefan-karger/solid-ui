@@ -52,7 +52,9 @@ export default function QuestionnaireSkipExample() {
             Choose the category that best describes the work.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="feature">New feature</QuestionnaireChoice>
+            <QuestionnaireChoice value="feature">
+              New feature
+            </QuestionnaireChoice>
             <QuestionnaireChoice value="fix">Bug fix</QuestionnaireChoice>
             <QuestionnaireChoice value="refactor">Refactor</QuestionnaireChoice>
           </QuestionnaireChoices>
@@ -60,7 +62,9 @@ export default function QuestionnaireSkipExample() {
         </QuestionnaireItem>
 
         <QuestionnaireItem value="constraints">
-          <QuestionnaireTitle>Are there any implementation constraints?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            Are there any implementation constraints?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Answer if needed, or intentionally skip this question.
           </QuestionnaireDescription>
@@ -71,7 +75,9 @@ export default function QuestionnaireSkipExample() {
             <QuestionnaireChoice value="no-migrations">
               Do not change the database
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="preserve-api">Preserve the public API</QuestionnaireChoice>
+            <QuestionnaireChoice value="preserve-api">
+              Preserve the public API
+            </QuestionnaireChoice>
             <QuestionnaireInput
               aria-label="Another implementation constraint"
               placeholder="Describe another constraint…"
@@ -80,14 +86,22 @@ export default function QuestionnaireSkipExample() {
         </QuestionnaireItem>
 
         <QuestionnaireItem value="review">
-          <QuestionnaireTitle>How should the work be reviewed?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            How should the work be reviewed?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Choose the checks the agent should complete before handoff.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="tests">Run the test suite</QuestionnaireChoice>
-            <QuestionnaireChoice value="diff">Review the final diff</QuestionnaireChoice>
-            <QuestionnaireChoice value="both">Tests and diff review</QuestionnaireChoice>
+            <QuestionnaireChoice value="tests">
+              Run the test suite
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="diff">
+              Review the final diff
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="both">
+              Tests and diff review
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

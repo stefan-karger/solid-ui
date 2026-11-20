@@ -4,7 +4,10 @@ description: Combine labels, controls, and help text to compose accessible form 
 component: true
 ---
 
-<ComponentPreview name="field-demo" previewClassName="h-[800px] p-6 md:h-[850px]" />
+<ComponentPreview
+  name="field-demo"
+  previewClassName="h-[800px] p-6 md:h-[850px]"
+/>
 
 ## Installation
 
@@ -198,23 +201,26 @@ See the [Form](/docs/forms) documentation for building forms with the `Field` co
 
 ## Choice Card
 
-Wrap `Field` components inside `FieldLabel` to create selectable field groups.
+Wrap each horizontal `Field` in a `FieldLabel` to make the whole choice card selectable. This example uses `RadioGroupItem`.
 
 <ComponentPreview name="field-choice-card" />
 
 ## Field Group
 
-Stack `Field` components with `FieldGroup`. Add `FieldSeparator` to divide sections.
+Stack `Field` components with `FieldGroup`. Add `FieldSeparator` to divide them.
 
 <ComponentPreview name="field-group" previewClassName="h-96" />
 
 ## Responsive Layout
 
-- **Vertical fields:** Default orientation stacks label, control, and helper text for mobile-first layouts.
-- **Horizontal fields:** Set `orientation="horizontal"` on `Field` to align label and control side by side.
-- **Responsive fields:** Set `orientation="responsive"` and use container-aware `FieldGroup` classes to adapt by width.
+- **Vertical fields:** Default orientation stacks label, control, and helper text—ideal for mobile-first layouts.
+- **Horizontal fields:** Set `orientation="horizontal"` on `Field` to align the label and control side-by-side. Pair with `FieldContent` to keep descriptions aligned.
+- **Responsive fields:** Set `orientation="responsive"` for automatic column layouts inside container-aware parents. Apply `@container/field-group` classes on `FieldGroup` to switch orientations at specific breakpoints.
 
-<ComponentPreview name="field-responsive" previewClassName="h-[650px] p-6 md:h-[500px] md:p-10" />
+<ComponentPreview
+  name="field-responsive"
+  previewClassName="h-[650px] p-6 md:h-[500px] md:p-10"
+/>
 
 ## Validation and Errors
 

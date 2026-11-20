@@ -14,7 +14,10 @@ const formatDate = new Intl.DateTimeFormat("en-US", {
 })
 
 export default function DatePickerRange() {
-  const [range, setRange] = createSignal<[string, string] | null>(["2026-01-20", "2026-02-09"])
+  const [range, setRange] = createSignal<[string, string] | null>([
+    "2026-01-20",
+    "2026-02-09"
+  ])
 
   return (
     <Field class="mx-auto w-60">
@@ -35,14 +38,18 @@ export default function DatePickerRange() {
             ?.map((date) => formatDate.format(new Date(date)))
             .join(" - ") ?? <span>Pick a date</span>}
         </PopoverTrigger>
-        <PopoverContent class="w-auto max-w-[calc(100vw-2rem)] overflow-auto p-0" align="start">
+        <PopoverContent
+          class="w-auto max-w-[calc(100vw-2rem)] overflow-auto p-0"
+          align="start"
+        >
           <Calendar
             mode="range"
             months={2}
             value={range()}
             defaultMonth={range()?.[0].slice(0, 7) ?? "2026-01"}
             onValueChange={(value) => {
-              const [start, end] = value && typeof value !== "string" ? value : []
+              const [start, end] =
+                value && typeof value !== "string" ? value : []
               setRange(start && end ? [start, end] : null)
             }}
           />

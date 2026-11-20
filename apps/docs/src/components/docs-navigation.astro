@@ -8,7 +8,9 @@ const { navigation, currentPath } = Astro.props
 <nav aria-label="Documentation" class="grid gap-6 px-3 pb-10 text-sm">
   {navigation.map((group) => (
     <div>
-      <p class="mb-2 px-2 text-xs font-medium text-muted-foreground">{group.title}</p>
+      <p class="mb-2 px-2 text-xs font-medium text-muted-foreground">
+        {group.title}
+      </p>
       <ul class="grid gap-0.5">
         {group.links.map((link) => (
           <li>
@@ -17,7 +19,8 @@ const { navigation, currentPath } = Astro.props
               aria-current={currentPath === link.href ? "page" : undefined}
               data-active={
                 currentPath === link.href ||
-                (link.href === "/docs/components" && currentPath.startsWith("/docs/components/"))
+                (link.href === "/docs/components" &&
+                  currentPath.startsWith("/docs/components/"))
                   ? ""
                   : undefined
               }
@@ -25,7 +28,10 @@ const { navigation, currentPath } = Astro.props
             >
               {link.title}
               {link.isNew && (
-                <span class="size-1.5 rounded-full bg-primary" aria-label="New component" />
+                <span
+                  class="size-1.5 rounded-full bg-primary"
+                  aria-label="New component"
+                />
               )}
             </a>
           </li>
@@ -48,7 +54,8 @@ const { navigation, currentPath } = Astro.props
           const { top, bottom } = active.getBoundingClientRect()
           const viewport = sidebar.getBoundingClientRect()
           if (top < viewport.top || bottom > viewport.bottom) {
-            sidebar.scrollTop += (top + bottom - viewport.top - viewport.bottom) / 2
+            sidebar.scrollTop +=
+              (top + bottom - viewport.top - viewport.bottom) / 2
           }
         }
       }
@@ -61,7 +68,10 @@ const { navigation, currentPath } = Astro.props
         try {
           sessionStorage.setItem(
             key,
-            JSON.stringify({ pathname: location.pathname, scrollTop: sidebar.scrollTop })
+            JSON.stringify({
+              pathname: location.pathname,
+              scrollTop: sidebar.scrollTop
+            })
           )
         } catch {
           // The current scroll position is retained for this page.

@@ -48,13 +48,19 @@ npm install @ui-sdk/solid @ui-sdk/core
 ## Usage
 
 ```tsx
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
+} from "~/components/ui/hover-card"
 ```
 
 ```tsx showLineNumbers
 <HoverCard>
   <HoverCardTrigger
-    render={(partProps) => <a {...partProps} href="/docs/components/hover-card" />}
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
     class="underline underline-offset-4"
   >
     Hover
@@ -82,7 +88,9 @@ Use `openDelay` and `closeDelay` on `HoverCard` to control when content opens an
 ```tsx showLineNumbers
 <HoverCard delay={100} closeDelay={200}>
   <HoverCardTrigger
-    render={(partProps) => <a {...partProps} href="/docs/components/hover-card" />}
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
     class="underline underline-offset-4"
   >
     Hover
@@ -100,7 +108,9 @@ Use `side`, `align`, and `sideOffset` on `HoverCardContent` to position the cont
 ```tsx showLineNumbers
 <HoverCard>
   <HoverCardTrigger
-    render={(partProps) => <a {...partProps} href="/docs/components/hover-card" />}
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
     class="underline underline-offset-4"
   >
     Hover

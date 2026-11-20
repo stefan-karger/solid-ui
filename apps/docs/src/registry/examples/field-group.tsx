@@ -15,8 +15,8 @@ export default function FieldGroupExample() {
         <FieldSet>
           <FieldLabel>Responses</FieldLabel>
           <FieldDescription>
-            Get notified when responses complete for longer requests, like research or image
-            generation.
+            Get notified when responses complete for longer requests, like
+            research or image generation.
           </FieldDescription>
           <FieldGroup data-slot="checkbox-group">
             <Field orientation="horizontal">
@@ -31,7 +31,8 @@ export default function FieldGroupExample() {
         <FieldSet>
           <FieldLabel>Tasks</FieldLabel>
           <FieldDescription>
-            Get notified when tasks you created have updates. <a href="#">Manage tasks</a>
+            Get notified when tasks you created have updates.{" "}
+            <a href="#">Manage tasks</a>
           </FieldDescription>
           <FieldGroup data-slot="checkbox-group">
             <Field orientation="horizontal">

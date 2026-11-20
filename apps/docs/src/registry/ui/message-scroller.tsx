@@ -13,18 +13,25 @@ import { Button } from "~/registry/ui/button"
 
 export { createScrollAreaController as createMessageScrollerController } from "@ui-sdk/solid/scroll-area"
 export function MessageScroller(
-  props: Omit<ComponentProps<typeof SdkScrollArea>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollArea>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollArea
       stickToEnd
       {...props}
-      class={cn("cn-message-scroller relative min-h-0 min-w-0 overflow-hidden", props.class)}
+      class={cn(
+        "cn-message-scroller relative min-h-0 min-w-0 overflow-hidden",
+        props.class
+      )}
     />
   )
 }
 export function MessageScrollerViewport(
-  props: Omit<ComponentProps<typeof SdkScrollAreaViewport>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaViewport>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollAreaViewport
@@ -37,12 +44,17 @@ export function MessageScrollerViewport(
   )
 }
 export function MessageScrollerContent(
-  props: Omit<ComponentProps<typeof SdkScrollAreaContent>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaContent>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollAreaContent
       {...props}
-      class={cn("cn-message-scroller-content flex min-w-0 flex-col", props.class)}
+      class={cn(
+        "cn-message-scroller-content flex min-w-0 flex-col",
+        props.class
+      )}
     />
   )
 }
@@ -56,7 +68,9 @@ export function MessageScrollerItem(props: ComponentProps<"div">) {
   )
 }
 export function MessageScrollerButton(
-  props: Omit<ComponentProps<typeof SdkScrollAreaScrollToEnd>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaScrollToEnd>, "class"> & {
+    class?: string
+  }
 ) {
   const rest = omit(props, "class", "children")
   return (

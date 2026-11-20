@@ -53,7 +53,10 @@ describe("Astro client contract", () => {
     "normalizes %s for client-only islands",
     async (slotName) => {
       const element = island()
-      const Component = (props: { children?: JSX.Element; namedSlot?: JSX.Element }) => (
+      const Component = (props: {
+        children?: JSX.Element
+        namedSlot?: JSX.Element
+      }) => (
         <section>
           {props.children}
           <aside>{props.namedSlot}</aside>
@@ -87,7 +90,9 @@ describe("Astro client contract", () => {
     const Component = () => {
       const [count, setCount] = createSignal(0)
       onCleanup(cleanup)
-      return <button onClick={() => setCount(count() + 1)}>count: {count()}</button>
+      return (
+        <button onClick={() => setCount(count() + 1)}>count: {count()}</button>
+      )
     }
     const mount = bootstrap(element)
     await mount(Component, {}, {}, { client: "only" })

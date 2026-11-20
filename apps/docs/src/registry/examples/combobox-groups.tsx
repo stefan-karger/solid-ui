@@ -51,7 +51,10 @@ const timezones = [
 export default function ComboboxWithGroupsAndSeparator() {
   return (
     <Combobox<string>>
-      <ComboboxInput placeholder="Select a timezone" aria-label="Select a timezone" />
+      <ComboboxInput
+        placeholder="Select a timezone"
+        aria-label="Select a timezone"
+      />
       <ComboboxContent>
         <ComboboxEmpty>No timezones found.</ComboboxEmpty>
         <ComboboxList>

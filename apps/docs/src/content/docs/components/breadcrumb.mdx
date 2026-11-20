@@ -125,19 +125,19 @@ Pass the `separator` prop to `Breadcrumb` to override the separator for the enti
 
 ## Dropdown
 
-Compose `BreadcrumbItem` with `DropdownMenu` to add branching navigation.
+You can compose `<BreadcrumbItem />` with a `<DropdownMenu />` to create a dropdown in the breadcrumb.
 
 <ComponentPreview name="breadcrumb-dropdown" />
 
 ## Collapsed
 
-Use `BreadcrumbEllipsis` when the breadcrumb path is too long.
+We provide a `<BreadcrumbEllipsis />` component to show a collapsed state when the breadcrumb is too long.
 
 <ComponentPreview name="breadcrumb-ellipsis" previewClassName="p-2" />
 
 ## Link component
 
-Render custom routing links by passing a component to the `as` prop on `BreadcrumbLink`.
+To use a custom link component from your routing library, pass it to the `as` prop on `BreadcrumbLink`.
 
 <ComponentPreview name="breadcrumb-link" />
 

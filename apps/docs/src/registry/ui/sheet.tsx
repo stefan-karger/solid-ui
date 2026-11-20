@@ -15,15 +15,23 @@ import { cn } from "~/lib/utils"
 import { Button } from "~/registry/ui/button"
 type SheetProps = ComponentProps<typeof SdkDialog>
 const Sheet: Component<SheetProps> = (props) => <SdkDialog {...props} />
-type SheetTriggerProps = Omit<ComponentProps<typeof SdkDialogTrigger>, "class"> & {
+type SheetTriggerProps = Omit<
+  ComponentProps<typeof SdkDialogTrigger>,
+  "class"
+> & {
   class?: string
 }
-const SheetTrigger = (props: SheetTriggerProps) => <SdkDialogTrigger {...props} />
+const SheetTrigger = (props: SheetTriggerProps) => (
+  <SdkDialogTrigger {...props} />
+)
 type SheetCloseProps = Omit<ComponentProps<typeof SdkDialogClose>, "class"> & {
   class?: string
 }
 const SheetClose = (props: SheetCloseProps) => <SdkDialogClose {...props} />
-type SheetOverlayProps = Omit<ComponentProps<typeof SdkDialogBackdrop>, "class"> & {
+type SheetOverlayProps = Omit<
+  ComponentProps<typeof SdkDialogBackdrop>,
+  "class"
+> & {
   class?: string
 }
 const SheetOverlay = (props: SheetOverlayProps) => (
@@ -32,7 +40,10 @@ const SheetOverlay = (props: SheetOverlayProps) => (
     class={cn("cn-sheet-overlay fixed inset-0 isolate z-50", props.class)}
   />
 )
-type SheetContentProps = (Omit<ComponentProps<typeof SdkDialogContent>, "class"> & {
+type SheetContentProps = (Omit<
+  ComponentProps<typeof SdkDialogContent>,
+  "class"
+> & {
   class?: string
   "data-slot"?: string
 }) & {
@@ -40,10 +51,23 @@ type SheetContentProps = (Omit<ComponentProps<typeof SdkDialogContent>, "class">
   showCloseButton?: boolean
 }
 const SheetContent = (props: SheetContentProps) => {
-  const others = omit(props, "children", "side", "showCloseButton", "render", "data-slot")
+  const others = omit(
+    props,
+    "children",
+    "side",
+    "showCloseButton",
+    "render",
+    "data-slot"
+  )
   const renderContent: SheetContentProps["render"] = (part, state) => {
-    const attributes = merge(part, () => ({ "data-slot": props["data-slot"] ?? "sheet-content" }))
-    return props.render ? props.render(attributes, state) : <div {...attributes} />
+    const attributes = merge(part, () => ({
+      "data-slot": props["data-slot"] ?? "sheet-content"
+    }))
+    return props.render ? (
+      props.render(attributes, state)
+    ) : (
+      <div {...attributes} />
+    )
   }
   return (
     <>
@@ -57,7 +81,9 @@ const SheetContent = (props: SheetContentProps) => {
         {props.children}
         <Show when={props.showCloseButton !== false}>
           <SdkDialogClose
-            render={(partProps) => <Button {...partProps} variant="ghost" size="icon-sm" />}
+            render={(partProps) => (
+              <Button {...partProps} variant="ghost" size="icon-sm" />
+            )}
 
             class="cn-sheet-close"
           >
@@ -91,11 +117,17 @@ type SheetTitleProps = Omit<ComponentProps<typeof SdkDialogTitle>, "class"> & {
 const SheetTitle = (props: SheetTitleProps) => (
   <SdkDialogTitle {...props} class={cn("cn-sheet-title", props.class)} />
 )
-type SheetDescriptionProps = Omit<ComponentProps<typeof SdkDialogDescription>, "class"> & {
+type SheetDescriptionProps = Omit<
+  ComponentProps<typeof SdkDialogDescription>,
+  "class"
+> & {
   class?: string
 }
 const SheetDescription = (props: SheetDescriptionProps) => (
-  <SdkDialogDescription {...props} class={cn("cn-sheet-description", props.class)} />
+  <SdkDialogDescription
+    {...props}
+    class={cn("cn-sheet-description", props.class)}
+  />
 )
 export {
   Sheet,

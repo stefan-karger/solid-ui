@@ -53,15 +53,18 @@ export default function CodeBlockMarkdown() {
       <Message align="end">
         <MessageContent>
           <Bubble align="end" variant="muted">
-            <BubbleContent>How do I debounce a search input in Solid?</BubbleContent>
+            <BubbleContent>
+              How do I debounce a search input in Solid?
+            </BubbleContent>
           </Bubble>
         </MessageContent>
       </Message>
       <Message>
         <MessageContent>
           <p>
-            Wrap the value in a <code>useDebounce</code> hook. It returns the latest value once it
-            stops changing for <code>delay</code> milliseconds.
+            Wrap the value in a <code>useDebounce</code> hook. It returns the
+            latest value once it stops changing for <code>delay</code>{" "}
+            milliseconds.
           </p>
           <CodeBlock>
             <CodeBlockHeader>
@@ -71,16 +74,25 @@ export default function CodeBlockMarkdown() {
               </CodeBlockActions>
             </CodeBlockHeader>
             <CodeBlockContent>
-              <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+              <For each={lines()}>
+                {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+              </For>
             </CodeBlockContent>
           </CodeBlock>
           <Show when={ready()}>
-            <p>Pass the debounced value to your fetch instead of the raw input.</p>
+            <p>
+              Pass the debounced value to your fetch instead of the raw input.
+            </p>
           </Show>
         </MessageContent>
       </Message>
       <Show when={ready()}>
-        <Button variant="outline" size="sm" class="mt-auto self-start" onClick={replay}>
+        <Button
+          variant="outline"
+          size="sm"
+          class="mt-auto self-start"
+          onClick={replay}
+        >
           <RotateCcwIcon /> Replay
         </Button>
       </Show>

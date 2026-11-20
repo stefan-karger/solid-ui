@@ -1,16 +1,25 @@
 import type { CollectionEntry } from "astro:content"
 
-import { createComponentLinks, toDocsPath, type ComponentListVariant } from "~/lib/docs"
+import {
+  createComponentLinks,
+  toDocsPath,
+  type ComponentListVariant
+} from "~/lib/docs"
 import { getRegistrySource } from "~/lib/registry.server"
 
 type DocsPage = CollectionEntry<"docs">
 
 export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
   const { title, description, component, new: isNew } = page.data
-  const descriptions = new Map(pages.map((entry) => [toDocsPath(entry.id), entry.data.description]))
+  const descriptions = new Map(
+    pages.map((entry) => [toDocsPath(entry.id), entry.data.description])
+  )
   const list = (variant: ComponentListVariant) =>
     createComponentLinks(pages, variant)
-      .map(({ title, href }) => `- [${title}](${href}/) — ${descriptions.get(href)}`)
+      .map(
+        ({ title, href }) =>
+          `- [${title}](${href}/) — ${descriptions.get(href)}`
+      )
       .join("\n")
   const body = (page.body ?? "")
     .replace(/<ComponentsList\s+variant=["']new["']\s*\/>/g, () => list("new"))
@@ -37,7 +46,10 @@ export async function includeDocsExamples(markdown: string) {
       const name = attributes?.match(/\bname=["']([^"']+)["']/)?.[1]
       if (!name) return tag
       const file = attributes?.match(/\bfile=["']([^"']+)["']/)?.[1]
-      const source = await getRegistrySource({ name, ...(file ? { file } : {}) })
+      const source = await getRegistrySource({
+        name,
+        ...(file ? { file } : {})
+      })
       const longestRun = Math.max(
         2,
         ...Array.from(source.code.matchAll(/`{3,}/g), ([run]) => run.length)

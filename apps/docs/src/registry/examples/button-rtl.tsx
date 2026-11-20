@@ -7,7 +7,10 @@ export default function ButtonRtl() {
   const direction = useDirection()
 
   return (
-    <div class="flex flex-wrap items-center gap-2" data-provider-direction={direction()}>
+    <div
+      class="flex flex-wrap items-center gap-2"
+      data-provider-direction={direction()}
+    >
       <Button variant="outline">
         <ArrowLeftIcon data-icon="inline-start" />
         Previous

@@ -47,13 +47,17 @@ it("keeps controlled answers until the parent accepts changes and blocks skippin
   dispose = render(Fixture, host)
   host.querySelectorAll<HTMLButtonElement>("button")[0]!.click()
   await vi.waitFor(() =>
-    expect(host.querySelector('[role="alert"]')!.textContent).toContain("Please answer")
+    expect(host.querySelector('[role="alert"]')!.textContent).toContain(
+      "Please answer"
+    )
   )
   expect(complete).not.toHaveBeenCalled()
   const input = host.querySelector("input")!
   input.value = "Proposed answer"
   input.dispatchEvent(new InputEvent("input", { bubbles: true }))
-  await vi.waitFor(() => expect(change).toHaveBeenCalledWith({ name: "Proposed answer" }))
+  await vi.waitFor(() =>
+    expect(change).toHaveBeenCalledWith({ name: "Proposed answer" })
+  )
   host.querySelectorAll<HTMLButtonElement>("button")[1]!.click()
   expect(complete).not.toHaveBeenCalled()
   accept()

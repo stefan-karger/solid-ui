@@ -27,7 +27,10 @@ function Actions() {
       <Show when={state.step() === 1}>
         <QuestionnaireSkip />
       </Show>
-      <Show when={state.step() === 2} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={state.step() === 2}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Save plan</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -44,7 +47,9 @@ export default function QuestionnaireDemo() {
         steps={["direction", "signals", "timing"]}
         required={["direction", "timing"]}
         onComplete={(answers) => {
-          const signals = Array.isArray(answers.signals) ? answers.signals.join(", ") : ""
+          const signals = Array.isArray(answers.signals)
+            ? answers.signals.join(", ")
+            : ""
           toast("Agent plan saved", {
             description: `Direction: ${answers.direction ?? "None"} · Progress signals: ${signals || "None"} · Timing: ${answers.timing ?? "None"}`
           })
@@ -53,14 +58,18 @@ export default function QuestionnaireDemo() {
         <QuestionnaireProgress />
 
         <QuestionnaireItem value="direction">
-          <QuestionnaireTitle>What should the agent build next?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What should the agent build next?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Choose a direction or describe another task.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="tool-calls">
               <span class="font-medium">Tool call timeline</span>
-              <span class="text-muted-foreground">Show what the agent ran and what came back.</span>
+              <span class="text-muted-foreground">
+                Show what the agent ran and what came back.
+              </span>
             </QuestionnaireChoice>
             <QuestionnaireChoice value="approvals">
               <span class="font-medium">Approval checkpoints</span>
@@ -83,15 +92,21 @@ export default function QuestionnaireDemo() {
         </QuestionnaireItem>
 
         <QuestionnaireItem value="signals">
-          <QuestionnaireTitle>What should every progress update include?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What should every progress update include?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Select all that apply, or skip this question.
           </QuestionnaireDescription>
           <QuestionnaireChoices multiple>
             <QuestionnaireChoice value="progress">Progress</QuestionnaireChoice>
-            <QuestionnaireChoice value="decisions">Decisions</QuestionnaireChoice>
+            <QuestionnaireChoice value="decisions">
+              Decisions
+            </QuestionnaireChoice>
             <QuestionnaireChoice value="risks">Risks</QuestionnaireChoice>
-            <QuestionnaireChoice value="next-step">Next step</QuestionnaireChoice>
+            <QuestionnaireChoice value="next-step">
+              Next step
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
@@ -103,8 +118,12 @@ export default function QuestionnaireDemo() {
           </QuestionnaireDescription>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="now">Start now</QuestionnaireChoice>
-            <QuestionnaireChoice value="next-cycle">Next development cycle</QuestionnaireChoice>
-            <QuestionnaireChoice value="backlog">Add it to the backlog</QuestionnaireChoice>
+            <QuestionnaireChoice value="next-cycle">
+              Next development cycle
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="backlog">
+              Add it to the backlog
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

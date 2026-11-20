@@ -31,11 +31,17 @@ export default function DropdownMenuAvatar() {
           />
           <div class="grid flex-1 text-left text-sm leading-tight">
             <span class="truncate font-semibold">shadcn</span>
-            <span class="truncate text-xs text-muted-foreground">shadcn@example.com</span>
+            <span class="truncate text-xs text-muted-foreground">
+              shadcn@example.com
+            </span>
           </div>
           <ChevronsUpDownIcon class="ml-auto size-4 text-muted-foreground" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent side="top" align="end" class="w-(--anchor-width) min-w-56">
+        <DropdownMenuContent
+          side="top"
+          align="end"
+          class="w-(--anchor-width) min-w-56"
+        >
           <DropdownMenuGroup>
             <DropdownMenuItem>
               <BadgeCheckIcon class="size-4" />
@@ -60,7 +66,9 @@ export default function DropdownMenuAvatar() {
 
       <DropdownMenu>
         <DropdownMenuTrigger
-          render={(partProps) => <Button {...partProps} size="icon" variant="ghost" />}
+          render={(partProps) => (
+            <Button {...partProps} size="icon" variant="ghost" />
+          )}
           class="rounded-full"
         >
           <img

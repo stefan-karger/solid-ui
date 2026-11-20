@@ -26,7 +26,12 @@ export default function ItemAvatar() {
           <ItemDescription>Last seen 5 minutes ago</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button aria-label="Invite" class="rounded-full" size="icon-sm" variant="outline">
+          <Button
+            aria-label="Invite"
+            class="rounded-full"
+            size="icon-sm"
+            variant="outline"
+          >
             <PlusIcon class="size-4" />
           </Button>
         </ItemActions>
@@ -54,7 +59,9 @@ export default function ItemAvatar() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>No Team Members</ItemTitle>
-          <ItemDescription>Invite your team to collaborate on this project.</ItemDescription>
+          <ItemDescription>
+            Invite your team to collaborate on this project.
+          </ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button size="sm" variant="outline">

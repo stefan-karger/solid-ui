@@ -16,7 +16,9 @@ export default function DrawerDemo() {
   const [goal, setGoal] = createSignal(350)
   return (
     <Drawer>
-      <DrawerTrigger render={(p) => <Button {...p} variant="outline" />}>Open drawer</DrawerTrigger>
+      <DrawerTrigger render={(p) => <Button {...p} variant="outline" />}>
+        Open drawer
+      </DrawerTrigger>
       <DrawerContent>
         <div class="mx-auto w-full max-w-sm">
           <DrawerHandle />
@@ -44,8 +46,12 @@ export default function DrawerDemo() {
             </Button>
           </div>
           <DrawerFooter>
-            <DrawerClose render={(p) => <Button {...p} />}>Save goal</DrawerClose>
-            <DrawerClose render={(p) => <Button {...p} variant="outline" />}>Cancel</DrawerClose>
+            <DrawerClose render={(p) => <Button {...p} />}>
+              Save goal
+            </DrawerClose>
+            <DrawerClose render={(p) => <Button {...p} variant="outline" />}>
+              Cancel
+            </DrawerClose>
           </DrawerFooter>
         </div>
       </DrawerContent>

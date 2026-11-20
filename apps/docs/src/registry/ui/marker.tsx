@@ -4,15 +4,18 @@ import { isStatic, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-const markerVariants = cva("cn-marker group/marker relative flex w-full items-center", {
-  variants: {
-    variant: {
-      default: "cn-marker-variant-default",
-      separator: "cn-marker-variant-separator",
-      border: "cn-marker-variant-border"
+const markerVariants = cva(
+  "cn-marker group/marker relative flex w-full items-center",
+  {
+    variants: {
+      variant: {
+        default: "cn-marker-variant-default",
+        separator: "cn-marker-variant-separator",
+        border: "cn-marker-variant-border"
+      }
     }
   }
-})
+)
 
 export function Marker(
   props: Omit<ComponentProps<"div">, "class"> & {
@@ -23,19 +26,26 @@ export function Marker(
     ) => JSX.Element
   }
 ) {
-  const Comp = dynamic(() => props.render ?? "div", { static: isStatic(props, "render") })
+  const Comp = dynamic(() => props.render ?? "div", {
+    static: isStatic(props, "render")
+  })
   const rest = omit(props, "class", "variant", "render")
   return (
     <Comp
       data-slot="marker"
       data-variant={props.variant ?? "default"}
-      class={cn(markerVariants({ variant: props.variant ?? "default" }), props.class)}
+      class={cn(
+        markerVariants({ variant: props.variant ?? "default" }),
+        props.class
+      )}
       {...rest}
     />
   )
 }
 
-export function MarkerIcon(props: Omit<ComponentProps<"span">, "class"> & { class?: string }) {
+export function MarkerIcon(
+  props: Omit<ComponentProps<"span">, "class"> & { class?: string }
+) {
   return (
     <span
       {...props}
@@ -46,7 +56,9 @@ export function MarkerIcon(props: Omit<ComponentProps<"span">, "class"> & { clas
   )
 }
 
-export function MarkerContent(props: Omit<ComponentProps<"span">, "class"> & { class?: string }) {
+export function MarkerContent(
+  props: Omit<ComponentProps<"span">, "class"> & { class?: string }
+) {
   return (
     <span
       {...props}

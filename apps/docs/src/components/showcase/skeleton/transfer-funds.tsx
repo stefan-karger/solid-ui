@@ -1,4 +1,10 @@
-import { Card, CardAction, CardContent, CardFooter, CardHeader } from "~/registry/ui/card"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardFooter,
+  CardHeader
+} from "~/registry/ui/card"
 import { Skeleton } from "~/registry/ui/skeleton"
 
 export function TransferFunds() {

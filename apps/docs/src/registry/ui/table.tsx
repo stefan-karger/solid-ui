@@ -11,31 +11,59 @@ const Table = (props: TableProps) => (
 )
 
 const TableHeader = (props: ComponentProps<"thead">) => (
-  <thead data-slot="table-header" {...props} class={cn("cn-table-header", props.class)} />
+  <thead
+    data-slot="table-header"
+    {...props}
+    class={cn("cn-table-header", props.class)}
+  />
 )
 
 const TableBody = (props: ComponentProps<"tbody">) => (
-  <tbody data-slot="table-body" {...props} class={cn("cn-table-body", props.class)} />
+  <tbody
+    data-slot="table-body"
+    {...props}
+    class={cn("cn-table-body", props.class)}
+  />
 )
 
 const TableFooter = (props: ComponentProps<"tfoot">) => (
-  <tfoot data-slot="table-footer" {...props} class={cn("cn-table-footer", props.class)} />
+  <tfoot
+    data-slot="table-footer"
+    {...props}
+    class={cn("cn-table-footer", props.class)}
+  />
 )
 
 const TableRow = (props: ComponentProps<"tr">) => (
-  <tr data-slot="table-row" {...props} class={cn("cn-table-row", props.class)} />
+  <tr
+    data-slot="table-row"
+    {...props}
+    class={cn("cn-table-row", props.class)}
+  />
 )
 
 const TableHead = (props: ComponentProps<"th">) => (
-  <th data-slot="table-head" {...props} class={cn("cn-table-head", props.class)} />
+  <th
+    data-slot="table-head"
+    {...props}
+    class={cn("cn-table-head", props.class)}
+  />
 )
 
 const TableCell = (props: ComponentProps<"td">) => (
-  <td data-slot="table-cell" {...props} class={cn("cn-table-cell", props.class)} />
+  <td
+    data-slot="table-cell"
+    {...props}
+    class={cn("cn-table-cell", props.class)}
+  />
 )
 
 const TableCaption = (props: ComponentProps<"caption">) => (
-  <caption data-slot="table-caption" {...props} class={cn("cn-table-caption", props.class)} />
+  <caption
+    data-slot="table-caption"
+    {...props}
+    class={cn("cn-table-caption", props.class)}
+  />
 )
 
 export {

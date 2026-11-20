@@ -17,7 +17,9 @@ import { Button } from "~/registry/ui/button"
 export default function AlertDialogSmallMedia() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
+      <AlertDialogTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+      >
         Show Dialog
       </AlertDialogTrigger>
       <AlertDialogContent size="sm">

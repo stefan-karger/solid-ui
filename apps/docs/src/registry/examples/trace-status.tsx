@@ -1,4 +1,9 @@
-import { CircleAlertIcon, CircleCheckIcon, CircleIcon, LoaderCircleIcon } from "lucide-solid"
+import {
+  CircleAlertIcon,
+  CircleCheckIcon,
+  CircleIcon,
+  LoaderCircleIcon
+} from "lucide-solid"
 
 import { Trace, TraceIcon, TraceLine, TraceTitle } from "~/registry/ui/trace"
 

@@ -16,7 +16,11 @@ export default function CarouselDApiDemo() {
 
   return (
     <div class="mx-auto max-w-[10rem] sm:max-w-xs">
-      <Carousel page={current()} onPageChange={setCurrent} class="w-full max-w-xs">
+      <Carousel
+        page={current()}
+        onPageChange={setCurrent}
+        class="w-full max-w-xs"
+      >
         <CarouselViewport>
           <CarouselContent>
             <For each={slides}>

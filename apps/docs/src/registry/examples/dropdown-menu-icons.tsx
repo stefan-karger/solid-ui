@@ -1,4 +1,9 @@
-import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-solid"
+import {
+  CreditCardIcon,
+  LogOutIcon,
+  SettingsIcon,
+  UserIcon
+} from "lucide-solid"
 
 import { Button } from "~/registry/ui/button"
 import {

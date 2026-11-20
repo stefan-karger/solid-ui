@@ -4,7 +4,10 @@ description: Displays a menu of actions triggered by a right click.
 component: true
 ---
 
-<ComponentPreview name="context-menu-demo" description="A context menu with sub menu items." />
+<ComponentPreview
+  name="context-menu-demo"
+  description="A context menu with sub menu items."
+/>
 
 ## Installation
 
@@ -78,15 +81,25 @@ ContextMenu
 └── ContextMenuContent
     ├── ContextMenuGroup
     │   ├── ContextMenuLabel
+    │   ├── ContextMenuItem
     │   └── ContextMenuItem
-    ├── ContextMenuCheckboxItem
-    ├── ContextMenuRadioGroup
-    │   └── ContextMenuRadioItem
     ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuCheckboxItem
+    │   └── ContextMenuCheckboxItem
+    ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   └── ContextMenuRadioGroup
+    │       ├── ContextMenuRadioItem
+    │       └── ContextMenuRadioItem
     └── ContextMenuSub
         ├── ContextMenuSubTrigger
         └── ContextMenuSubContent
-            └── ContextMenuItem
+            └── ContextMenuGroup
+                ├── ContextMenuItem
+                └── ContextMenuItem
 ```
 
 ## Basic

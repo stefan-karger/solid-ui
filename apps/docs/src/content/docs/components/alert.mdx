@@ -48,7 +48,12 @@ npm install class-variance-authority
 ## Usage
 
 ```tsx
-import { Alert, AlertAction, AlertDescription, AlertTitle } from "~/components/ui/alert"
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle
+} from "~/components/ui/alert"
 import { Button } from "~/components/ui/button"
 ```
 
@@ -71,7 +76,7 @@ Use the following composition to build an `Alert`:
 
 ```text
 Alert
-├── Icon or custom media
+├── Icon
 ├── AlertTitle
 ├── AlertDescription
 └── AlertAction
@@ -87,7 +92,10 @@ A basic alert with an icon, title and description.
 
 Use `variant="destructive"` to create a destructive alert.
 
-<ComponentPreview name="alert-destructive" previewClassName="h-auto sm:h-72 p-6" />
+<ComponentPreview
+  name="alert-destructive"
+  previewClassName="h-auto sm:h-72 p-6"
+/>
 
 ## Action
 

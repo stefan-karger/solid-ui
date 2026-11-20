@@ -13,7 +13,11 @@ export default function TooltipSides() {
           <Tooltip>
             <TooltipTrigger
               render={(partProps) => (
-                <Button {...partProps} variant="outline" class="w-fit capitalize" />
+                <Button
+                  {...partProps}
+                  variant="outline"
+                  class="w-fit capitalize"
+                />
               )}
             >
               {side}

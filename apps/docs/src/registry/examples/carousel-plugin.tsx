@@ -12,7 +12,12 @@ import {
 
 export default function CarouselPlugin() {
   return (
-    <Carousel defaultPlaying interval={2000} loop class="w-full max-w-[10rem] sm:max-w-xs">
+    <Carousel
+      defaultPlaying
+      interval={2000}
+      loop
+      class="w-full max-w-[10rem] sm:max-w-xs"
+    >
       <CarouselViewport>
         <CarouselContent>
           <For each={[1, 2, 3, 4, 5]}>

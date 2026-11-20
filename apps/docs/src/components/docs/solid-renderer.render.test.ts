@@ -6,12 +6,18 @@ import { describe, expect, it } from "vitest"
 describe("Solid server renderer compatibility", () => {
   const context = () =>
     ({
-      result: { componentMetadata: new Map(), resolve: async (specifier: string) => specifier }
+      result: {
+        componentMetadata: new Map(),
+        resolve: async (specifier: string) => specifier
+      }
     }) as ThisParameterType<typeof solidRenderer.renderToStaticMarkup>
 
   it("uses unique hydration IDs per request and resets them for a new request", async () => {
     const request = context()
-    const render = (ctx: ReturnType<typeof context>, hydrate: "load" = "load") =>
+    const render = (
+      ctx: ReturnType<typeof context>,
+      hydrate: "load" = "load"
+    ) =>
       solidRenderer.renderToStaticMarkup.call(
         ctx,
         () => ssr("<p>Island</p>"),
@@ -19,18 +25,32 @@ describe("Solid server renderer compatibility", () => {
         {},
         { hydrate, astroStaticSlot: true, displayName: "RendererFixture" }
       )
-    expect((await render(request)).attrs).toEqual({ "data-solid-render-id": "s0" })
-    expect((await render(request)).attrs).toEqual({ "data-solid-render-id": "s1" })
-    expect((await render(context())).attrs).toEqual({ "data-solid-render-id": "s0" })
+    expect((await render(request)).attrs).toEqual({
+      "data-solid-render-id": "s0"
+    })
+    expect((await render(request)).attrs).toEqual({
+      "data-solid-render-id": "s1"
+    })
+    expect((await render(context())).attrs).toEqual({
+      "data-solid-render-id": "s0"
+    })
   })
 
   it("renders default and normalized named slots without changing serialized props", async () => {
     const props = Object.freeze({ label: "untouched" })
-    const slots = Object.freeze({ default: "<b>Default</b>", "named-slot": "<i>Named</i>" })
+    const slots = Object.freeze({
+      default: "<b>Default</b>",
+      "named-slot": "<i>Named</i>"
+    })
     const Component = (value: {
       children: ReturnType<typeof ssr>
       namedSlot: ReturnType<typeof ssr>
-    }) => ssr(["<section>", "<aside>", "</aside></section>"], value.children, value.namedSlot)
+    }) =>
+      ssr(
+        ["<section>", "<aside>", "</aside></section>"],
+        value.children,
+        value.namedSlot
+      )
     const rendered = await solidRenderer.renderToStaticMarkup.call(
       context(),
       Component,
@@ -39,13 +59,16 @@ describe("Solid server renderer compatibility", () => {
       { hydrate: "load", astroStaticSlot: true, displayName: "RendererFixture" }
     )
     expect(rendered.html).toContain("<astro-slot><b>Default</b></astro-slot>")
-    expect(rendered.html).toContain('<astro-slot name="namedSlot"><i>Named</i></astro-slot>')
+    expect(rendered.html).toContain(
+      '<astro-slot name="namedSlot"><i>Named</i></astro-slot>'
+    )
     expect(props).toEqual({ label: "untouched" })
   })
 
   it("escapes named slot attributes and renders static slots without scripts", async () => {
     const name = 'quote"<&'
-    const Component = (props: Record<string, ReturnType<typeof ssr>>) => props[name]
+    const Component = (props: Record<string, ReturnType<typeof ssr>>) =>
+      props[name]
     const rendered = await solidRenderer.renderToStaticMarkup.call(
       context(),
       Component,
@@ -59,7 +82,9 @@ describe("Solid server renderer compatibility", () => {
   })
 
   it("waits for lazy components during SSR", async () => {
-    const Lazy = lazy(async () => ({ default: () => ssr("<p>Async complete</p>") }))
+    const Lazy = lazy(async () => ({
+      default: () => ssr("<p>Async complete</p>")
+    }))
     const rendered = await solidRenderer.renderToStaticMarkup.call(
       context(),
       () => createComponent(Lazy, {}),
@@ -82,7 +107,9 @@ describe("Solid server renderer compatibility", () => {
       return $$renderer
     }
     for (const candidate of [null, {}, QwikComponent, LegacySvelte, Svelte]) {
-      await expect(solidRenderer.check.call(request, candidate, {}, {})).resolves.toBe(false)
+      await expect(
+        solidRenderer.check.call(request, candidate, {}, {})
+      ).resolves.toBe(false)
     }
     await expect(
       solidRenderer.check.call(request, () => ssr("<p>Solid</p>"), {}, {})
@@ -104,11 +131,20 @@ describe("Solid server renderer compatibility", () => {
       }
     )
     const request = context() as ThisParameterType<typeof solidRenderer.check>
-    await expect(solidRenderer.check.call(request, Component, {}, {})).resolves.toBe(true)
-    await expect(solidRenderer.check.call(request, Component, {}, {})).resolves.toBe(true)
+    await expect(
+      solidRenderer.check.call(request, Component, {}, {})
+    ).resolves.toBe(true)
+    await expect(
+      solidRenderer.check.call(request, Component, {}, {})
+    ).resolves.toBe(true)
     expect(renders).toBe(1)
     await expect(
-      solidRenderer.check.call(request, () => ({ $$typeof: Symbol.for("react.element") }), {}, {})
+      solidRenderer.check.call(
+        request,
+        () => ({ $$typeof: Symbol.for("react.element") }),
+        {},
+        {}
+      )
     ).resolves.toBe(false)
   })
 
@@ -132,7 +168,10 @@ describe("Solid server renderer compatibility", () => {
 
   it("propagates synchronous render failures to Astro", async () => {
     const context = {
-      result: { componentMetadata: new Map(), resolve: async (specifier: string) => specifier }
+      result: {
+        componentMetadata: new Map(),
+        resolve: async (specifier: string) => specifier
+      }
     } as ThisParameterType<typeof solidRenderer.renderToStaticMarkup>
 
     await expect(
@@ -162,7 +201,11 @@ describe("Solid server renderer compatibility", () => {
         () => createComponent(Failing, {}),
         {},
         {},
-        { hydrate: "load", astroStaticSlot: true, displayName: "AsyncErrorFixture" }
+        {
+          hydrate: "load",
+          astroStaticSlot: true,
+          displayName: "AsyncErrorFixture"
+        }
       )
     ).rejects.toThrow("Async renderer regression probe")
   })

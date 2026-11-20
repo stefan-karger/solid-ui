@@ -18,7 +18,11 @@ export default function InputOTPControlled() {
         </InputOTPGroup>
       </InputOTP>
       <div class="text-center text-sm">
-        {value() === "" ? <>Enter your one-time password.</> : <>You entered: {value()}</>}
+        {value() === "" ? (
+          <>Enter your one-time password.</>
+        ) : (
+          <>You entered: {value()}</>
+        )}
       </div>
     </div>
   )

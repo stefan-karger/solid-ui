@@ -33,19 +33,31 @@ const Alert = (props: AlertProps) => {
 type AlertTitleProps = ComponentProps<"h5">
 
 const AlertTitle = (props: AlertTitleProps) => (
-  <h5 data-slot="alert-title" {...props} class={cn("cn-alert-title", props.class)} />
+  <h5
+    data-slot="alert-title"
+    {...props}
+    class={cn("cn-alert-title", props.class)}
+  />
 )
 
 type AlertDescriptionProps = ComponentProps<"div">
 
 const AlertDescription = (props: AlertDescriptionProps) => (
-  <div data-slot="alert-description" {...props} class={cn("cn-alert-description", props.class)} />
+  <div
+    data-slot="alert-description"
+    {...props}
+    class={cn("cn-alert-description", props.class)}
+  />
 )
 
 type AlertActionProps = ComponentProps<"div">
 
 const AlertAction = (props: AlertActionProps) => (
-  <div data-slot="alert-action" {...props} class={cn("cn-alert-action", props.class)} />
+  <div
+    data-slot="alert-action"
+    {...props}
+    class={cn("cn-alert-action", props.class)}
+  />
 )
 
 export {

@@ -8,7 +8,15 @@ import {
 export const LIGHT_CODE_THEME = "github-light-default"
 export const DARK_CODE_THEME = "github-dark"
 
-const registryLanguages = ["tsx", "ts", "jsx", "js", "css", "json", "text"] as const
+const registryLanguages = [
+  "tsx",
+  "ts",
+  "jsx",
+  "js",
+  "css",
+  "json",
+  "text"
+] as const
 let highlighterPromise: Promise<Highlighter> | undefined
 
 function getHighlighter() {
@@ -19,9 +27,14 @@ function getHighlighter() {
   return highlighterPromise
 }
 
-export async function highlightCode(code: string, language: string): Promise<string> {
+export async function highlightCode(
+  code: string,
+  language: string
+): Promise<string> {
   const highlighter = await getHighlighter()
-  const lang = registryLanguages.includes(language as (typeof registryLanguages)[number])
+  const lang = registryLanguages.includes(
+    language as (typeof registryLanguages)[number]
+  )
     ? (language as BundledLanguage)
     : "text"
 

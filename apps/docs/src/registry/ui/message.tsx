@@ -3,7 +3,9 @@ import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-export function MessageGroup(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function MessageGroup(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
@@ -14,7 +16,10 @@ export function MessageGroup(props: Omit<ComponentProps<"div">, "class"> & { cla
 }
 
 export function Message(
-  props: Omit<ComponentProps<"div">, "class"> & { class?: string; align?: "start" | "end" }
+  props: Omit<ComponentProps<"div">, "class"> & {
+    class?: string
+    align?: "start" | "end"
+  }
 ) {
   const rest = omit(props, "class", "align")
   return (
@@ -30,7 +35,9 @@ export function Message(
   )
 }
 
-export function MessageAvatar(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function MessageAvatar(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
@@ -43,27 +50,39 @@ export function MessageAvatar(props: Omit<ComponentProps<"div">, "class"> & { cl
   )
 }
 
-export function MessageContent(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function MessageContent(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
       data-slot="message-content"
-      class={cn("cn-message-content flex w-full min-w-0 flex-col wrap-break-word", props.class)}
+      class={cn(
+        "cn-message-content flex w-full min-w-0 flex-col wrap-break-word",
+        props.class
+      )}
     />
   )
 }
 
-export function MessageHeader(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function MessageHeader(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
       data-slot="message-header"
-      class={cn("cn-message-header flex max-w-full min-w-0 items-center", props.class)}
+      class={cn(
+        "cn-message-header flex max-w-full min-w-0 items-center",
+        props.class
+      )}
     />
   )
 }
 
-export function MessageFooter(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function MessageFooter(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}

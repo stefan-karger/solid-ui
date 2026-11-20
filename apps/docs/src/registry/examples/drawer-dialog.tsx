@@ -23,7 +23,8 @@ import {
 import { Input } from "~/registry/ui/input"
 import { Label } from "~/registry/ui/label"
 
-const description = "Make changes to your profile here. Click save when you're done."
+const description =
+  "Make changes to your profile here. Click save when you're done."
 
 function ProfileForm(props: { class?: string; onSave: () => void }) {
   return (
@@ -36,7 +37,11 @@ function ProfileForm(props: { class?: string; onSave: () => void }) {
     >
       <div class="grid gap-3">
         <Label for="drawer-profile-email">Email</Label>
-        <Input type="email" id="drawer-profile-email" value="shadcn@example.com" />
+        <Input
+          type="email"
+          id="drawer-profile-email"
+          value="shadcn@example.com"
+        />
       </div>
       <div class="grid gap-3">
         <Label for="drawer-profile-username">Username</Label>
@@ -56,7 +61,9 @@ export default function DrawerDialogDemo() {
       when={mobile()}
       fallback={
         <Dialog open={open()} onOpenChange={setOpen}>
-          <DialogTrigger render={(part) => <Button {...part} variant="outline" />}>
+          <DialogTrigger
+            render={(part) => <Button {...part} variant="outline" />}
+          >
             Edit Profile
           </DialogTrigger>
           <DialogContent class="sm:max-w-[425px]">
@@ -70,7 +77,9 @@ export default function DrawerDialogDemo() {
       }
     >
       <Drawer open={open()} onOpenChange={setOpen}>
-        <DrawerTrigger render={(part) => <Button {...part} variant="outline" />}>
+        <DrawerTrigger
+          render={(part) => <Button {...part} variant="outline" />}
+        >
           Edit Profile
         </DrawerTrigger>
         <DrawerContent>
@@ -80,7 +89,9 @@ export default function DrawerDialogDemo() {
           </DrawerHeader>
           <ProfileForm class="px-4" onSave={close} />
           <DrawerFooter class="pt-2">
-            <DrawerClose render={(part) => <Button {...part} variant="outline" />}>
+            <DrawerClose
+              render={(part) => <Button {...part} variant="outline" />}
+            >
               Cancel
             </DrawerClose>
           </DrawerFooter>

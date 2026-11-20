@@ -1,4 +1,9 @@
-import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from "~/registry/ui/bubble"
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions
+} from "~/registry/ui/bubble"
 
 export default function BubbleGroupDemo() {
   return (
@@ -22,8 +27,8 @@ export default function BubbleGroupDemo() {
       </BubbleGroup>
       <Bubble variant="muted">
         <BubbleContent>
-          Want me to diff yesterday&apos;s you against today&apos;s you? It&apos;s a bit
-          embarrassing.
+          Want me to diff yesterday&apos;s you against today&apos;s you?
+          It&apos;s a bit embarrassing.
         </BubbleContent>
       </Bubble>
     </div>

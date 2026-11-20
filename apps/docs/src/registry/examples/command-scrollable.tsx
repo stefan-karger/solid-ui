@@ -59,7 +59,12 @@ const options: CommandGroupOption[] = [
     items: [
       { value: "home", label: "Home", shortcut: "⌘H", icon: HouseIcon },
       { value: "inbox", label: "Inbox", shortcut: "⌘I", icon: Inbox },
-      { value: "documents", label: "Documents", shortcut: "⌘D", icon: FileText },
+      {
+        value: "documents",
+        label: "Documents",
+        shortcut: "⌘D",
+        icon: FileText
+      },
       { value: "folders", label: "Folders", shortcut: "⌘F", icon: Folder }
     ]
   },
@@ -67,7 +72,12 @@ const options: CommandGroupOption[] = [
     heading: "Actions",
     items: [
       { value: "new-file", label: "New File", shortcut: "⌘N", icon: Plus },
-      { value: "new-folder", label: "New Folder", shortcut: "⇧⌘N", icon: FolderPlus },
+      {
+        value: "new-folder",
+        label: "New Folder",
+        shortcut: "⇧⌘N",
+        icon: FolderPlus
+      },
       { value: "copy", label: "Copy", shortcut: "⌘C", icon: Copy },
       { value: "cut", label: "Cut", shortcut: "⌘X", icon: Scissors },
       { value: "paste", label: "Paste", shortcut: "⌘V", icon: ClipboardPaste },
@@ -90,7 +100,11 @@ const options: CommandGroupOption[] = [
       { value: "billing", label: "Billing", shortcut: "⌘B", icon: CreditCard },
       { value: "settings", label: "Settings", shortcut: "⌘S", icon: Settings },
       { value: "notifications", label: "Notifications", icon: Bell },
-      { value: "help-support", label: "Help & Support", icon: CircleQuestionMarkIcon }
+      {
+        value: "help-support",
+        label: "Help & Support",
+        icon: CircleQuestionMarkIcon
+      }
     ]
   },
   {
@@ -156,11 +170,16 @@ export default function CommandScrollable() {
                     <CommandGroupLabel>{group.heading}</CommandGroupLabel>
                     <For each={group["items"]}>
                       {(option) => (
-                        <CommandItem value={option["value"]} label={option["label"]}>
+                        <CommandItem
+                          value={option["value"]}
+                          label={option["label"]}
+                        >
                           <option.icon class="size-4" />
                           <span>{option.label}</span>
                           <Show when={option.shortcut}>
-                            {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
+                            {(shortcut) => (
+                              <CommandShortcut>{shortcut()}</CommandShortcut>
+                            )}
                           </Show>
                         </CommandItem>
                       )}

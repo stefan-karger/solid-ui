@@ -1,4 +1,8 @@
-import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton
+} from "~/registry/ui/input-group"
 
 export default function InputGroupCustom() {
   return (

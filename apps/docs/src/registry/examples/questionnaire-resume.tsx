@@ -22,7 +22,9 @@ export default function QuestionnaireResume() {
   function handleSubmit(formData: QuestionnaireAnswers) {
     const answers = {
       change: formData.change,
-      verification: Array.isArray(formData.verification) ? formData.verification : [],
+      verification: Array.isArray(formData.verification)
+        ? formData.verification
+        : [],
       notes: formData.notes
     }
 
@@ -50,33 +52,51 @@ export default function QuestionnaireResume() {
         <QuestionnaireProgress />
 
         <QuestionnaireItem value="change">
-          <QuestionnaireTitle>What kind of migration is this?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What kind of migration is this?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             This answer was saved during the previous session.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="incremental">Incremental migration</QuestionnaireChoice>
-            <QuestionnaireChoice value="cutover">Single cutover</QuestionnaireChoice>
+            <QuestionnaireChoice value="incremental">
+              Incremental migration
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="cutover">
+              Single cutover
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
 
         <QuestionnaireItem value="verification">
-          <QuestionnaireTitle>How should the migration be verified?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            How should the migration be verified?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             These checks were selected during the previous session.
           </QuestionnaireDescription>
           <QuestionnaireChoices multiple>
-            <QuestionnaireChoice value="tests">Run migration tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="typecheck">Run the typecheck</QuestionnaireChoice>
-            <QuestionnaireChoice value="manual">Perform a manual smoke test</QuestionnaireChoice>
+            <QuestionnaireChoice value="tests">
+              Run migration tests
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="typecheck">
+              Run the typecheck
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="manual">
+              Perform a manual smoke test
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
 
         <QuestionnaireItem value="notes">
-          <QuestionnaireTitle>Anything else the agent should remember?</QuestionnaireTitle>
-          <QuestionnaireDescription>This note was saved with the draft.</QuestionnaireDescription>
+          <QuestionnaireTitle>
+            Anything else the agent should remember?
+          </QuestionnaireTitle>
+          <QuestionnaireDescription>
+            This note was saved with the draft.
+          </QuestionnaireDescription>
           <QuestionnaireInput aria-label="Saved migration note" />
         </QuestionnaireItem>
 

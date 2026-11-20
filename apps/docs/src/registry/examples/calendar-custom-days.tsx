@@ -31,7 +31,9 @@ export default function CalendarCustomDays() {
         <CalendarNext />
       </div>
       <CalendarGrid>
-        <SdkCalendarWeekdays>{(index) => <CalendarWeekday index={index} />}</SdkCalendarWeekdays>
+        <SdkCalendarWeekdays>
+          {(index) => <CalendarWeekday index={index} />}
+        </SdkCalendarWeekdays>
         <SdkCalendarWeeks>
           {(cell) => (
             <CalendarDayButton

@@ -8,7 +8,11 @@ import { BubbleContent } from "./bubble"
 import { Button } from "./button"
 import { Marker } from "./marker"
 import { Separator } from "./separator"
-import { TraceCollapsible, TraceCollapsibleContent, TraceCollapsibleTrigger } from "./trace"
+import {
+  TraceCollapsible,
+  TraceCollapsibleContent,
+  TraceCollapsibleTrigger
+} from "./trace"
 
 let dispose: VoidFunction | undefined
 afterEach(() => {
@@ -63,7 +67,11 @@ it("forwards name, content, attributes, and handlers through marker and bubble r
   dispose = render(
     () => (
       <>
-        <Marker id="marker" variant="separator" render={(part) => <a {...part} href="#updates" />}>
+        <Marker
+          id="marker"
+          variant="separator"
+          render={(part) => <a {...part} href="#updates" />}
+        >
           Updates
         </Marker>
         <BubbleContent
@@ -155,9 +163,13 @@ it("preserves composed separator and trace slots with their SDK semantics", () =
   const separator = host.querySelector('[data-slot="item-separator"]')
   expect(separator?.getAttribute("aria-orientation")).toBe("vertical")
   const trace = host.querySelector('[data-slot="trace-collapsible"]')
-  expect(trace?.querySelector("button")?.dataset.slot).toBe("trace-collapsible-trigger")
-  expect(trace?.querySelector("button")?.getAttribute("aria-expanded")).toBe("true")
-  expect(trace?.querySelector('[data-slot="trace-collapsible-content"]')?.textContent).toBe(
-    "Trace output"
+  expect(trace?.querySelector("button")?.dataset.slot).toBe(
+    "trace-collapsible-trigger"
   )
+  expect(trace?.querySelector("button")?.getAttribute("aria-expanded")).toBe(
+    "true"
+  )
+  expect(
+    trace?.querySelector('[data-slot="trace-collapsible-content"]')?.textContent
+  ).toBe("Trace output")
 })

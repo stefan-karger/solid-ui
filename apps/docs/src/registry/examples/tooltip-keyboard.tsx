@@ -8,7 +8,9 @@ export default function TooltipKeyboard() {
   return (
     <Tooltip>
       <TooltipTrigger
-        render={(partProps) => <Button {...partProps} variant="outline" size="icon-sm" />}
+        render={(partProps) => (
+          <Button {...partProps} variant="outline" size="icon-sm" />
+        )}
       >
         <SaveIcon />
       </TooltipTrigger>

@@ -35,10 +35,14 @@ const {
 } = Astro.props
 if (!name) throw new Error("[registry] ComponentPreview requires a name")
 if (direction !== "ltr" && direction !== "rtl") {
-  throw new Error(`[registry] ComponentPreview received invalid direction "${direction}"`)
+  throw new Error(
+    `[registry] ComponentPreview received invalid direction "${direction}"`
+  )
 }
 if (locale !== undefined && !locale.trim()) {
-  throw new Error("[registry] ComponentPreview locale must be a non-empty string")
+  throw new Error(
+    "[registry] ComponentPreview locale must be a non-empty string"
+  )
 }
 
 const resolvedLocale = locale?.trim() ?? (direction === "rtl" ? "ar" : "en-US")
@@ -55,16 +59,18 @@ if (!isBlock && descriptor.type === "registry:block") {
 }
 
 const alignmentClasses = {
-  start: "items-start justify-start text-left",
-  center: "items-center justify-center text-center",
-  end: "items-end justify-end text-right"
+  start: "items-start",
+  center: "items-center",
+  end: "items-start sm:items-end"
 } as const
 
 const source =
   hideCode || isBlock
     ? undefined
     : await getRegistrySource({ name, file: file ?? descriptor.filePath })
-const highlightedCode = source ? await highlightCode(source.code, source.language) : undefined
+const highlightedCode = source
+  ? await highlightCode(source.code, source.language)
+  : undefined
 const blockPreviewClassName = previewClassName ?? "aspect-[4/2.5] min-h-[24rem]"
 const blockHref = `/view/${encodeURIComponent(name)}`
 ---
@@ -110,7 +116,7 @@ const blockHref = `/view/${encodeURIComponent(name)}`
       <div data-slot="preview">
         <div
           class={cn(
-            "preview relative flex h-72 w-full flex-col p-10",
+            "preview relative flex h-72 w-full justify-center p-10",
             alignmentClasses[align],
             previewClassName
           )}

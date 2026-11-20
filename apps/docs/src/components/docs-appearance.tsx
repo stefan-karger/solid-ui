@@ -11,10 +11,18 @@ import {
   type DocsStyle
 } from "~/lib/appearance"
 import { Button } from "~/registry/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 export default function DocsAppearance(props: { defaultStyle?: DocsStyle }) {
-  const [style, setStyle] = createSignal<DocsStyle>(props.defaultStyle ?? "nova")
+  const [style, setStyle] = createSignal<DocsStyle>(
+    props.defaultStyle ?? "nova"
+  )
   const [mode, setMode] = createSignal<ColorMode>("light")
   createEffect(
     () => true,
@@ -49,7 +57,11 @@ export default function DocsAppearance(props: { defaultStyle?: DocsStyle }) {
           saveAppearance(value, mode())
         }}
       >
-        <SelectTrigger aria-label="Preview style" size="sm" class="w-[4.75rem] capitalize sm:w-24">
+        <SelectTrigger
+          aria-label="Preview style"
+          size="sm"
+          class="w-[4.75rem] capitalize sm:w-24"
+        >
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

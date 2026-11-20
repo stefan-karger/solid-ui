@@ -21,7 +21,10 @@ function Actions() {
   return (
     <QuestionnaireActions>
       <QuestionnairePrevious />
-      <Show when={last()} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={last()}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Review plan</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -65,35 +68,59 @@ export default function QuestionnaireProgressDemo() {
           <QuestionnaireTitle>How large is the change?</QuestionnaireTitle>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="small">Small patch</QuestionnaireChoice>
-            <QuestionnaireChoice value="medium">Feature-sized change</QuestionnaireChoice>
-            <QuestionnaireChoice value="large">Cross-package change</QuestionnaireChoice>
+            <QuestionnaireChoice value="medium">
+              Feature-sized change
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="large">
+              Cross-package change
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
         <QuestionnaireItem value="strategy">
-          <QuestionnaireTitle>How should commits be organized?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            How should commits be organized?
+          </QuestionnaireTitle>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="single">Single commit</QuestionnaireChoice>
-            <QuestionnaireChoice value="logical">Logical commits</QuestionnaireChoice>
-            <QuestionnaireChoice value="squash">Squash before review</QuestionnaireChoice>
+            <QuestionnaireChoice value="single">
+              Single commit
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="logical">
+              Logical commits
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="squash">
+              Squash before review
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
         <QuestionnaireItem value="tests">
           <QuestionnaireTitle>Which tests should run?</QuestionnaireTitle>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="targeted">Targeted tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="package">Package suite</QuestionnaireChoice>
-            <QuestionnaireChoice value="workspace">Full workspace</QuestionnaireChoice>
+            <QuestionnaireChoice value="targeted">
+              Targeted tests
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="package">
+              Package suite
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="workspace">
+              Full workspace
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
         <QuestionnaireItem value="delivery">
-          <QuestionnaireTitle>How should the work be delivered?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            How should the work be delivered?
+          </QuestionnaireTitle>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="patch">Patch only</QuestionnaireChoice>
-            <QuestionnaireChoice value="commit">Committed locally</QuestionnaireChoice>
-            <QuestionnaireChoice value="branch">Push a review branch</QuestionnaireChoice>
+            <QuestionnaireChoice value="commit">
+              Committed locally
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="branch">
+              Push a review branch
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

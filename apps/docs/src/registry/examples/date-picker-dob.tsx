@@ -5,7 +5,12 @@ import {
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Calendar, CalendarMonth, CalendarNext, CalendarPrevious } from "~/registry/ui/calendar"
+import {
+  Calendar,
+  CalendarMonth,
+  CalendarNext,
+  CalendarPrevious
+} from "~/registry/ui/calendar"
 import { Field, FieldLabel } from "~/registry/ui/field"
 import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
 

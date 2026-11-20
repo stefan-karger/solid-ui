@@ -41,7 +41,11 @@ export default function CodeBlockDiff() {
         </CodeBlockHeader>
         <CodeBlockContent>
           <For each={patch.split("\n")}>
-            {(line) => <CodeBlockLine variant={getVariant(line)}>{line.slice(1)}</CodeBlockLine>}
+            {(line) => (
+              <CodeBlockLine variant={getVariant(line)}>
+                {line.slice(1)}
+              </CodeBlockLine>
+            )}
           </For>
         </CodeBlockContent>
       </CodeBlock>

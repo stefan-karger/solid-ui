@@ -70,14 +70,17 @@ import { Button } from "~/components/ui/button"
 
 ```tsx showLineNumbers
 <AlertDialog>
-  <AlertDialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
+  <AlertDialogTrigger
+    render={(partProps) => <Button {...partProps} variant="outline" />}
+  >
     Show Dialog
   </AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete your account from our servers.
+        This action cannot be undone. This will permanently delete your account
+        from our servers.
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
@@ -97,9 +100,9 @@ AlertDialog
 ├── AlertDialogTrigger
 └── AlertDialogContent
     ├── AlertDialogHeader
+    │   ├── AlertDialogMedia
     │   ├── AlertDialogTitle
-    │   ├── AlertDialogDescription
-    │   └── AlertDialogMedia
+    │   └── AlertDialogDescription
     └── AlertDialogFooter
         ├── AlertDialogCancel
         └── AlertDialogAction
@@ -113,25 +116,25 @@ A basic alert dialog with a title, description, and cancel and continue buttons.
 
 ## Small
 
-Use the `size="sm"` prop to render a compact alert dialog.
+Use the `size="sm"` prop to make the alert dialog smaller.
 
 <ComponentPreview name="alert-dialog-small" previewClassName="h-56" />
 
 ## Media
 
-Use `AlertDialogMedia` to add a visual cue such as an icon.
+Use the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
 
 <ComponentPreview name="alert-dialog-media" previewClassName="h-56" />
 
 ## Small with Media
 
-Combine `size="sm"` with `AlertDialogMedia` for compact confirmation flows.
+Use the `size="sm"` prop to make the alert dialog smaller and the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
 
 <ComponentPreview name="alert-dialog-small-media" previewClassName="h-56" />
 
 ## Destructive
 
-Use `variant="destructive"` on the trigger and action to highlight irreversible operations.
+Use the `AlertDialogAction` component to add a destructive action button to the alert dialog.
 
 <ComponentPreview name="alert-dialog-destructive" previewClassName="h-56" />
 

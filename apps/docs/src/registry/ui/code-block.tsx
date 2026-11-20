@@ -78,7 +78,10 @@ export function CodeBlockFooter(props: ComponentProps<"div">) {
     <div
       {...props}
       data-slot="code-block-footer"
-      class={cn("cn-code-block-footer flex min-w-0 shrink-0 items-center", props.class)}
+      class={cn(
+        "cn-code-block-footer flex min-w-0 shrink-0 items-center",
+        props.class
+      )}
     />
   )
 }
@@ -126,7 +129,9 @@ export function CodeBlockCopyButton(
         {...rest}
         data-slot="code-block-copy-button"
         data-copied={copied() || undefined}
-        aria-label={copied() ? "Copied" : failed() ? "Copy failed" : "Copy code"}
+        aria-label={
+          copied() ? "Copied" : failed() ? "Copy failed" : "Copy code"
+        }
         onClick={copy}
       >
         {copied() ? <CheckIcon /> : <CopyIcon />}
@@ -146,7 +151,15 @@ export function CodeBlockContent(
     style?: JSX.CSSProperties
   }
 ) {
-  const rest = omit(props, "class", "children", "wrap", "lineNumbers", "startLine", "style")
+  const rest = omit(
+    props,
+    "class",
+    "children",
+    "wrap",
+    "lineNumbers",
+    "startLine",
+    "style"
+  )
   return (
     <pre
       {...rest}
@@ -155,7 +168,10 @@ export function CodeBlockContent(
       data-numbered={props.lineNumbers || undefined}
       dir="ltr"
       tabindex={0}
-      style={{ "counter-reset": "line " + ((props.startLine ?? 1) - 1), ...props.style }}
+      style={{
+        "counter-reset": "line " + ((props.startLine ?? 1) - 1),
+        ...props.style
+      }}
       class={cn(
         "cn-code-block-content min-h-0 min-w-0 overflow-auto text-start font-mono outline-none data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap",
         props.class
@@ -189,7 +205,9 @@ export function CodeBlockLine(
       class={cn(codeBlockLineVariants({ variant: props.variant }), props.class)}
     >
       <span data-slot="code-block-line-content" class="min-w-0">
-        {props.children === undefined || props.children === null || props.children === ""
+        {props.children === undefined ||
+        props.children === null ||
+        props.children === ""
           ? "\n"
           : props.children}
       </span>

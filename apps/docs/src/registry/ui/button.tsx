@@ -52,7 +52,10 @@ function Button<T extends ValidComponent = "button">(props: ButtonProps<T>) {
       data-slot="button"
       data-variant={props.variant === undefined ? "default" : props.variant}
       data-size={props.size === undefined ? "default" : props.size}
-      class={cn(buttonVariants({ variant: props.variant, size: props.size }), props.class)}
+      class={cn(
+        buttonVariants({ variant: props.variant, size: props.size }),
+        props.class
+      )}
       {...rest}
     />
   )

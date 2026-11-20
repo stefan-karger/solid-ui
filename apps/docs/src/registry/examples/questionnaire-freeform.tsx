@@ -33,7 +33,9 @@ export default function QuestionnaireFreeform() {
         onComplete={handleSubmit}
       >
         <QuestionnaireItem value="approach">
-          <QuestionnaireTitle>How should the agent approach this refactor?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            How should the agent approach this refactor?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Choose a strategy or write a more specific instruction.
           </QuestionnaireDescription>
@@ -41,7 +43,9 @@ export default function QuestionnaireFreeform() {
             <QuestionnaireChoice value="incremental">
               Make the smallest safe change
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="module">Refactor one module at a time</QuestionnaireChoice>
+            <QuestionnaireChoice value="module">
+              Refactor one module at a time
+            </QuestionnaireChoice>
             <QuestionnaireChoice value="rewrite">
               Replace the implementation completely
             </QuestionnaireChoice>

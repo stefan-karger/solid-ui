@@ -11,7 +11,9 @@ export default function CalendarBookedDates() {
         defaultMonth="2026-11"
         class="rounded-lg border"
       />
-      <p class="text-center text-xs text-muted-foreground">Booked dates are unavailable.</p>
+      <p class="text-center text-xs text-muted-foreground">
+        Booked dates are unavailable.
+      </p>
     </div>
   )
 }

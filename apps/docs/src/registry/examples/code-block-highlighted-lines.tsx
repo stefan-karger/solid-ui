@@ -1,6 +1,10 @@
 import { For } from "solid-js"
 
-import { CodeBlock, CodeBlockContent, CodeBlockLine } from "~/registry/ui/code-block"
+import {
+  CodeBlock,
+  CodeBlockContent,
+  CodeBlockLine
+} from "~/registry/ui/code-block"
 
 const code = `export default {
   experimental: {
@@ -21,7 +25,11 @@ export default function CodeBlockHighlightedLines() {
         <CodeBlockContent lineNumbers>
           <For each={code.split("\n")}>
             {(line, index) => (
-              <CodeBlockLine variant={highlighted.includes(index()) ? "highlighted" : "default"}>
+              <CodeBlockLine
+                variant={
+                  highlighted.includes(index()) ? "highlighted" : "default"
+                }
+              >
                 {line}
               </CodeBlockLine>
             )}

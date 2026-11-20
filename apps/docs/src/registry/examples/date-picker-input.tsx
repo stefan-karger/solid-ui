@@ -23,7 +23,9 @@ export default function DatePickerInputDemo() {
   const [open, setOpen] = createSignal(false)
   const [date, setDate] = createSignal(initialDate)
   const [month, setMonth] = createSignal(initialDate.slice(0, 7))
-  const [value, setValue] = createSignal(formatDate.format(new Date(initialDate)))
+  const [value, setValue] = createSignal(
+    formatDate.format(new Date(initialDate))
+  )
 
   return (
     <Field class="mx-auto w-48">
@@ -40,7 +42,13 @@ export default function DatePickerInputDemo() {
             if (Number.isNaN(parsed.getTime())) return
             const isoDate = /^\d{4}-\d{2}-\d{2}$/.test(text)
               ? text
-              : new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), parsed.getDate()))
+              : new Date(
+                  Date.UTC(
+                    parsed.getFullYear(),
+                    parsed.getMonth(),
+                    parsed.getDate()
+                  )
+                )
                   .toISOString()
                   .slice(0, 10)
             setDate(isoDate)
@@ -57,12 +65,21 @@ export default function DatePickerInputDemo() {
           <Popover open={open()} onOpenChange={setOpen}>
             <PopoverTrigger
               render={(part) => (
-                <InputGroupButton {...part} variant="ghost" size="icon-xs" aria-label="Select date">
+                <InputGroupButton
+                  {...part}
+                  variant="ghost"
+                  size="icon-xs"
+                  aria-label="Select date"
+                >
                   <CalendarIcon />
                 </InputGroupButton>
               )}
             />
-            <PopoverContent class="w-auto overflow-hidden p-0" align="end" sideOffset={10}>
+            <PopoverContent
+              class="w-auto overflow-hidden p-0"
+              align="end"
+              sideOffset={10}
+            >
               <Calendar
                 value={date()}
                 month={month()}

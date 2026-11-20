@@ -15,8 +15,14 @@ export function adaptTheme(source: string, extension: string) {
     .replaceAll("data-horizontal:", "data-[orientation=horizontal]:")
     .replaceAll("data-vertical:", "data-[orientation=vertical]:")
     .replaceAll("data-closed:", "data-ending-style:")
-    .replaceAll("**:[[cmdk-group-heading]]:", "**:data-[slot=command-group-label]:")
-    .replaceAll("[data-slot=input-group-control]", "[data-ui=input-group-control]")
+    .replaceAll(
+      "**:[[cmdk-group-heading]]:",
+      "**:data-[slot=command-group-label]:"
+    )
+    .replaceAll(
+      "[data-slot=input-group-control]",
+      "[data-ui=input-group-control]"
+    )
     .replaceAll("group-data-empty/combobox-content:", "data-empty:")
     .replaceAll("data-[vaul-drawer-direction=", "data-[side=")
   css = css.replace(
@@ -88,10 +94,15 @@ export function adaptTheme(source: string, extension: string) {
       start +
       body
         .replaceAll("data-active:", "data-selected:")
-        .replaceAll("data-selected/command-item:", "data-highlighted/command-item:")
+        .replaceAll(
+          "data-selected/command-item:",
+          "data-highlighted/command-item:"
+        )
         .replaceAll(
           "data-selected:",
-          start.includes("tabs-trigger") ? "data-selected:" : "data-highlighted:"
+          start.includes("tabs-trigger")
+            ? "data-selected:"
+            : "data-highlighted:"
         ) +
       end
   )

@@ -10,11 +10,19 @@ import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 const Tooltip = (props: TooltipProps) => <SdkTooltip {...props} />
-type TooltipTriggerProps = Omit<ComponentProps<typeof SdkTooltipTrigger>, "class"> & {
+type TooltipTriggerProps = Omit<
+  ComponentProps<typeof SdkTooltipTrigger>,
+  "class"
+> & {
   class?: string
 }
-const TooltipTrigger = (props: TooltipTriggerProps) => <SdkTooltipTrigger {...props} />
-type TooltipContentProps = Omit<ComponentProps<typeof SdkTooltipContent>, "class"> & {
+const TooltipTrigger = (props: TooltipTriggerProps) => (
+  <SdkTooltipTrigger {...props} />
+)
+type TooltipContentProps = Omit<
+  ComponentProps<typeof SdkTooltipContent>,
+  "class"
+> & {
   class?: string
 }
 const TooltipContent = (props: TooltipContentProps) => {

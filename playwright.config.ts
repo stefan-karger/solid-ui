@@ -55,7 +55,8 @@ export default defineConfig({
       timeout: 120_000
     },
     {
-      command: "pnpm --filter docs exec astro preview --host 127.0.0.1 --port 4324",
+      command:
+        "pnpm --filter docs exec astro preview --host 127.0.0.1 --port 4324",
       url: "http://127.0.0.1:4324",
       timeout: 120_000
     }

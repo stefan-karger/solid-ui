@@ -1,4 +1,9 @@
-import { CodeIcon, CopyIcon, CornerDownLeftIcon, RefreshCwIcon } from "lucide-solid"
+import {
+  CodeIcon,
+  CopyIcon,
+  CornerDownLeftIcon,
+  RefreshCwIcon
+} from "lucide-solid"
 
 import {
   InputGroup,

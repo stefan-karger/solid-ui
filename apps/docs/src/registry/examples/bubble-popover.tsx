@@ -36,7 +36,9 @@ export default function BubblePopoverDemo() {
             />
             <PopoverContent>
               <PopoverHeader>
-                <PopoverTitle class="text-sm">Command failed with exit code 1</PopoverTitle>
+                <PopoverTitle class="text-sm">
+                  Command failed with exit code 1
+                </PopoverTitle>
                 <PopoverDescription class="text-sm">
                   ENOENT: no such file or directory, open pnpm-lock.yaml
                 </PopoverDescription>

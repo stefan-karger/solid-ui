@@ -106,7 +106,10 @@ export default function CommandDemo() {
   })
 
   return (
-    <Command class="max-w-sm rounded-lg border shadow-md" onQueryChange={setQuery}>
+    <Command
+      class="max-w-sm rounded-lg border shadow-md"
+      onQueryChange={setQuery}
+    >
       <CommandInput
         placeholder="Type a command or search..."
         aria-label="Type a command or search..."
@@ -128,7 +131,9 @@ export default function CommandDemo() {
                       <option.icon class="size-4" />
                       <span>{option.label}</span>
                       <Show when={option.shortcut}>
-                        {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
+                        {(shortcut) => (
+                          <CommandShortcut>{shortcut()}</CommandShortcut>
+                        )}
                       </Show>
                     </CommandItem>
                   )}

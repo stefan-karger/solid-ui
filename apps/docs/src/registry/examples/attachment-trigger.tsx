@@ -41,7 +41,10 @@ export default function AttachmentTriggerDemo() {
           </AttachmentActions>
           <DialogTrigger
             render={(partProps) => (
-              <AttachmentTrigger {...partProps} aria-label="Preview research-summary.pdf" />
+              <AttachmentTrigger
+                {...partProps}
+                aria-label="Preview research-summary.pdf"
+              />
             )}
           />
         </Attachment>
@@ -49,8 +52,8 @@ export default function AttachmentTriggerDemo() {
           <DialogHeader>
             <DialogTitle>research-summary.pdf</DialogTitle>
             <DialogDescription>
-              The attachment trigger fills the card and opens the dialog, while the actions stay
-              independently clickable above it.
+              The attachment trigger fills the card and opens the dialog, while
+              the actions stay independently clickable above it.
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

@@ -8,8 +8,8 @@ export default function AlertColors() {
       <TriangleAlert class="size-4" />
       <AlertTitle>Your subscription will expire in 3 days.</AlertTitle>
       <AlertDescription>
-        Renew now to avoid service interruption or upgrade to a paid plan to continue using the
-        service.
+        Renew now to avoid service interruption or upgrade to a paid plan to
+        continue using the service.
       </AlertDescription>
     </Alert>
   )

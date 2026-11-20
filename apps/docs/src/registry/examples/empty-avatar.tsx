@@ -25,7 +25,8 @@ export default function EmptyAvatar() {
         </EmptyMedia>
         <EmptyTitle>User Offline</EmptyTitle>
         <EmptyDescription>
-          This user is currently offline. You can leave a message to notify them or try again later.
+          This user is currently offline. You can leave a message to notify them
+          or try again later.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>

@@ -2,17 +2,27 @@ import { ChevronsUpDown } from "lucide-solid"
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "~/registry/ui/collapsible"
 
 export default function CollapsibleDemo() {
   const [isOpen, setIsOpen] = createSignal(false)
 
   return (
-    <Collapsible open={isOpen()} onOpenChange={setIsOpen} class="flex w-[350px] flex-col gap-2">
+    <Collapsible
+      open={isOpen()}
+      onOpenChange={setIsOpen}
+      class="flex w-[350px] flex-col gap-2"
+    >
       <div class="flex items-center justify-between gap-4 px-4">
         <h4 class="text-sm font-semibold">Order #4189</h4>
         <CollapsibleTrigger
-          render={(partProps) => <Button {...partProps} variant="ghost" size="icon" />}
+          render={(partProps) => (
+            <Button {...partProps} variant="ghost" size="icon" />
+          )}
           class="size-8"
         >
           <ChevronsUpDown />

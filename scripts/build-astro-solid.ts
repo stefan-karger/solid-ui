@@ -10,7 +10,9 @@ import ts from "typescript"
 const root = fileURLToPath(new URL("../", import.meta.url))
 const vendor = join(root, "vendor/astro-solid")
 const upstream = join(vendor, "upstream")
-const manifest = JSON.parse(await readFile(join(vendor, "revision.json"), "utf8")) as {
+const manifest = JSON.parse(
+  await readFile(join(vendor, "revision.json"), "utf8")
+) as {
   revision: string
   files: Record<string, string>
   packages: Array<{
@@ -22,7 +24,8 @@ const manifest = JSON.parse(await readFile(join(vendor, "revision.json"), "utf8"
   }>
 }
 const dependencyArg = process.argv.indexOf("--dependencies")
-const dependencyRoot = dependencyArg < 0 ? root : resolve(process.argv[dependencyArg + 1]!)
+const dependencyRoot =
+  dependencyArg < 0 ? root : resolve(process.argv[dependencyArg + 1]!)
 for (const [file, hash] of Object.entries(manifest.files)) {
   const contents = await readFile(join(upstream, file))
   if (createHash("sha256").update(contents).digest("hex") !== hash)
@@ -32,7 +35,9 @@ async function sources(directory: string): Promise<string[]> {
   return (
     await Promise.all(
       (await readdir(directory, { withFileTypes: true })).map((entry) =>
-        entry.isDirectory() ? sources(join(directory, entry.name)) : [join(directory, entry.name)]
+        entry.isDirectory()
+          ? sources(join(directory, entry.name))
+          : [join(directory, entry.name)]
       )
     )
   )
@@ -44,7 +49,9 @@ async function sources(directory: string): Promise<string[]> {
 // fallback supports pnpm's isolated transitive dependencies during packaging.
 const declarationRoot = await mkdtemp(join(tmpdir(), "astro-solid-types-"))
 const allSources = (
-  await Promise.all(manifest.packages.map((pkg) => sources(join(upstream, pkg.path, "src"))))
+  await Promise.all(
+    manifest.packages.map((pkg) => sources(join(upstream, pkg.path, "src")))
+  )
 ).flat()
 const options: ts.CompilerOptions = {
   target: ts.ScriptTarget.ES2022,
@@ -62,8 +69,12 @@ const options: ts.CompilerOptions = {
   rootDir: join(upstream, "packages"),
   outDir: declarationRoot,
   paths: {
-    "@astrojs/solid-js-renderer": [join(upstream, "packages/renderers/solid-js/src/index.ts")],
-    "@astrojs/solid-js-renderer/*": [join(upstream, "packages/renderers/solid-js/src/*")]
+    "@astrojs/solid-js-renderer": [
+      join(upstream, "packages/renderers/solid-js/src/index.ts")
+    ],
+    "@astrojs/solid-js-renderer/*": [
+      join(upstream, "packages/renderers/solid-js/src/*")
+    ]
   }
 }
 const host = ts.createCompilerHost(options)
@@ -76,7 +87,12 @@ host.resolveModuleNames = (names, containingFile) =>
     for (const from of name.startsWith(".")
       ? [containingFile]
       : [...dependencies, containingFile]) {
-      const found = ts.resolveModuleName(name, from, options, host).resolvedModule
+      const found = ts.resolveModuleName(
+        name,
+        from,
+        options,
+        host
+      ).resolvedModule
       if (found) return found
     }
     return undefined
@@ -98,13 +114,20 @@ program.emit()
 // reproducible without platform-specific tar flags or an upstream monorepo install.
 function archive(files: Map<string, Buffer>) {
   const chunks: Buffer[] = []
-  for (const [path, bytes] of [...files].sort(([a], [b]) => a.localeCompare(b, "en"))) {
+  for (const [path, bytes] of [...files].sort(([a], [b]) =>
+    a.localeCompare(b, "en")
+  )) {
     const name = `package/${path}`
-    if (Buffer.byteLength(name) > 100) throw new Error(`Tar path is too long: ${name}`)
+    if (Buffer.byteLength(name) > 100)
+      throw new Error(`Tar path is too long: ${name}`)
     const header = Buffer.alloc(512)
     header.write(name, 0, 100)
     const octal = (value: number, offset: number, length: number) =>
-      header.write(value.toString(8).padStart(length - 1, "0") + "\0", offset, length)
+      header.write(
+        value.toString(8).padStart(length - 1, "0") + "\0",
+        offset,
+        length
+      )
     octal(0o644, 100, 8)
     octal(0, 108, 8)
     octal(0, 116, 8)
@@ -128,8 +151,14 @@ function archive(files: Map<string, Buffer>) {
 
 try {
   for (const pkg of manifest.packages) {
-    const original = JSON.parse(await readFile(join(upstream, pkg.path, "package.json"), "utf8"))
-    const packaged = { ...original, version: pkg.version, dependencies: pkg.dependencies }
+    const original = JSON.parse(
+      await readFile(join(upstream, pkg.path, "package.json"), "utf8")
+    )
+    const packaged = {
+      ...original,
+      version: pkg.version,
+      dependencies: pkg.dependencies
+    }
     delete packaged.devDependencies
     delete packaged.scripts
     const files = new Map<string, Buffer>([
@@ -138,7 +167,10 @@ try {
       ["README.md", await readFile(join(upstream, pkg.path, "README.md"))]
     ])
     for (const file of await sources(join(upstream, pkg.path, "src"))) {
-      const local = relative(join(upstream, pkg.path, "src"), file).replaceAll("\\", "/")
+      const local = relative(join(upstream, pkg.path, "src"), file).replaceAll(
+        "\\",
+        "/"
+      )
       if (file.endsWith(".d.ts")) {
         files.set(`dist/${local}`, await readFile(file))
         continue
@@ -153,10 +185,10 @@ try {
         }
       }).outputText
       files.set(`dist/${local.slice(0, -3)}.js`, Buffer.from(js))
-      const declaration = join(declarationRoot, relative(join(upstream, "packages"), file)).replace(
-        /\.ts$/,
-        ".d.ts"
-      )
+      const declaration = join(
+        declarationRoot,
+        relative(join(upstream, "packages"), file)
+      ).replace(/\.ts$/, ".d.ts")
       files.set(`dist/${local.slice(0, -3)}.d.ts`, await readFile(declaration))
     }
     const bytes = archive(files)

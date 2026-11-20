@@ -21,7 +21,10 @@ import { createUniqueId, merge, omit } from "solid-js"
 import { cn } from "~/lib/utils"
 type ContextMenuProps = ComponentProps<typeof SdkMenu>
 const ContextMenu = (props: ContextMenuProps) => <SdkMenu {...props} />
-type ContextMenuTriggerProps = Omit<ComponentProps<typeof SdkMenuContextTrigger>, "class"> & {
+type ContextMenuTriggerProps = Omit<
+  ComponentProps<typeof SdkMenuContextTrigger>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuTrigger = (props: ContextMenuTriggerProps) => (
@@ -30,7 +33,10 @@ const ContextMenuTrigger = (props: ContextMenuTriggerProps) => (
     class={cn("cn-context-menu-trigger select-none", props.class)}
   />
 )
-type ContextMenuContentProps = Omit<ComponentProps<typeof SdkMenuContent>, "class"> & {
+type ContextMenuContentProps = Omit<
+  ComponentProps<typeof SdkMenuContent>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuContent = (props: ContextMenuContentProps) => (
@@ -44,13 +50,19 @@ const ContextMenuContent = (props: ContextMenuContentProps) => (
     />
   </>
 )
-type ContextMenuGroupProps = Omit<ComponentProps<typeof SdkMenuGroup>, "class"> & {
+type ContextMenuGroupProps = Omit<
+  ComponentProps<typeof SdkMenuGroup>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuGroup = (props: ContextMenuGroupProps) => (
   <SdkMenuGroup {...props} class={props.class} />
 )
-type ContextMenuLabelProps = (Omit<ComponentProps<typeof SdkMenuGroupLabel>, "class"> & {
+type ContextMenuLabelProps = (Omit<
+  ComponentProps<typeof SdkMenuGroupLabel>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -65,7 +77,10 @@ const ContextMenuLabel = (props: ContextMenuLabelProps) => {
     />
   )
 }
-type ContextMenuItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
+type ContextMenuItemProps = (Omit<
+  ComponentProps<typeof SdkMenuItem>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -91,7 +106,10 @@ const ContextMenuItem = (rawProps: ContextMenuItemProps) => {
 }
 type ContextMenuSubProps = ComponentProps<typeof SdkMenuSub>
 const ContextMenuSub = (props: ContextMenuSubProps) => <SdkMenuSub {...props} />
-type ContextMenuSubTriggerProps = (Omit<ComponentProps<typeof SdkMenuSubTrigger>, "class"> & {
+type ContextMenuSubTriggerProps = (Omit<
+  ComponentProps<typeof SdkMenuSubTrigger>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -112,7 +130,10 @@ const ContextMenuSubTrigger = (props: ContextMenuSubTriggerProps) => {
     </SdkMenuSubTrigger>
   )
 }
-type ContextMenuSubContentProps = Omit<ComponentProps<typeof SdkMenuSubContent>, "class"> & {
+type ContextMenuSubContentProps = Omit<
+  ComponentProps<typeof SdkMenuSubContent>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuSubContent = (props: ContextMenuSubContentProps) => (
@@ -155,13 +176,19 @@ const ContextMenuCheckboxItem = (props: ContextMenuCheckboxItemProps) => {
     </SdkMenuCheckboxItem>
   )
 }
-type ContextMenuRadioGroupProps = Omit<ComponentProps<typeof SdkMenuRadioGroup>, "class"> & {
+type ContextMenuRadioGroupProps = Omit<
+  ComponentProps<typeof SdkMenuRadioGroup>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuRadioGroup = (props: ContextMenuRadioGroupProps) => (
   <SdkMenuRadioGroup {...props} class={props.class} />
 )
-type ContextMenuRadioItemProps = Omit<ComponentProps<typeof SdkMenuRadioItem>, "class"> & {
+type ContextMenuRadioItemProps = Omit<
+  ComponentProps<typeof SdkMenuRadioItem>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuRadioItem = (props: ContextMenuRadioItemProps) => {
@@ -183,11 +210,17 @@ const ContextMenuRadioItem = (props: ContextMenuRadioItemProps) => {
     </SdkMenuRadioItem>
   )
 }
-type ContextMenuSeparatorProps = Omit<ComponentProps<typeof SdkMenuSeparator>, "class"> & {
+type ContextMenuSeparatorProps = Omit<
+  ComponentProps<typeof SdkMenuSeparator>,
+  "class"
+> & {
   class?: string
 }
 const ContextMenuSeparator = (props: ContextMenuSeparatorProps) => (
-  <SdkMenuSeparator {...props} class={cn("cn-context-menu-separator", props.class)} />
+  <SdkMenuSeparator
+    {...props}
+    class={cn("cn-context-menu-separator", props.class)}
+  />
 )
 type ContextMenuShortcutProps = ComponentProps<"span">
 const ContextMenuShortcut = (props: ContextMenuShortcutProps) => (

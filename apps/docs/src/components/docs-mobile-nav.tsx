@@ -3,7 +3,12 @@ import { createSignal, For } from "solid-js"
 import type { DocsNavigationGroup } from "~/lib/docs"
 import { cn } from "~/lib/utils"
 import { Button } from "~/registry/ui/button"
-import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "~/registry/ui/popover"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTitle,
+  PopoverTrigger
+} from "~/registry/ui/popover"
 
 const mainLinks = [
   { title: "Home", href: "/" },
@@ -61,16 +66,23 @@ export default function DocsMobileNav(props: {
         class="max-h-(--available-height) w-dvw max-w-none overflow-y-auto overscroll-contain rounded-none border-0 bg-background p-0 ring-0 lg:hidden"
       >
         <PopoverTitle class="sr-only">Site navigation</PopoverTitle>
-        <nav aria-label="Mobile documentation" class="grid gap-8 px-6 py-6 sm:px-8">
+        <nav
+          aria-label="Mobile documentation"
+          class="grid gap-8 px-6 py-6 sm:px-8"
+        >
           <For each={groups()}>
             {(group) => (
               <div class="grid gap-2">
-                <p class="mb-1 text-sm font-medium text-muted-foreground">{group.title}</p>
+                <p class="mb-1 text-sm font-medium text-muted-foreground">
+                  {group.title}
+                </p>
                 <For each={group.links}>
                   {(link) => (
                     <a
                       href={link.href}
-                      aria-current={props.currentPath === link.href ? "page" : undefined}
+                      aria-current={
+                        props.currentPath === link.href ? "page" : undefined
+                      }
                       class="w-fit rounded-sm text-xl leading-snug font-medium tracking-tight hover:text-primary aria-[current=page]:text-primary sm:text-2xl"
                       onClick={() => setOpen(false)}
                     >

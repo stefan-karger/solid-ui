@@ -76,7 +76,11 @@ export default function CodeBlockDemo() {
         <CodeBlockContent wrap={wrap()} lineNumbers>
           <For each={lines()}>
             {(line, index) => (
-              <CodeBlockLine variant={index() >= 5 && index() <= 9 ? "highlighted" : "default"}>
+              <CodeBlockLine
+                variant={
+                  index() >= 5 && index() <= 9 ? "highlighted" : "default"
+                }
+              >
                 {line}
               </CodeBlockLine>
             )}

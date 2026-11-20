@@ -8,7 +8,9 @@ export default function KbdTooltip() {
     <div class="flex flex-wrap gap-4">
       <ButtonGroup>
         <Tooltip>
-          <TooltipTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
+          <TooltipTrigger
+            render={(partProps) => <Button {...partProps} variant="outline" />}
+          >
             Save
           </TooltipTrigger>
           <TooltipContent>
@@ -16,7 +18,9 @@ export default function KbdTooltip() {
           </TooltipContent>
         </Tooltip>
         <Tooltip>
-          <TooltipTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
+          <TooltipTrigger
+            render={(partProps) => <Button {...partProps} variant="outline" />}
+          >
             Print
           </TooltipTrigger>
           <TooltipContent>

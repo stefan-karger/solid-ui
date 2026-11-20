@@ -44,7 +44,9 @@ export default function TraceDialog() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Searched the web for cache keys</DialogTitle>
-            <DialogDescription>Three results were used in the response.</DialogDescription>
+            <DialogDescription>
+              Three results were used in the response.
+            </DialogDescription>
           </DialogHeader>
           <Trace>
             <For each={results}>

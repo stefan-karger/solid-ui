@@ -17,7 +17,9 @@ export default function Native() {
       <ComboboxContent>
         <ComboboxList>
           <For each={items}>
-            {(item) => <ComboboxItem value={item.value}>{item.label}</ComboboxItem>}
+            {(item) => (
+              <ComboboxItem value={item.value}>{item.label}</ComboboxItem>
+            )}
           </For>
         </ComboboxList>
       </ComboboxContent>

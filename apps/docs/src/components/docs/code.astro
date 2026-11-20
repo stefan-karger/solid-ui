@@ -13,13 +13,15 @@ const { class: className, __raw__: code, __src__: src, ...props } = Astro.props
 
 const hasRawCode = Boolean(code)
 const isInline = !hasRawCode
-const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim() : ""
+const blockCodeContent = !isInline
+  ? (await Astro.slots.render("default")).trim()
+  : ""
 ---
 
 {isInline ? (
   <code
     class={cn(
-      "relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
+      "relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.85em] break-words outline-none",
       className
     )}
     {...props}
@@ -29,6 +31,11 @@ const blockCodeContent = !isInline ? (await Astro.slots.render("default")).trim(
 ) : (
   <>
     {code && <CopyButton value={code} />}
-    <code class={className} data-source={src} set:html={blockCodeContent} {...props} />
+    <code
+      class={className}
+      data-source={src}
+      set:html={blockCodeContent}
+      {...props}
+    />
   </>
 )}

@@ -22,17 +22,32 @@ export default function PopoverAlignments() {
         {(item) => (
           <Popover>
             <PopoverTrigger
-              render={(partProps) => <Button {...partProps} size="sm" variant="outline" />}
+              render={(partProps) => (
+                <Button {...partProps} size="sm" variant="outline" />
+              )}
             >
               {item.label}
             </PopoverTrigger>
             <PopoverContent
-              side={item.placement.split("-")[0] as "top" | "bottom" | "left" | "right"}
-              align={(item.placement.split("-")[1] ?? "center") as "start" | "center" | "end"}
+              side={
+                item.placement.split("-")[0] as
+                  | "top"
+                  | "bottom"
+                  | "left"
+                  | "right"
+              }
+              align={
+                (item.placement.split("-")[1] ?? "center") as
+                  | "start"
+                  | "center"
+                  | "end"
+              }
               class="w-56"
             >
               <PopoverTitle>{item.label}</PopoverTitle>
-              <PopoverDescription>Aligned to {item.label.toLowerCase()}</PopoverDescription>
+              <PopoverDescription>
+                Aligned to {item.label.toLowerCase()}
+              </PopoverDescription>
             </PopoverContent>
           </Popover>
         )}

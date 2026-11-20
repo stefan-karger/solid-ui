@@ -33,10 +33,16 @@ type AvatarImageProps = Omit<ComponentProps<typeof SdkAvatarImage>, "class"> & {
 const AvatarImage = (props: AvatarImageProps) => (
   <SdkAvatarImage
     {...props}
-    class={cn("cn-avatar-image aspect-square size-full object-cover", props.class)}
+    class={cn(
+      "cn-avatar-image aspect-square size-full object-cover",
+      props.class
+    )}
   />
 )
-type AvatarFallbackProps = Omit<ComponentProps<typeof SdkAvatarFallback>, "class"> & {
+type AvatarFallbackProps = Omit<
+  ComponentProps<typeof SdkAvatarFallback>,
+  "class"
+> & {
   class?: string
 }
 const AvatarFallback = (props: AvatarFallbackProps) => (
@@ -84,4 +90,11 @@ const AvatarGroupCount = (props: AvatarGroupCountProps) => (
     )}
   />
 )
-export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage }
+export {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage
+}

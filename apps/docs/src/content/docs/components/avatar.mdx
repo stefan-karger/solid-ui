@@ -75,22 +75,24 @@ Use the following composition to build an `AvatarGroup`:
 AvatarGroup
 ├── Avatar
 │   ├── AvatarImage
-│   └── AvatarFallback
+│   ├── AvatarFallback
+│   └── AvatarBadge
 ├── Avatar
 │   ├── AvatarImage
-│   └── AvatarFallback
+│   ├── AvatarFallback
+│   └── AvatarBadge
 └── AvatarGroupCount
 ```
 
 ## Basic
 
-A basic avatar with image and fallback content.
+A basic avatar component with an image and a fallback.
 
 <ComponentPreview name="avatar-basic" />
 
 ## Badge
 
-Use `AvatarBadge` to show status indicators.
+Use the `AvatarBadge` component to add a badge to the avatar. The badge is positioned at the bottom right of the avatar.
 
 <ComponentPreview name="avatar-badge" />
 
@@ -106,7 +108,7 @@ Use the `class` prop to customize badge colors and sizing.
 
 ## Badge with Icon
 
-Render icons inside `AvatarBadge`.
+You can also use an icon inside `<AvatarBadge>`.
 
 <ComponentPreview
   name="avatar-badge-icon"
@@ -115,7 +117,7 @@ Render icons inside `AvatarBadge`.
 
 ## Avatar Group
 
-Use `AvatarGroup` to overlap multiple avatars.
+Use the `AvatarGroup` component to add a group of avatars.
 
 <ComponentPreview
   name="avatar-group"
@@ -124,7 +126,7 @@ Use `AvatarGroup` to overlap multiple avatars.
 
 ## Avatar Group Count
 
-Use `AvatarGroupCount` to display extra-member counts.
+Use `<AvatarGroupCount>` to add a count to the group.
 
 <ComponentPreview
   name="avatar-group-count"
@@ -133,7 +135,7 @@ Use `AvatarGroupCount` to display extra-member counts.
 
 ## Avatar Group with Icon
 
-You can also render icons inside `AvatarGroupCount`.
+You can also use an icon inside `<AvatarGroupCount>`.
 
 <ComponentPreview
   name="avatar-group-count-icon"
@@ -142,7 +144,7 @@ You can also render icons inside `AvatarGroupCount`.
 
 ## Sizes
 
-Use the `size` prop on `Avatar` to change the avatar size.
+Use the `size` prop to change the size of the avatar.
 
 <ComponentPreview
   name="avatar-size"
@@ -151,7 +153,7 @@ Use the `size` prop on `Avatar` to change the avatar size.
 
 ## Dropdown
 
-Use `Avatar` as the trigger for a dropdown menu.
+You can use the `Avatar` component as a trigger for a dropdown menu.
 
 <ComponentPreview name="avatar-dropdown" />
 

@@ -23,9 +23,13 @@ export function ResizablePanelGroup(
 }
 
 export function ResizablePanel(
-  props: Omit<ComponentProps<typeof SdkResizablePanel>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkResizablePanel>, "class"> & {
+    class?: string
+  }
 ) {
-  return <SdkResizablePanel {...props} class={cn("min-h-0 min-w-0", props.class)} />
+  return (
+    <SdkResizablePanel {...props} class={cn("min-h-0 min-w-0", props.class)} />
+  )
 }
 
 export function ResizableHandle(
@@ -43,7 +47,9 @@ export function ResizableHandle(
         props.class
       )}
     >
-      {props.withHandle && <div class="cn-resizable-handle-icon z-10 flex shrink-0" />}
+      {props.withHandle && (
+        <div class="cn-resizable-handle-icon z-10 flex shrink-0" />
+      )}
     </SdkResizableHandle>
   )
 }

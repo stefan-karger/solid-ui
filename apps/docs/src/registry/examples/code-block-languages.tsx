@@ -40,7 +40,9 @@ function Sample(props: { code: string; language: string }) {
 
   return (
     <CodeBlockContent>
-      <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+      <For each={lines()}>
+        {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+      </For>
     </CodeBlockContent>
   )
 }

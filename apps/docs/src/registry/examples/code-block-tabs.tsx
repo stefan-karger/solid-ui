@@ -56,7 +56,9 @@ function FileCode(props: { code: string; language: string }) {
 
   return (
     <CodeBlockContent lineNumbers>
-      <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+      <For each={lines()}>
+        {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+      </For>
     </CodeBlockContent>
   )
 }
@@ -66,7 +68,11 @@ export default function CodeBlockTabs() {
     <Tabs defaultValue="route" class="w-full max-w-md">
       <TabsList>
         <For each={files}>
-          {(file) => <TabsTrigger value={file.id}>{file.title.split("/").at(-1)}</TabsTrigger>}
+          {(file) => (
+            <TabsTrigger value={file.id}>
+              {file.title.split("/").at(-1)}
+            </TabsTrigger>
+          )}
         </For>
       </TabsList>
       <For each={files}>

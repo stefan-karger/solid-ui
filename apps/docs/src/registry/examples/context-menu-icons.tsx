@@ -1,4 +1,9 @@
-import { ClipboardPasteIcon, CopyIcon, ScissorsIcon, TrashIcon } from "lucide-solid"
+import {
+  ClipboardPasteIcon,
+  CopyIcon,
+  ScissorsIcon,
+  TrashIcon
+} from "lucide-solid"
 
 import {
   ContextMenu,

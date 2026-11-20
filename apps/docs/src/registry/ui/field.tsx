@@ -123,7 +123,10 @@ const FieldTitle = (props: FieldTitleProps) => (
   <div
     data-slot="field-label"
     {...props}
-    class={cn("cn-field-title flex w-fit items-center leading-snug", props.class)}
+    class={cn(
+      "cn-field-title flex w-fit items-center leading-snug",
+      props.class
+    )}
   />
 )
 
@@ -191,14 +194,20 @@ const FieldError = (props: FieldErrorProps) => {
     if (!props.errors?.length) {
       return null
     }
-    const uniqueErrors = [...new Map(props.errors.map((error) => [error?.message, error])).values()]
+    const uniqueErrors = [
+      ...new Map(props.errors.map((error) => [error?.message, error])).values()
+    ]
     if (uniqueErrors.length === 1) {
       return uniqueErrors[0]?.message
     }
     return (
       <ul class="ml-4 flex list-disc flex-col gap-1">
         <For each={uniqueErrors}>
-          {(error) => <Show when={error?.message}>{(message) => <li>{message()}</li>}</Show>}
+          {(error) => (
+            <Show when={error?.message}>
+              {(message) => <li>{message()}</li>}
+            </Show>
+          )}
         </For>
       </ul>
     )

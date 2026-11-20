@@ -15,15 +15,23 @@ import { cn } from "~/lib/utils"
 import { Button } from "~/registry/ui/button"
 type DialogProps = ComponentProps<typeof SdkDialog>
 const Dialog: Component<DialogProps> = (props) => <SdkDialog {...props} />
-type DialogTriggerProps = Omit<ComponentProps<typeof SdkDialogTrigger>, "class"> & {
+type DialogTriggerProps = Omit<
+  ComponentProps<typeof SdkDialogTrigger>,
+  "class"
+> & {
   class?: string
 }
-const DialogTrigger = (props: DialogTriggerProps) => <SdkDialogTrigger {...props} />
+const DialogTrigger = (props: DialogTriggerProps) => (
+  <SdkDialogTrigger {...props} />
+)
 type DialogCloseProps = Omit<ComponentProps<typeof SdkDialogClose>, "class"> & {
   class?: string
 }
 const DialogClose = (props: DialogCloseProps) => <SdkDialogClose {...props} />
-type DialogOverlayProps = Omit<ComponentProps<typeof SdkDialogBackdrop>, "class"> & {
+type DialogOverlayProps = Omit<
+  ComponentProps<typeof SdkDialogBackdrop>,
+  "class"
+> & {
   class?: string
 }
 const DialogOverlay = (props: DialogOverlayProps) => (
@@ -32,7 +40,10 @@ const DialogOverlay = (props: DialogOverlayProps) => (
     class={cn("cn-dialog-overlay fixed inset-0 isolate z-50", props.class)}
   />
 )
-type DialogContentProps = (Omit<ComponentProps<typeof SdkDialogContent>, "class"> & {
+type DialogContentProps = (Omit<
+  ComponentProps<typeof SdkDialogContent>,
+  "class"
+> & {
   class?: string
 }) & {
   showCloseButton?: boolean
@@ -52,7 +63,9 @@ const DialogContent = (props: DialogContentProps) => {
         {props.children}
         <Show when={props.showCloseButton !== false}>
           <SdkDialogClose
-            render={(partProps) => <Button {...partProps} variant="ghost" size="icon-sm" />}
+            render={(partProps) => (
+              <Button {...partProps} variant="ghost" size="icon-sm" />
+            )}
 
             class="cn-dialog-close"
           >
@@ -90,7 +103,9 @@ const DialogFooter = (props: DialogFooterProps) => {
     >
       {props.children}
       <Show when={props.showCloseButton}>
-        <SdkDialogClose render={(partProps) => <Button {...partProps} variant="outline" />}>
+        <SdkDialogClose
+          render={(partProps) => <Button {...partProps} variant="outline" />}
+        >
           Close
         </SdkDialogClose>
       </Show>
@@ -103,11 +118,17 @@ type DialogTitleProps = Omit<ComponentProps<typeof SdkDialogTitle>, "class"> & {
 const DialogTitle = (props: DialogTitleProps) => (
   <SdkDialogTitle {...props} class={cn("cn-dialog-title", props.class)} />
 )
-type DialogDescriptionProps = Omit<ComponentProps<typeof SdkDialogDescription>, "class"> & {
+type DialogDescriptionProps = Omit<
+  ComponentProps<typeof SdkDialogDescription>,
+  "class"
+> & {
   class?: string
 }
 const DialogDescription = (props: DialogDescriptionProps) => (
-  <SdkDialogDescription {...props} class={cn("cn-dialog-description", props.class)} />
+  <SdkDialogDescription
+    {...props}
+    class={cn("cn-dialog-description", props.class)}
+  />
 )
 export {
   Dialog,

@@ -3,7 +3,10 @@ import { For } from "solid-js"
 import { ScrollArea } from "~/registry/ui/scroll-area"
 import { Separator } from "~/registry/ui/separator"
 
-const tags = Array.from({ length: 50 }, (_, index) => `v1.2.0-beta.${50 - index}`)
+const tags = Array.from(
+  { length: 50 },
+  (_, index) => `v1.2.0-beta.${50 - index}`
+)
 
 export default function ScrollAreaDemo() {
   return (

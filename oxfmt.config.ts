@@ -3,7 +3,7 @@ import { defineConfig } from "oxfmt"
 export default defineConfig({
   astro: true,
   endOfLine: "lf",
-  printWidth: 100,
+  printWidth: 80,
   tabWidth: 2,
   useTabs: false,
   semi: false,

@@ -8,7 +8,10 @@ export default function ButtonGroupTextExample() {
       <ButtonGroupText as={Label} for="button-group-text-input">
         GPU Size
       </ButtonGroupText>
-      <Input id="button-group-text-input" placeholder="Type something here..." />
+      <Input
+        id="button-group-text-input"
+        placeholder="Type something here..."
+      />
     </ButtonGroup>
   )
 }

@@ -69,7 +69,9 @@ export default function AttachmentStates() {
         </AttachmentMedia>
         <AttachmentContent>
           <AttachmentTitle>financial-model.xlsx</AttachmentTitle>
-          <AttachmentDescription>Upload failed. Try again.</AttachmentDescription>
+          <AttachmentDescription>
+            Upload failed. Try again.
+          </AttachmentDescription>
         </AttachmentContent>
         <AttachmentActions>
           <AttachmentAction aria-label="Retry upload">

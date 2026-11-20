@@ -1,7 +1,13 @@
 import { For } from "solid-js"
 
 import { Field, FieldError, FieldLabel } from "~/registry/ui/field"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 type Fruit = {
   label: string

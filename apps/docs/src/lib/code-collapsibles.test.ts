@@ -42,7 +42,11 @@ describe("initializeCodeCollapsibles", () => {
 
     expect(root.dataset.expanded).toBe("true")
     expect(toggle.getAttribute("aria-expanded")).toBe("true")
-    expect(root.querySelector<HTMLElement>("[data-code-label-collapsed]")!.hidden).toBe(true)
-    expect(root.querySelector<HTMLElement>("[data-code-label-expanded]")!.hidden).toBe(false)
+    expect(
+      root.querySelector<HTMLElement>("[data-code-label-collapsed]")!.hidden
+    ).toBe(true)
+    expect(
+      root.querySelector<HTMLElement>("[data-code-label-expanded]")!.hidden
+    ).toBe(false)
   })
 })

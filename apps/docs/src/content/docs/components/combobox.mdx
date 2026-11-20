@@ -4,7 +4,10 @@ description: Autocomplete input with a list of suggestions.
 component: true
 ---
 
-<ComponentPreview name="combobox-demo" description="A combobox with a list of frameworks." />
+<ComponentPreview
+  name="combobox-demo"
+  description="A combobox with a list of frameworks."
+/>
 
 ## Installation
 
@@ -64,7 +67,11 @@ import {
 } from "~/components/ui/combobox"
 
 ;<Combobox>
-  <ComboboxInput aria-label="Framework" placeholder="Select a framework" showClear />
+  <ComboboxInput
+    aria-label="Framework"
+    placeholder="Select a framework"
+    showClear
+  />
   <ComboboxContent>
     <ComboboxList>
       <ComboboxItem value="solid">Solid</ComboboxItem>
@@ -102,7 +109,8 @@ Combobox
 ├── ComboboxChips
 │   ├── ComboboxValue
 │   │   └── ComboboxChip
-│   └── ComboboxChipsInput
+│   │       └── ComboboxChipRemove
+│   └── ComboboxChipInput
 └── ComboboxContent
     ├── ComboboxEmpty
     └── ComboboxList
@@ -110,9 +118,9 @@ Combobox
         └── ComboboxItem
 ```
 
-### With groups and collection
+### With groups
 
-Nested items per group using `ComboboxCollection` inside each `ComboboxGroup`, with a separator between groups (see [Groups](#groups)).
+Render items inside each `ComboboxGroup` and use a separator between groups (see [Groups](#groups)).
 
 ```text
 Combobox
@@ -122,65 +130,75 @@ Combobox
     └── ComboboxList
         ├── ComboboxGroup
         │   ├── ComboboxLabel
-        │   └── ComboboxCollection
-        │       ├── ComboboxItem
-        │       └── ComboboxItem
+        │   ├── ComboboxItem
+        │   └── ComboboxItem
         ├── ComboboxSeparator
         └── ComboboxGroup
             ├── ComboboxLabel
-            └── ComboboxCollection
-                ├── ComboboxItem
-                └── ComboboxItem
+            ├── ComboboxItem
+            └── ComboboxItem
 ```
 
-## Custom Items
-
-Use `itemToStringValue` when your items are objects.
-
-## Multiple Selection
-
-Use `multiple` with chips for multi-select behavior.
-
 ## Basic
+
+A simple combobox with a list of frameworks.
 
 <ComponentPreview name="combobox-basic" />
 
 ## Multiple
 
+Use `multiple` and `ComboboxChips` to select more than one option and show each selection as a chip.
+
 <ComponentPreview name="combobox-multiple" />
 
 ## Clear Button
+
+Use `showClear` on `ComboboxInput` to show a clear button.
 
 <ComponentPreview name="combobox-clear" />
 
 ## Groups
 
+Use `ComboboxGroup` and `ComboboxSeparator` to group items.
+
 <ComponentPreview name="combobox-groups" />
 
 ## Custom Items
+
+Render a custom component inside `ComboboxItem`. For object values, pass `itemToValue` and `itemToLabel` to `Combobox`.
 
 <ComponentPreview name="combobox-custom" />
 
 ## Invalid
 
+Set `aria-invalid` on `ComboboxInput` to show the invalid state.
+
 <ComponentPreview name="combobox-invalid" />
 
 ## Disabled
+
+Set `disabled` on `ComboboxInput` to disable the input.
 
 <ComponentPreview name="combobox-disabled" />
 
 ## Auto Highlight
 
+Use the `autoHighlight` prop to automatically highlight the first item on filter.
+
 <ComponentPreview name="combobox-auto-highlight" />
 
 ## Popup
+
+Use the `render` prop on `ComboboxTrigger` to open the popup from a button. Put `ComboboxInput` inside `ComboboxContent` to search within the popup.
 
 <ComponentPreview name="combobox-popup" />
 
 ## Input Group
 
+Put an `InputGroupAddon` inside `ComboboxInput` to add an icon alongside the search field.
+
 <ComponentPreview name="combobox-input-group" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/combobox#api-reference) documentation for more information.
+See the [UI SDK Combobox API](https://ui-sdk.dev/docs/solid/components/combobox) for selection, filtering, and keyboard behavior.

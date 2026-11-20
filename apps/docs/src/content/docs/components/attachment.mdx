@@ -165,7 +165,10 @@ Add an `AttachmentTrigger` to make the whole card open a link or dialog. It fill
     {/* media, content, actions */}
     <DialogTrigger
       render={(partProps) => (
-        <AttachmentTrigger {...partProps} aria-label="Preview research-summary.pdf" />
+        <AttachmentTrigger
+          {...partProps}
+          aria-label="Preview research-summary.pdf"
+        />
       )}
     />
   </Attachment>
@@ -194,7 +197,13 @@ Add an `AttachmentTrigger` to make the whole card open a link or dialog. It fill
 ```tsx showLineNumbers
 <AttachmentTrigger
   render={(partProps) => (
-    <a {...partProps} href={url} target="_blank" rel="noreferrer" aria-label="Open workspace.png" />
+    <a
+      {...partProps}
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open workspace.png"
+    />
   )}
 />
 ```

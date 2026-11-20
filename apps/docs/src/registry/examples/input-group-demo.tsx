@@ -1,6 +1,10 @@
 import { SearchIcon } from "lucide-solid"
 
-import { InputGroup, InputGroupAddon, InputGroupInput } from "~/registry/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput
+} from "~/registry/ui/input-group"
 
 export default function InputGroupDemo() {
   return (

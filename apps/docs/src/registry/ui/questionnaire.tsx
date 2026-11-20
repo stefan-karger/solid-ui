@@ -1,7 +1,13 @@
 import type { ComponentProps, JSX } from "@solidjs/web"
-import { Checkbox as SdkCheckbox, CheckboxGroup as SdkCheckboxGroup } from "@ui-sdk/solid/checkbox"
+import {
+  Checkbox as SdkCheckbox,
+  CheckboxGroup as SdkCheckboxGroup
+} from "@ui-sdk/solid/checkbox"
 import { Input as SdkInput } from "@ui-sdk/solid/input"
-import { Radio as SdkRadio, RadioGroup as SdkRadioGroup } from "@ui-sdk/solid/radio"
+import {
+  Radio as SdkRadio,
+  RadioGroup as SdkRadioGroup
+} from "@ui-sdk/solid/radio"
 import { CheckIcon } from "lucide-solid"
 import {
   createContext,
@@ -36,10 +42,14 @@ export function useQuestionnaire() {
 }
 function useItem() {
   const context = useContext(ItemContext)
-  if (!context) throw new Error("Questionnaire inputs require a QuestionnaireItem")
+  if (!context)
+    throw new Error("Questionnaire inputs require a QuestionnaireItem")
   return context
 }
-type QuestionnaireProps = Omit<ComponentProps<"form">, "onSubmit" | "onChange"> & {
+type QuestionnaireProps = Omit<
+  ComponentProps<"form">,
+  "onSubmit" | "onChange"
+> & {
   steps: string[]
   required?: string[]
   value?: QuestionnaireAnswers
@@ -71,7 +81,8 @@ export function Questionnaire(props: QuestionnaireProps) {
   let form!: HTMLFormElement
   const state: QuestionnaireState = {
     steps: () => props.steps,
-    step: () => Math.max(0, Math.min(props.step ?? step(), props.steps.length - 1)),
+    step: () =>
+      Math.max(0, Math.min(props.step ?? step(), props.steps.length - 1)),
     answers: () => props.value ?? answers(),
     error,
     answer(key, value) {
@@ -83,7 +94,11 @@ export function Questionnaire(props: QuestionnaireProps) {
     move(direction) {
       const current = props.steps[state.step()]!
       const empty = (key: string) => !state.answers()[key]?.length
-      if (direction !== "previous" && props.required?.includes(current) && empty(current)) {
+      if (
+        direction !== "previous" &&
+        props.required?.includes(current) &&
+        empty(current)
+      ) {
         setError("Please answer this question before continuing.")
         return
       }
@@ -101,7 +116,9 @@ export function Questionnaire(props: QuestionnaireProps) {
       next = Math.max(0, next)
       if (props.step === undefined) setStep(next)
       props.onStepChange?.(next)
-      queueMicrotask(() => form.querySelector<HTMLElement>("fieldset:not([hidden])")?.focus())
+      queueMicrotask(() =>
+        form.querySelector<HTMLElement>("fieldset:not([hidden])")?.focus()
+      )
     }
   }
   return (
@@ -132,7 +149,9 @@ export function Questionnaire(props: QuestionnaireProps) {
     </QuestionnaireContext>
   )
 }
-export function QuestionnaireItem(props: ComponentProps<"fieldset"> & { value: string }) {
+export function QuestionnaireItem(
+  props: ComponentProps<"fieldset"> & { value: string }
+) {
   const state = useQuestionnaire(),
     id = createUniqueId(),
     rest = omit(props, "class", "value")
@@ -144,7 +163,10 @@ export function QuestionnaireItem(props: ComponentProps<"fieldset"> & { value: s
         hidden={state.steps()[state.step()] !== props.value}
         tabindex={-1}
         data-slot="questionnaire-item"
-        class={cn("cn-questionnaire-item min-w-0 border-0 p-0 outline-none", props.class)}
+        class={cn(
+          "cn-questionnaire-item min-w-0 border-0 p-0 outline-none",
+          props.class
+        )}
       />
     </ItemContext>
   )
@@ -157,7 +179,10 @@ export function QuestionnaireTitle(props: ComponentProps<"legend">) {
       {...rest}
       id={`${item.id}-title`}
       data-slot="questionnaire-title"
-      class={cn("cn-questionnaire-title cn-font-heading text-pretty", props.class)}
+      class={cn(
+        "cn-questionnaire-title cn-font-heading text-pretty",
+        props.class
+      )}
     />
   )
 }
@@ -169,7 +194,10 @@ export function QuestionnaireDescription(props: ComponentProps<"p">) {
       {...rest}
       id={`${item.id}-description`}
       data-slot="questionnaire-description"
-      class={cn("cn-questionnaire-description text-pretty text-muted-foreground", props.class)}
+      class={cn(
+        "cn-questionnaire-description text-pretty text-muted-foreground",
+        props.class
+      )}
     />
   )
 }
@@ -181,7 +209,10 @@ export function QuestionnaireChoices(props: {
   const state = useQuestionnaire(),
     item = useItem()
   const classes = () =>
-    cn("cn-questionnaire-choices group/questionnaire-choices grid min-w-0", props.class)
+    cn(
+      "cn-questionnaire-choices group/questionnaire-choices grid min-w-0",
+      props.class
+    )
   const multiple = createMemo(() => props.multiple ?? false)
   return (
     <ChoiceContext value={multiple}>
@@ -286,7 +317,10 @@ export function QuestionnaireChoiceDescription(props: ComponentProps<"span">) {
   )
 }
 export function QuestionnaireInput(
-  props: Omit<ComponentProps<typeof SdkInput>, "class" | "value" | "onValueChange"> & {
+  props: Omit<
+    ComponentProps<typeof SdkInput>,
+    "class" | "value" | "onValueChange"
+  > & {
     class?: string
   }
 ) {
@@ -316,9 +350,13 @@ export function QuestionnaireProgress(props: ComponentProps<"div">) {
       {...rest}
       aria-live="polite"
       data-slot="questionnaire-progress"
-      class={cn("cn-questionnaire-progress text-muted-foreground tabular-nums", props.class)}
+      class={cn(
+        "cn-questionnaire-progress text-muted-foreground tabular-nums",
+        props.class
+      )}
     >
-      {props.children ?? `Question ${state.step() + 1} of ${state.steps().length}`}
+      {props.children ??
+        `Question ${state.step() + 1} of ${state.steps().length}`}
     </div>
   )
 }
@@ -341,7 +379,10 @@ export function QuestionnaireActions(props: ComponentProps<"div">) {
     <div
       {...props}
       data-slot="questionnaire-actions"
-      class={cn("cn-questionnaire-actions flex min-h-11 w-full items-center gap-2", props.class)}
+      class={cn(
+        "cn-questionnaire-actions flex min-h-11 w-full items-center gap-2",
+        props.class
+      )}
     />
   )
 }
@@ -371,7 +412,12 @@ export function QuestionnaireNext(props: ActionProps) {
 export function QuestionnaireSkip(props: ActionProps) {
   const state = useQuestionnaire()
   return (
-    <Button variant="ghost" {...props} type="button" onClick={() => state.move("skip")}>
+    <Button
+      variant="ghost"
+      {...props}
+      type="button"
+      onClick={() => state.move("skip")}
+    >
       {props.children ?? "Skip"}
     </Button>
   )

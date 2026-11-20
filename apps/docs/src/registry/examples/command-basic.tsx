@@ -81,7 +81,10 @@ export default function CommandBasic() {
                   <CommandGroupLabel>{group.heading}</CommandGroupLabel>
                   <For each={group["items"]}>
                     {(option) => (
-                      <CommandItem value={option["value"]} label={option["label"]}>
+                      <CommandItem
+                        value={option["value"]}
+                        label={option["label"]}
+                      >
                         {option.label}
                       </CommandItem>
                     )}

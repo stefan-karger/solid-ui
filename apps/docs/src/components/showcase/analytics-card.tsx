@@ -1,6 +1,12 @@
 import { Badge } from "~/registry/ui/badge"
 import { Button } from "~/registry/ui/button"
-import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/registry/ui/card"
 
 const areaPath = "M0 52L18 40L36 46L54 70L72 50L100 49V86H0Z"
 const strokePath = "M0 52L18 40L36 46L54 70L72 50L100 49"

@@ -18,7 +18,10 @@ export default function EmptyAvatarGroup() {
         <EmptyMedia>
           <div class="flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
             <Avatar>
-              <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
+              <AvatarImage
+                alt="@stefan-karger"
+                src="https://github.com/stefan-karger.png"
+              />
               <AvatarFallback>SK</AvatarFallback>
             </Avatar>
             <Avatar>
@@ -26,13 +29,18 @@ export default function EmptyAvatarGroup() {
               <AvatarFallback>KA</AvatarFallback>
             </Avatar>
             <Avatar>
-              <AvatarImage alt="@ryansolid" src="https://github.com/ryansolid.png" />
+              <AvatarImage
+                alt="@ryansolid"
+                src="https://github.com/ryansolid.png"
+              />
               <AvatarFallback>RC</AvatarFallback>
             </Avatar>
           </div>
         </EmptyMedia>
         <EmptyTitle>No Team Members</EmptyTitle>
-        <EmptyDescription>Invite your team to collaborate on this project.</EmptyDescription>
+        <EmptyDescription>
+          Invite your team to collaborate on this project.
+        </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button size="sm">

@@ -4,22 +4,25 @@ import { isStatic, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-const bubbleVariants = cva("cn-bubble group/bubble relative flex w-fit min-w-0 flex-col", {
-  variants: {
-    variant: {
-      default: "cn-bubble-variant-default",
-      secondary: "cn-bubble-variant-secondary",
-      muted: "cn-bubble-variant-muted",
-      tinted: "cn-bubble-variant-tinted",
-      outline: "cn-bubble-variant-outline",
-      ghost: "cn-bubble-variant-ghost",
-      destructive: "cn-bubble-variant-destructive"
+const bubbleVariants = cva(
+  "cn-bubble group/bubble relative flex w-fit min-w-0 flex-col",
+  {
+    variants: {
+      variant: {
+        default: "cn-bubble-variant-default",
+        secondary: "cn-bubble-variant-secondary",
+        muted: "cn-bubble-variant-muted",
+        tinted: "cn-bubble-variant-tinted",
+        outline: "cn-bubble-variant-outline",
+        ghost: "cn-bubble-variant-ghost",
+        destructive: "cn-bubble-variant-destructive"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
     }
-  },
-  defaultVariants: {
-    variant: "default"
   }
-})
+)
 
 const bubbleReactionsVariants = cva(
   "cn-bubble-reactions absolute z-10 flex w-fit items-center justify-center",
@@ -41,7 +44,9 @@ const bubbleReactionsVariants = cva(
   }
 )
 
-export function BubbleGroup(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function BubbleGroup(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
@@ -65,7 +70,10 @@ export function Bubble(
       data-slot="bubble"
       data-align={props.align ?? "start"}
       data-variant={props.variant ?? "default"}
-      class={cn(bubbleVariants({ variant: props.variant ?? "default" }), props.class)}
+      class={cn(
+        bubbleVariants({ variant: props.variant ?? "default" }),
+        props.class
+      )}
     />
   )
 }
@@ -77,7 +85,9 @@ export function BubbleContent(
     ) => JSX.Element
   }
 ) {
-  const Comp = dynamic(() => props.render ?? "div", { static: isStatic(props, "render") })
+  const Comp = dynamic(() => props.render ?? "div", {
+    static: isStatic(props, "render")
+  })
   const rest = omit(props, "class", "render")
   return (
     <Comp
@@ -106,7 +116,10 @@ export function BubbleReactions(
       data-side={props.side ?? "bottom"}
       data-align={props.align ?? "end"}
       class={cn(
-        bubbleReactionsVariants({ side: props.side ?? "bottom", align: props.align ?? "end" }),
+        bubbleReactionsVariants({
+          side: props.side ?? "bottom",
+          align: props.align ?? "end"
+        }),
         props.class
       )}
     />

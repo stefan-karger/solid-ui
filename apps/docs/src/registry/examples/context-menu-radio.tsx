@@ -25,7 +25,9 @@ export default function ContextMenuRadio() {
         <ContextMenuGroup>
           <ContextMenuLabel>People</ContextMenuLabel>
           <ContextMenuRadioGroup onValueChange={setUser} value={user()}>
-            <ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
             <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
           </ContextMenuRadioGroup>
         </ContextMenuGroup>

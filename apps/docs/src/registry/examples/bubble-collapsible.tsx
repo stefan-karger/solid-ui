@@ -33,7 +33,11 @@ export default function BubbleCollapsible() {
             {isLong ? (
               <CollapsibleTrigger
                 render={(partProps) => (
-                  <Button {...partProps} variant="link" class="gap-1 p-0 text-muted-foreground">
+                  <Button
+                    {...partProps}
+                    variant="link"
+                    class="gap-1 p-0 text-muted-foreground"
+                  >
                     {open() ? "Show less" : "Show more"}
                     <ChevronDownIcon
                       data-icon="inline-end"

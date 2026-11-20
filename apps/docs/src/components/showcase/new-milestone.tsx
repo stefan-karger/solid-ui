@@ -16,14 +16,18 @@ export function NewMilestone() {
       <CardHeader>
         <CardTitle>Set a new milestone</CardTitle>
         <CardDescription>
-          Define your financial target and we&apos;ll help you pace your savings.
+          Define your financial target and we&apos;ll help you pace your
+          savings.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
           <Field>
             <FieldLabel for="goal-name">Goal Name</FieldLabel>
-            <Input id="goal-name" placeholder="e.g. New Car, Home Downpayment" />
+            <Input
+              id="goal-name"
+              placeholder="e.g. New Car, Home Downpayment"
+            />
           </Field>
           <div class="grid grid-cols-2 gap-3">
             <Field>

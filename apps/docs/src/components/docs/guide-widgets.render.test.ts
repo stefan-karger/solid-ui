@@ -12,7 +12,8 @@ import KbdGroup from "./kbd-group.astro"
 import Kbd from "./kbd.astro"
 import LinkedCard from "./linked-card.astro"
 
-const occurrences = (value: string, search: string) => value.split(search).length - 1
+const occurrences = (value: string, search: string) =>
+  value.split(search).length - 1
 
 describe("static guide widgets", () => {
   let container: Awaited<ReturnType<typeof AstroContainer.create>>
@@ -96,7 +97,9 @@ describe("static guide widgets", () => {
   it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY])(
     "rejects invalid aspect ratio %s",
     async (ratio) => {
-      await expect(container.renderToString(AspectRatio, { props: { ratio } })).rejects.toThrow(
+      await expect(
+        container.renderToString(AspectRatio, { props: { ratio } })
+      ).rejects.toThrow(
         "[AspectRatio] `ratio` must be a positive finite number."
       )
     }
@@ -191,7 +194,9 @@ describe("static guide widgets", () => {
       container.renderToString(AspectRatio, { props: { ratio: 1 } }),
       container.renderToString(Alert, { slots: { default: "Alert" } }),
       container.renderToString(Button, { slots: { default: "Button" } }),
-      container.renderToString(CodeCollapsibleWrapper, { slots: { default: "Code" } })
+      container.renderToString(CodeCollapsibleWrapper, {
+        slots: { default: "Code" }
+      })
     ])
 
     for (const html of outputs) {

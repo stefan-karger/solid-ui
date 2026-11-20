@@ -7,7 +7,8 @@ import "~/registry/examples/button-demo"
 
 import ComponentPreview from "../component-preview.astro"
 
-const occurrences = (value: string, search: string) => value.split(search).length - 1
+const occurrences = (value: string, search: string) =>
+  value.split(search).length - 1
 
 describe("ComponentPreview", () => {
   let container: Awaited<ReturnType<typeof AstroContainer.create>>
@@ -29,7 +30,9 @@ describe("ComponentPreview", () => {
     expect(occurrences(html, "<iframe")).toBe(2)
     expect(occurrences(html, 'src="/view/sidebar-demo"')).toBe(2)
     expect(occurrences(html, 'title="sidebar-demo preview"')).toBe(2)
-    expect(html).toContain("absolute inset-0 hidden w-[1600px] bg-background md:block")
+    expect(html).toContain(
+      "absolute inset-0 hidden w-[1600px] bg-background md:block"
+    )
     expect(html).not.toContain("left-1/2")
     expect(html).not.toContain("-translate-x-1/2")
   })

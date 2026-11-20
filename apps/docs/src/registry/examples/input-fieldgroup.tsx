@@ -1,5 +1,10 @@
 import { Button } from "~/registry/ui/button"
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
 
 export default function InputFieldgroup() {
@@ -13,8 +18,14 @@ export default function InputFieldgroup() {
 
         <Field>
           <FieldLabel for="fieldgroup-email">Email</FieldLabel>
-          <Input id="fieldgroup-email" placeholder="name@example.com" type="email" />
-          <FieldDescription>We&apos;ll send updates to this address.</FieldDescription>
+          <Input
+            id="fieldgroup-email"
+            placeholder="name@example.com"
+            type="email"
+          />
+          <FieldDescription>
+            We&apos;ll send updates to this address.
+          </FieldDescription>
         </Field>
 
         <Field orientation="horizontal">

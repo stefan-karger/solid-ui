@@ -8,8 +8,13 @@ import { omit } from "solid-js"
 type CollapsibleProps = Omit<ComponentProps<typeof SdkCollapsible>, "class"> & {
   class?: string
 }
-const Collapsible = (props: CollapsibleProps) => <SdkCollapsible {...props} class={props.class} />
-type CollapsibleTriggerProps = Omit<ComponentProps<typeof SdkCollapsibleTrigger>, "class"> & {
+const Collapsible = (props: CollapsibleProps) => (
+  <SdkCollapsible {...props} class={props.class} />
+)
+type CollapsibleTriggerProps = Omit<
+  ComponentProps<typeof SdkCollapsibleTrigger>,
+  "class"
+> & {
   class?: string
 }
 const CollapsibleTrigger = (props: CollapsibleTriggerProps) => {
@@ -20,7 +25,10 @@ const CollapsibleTrigger = (props: CollapsibleTriggerProps) => {
     </SdkCollapsibleTrigger>
   )
 }
-type CollapsibleContentProps = Omit<ComponentProps<typeof SdkCollapsiblePanel>, "class"> & {
+type CollapsibleContentProps = Omit<
+  ComponentProps<typeof SdkCollapsiblePanel>,
+  "class"
+> & {
   class?: string
 }
 const CollapsibleContent = (props: CollapsibleContentProps) => {

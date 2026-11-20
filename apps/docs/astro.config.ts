@@ -8,7 +8,11 @@ import { defineConfig } from "astro/config"
 import { rehypePrettyCode } from "rehype-pretty-code"
 
 import { rehypeCommandMetadata } from "./src/lib/command-metadata"
-import { DARK_CODE_THEME, LIGHT_CODE_THEME, transformers } from "./src/lib/highlight-code"
+import {
+  DARK_CODE_THEME,
+  LIGHT_CODE_THEME,
+  transformers
+} from "./src/lib/highlight-code"
 
 export default defineConfig({
   output: "static",
@@ -37,10 +41,16 @@ export default defineConfig({
         {
           find: /^lucide-solid$/,
           replacement: fileURLToPath(
-            new URL("./node_modules/lucide-solid/dist/source/lucide-solid.jsx", import.meta.url)
+            new URL(
+              "./node_modules/lucide-solid/dist/source/lucide-solid.jsx",
+              import.meta.url
+            )
           )
         },
-        { find: "~", replacement: fileURLToPath(new URL("./src", import.meta.url)) }
+        {
+          find: "~",
+          replacement: fileURLToPath(new URL("./src", import.meta.url))
+        }
       ]
     }
   }

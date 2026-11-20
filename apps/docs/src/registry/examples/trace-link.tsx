@@ -1,4 +1,9 @@
-import { ArrowUpRightIcon, ChevronRightIcon, FileTextIcon, GlobeIcon } from "lucide-solid"
+import {
+  ArrowUpRightIcon,
+  ChevronRightIcon,
+  FileTextIcon,
+  GlobeIcon
+} from "lucide-solid"
 
 import { Trace, TraceIcon, TraceLine, TraceTitle } from "~/registry/ui/trace"
 
@@ -16,7 +21,11 @@ export default function TraceLink() {
           </TraceIcon>
         </TraceLine>
       </a>
-      <a href="https://docs.astro.build/en/install-and-setup/" target="_blank" rel="noreferrer">
+      <a
+        href="https://docs.astro.build/en/install-and-setup/"
+        target="_blank"
+        rel="noreferrer"
+      >
         <TraceLine>
           <TraceIcon>
             <GlobeIcon />

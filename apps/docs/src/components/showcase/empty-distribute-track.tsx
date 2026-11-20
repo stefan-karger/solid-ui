@@ -22,8 +22,8 @@ export function EmptyDistributeTrack() {
           <EmptyHeader>
             <EmptyTitle>Distribute Track</EmptyTitle>
             <EmptyDescription>
-              Upload your first master to start reaching listeners on Spotify, Apple Music, and
-              more.
+              Upload your first master to start reaching listeners on Spotify,
+              Apple Music, and more.
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>

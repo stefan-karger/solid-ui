@@ -6,7 +6,12 @@ import { parseDate } from "chrono-node"
 import { CalendarIcon } from "lucide-solid"
 import { createSignal } from "solid-js"
 
-import { Calendar, CalendarMonth, CalendarNext, CalendarPrevious } from "~/registry/ui/calendar"
+import {
+  Calendar,
+  CalendarMonth,
+  CalendarNext,
+  CalendarPrevious
+} from "~/registry/ui/calendar"
 import { Field, FieldLabel } from "~/registry/ui/field"
 import {
   InputGroup,
@@ -60,12 +65,21 @@ export default function DatePickerNaturalLanguage() {
           <Popover open={open()} onOpenChange={setOpen}>
             <PopoverTrigger
               render={(part) => (
-                <InputGroupButton {...part} variant="ghost" size="icon-xs" aria-label="Select date">
+                <InputGroupButton
+                  {...part}
+                  variant="ghost"
+                  size="icon-xs"
+                  aria-label="Select date"
+                >
                   <CalendarIcon />
                 </InputGroupButton>
               )}
             />
-            <PopoverContent class="w-auto overflow-hidden p-0" align="end" sideOffset={8}>
+            <PopoverContent
+              class="w-auto overflow-hidden p-0"
+              align="end"
+              sideOffset={8}
+            >
               <Calendar
                 aria-label="Select date"
                 value={date()}
@@ -90,7 +104,8 @@ export default function DatePickerNaturalLanguage() {
         </InputGroupAddon>
       </InputGroup>
       <div class="px-1 text-sm text-muted-foreground">
-        Your post will be published on <span class="font-medium">{formatted()}</span>.
+        Your post will be published on{" "}
+        <span class="font-medium">{formatted()}</span>.
       </div>
     </Field>
   )

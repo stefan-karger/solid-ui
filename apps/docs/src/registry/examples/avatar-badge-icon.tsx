@@ -1,6 +1,11 @@
 import { PlusIcon } from "lucide-solid"
 
-import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage
+} from "~/registry/ui/avatar"
 
 export default function AvatarBadgeIconExample() {
   return (

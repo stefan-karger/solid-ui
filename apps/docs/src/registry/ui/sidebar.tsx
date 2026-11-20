@@ -1,4 +1,9 @@
-import { dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
+import {
+  dynamic,
+  type ComponentProps,
+  type JSX,
+  type ValidComponent
+} from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
 import { PanelLeftIcon } from "lucide-solid"
 import {
@@ -22,12 +27,24 @@ import { useIsMobile } from "~/registry/hooks/use-mobile"
 import { Button, type ButtonProps } from "~/registry/ui/button"
 import { Input } from "~/registry/ui/input"
 import { Separator } from "~/registry/ui/separator"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "~/registry/ui/sheet"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle
+} from "~/registry/ui/sheet"
 import { Skeleton } from "~/registry/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/registry/ui/tooltip"
 
-type PolymorphicProps<T extends ValidComponent, P> = Omit<P, "as" | "class" | "children"> &
-  Omit<ComponentProps<T>, keyof P | "as" | "class" | "children" | "onChange"> & {
+type PolymorphicProps<T extends ValidComponent, P> = Omit<
+  P,
+  "as" | "class" | "children"
+> &
+  Omit<
+    ComponentProps<T>,
+    keyof P | "as" | "class" | "children" | "onChange"
+  > & {
     as?: T
     class?: string | undefined
     children?: JSX.Element
@@ -73,7 +90,15 @@ type SidebarProviderProps = ComponentProps<"div"> & {
 
 const SidebarProvider = (props: SidebarProviderProps) => {
   const local = merge({ defaultOpen: true }, props)
-  const others = omit(props, "defaultOpen", "open", "onOpenChange", "class", "style", "children")
+  const others = omit(
+    props,
+    "defaultOpen",
+    "open",
+    "onOpenChange",
+    "class",
+    "style",
+    "children"
+  )
   const isMobile = useIsMobile()
   const [openMobile, setOpenMobile] = createSignal(false)
   const [_open, _setOpen] = createSignal(local.defaultOpen)
@@ -87,11 +112,16 @@ const SidebarProvider = (props: SidebarProviderProps) => {
     document.cookie = `${SIDEBAR_COOKIE_NAME}=${open()}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
   }
   const toggleSidebar = () => {
-    return isMobile() ? setOpenMobile((isOpen) => !isOpen) : setOpen((isOpen) => !isOpen)
+    return isMobile()
+      ? setOpenMobile((isOpen) => !isOpen)
+      : setOpen((isOpen) => !isOpen)
   }
   onSettled(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
+      if (
+        event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
+        (event.metaKey || event.ctrlKey)
+      ) {
         event.preventDefault()
         toggleSidebar()
       }
@@ -146,8 +176,18 @@ const Sidebar: Component<SidebarProps> = (props) => {
     },
     props
   )
-  const others = omit(props, "side", "variant", "collapsible", "class", "children")
-  const mobileContentProps = others as unknown as Omit<ComponentProps<typeof SheetContent>, "class">
+  const others = omit(
+    props,
+    "side",
+    "variant",
+    "collapsible",
+    "class",
+    "children"
+  )
+  const mobileContentProps = others as unknown as Omit<
+    ComponentProps<typeof SheetContent>,
+    "class"
+  >
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
   return (
     <Switch>
@@ -287,7 +327,10 @@ const SidebarInset = (props: ComponentProps<"main">) => (
   <main
     data-slot="sidebar-inset"
     {...props}
-    class={cn("cn-sidebar-inset relative flex w-full flex-1 flex-col", props.class)}
+    class={cn(
+      "cn-sidebar-inset relative flex w-full flex-1 flex-col",
+      props.class
+    )}
   />
 )
 
@@ -346,18 +389,23 @@ const SidebarGroup = (props: ComponentProps<"div">) => (
     data-slot="sidebar-group"
     data-sidebar="group"
     {...props}
-    class={cn("cn-sidebar-group relative flex w-full min-w-0 flex-col", props.class)}
+    class={cn(
+      "cn-sidebar-group relative flex w-full min-w-0 flex-col",
+      props.class
+    )}
   />
 )
 
-type SidebarGroupLabelProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  ComponentProps<T>
->
+type SidebarGroupLabelProps<T extends ValidComponent = "div"> =
+  PolymorphicProps<T, ComponentProps<T>>
 
-const SidebarGroupLabel = <T extends ValidComponent = "div">(props: SidebarGroupLabelProps<T>) => {
+const SidebarGroupLabel = <T extends ValidComponent = "div">(
+  props: SidebarGroupLabelProps<T>
+) => {
   const others = omit(props as SidebarGroupLabelProps, "class", "as")
-  const Comp = dynamic(() => props.as ?? "div", { static: isStatic(props, "as") })
+  const Comp = dynamic(() => props.as ?? "div", {
+    static: isStatic(props, "as")
+  })
   return (
     <Comp
       data-slot="sidebar-group-label"
@@ -371,16 +419,16 @@ const SidebarGroupLabel = <T extends ValidComponent = "div">(props: SidebarGroup
   )
 }
 
-type SidebarGroupActionProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  ComponentProps<T>
->
+type SidebarGroupActionProps<T extends ValidComponent = "button"> =
+  PolymorphicProps<T, ComponentProps<T>>
 
 const SidebarGroupAction = <T extends ValidComponent = "button">(
   props: SidebarGroupActionProps<T>
 ) => {
   const others = omit(props as SidebarGroupActionProps, "class", "as")
-  const Comp = dynamic(() => props.as ?? "button", { static: isStatic(props, "as") })
+  const Comp = dynamic(() => props.as ?? "button", {
+    static: isStatic(props, "as")
+  })
   return (
     <Comp
       data-slot="sidebar-group-action"
@@ -442,14 +490,12 @@ const sidebarMenuButtonVariants = cva(
   }
 )
 
-type SidebarMenuButtonProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  Pick<ComponentProps<T>, "class" | "children">
-> &
-  VariantProps<typeof sidebarMenuButtonVariants> & {
-    isActive?: boolean
-    tooltip?: string
-  }
+type SidebarMenuButtonProps<T extends ValidComponent = "button"> =
+  PolymorphicProps<T, Pick<ComponentProps<T>, "class" | "children">> &
+    VariantProps<typeof sidebarMenuButtonVariants> & {
+      isActive?: boolean
+      tooltip?: string
+    }
 
 const SidebarMenuButton = <T extends ValidComponent = "button">(
   rawProps: SidebarMenuButtonProps<T>
@@ -468,7 +514,9 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
     "class"
   )
   const { isMobile, state } = useSidebar()
-  const Comp = dynamic(() => local.as ?? "button", { static: isStatic(rawProps, "as") })
+  const Comp = dynamic(() => local.as ?? "button", {
+    static: isStatic(rawProps, "as")
+  })
   const MenuButton = (menuButtonProps: SidebarMenuButtonProps) => {
     const forwardedProps = omit(menuButtonProps, "class", "as")
     return (
@@ -478,7 +526,10 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
         data-size={local.size}
         data-active={local.isActive}
         class={cn(
-          sidebarMenuButtonVariants({ variant: local.variant, size: local.size }),
+          sidebarMenuButtonVariants({
+            variant: local.variant,
+            size: local.size
+          }),
           menuButtonProps.class,
           local.class
         )}
@@ -491,7 +542,11 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
     <Show fallback={<MenuButton />} when={local.tooltip}>
       <Tooltip>
         <TooltipTrigger render={MenuButton} class="w-full" />
-        <TooltipContent side="right" align="center" hidden={state() !== "collapsed" || isMobile()}>
+        <TooltipContent
+          side="right"
+          align="center"
+          hidden={state() !== "collapsed" || isMobile()}
+        >
           {local.tooltip}
         </TooltipContent>
       </Tooltip>
@@ -499,21 +554,27 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
   )
 }
 
-type SidebarMenuActionProps<T extends ValidComponent = "button"> = ComponentProps<T> & {
-  showOnHover?: boolean
-}
+type SidebarMenuActionProps<T extends ValidComponent = "button"> =
+  ComponentProps<T> & {
+    showOnHover?: boolean
+  }
 
 const SidebarMenuAction = <T extends ValidComponent = "button">(
   rawProps: PolymorphicProps<T, SidebarMenuActionProps>
 ) => {
-  const local = merge({ showOnHover: false }, rawProps) as SidebarMenuActionProps
+  const local = merge(
+    { showOnHover: false },
+    rawProps
+  ) as SidebarMenuActionProps
   const others = omit(
     rawProps as PolymorphicProps<"button", SidebarMenuActionProps>,
     "class",
     "as",
     "showOnHover"
   )
-  const Comp = dynamic(() => rawProps.as ?? "button", { static: isStatic(rawProps, "as") })
+  const Comp = dynamic(() => rawProps.as ?? "button", {
+    static: isStatic(rawProps, "as")
+  })
   return (
     <Comp
       data-slot="sidebar-menu-action"
@@ -557,7 +618,10 @@ const SidebarMenuSkeleton: Component<SidebarMenuSkeletonProps> = (rawProps) => {
       {...others}
     >
       <Show when={local.showIcon}>
-        <Skeleton class="cn-sidebar-menu-skeleton-icon" data-sidebar="menu-skeleton-icon" />
+        <Skeleton
+          class="cn-sidebar-menu-skeleton-icon"
+          data-sidebar="menu-skeleton-icon"
+        />
       </Show>
       <Skeleton
         class="cn-sidebar-menu-skeleton-text max-w-(--skeleton-width) flex-1"
@@ -588,10 +652,11 @@ const SidebarMenuSubItem: Component<ComponentProps<"li">> = (props) => (
   />
 )
 
-type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> = ComponentProps<T> & {
-  size?: "sm" | "md"
-  isActive?: boolean
-}
+type SidebarMenuSubButtonProps<T extends ValidComponent = "a"> =
+  ComponentProps<T> & {
+    size?: "sm" | "md"
+    isActive?: boolean
+  }
 
 const SidebarMenuSubButton = <T extends ValidComponent = "a">(
   rawProps: PolymorphicProps<T, SidebarMenuSubButtonProps>
@@ -604,7 +669,9 @@ const SidebarMenuSubButton = <T extends ValidComponent = "a">(
     "class",
     "as"
   )
-  const Comp = dynamic(() => rawProps.as ?? "a", { static: isStatic(rawProps, "as") })
+  const Comp = dynamic(() => rawProps.as ?? "a", {
+    static: isStatic(rawProps, "as")
+  })
   return (
     <Comp
       data-slot="sidebar-menu-sub-button"

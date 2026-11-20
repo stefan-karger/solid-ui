@@ -31,8 +31,8 @@ export default function CodeBlockTypeset() {
     <div class="grid w-full max-w-md gap-3 text-start text-sm">
       <h3 class="font-semibold">Stream a response</h3>
       <p>
-        Create a route handler that calls <code>streamText</code> and returns the stream to the
-        client.
+        Create a route handler that calls <code>streamText</code> and returns
+        the stream to the client.
       </p>
       <CodeBlock>
         <CodeBlockHeader>
@@ -45,12 +45,14 @@ export default function CodeBlockTypeset() {
           </CodeBlockActions>
         </CodeBlockHeader>
         <CodeBlockContent lineNumbers>
-          <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+          <For each={lines()}>
+            {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+          </For>
         </CodeBlockContent>
       </CodeBlock>
       <p>
-        The <code>useChat</code> hook reads the stream on the client and renders the answer while it
-        is written.
+        The <code>useChat</code> hook reads the stream on the client and renders
+        the answer while it is written.
       </p>
     </div>
   )

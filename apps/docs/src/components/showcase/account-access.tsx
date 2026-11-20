@@ -9,7 +9,13 @@ import {
 } from "~/registry/ui/card"
 import { Field, FieldGroup, FieldLabel } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle
+} from "~/registry/ui/item"
 
 import { ShowcaseIcon } from "./showcase-icon"
 
@@ -18,13 +24,19 @@ export function AccountAccess() {
     <Card>
       <CardHeader>
         <CardTitle>Account Access</CardTitle>
-        <CardDescription>Update your credentials or re-authenticate.</CardDescription>
+        <CardDescription>
+          Update your credentials or re-authenticate.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
           <Field>
             <FieldLabel for="email-address">Email Address</FieldLabel>
-            <Input id="email-address" type="email" placeholder="artist@studio.inc" />
+            <Input
+              id="email-address"
+              type="email"
+              placeholder="artist@studio.inc"
+            />
           </Field>
           <Field>
             <div class="flex items-center justify-between">
@@ -36,7 +48,11 @@ export function AccountAccess() {
                 Forgot?
               </a>
             </div>
-            <Input id="current-password" type="password" placeholder="••••••••••••••••••••••••" />
+            <Input
+              id="current-password"
+              type="password"
+              placeholder="••••••••••••••••••••••••"
+            />
           </Field>
         </FieldGroup>
       </CardContent>

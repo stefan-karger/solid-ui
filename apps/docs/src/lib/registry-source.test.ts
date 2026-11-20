@@ -19,15 +19,18 @@ const styleCss = `
 describe("registry source preparation", () => {
   it("accepts empty upstream theme placeholders", () => {
     expect(
-      extractStyleMap(".cn-placeholder {} .cn-button { @apply rounded-md; }", "test").get(
-        "cn-button"
-      )
+      extractStyleMap(
+        ".cn-placeholder {} .cn-button { @apply rounded-md; }",
+        "test"
+      ).get("cn-button")
     ).toBe("rounded-md")
   })
   it("reads an upstream apply declaration without a final semicolon", () => {
-    expect(extractStyleMap(".cn-button { @apply rounded-md }", "test").get("cn-button")).toBe(
-      "rounded-md"
-    )
+    expect(
+      extractStyleMap(".cn-button { @apply rounded-md }", "test").get(
+        "cn-button"
+      )
+    ).toBe("rounded-md")
   })
   it("extracts style utilities through nested blocks", () => {
     expect(extractStyleMap(styleCss, "test").get("cn-button")).toBe(
@@ -42,17 +45,22 @@ describe("registry source preparation", () => {
     )
 
     expect(result.code).toContain('from "~/components/ui/button"')
-    expect(result.code).toContain(`class="rounded-md text-sm [&_svg:not([class*='size-'])]:size-4"`)
+    expect(result.code).toContain(
+      `class="rounded-md text-sm [&_svg:not([class*='size-'])]:size-4"`
+    )
     expect(result.code).toContain("export default")
     expect(result.code.endsWith("\n")).toBe(false)
   })
 
   it("expands mapped semantic tokens and removes unmapped helpers", async () => {
-    const result = await prepareRegistrySource(`const value = "flex cn-missing cn-button grid"`, {
-      registryPath: "examples/demo.ts",
-      styleName: "test",
-      styleCss
-    })
+    const result = await prepareRegistrySource(
+      `const value = "flex cn-missing cn-button grid"`,
+      {
+        registryPath: "examples/demo.ts",
+        styleName: "test",
+        styleCss
+      }
+    )
 
     expect(result.code).toContain(
       `const value = "flex rounded-md text-sm [&_svg:not([class*='size-'])]:size-4 grid"`
@@ -68,12 +76,18 @@ describe("registry source preparation", () => {
         styleName: "test",
         styleCss
       })
-    ).rejects.toThrow("Cannot safely transform a semantic class in a template expression")
+    ).rejects.toThrow(
+      "Cannot safely transform a semantic class in a template expression"
+    )
   })
 
   it("maps display paths and languages", () => {
-    expect(getRegistryDisplayPath("ui/button.tsx")).toBe("components/ui/button.tsx")
-    expect(getRegistryDisplayPath("ui/button.tsx", "custom/button.tsx")).toBe("custom/button.tsx")
+    expect(getRegistryDisplayPath("ui/button.tsx")).toBe(
+      "components/ui/button.tsx"
+    )
+    expect(getRegistryDisplayPath("ui/button.tsx", "custom/button.tsx")).toBe(
+      "custom/button.tsx"
+    )
     expect(inferRegistryLanguage("data.json")).toBe("json")
     expect(inferRegistryLanguage("README.md")).toBe("text")
   })

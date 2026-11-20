@@ -16,8 +16,12 @@ const {
   defaultValue,
   ...props
 } = Astro.props
-const defaultValues = Array.isArray(defaultValue) ? defaultValue : [defaultValue]
-const encodedDefault = defaultValues.filter((value): value is string => Boolean(value)).join(",")
+const defaultValues = Array.isArray(defaultValue)
+  ? defaultValue
+  : [defaultValue]
+const encodedDefault = defaultValues
+  .filter((value): value is string => Boolean(value))
+  .join(",")
 ---
 
 <div

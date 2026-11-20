@@ -13,7 +13,10 @@ export default function BubbleLinkButtonDemo() {
         <Bubble variant="tinted" align="end">
           <BubbleContent
             render={(partProps) => (
-              <button {...partProps} onClick={() => toast("You clicked forgot password")}>
+              <button
+                {...partProps}
+                onClick={() => toast("You clicked forgot password")}
+              >
                 I forgot my password
               </button>
             )}
@@ -22,7 +25,10 @@ export default function BubbleLinkButtonDemo() {
         <Bubble variant="tinted" align="end">
           <BubbleContent
             render={(partProps) => (
-              <button {...partProps} onClick={() => toast("You clicked help with subscription")}>
+              <button
+                {...partProps}
+                onClick={() => toast("You clicked help with subscription")}
+              >
                 I need help with my subscription
               </button>
             )}
@@ -33,7 +39,9 @@ export default function BubbleLinkButtonDemo() {
             render={(partProps) => (
               <button
                 {...partProps}
-                onClick={() => toast("You clicked something else. Talk to a human.")}
+                onClick={() =>
+                  toast("You clicked something else. Talk to a human.")
+                }
               >
                 Something else. Talk to a human.
               </button>

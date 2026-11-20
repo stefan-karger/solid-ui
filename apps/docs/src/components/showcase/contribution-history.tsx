@@ -42,7 +42,9 @@ export function ContributionHistory() {
                   class="min-h-2 rounded-lg data-[index=0]:bg-primary/65 data-[index=1]:bg-primary/72 data-[index=2]:bg-primary/80 data-[index=3]:bg-primary/90 data-[index=4]:bg-primary"
                   style={{ height: `${(item.amount / maxAmount) * 100}%` }}
                 />
-                <span class="text-center text-xs text-muted-foreground">{item.month}</span>
+                <span class="text-center text-xs text-muted-foreground">
+                  {item.month}
+                </span>
               </div>
             )}
           </For>
@@ -64,7 +66,9 @@ export function ContributionHistory() {
               <ItemDescription class="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                 Savings Plan
               </ItemDescription>
-              <span class="font-heading text-base font-semibold">Accelerated</span>
+              <span class="font-heading text-base font-semibold">
+                Accelerated
+              </span>
               <span class="text-sm text-muted-foreground">Recurring</span>
             </ItemContent>
           </Item>

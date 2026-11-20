@@ -15,7 +15,9 @@ import { Button } from "~/registry/ui/button"
 export { toast, createToaster } from "@ui-sdk/solid/toast"
 
 export function Toaster(
-  props: Omit<ComponentProps<typeof SdkToastRegion>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkToastRegion>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkToastRegion
@@ -32,10 +34,14 @@ export function Toaster(
             <SdkToastTitle class="text-sm font-medium" />
             <SdkToastDescription class="text-sm text-muted-foreground" />
           </div>
-          <SdkToastAction render={(part) => <Button {...part} variant="outline" size="sm" />} />
+          <SdkToastAction
+            render={(part) => <Button {...part} variant="outline" size="sm" />}
+          />
           <SdkToastClose
             aria-label="Close toast"
-            render={(part) => <Button {...part} variant="ghost" size="icon-sm" />}
+            render={(part) => (
+              <Button {...part} variant="ghost" size="icon-sm" />
+            )}
           >
             <XIcon />
           </SdkToastClose>

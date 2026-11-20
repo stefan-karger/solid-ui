@@ -3,9 +3,21 @@ import { createAgent } from "@ui-sdk/solid/agent"
 import { createMemo, createSignal, For } from "solid-js"
 import { afterEach, describe, expect, it } from "vitest"
 
-import { Combobox, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxList } from "./combobox"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList
+} from "./combobox"
 import { Command, CommandInput, CommandItem, CommandList } from "./command"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "./select"
 type Option = { value: string; label: string }
 const agent = createAgent()
 const options: Option[] = [
@@ -33,14 +45,15 @@ async function inputText(input: HTMLInputElement, value: string) {
   await flushUpdates()
 }
 function expectActiveOption(input: HTMLInputElement, label: string) {
-  const option = [...document.querySelectorAll<HTMLElement>("[role=option]")].find(
-    (node) => node.textContent === label
-  )!
+  const option = [
+    ...document.querySelectorAll<HTMLElement>("[role=option]")
+  ].find((node) => node.textContent === label)!
   expect(option).toBeDefined()
   expect(option.hasAttribute("data-highlighted")).toBe(true)
-  expect(input.getAttribute("aria-activedescendant") ?? input.ariaActiveDescendantElement?.id).toBe(
-    option.id
-  )
+  expect(
+    input.getAttribute("aria-activedescendant") ??
+      input.ariaActiveDescendantElement?.id
+  ).toBe(option.id)
 }
 describe("native collection composition", () => {
   it("highlights and selects replacement Combobox objects", async () => {
@@ -48,7 +61,9 @@ describe("native collection composition", () => {
     const Fixture = () => {
       const [query, setQuery] = createSignal("")
       const filtered = createMemo(() =>
-        options.filter((option) => option.label.toLowerCase().includes(query().toLowerCase()))
+        options.filter((option) =>
+          option.label.toLowerCase().includes(query().toLowerCase())
+        )
       )
       return (
         <Combobox<Option>
@@ -82,7 +97,9 @@ describe("native collection composition", () => {
     expectActiveOption(input, "Alpha")
     await inputText(input, "Beta")
     expectActiveOption(input, "Beta")
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }))
+    input.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Enter", bubbles: true })
+    )
     await flushUpdates()
     expect(selected).toEqual(options[1])
   })
@@ -91,7 +108,9 @@ describe("native collection composition", () => {
     const Fixture = () => {
       const [query, setQuery] = createSignal("")
       const filtered = createMemo(() =>
-        options.filter((item) => item.label.toLowerCase().includes(query().toLowerCase()))
+        options.filter((item) =>
+          item.label.toLowerCase().includes(query().toLowerCase())
+        )
       )
       return (
         <Command
@@ -120,7 +139,9 @@ describe("native collection composition", () => {
     expectActiveOption(input, "Alpha")
     await inputText(input, "Beta")
     expectActiveOption(input, "Beta")
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }))
+    input.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Enter", bubbles: true })
+    )
     await flushUpdates()
     expect(selected).toBe("beta")
   })
@@ -160,9 +181,9 @@ describe("native collection composition", () => {
     expect(result.ok).toBe(true)
     await flushUpdates()
     expect(selected).toBe(options[1]!.value)
-    const option = [...document.querySelectorAll<HTMLElement>('[role="option"]')].find((node) =>
-      node.textContent?.includes("Beta")
-    )!
+    const option = [
+      ...document.querySelectorAll<HTMLElement>('[role="option"]')
+    ].find((node) => node.textContent?.includes("Beta"))!
     option.click()
     await flushUpdates()
     expect(selected).toBe(options[1]!.value)

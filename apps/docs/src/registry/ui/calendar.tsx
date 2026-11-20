@@ -25,7 +25,9 @@ export function CalendarRoot(
 }
 
 export function CalendarPrevious(
-  props: Omit<ComponentProps<typeof SdkCalendarPrevious>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarPrevious>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCalendarPrevious
@@ -41,7 +43,9 @@ export function CalendarPrevious(
 }
 
 export function CalendarNext(
-  props: Omit<ComponentProps<typeof SdkCalendarNext>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarNext>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCalendarNext
@@ -57,35 +61,54 @@ export function CalendarNext(
 }
 
 export function CalendarHeading(
-  props: Omit<ComponentProps<typeof SdkCalendarHeading>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarHeading>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCalendarHeading
       {...props}
-      class={cn("cn-calendar-caption-label flex-1 text-center text-sm font-medium", props.class)}
+      class={cn(
+        "cn-calendar-caption-label flex-1 text-center text-sm font-medium",
+        props.class
+      )}
     />
   )
 }
 
 export function CalendarGrid(
-  props: Omit<ComponentProps<typeof SdkCalendarGrid>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarGrid>, "class"> & {
+    class?: string
+  }
 ) {
-  return <SdkCalendarGrid {...props} class={cn("w-full border-collapse", props.class)} />
+  return (
+    <SdkCalendarGrid
+      {...props}
+      class={cn("w-full border-collapse", props.class)}
+    />
+  )
 }
 
 export function CalendarWeekday(
-  props: Omit<ComponentProps<typeof SdkCalendarWeekday>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarWeekday>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCalendarWeekday
       {...props}
-      class={cn("h-(--cell-size) text-xs font-normal text-muted-foreground", props.class)}
+      class={cn(
+        "h-(--cell-size) text-xs font-normal text-muted-foreground",
+        props.class
+      )}
     />
   )
 }
 
 export function CalendarDayButton(
-  props: Omit<ComponentProps<typeof SdkCalendarDay>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCalendarDay>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCalendarDay
@@ -101,8 +124,12 @@ export function CalendarDayButton(
 export function CalendarMonth(props: { offset?: number }) {
   return (
     <CalendarGrid offset={props.offset ?? 0}>
-      <SdkCalendarWeekdays>{(index) => <CalendarWeekday index={index} />}</SdkCalendarWeekdays>
-      <SdkCalendarWeeks>{(cell) => <CalendarDayButton value={cell.date} />}</SdkCalendarWeeks>
+      <SdkCalendarWeekdays>
+        {(index) => <CalendarWeekday index={index} />}
+      </SdkCalendarWeekdays>
+      <SdkCalendarWeeks>
+        {(cell) => <CalendarDayButton value={cell.date} />}
+      </SdkCalendarWeeks>
     </CalendarGrid>
   )
 }

@@ -16,7 +16,9 @@ export default function ItemDemo() {
       <Item variant="outline">
         <ItemContent>
           <ItemTitle>Basic Item</ItemTitle>
-          <ItemDescription>A simple item with title and description.</ItemDescription>
+          <ItemDescription>
+            A simple item with title and description.
+          </ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button size="sm" variant="outline">

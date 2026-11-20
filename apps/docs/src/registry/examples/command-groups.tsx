@@ -41,7 +41,11 @@ const options: CommandGroupOption[] = [
     heading: "Suggestions",
     items: [
       { value: "calendar", label: "Calendar", icon: Calendar },
-      { value: "search-emoji", label: "Search Emoji", icon: FaceSlightlySmilingIcon },
+      {
+        value: "search-emoji",
+        label: "Search Emoji",
+        icon: FaceSlightlySmilingIcon
+      },
       { value: "calculator", label: "Calculator", icon: Calculator }
     ]
   },
@@ -107,11 +111,16 @@ export default function CommandGroups() {
                     <CommandGroupLabel>{group.heading}</CommandGroupLabel>
                     <For each={group["items"]}>
                       {(option) => (
-                        <CommandItem value={option["value"]} label={option["label"]}>
+                        <CommandItem
+                          value={option["value"]}
+                          label={option["label"]}
+                        >
                           <option.icon class="size-4" />
                           <span>{option.label}</span>
                           <Show when={option.shortcut}>
-                            {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
+                            {(shortcut) => (
+                              <CommandShortcut>{shortcut()}</CommandShortcut>
+                            )}
                           </Show>
                         </CommandItem>
                       )}

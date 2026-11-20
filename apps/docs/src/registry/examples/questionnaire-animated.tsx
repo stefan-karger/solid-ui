@@ -40,35 +40,61 @@ export default function QuestionnaireAnimated() {
 
         <QuestionnaireItem class={itemClassName} value="task">
           <QuestionnaireTitle>What should the agent do?</QuestionnaireTitle>
-          <QuestionnaireDescription>Choose the task for this run.</QuestionnaireDescription>
+          <QuestionnaireDescription>
+            Choose the task for this run.
+          </QuestionnaireDescription>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="implement">
               Implement the requested change
             </QuestionnaireChoice>
-            <QuestionnaireChoice value="debug">Debug the current behavior</QuestionnaireChoice>
-            <QuestionnaireChoice value="review">Review the implementation</QuestionnaireChoice>
+            <QuestionnaireChoice value="debug">
+              Debug the current behavior
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="review">
+              Review the implementation
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
 
         <QuestionnaireItem class={itemClassName} value="review">
-          <QuestionnaireTitle>How should the work be reviewed?</QuestionnaireTitle>
-          <QuestionnaireDescription>Select the verification depth.</QuestionnaireDescription>
+          <QuestionnaireTitle>
+            How should the work be reviewed?
+          </QuestionnaireTitle>
+          <QuestionnaireDescription>
+            Select the verification depth.
+          </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="targeted">Targeted checks</QuestionnaireChoice>
-            <QuestionnaireChoice value="complete">Complete test suite</QuestionnaireChoice>
-            <QuestionnaireChoice value="manual">Tests and manual QA</QuestionnaireChoice>
+            <QuestionnaireChoice value="targeted">
+              Targeted checks
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="complete">
+              Complete test suite
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="manual">
+              Tests and manual QA
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>
 
         <QuestionnaireItem class={itemClassName} value="delivery">
-          <QuestionnaireTitle>How should the result be delivered?</QuestionnaireTitle>
-          <QuestionnaireDescription>Choose the final handoff format.</QuestionnaireDescription>
+          <QuestionnaireTitle>
+            How should the result be delivered?
+          </QuestionnaireTitle>
+          <QuestionnaireDescription>
+            Choose the final handoff format.
+          </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="summary">Concise summary</QuestionnaireChoice>
-            <QuestionnaireChoice value="diff">Summary and changed files</QuestionnaireChoice>
-            <QuestionnaireChoice value="handoff">Detailed review handoff</QuestionnaireChoice>
+            <QuestionnaireChoice value="summary">
+              Concise summary
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="diff">
+              Summary and changed files
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="handoff">
+              Detailed review handoff
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

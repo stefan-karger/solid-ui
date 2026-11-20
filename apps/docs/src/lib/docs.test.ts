@@ -60,7 +60,10 @@ describe("docs page ordering and neighbors", () => {
       previous: pages[2],
       next: pages[1]
     })
-    expect(findNeighbors(pages, "index")).toEqual({ previous: null, next: pages[3] })
+    expect(findNeighbors(pages, "index")).toEqual({
+      previous: null,
+      next: pages[3]
+    })
     expect(findNeighbors(pages, "guides/zebra.mdx")).toEqual({
       previous: pages[4],
       next: null
@@ -68,7 +71,10 @@ describe("docs page ordering and neighbors", () => {
   })
 
   it("returns empty neighbors when the current page is missing", () => {
-    expect(findNeighbors(pages, "missing")).toEqual({ previous: null, next: null })
+    expect(findNeighbors(pages, "missing")).toEqual({
+      previous: null,
+      next: null
+    })
   })
 
   it("filters non-component pages before finding neighbors", () => {
@@ -90,10 +96,19 @@ describe("docs page ordering and neighbors", () => {
 describe("createComponentLinks", () => {
   const pages: DocsPageLike[] = [
     page("components/zeta.mdx", "Zeta", true),
-    { id: "components/alpha/index.mdx", data: { title: "Alpha", component: true, new: true } },
+    {
+      id: "components/alpha/index.mdx",
+      data: { title: "Alpha", component: true, new: true }
+    },
     page("guides/setup.mdx", "Setup"),
-    { id: "components/alpha-alt.mdx", data: { title: "Alpha", component: true } },
-    { id: "components/beta.md", data: { title: "Beta", component: true, new: true } }
+    {
+      id: "components/alpha-alt.mdx",
+      data: { title: "Alpha", component: true }
+    },
+    {
+      id: "components/beta.md",
+      data: { title: "Beta", component: true, new: true }
+    }
   ]
 
   it("derives normalized links only from component pages", () => {
@@ -114,6 +129,8 @@ describe("createComponentLinks", () => {
 
   it("returns an empty list for empty and non-component inputs", () => {
     expect(createComponentLinks([])).toEqual([])
-    expect(createComponentLinks([page("guides/setup.mdx", "Setup")], "new")).toEqual([])
+    expect(
+      createComponentLinks([page("guides/setup.mdx", "Setup")], "new")
+    ).toEqual([])
   })
 })

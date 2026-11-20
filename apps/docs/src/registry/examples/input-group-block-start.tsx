@@ -1,6 +1,11 @@
 import { CodeIcon, CopyIcon } from "lucide-solid"
 
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
@@ -16,7 +21,10 @@ export default function InputGroupBlockStart() {
       <Field>
         <FieldLabel for="block-start-input">Input</FieldLabel>
         <InputGroup class="h-auto">
-          <InputGroupInput id="block-start-input" placeholder="Enter your name" />
+          <InputGroupInput
+            id="block-start-input"
+            placeholder="Enter your name"
+          />
           <InputGroupAddon align="block-start">
             <InputGroupText>Full Name</InputGroupText>
           </InputGroupAddon>
@@ -40,7 +48,9 @@ export default function InputGroupBlockStart() {
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
-        <FieldDescription>Header positioned above the textarea.</FieldDescription>
+        <FieldDescription>
+          Header positioned above the textarea.
+        </FieldDescription>
       </Field>
     </FieldGroup>
   )

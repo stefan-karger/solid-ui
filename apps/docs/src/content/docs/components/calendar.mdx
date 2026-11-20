@@ -78,17 +78,19 @@ The SDK uses `timeZone` to determine today. Without it, the SDK reads the browse
 
 ## Basic
 
-A basic calendar component. We used `class="rounded-lg border"` to style the calendar.
+A basic calendar styled with `class="rounded-lg border"`.
 
 <ComponentPreview name="calendar-basic" previewClassName="h-96" />
 
 ## Range Calendar
 
+Use the `mode="range"` prop to enable range selection.
+
 <ComponentPreview name="calendar-range" previewClassName="h-[36rem] md:h-96" />
 
 ## Month and Year Selector
 
-Use the Calendar month and year selectors to build a dropdown caption.
+Use month and year dropdowns to change the calendar's visible month.
 
 <ComponentPreview name="calendar-caption" previewClassName="h-96" />
 
@@ -117,7 +119,7 @@ Set `--cell-size` to a fixed value or use responsive utilities such as `[--cell-
 
 ## Week Numbers
 
-Render a row header beside the days to display the ISO week number.
+Add a column to the calendar grid to display ISO week numbers.
 
 <ComponentPreview name="calendar-week-numbers" previewClassName="h-96" />
 

@@ -16,7 +16,9 @@ const { defaultPrototype, prototypeIds } = Astro.props
   hidden
 >
   <div class="flex items-center gap-0.5">
-    <span class="px-2 text-xs font-medium text-muted-foreground">Prototype</span>
+    <span class="px-2 text-xs font-medium text-muted-foreground">
+      Prototype
+    </span>
     {prototypeIds.map((id) => (
       <a
         href={`?prototype=${id}`}
@@ -44,25 +46,36 @@ const { defaultPrototype, prototypeIds } = Astro.props
     function syncPrototype() {
       const url = new URL(window.location.href)
       const requested = url.searchParams.get("prototype")
-      const selected = variants.some((variant) => variant.dataset.heroVariant === requested)
+      const selected = variants.some(
+        (variant) => variant.dataset.heroVariant === requested
+      )
         ? requested
         : switcher.dataset.heroSwitcher
 
-      for (const variant of variants) variant.hidden = variant.dataset.heroVariant !== selected
+      for (const variant of variants)
+        variant.hidden = variant.dataset.heroVariant !== selected
       for (const link of links) {
         url.searchParams.set("prototype", link.dataset.heroLink)
         link.href = url.href
-        if (link.dataset.heroLink === selected) link.setAttribute("aria-current", "page")
+        if (link.dataset.heroLink === selected)
+          link.setAttribute("aria-current", "page")
         else link.removeAttribute("aria-current")
       }
     }
 
     for (const link of links) {
       link.addEventListener("click", (event) => {
-        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
           return
         event.preventDefault()
-        if (link.href !== window.location.href) history.pushState(null, "", link.href)
+        if (link.href !== window.location.href)
+          history.pushState(null, "", link.href)
         syncPrototype()
         if (hero.getBoundingClientRect().top < 0) window.scrollTo(0, 0)
       })

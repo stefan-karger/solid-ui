@@ -8,17 +8,26 @@ import {
   AccordionPanel as SdkAccordionPanel
 } from "@ui-sdk/solid/accordion"
 import { ChevronDownIcon } from "lucide-solid"
-import { omit } from "solid-js"
+import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-type AccordionProps = Omit<ComponentProps<typeof SdkAccordion>, "class" | "children"> & {
+type AccordionProps = Omit<
+  ComponentProps<typeof SdkAccordion>,
+  "class" | "children"
+> & {
   children?: JSX.Element
   class?: string
 }
 const Accordion = (props: AccordionProps) => (
-  <SdkAccordion {...props} class={cn("cn-accordion flex w-full flex-col", props.class)} />
+  <SdkAccordion
+    {...props}
+    class={cn("cn-accordion flex w-full flex-col", props.class)}
+  />
 )
-type AccordionItemProps = Omit<ComponentProps<typeof SdkAccordionItem>, "class" | "children"> & {
+type AccordionItemProps = Omit<
+  ComponentProps<typeof SdkAccordionItem>,
+  "class" | "children"
+> & {
   children?: JSX.Element
   class?: string
 }
@@ -30,16 +39,26 @@ type AccordionTriggerProps = Omit<
   "class" | "children"
 > & { children?: JSX.Element; class?: string }
 const AccordionTrigger = (props: AccordionTriggerProps) => {
-  const others = omit(props, "class", "children")
+  const others = omit(props, "class", "children", "render")
+  const renderTrigger: AccordionTriggerProps["render"] = (part, state) => {
+    const attributes = merge(part, () => ({
+      tabindex: state.disabled ? -1 : part.tabindex
+    }))
+    return props.render ? (
+      props.render(attributes, state)
+    ) : (
+      <button {...attributes} />
+    )
+  }
   return (
     <SdkAccordionHeader class="flex">
       <SdkAccordionTrigger
         class={cn(
-          "group/accordion-trigger cn-accordion-trigger relative flex flex-1 items-start justify-between border border-transparent transition-all outline-none disabled:pointer-events-none disabled:opacity-50",
+          "group/accordion-trigger cn-accordion-trigger relative flex flex-1 items-start justify-between border border-transparent transition-all outline-none disabled:pointer-events-none disabled:opacity-50 data-disabled:pointer-events-none data-disabled:opacity-50",
           props.class
         )}
-
         {...others}
+        render={renderTrigger}
       >
         {props.children}
         <ChevronDownIcon

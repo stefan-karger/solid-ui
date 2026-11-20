@@ -8,7 +8,8 @@ type Manifest = {
   devDependencies: Record<string, string>
   peerDependencies: Record<string, string>
 }
-const read = (path: string) => JSON.parse(readFileSync(resolve(path), "utf8")) as Manifest
+const read = (path: string) =>
+  JSON.parse(readFileSync(resolve(path), "utf8")) as Manifest
 
 describe("workspace compatibility target", () => {
   it("keeps the docs, fixture, test runtime and upstream packages on the stable Solid stack", () => {
@@ -20,9 +21,8 @@ describe("workspace compatibility target", () => {
       expect(docs.dependencies[pkg]).toBe("2.0.1")
       for (const upstream of ["integrations/solid", "renderers/solid-js"])
         expect(
-          read(`vendor/astro-solid/upstream/packages/${upstream}/package.json`).peerDependencies[
-            pkg
-          ]
+          read(`vendor/astro-solid/upstream/packages/${upstream}/package.json`)
+            .peerDependencies[pkg]
         ).toBe("^2.0.0")
     }
     for (const pkg of ["@ui-sdk/core", "@ui-sdk/solid"]) {
@@ -31,9 +31,15 @@ describe("workspace compatibility target", () => {
     }
     expect(root.devDependencies["@solidjs/vite-plugin"]).toBe("3.0.1")
     const workspace = readFileSync(resolve("pnpm-workspace.yaml"), "utf8")
-    for (const pkg of ["@solidjs/signals", "@solidjs/compiler", "@solidjs/babel-plugin"])
+    for (const pkg of [
+      "@solidjs/signals",
+      "@solidjs/compiler",
+      "@solidjs/babel-plugin"
+    ])
       expect(workspace).toContain(`${pkg}": "2.0.1"`)
-    expect(docs.dependencies["@astrojs/solid-js"]).toContain("8.0.0-pr.17891.bbf9faa.tgz")
+    expect(docs.dependencies["@astrojs/solid-js"]).toContain(
+      "8.0.0-pr.17891.bbf9faa.tgz"
+    )
     expect(docs.dependencies).not.toHaveProperty("@solid-ui/astro-solid2")
     expect(docs.dependencies).not.toHaveProperty("@kobalte/core")
   })

@@ -45,7 +45,9 @@ export default function CodeBlockAnsi() {
           </CodeBlockActions>
         </CodeBlockHeader>
         <CodeBlockContent wrap>
-          <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+          <For each={lines()}>
+            {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+          </For>
         </CodeBlockContent>
       </CodeBlock>
     </div>

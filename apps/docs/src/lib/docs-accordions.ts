@@ -8,7 +8,10 @@ type AccordionItem = {
   disabled: boolean
 }
 
-function scopedElements<T extends Element>(root: HTMLElement, selector: string) {
+function scopedElements<T extends Element>(
+  root: HTMLElement,
+  selector: string
+) {
   return [...root.querySelectorAll<T>(selector)].filter(
     (element) => element.closest("[data-docs-accordion]") === root
   )
@@ -30,14 +33,21 @@ function collectItems(root: HTMLElement) {
   const values = new Set<string>()
   const validItems: AccordionItem[] = []
 
-  for (const element of scopedElements<HTMLElement>(root, "[data-accordion-item]")) {
+  for (const element of scopedElements<HTMLElement>(
+    root,
+    "[data-accordion-item]"
+  )) {
     const value = element.dataset.value?.trim()
     const itemTriggers = itemDescendants<HTMLButtonElement>(
       root,
       element,
       "[data-accordion-trigger]"
     )
-    const itemContents = itemDescendants<HTMLElement>(root, element, "[data-accordion-content]")
+    const itemContents = itemDescendants<HTMLElement>(
+      root,
+      element,
+      "[data-accordion-content]"
+    )
 
     if (!value || value.includes(",") || values.has(value)) continue
     if (itemTriggers.length !== 1 || itemContents.length !== 1) continue
@@ -72,7 +82,9 @@ function initializeDocsAccordionRoot(root: HTMLElement) {
     .map((value) => value.trim())
     .filter(Boolean)
   const defaultValues = new Set(
-    validDefaults.filter((value) => enabledItems.some((item) => item.value === value))
+    validDefaults.filter((value) =>
+      enabledItems.some((item) => item.value === value)
+    )
   )
   const collapsible = root.hasAttribute("data-collapsible")
   const openValues = new Set<string>()
@@ -81,7 +93,8 @@ function initializeDocsAccordionRoot(root: HTMLElement) {
     for (const value of defaultValues) openValues.add(value)
   } else {
     const initialValue =
-      [...defaultValues][0] ?? (!collapsible ? enabledItems[0]?.value : undefined)
+      [...defaultValues][0] ??
+      (!collapsible ? enabledItems[0]?.value : undefined)
     if (initialValue) openValues.add(initialValue)
   }
 
@@ -138,8 +151,10 @@ function initializeDocsAccordionRoot(root: HTMLElement) {
       let nextIndex: number | undefined
 
       if (event.key === "ArrowUp")
-        nextIndex = (currentIndex - 1 + enabledItems.length) % enabledItems.length
-      if (event.key === "ArrowDown") nextIndex = (currentIndex + 1) % enabledItems.length
+        nextIndex =
+          (currentIndex - 1 + enabledItems.length) % enabledItems.length
+      if (event.key === "ArrowDown")
+        nextIndex = (currentIndex + 1) % enabledItems.length
       if (event.key === "Home") nextIndex = 0
       if (event.key === "End") nextIndex = enabledItems.length - 1
       if (nextIndex === undefined) return
@@ -155,7 +170,9 @@ function initializeDocsAccordionRoot(root: HTMLElement) {
 }
 
 export function initializeDocsAccordions() {
-  for (const root of document.querySelectorAll<HTMLElement>("[data-docs-accordion]")) {
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-docs-accordion]"
+  )) {
     initializeDocsAccordionRoot(root)
   }
 }

@@ -25,12 +25,18 @@ function Actions() {
       <Show
         when={last()}
         fallback={
-          <QuestionnaireNext disabled={!state.answers()[state.steps()[state.step()] ?? ""]?.length}>
+          <QuestionnaireNext
+            disabled={
+              !state.answers()[state.steps()[state.step()] ?? ""]?.length
+            }
+          >
             Next
           </QuestionnaireNext>
         }
       >
-        <QuestionnaireSubmit disabled={!state.answers()[state.steps()[state.step()] ?? ""]?.length}>
+        <QuestionnaireSubmit
+          disabled={!state.answers()[state.steps()[state.step()] ?? ""]?.length}
+        >
           Permissions
         </QuestionnaireSubmit>
       </Show>
@@ -57,8 +63,12 @@ export default function QuestionnaireNavigationState() {
             Next is intentionally disabled until an answer is selected.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="files">Project files</QuestionnaireChoice>
-            <QuestionnaireChoice value="tests">Project files and tests</QuestionnaireChoice>
+            <QuestionnaireChoice value="files">
+              Project files
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="tests">
+              Project files and tests
+            </QuestionnaireChoice>
             <QuestionnaireChoice value="config">
               Files, tests, and configuration
             </QuestionnaireChoice>
@@ -66,11 +76,17 @@ export default function QuestionnaireNavigationState() {
           <QuestionnaireError />
         </QuestionnaireItem>
         <QuestionnaireItem value="verification">
-          <QuestionnaireTitle>What must pass before completion?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What must pass before completion?
+          </QuestionnaireTitle>
           <QuestionnaireChoices>
             <QuestionnaireChoice value="tests">Tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="types">Tests and types</QuestionnaireChoice>
-            <QuestionnaireChoice value="all">Tests, types, and visual QA</QuestionnaireChoice>
+            <QuestionnaireChoice value="types">
+              Tests and types
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="all">
+              Tests, types, and visual QA
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

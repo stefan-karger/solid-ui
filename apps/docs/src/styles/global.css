@@ -181,13 +181,13 @@
   --color-selection-foreground: var(--selection-foreground);
 
   --font-sans:
-    "Geist Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+    "Geist Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-heading: var(--font-sans);
 
   --font-mono:
-    "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @layer base {
@@ -200,7 +200,8 @@
   }
   html {
     @apply overscroll-y-none;
-    scrollbar-color: color-mix(in oklab, var(--primary) 60%, var(--border)) transparent;
+    scrollbar-color: color-mix(in oklab, var(--primary) 60%, var(--border))
+      transparent;
   }
   body {
     font-synthesis-weight: none;
@@ -279,7 +280,8 @@
     }
   }
 
-  [data-docs-tabs][data-tabs-enhanced="true"] [data-tabs-content][data-state="inactive"] {
+  [data-docs-tabs][data-tabs-enhanced="true"]
+    [data-tabs-content][data-state="inactive"] {
     display: none;
   }
 
@@ -379,7 +381,11 @@
       width: 2px;
       height: 100%;
       content: "";
-      background-color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+      background-color: color-mix(
+        in oklab,
+        var(--muted-foreground) 50%,
+        transparent
+      );
     }
   }
 
@@ -395,19 +401,29 @@
     display: none;
   }
 
+  [data-code-collapsible][data-variant="source"]:not(
+      [data-code-enhanced="true"]
+    )
+    pre {
+    max-height: 24rem;
+  }
+
   [data-code-collapsible][data-code-enhanced="true"] [data-code-top-control] {
     display: flex;
   }
 
-  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"] [data-code-reveal] {
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"]
+    [data-code-reveal] {
     display: flex;
   }
 
-  [data-code-collapsible][data-code-enhanced="true"][data-expanded="true"] [data-code-reveal] {
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="true"]
+    [data-code-reveal] {
     display: none;
   }
 
-  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"] [data-code-content] {
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"]
+    [data-code-content] {
     overflow: hidden;
   }
 

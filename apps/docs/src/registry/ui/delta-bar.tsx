@@ -15,12 +15,15 @@ const DeltaBar = (rawProps: DeltaBarProps) => {
   const width = () => `${Math.abs(value())}%`
   const tone = () => {
     if (value() === 0) return undefined
-    return (value() > 0 && local.isIncreasePositive) || (value() < 0 && !local.isIncreasePositive)
+    return (value() > 0 && local.isIncreasePositive) ||
+      (value() < 0 && !local.isIncreasePositive)
       ? "positive"
       : "negative"
   }
   const indicatorToneClass = () =>
-    tone() === "positive" ? "bg-green-500 dark:bg-green-400" : "bg-red-500 dark:bg-red-400"
+    tone() === "positive"
+      ? "bg-green-500 dark:bg-green-400"
+      : "bg-red-500 dark:bg-red-400"
   return (
     <div
       class={cn("cn-delta-bar relative flex w-full items-center", local.class)}
@@ -31,7 +34,10 @@ const DeltaBar = (rawProps: DeltaBarProps) => {
       <div class="flex h-full w-1/2 justify-end" data-slot="delta-bar-decrease">
         <Show when={value() < 0}>
           <div
-            class={cn("cn-delta-bar-indicator-decrease h-full", indicatorToneClass())}
+            class={cn(
+              "cn-delta-bar-indicator-decrease h-full",
+              indicatorToneClass()
+            )}
             data-side="decrease"
             data-slot="delta-bar-indicator"
             data-tone={tone()}
@@ -40,14 +46,23 @@ const DeltaBar = (rawProps: DeltaBarProps) => {
         </Show>
       </div>
       <div
-        class={cn("cn-delta-bar-marker z-10", value() === 0 ? "bg-muted" : indicatorToneClass())}
+        class={cn(
+          "cn-delta-bar-marker z-10",
+          value() === 0 ? "bg-muted" : indicatorToneClass()
+        )}
         data-slot="delta-bar-marker"
         data-tone={tone()}
       />
-      <div class="flex h-full w-1/2 justify-start" data-slot="delta-bar-increase">
+      <div
+        class="flex h-full w-1/2 justify-start"
+        data-slot="delta-bar-increase"
+      >
         <Show when={value() > 0}>
           <div
-            class={cn("cn-delta-bar-indicator-increase h-full", indicatorToneClass())}
+            class={cn(
+              "cn-delta-bar-indicator-increase h-full",
+              indicatorToneClass()
+            )}
             data-side="increase"
             data-slot="delta-bar-indicator"
             data-tone={tone()}

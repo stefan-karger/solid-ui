@@ -45,7 +45,10 @@ export default function ScrollAreaHorizontalDemo() {
                   />
                 </div>
                 <figcaption class="pt-2 text-xs text-muted-foreground">
-                  Photo by <span class="font-semibold text-foreground">{artwork.artist}</span>
+                  Photo by{" "}
+                  <span class="font-semibold text-foreground">
+                    {artwork.artist}
+                  </span>
                 </figcaption>
               </figure>
             )}

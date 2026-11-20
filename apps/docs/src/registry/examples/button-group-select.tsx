@@ -4,7 +4,13 @@ import { For } from "solid-js"
 import { Button } from "~/registry/ui/button"
 import { ButtonGroup } from "~/registry/ui/button-group"
 import { Input } from "~/registry/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 type Currency = {
   label: string
@@ -28,7 +34,9 @@ export default function ButtonGroupSelect() {
         >
           <SelectTrigger aria-label="Select an option" class="font-mono">
             <SelectValue>
-              {(state) => String((state.value as { value: string } | null)?.value ?? "")}
+              {(state) =>
+                String((state.value as { value: string } | null)?.value ?? "")
+              }
             </SelectValue>
           </SelectTrigger>
           <SelectContent>

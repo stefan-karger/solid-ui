@@ -10,8 +10,19 @@ import {
 
 describe("documentation appearance", () => {
   it("reads supported styles and explicit color preferences", () => {
-    expect(styles).toEqual(["vega", "nova", "maia", "lyra", "mira", "luma", "sera", "rhea"])
-    expect(readAppearance({ getItem: () => '{"style":"lyra","mode":"dark"}' })).toEqual({
+    expect(styles).toEqual([
+      "vega",
+      "nova",
+      "maia",
+      "lyra",
+      "mira",
+      "luma",
+      "sera",
+      "rhea"
+    ])
+    expect(
+      readAppearance({ getItem: () => '{"style":"lyra","mode":"dark"}' })
+    ).toEqual({
       style: "lyra",
       mode: "dark"
     })
@@ -19,12 +30,20 @@ describe("documentation appearance", () => {
     expect(isDocsStyle("luna")).toBe(false)
   })
   it("uses system color mode when no preference exists and rejects corrupt data", () => {
-    expect(readAppearance({ getItem: () => null }, true)).toEqual({ style: "nova", mode: "dark" })
-    expect(readAppearance({ getItem: () => '{"style":"unknown","mode":"oops"}' })).toEqual({
+    expect(readAppearance({ getItem: () => null }, true)).toEqual({
+      style: "nova",
+      mode: "dark"
+    })
+    expect(
+      readAppearance({ getItem: () => '{"style":"unknown","mode":"oops"}' })
+    ).toEqual({
       style: "nova",
       mode: "light"
     })
-    expect(readAppearance({ getItem: () => "broken" })).toEqual({ style: "nova", mode: "light" })
+    expect(readAppearance({ getItem: () => "broken" })).toEqual({
+      style: "nova",
+      mode: "light"
+    })
   })
   it("handles unavailable storage and applies saved appearance before hydration", () => {
     expect(

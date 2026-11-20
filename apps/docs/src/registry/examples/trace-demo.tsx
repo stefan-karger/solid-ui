@@ -26,7 +26,8 @@ const commands = [
   { command: "pnpm --version", output: "10.18.0" },
   {
     command: "git diff --stat HEAD~1 -- package.json pnpm-lock.yaml",
-    output: " package.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)"
+    output:
+      " package.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)"
   },
   {
     command: "pnpm install --frozen-lockfile",
@@ -36,8 +37,14 @@ const commands = [
   }
 ]
 const sources = [
-  { title: "pnpm install | pnpm.io", url: "https://pnpm.io/cli/install#--frozen-lockfile" },
-  { title: "Continuous Integration | pnpm.io", url: "https://pnpm.io/continuous-integration" }
+  {
+    title: "pnpm install | pnpm.io",
+    url: "https://pnpm.io/cli/install#--frozen-lockfile"
+  },
+  {
+    title: "Continuous Integration | pnpm.io",
+    url: "https://pnpm.io/continuous-integration"
+  }
 ]
 
 export default function TraceDemo() {
@@ -78,13 +85,15 @@ export default function TraceDemo() {
                       <CircleCheckIcon />
                     )}
                   </TraceIcon>
-                  <TraceTitle>{stage() === 0 ? "Thinking" : "Thought for 5s"}</TraceTitle>
+                  <TraceTitle>
+                    {stage() === 0 ? "Thinking" : "Thought for 5s"}
+                  </TraceTitle>
                 </TraceLine>
               </TraceCollapsibleTrigger>
               <TraceCollapsibleContent>
-                CI installs with a frozen lockfile, so the install stops when package.json and
-                pnpm-lock.yaml disagree. I should check what the last commit changed, then reproduce
-                the install.
+                CI installs with a frozen lockfile, so the install stops when
+                package.json and pnpm-lock.yaml disagree. I should check what
+                the last commit changed, then reproduce the install.
               </TraceCollapsibleContent>
             </TraceCollapsible>
             <For each={commands}>
@@ -105,7 +114,11 @@ export default function TraceDemo() {
                       <TraceCollapsibleTrigger>
                         <TraceLine status={row.failed ? "error" : undefined}>
                           <TraceIcon>
-                            {row.failed ? <CircleAlertIcon /> : <CircleCheckIcon />}
+                            {row.failed ? (
+                              <CircleAlertIcon />
+                            ) : (
+                              <CircleCheckIcon />
+                            )}
                           </TraceIcon>
                           <TraceTitle>
                             {row.failed ? "Failed to run" : "Ran"} {row.command}
@@ -113,7 +126,10 @@ export default function TraceDemo() {
                         </TraceLine>
                       </TraceCollapsibleTrigger>
                       <TraceCollapsibleContent>
-                        <CodeBlock size="sm" variant={row.failed ? "destructive" : "default"}>
+                        <CodeBlock
+                          size="sm"
+                          variant={row.failed ? "destructive" : "default"}
+                        >
                           <CodeBlockContent wrap>{row.output}</CodeBlockContent>
                         </CodeBlock>
                       </TraceCollapsibleContent>
@@ -129,7 +145,9 @@ export default function TraceDemo() {
                     <TraceIcon>
                       <GlobeIcon />
                     </TraceIcon>
-                    <TraceTitle>{running() ? "Using" : "Used"} 2 sources</TraceTitle>
+                    <TraceTitle>
+                      {running() ? "Using" : "Used"} 2 sources
+                    </TraceTitle>
                   </TraceLine>
                 </TraceCollapsibleTrigger>
                 <TraceCollapsibleContent>
@@ -159,13 +177,20 @@ export default function TraceDemo() {
           </Trace>
           <Show when={!running()}>
             <p>
-              The last commit bumped a version in package.json without updating pnpm-lock.yaml, so
-              the frozen install fails. Run pnpm install locally and commit the lockfile.
+              The last commit bumped a version in package.json without updating
+              pnpm-lock.yaml, so the frozen install fails. Run pnpm install
+              locally and commit the lockfile.
             </p>
           </Show>
         </MessageContent>
       </Message>
-      <Button variant="outline" size="sm" class="self-start" disabled={running()} onClick={replay}>
+      <Button
+        variant="outline"
+        size="sm"
+        class="self-start"
+        disabled={running()}
+        onClick={replay}
+      >
         <RotateCcwIcon /> Replay
       </Button>
     </div>

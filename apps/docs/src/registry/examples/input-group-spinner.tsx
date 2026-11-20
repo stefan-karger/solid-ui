@@ -38,7 +38,9 @@ export default function InputGroupSpinner() {
           <RefreshCwIcon class="size-4 animate-spin" />
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <InputGroupText class="text-muted-foreground">Please wait...</InputGroupText>
+          <InputGroupText class="text-muted-foreground">
+            Please wait...
+          </InputGroupText>
         </InputGroupAddon>
       </InputGroup>
     </div>

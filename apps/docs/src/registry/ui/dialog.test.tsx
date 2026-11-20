@@ -39,7 +39,9 @@ describe("dialog dismissal", () => {
     expect(dialog).not.toBeNull()
     expect(dialog.getAttribute("aria-modal")).toBe("true")
 
-    dialog.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }))
+    dialog.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Escape", bubbles: true })
+    )
     await flushUpdates()
     expect(document.querySelector('[role="dialog"]')).toBeNull()
     expect(document.querySelector("[data-slot=dialog-backdrop]")).toBeNull()
@@ -47,7 +49,9 @@ describe("dialog dismissal", () => {
     trigger.click()
     await flushUpdates()
     expect(document.querySelector('[role="dialog"]')).not.toBeNull()
-    expect(document.querySelector("[role=dialog]")?.getAttribute("aria-modal")).toBe("true")
+    expect(
+      document.querySelector("[role=dialog]")?.getAttribute("aria-modal")
+    ).toBe("true")
 
     dispose()
     dispose = undefined

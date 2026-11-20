@@ -21,7 +21,9 @@ export default function FieldResponsive() {
             <Field orientation="responsive">
               <FieldContent>
                 <FieldLabel for="name">Name</FieldLabel>
-                <FieldDescription>Provide your full name for identification</FieldDescription>
+                <FieldDescription>
+                  Provide your full name for identification
+                </FieldDescription>
               </FieldContent>
               <Input id="name" placeholder="Evil Rabbit" required />
             </Field>

@@ -1,6 +1,17 @@
-import { CheckIcon, CreditCardIcon, InfoIcon, MailIcon, SearchIcon, StarIcon } from "lucide-solid"
+import {
+  CheckIcon,
+  CreditCardIcon,
+  InfoIcon,
+  MailIcon,
+  SearchIcon,
+  StarIcon
+} from "lucide-solid"
 
-import { InputGroup, InputGroupAddon, InputGroupInput } from "~/registry/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput
+} from "~/registry/ui/input-group"
 
 export default function InputGroupIcon() {
   return (

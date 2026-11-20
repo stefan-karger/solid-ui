@@ -15,7 +15,9 @@ export default function MessageDemo() {
         <MessageContent>
           <MessageHeader>Alex</MessageHeader>
           <Bubble>
-            <BubbleContent>The new components are ready to review.</BubbleContent>
+            <BubbleContent>
+              The new components are ready to review.
+            </BubbleContent>
           </Bubble>
           <MessageFooter>
             <time datetime="2026-11-17T10:30:00Z">10:30</time>

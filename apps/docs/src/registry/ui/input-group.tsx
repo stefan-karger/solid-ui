@@ -28,8 +28,10 @@ const inputGroupAddonVariants = cva(
       align: {
         "inline-start": "cn-input-group-addon-align-inline-start order-first",
         "inline-end": "cn-input-group-addon-align-inline-end order-last",
-        "block-start": "cn-input-group-addon-align-block-start order-first w-full justify-start",
-        "block-end": "cn-input-group-addon-align-block-end order-last w-full justify-start"
+        "block-start":
+          "cn-input-group-addon-align-block-start order-first w-full justify-start",
+        "block-end":
+          "cn-input-group-addon-align-block-end order-last w-full justify-start"
       }
     },
     defaultVariants: {
@@ -38,9 +40,13 @@ const inputGroupAddonVariants = cva(
   }
 )
 
-type InputGroupAddonProps = ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>
+type InputGroupAddonProps = ComponentProps<"div"> &
+  VariantProps<typeof inputGroupAddonVariants>
 
-const handleInputGroupAddonClick: JSX.EventHandler<HTMLDivElement, MouseEvent> = (event) => {
+const handleInputGroupAddonClick: JSX.EventHandler<
+  HTMLDivElement,
+  MouseEvent
+> = (event) => {
   if ((event.target as HTMLElement).closest("button")) {
     return
   }
@@ -62,19 +68,22 @@ const InputGroupAddon = (props: InputGroupAddonProps) => {
   )
 }
 
-const inputGroupButtonVariants = cva("cn-input-group-button flex items-center shadow-none", {
-  variants: {
-    size: {
-      xs: "cn-input-group-button-size-xs",
-      sm: "cn-input-group-button-size-sm",
-      "icon-xs": "cn-input-group-button-size-icon-xs",
-      "icon-sm": "cn-input-group-button-size-icon-sm"
+const inputGroupButtonVariants = cva(
+  "cn-input-group-button flex items-center shadow-none",
+  {
+    variants: {
+      size: {
+        xs: "cn-input-group-button-size-xs",
+        sm: "cn-input-group-button-size-sm",
+        "icon-xs": "cn-input-group-button-size-icon-xs",
+        "icon-sm": "cn-input-group-button-size-icon-sm"
+      }
+    },
+    defaultVariants: {
+      size: "xs"
     }
-  },
-  defaultVariants: {
-    size: "xs"
   }
-})
+)
 
 type InputGroupButtonProps = Omit<ButtonProps, "size"> &
   VariantProps<typeof inputGroupButtonVariants> & {
@@ -102,7 +111,10 @@ type InputGroupTextProps = ComponentProps<"span">
 const InputGroupText = (props: InputGroupTextProps) => (
   <span
     {...props}
-    class={cn("cn-input-group-text flex items-center [&_svg]:pointer-events-none", props.class)}
+    class={cn(
+      "cn-input-group-text flex items-center [&_svg]:pointer-events-none",
+      props.class
+    )}
   />
 )
 

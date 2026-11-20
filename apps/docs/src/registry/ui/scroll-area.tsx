@@ -12,13 +12,22 @@ import { omit } from "solid-js"
 import { cn } from "~/lib/utils"
 
 export function ScrollAreaRoot(
-  props: Omit<ComponentProps<typeof SdkScrollArea>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollArea>, "class"> & {
+    class?: string
+  }
 ) {
-  return <SdkScrollArea {...props} class={cn("cn-scroll-area relative", props.class)} />
+  return (
+    <SdkScrollArea
+      {...props}
+      class={cn("cn-scroll-area relative", props.class)}
+    />
+  )
 }
 
 export function ScrollAreaViewport(
-  props: Omit<ComponentProps<typeof SdkScrollAreaViewport>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaViewport>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollAreaViewport
@@ -32,13 +41,17 @@ export function ScrollAreaViewport(
 }
 
 export function ScrollAreaContent(
-  props: Omit<ComponentProps<typeof SdkScrollAreaContent>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaContent>, "class"> & {
+    class?: string
+  }
 ) {
   return <SdkScrollAreaContent {...props} class={cn("min-w-0", props.class)} />
 }
 
 export function ScrollBar(
-  props: Omit<ComponentProps<typeof SdkScrollAreaScrollbar>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaScrollbar>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollAreaScrollbar
@@ -54,12 +67,17 @@ export function ScrollBar(
 }
 
 export function ScrollAreaThumb(
-  props: Omit<ComponentProps<typeof SdkScrollAreaThumb>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkScrollAreaThumb>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkScrollAreaThumb
       {...props}
-      class={cn("cn-scroll-area-thumb relative flex-1 rounded-full bg-border", props.class)}
+      class={cn(
+        "cn-scroll-area-thumb relative flex-1 rounded-full bg-border",
+        props.class
+      )}
     />
   )
 }

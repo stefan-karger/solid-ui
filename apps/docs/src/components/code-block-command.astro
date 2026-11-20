@@ -134,11 +134,18 @@ const instanceId = `code-block-command-${randomUUID()}`
   const DEFAULT_PACKAGE_MANAGER = "pnpm"
   type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
-  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set(["pnpm", "npm", "yarn", "bun"])
+  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set([
+    "pnpm",
+    "npm",
+    "yarn",
+    "bun"
+  ])
   const copyOperationIds = new WeakMap<HTMLButtonElement, number>()
   const copyResetTimers = new WeakMap<HTMLButtonElement, number>()
 
-  function isPackageManager(value: string | undefined): value is PackageManager {
+  function isPackageManager(
+    value: string | undefined
+  ): value is PackageManager {
     return value !== undefined && PACKAGE_MANAGERS.has(value)
   }
 
@@ -149,7 +156,9 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function resetCopyFeedback(root: HTMLElement) {
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
+    const copyButton = root.querySelector<HTMLButtonElement>(
+      "[data-copy-command]"
+    )
     if (!copyButton) return
 
     nextCopyOperation(copyButton)
@@ -160,19 +169,27 @@ const instanceId = `code-block-command-${randomUUID()}`
 
     delete copyButton.dataset.copied
     copyButton.setAttribute("aria-label", "Copy command")
-    root.querySelector<SVGElement>("[data-copy-icon]")?.classList.remove("hidden")
+    root
+      .querySelector<SVGElement>("[data-copy-icon]")
+      ?.classList.remove("hidden")
     root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden")
 
     const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
     if (copyStatus) copyStatus.textContent = ""
   }
 
-  function setPackageManager(root: HTMLElement, packageManager: PackageManager, focus = false) {
+  function setPackageManager(
+    root: HTMLElement,
+    packageManager: PackageManager,
+    focus = false
+  ) {
     if (root.dataset.packageManager !== packageManager) resetCopyFeedback(root)
 
     root.dataset.packageManager = packageManager
 
-    for (const tab of root.querySelectorAll<HTMLElement>("[data-command-tab]")) {
+    for (const tab of root.querySelectorAll<HTMLElement>(
+      "[data-command-tab]"
+    )) {
       const isActive = tab.dataset.packageManager === packageManager
       tab.dataset.state = isActive ? "active" : "inactive"
       tab.setAttribute("aria-selected", String(isActive))
@@ -180,7 +197,9 @@ const instanceId = `code-block-command-${randomUUID()}`
       if (isActive && focus) tab.focus()
     }
 
-    for (const panel of root.querySelectorAll<HTMLElement>("[data-command-panel]")) {
+    for (const panel of root.querySelectorAll<HTMLElement>(
+      "[data-command-panel]"
+    )) {
       const isActive = panel.dataset.packageManager === packageManager
       panel.dataset.state = isActive ? "active" : "inactive"
       panel.hidden = !isActive
@@ -194,7 +213,9 @@ const instanceId = `code-block-command-${randomUUID()}`
       // Storage may be disabled; the command block remains fully functional.
     }
 
-    window.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: packageManager }))
+    window.dispatchEvent(
+      new CustomEvent(CHANGE_EVENT, { detail: packageManager })
+    )
   }
 
   function getStoredPackageManager() {
@@ -207,14 +228,19 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function synchronizePackageManager(packageManager: PackageManager) {
-    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+    for (const root of document.querySelectorAll<HTMLElement>(
+      "[data-code-block-command]"
+    )) {
       setPackageManager(root, packageManager)
     }
   }
 
   function handlePackageManagerChange(event: Event) {
     const packageManager = (event as CustomEvent<unknown>).detail
-    if (typeof packageManager === "string" && isPackageManager(packageManager)) {
+    if (
+      typeof packageManager === "string" &&
+      isPackageManager(packageManager)
+    ) {
       synchronizePackageManager(packageManager)
     }
   }
@@ -224,9 +250,14 @@ const instanceId = `code-block-command-${randomUUID()}`
     root.dataset.initialized = "true"
 
     const tabs = [...root.querySelectorAll<HTMLElement>("[data-command-tab]")]
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
+    const copyButton = root.querySelector<HTMLButtonElement>(
+      "[data-copy-command]"
+    )
 
-    setPackageManager(root, getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER)
+    setPackageManager(
+      root,
+      getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER
+    )
 
     for (const [index, tab] of tabs.entries()) {
       tab.addEventListener("click", () => {
@@ -239,7 +270,8 @@ const instanceId = `code-block-command-${randomUUID()}`
       tab.addEventListener("keydown", (event) => {
         let nextIndex: number | undefined
         if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length
-        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length
+        if (event.key === "ArrowLeft")
+          nextIndex = (index - 1 + tabs.length) % tabs.length
         if (event.key === "Home") nextIndex = 0
         if (event.key === "End") nextIndex = tabs.length - 1
         if (nextIndex === undefined) return
@@ -260,20 +292,28 @@ const instanceId = `code-block-command-${randomUUID()}`
       if (!command) return
 
       const operationId = nextCopyOperation(copyButton)
-      if (!(await copyToClipboard(command)) || copyOperationIds.get(copyButton) !== operationId) {
+      if (
+        !(await copyToClipboard(command)) ||
+        copyOperationIds.get(copyButton) !== operationId
+      ) {
         return
       }
 
       copyButton.dataset.copied = "true"
       copyButton.setAttribute("aria-label", "Command copied")
-      root.querySelector<SVGElement>("[data-copy-icon]")?.classList.add("hidden")
-      root.querySelector<SVGElement>("[data-check-icon]")?.classList.remove("hidden")
+      root
+        .querySelector<SVGElement>("[data-copy-icon]")
+        ?.classList.add("hidden")
+      root
+        .querySelector<SVGElement>("[data-check-icon]")
+        ?.classList.remove("hidden")
 
       const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
       if (copyStatus) copyStatus.textContent = "Command copied"
 
       const previousResetTimer = copyResetTimers.get(copyButton)
-      if (previousResetTimer !== undefined) window.clearTimeout(previousResetTimer)
+      if (previousResetTimer !== undefined)
+        window.clearTimeout(previousResetTimer)
 
       copyResetTimers.set(
         copyButton,
@@ -283,7 +323,9 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function initializeCommandBlocks() {
-    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+    for (const root of document.querySelectorAll<HTMLElement>(
+      "[data-code-block-command]"
+    )) {
       initializeCommandBlock(root)
     }
   }

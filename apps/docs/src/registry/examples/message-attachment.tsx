@@ -27,7 +27,8 @@ export default function MessageAttachmentDemo() {
           </Attachment>
           <Bubble>
             <BubbleContent>
-              Here&apos;s the image. Can you add it to the PDF? Use it for the cover page.
+              Here&apos;s the image. Can you add it to the PDF? Use it for the
+              cover page.
             </BubbleContent>
           </Bubble>
         </MessageContent>

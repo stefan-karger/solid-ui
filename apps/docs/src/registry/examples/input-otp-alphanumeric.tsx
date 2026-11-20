@@ -1,6 +1,11 @@
 const REGEXP_ONLY_DIGITS_AND_CHARS = /[a-z0-9]/i
 
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot
+} from "~/registry/ui/input-otp"
 
 export default function InputOTPAlphanumeric() {
   return (

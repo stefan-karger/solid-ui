@@ -45,7 +45,9 @@ export default function TraceToolCalls() {
         <Message align="end">
           <MessageContent>
             <Bubble align="end" variant="muted">
-              <BubbleContent>Which package managers are installed?</BubbleContent>
+              <BubbleContent>
+                Which package managers are installed?
+              </BubbleContent>
             </Bubble>
           </MessageContent>
         </Message>
@@ -93,7 +95,12 @@ export default function TraceToolCalls() {
         </Message>
       </Show>
       <Show when={!busy()}>
-        <Button variant="outline" size="sm" class="mt-auto self-start" onClick={send}>
+        <Button
+          variant="outline"
+          size="sm"
+          class="mt-auto self-start"
+          onClick={send}
+        >
           {completed() < 0 ? "Send message" : "Reset"}
         </Button>
       </Show>

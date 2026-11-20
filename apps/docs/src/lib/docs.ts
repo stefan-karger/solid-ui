@@ -79,7 +79,9 @@ export function findNeighbors<T extends DocsPageLike>(
 ): PageNeighbors<T> {
   const sortedPages = sortDocsPages(pages)
   const normalizedCurrentId = toRouteId(currentId)
-  const index = sortedPages.findIndex((page) => toRouteId(page.id) === normalizedCurrentId)
+  const index = sortedPages.findIndex(
+    (page) => toRouteId(page.id) === normalizedCurrentId
+  )
 
   if (index === -1) {
     return { previous: null, next: null }
@@ -106,16 +108,22 @@ export function createComponentLinks(
   variant: ComponentListVariant = "all"
 ): ComponentLink[] {
   return pages
-    .filter((page) => page.data.component && (variant === "all" || page.data.new))
+    .filter(
+      (page) => page.data.component && (variant === "all" || page.data.new)
+    )
     .map((page) => ({
       title: page.data.title,
       href: toDocsPath(page.id),
       isNew: Boolean(page.data.new)
     }))
-    .toSorted((a, b) => a.title.localeCompare(b.title) || a.href.localeCompare(b.href))
+    .toSorted(
+      (a, b) => a.title.localeCompare(b.title) || a.href.localeCompare(b.href)
+    )
 }
 
-export function createDocsNavigation(pages: readonly DocsPageLike[]): DocsNavigationGroup[] {
+export function createDocsNavigation(
+  pages: readonly DocsPageLike[]
+): DocsNavigationGroup[] {
   return [
     {
       title: "Sections",
@@ -128,7 +136,9 @@ export function createDocsNavigation(pages: readonly DocsPageLike[]): DocsNaviga
   ]
 }
 
-export async function getDocsPages(loadDocs: DocsCollectionLoader): Promise<DocsPage[]> {
+export async function getDocsPages(
+  loadDocs: DocsCollectionLoader
+): Promise<DocsPage[]> {
   return sortDocsPages(await loadDocs())
 }
 
@@ -136,7 +146,10 @@ export async function getNeighbors(id: string, loadDocs: DocsCollectionLoader) {
   return findNeighbors(await getDocsPages(loadDocs), id)
 }
 
-export async function getComponentNeighbors(id: string, loadDocs: DocsCollectionLoader) {
+export async function getComponentNeighbors(
+  id: string,
+  loadDocs: DocsCollectionLoader
+) {
   return findComponentNeighbors(await getDocsPages(loadDocs), id)
 }
 

@@ -1,4 +1,11 @@
-import { ArchiveIcon, FileIcon, FolderIcon, InfoIcon, SearchIcon, TrashIcon } from "lucide-solid"
+import {
+  ArchiveIcon,
+  FileIcon,
+  FolderIcon,
+  InfoIcon,
+  SearchIcon,
+  TrashIcon
+} from "lucide-solid"
 
 import {
   Menubar,

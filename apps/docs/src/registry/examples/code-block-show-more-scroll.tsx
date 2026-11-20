@@ -68,9 +68,15 @@ export default function CodeBlockShowMoreScroll() {
         <CodeBlockContent
           id={id}
           lineNumbers
-          class={expanded() ? "max-h-96 scroll-fade-y" : "max-h-64 scroll-fade-y overflow-y-hidden"}
+          class={
+            expanded()
+              ? "max-h-96 scroll-fade-y"
+              : "max-h-64 scroll-fade-y overflow-y-hidden"
+          }
         >
-          <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+          <For each={lines()}>
+            {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+          </For>
         </CodeBlockContent>
         <CodeBlockFooter class="justify-center">
           <Button

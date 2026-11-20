@@ -29,7 +29,9 @@ export default function CodeBlockHighlighting() {
           <CodeBlockTitle>getWeather output</CodeBlockTitle>
         </CodeBlockHeader>
         <CodeBlockContent>
-          <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+          <For each={lines()}>
+            {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+          </For>
         </CodeBlockContent>
       </CodeBlock>
     </div>

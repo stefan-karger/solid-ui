@@ -10,7 +10,13 @@ import {
   CardTitle
 } from "~/registry/ui/card"
 import { Checkbox } from "~/registry/ui/checkbox"
-import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel
+} from "~/registry/ui/field"
 
 const NOTIFICATIONS = [
   {
@@ -44,14 +50,19 @@ export function NotificationSettings() {
     <Card>
       <CardHeader>
         <CardTitle>Notifications</CardTitle>
-        <CardDescription>Choose which email and push alerts you want to receive.</CardDescription>
+        <CardDescription>
+          Choose which email and push alerts you want to receive.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
           <For each={NOTIFICATIONS}>
             {(n) => (
               <Field orientation="horizontal">
-                <Checkbox id={`notify-${n.id}`} defaultChecked={n.defaultChecked} />
+                <Checkbox
+                  id={`notify-${n.id}`}
+                  defaultChecked={n.defaultChecked}
+                />
                 <FieldContent>
                   <FieldLabel for={`notify-${n.id}`}>{n.label}</FieldLabel>
                   <FieldDescription>{n.description}</FieldDescription>

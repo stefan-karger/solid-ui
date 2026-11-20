@@ -1,4 +1,9 @@
-import { dynamic, type ComponentProps, type JSX, type ValidComponent } from "@solidjs/web"
+import {
+  dynamic,
+  type ComponentProps,
+  type JSX,
+  type ValidComponent
+} from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
 import { isStatic, omit } from "solid-js"
 
@@ -77,7 +82,10 @@ export function AttachmentMedia(
       {...rest}
       data-slot="attachment-media"
       data-variant={props.variant ?? "icon"}
-      class={cn(attachmentMediaVariants({ variant: props.variant ?? "icon" }), props.class)}
+      class={cn(
+        attachmentMediaVariants({ variant: props.variant ?? "icon" }),
+        props.class
+      )}
     />
   )
 }
@@ -94,7 +102,9 @@ export function AttachmentContent(
   )
 }
 
-export function AttachmentTitle(props: Omit<ComponentProps<"span">, "class"> & { class?: string }) {
+export function AttachmentTitle(
+  props: Omit<ComponentProps<"span">, "class"> & { class?: string }
+) {
   return (
     <span
       {...props}
@@ -129,12 +139,17 @@ export function AttachmentActions(
     <div
       {...props}
       data-slot="attachment-actions"
-      class={cn("cn-attachment-actions flex shrink-0 items-center", props.class)}
+      class={cn(
+        "cn-attachment-actions flex shrink-0 items-center",
+        props.class
+      )}
     />
   )
 }
 
-export function AttachmentAction<T extends ValidComponent = "button">(props: ButtonProps<T>) {
+export function AttachmentAction<T extends ValidComponent = "button">(
+  props: ButtonProps<T>
+) {
   return (
     <Button<T>
       variant="ghost"
@@ -154,7 +169,9 @@ export function AttachmentTrigger(
     ) => JSX.Element
   }
 ) {
-  const Comp = dynamic(() => props.render ?? "button", { static: isStatic(props, "render") })
+  const Comp = dynamic(() => props.render ?? "button", {
+    static: isStatic(props, "render")
+  })
   const rest = omit(props, "class", "render", "type")
   return (
     <Comp
@@ -166,7 +183,9 @@ export function AttachmentTrigger(
   )
 }
 
-export function AttachmentGroup(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function AttachmentGroup(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}

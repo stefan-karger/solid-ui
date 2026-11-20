@@ -7,7 +7,9 @@ import { CheckIcon, MinusIcon } from "lucide-solid"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-type CheckboxProps = Omit<ComponentProps<typeof SdkCheckbox>, "class"> & { class?: string }
+type CheckboxProps = Omit<ComponentProps<typeof SdkCheckbox>, "class"> & {
+  class?: string
+}
 const Checkbox = (props: CheckboxProps) => {
   const rest = omit(props, "class", "children")
   return (

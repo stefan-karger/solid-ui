@@ -12,11 +12,21 @@ import {
   ComboboxList
 } from "~/registry/ui/combobox"
 
-const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const
+const frameworks = [
+  "Next.js",
+  "SvelteKit",
+  "Nuxt.js",
+  "Remix",
+  "Astro"
+] as const
 
 export default function ComboboxMultiple() {
   return (
-    <Combobox<string, true> multiple autoHighlight defaultValue={[frameworks[0]]}>
+    <Combobox<string, true>
+      multiple
+      autoHighlight
+      defaultValue={[frameworks[0]]}
+    >
       <ComboboxChips class="w-full max-w-xs">
         <ComboboxValue>
           {(state) => (
@@ -32,7 +42,11 @@ export default function ComboboxMultiple() {
             </>
           )}
         </ComboboxValue>
-        <ComboboxChipInput aria-label="Frameworks" class="min-w-24" placeholder="Add a framework" />
+        <ComboboxChipInput
+          aria-label="Frameworks"
+          class="min-w-24"
+          placeholder="Add a framework"
+        />
       </ComboboxChips>
       <ComboboxContent>
         <ComboboxList>

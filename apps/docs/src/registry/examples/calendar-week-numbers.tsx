@@ -23,7 +23,11 @@ export default function CalendarWeekNumbers() {
   return (
     <Card class="mx-auto w-fit p-0">
       <CardContent class="p-0">
-        <Calendar defaultMonth="2026-02" defaultValue="2026-02-03" weekStartsOn={1}>
+        <Calendar
+          defaultMonth="2026-02"
+          defaultValue="2026-02-03"
+          weekStartsOn={1}
+        >
           <div class="flex items-center">
             <CalendarPrevious />
             <CalendarHeading />
@@ -46,7 +50,10 @@ export default function CalendarWeekNumbers() {
                   <For each={grid.weeks} keyed={(week) => week[0]?.date}>
                     {(week) => (
                       <tr>
-                        <th scope="row" class="text-xs font-normal text-muted-foreground">
+                        <th
+                          scope="row"
+                          class="text-xs font-normal text-muted-foreground"
+                        >
                           {weekNumber(week()[0]?.date)}
                         </th>
                         <For each={week()} keyed={(day) => day.date}>

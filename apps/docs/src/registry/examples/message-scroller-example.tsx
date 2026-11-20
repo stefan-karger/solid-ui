@@ -47,7 +47,8 @@ export function MessageScrollerExample(props: {
 }) {
   const id = createUniqueId()
   const scroll = createMessageScrollerController()
-  const isStreaming = () => ["streaming", "previous-context", "animation"].includes(props.scenario)
+  const isStreaming = () =>
+    ["streaming", "previous-context", "animation"].includes(props.scenario)
   const initialCount = () =>
     props.scenario === "group-chat"
       ? 3
@@ -59,7 +60,9 @@ export function MessageScrollerExample(props: {
             : 0
           : props.messages.length
   const initialOffset = () =>
-    props.scenario === "load-history" ? Math.max(props.messages.length - 5, 0) : 0
+    props.scenario === "load-history"
+      ? Math.max(props.messages.length - 5, 0)
+      : 0
   const [start, setStart] = createSignal(initialOffset())
   const [end, setEnd] = createSignal(initialCount())
   const [stream, setStream] = createSignal("")
@@ -92,7 +95,8 @@ export function MessageScrollerExample(props: {
     setStream("")
     setStart(initialOffset())
     setEnd(initialCount())
-    if (props.scenario === "load-history") requestAnimationFrame(() => scroll.scrollToEnd())
+    if (props.scenario === "load-history")
+      requestAnimationFrame(() => scroll.scrollToEnd())
   }
 
   function addTurn() {
@@ -102,8 +106,10 @@ export function MessageScrollerExample(props: {
     setEnd(index + 1)
     if (!isStreaming()) {
       const next = props.messages[index + 1]
-      if (next?.role === "assistant" || props.scenario === "group-chat") setEnd(index + 2)
-      if (props.scenario === "anchoring") jump(anchor() === "assistant" && next ? index + 1 : index)
+      if (next?.role === "assistant" || props.scenario === "group-chat")
+        setEnd(index + 2)
+      if (props.scenario === "anchoring")
+        jump(anchor() === "assistant" && next ? index + 1 : index)
       return
     }
     if (props.scenario === "previous-context") jump(Math.max(0, index - 1))
@@ -136,11 +142,15 @@ export function MessageScrollerExample(props: {
     if (props.scenario === "visibility") {
       const bounds = viewport.getBoundingClientRect()
       const visible = [
-        ...viewport.querySelectorAll<HTMLElement>('[data-transcript-role="user"]')
+        ...viewport.querySelectorAll<HTMLElement>(
+          '[data-transcript-role="user"]'
+        )
       ].find((node) => node.getBoundingClientRect().bottom >= bounds.top)
       setStatus(visible?.textContent?.trim() ?? "End")
     } else {
-      setStatus(scroll.isAtStart() ? "Start" : scroll.isAtEnd() ? "End" : "Scrollable")
+      setStatus(
+        scroll.isAtStart() ? "Start" : scroll.isAtEnd() ? "End" : "Scrollable"
+      )
     }
   }
 
@@ -175,7 +185,11 @@ export function MessageScrollerExample(props: {
             role="region"
             aria-label={props.title}
           >
-            <MessageScrollerContent class="gap-3 p-4" role="log" aria-relevant="additions">
+            <MessageScrollerContent
+              class="gap-3 p-4"
+              role="log"
+              aria-relevant="additions"
+            >
               <Show when={props.scenario === "load-history" && start() > 0}>
                 <Button variant="outline" size="sm" onClick={loadHistory}>
                   Load earlier messages
@@ -202,14 +216,24 @@ export function MessageScrollerExample(props: {
                       }
                     >
                       <Message
-                        align={line.role === "user" || line.sender === "Grace" ? "end" : "start"}
+                        align={
+                          line.role === "user" || line.sender === "Grace"
+                            ? "end"
+                            : "start"
+                        }
                       >
                         <MessageContent>
                           <Show when={line.sender}>
                             <MessageHeader>{line.sender}</MessageHeader>
                           </Show>
-                          <Bubble variant={line.role === "assistant" ? "ghost" : "muted"}>
-                            <BubbleContent class="whitespace-pre-wrap">{line.text}</BubbleContent>
+                          <Bubble
+                            variant={
+                              line.role === "assistant" ? "ghost" : "muted"
+                            }
+                          >
+                            <BubbleContent class="whitespace-pre-wrap">
+                              {line.text}
+                            </BubbleContent>
                           </Bubble>
                         </MessageContent>
                       </Message>
@@ -219,7 +243,9 @@ export function MessageScrollerExample(props: {
               </For>
               <Show when={running()}>
                 <Bubble variant="ghost">
-                  <BubbleContent class="whitespace-pre-wrap">{stream()}</BubbleContent>
+                  <BubbleContent class="whitespace-pre-wrap">
+                    {stream()}
+                  </BubbleContent>
                 </Bubble>
               </Show>
             </MessageScrollerContent>
@@ -229,7 +255,11 @@ export function MessageScrollerExample(props: {
       </CardContent>
       <CardFooter class="flex flex-wrap gap-2 border-t">
         <Show
-          when={isStreaming() || props.scenario === "anchoring" || props.scenario === "group-chat"}
+          when={
+            isStreaming() ||
+            props.scenario === "anchoring" ||
+            props.scenario === "group-chat"
+          }
         >
           <Show when={props.scenario === "anchoring"}>
             <select
@@ -237,7 +267,9 @@ export function MessageScrollerExample(props: {
               aria-label="Anchor role"
               value={anchor()}
               onChange={(event) =>
-                setAnchor(event.currentTarget.value === "user" ? "user" : "assistant")
+                setAnchor(
+                  event.currentTarget.value === "user" ? "user" : "assistant"
+                )
               }
             >
               <option value="user">User</option>
@@ -289,7 +321,11 @@ export function MessageScrollerExample(props: {
               )}
             </For>
           </select>
-          <Button size="sm" variant="outline" onClick={() => scroll.scrollToStart()}>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => scroll.scrollToStart()}
+          >
             Start
           </Button>
           <Button size="sm" onClick={() => scroll.scrollToEnd()}>
@@ -301,7 +337,11 @@ export function MessageScrollerExample(props: {
             Reset
           </Button>
         </Show>
-        <Show when={props.scenario === "visibility" || props.scenario === "scrollable"}>
+        <Show
+          when={
+            props.scenario === "visibility" || props.scenario === "scrollable"
+          }
+        >
           <output class="text-sm text-muted-foreground">{status()}</output>
         </Show>
       </CardFooter>

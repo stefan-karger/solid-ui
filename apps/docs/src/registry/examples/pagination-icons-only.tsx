@@ -8,7 +8,13 @@ import {
   PaginationNext,
   PaginationPrevious
 } from "~/registry/ui/pagination"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 
 export default function PaginationIconsOnly() {
   return (
@@ -16,7 +22,11 @@ export default function PaginationIconsOnly() {
       <Field orientation="horizontal" class="w-fit">
         <FieldLabel for="select-rows-per-page">Rows per page</FieldLabel>
         <Select<string> defaultValue="25">
-          <SelectTrigger aria-label="Select an option" class="w-20" id="select-rows-per-page">
+          <SelectTrigger
+            aria-label="Select an option"
+            class="w-20"
+            id="select-rows-per-page"
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

@@ -26,7 +26,8 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Progress",
     href: "/docs/components/progress",
-    description: "Displays an indicator showing the completion progress of a task."
+    description:
+      "Displays an indicator showing the completion progress of a task."
   },
   {
     title: "Scroll-area",
@@ -36,12 +37,14 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Tabs",
     href: "/docs/components/tabs",
-    description: "A set of layered sections of content displayed one panel at a time."
+    description:
+      "A set of layered sections of content displayed one panel at a time."
   },
   {
     title: "Tooltip",
     href: "/docs/components/tooltip",
-    description: "A popup that displays information related to an element on focus or hover."
+    description:
+      "A popup that displays information related to an element on focus or hover."
   }
 ]
 
@@ -89,7 +92,11 @@ export default function NavigationMenuDemo() {
   )
 }
 
-function ListItem(props: { href: string; title: string; children: JSX.Element }) {
+function ListItem(props: {
+  href: string
+  title: string
+  children: JSX.Element
+}) {
   return (
     <NavigationMenuLink href={props.href}>
       <div class="flex flex-col gap-1 text-sm">

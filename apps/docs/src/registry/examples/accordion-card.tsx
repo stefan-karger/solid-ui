@@ -6,7 +6,13 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "~/registry/ui/accordion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/registry/ui/card"
 
 const items = [
   {
@@ -35,7 +41,8 @@ export default function AccordionCard() {
       <CardHeader>
         <CardTitle>Subscription & Billing</CardTitle>
         <CardDescription>
-          Common questions about your account, plans, payments and cancellations.
+          Common questions about your account, plans, payments and
+          cancellations.
         </CardDescription>
       </CardHeader>
       <CardContent>

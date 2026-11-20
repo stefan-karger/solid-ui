@@ -17,7 +17,9 @@ import { Button } from "~/registry/ui/button"
 export default function AlertDialogMediaExample() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={(partProps) => <Button {...partProps} variant="outline" />}>
+      <AlertDialogTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+      >
         Share Project
       </AlertDialogTrigger>
       <AlertDialogContent>

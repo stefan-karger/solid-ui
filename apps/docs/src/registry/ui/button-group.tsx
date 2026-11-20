@@ -30,13 +30,17 @@ const buttonGroupVariants = cva(
   }
 )
 
-type ButtonGroupProps = ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>
+type ButtonGroupProps = ComponentProps<"div"> &
+  VariantProps<typeof buttonGroupVariants>
 
 const ButtonGroup = (props: ButtonGroupProps) => {
   const others = omit(props, "class", "orientation")
   return (
     <div
-      class={cn(buttonGroupVariants({ orientation: props.orientation }), props.class)}
+      class={cn(
+        buttonGroupVariants({ orientation: props.orientation }),
+        props.class
+      )}
       data-orientation={props.orientation}
       data-slot="button-group"
       role="group"
@@ -50,14 +54,21 @@ type ButtonGroupTextProps<T extends ValidComponent = "div"> = {
   class?: string | undefined
 } & Omit<ComponentProps<T>, "as" | "class">
 
-const ButtonGroupText = <T extends ValidComponent = "div">(rawProps: ButtonGroupTextProps<T>) => {
+const ButtonGroupText = <T extends ValidComponent = "div">(
+  rawProps: ButtonGroupTextProps<T>
+) => {
   const props = rawProps as ButtonGroupTextProps
   const others = omit(props, "as", "class")
-  const Comp = dynamic(() => props.as ?? "div", { static: isStatic(props, "as") })
+  const Comp = dynamic(() => props.as ?? "div", {
+    static: isStatic(props, "as")
+  })
   return (
     <Comp
       data-slot="button-group-text"
-      class={cn("cn-button-group-text flex items-center [&_svg]:pointer-events-none", props.class)}
+      class={cn(
+        "cn-button-group-text flex items-center [&_svg]:pointer-events-none",
+        props.class
+      )}
       {...others}
     />
   )
@@ -80,4 +91,9 @@ const ButtonGroupSeparator = (props: ButtonGroupSeparatorProps) => {
   )
 }
 
-export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants }
+export {
+  ButtonGroup,
+  ButtonGroupSeparator,
+  ButtonGroupText,
+  buttonGroupVariants
+}

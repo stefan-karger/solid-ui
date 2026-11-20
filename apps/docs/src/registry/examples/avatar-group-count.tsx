@@ -18,7 +18,10 @@ export default function AvatarGroupCountExample() {
         <AvatarFallback>LR</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+        <AvatarImage
+          src="https://github.com/evilrabbit.png"
+          alt="@evilrabbit"
+        />
         <AvatarFallback>ER</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>+3</AvatarGroupCount>

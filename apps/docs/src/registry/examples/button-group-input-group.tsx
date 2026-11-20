@@ -25,14 +25,18 @@ export default function ButtonGroupInputGroup() {
         <InputGroup>
           <InputGroupInput
             disabled={voiceEnabled()}
-            placeholder={voiceEnabled() ? "Record and send audio..." : "Send a message..."}
+            placeholder={
+              voiceEnabled() ? "Record and send audio..." : "Send a message..."
+            }
           />
           <InputGroupAddon align="inline-end">
             <Tooltip>
               <TooltipTrigger
                 aria-label="Voice Mode"
                 aria-pressed={voiceEnabled() ? "true" : "false"}
-                render={(partProps) => <InputGroupButton {...partProps} size="icon-xs" />}
+                render={(partProps) => (
+                  <InputGroupButton {...partProps} size="icon-xs" />
+                )}
                 class="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
                 data-active={voiceEnabled()}
                 onClick={() => setVoiceEnabled((value) => !value)}

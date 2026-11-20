@@ -125,7 +125,10 @@ A long title truncates. To link the title to a file, wrap `CodeBlockTitle` in an
 
 Without a header, put `CodeBlockActions` directly inside `CodeBlock`. The actions float at the top end and stay hidden until the block is hovered or focused. They always show on touch screens.
 
-<ComponentPreview name="code-block-floating-actions" previewClassName="h-auto" />
+<ComponentPreview
+  name="code-block-floating-actions"
+  previewClassName="h-auto"
+/>
 
 ## Line Numbers
 
@@ -149,9 +152,14 @@ Long lines scroll by default. Add `wrap` to wrap them, which suits tool output a
 
 Render each line as a `CodeBlockLine` and set `variant="highlighted"` on the lines to call out.
 
-<ComponentPreview name="code-block-highlighted-lines" previewClassName="h-auto" />
+<ComponentPreview
+  name="code-block-highlighted-lines"
+  previewClassName="h-auto"
+/>
 
 ## Diff
+
+Set `variant="added"` or `variant="removed"` on a `CodeBlockLine`. Each one adds a `+` or `−` marker.
 
 <ComponentPreview name="code-block-diff" previewClassName="h-auto" />
 
@@ -173,7 +181,10 @@ Cap the height with a `max-h-*` class on `CodeBlockContent`. The content scrolls
 
 To keep a long block from taking over the page, raise the cap instead of removing it. The expanded content scrolls, and the edges fade as you scroll.
 
-<ComponentPreview name="code-block-show-more-scroll" previewClassName="h-auto" />
+<ComponentPreview
+  name="code-block-show-more-scroll"
+  previewClassName="h-auto"
+/>
 
 ## Size
 
@@ -207,13 +218,13 @@ Put a `CodeBlock` between paragraphs inside a [Message](/docs/components/message
 
 ## Typeset
 
-Place `CodeBlock` between paragraphs to keep the code block's padding, syntax colors, and copy controls within a prose layout.
+A `CodeBlock` between paragraphs keeps its code styling and copy controls in a prose layout.
 
 <ComponentPreview name="code-block-typeset" previewClassName="h-auto" />
 
 ## Syntax Highlighting
 
-`useHighlightedCode` highlights with [Shiki](https://shiki.style) and returns one Solid JSX element per line for `CodeBlockLine`.
+`useHighlightedCode` highlights with [Shiki](https://shiki.style) and returns a Solid JSX element for each `CodeBlockLine`.
 
 <ComponentPreview name="code-block-highlighting" previewClassName="h-auto" />
 
@@ -221,7 +232,7 @@ Shiki uses its JavaScript regex engine, so there is no WASM to load.
 
 ### Languages
 
-Edit the supported grammars in `lib/code-highlighter.ts`. An unrecognized language renders as plain text.
+Configure the available grammars in `lib/code-highlighter.ts`. Unrecognized languages render as plain text.
 
 <ComponentPreview name="code-block-languages" previewClassName="h-auto" />
 
@@ -241,13 +252,13 @@ Call `highlightCode` from Astro frontmatter to render highlighted HTML at build 
 
 ### Streaming
 
-Pass an accessor for the current buffer to highlight code as it streams. Keep copy disabled until the block is complete.
+Pass an accessor for the growing buffer to `useHighlightedCode`. Keep copy disabled until the block is complete.
 
 <ComponentPreview name="code-block-streaming" previewClassName="h-auto" />
 
 ### Markdown
 
-Render inline Markdown code with `<code>` and a fenced block with `CodeBlock`. The preview replays a sample response and updates the fenced block as content arrives.
+Render inline Markdown code with `<code>` and fenced code with `CodeBlock`. This preview streams a sample response to show how the fenced block updates.
 
 <ComponentPreview name="code-block-markdown" previewClassName="h-auto" />
 

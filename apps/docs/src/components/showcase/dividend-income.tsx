@@ -9,7 +9,13 @@ import {
   CardHeader,
   CardTitle
 } from "~/registry/ui/card"
-import { Item, ItemContent, ItemDescription, ItemGroup, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemTitle
+} from "~/registry/ui/item"
 
 import { ShowcaseIcon } from "./showcase-icon"
 

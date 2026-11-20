@@ -17,21 +17,31 @@ const Progress = (props: ProgressProps) => {
   return (
     <SdkProgress class={cn("w-full", props.class)} {...others}>
       {props.children}
-      <SdkProgressTrack class={cn("cn-progress cn-progress-track relative overflow-hidden")}>
+      <SdkProgressTrack
+        class={cn("cn-progress cn-progress-track relative overflow-hidden")}
+      >
         <SdkProgressIndicator
-          class={cn("cn-progress-indicator h-full w-(--progress-value) transition-all")}
+          class={cn(
+            "cn-progress-indicator h-full w-(--progress-value) transition-all"
+          )}
         />
       </SdkProgressTrack>
     </SdkProgress>
   )
 }
-type ProgressLabelProps = Omit<ComponentProps<typeof SdkProgressLabel>, "class"> & {
+type ProgressLabelProps = Omit<
+  ComponentProps<typeof SdkProgressLabel>,
+  "class"
+> & {
   class?: string
 }
 const ProgressLabel = (props: ProgressLabelProps) => (
   <SdkProgressLabel {...props} class={cn("cn-progress-label", props.class)} />
 )
-type ProgressValueProps = Omit<ComponentProps<typeof SdkProgressValue>, "class"> & {
+type ProgressValueProps = Omit<
+  ComponentProps<typeof SdkProgressValue>,
+  "class"
+> & {
   class?: string
 }
 const ProgressValue = (props: ProgressValueProps) => (

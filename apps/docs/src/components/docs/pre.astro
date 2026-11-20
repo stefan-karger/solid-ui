@@ -20,8 +20,11 @@ const {
   ...props
 } = Astro.props
 
-const commandProps = npm && yarn && pnpm && bun ? { npm, yarn, pnpm, bun } : undefined
-const preContent = commandProps ? undefined : await Astro.slots.render("default")
+const commandProps =
+  npm && yarn && pnpm && bun ? { npm, yarn, pnpm, bun } : undefined
+const preContent = commandProps
+  ? undefined
+  : await Astro.slots.render("default")
 ---
 
 {commandProps ? (

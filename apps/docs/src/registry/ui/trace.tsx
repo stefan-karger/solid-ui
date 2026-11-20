@@ -3,9 +3,15 @@ import { ChevronRightIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "~/registry/ui/collapsible"
 
-export function Trace(props: Omit<ComponentProps<"div">, "class"> & { class?: string }) {
+export function Trace(
+  props: Omit<ComponentProps<"div">, "class"> & { class?: string }
+) {
   return (
     <div
       {...props}
@@ -38,7 +44,9 @@ export function TraceLine(
   )
 }
 
-export function TraceIcon(props: Omit<ComponentProps<"span">, "class"> & { class?: string }) {
+export function TraceIcon(
+  props: Omit<ComponentProps<"span">, "class"> & { class?: string }
+) {
   return (
     <span
       {...props}
@@ -51,12 +59,17 @@ export function TraceIcon(props: Omit<ComponentProps<"span">, "class"> & { class
   )
 }
 
-export function TraceTitle(props: Omit<ComponentProps<"span">, "class"> & { class?: string }) {
+export function TraceTitle(
+  props: Omit<ComponentProps<"span">, "class"> & { class?: string }
+) {
   return (
     <span
       {...props}
       data-slot="trace-title"
-      class={cn("cn-trace-title min-w-0 truncate motion-reduce:shimmer-none", props.class)}
+      class={cn(
+        "cn-trace-title min-w-0 truncate motion-reduce:shimmer-none",
+        props.class
+      )}
     />
   )
 }
@@ -68,7 +81,10 @@ export function TraceDescription(
     <span
       {...props}
       data-slot="trace-description"
-      class={cn("cn-trace-description shrink-0 text-muted-foreground/70 tabular-nums", props.class)}
+      class={cn(
+        "cn-trace-description shrink-0 text-muted-foreground/70 tabular-nums",
+        props.class
+      )}
     />
   )
 }
@@ -78,16 +94,25 @@ export function TraceCollapsible(props: ComponentProps<typeof Collapsible>) {
   return (
     <Collapsible
       {...rest}
-      class={cn("cn-trace-collapsible flex w-full min-w-0 flex-col", props.class)}
+      class={cn(
+        "cn-trace-collapsible flex w-full min-w-0 flex-col",
+        props.class
+      )}
       render={(part, state) => {
         const forwarded = merge(part, { "data-slot": "trace-collapsible" })
-        return props.render ? props.render(forwarded, state) : <div {...forwarded} />
+        return props.render ? (
+          props.render(forwarded, state)
+        ) : (
+          <div {...forwarded} />
+        )
       }}
     />
   )
 }
 
-export function TraceCollapsibleTrigger(props: ComponentProps<typeof CollapsibleTrigger>) {
+export function TraceCollapsibleTrigger(
+  props: ComponentProps<typeof CollapsibleTrigger>
+) {
   const rest = omit(props, "class", "children", "render")
   return (
     <CollapsibleTrigger
@@ -97,8 +122,14 @@ export function TraceCollapsibleTrigger(props: ComponentProps<typeof Collapsible
         props.class
       )}
       render={(part, state) => {
-        const forwarded = merge(part, { "data-slot": "trace-collapsible-trigger" })
-        return props.render ? props.render(forwarded, state) : <button {...forwarded} />
+        const forwarded = merge(part, {
+          "data-slot": "trace-collapsible-trigger"
+        })
+        return props.render ? (
+          props.render(forwarded, state)
+        ) : (
+          <button {...forwarded} />
+        )
       }}
     >
       {props.children}
@@ -110,7 +141,9 @@ export function TraceCollapsibleTrigger(props: ComponentProps<typeof Collapsible
 }
 
 export function TraceCollapsibleContent(
-  props: Omit<ComponentProps<typeof CollapsibleContent>, "children"> & { children?: JSX.Element }
+  props: Omit<ComponentProps<typeof CollapsibleContent>, "children"> & {
+    children?: JSX.Element
+  }
 ) {
   const rest = omit(props, "class", "children", "render")
   return (
@@ -118,8 +151,14 @@ export function TraceCollapsibleContent(
       {...rest}
       class="cn-trace-collapsible-content h-(--collapsible-panel-height) min-w-0 overflow-hidden transition-[height] data-ending-style:h-0 data-starting-style:h-0"
       render={(part, state) => {
-        const forwarded = merge(part, { "data-slot": "trace-collapsible-content" })
-        return props.render ? props.render(forwarded, state) : <div {...forwarded} />
+        const forwarded = merge(part, {
+          "data-slot": "trace-collapsible-content"
+        })
+        return props.render ? (
+          props.render(forwarded, state)
+        ) : (
+          <div {...forwarded} />
+        )
       }}
     >
       <div

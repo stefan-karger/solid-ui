@@ -32,11 +32,19 @@ const CardHeader = (props: ComponentProps<"div">) => (
 )
 
 const CardTitle = (props: ComponentProps<"div">) => (
-  <div data-slot="card-title" {...props} class={cn("cn-card-title", props.class)} />
+  <div
+    data-slot="card-title"
+    {...props}
+    class={cn("cn-card-title", props.class)}
+  />
 )
 
 const CardDescription = (props: ComponentProps<"div">) => (
-  <div data-slot="card-description" {...props} class={cn("cn-card-description", props.class)} />
+  <div
+    data-slot="card-description"
+    {...props}
+    class={cn("cn-card-description", props.class)}
+  />
 )
 
 const CardAction = (props: ComponentProps<"div">) => (
@@ -51,7 +59,11 @@ const CardAction = (props: ComponentProps<"div">) => (
 )
 
 const CardContent = (props: ComponentProps<"div">) => (
-  <div data-slot="card-content" {...props} class={cn("cn-card-content", props.class)} />
+  <div
+    data-slot="card-content"
+    {...props}
+    class={cn("cn-card-content", props.class)}
+  />
 )
 
 const CardFooter = (props: ComponentProps<"div">) => (

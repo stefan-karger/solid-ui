@@ -24,26 +24,38 @@ const previewModules = import.meta.glob<{ default?: unknown }>(
 
 describe("registry catalog", () => {
   it("normalizes Windows separators into canonical module IDs", () => {
-    expect(normalizeRegistryPath("examples\\button-demo.tsx", "button-demo")).toBe(
-      "examples/button-demo.tsx"
-    )
+    expect(
+      normalizeRegistryPath("examples\\button-demo.tsx", "button-demo")
+    ).toBe("examples/button-demo.tsx")
     expect(toRegistryModuleId("examples/button-demo.tsx")).toBe(
       "/src/registry/examples/button-demo.tsx"
     )
   })
 
-  it.each(["", "/absolute.ts", "C:\\absolute.ts", "a//b.ts", "a/./b.ts", "a/../b.ts"])(
-    "rejects unsafe path %j",
-    (path) => expect(() => normalizeRegistryPath(path, "fixture")).toThrow(/invalid/)
+  it.each([
+    "",
+    "/absolute.ts",
+    "C:\\absolute.ts",
+    "a//b.ts",
+    "a/./b.ts",
+    "a/../b.ts"
+  ])("rejects unsafe path %j", (path) =>
+    expect(() => normalizeRegistryPath(path, "fixture")).toThrow(/invalid/)
   )
 
   it("rejects duplicate and unsafe names", () => {
-    const file = { path: "examples/demo.tsx", type: "registry:example" as const }
+    const file = {
+      path: "examples/demo.tsx",
+      type: "registry:example" as const
+    }
     const available = new Set(["/src/registry/examples/demo.tsx"])
     const base = { name: "Test", homepage: "https://example.com" }
     expect(() =>
       validateRegistryCatalog(
-        { ...base, items: [{ name: "Bad Name", type: "registry:example", files: [file] }] },
+        {
+          ...base,
+          items: [{ name: "Bad Name", type: "registry:example", files: [file] }]
+        },
         available
       )
     ).toThrow("not route-safe")
@@ -63,9 +75,15 @@ describe("registry catalog", () => {
 
   it("resolves real source and preview entries", () => {
     expect(getRegistryFile("button").path).toBe("ui/button.tsx")
-    expect(resolvePreview("button-demo").moduleId).toBe("/src/registry/examples/button-demo.tsx")
-    expect(resolvePreview("button-rtl").moduleId).toBe("/src/registry/examples/button-rtl.tsx")
-    expect(() => resolvePreview("button")).toThrow("cannot be previewed directly")
+    expect(resolvePreview("button-demo").moduleId).toBe(
+      "/src/registry/examples/button-demo.tsx"
+    )
+    expect(resolvePreview("button-rtl").moduleId).toBe(
+      "/src/registry/examples/button-rtl.tsx"
+    )
+    expect(() => resolvePreview("button")).toThrow(
+      "cannot be previewed directly"
+    )
   })
 
   it("exposes only allow-listed block previews", () => {
@@ -110,7 +128,10 @@ describe("registry catalog", () => {
     } satisfies Registry
 
     expect(() =>
-      validateRegistryCatalog(fixture, new Set(["/src/registry/examples/demo.tsx"]))
+      validateRegistryCatalog(
+        fixture,
+        new Set(["/src/registry/examples/demo.tsx"])
+      )
     ).toThrow('Item "demo" has invalid meta.docs')
   })
 
@@ -133,12 +154,18 @@ describe("registry catalog", () => {
         }
       ]
     } satisfies Registry
-    expect(() => validateRegistryCatalog(fixture, new Set())).toThrow("declares missing file")
+    expect(() => validateRegistryCatalog(fixture, new Set())).toThrow(
+      "declares missing file"
+    )
   })
 
   it("imports every SSR-safe preview with a callable default export", () => {
     for (const item of registry.items) {
-      if (!["registry:example", "registry:component", "registry:block"].includes(item.type)) {
+      if (
+        !["registry:example", "registry:component", "registry:block"].includes(
+          item.type
+        )
+      ) {
         continue
       }
 
@@ -162,7 +189,9 @@ describe("registry catalog", () => {
 
     for (const { context, source } of preparedSources) {
       const unresolved = source.code.match(/\bcn-[a-z0-9-]+\b/)
-      expect(unresolved ? { context, unresolved: unresolved[0] } : undefined).toBeUndefined()
+      expect(
+        unresolved ? { context, unresolved: unresolved[0] } : undefined
+      ).toBeUndefined()
     }
   })
 })

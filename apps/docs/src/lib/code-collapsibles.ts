@@ -16,10 +16,14 @@ function initializeCodeCollapsible(root: HTMLElement) {
       toggle.setAttribute("aria-controls", content.id)
       toggle.setAttribute("aria-expanded", String(expanded))
     }
-    for (const label of root.querySelectorAll<HTMLElement>("[data-code-label-collapsed]")) {
+    for (const label of root.querySelectorAll<HTMLElement>(
+      "[data-code-label-collapsed]"
+    )) {
       label.hidden = expanded
     }
-    for (const label of root.querySelectorAll<HTMLElement>("[data-code-label-expanded]")) {
+    for (const label of root.querySelectorAll<HTMLElement>(
+      "[data-code-label-expanded]"
+    )) {
       label.hidden = !expanded
     }
   }
@@ -28,12 +32,16 @@ function initializeCodeCollapsible(root: HTMLElement) {
   root.dataset.codeEnhanced = "true"
 
   for (const toggle of toggles) {
-    toggle.addEventListener("click", () => setExpanded(root.dataset.expanded !== "true"))
+    toggle.addEventListener("click", () =>
+      setExpanded(root.dataset.expanded !== "true")
+    )
   }
 }
 
 export function initializeCodeCollapsibles() {
-  for (const root of document.querySelectorAll<HTMLElement>("[data-code-collapsible]")) {
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-code-collapsible]"
+  )) {
     initializeCodeCollapsible(root)
   }
 }

@@ -13,7 +13,10 @@ const manifest = JSON.parse(read("vendor/shadcn/revision.json")) as {
 }
 const normalized = (css: string) =>
   Object.fromEntries(
-    [...extractStyleMap(css, "test")].map(([key, value]) => [key, value.split(/\s+/).sort()])
+    [...extractStyleMap(css, "test")].map(([key, value]) => [
+      key,
+      value.split(/\s+/).sort()
+    ])
   )
 
 describe("pinned upstream themes", () => {
@@ -22,33 +25,46 @@ describe("pinned upstream themes", () => {
       const source = read(`vendor/shadcn/styles/${file}`)
       expect(createHash("sha256").update(source).digest("hex")).toBe(hash)
       const theme = file.slice(6, -4)
-      const adapted = adaptTheme(source, read(`vendor/shadcn/delta-${theme}.css`))
+      const adapted = adaptTheme(
+        source,
+        read(`vendor/shadcn/delta-${theme}.css`)
+      )
       const generated = read(`apps/docs/src/registry/styles/${file}`)
       expect(normalized(generated)).toEqual(normalized(adapted))
       const map = extractStyleMap(generated, theme)
       expect(map.get("cn-slider-thumb")).toContain("has-[:focus-visible]:")
       expect(map.get("cn-slider-thumb")).not.toMatch(/(?<![\w-])active:/)
-      expect(map.get("cn-command-group")).toContain("data-[slot=command-group-label]")
+      expect(map.get("cn-command-group")).toContain(
+        "data-[slot=command-group-label]"
+      )
       expect(map.get("cn-input-group")).toContain("data-ui=input-group-control")
       expect(map.get("cn-combobox-content")).toContain("data-ending-style:")
       expect(map.get("cn-combobox-empty")).toContain("data-empty:flex")
       expect(map.get("cn-combobox-empty")).not.toContain("group-data-empty")
       expect(map.get("cn-navigation-menu-link")).toContain("data-current:")
       expect(map.get("cn-input-otp-slot")).toContain("data-active:")
-      expect(map.get("cn-drawer-content")).not.toContain("vaul-drawer-direction")
-      expect(map.get("cn-drawer-content")?.includes("data-[side=bottom]:")).toBe(
-        source.includes("data-[vaul-drawer-direction=bottom]:")
+      expect(map.get("cn-drawer-content")).not.toContain(
+        "vaul-drawer-direction"
       )
+      expect(
+        map.get("cn-drawer-content")?.includes("data-[side=bottom]:")
+      ).toBe(source.includes("data-[vaul-drawer-direction=bottom]:"))
       const original = extractStyleMap(source, theme)
-      const selectGroupPadding = original.get("cn-select-group")?.match(/\bp-[\d.]+\b/)?.[0]
+      const selectGroupPadding = original
+        .get("cn-select-group")
+        ?.match(/\bp-[\d.]+\b/)?.[0]
       expect(map.get("cn-select-list")).toBe(selectGroupPadding ?? "p-1")
       expect(map.get("cn-select-group")).not.toMatch(/\bp-[\d.]+\b/)
       expect(map.get("cn-tabs-trigger")?.includes("data-[selected]:")).toBe(
-        /\bdata-(?:selected|active):/.test(original.get("cn-tabs-trigger") ?? "")
+        /\bdata-(?:selected|active):/.test(
+          original.get("cn-tabs-trigger") ?? ""
+        )
       )
       expect(map.get("cn-tabs-trigger")).not.toContain("data-selected:")
       expect(map.get("cn-switch-thumb")).toContain("rtl:-translate-x-")
-      expect(map.get("cn-switch-thumb")).toContain("data-unchecked:rtl:-translate-x-")
+      expect(map.get("cn-switch-thumb")).toContain(
+        "data-unchecked:rtl:-translate-x-"
+      )
       expect(map.get("cn-switch")?.split(/\s+/).sort()).toEqual(
         original
           .get("cn-switch")

@@ -24,7 +24,8 @@ export default function CardImage() {
         </CardAction>
         <CardTitle>Design systems meetup</CardTitle>
         <CardDescription>
-          A practical talk on component APIs, accessibility, and shipping faster.
+          A practical talk on component APIs, accessibility, and shipping
+          faster.
         </CardDescription>
       </CardHeader>
       <CardFooter>

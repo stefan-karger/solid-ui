@@ -23,7 +23,9 @@ export default function CodeBlockHeight() {
             <CodeBlockCopyButton value={logs} />
           </CodeBlockActions>
         </CodeBlockHeader>
-        <CodeBlockContent class="max-h-48 scroll-fade-y">{logs}</CodeBlockContent>
+        <CodeBlockContent class="max-h-48 scroll-fade-y">
+          {logs}
+        </CodeBlockContent>
       </CodeBlock>
     </div>
   )

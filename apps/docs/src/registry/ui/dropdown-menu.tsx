@@ -21,13 +21,19 @@ import { createUniqueId, merge, omit } from "solid-js"
 import { cn } from "~/lib/utils"
 type DropdownMenuProps = ComponentProps<typeof SdkMenu>
 const DropdownMenu = (props: DropdownMenuProps) => <SdkMenu {...props} />
-type DropdownMenuTriggerProps = Omit<ComponentProps<typeof SdkMenuTrigger>, "class"> & {
+type DropdownMenuTriggerProps = Omit<
+  ComponentProps<typeof SdkMenuTrigger>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuTrigger = (props: DropdownMenuTriggerProps) => (
   <SdkMenuTrigger {...props} class={props.class} />
 )
-type DropdownMenuContentProps = Omit<ComponentProps<typeof SdkMenuContent>, "class"> & {
+type DropdownMenuContentProps = Omit<
+  ComponentProps<typeof SdkMenuContent>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuContent = (props: DropdownMenuContentProps) => (
@@ -41,13 +47,19 @@ const DropdownMenuContent = (props: DropdownMenuContentProps) => (
     />
   </>
 )
-type DropdownMenuGroupProps = Omit<ComponentProps<typeof SdkMenuGroup>, "class"> & {
+type DropdownMenuGroupProps = Omit<
+  ComponentProps<typeof SdkMenuGroup>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuGroup = (props: DropdownMenuGroupProps) => (
   <SdkMenuGroup {...props} class={props.class} />
 )
-type DropdownMenuLabelProps = (Omit<ComponentProps<typeof SdkMenuGroupLabel>, "class"> & {
+type DropdownMenuLabelProps = (Omit<
+  ComponentProps<typeof SdkMenuGroupLabel>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -62,7 +74,10 @@ const DropdownMenuLabel = (props: DropdownMenuLabelProps) => {
     />
   )
 }
-type DropdownMenuItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
+type DropdownMenuItemProps = (Omit<
+  ComponentProps<typeof SdkMenuItem>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -87,8 +102,13 @@ const DropdownMenuItem = (rawProps: DropdownMenuItemProps) => {
   )
 }
 type DropdownMenuSubProps = ComponentProps<typeof SdkMenuSub>
-const DropdownMenuSub = (props: DropdownMenuSubProps) => <SdkMenuSub {...props} />
-type DropdownMenuSubTriggerProps = (Omit<ComponentProps<typeof SdkMenuSubTrigger>, "class"> & {
+const DropdownMenuSub = (props: DropdownMenuSubProps) => (
+  <SdkMenuSub {...props} />
+)
+type DropdownMenuSubTriggerProps = (Omit<
+  ComponentProps<typeof SdkMenuSubTrigger>,
+  "class"
+> & {
   class?: string
 }) & {
   inset?: boolean
@@ -109,7 +129,10 @@ const DropdownMenuSubTrigger = (props: DropdownMenuSubTriggerProps) => {
     </SdkMenuSubTrigger>
   )
 }
-type DropdownMenuSubContentProps = Omit<ComponentProps<typeof SdkMenuSubContent>, "class"> & {
+type DropdownMenuSubContentProps = Omit<
+  ComponentProps<typeof SdkMenuSubContent>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuSubContent = (props: DropdownMenuSubContentProps) => (
@@ -152,13 +175,19 @@ const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
     </SdkMenuCheckboxItem>
   )
 }
-type DropdownMenuRadioGroupProps = Omit<ComponentProps<typeof SdkMenuRadioGroup>, "class"> & {
+type DropdownMenuRadioGroupProps = Omit<
+  ComponentProps<typeof SdkMenuRadioGroup>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuRadioGroup = (props: DropdownMenuRadioGroupProps) => (
   <SdkMenuRadioGroup {...props} class={props.class} />
 )
-type DropdownMenuRadioItemProps = Omit<ComponentProps<typeof SdkMenuRadioItem>, "class"> & {
+type DropdownMenuRadioItemProps = Omit<
+  ComponentProps<typeof SdkMenuRadioItem>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuRadioItem = (props: DropdownMenuRadioItemProps) => {
@@ -180,11 +209,17 @@ const DropdownMenuRadioItem = (props: DropdownMenuRadioItemProps) => {
     </SdkMenuRadioItem>
   )
 }
-type DropdownMenuSeparatorProps = Omit<ComponentProps<typeof SdkMenuSeparator>, "class"> & {
+type DropdownMenuSeparatorProps = Omit<
+  ComponentProps<typeof SdkMenuSeparator>,
+  "class"
+> & {
   class?: string
 }
 const DropdownMenuSeparator = (props: DropdownMenuSeparatorProps) => (
-  <SdkMenuSeparator {...props} class={cn("cn-dropdown-menu-separator", props.class)} />
+  <SdkMenuSeparator
+    {...props}
+    class={cn("cn-dropdown-menu-separator", props.class)}
+  />
 )
 type DropdownMenuShortcutProps = ComponentProps<"span">
 const DropdownMenuShortcut = (props: DropdownMenuShortcutProps) => (

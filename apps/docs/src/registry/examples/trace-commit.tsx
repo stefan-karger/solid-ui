@@ -1,7 +1,16 @@
-import { ChevronRightIcon, FilePenIcon, FilePlusIcon, GitCommitHorizontalIcon } from "lucide-solid"
+import {
+  ChevronRightIcon,
+  FilePenIcon,
+  FilePlusIcon,
+  GitCommitHorizontalIcon
+} from "lucide-solid"
 import { For } from "solid-js"
 
-import { CodeBlock, CodeBlockContent, CodeBlockLine } from "~/registry/ui/code-block"
+import {
+  CodeBlock,
+  CodeBlockContent,
+  CodeBlockLine
+} from "~/registry/ui/code-block"
 import {
   Sheet,
   SheetContent,
@@ -62,7 +71,13 @@ function DiffLines({ diff }: { diff: string }) {
 
     return (
       <CodeBlockLine
-        variant={line.startsWith("+") ? "added" : line.startsWith("-") ? "removed" : "default"}
+        variant={
+          line.startsWith("+")
+            ? "added"
+            : line.startsWith("-")
+              ? "removed"
+              : "default"
+        }
       >
         {line.slice(1)}
       </CodeBlockLine>
@@ -89,7 +104,9 @@ export default function TraceCommit() {
                 <Sheet>
                   <SheetTrigger>
                     <TraceLine>
-                      <TraceIcon>{file.added ? <FilePlusIcon /> : <FilePenIcon />}</TraceIcon>
+                      <TraceIcon>
+                        {file.added ? <FilePlusIcon /> : <FilePenIcon />}
+                      </TraceIcon>
                       <TraceTitle>
                         {file.added ? "Added" : "Edited"} {file.path}
                       </TraceTitle>

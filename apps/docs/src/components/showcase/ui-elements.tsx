@@ -42,7 +42,8 @@ export function UIElements() {
       <CardContent class="flex flex-col gap-6">
         <div class="flex gap-2 max-md:flex-wrap">
           <Button>
-            Button <ShowcaseIcon name="ArrowRight02Icon" data-icon="inline-end" />
+            Button{" "}
+            <ShowcaseIcon name="ArrowRight02Icon" data-icon="inline-end" />
           </Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
@@ -59,7 +60,11 @@ export function UIElements() {
             </InputGroup>
           </Field>
           <Field class="flex-1">
-            <Textarea aria-label="Message" placeholder="Message" class="resize-none" />
+            <Textarea
+              aria-label="Message"
+              placeholder="Message"
+              class="resize-none"
+            />
           </Field>
         </FieldGroup>
         <div class="flex items-center gap-2 max-md:flex-wrap">
@@ -90,15 +95,20 @@ export function UIElements() {
         </div>
         <div class="flex items-center gap-4 max-md:flex-wrap">
           <AlertDialog>
-            <AlertDialogTrigger render={(part) => <Button {...part} variant="outline" />}>
-              <span class="hidden md:flex style-sera:md:hidden">Alert Dialog</span>
+            <AlertDialogTrigger
+              render={(part) => <Button {...part} variant="outline" />}
+            >
+              <span class="hidden md:flex style-sera:md:hidden">
+                Alert Dialog
+              </span>
               <span class="flex md:hidden style-sera:md:flex">Dialog</span>
             </AlertDialogTrigger>
             <AlertDialogContent size="sm">
               <AlertDialogHeader>
                 <AlertDialogTitle>Allow accessory to connect?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Do you want to allow the USB accessory to connect to this device and your data?
+                  Do you want to allow the USB accessory to connect to this
+                  device and your data?
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
@@ -115,7 +125,12 @@ export function UIElements() {
             <DropdownMenu>
               <DropdownMenuTrigger
                 render={(part) => (
-                  <Button {...part} variant="outline" size="icon" aria-label="Open quick actions" />
+                  <Button
+                    {...part}
+                    variant="outline"
+                    size="icon"
+                    aria-label="Open quick actions"
+                  />
                 )}
               >
                 <ShowcaseIcon name="ArrowUp01Icon" />
@@ -129,12 +144,18 @@ export function UIElements() {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem variant="destructive">Delete Conversation</DropdownMenuItem>
+                  <DropdownMenuItem variant="destructive">
+                    Delete Conversation
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </ButtonGroup>
-          <Switch defaultChecked class="hidden 4xl:flex" aria-label="Enable advanced setting" />
+          <Switch
+            defaultChecked
+            class="hidden 4xl:flex"
+            aria-label="Enable advanced setting"
+          />
         </div>
       </CardContent>
     </Card>

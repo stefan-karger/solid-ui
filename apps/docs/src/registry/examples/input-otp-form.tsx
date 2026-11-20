@@ -10,7 +10,12 @@ import {
   CardTitle
 } from "~/registry/ui/card"
 import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "~/registry/ui/input-otp"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot
+} from "~/registry/ui/input-otp"
 
 export default function InputOTPForm() {
   return (
@@ -56,7 +61,10 @@ export default function InputOTPForm() {
           </Button>
           <div class="text-sm text-muted-foreground">
             Having trouble signing in?{" "}
-            <a href="#" class="underline underline-offset-4 transition-colors hover:text-primary">
+            <a
+              href="#"
+              class="underline underline-offset-4 transition-colors hover:text-primary"
+            >
               Contact support
             </a>
           </div>

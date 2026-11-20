@@ -1,5 +1,14 @@
 // Keep the order in shadcn's pinned apps/v4/registry/styles.tsx.
-export const styles = ["vega", "nova", "maia", "lyra", "mira", "luma", "sera", "rhea"] as const
+export const styles = [
+  "vega",
+  "nova",
+  "maia",
+  "lyra",
+  "mira",
+  "luma",
+  "sera",
+  "rhea"
+] as const
 export type DocsStyle = (typeof styles)[number]
 export type ColorMode = "light" | "dark"
 export const appearanceKey = "solid-ui-appearance"
@@ -25,18 +34,24 @@ export function readAppearance(
             : ("light" as const)
     }
   } catch {
-    return { style: defaultStyle, mode: prefersDark ? ("dark" as const) : ("light" as const) }
+    return {
+      style: defaultStyle,
+      mode: prefersDark ? ("dark" as const) : ("light" as const)
+    }
   }
 }
 
 export function applyAppearance(style: DocsStyle, mode: ColorMode) {
   const root = document.documentElement
-  for (const name of styles) root.classList.toggle(`style-${name}`, name === style)
+  for (const name of styles)
+    root.classList.toggle(`style-${name}`, name === style)
   root.classList.toggle("dark", mode === "dark")
   root.style.colorScheme = mode
   root.dataset.docsStyle = style
   root.dataset.colorMode = mode
-  window.dispatchEvent(new CustomEvent("solid-ui:appearance", { detail: { style, mode } }))
+  window.dispatchEvent(
+    new CustomEvent("solid-ui:appearance", { detail: { style, mode } })
+  )
 }
 
 export function saveAppearance(style: DocsStyle, mode: ColorMode) {

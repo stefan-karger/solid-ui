@@ -1,7 +1,11 @@
 import { SearchIcon } from "lucide-solid"
 
 import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
-import { InputGroup, InputGroupAddon, InputGroupInput } from "~/registry/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput
+} from "~/registry/ui/input-group"
 
 export default function InputGroupInlineStart() {
   return (

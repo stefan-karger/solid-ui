@@ -22,7 +22,9 @@ import {
 } from "~/registry/ui/dialog"
 import { Kbd } from "~/registry/ui/kbd"
 
-export default function DocsSearch(props: { navigation: DocsNavigationGroup[] }) {
+export default function DocsSearch(props: {
+  navigation: DocsNavigationGroup[]
+}) {
   return (
     <Dialog>
       <DialogTrigger
@@ -37,7 +39,9 @@ export default function DocsSearch(props: { navigation: DocsNavigationGroup[] })
         )}
       >
         <span class="min-w-0 truncate xl:hidden">Search...</span>
-        <span class="hidden min-w-0 truncate xl:inline">Search documentation...</span>
+        <span class="hidden min-w-0 truncate xl:inline">
+          Search documentation...
+        </span>
       </DialogTrigger>
       <DialogContent
         initialFocus="[data-slot=command-input]"
@@ -46,7 +50,9 @@ export default function DocsSearch(props: { navigation: DocsNavigationGroup[] })
       >
         <DialogHeader class="sr-only">
           <DialogTitle>Search documentation</DialogTitle>
-          <DialogDescription>Find a section or component by name.</DialogDescription>
+          <DialogDescription>
+            Find a section or component by name.
+          </DialogDescription>
         </DialogHeader>
         <Command
           filter="contains"

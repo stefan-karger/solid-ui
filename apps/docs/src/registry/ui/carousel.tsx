@@ -20,13 +20,22 @@ export function Carousel(
 }
 
 export function CarouselViewport(
-  props: Omit<ComponentProps<typeof SdkCarouselViewport>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCarouselViewport>, "class"> & {
+    class?: string
+  }
 ) {
-  return <SdkCarouselViewport {...props} class={cn("min-w-0 overflow-hidden", props.class)} />
+  return (
+    <SdkCarouselViewport
+      {...props}
+      class={cn("min-w-0 overflow-hidden", props.class)}
+    />
+  )
 }
 
 export function CarouselContent(
-  props: Omit<ComponentProps<typeof SdkCarouselContent>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCarouselContent>, "class"> & {
+    class?: string
+  }
 ) {
   return (
     <SdkCarouselContent
@@ -37,15 +46,22 @@ export function CarouselContent(
 }
 
 export function CarouselItem(
-  props: Omit<ComponentProps<typeof SdkCarouselItem>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCarouselItem>, "class"> & {
+    class?: string
+  }
 ) {
   return (
-    <SdkCarouselItem {...props} class={cn("min-w-0 shrink-0 grow-0 basis-full", props.class)} />
+    <SdkCarouselItem
+      {...props}
+      class={cn("min-w-0 shrink-0 grow-0 basis-full", props.class)}
+    />
   )
 }
 
 export function CarouselPrevious(
-  props: Omit<ComponentProps<typeof SdkCarouselPrevious>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCarouselPrevious>, "class"> & {
+    class?: string
+  }
 ) {
   const rest = omit(props, "class", "children")
   return (
@@ -53,7 +69,10 @@ export function CarouselPrevious(
       aria-label="Previous slide"
       render={(p) => <Button {...p} variant="outline" size="icon" />}
       {...rest}
-      class={cn("cn-carousel-previous absolute start-2 top-1/2 -translate-y-1/2", props.class)}
+      class={cn(
+        "cn-carousel-previous absolute start-2 top-1/2 -translate-y-1/2",
+        props.class
+      )}
     >
       {props.children ?? <ChevronLeftIcon class="size-4 rtl:rotate-180" />}
     </SdkCarouselPrevious>
@@ -61,7 +80,9 @@ export function CarouselPrevious(
 }
 
 export function CarouselNext(
-  props: Omit<ComponentProps<typeof SdkCarouselNext>, "class"> & { class?: string }
+  props: Omit<ComponentProps<typeof SdkCarouselNext>, "class"> & {
+    class?: string
+  }
 ) {
   const rest = omit(props, "class", "children")
   return (
@@ -69,7 +90,10 @@ export function CarouselNext(
       aria-label="Next slide"
       render={(p) => <Button {...p} variant="outline" size="icon" />}
       {...rest}
-      class={cn("cn-carousel-next absolute end-2 top-1/2 -translate-y-1/2", props.class)}
+      class={cn(
+        "cn-carousel-next absolute end-2 top-1/2 -translate-y-1/2",
+        props.class
+      )}
     >
       {props.children ?? <ChevronRightIcon class="size-4 rtl:rotate-180" />}
     </SdkCarouselNext>

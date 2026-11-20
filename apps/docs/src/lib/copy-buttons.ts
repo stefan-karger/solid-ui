@@ -31,7 +31,9 @@ function initializeCopyButton(button: HTMLButtonElement) {
 }
 
 export function initializeCopyButtons() {
-  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-copy-button]")) {
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    "[data-copy-button]"
+  )) {
     initializeCopyButton(button)
   }
 }

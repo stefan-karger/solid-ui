@@ -22,7 +22,10 @@ const links = await getComponentLinks(() => getCollection("docs"), variant)
         {variant === "all" && link.isNew && (
           <span class="ml-auto flex shrink-0 items-center pl-2">
             <span class="sr-only">New</span>
-            <span aria-hidden="true" class="size-1.5 rounded-full bg-blue-500" />
+            <span
+              aria-hidden="true"
+              class="size-1.5 rounded-full bg-blue-500"
+            />
           </span>
         )}
       </a>

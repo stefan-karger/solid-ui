@@ -2,8 +2,18 @@ import { MaximizeIcon, MinimizeIcon } from "lucide-solid"
 import { createSignal, Show } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/registry/ui/collapsible"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/registry/ui/card"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "~/registry/ui/collapsible"
 import { Field, FieldGroup, FieldLabel } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
 
@@ -17,7 +27,11 @@ export default function CollapsibleSettings() {
         <CardDescription>Set the corner radius of the element.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Collapsible open={isOpen()} onOpenChange={setIsOpen} class="flex items-start gap-2">
+        <Collapsible
+          open={isOpen()}
+          onOpenChange={setIsOpen}
+          class="flex items-start gap-2"
+        >
           <FieldGroup class="grid w-full grid-cols-2 gap-2">
             <Field>
               <FieldLabel for="radius-x" class="sr-only">
@@ -47,7 +61,9 @@ export default function CollapsibleSettings() {
             </CollapsibleContent>
           </FieldGroup>
           <CollapsibleTrigger
-            render={(partProps) => <Button {...partProps} variant="outline" size="icon" />}
+            render={(partProps) => (
+              <Button {...partProps} variant="outline" size="icon" />
+            )}
           >
             <Show when={isOpen()} fallback={<MaximizeIcon />}>
               <MinimizeIcon />

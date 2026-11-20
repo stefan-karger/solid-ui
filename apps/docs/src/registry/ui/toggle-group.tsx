@@ -1,5 +1,8 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
-import { Toggle as SdkToggle, ToggleGroup as SdkToggleGroup } from "@ui-sdk/solid/toggle"
+import {
+  Toggle as SdkToggle,
+  ToggleGroup as SdkToggleGroup
+} from "@ui-sdk/solid/toggle"
 import type { VariantProps } from "class-variance-authority"
 import { createContext, merge, omit, useContext } from "solid-js"
 
@@ -15,7 +18,10 @@ const ToggleGroupContext = createContext<ToggleGroupContextValue>({
   spacing: 0,
   orientation: "horizontal"
 })
-type ToggleGroupProps = (Omit<ComponentProps<typeof SdkToggleGroup>, "class" | "children"> & {
+type ToggleGroupProps = (Omit<
+  ComponentProps<typeof SdkToggleGroup>,
+  "class" | "children"
+> & {
   children?: JSX.Element
   class?: string
 }) &
@@ -31,7 +37,15 @@ const ToggleGroup = (rawProps: ToggleGroupProps) => {
     } as const,
     rawProps
   ) as ToggleGroupProps
-  const others = omit(rawProps, "class", "children", "variant", "size", "spacing", "orientation")
+  const others = omit(
+    rawProps,
+    "class",
+    "children",
+    "variant",
+    "size",
+    "spacing",
+    "orientation"
+  )
   return (
     <SdkToggleGroup
       class={cn(

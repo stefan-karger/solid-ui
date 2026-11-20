@@ -7,7 +7,11 @@ import DocsToc from "~/components/docs-toc.astro"
 import SiteLayout from "~/layouts/site-layout.astro"
 import { createDocsNavigation } from "~/lib/docs"
 
-type Props = { title: string; description: string; headings?: MarkdownHeading[] }
+type Props = {
+  title: string
+  description: string
+  headings?: MarkdownHeading[]
+}
 const { title, description, headings = [] } = Astro.props
 const navigation = createDocsNavigation(await getCollection("docs"))
 const currentPath = Astro.url.pathname.replace(/\/$/, "")
@@ -29,9 +33,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "")
       </div>
     </aside>
     <main id="main-content" class="min-w-0" tabindex="-1">
-      {headings.some((heading) => heading.depth === 2 || heading.depth === 3) && (
+      {headings.some(
+        (heading) => heading.depth === 2 || heading.depth === 3
+      ) && (
         <details class="mx-4 mt-5 border-b pb-4 sm:mx-6 xl:hidden">
-          <summary class="cursor-pointer text-sm font-medium">On This Page</summary>
+          <summary class="cursor-pointer text-sm font-medium">
+            On This Page
+          </summary>
           <div class="pt-4">
             <DocsToc {headings} showTitle={false} />
           </div>

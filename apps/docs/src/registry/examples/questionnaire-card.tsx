@@ -23,7 +23,10 @@ function Actions() {
   return (
     <QuestionnaireActions>
       <QuestionnairePrevious />
-      <Show when={last()} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={last()}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Task created</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -49,26 +52,42 @@ export default function QuestionnaireCard() {
           >
             <QuestionnaireProgress />
             <QuestionnaireItem value="task">
-              <QuestionnaireTitle>What should the agent work on?</QuestionnaireTitle>
+              <QuestionnaireTitle>
+                What should the agent work on?
+              </QuestionnaireTitle>
               <QuestionnaireDescription>
                 Choose the task that should be handled next.
               </QuestionnaireDescription>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="fix">Fix the failing tests</QuestionnaireChoice>
-                <QuestionnaireChoice value="refactor">Refactor the data layer</QuestionnaireChoice>
-                <QuestionnaireChoice value="docs">Update the integration guide</QuestionnaireChoice>
+                <QuestionnaireChoice value="fix">
+                  Fix the failing tests
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="refactor">
+                  Refactor the data layer
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="docs">
+                  Update the integration guide
+                </QuestionnaireChoice>
               </QuestionnaireChoices>
               <QuestionnaireError />
             </QuestionnaireItem>
             <QuestionnaireItem value="output">
-              <QuestionnaireTitle>What should the final handoff include?</QuestionnaireTitle>
+              <QuestionnaireTitle>
+                What should the final handoff include?
+              </QuestionnaireTitle>
               <QuestionnaireDescription>
                 Pick the level of detail needed for review.
               </QuestionnaireDescription>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="summary">Summary only</QuestionnaireChoice>
-                <QuestionnaireChoice value="files">Summary and changed files</QuestionnaireChoice>
-                <QuestionnaireChoice value="review">Full review handoff</QuestionnaireChoice>
+                <QuestionnaireChoice value="summary">
+                  Summary only
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="files">
+                  Summary and changed files
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="review">
+                  Full review handoff
+                </QuestionnaireChoice>
               </QuestionnaireChoices>
               <QuestionnaireError />
             </QuestionnaireItem>

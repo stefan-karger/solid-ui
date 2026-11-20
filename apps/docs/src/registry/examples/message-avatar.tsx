@@ -14,7 +14,9 @@ export default function MessageAvatarDemo() {
         </MessageAvatar>
         <MessageContent>
           <Bubble variant="muted">
-            <BubbleContent>The build failed during dependency installation.</BubbleContent>
+            <BubbleContent>
+              The build failed during dependency installation.
+            </BubbleContent>
           </Bubble>
         </MessageContent>
       </Message>
@@ -45,8 +47,8 @@ export default function MessageAvatarDemo() {
             </Bubble>
             <Bubble variant="muted">
               <BubbleContent>
-                Something went wrong with the build. The libraries are not installed correctly. Try
-                running the build again.
+                Something went wrong with the build. The libraries are not
+                installed correctly. Try running the build again.
               </BubbleContent>
             </Bubble>
           </BubbleGroup>

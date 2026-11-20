@@ -13,11 +13,19 @@ import { omit } from "solid-js"
 import { cn } from "~/lib/utils"
 type PopoverProps = ComponentProps<typeof SdkPopover>
 const Popover = (props: PopoverProps) => <SdkPopover {...props} />
-type PopoverTriggerProps = Omit<ComponentProps<typeof SdkPopoverTrigger>, "class"> & {
+type PopoverTriggerProps = Omit<
+  ComponentProps<typeof SdkPopoverTrigger>,
+  "class"
+> & {
   class?: string
 }
-const PopoverTrigger = (props: PopoverTriggerProps) => <SdkPopoverTrigger {...props} />
-type PopoverContentProps = Omit<ComponentProps<typeof SdkPopoverContent>, "class"> & {
+const PopoverTrigger = (props: PopoverTriggerProps) => (
+  <SdkPopoverTrigger {...props} />
+)
+type PopoverContentProps = Omit<
+  ComponentProps<typeof SdkPopoverContent>,
+  "class"
+> & {
   class?: string
 }
 const PopoverContent = (props: PopoverContentProps) => {
@@ -36,7 +44,10 @@ const PopoverContent = (props: PopoverContentProps) => {
     </>
   )
 }
-type PopoverCloseButtonProps = Omit<ComponentProps<typeof SdkPopoverClose>, "class"> & {
+type PopoverCloseButtonProps = Omit<
+  ComponentProps<typeof SdkPopoverClose>,
+  "class"
+> & {
   class?: string
 }
 const PopoverCloseButton = (props: PopoverCloseButtonProps) => (
@@ -46,21 +57,37 @@ type PopoverHeaderProps = ComponentProps<"div"> & {
   class?: string | undefined
 }
 const PopoverHeader = (props: PopoverHeaderProps) => (
-  <div data-slot="popover-header" {...props} class={cn("cn-popover-header", props.class)} />
+  <div
+    data-slot="popover-header"
+    {...props}
+    class={cn("cn-popover-header", props.class)}
+  />
 )
-type PopoverTitleProps = Omit<ComponentProps<typeof SdkPopoverTitle>, "class"> & {
+type PopoverTitleProps = Omit<
+  ComponentProps<typeof SdkPopoverTitle>,
+  "class"
+> & {
   class?: string
 }
 const PopoverTitle = (props: PopoverTitleProps) => (
   <SdkPopoverTitle {...props} class={cn("cn-popover-title", props.class)} />
 )
-type PopoverDescriptionProps = Omit<ComponentProps<typeof SdkPopoverDescription>, "class"> & {
+type PopoverDescriptionProps = Omit<
+  ComponentProps<typeof SdkPopoverDescription>,
+  "class"
+> & {
   class?: string
 }
 const PopoverDescription = (props: PopoverDescriptionProps) => (
-  <SdkPopoverDescription {...props} class={cn("cn-popover-description", props.class)} />
+  <SdkPopoverDescription
+    {...props}
+    class={cn("cn-popover-description", props.class)}
+  />
 )
-type PopoverArrowProps = Omit<ComponentProps<typeof SdkPopoverArrow>, "class"> & {
+type PopoverArrowProps = Omit<
+  ComponentProps<typeof SdkPopoverArrow>,
+  "class"
+> & {
   class?: string
 }
 const PopoverArrow = (props: PopoverArrowProps) => (

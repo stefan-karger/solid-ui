@@ -28,8 +28,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/registry/ui/dropdown-menu"
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "~/registry/ui/empty"
-import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle
+} from "~/registry/ui/empty"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton
+} from "~/registry/ui/input-group"
 import { Message, MessageContent } from "~/registry/ui/message"
 import {
   MessageScroller,
@@ -139,7 +149,8 @@ export default function MessageScrollerDemo() {
                   </EmptyMedia>
                   <EmptyTitle>Morning, shadcn!</EmptyTitle>
                   <EmptyDescription>
-                    What are we working on today? Press send to start a new conversation
+                    What are we working on today? Press send to start a new
+                    conversation
                   </EmptyDescription>
                 </EmptyHeader>
               </Empty>
@@ -156,9 +167,15 @@ export default function MessageScrollerDemo() {
                   <For each={messages.slice(0, count())}>
                     {(message) => (
                       <MessageScrollerItem>
-                        <Message align={message.role === "user" ? "end" : "start"}>
+                        <Message
+                          align={message.role === "user" ? "end" : "start"}
+                        >
                           <MessageContent>
-                            <Bubble variant={message.role === "user" ? "muted" : "ghost"}>
+                            <Bubble
+                              variant={
+                                message.role === "user" ? "muted" : "ghost"
+                              }
+                            >
                               <BubbleContent class="whitespace-pre-wrap">
                                 {message.text}
                               </BubbleContent>
@@ -170,7 +187,9 @@ export default function MessageScrollerDemo() {
                   </For>
                   <Show when={busy()}>
                     <Bubble variant="ghost">
-                      <BubbleContent class="whitespace-pre-wrap">{response()}</BubbleContent>
+                      <BubbleContent class="whitespace-pre-wrap">
+                        {response()}
+                      </BubbleContent>
                     </Bubble>
                   </Show>
                 </MessageScrollerContent>
@@ -190,7 +209,8 @@ export default function MessageScrollerDemo() {
             <InputGroup>
               <div class="h-14 w-full px-3 py-2.5">
                 <span class={["line-clamp-2", { "opacity-60": busy() }]}>
-                  {next()?.text ?? "No messages queued. Reset the conversation."}
+                  {next()?.text ??
+                    "No messages queued. Reset the conversation."}
                 </span>
               </div>
               <InputGroupAddon align="block-end" class="pt-1">

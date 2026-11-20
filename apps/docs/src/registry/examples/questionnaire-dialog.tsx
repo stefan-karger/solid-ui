@@ -31,7 +31,10 @@ function Actions() {
   return (
     <QuestionnaireActions>
       <QuestionnairePrevious />
-      <Show when={last()} fallback={<QuestionnaireNext>Next</QuestionnaireNext>}>
+      <Show
+        when={last()}
+        fallback={<QuestionnaireNext>Next</QuestionnaireNext>}
+      >
         <QuestionnaireSubmit>Agent reply</QuestionnaireSubmit>
       </Show>
     </QuestionnaireActions>
@@ -56,7 +59,9 @@ export default function QuestionnaireDialog() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Configure agent</DialogTitle>
-            <DialogDescription>Choose the scope and verification.</DialogDescription>
+            <DialogDescription>
+              Choose the scope and verification.
+            </DialogDescription>
           </DialogHeader>
           <Questionnaire
             class="mx-auto max-w-md"
@@ -74,7 +79,9 @@ export default function QuestionnaireDialog() {
                 Choose how broadly the agent can update the workspace.
               </QuestionnaireDescription>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="component">Component only</QuestionnaireChoice>
+                <QuestionnaireChoice value="component">
+                  Component only
+                </QuestionnaireChoice>
                 <QuestionnaireChoice value="feature">
                   Complete feature directory
                 </QuestionnaireChoice>
@@ -85,14 +92,22 @@ export default function QuestionnaireDialog() {
               <QuestionnaireError />
             </QuestionnaireItem>
             <QuestionnaireItem value="tests">
-              <QuestionnaireTitle>How much verification is needed?</QuestionnaireTitle>
+              <QuestionnaireTitle>
+                How much verification is needed?
+              </QuestionnaireTitle>
               <QuestionnaireDescription>
                 Choose the checks the agent should run before handoff.
               </QuestionnaireDescription>
               <QuestionnaireChoices>
-                <QuestionnaireChoice value="targeted">Targeted tests</QuestionnaireChoice>
-                <QuestionnaireChoice value="package">Package tests</QuestionnaireChoice>
-                <QuestionnaireChoice value="full">Full workspace verification</QuestionnaireChoice>
+                <QuestionnaireChoice value="targeted">
+                  Targeted tests
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="package">
+                  Package tests
+                </QuestionnaireChoice>
+                <QuestionnaireChoice value="full">
+                  Full workspace verification
+                </QuestionnaireChoice>
               </QuestionnaireChoices>
               <QuestionnaireError />
             </QuestionnaireItem>

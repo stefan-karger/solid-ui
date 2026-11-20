@@ -52,7 +52,9 @@ export default function CodeBlockChat() {
               </CodeBlockActions>
             </CodeBlockHeader>
             <CodeBlockContent>
-              <For each={lines()}>{(line) => <CodeBlockLine>{line}</CodeBlockLine>}</For>
+              <For each={lines()}>
+                {(line) => <CodeBlockLine>{line}</CodeBlockLine>}
+              </For>
             </CodeBlockContent>
           </CodeBlock>
           <p>The client reads it with useChat.</p>

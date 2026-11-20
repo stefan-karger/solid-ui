@@ -22,10 +22,17 @@ import { CheckIcon, ChevronDownIcon, XIcon } from "lucide-solid"
 import { omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { InputGroup, InputGroupAddon, InputGroupButton } from "~/registry/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton
+} from "~/registry/ui/input-group"
 const Combobox = SdkCombobox
 const ComboboxValue = SdkComboboxValue
-type ComboboxInputProps = Omit<ComponentProps<typeof SdkComboboxInput>, "class"> & {
+type ComboboxInputProps = Omit<
+  ComponentProps<typeof SdkComboboxInput>,
+  "class"
+> & {
   class?: string
   children?: JSX.Element
   showTrigger?: boolean
@@ -58,18 +65,25 @@ const ComboboxInput = (props: ComboboxInputProps) => {
   )
 }
 const ComboboxTrigger = (
-  props: Omit<ComponentProps<typeof SdkComboboxTrigger>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkComboboxTrigger>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
 ) => (
   <SdkComboboxTrigger
     aria-label="Show options"
-    render={(partProps) => <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />}
+    render={(partProps) => (
+      <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+    )}
     {...props}
     class={cn("cn-combobox-trigger", props.class)}
   >
-    {props.children ?? <ChevronDownIcon class="cn-combobox-trigger-icon pointer-events-none" />}
+    {props.children ?? (
+      <ChevronDownIcon class="cn-combobox-trigger-icon pointer-events-none" />
+    )}
   </SdkComboboxTrigger>
 )
 const ComboboxClear = (
@@ -80,7 +94,9 @@ const ComboboxClear = (
 ) => (
   <SdkComboboxClear
     aria-label="Clear selection"
-    render={(partProps) => <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />}
+    render={(partProps) => (
+      <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+    )}
     {...props}
     class={cn("cn-combobox-clear", props.class)}
   >
@@ -88,7 +104,10 @@ const ComboboxClear = (
   </SdkComboboxClear>
 )
 const ComboboxContent = (
-  props: Omit<ComponentProps<typeof SdkComboboxContent>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkComboboxContent>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
@@ -111,7 +130,10 @@ const ComboboxList = (
 ) => (
   <SdkComboboxList
     {...props}
-    class={cn("cn-combobox-list overflow-y-auto overscroll-contain", props.class)}
+    class={cn(
+      "cn-combobox-list overflow-y-auto overscroll-contain",
+      props.class
+    )}
   />
 )
 const ComboboxItem = (
@@ -139,25 +161,45 @@ const ComboboxGroup = (
     class?: string
     children?: JSX.Element
   }
-) => <SdkComboboxGroup {...props} class={cn("cn-combobox-group", props.class)} />
+) => (
+  <SdkComboboxGroup {...props} class={cn("cn-combobox-group", props.class)} />
+)
 const ComboboxLabel = (
-  props: Omit<ComponentProps<typeof SdkComboboxGroupLabel>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkComboboxGroupLabel>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkComboboxGroupLabel {...props} class={cn("cn-combobox-label", props.class)} />
+) => (
+  <SdkComboboxGroupLabel
+    {...props}
+    class={cn("cn-combobox-label", props.class)}
+  />
+)
 const ComboboxEmpty = (
   props: Omit<ComponentProps<typeof SdkComboboxEmpty>, "class" | "children"> & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkComboboxEmpty {...props} class={cn("cn-combobox-empty", props.class)} />
+) => (
+  <SdkComboboxEmpty {...props} class={cn("cn-combobox-empty", props.class)} />
+)
 const ComboboxSeparator = (
-  props: Omit<ComponentProps<typeof SdkComboboxSeparator>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkComboboxSeparator>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
-) => <SdkComboboxSeparator {...props} class={cn("cn-combobox-separator", props.class)} />
+) => (
+  <SdkComboboxSeparator
+    {...props}
+    class={cn("cn-combobox-separator", props.class)}
+  />
+)
 const ComboboxChips = (
   props: Omit<ComponentProps<typeof SdkComboboxChips>, "class" | "children"> & {
     class?: string
@@ -177,7 +219,10 @@ const ComboboxChip = (
   }
 ) => <SdkComboboxChip {...props} class={cn("cn-combobox-chip", props.class)} />
 const ComboboxChipRemove = (
-  props: Omit<ComponentProps<typeof SdkComboboxChipRemove>, "class" | "children"> & {
+  props: Omit<
+    ComponentProps<typeof SdkComboboxChipRemove>,
+    "class" | "children"
+  > & {
     class?: string
     children?: JSX.Element
   }
@@ -199,7 +244,10 @@ const ComboboxChipInput = (
   <SdkComboboxInput
     data-ui="input-group-control"
     {...props}
-    class={cn("min-w-24 flex-1 outline-none placeholder:text-muted-foreground", props.class)}
+    class={cn(
+      "min-w-24 flex-1 outline-none placeholder:text-muted-foreground",
+      props.class
+    )}
   />
 )
 export {

@@ -6,12 +6,20 @@ import { ChevronDownIcon } from "lucide-solid"
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Calendar, CalendarMonth, CalendarNext, CalendarPrevious } from "~/registry/ui/calendar"
+import {
+  Calendar,
+  CalendarMonth,
+  CalendarNext,
+  CalendarPrevious
+} from "~/registry/ui/calendar"
 import { Field, FieldLabel, FieldGroup } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
 
-const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" })
+const formatDate = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC"
+})
 
 export default function DatePickerTime() {
   const [open, setOpen] = createSignal(false)

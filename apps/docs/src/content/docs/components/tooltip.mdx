@@ -48,12 +48,18 @@ npm install @ui-sdk/solid @ui-sdk/core
 ## Usage
 
 ```tsx
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from "~/components/ui/tooltip"
 ```
 
 ```tsx showLineNumbers
 <Tooltip>
-  <TooltipTrigger render={(partProps) => <button {...partProps} />}>Hover</TooltipTrigger>
+  <TooltipTrigger render={(partProps) => <button {...partProps} />}>
+    Hover
+  </TooltipTrigger>
   <TooltipContent>
     <p>Add to library</p>
   </TooltipContent>
@@ -72,6 +78,8 @@ Tooltip
 
 ## Side
 
+Use the `side` prop to change the position of the tooltip.
+
 <ComponentPreview name="tooltip-sides" />
 
 ## With Keyboard Shortcut
@@ -79,6 +87,8 @@ Tooltip
 <ComponentPreview name="tooltip-keyboard" />
 
 ## Disabled Button
+
+Wrap a disabled button in a `span` and use that wrapper as the tooltip trigger.
 
 <ComponentPreview name="tooltip-disabled" />
 

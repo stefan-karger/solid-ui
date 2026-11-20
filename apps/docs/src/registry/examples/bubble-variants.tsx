@@ -19,7 +19,8 @@ export default function BubbleVariantsDemo() {
       </Bubble>
       <Bubble variant="tinted" align="end">
         <BubbleContent>
-          This one is tinted. The tint is a softer color derived from the primary color.
+          This one is tinted. The tint is a softer color derived from the
+          primary color.
         </BubbleContent>
       </Bubble>
       <Bubble variant="outline">
@@ -35,14 +36,18 @@ export default function BubbleVariantsDemo() {
         <BubbleContent>
           <div class="space-y-3">
             <p>
-              Ghost bubbles work for assistant text, <strong>markdown</strong>, and other content
-              that should not be framed.
+              Ghost bubbles work for assistant text, <strong>markdown</strong>,
+              and other content that should not be framed.
             </p>
             <p>
-              This is perfect for assistant messages that should not have a frame and can take the
-              full width of the container. You can also render <code>code</code> in it.
+              This is perfect for assistant messages that should not have a
+              frame and can take the full width of the container. You can also
+              render <code>code</code> in it.
             </p>
-            <p>Ghost bubbles are full width and can take the full width of the container.</p>
+            <p>
+              Ghost bubbles are full width and can take the full width of the
+              container.
+            </p>
           </div>
         </BubbleContent>
       </Bubble>

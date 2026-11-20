@@ -4,7 +4,12 @@ import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
 
 export default function ToggleGroupVertical() {
   return (
-    <ToggleGroup multiple orientation="vertical" spacing={1} defaultValue={["bold", "italic"]}>
+    <ToggleGroup
+      multiple
+      orientation="vertical"
+      spacing={1}
+      defaultValue={["bold", "italic"]}
+    >
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <BoldIcon />
       </ToggleGroupItem>

@@ -1,11 +1,22 @@
-import { dynamic, type JSX, type ComponentProps, type ValidComponent } from "@solidjs/web"
+import {
+  dynamic,
+  type JSX,
+  type ComponentProps,
+  type ValidComponent
+} from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
 import { isStatic, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-type PolymorphicProps<T extends ValidComponent, P> = Omit<P, "as" | "class" | "children"> &
-  Omit<ComponentProps<T>, keyof P | "as" | "class" | "children" | "onChange"> & {
+type PolymorphicProps<T extends ValidComponent, P> = Omit<
+  P,
+  "as" | "class" | "children"
+> &
+  Omit<
+    ComponentProps<T>,
+    keyof P | "as" | "class" | "children" | "onChange"
+  > & {
     as?: T
     class?: string | undefined
     children?: JSX.Element
@@ -30,13 +41,18 @@ const badgeVariants = cva(
   }
 )
 
-type BadgeProps<T extends ValidComponent = "span"> = PolymorphicProps<T, ComponentProps<"span">> &
+type BadgeProps<T extends ValidComponent = "span"> = PolymorphicProps<
+  T,
+  ComponentProps<"span">
+> &
   VariantProps<typeof badgeVariants> &
   Pick<ComponentProps<T>, "class">
 
 const Badge = <T extends ValidComponent = "span">(props: BadgeProps<T>) => {
   const others = omit(props as BadgeProps, "class", "as", "variant")
-  const Comp = dynamic(() => props.as ?? "span", { static: isStatic(props, "as") })
+  const Comp = dynamic(() => props.as ?? "span", {
+    static: isStatic(props, "as")
+  })
   return (
     <Comp
       class={cn(badgeVariants({ variant: props.variant }), props.class)}

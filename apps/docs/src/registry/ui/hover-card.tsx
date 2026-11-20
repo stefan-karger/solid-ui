@@ -9,11 +9,19 @@ import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 const HoverCard = (props: HoverCardProps) => <SdkHoverCard {...props} />
-type HoverCardTriggerProps = Omit<ComponentProps<typeof SdkHoverCardTrigger>, "class"> & {
+type HoverCardTriggerProps = Omit<
+  ComponentProps<typeof SdkHoverCardTrigger>,
+  "class"
+> & {
   class?: string
 }
-const HoverCardTrigger = (props: HoverCardTriggerProps) => <SdkHoverCardTrigger {...props} />
-type HoverCardContentProps = Omit<ComponentProps<typeof SdkHoverCardContent>, "class"> & {
+const HoverCardTrigger = (props: HoverCardTriggerProps) => (
+  <SdkHoverCardTrigger {...props} />
+)
+type HoverCardContentProps = Omit<
+  ComponentProps<typeof SdkHoverCardContent>,
+  "class"
+> & {
   class?: string
 }
 const HoverCardContent = (props: HoverCardContentProps) => {

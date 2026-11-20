@@ -30,5 +30,11 @@
   "oxc.requireConfig": true,
   "oxc.enable.oxlint": false,
   "oxc.enable.oxfmt": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro"]
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "astro"
+  ]
 }

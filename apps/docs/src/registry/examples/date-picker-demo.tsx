@@ -5,7 +5,10 @@ import { Button } from "~/registry/ui/button"
 import { Calendar } from "~/registry/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "~/registry/ui/popover"
 
-const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" })
+const formatDate = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC"
+})
 
 export default function DatePickerDemo() {
   const [date, setDate] = createSignal<string | null>(null)
@@ -21,14 +24,18 @@ export default function DatePickerDemo() {
           />
         )}
       >
-        <span>{date() ? formatDate.format(new Date(date()!)) : "Pick a date"}</span>
+        <span>
+          {date() ? formatDate.format(new Date(date()!)) : "Pick a date"}
+        </span>
         <ChevronDownIcon />
       </PopoverTrigger>
       <PopoverContent class="w-auto p-0" align="start">
         <Calendar
           value={date()}
           defaultMonth="2026-11"
-          onValueChange={(selection) => setDate(typeof selection === "string" ? selection : null)}
+          onValueChange={(selection) =>
+            setDate(typeof selection === "string" ? selection : null)
+          }
         />
       </PopoverContent>
     </Popover>

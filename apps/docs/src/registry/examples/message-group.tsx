@@ -1,6 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import { Bubble, BubbleContent } from "~/registry/ui/bubble"
-import { Message, MessageAvatar, MessageContent, MessageGroup } from "~/registry/ui/message"
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageGroup
+} from "~/registry/ui/message"
 
 export default function MessageGroupDemo() {
   return (

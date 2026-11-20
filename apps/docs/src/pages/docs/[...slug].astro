@@ -29,10 +29,14 @@ const neighbors = findNeighbors(pages, page.id)
 const markdown = formatDocsMarkdown(page, pages)
 ---
 
-<DocsLayout title={page.data.title} description={page.data.description} headings={headings}>
+<DocsLayout
+  title={page.data.title}
+  description={page.data.description}
+  headings={headings}
+>
   <article
     aria-label={isIntroduction ? "Introduction" : "MDX component examples"}
-    class="mx-auto w-full max-w-160 px-4 pt-6 pb-14 font-sans md:px-0 lg:pt-12 [&_[data-rehype-pretty-code-figure]:first-child]:mt-0"
+    class="mx-auto w-full max-w-160 px-4 pt-6 pb-14 font-sans text-[1.05rem] sm:text-[15px] md:px-0 lg:pt-12 [&_[data-rehype-pretty-code-figure]:first-child]:mt-0"
     data-slot="docs"
   >
     <header class="mb-8 flex flex-col gap-2">
@@ -56,7 +60,7 @@ const markdown = formatDocsMarkdown(page, pages)
       </p>
     </header>
 
-    <div class="w-full *:first:mt-0">
+    <div class="w-full text-[1.125em]/[1.75] *:first:mt-0 md:text-[1em]/[1.75]">
       <Content components={mdxComponents} />
     </div>
 

@@ -12,10 +12,29 @@ import {
   FieldSet
 } from "~/registry/ui/field"
 import { Input } from "~/registry/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/registry/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/registry/ui/select"
 import { Textarea } from "~/registry/ui/textarea"
 
-const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+const months = [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12"
+]
 const years = ["2024", "2025", "2026", "2027", "2028", "2029"]
 
 export default function FieldDemo() {
@@ -25,27 +44,45 @@ export default function FieldDemo() {
         <FieldGroup>
           <FieldSet>
             <FieldLegend>Payment Method</FieldLegend>
-            <FieldDescription>All transactions are secure and encrypted</FieldDescription>
+            <FieldDescription>
+              All transactions are secure and encrypted
+            </FieldDescription>
             <FieldGroup>
               <Field>
                 <FieldLabel for="checkout-card-name">Name on Card</FieldLabel>
-                <Input id="checkout-card-name" placeholder="Evil Rabbit" required />
+                <Input
+                  id="checkout-card-name"
+                  placeholder="Evil Rabbit"
+                  required
+                />
               </Field>
               <Field>
                 <FieldLabel for="checkout-card-number">Card Number</FieldLabel>
-                <Input id="checkout-card-number" placeholder="1234 5678 9012 3456" required />
-                <FieldDescription>Enter your 16-digit card number</FieldDescription>
+                <Input
+                  id="checkout-card-number"
+                  placeholder="1234 5678 9012 3456"
+                  required
+                />
+                <FieldDescription>
+                  Enter your 16-digit card number
+                </FieldDescription>
               </Field>
               <div class="grid grid-cols-3 gap-4">
                 <Field>
                   <FieldLabel for="checkout-exp-month">Month</FieldLabel>
                   <Select<string> placeholder="MM">
-                    <SelectTrigger aria-label="MM" class="w-full" id="checkout-exp-month">
+                    <SelectTrigger
+                      aria-label="MM"
+                      class="w-full"
+                      id="checkout-exp-month"
+                    >
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <For each={months}>
-                        {(option) => <SelectItem value={option}>{option}</SelectItem>}
+                        {(option) => (
+                          <SelectItem value={option}>{option}</SelectItem>
+                        )}
                       </For>
                     </SelectContent>
                   </Select>
@@ -53,12 +90,18 @@ export default function FieldDemo() {
                 <Field>
                   <FieldLabel for="checkout-exp-year">Year</FieldLabel>
                   <Select<string> placeholder="YYYY">
-                    <SelectTrigger aria-label="YYYY" class="w-full" id="checkout-exp-year">
+                    <SelectTrigger
+                      aria-label="YYYY"
+                      class="w-full"
+                      id="checkout-exp-year"
+                    >
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <For each={years}>
-                        {(option) => <SelectItem value={option}>{option}</SelectItem>}
+                        {(option) => (
+                          <SelectItem value={option}>{option}</SelectItem>
+                        )}
                       </For>
                     </SelectContent>
                   </Select>

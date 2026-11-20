@@ -28,7 +28,9 @@ const PaginationContent = (props: PaginationContentProps) => (
 
 type PaginationItemProps = ComponentProps<"li">
 
-const PaginationItem = (props: PaginationItemProps) => <li data-slot="pagination-item" {...props} />
+const PaginationItem = (props: PaginationItemProps) => (
+  <li data-slot="pagination-item" {...props} />
+)
 
 type PaginationLinkProps = Omit<ButtonProps<"a">, "as" | "variant"> & {
   isActive?: boolean
@@ -91,7 +93,10 @@ const PaginationEllipsis = (props: PaginationEllipsisProps) => (
     aria-hidden="true"
     data-slot="pagination-ellipsis"
     {...props}
-    class={cn("cn-pagination-ellipsis flex items-center justify-center", props.class)}
+    class={cn(
+      "cn-pagination-ellipsis flex items-center justify-center",
+      props.class
+    )}
   >
     <Ellipsis />
     <span class="sr-only">More pages</span>

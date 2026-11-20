@@ -1,4 +1,9 @@
-import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from "~/registry/ui/bubble"
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+  BubbleReactions
+} from "~/registry/ui/bubble"
 
 export default function BubbleDemo() {
   return (
@@ -12,7 +17,8 @@ export default function BubbleDemo() {
         </Bubble>
         <Bubble variant="muted">
           <BubbleContent>
-            I can group messages, switch sides, and keep the whole thread easy to scan.
+            I can group messages, switch sides, and keep the whole thread easy
+            to scan.
           </BubbleContent>
           <BubbleReactions role="img" aria-label="Reaction: thumbs up">
             <span>👍</span>
@@ -24,9 +30,13 @@ export default function BubbleDemo() {
       </Bubble>
       <Bubble variant="muted">
         <BubbleContent>
-          Yes. You are reading a demo that is demoing itself. Very meta. Very on-brand.
+          Yes. You are reading a demo that is demoing itself. Very meta. Very
+          on-brand.
         </BubbleContent>
-        <BubbleReactions role="img" aria-label="Reactions: thumbs up, fire, eyes, and 2 more">
+        <BubbleReactions
+          role="img"
+          aria-label="Reactions: thumbs up, fire, eyes, and 2 more"
+        >
           <span>👍</span>
           <span>🔥</span>
           <span>👀</span>

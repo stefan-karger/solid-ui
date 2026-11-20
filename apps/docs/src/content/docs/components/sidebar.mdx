@@ -111,17 +111,24 @@ SidebarProvider
 ├── Sidebar
 │   ├── SidebarHeader
 │   ├── SidebarContent
+│   │   ├── SidebarGroup
+│   │   │   ├── SidebarGroupLabel
+│   │   │   ├── SidebarGroupAction
+│   │   │   ├── SidebarGroupContent
+│   │   │   └── SidebarMenu
+│   │   │       ├── SidebarMenuItem
+│   │   │       │   ├── SidebarMenuButton
+│   │   │       │   ├── SidebarMenuAction
+│   │   │       │   └── SidebarMenuBadge
+│   │   │       └── SidebarMenuItem
+│   │   │           ├── SidebarMenuButton
+│   │   │           └── SidebarMenuSub
+│   │   │               ├── SidebarMenuSubItem
+│   │   │               └── SidebarMenuSubItem
 │   │   └── SidebarGroup
-│   │       ├── SidebarGroupLabel
-│   │       ├── SidebarGroupAction
-│   │       └── SidebarGroupContent
-│   │           └── SidebarMenu
-│   │               └── SidebarMenuItem
-│   │                   ├── SidebarMenuButton
-│   │                   ├── SidebarMenuAction
-│   │                   ├── SidebarMenuBadge
-│   │                   └── SidebarMenuSub
-│   │                       └── SidebarMenuSubItem
+│   │       └── SidebarMenu
+│   │           ├── SidebarMenuItem
+│   │           └── SidebarMenuItem
 │   ├── SidebarFooter
 │   └── SidebarRail
 ├── SidebarInset
@@ -218,7 +225,8 @@ The main `Sidebar` component renders the responsive, collapsible sidebar shell.
 | `none`      | A non-collapsible sidebar.                                   |
 
 <Callout>
-  **Note:** If you use the `inset` variant, wrap your page content in `SidebarInset`.
+  **Note:** If you use the `inset` variant, wrap your page content in
+  `SidebarInset`.
 </Callout>
 
 ```tsx showLineNumbers
@@ -238,7 +246,15 @@ Use `useSidebar` when you need to read or control the shared sidebar state.
 import { useSidebar } from "~/components/ui/sidebar"
 
 export function AppSidebar() {
-  const { state, open, setOpen, openMobile, setOpenMobile, isMobile, toggleSidebar } = useSidebar()
+  const {
+    state,
+    open,
+    setOpen,
+    openMobile,
+    setOpenMobile,
+    isMobile,
+    toggleSidebar
+  } = useSidebar()
 }
 ```
 

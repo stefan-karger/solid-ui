@@ -13,11 +13,16 @@ export default function AvatarDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={(partProps) => <Button {...partProps} size="icon" variant="ghost" />}
+        render={(partProps) => (
+          <Button {...partProps} size="icon" variant="ghost" />
+        )}
         class="rounded-full"
       >
         <Avatar>
-          <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
+          <AvatarImage
+            alt="@stefan-karger"
+            src="https://github.com/stefan-karger.png"
+          />
           <AvatarFallback>SK</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

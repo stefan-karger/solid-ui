@@ -8,7 +8,11 @@ export default function InputBadge() {
         Webhook URL
         <span class="cn-badge cn-badge-variant-secondary ml-auto">Beta</span>
       </FieldLabel>
-      <Input id="input-badge" placeholder="https://api.example.com/webhook" type="url" />
+      <Input
+        id="input-badge"
+        placeholder="https://api.example.com/webhook"
+        type="url"
+      />
     </Field>
   )
 }

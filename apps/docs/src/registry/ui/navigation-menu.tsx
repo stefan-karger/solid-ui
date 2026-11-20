@@ -14,7 +14,10 @@ import { ChevronDownIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-type NavigationMenuProps = (Omit<ComponentProps<typeof SdkNavigationMenu>, "class"> & {
+type NavigationMenuProps = (Omit<
+  ComponentProps<typeof SdkNavigationMenu>,
+  "class"
+> & {
   class?: string
 }) & {
   viewport?: boolean
@@ -48,7 +51,10 @@ const NavigationMenuList = (props: NavigationMenuListProps) => (
 )
 type NavigationMenuItemProps = ComponentProps<typeof SdkNavigationMenuItem>
 const NavigationMenuItem = (props: NavigationMenuItemProps) => (
-  <SdkNavigationMenuItem {...props} class={cn("cn-navigation-menu-item relative", props.class)} />
+  <SdkNavigationMenuItem
+    {...props}
+    class={cn("cn-navigation-menu-item relative", props.class)}
+  />
 )
 const navigationMenuTriggerStyle = cva(
   "cn-navigation-menu-trigger group/navigation-menu-trigger relative z-0 inline-flex h-9 w-max items-center justify-center outline-none focus-visible:z-10 disabled:pointer-events-none data-open:z-10"
@@ -75,11 +81,19 @@ const NavigationMenuTrigger = (props: NavigationMenuTriggerProps) => {
       {...others}
     >
       {props.children}
-      {showIcon() && <ChevronDownIcon class="cn-navigation-menu-trigger-icon" aria-hidden="true" />}
+      {showIcon() && (
+        <ChevronDownIcon
+          class="cn-navigation-menu-trigger-icon"
+          aria-hidden="true"
+        />
+      )}
     </SdkNavigationMenuTrigger>
   )
 }
-type NavigationMenuContentProps = Omit<ComponentProps<typeof SdkNavigationMenuContent>, "class"> & {
+type NavigationMenuContentProps = Omit<
+  ComponentProps<typeof SdkNavigationMenuContent>,
+  "class"
+> & {
   class?: string
 }
 const NavigationMenuContent = (props: NavigationMenuContentProps) => (
@@ -93,7 +107,9 @@ const NavigationMenuContent = (props: NavigationMenuContentProps) => (
     />
   </>
 )
-type NavigationMenuViewportProps = ComponentProps<typeof SdkNavigationMenuViewport>
+type NavigationMenuViewportProps = ComponentProps<
+  typeof SdkNavigationMenuViewport
+>
 const NavigationMenuViewport = (props: NavigationMenuViewportProps) => (
   <SdkNavigationMenuViewport
     {...props}
@@ -103,11 +119,17 @@ const NavigationMenuViewport = (props: NavigationMenuViewportProps) => (
     )}
   />
 )
-type NavigationMenuLinkProps = Omit<ComponentProps<typeof SdkNavigationMenuLink>, "class"> & {
+type NavigationMenuLinkProps = Omit<
+  ComponentProps<typeof SdkNavigationMenuLink>,
+  "class"
+> & {
   class?: string
 }
 const NavigationMenuLink = (props: NavigationMenuLinkProps) => (
-  <SdkNavigationMenuLink {...props} class={cn("cn-navigation-menu-link", props.class)} />
+  <SdkNavigationMenuLink
+    {...props}
+    class={cn("cn-navigation-menu-link", props.class)}
+  />
 )
 type NavigationMenuIndicatorProps = Omit<
   ComponentProps<typeof SdkNavigationMenuIndicator>,

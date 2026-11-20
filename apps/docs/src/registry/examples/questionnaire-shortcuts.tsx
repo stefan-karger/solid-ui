@@ -22,7 +22,10 @@ export default function QuestionnaireShortcuts() {
       <Toaster toaster={toast} />
       <label class="mb-2 flex gap-2 text-sm">
         Shortcuts
-        <select value={mode()} onChange={(event) => setMode(event.currentTarget.value)}>
+        <select
+          value={mode()}
+          onChange={(event) => setMode(event.currentTarget.value)}
+        >
           <option value="letters">Letters</option>
           <option value="numbers">Numbers</option>
           <option value="none">None</option>
@@ -41,11 +44,15 @@ export default function QuestionnaireShortcuts() {
             event.target instanceof HTMLSelectElement
           )
             return
-          const index = (mode() === "letters" ? "abc" : "123").indexOf(event.key.toLowerCase())
+          const index = (mode() === "letters" ? "abc" : "123").indexOf(
+            event.key.toLowerCase()
+          )
           const choice =
             index < 0
               ? undefined
-              : event.currentTarget.querySelectorAll<HTMLInputElement>('input[type="radio"]')[index]
+              : event.currentTarget.querySelectorAll<HTMLInputElement>(
+                  'input[type="radio"]'
+                )[index]
           if (choice) {
             event.preventDefault()
             choice.focus()
@@ -55,14 +62,22 @@ export default function QuestionnaireShortcuts() {
         onComplete={() => toast("Action confirmed")}
       >
         <QuestionnaireItem value="action">
-          <QuestionnaireTitle>What should the agent do next?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What should the agent do next?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Use the displayed shortcut or navigate with the keyboard.
           </QuestionnaireDescription>
           <QuestionnaireChoices>
-            <QuestionnaireChoice value="inspect">Inspect the implementation</QuestionnaireChoice>
-            <QuestionnaireChoice value="tests">Run the relevant tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="patch">Prepare the patch</QuestionnaireChoice>
+            <QuestionnaireChoice value="inspect">
+              Inspect the implementation
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="tests">
+              Run the relevant tests
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="patch">
+              Prepare the patch
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

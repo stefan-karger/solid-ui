@@ -10,8 +10,14 @@ type SeparatorProps = Omit<ComponentProps<typeof SdkSeparator>, "class"> & {
 const Separator = (props: SeparatorProps) => {
   const others = omit(props, "render", "data-slot")
   const renderSeparator: SeparatorProps["render"] = (part, state) => {
-    const attributes = merge(part, () => ({ "data-slot": props["data-slot"] ?? "separator" }))
-    return props.render ? props.render(attributes, state) : <div {...attributes} />
+    const attributes = merge(part, () => ({
+      "data-slot": props["data-slot"] ?? "separator"
+    }))
+    return props.render ? (
+      props.render(attributes, state)
+    ) : (
+      <div {...attributes} />
+    )
   }
   return (
     <SdkSeparator

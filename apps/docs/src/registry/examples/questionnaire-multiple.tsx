@@ -32,15 +32,25 @@ export default function QuestionnaireMultiple() {
         onComplete={handleSubmit}
       >
         <QuestionnaireItem value="context">
-          <QuestionnaireTitle>What context should the agent inspect?</QuestionnaireTitle>
+          <QuestionnaireTitle>
+            What context should the agent inspect?
+          </QuestionnaireTitle>
           <QuestionnaireDescription>
             Select every source that may affect the implementation.
           </QuestionnaireDescription>
           <QuestionnaireChoices multiple>
-            <QuestionnaireChoice value="source">Relevant source files</QuestionnaireChoice>
-            <QuestionnaireChoice value="tests">Existing tests</QuestionnaireChoice>
-            <QuestionnaireChoice value="docs">Architecture documentation</QuestionnaireChoice>
-            <QuestionnaireChoice value="history">Recent commit history</QuestionnaireChoice>
+            <QuestionnaireChoice value="source">
+              Relevant source files
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="tests">
+              Existing tests
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="docs">
+              Architecture documentation
+            </QuestionnaireChoice>
+            <QuestionnaireChoice value="history">
+              Recent commit history
+            </QuestionnaireChoice>
           </QuestionnaireChoices>
           <QuestionnaireError />
         </QuestionnaireItem>

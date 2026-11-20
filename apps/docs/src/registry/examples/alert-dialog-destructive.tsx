@@ -17,7 +17,9 @@ import { Button } from "~/registry/ui/button"
 export default function AlertDialogDestructive() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={(partProps) => <Button {...partProps} variant="destructive" />}>
+      <AlertDialogTrigger
+        render={(partProps) => <Button {...partProps} variant="destructive" />}
+      >
         Delete Chat
       </AlertDialogTrigger>
       <AlertDialogContent size="sm">
@@ -27,8 +29,9 @@ export default function AlertDialogDestructive() {
           </AlertDialogMedia>
           <AlertDialogTitle>Delete chat?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete this chat conversation. View <a href="#">Settings</a>, then
-            delete any memories saved during this chat.
+            This will permanently delete this chat conversation. View{" "}
+            <a href="#">Settings</a>, then delete any memories saved during this
+            chat.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

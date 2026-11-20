@@ -18,7 +18,8 @@ const componentCache = new Map<string, Component>()
 
 function getPreview(moduleId: string) {
   const loader = previewLoaders[moduleId]
-  if (!loader) throw new Error(`[registry-preview] No preview module for ${moduleId}`)
+  if (!loader)
+    throw new Error(`[registry-preview] No preview module for ${moduleId}`)
 
   let Preview = componentCache.get(moduleId)
   if (!Preview) {
@@ -40,7 +41,7 @@ export default function RegistryPreview(props: RegistryPreviewProps) {
   const content = (
     <Loading fallback={<p role="status">Loading component preview…</p>}>
       <DirectionProvider
-        class="grid w-full min-w-0 justify-items-center in-data-[align=end]:justify-items-end in-data-[align=start]:justify-items-start"
+        class="grid w-full min-w-0 justify-items-center"
         direction={props.direction ?? "ltr"}
         locale={props.locale ?? (props.direction === "rtl" ? "ar" : "en-US")}
       >
@@ -53,7 +54,10 @@ export default function RegistryPreview(props: RegistryPreviewProps) {
     <Errored
       fallback={(error) => {
         if (isServer) throw error()
-        console.error("[registry-preview] Could not load the component preview", error())
+        console.error(
+          "[registry-preview] Could not load the component preview",
+          error()
+        )
         return <p role="alert">The component preview could not be loaded.</p>
       }}
     >

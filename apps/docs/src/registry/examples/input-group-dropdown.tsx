@@ -26,7 +26,11 @@ export default function InputGroupDropdown() {
           <DropdownMenu>
             <DropdownMenuTrigger
               render={(partProps) => (
-                <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+                <InputGroupButton
+                  {...partProps}
+                  size="icon-xs"
+                  variant="ghost"
+                />
               )}
               aria-label="More"
             >
@@ -48,7 +52,9 @@ export default function InputGroupDropdown() {
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={(partProps) => <InputGroupButton {...partProps} variant="ghost" />}
+              render={(partProps) => (
+                <InputGroupButton {...partProps} variant="ghost" />
+              )}
               class="pr-1.5 text-xs"
             >
               {scope()}

@@ -15,8 +15,12 @@ export default function FieldCheckbox() {
     <div class="w-full max-w-xs">
       <FieldGroup>
         <FieldSet>
-          <FieldLegend variant="label">Show these items on the desktop</FieldLegend>
-          <FieldDescription>Select the items you want to show on the desktop.</FieldDescription>
+          <FieldLegend variant="label">
+            Show these items on the desktop
+          </FieldLegend>
+          <FieldDescription>
+            Select the items you want to show on the desktop.
+          </FieldDescription>
           <FieldGroup class="gap-3">
             <Field orientation="horizontal">
               <Checkbox id="finder-pref-hard-disks" />
@@ -48,10 +52,12 @@ export default function FieldCheckbox() {
         <Field orientation="horizontal">
           <Checkbox defaultChecked id="finder-pref-sync-folders" />
           <FieldContent>
-            <FieldLabel for="finder-pref-sync-folders">Sync Desktop & Documents folders</FieldLabel>
+            <FieldLabel for="finder-pref-sync-folders">
+              Sync Desktop & Documents folders
+            </FieldLabel>
             <FieldDescription>
-              Your Desktop & Documents folders are synced with iCloud Drive, so you can access them
-              from other devices.
+              Your Desktop & Documents folders are synced with iCloud Drive, so
+              you can access them from other devices.
             </FieldDescription>
           </FieldContent>
         </Field>

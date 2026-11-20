@@ -9,7 +9,13 @@ type Props = HTMLAttributes<"div"> & {
   variant?: "default" | "info" | "warning"
 }
 
-const { class: className, title, showIcon = false, variant = "default", ...props } = Astro.props
+const {
+  class: className,
+  title,
+  showIcon = false,
+  variant = "default",
+  ...props
+} = Astro.props
 
 const hasIconSlot = Astro.slots.has("icon")
 const hasIcon = hasIconSlot || showIcon
@@ -69,7 +75,10 @@ const hasIcon = hasIconSlot || showIcon
 
   {title && (
     <div
-      class={cn("col-start-1 min-h-4 min-w-0 font-medium tracking-tight", hasIcon && "col-start-2")}
+      class={cn(
+        "col-start-1 min-h-4 min-w-0 font-medium tracking-tight",
+        hasIcon && "col-start-2"
+      )}
     >
       {title}
     </div>

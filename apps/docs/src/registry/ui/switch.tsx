@@ -1,5 +1,8 @@
 import type { ComponentProps } from "@solidjs/web"
-import { Switch as SdkSwitch, SwitchThumb as SdkSwitchThumb } from "@ui-sdk/solid/switch"
+import {
+  Switch as SdkSwitch,
+  SwitchThumb as SdkSwitchThumb
+} from "@ui-sdk/solid/switch"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"

@@ -5,7 +5,10 @@ type Props = {
 }
 
 const { variant, class: className } = Astro.props
-const dimensions = variant === "launch" ? { width: 315, height: 78 } : { width: 201, height: 187 }
+const dimensions =
+  variant === "launch"
+    ? { width: 315, height: 78 }
+    : { width: 201, height: 187 }
 ---
 
 <span class:list={["inline-flex shrink-0", className]} aria-hidden="true">

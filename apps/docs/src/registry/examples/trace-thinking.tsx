@@ -52,13 +52,18 @@ export default function TraceThinking() {
         <Message>
           <MessageContent>
             <Trace>
-              <TraceCollapsible open={expanded() ?? running()} onOpenChange={setExpanded}>
+              <TraceCollapsible
+                open={expanded() ?? running()}
+                onOpenChange={setExpanded}
+              >
                 <TraceCollapsibleTrigger>
                   <TraceLine status={running() ? "running" : undefined}>
                     <TraceIcon>
                       <BrainIcon />
                     </TraceIcon>
-                    <TraceTitle>{running() ? "Thinking" : "Thought"}</TraceTitle>
+                    <TraceTitle>
+                      {running() ? "Thinking" : "Thought"}
+                    </TraceTitle>
                   </TraceLine>
                 </TraceCollapsibleTrigger>
                 <TraceCollapsibleContent class="whitespace-pre-wrap">
@@ -68,15 +73,20 @@ export default function TraceThinking() {
             </Trace>
             <Show when={!running()}>
               <p>
-                Image optimization is the bottleneck. Key its cache on the lockfile and the image
-                directory instead of the commit hash.
+                Image optimization is the bottleneck. Key its cache on the
+                lockfile and the image directory instead of the commit hash.
               </p>
             </Show>
           </MessageContent>
         </Message>
       </Show>
       <Show when={!running()}>
-        <Button variant="outline" size="sm" class="mt-auto self-start" onClick={send}>
+        <Button
+          variant="outline"
+          size="sm"
+          class="mt-auto self-start"
+          onClick={send}
+        >
           {progress() < 0 ? "Send message" : "Reset"}
         </Button>
       </Show>

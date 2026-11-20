@@ -16,7 +16,8 @@ export default function SwitchChoiceCard() {
           <FieldContent>
             <FieldTitle>Share across devices</FieldTitle>
             <FieldDescription>
-              Focus is shared across devices, and turns off when you leave the app.
+              Focus is shared across devices, and turns off when you leave the
+              app.
             </FieldDescription>
           </FieldContent>
           <Switch id="switch-share" />

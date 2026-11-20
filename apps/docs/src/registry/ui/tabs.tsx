@@ -18,7 +18,10 @@ const Tabs = (props: TabsProps) => {
     <SdkTabs
       data-orientation={props.orientation ?? "horizontal"}
       orientation={props.orientation ?? "horizontal"}
-      class={cn("group/tabs cn-tabs flex data-[orientation=horizontal]:flex-col", props.class)}
+      class={cn(
+        "group/tabs cn-tabs flex data-[orientation=horizontal]:flex-col",
+        props.class
+      )}
       {...others}
     />
   )
@@ -72,6 +75,9 @@ type TabsContentProps = Omit<ComponentProps<typeof SdkTabsPanel>, "class"> & {
   class?: string
 }
 const TabsContent = (props: TabsContentProps) => (
-  <SdkTabsPanel {...props} class={cn("cn-tabs-content flex-1 outline-none", props.class)} />
+  <SdkTabsPanel
+    {...props}
+    class={cn("cn-tabs-content flex-1 outline-none", props.class)}
+  />
 )
 export { Tabs, TabsContent, TabsList, tabsListVariants, TabsTrigger }

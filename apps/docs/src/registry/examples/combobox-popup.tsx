@@ -75,13 +75,21 @@ export default function ComboboxPopup() {
       >
         <ComboboxTrigger
           render={(part) => (
-            <Button {...part} variant="outline" class="w-64 justify-between font-normal" />
+            <Button
+              {...part}
+              variant="outline"
+              class="w-64 justify-between font-normal"
+            />
           )}
         >
           <ComboboxValue />
         </ComboboxTrigger>
         <ComboboxContent>
-          <ComboboxInput showTrigger={false} placeholder="Search" aria-label="Search" />
+          <ComboboxInput
+            showTrigger={false}
+            placeholder="Search"
+            aria-label="Search"
+          />
           <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>
             <For each={countries.filter((country) => country.code !== "")}>

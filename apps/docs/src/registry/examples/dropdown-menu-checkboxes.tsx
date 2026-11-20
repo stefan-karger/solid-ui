@@ -27,7 +27,10 @@ export default function DropdownMenuCheckboxes() {
       <DropdownMenuContent class="min-w-40">
         <DropdownMenuGroup>
           <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-          <DropdownMenuCheckboxItem checked={showStatusBar()} onCheckedChange={setShowStatusBar}>
+          <DropdownMenuCheckboxItem
+            checked={showStatusBar()}
+            onCheckedChange={setShowStatusBar}
+          >
             <LayoutPanelTopIcon class="size-4" />
             Status Bar
           </DropdownMenuCheckboxItem>
@@ -39,7 +42,10 @@ export default function DropdownMenuCheckboxes() {
             <ActivityIcon class="size-4" />
             Activity Bar
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem checked={showPanel()} onCheckedChange={setShowPanel}>
+          <DropdownMenuCheckboxItem
+            checked={showPanel()}
+            onCheckedChange={setShowPanel}
+          >
             <PanelLeftIcon class="size-4" />
             Panel
           </DropdownMenuCheckboxItem>

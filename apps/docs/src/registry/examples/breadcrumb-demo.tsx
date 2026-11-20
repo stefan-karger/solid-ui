@@ -27,7 +27,9 @@ export default function BreadcrumbDemo() {
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={(partProps) => <Button {...partProps} size="icon-sm" variant="ghost" />}
+              render={(partProps) => (
+                <Button {...partProps} size="icon-sm" variant="ghost" />
+              )}
               class="size-7"
             >
               <BreadcrumbEllipsis />

@@ -11,7 +11,9 @@ type Props = HTMLAttributes<"div"> & {
 const { class: className, value, disabled = false, ...props } = Astro.props
 
 if (!value.trim() || value.includes(",")) {
-  throw new Error("[AccordionItem] `value` must be non-empty and cannot contain commas.")
+  throw new Error(
+    "[AccordionItem] `value` must be non-empty and cannot contain commas."
+  )
 }
 ---
 

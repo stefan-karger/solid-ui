@@ -1,7 +1,17 @@
 import { SearchIcon } from "lucide-solid"
 
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "~/registry/ui/empty"
-import { InputGroup, InputGroupAddon, InputGroupInput } from "~/registry/ui/input-group"
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle
+} from "~/registry/ui/empty"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput
+} from "~/registry/ui/input-group"
 import { Kbd } from "~/registry/ui/kbd"
 
 export default function EmptyInputGroup() {
@@ -10,8 +20,8 @@ export default function EmptyInputGroup() {
       <EmptyHeader>
         <EmptyTitle>404 - Not Found</EmptyTitle>
         <EmptyDescription>
-          The page you&apos;re looking for doesn&apos;t exist. Try searching for what you need
-          below.
+          The page you&apos;re looking for doesn&apos;t exist. Try searching for
+          what you need below.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>

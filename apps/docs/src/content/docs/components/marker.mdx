@@ -106,7 +106,7 @@ Use the `separator` variant for labeled dividers, such as dates or section break
 
 ## Border
 
-Use the `border` variant for status rows that should keep the default marker alignment while separating the next row.
+A bordered marker keeps the same semantics as the default marker. The bottom border is decorative. Choose `role="status"`, a rendered link or button, or ordinary text according to the marker's purpose.
 
 <ComponentPreview name="marker-border" previewClassName="h-auto" />
 
@@ -118,7 +118,7 @@ Use `MarkerIcon` to render an icon alongside the content. Use `flex-col` to stac
 
 ## Links and Buttons
 
-Turn a marker into a link or button with the `render` prop on `Marker`.
+Use the `render` prop on `Marker` to turn it into a link or button.
 
 <ComponentPreview name="marker-link-button" previewClassName="h-auto" />
 
@@ -135,10 +135,10 @@ For streaming or progress markers such as "Thinking..." or a running tool, set `
 A separator that carries text, such as a date or a section label, needs no role. The divider lines are decorative CSS pseudo-elements, and the text is announced as ordinary content.
 
 <Callout>
-  **Note:** Do not add `role="separator"` to a labeled divider. A separator takes its accessible
-  name from `aria-label`, not from its text, and its contents are treated as presentational, so the
-  visible label would not be announced. Reserve `role="separator"` for a divider with no meaningful
-  text.
+  **Note:** Do not add `role="separator"` to a labeled divider. A separator
+  takes its accessible name from `aria-label`, not from its text, and its
+  contents are treated as presentational, so the visible label would not be
+  announced. Reserve `role="separator"` for a divider with no meaningful text.
 </Callout>
 
 ### Bordered Markers

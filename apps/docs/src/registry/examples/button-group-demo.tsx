@@ -51,7 +51,9 @@ export default function ButtonGroupDemo() {
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger
-            render={(partProps) => <Button {...partProps} size="icon-sm" variant="outline" />}
+            render={(partProps) => (
+              <Button {...partProps} size="icon-sm" variant="outline" />
+            )}
             aria-label="More Options"
             class=""
           >
@@ -88,10 +90,19 @@ export default function ButtonGroupDemo() {
                   Label As...
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup onValueChange={setLabel} value={label()}>
-                    <DropdownMenuRadioItem value="personal">Personal</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="work">Work</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="other">Other</DropdownMenuRadioItem>
+                  <DropdownMenuRadioGroup
+                    onValueChange={setLabel}
+                    value={label()}
+                  >
+                    <DropdownMenuRadioItem value="personal">
+                      Personal
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="work">
+                      Work
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="other">
+                      Other
+                    </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuSubContent>
               </DropdownMenuSub>

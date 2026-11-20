@@ -16,7 +16,11 @@ import {
 
 import { ShowcaseIcon } from "./showcase-icon"
 
-function SidebarSection(props: { label: string; children: JSX.Element; class?: string }) {
+function SidebarSection(props: {
+  label: string
+  children: JSX.Element
+  class?: string
+}) {
   return (
     <Card class={cn("w-full overflow-hidden rounded-3xl py-0", props.class)}>
       <SidebarProvider class="min-h-0">
@@ -104,7 +108,10 @@ export function SidebarNav() {
         </SidebarMenuItem>
       </SidebarSection>
 
-      <SidebarSection label="Support" class="flex xl:col-start-2 xl:row-start-1">
+      <SidebarSection
+        label="Support"
+        class="flex xl:col-start-2 xl:row-start-1"
+      >
         <SidebarMenuItem>
           <SidebarMenuButton>
             <ShowcaseIcon name="HelpCircleIcon" />
@@ -137,7 +144,10 @@ export function SidebarNav() {
         </SidebarMenuItem>
       </SidebarSection>
 
-      <SidebarSection label="Account" class="flex xl:col-start-2 xl:row-start-2">
+      <SidebarSection
+        label="Account"
+        class="flex xl:col-start-2 xl:row-start-2"
+      >
         <SidebarMenuItem>
           <SidebarMenuButton>
             <ShowcaseIcon name="UserIcon" />

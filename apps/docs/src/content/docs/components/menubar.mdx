@@ -87,20 +87,38 @@ Use the following composition to build a `Menubar`:
 
 ```text
 Menubar
+├── MenubarMenu
+│   ├── MenubarTrigger
+│   └── MenubarContent
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarItem
+│       │   └── MenubarItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarCheckboxItem
+│       │   └── MenubarCheckboxItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   └── MenubarRadioGroup
+│       │       ├── MenubarRadioItem
+│       │       └── MenubarRadioItem
+│       └── MenubarSub
+│           ├── MenubarSubTrigger
+│           └── MenubarSubContent
+│               └── MenubarGroup
+│                   ├── MenubarLabel
+│                   ├── MenubarItem
+│                   └── MenubarItem
 └── MenubarMenu
     ├── MenubarTrigger
     └── MenubarContent
-        ├── MenubarGroup
-        │   ├── MenubarLabel
-        │   └── MenubarItem
-        ├── MenubarCheckboxItem
-        ├── MenubarRadioGroup
-        │   └── MenubarRadioItem
-        ├── MenubarSeparator
-        └── MenubarSub
-            ├── MenubarSubTrigger
-            └── MenubarSubContent
-                └── MenubarItem
+        └── MenubarGroup
+            ├── MenubarLabel
+            ├── MenubarItem
+            └── MenubarItem
 ```
 
 ## Checkbox

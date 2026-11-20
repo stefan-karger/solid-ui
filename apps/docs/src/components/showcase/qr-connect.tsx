@@ -1,6 +1,12 @@
 import { For } from "solid-js"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/registry/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/registry/ui/card"
 
 const qrCells = [
   "111111100101101111111",
@@ -43,7 +49,9 @@ export function QrConnect() {
             shape-rendering="crispEdges"
           >
             <rect width="21" height="21" fill="white" />
-            <For each={blackCells}>{({ x, y }) => <rect x={x} y={y} width="1" height="1" />}</For>
+            <For each={blackCells}>
+              {({ x, y }) => <rect x={x} y={y} width="1" height="1" />}
+            </For>
           </svg>
         </div>
       </CardContent>
