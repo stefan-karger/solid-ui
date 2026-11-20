@@ -172,6 +172,36 @@ test("applies the shared Solid palette to the live mobile showcase", async ({ pa
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 })
 
+test("spaces the desktop header dividers from the visible GitHub content", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto("/docs/")
+  const header = page.locator("[data-docs-header]")
+  const github = header.getByRole("link", { name: /^Solid UI on GitHub/ })
+  const metrics = await github.evaluate((link) => {
+    const firstDivider = link.previousElementSibling!.getBoundingClientRect()
+    const lastDivider = link.nextElementSibling!.getBoundingClientRect()
+    const icon = link.querySelector("svg path")!.getBoundingClientRect()
+    const count = link.querySelector("[data-github-stars]")?.getBoundingClientRect()
+    return {
+      iconWidth: icon.width,
+      dividerToIcon: icon.left - firstDivider.right,
+      contentToDivider: lastDivider.left - (count ?? icon).right
+    }
+  })
+  expect(metrics.iconWidth).toBeCloseTo(16, 1)
+  expect(metrics.dividerToIcon).toBeCloseTo(18, 1)
+  expect(metrics.contentToDivider).toBeCloseTo(18, 1)
+
+  const firstDivider = github.locator("xpath=preceding-sibling::*[1]")
+  const lastDivider = github.locator("xpath=following-sibling::*[1]")
+  const search = header.getByRole("button", { name: "Search documentation" })
+  const select = header.getByRole("combobox", { name: "Preview style" })
+  const searchBox = (await search.boundingBox())!
+  const lastDividerBox = (await lastDivider.boundingBox())!
+  expect((await firstDivider.boundingBox())!.x - (searchBox.x + searchBox.width)).toBe(16)
+  expect((await select.boundingBox())!.x - (lastDividerBox.x + lastDividerBox.width)).toBe(16)
+})
+
 test("searches sidebar links and navigates from the command palette by keyboard", async ({
   page
 }) => {
