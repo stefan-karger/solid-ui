@@ -1,32 +1,73 @@
 ---
-type Props = { links: { title: string; href: string; isNew?: boolean }[]; currentPath: string }
-const { links, currentPath } = Astro.props
+import type { DocsNavigationGroup } from "~/lib/docs"
+
+type Props = { navigation: DocsNavigationGroup[]; currentPath: string }
+const { navigation, currentPath } = Astro.props
 ---
 
-<nav aria-label="Documentation" class="grid gap-0.5 pb-12 text-sm">
-  <a
-    href="/docs"
-    aria-current={currentPath === "/docs" ? "page" : undefined}
-    class="rounded-md px-3 py-2 text-muted-foreground hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-  >
-    Introduction
-  </a>
-  <a
-    href="/docs/directory"
-    aria-current={currentPath === "/docs/directory" ? "page" : undefined}
-    class="rounded-md px-3 py-2 text-muted-foreground hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-  >
-    Directory
-  </a>
-  <p class="mt-6 mb-2 px-3 text-xs font-medium text-foreground">Components</p>
-  {links.map((link) => (
-    <a
-      href={link.href}
-      aria-current={currentPath === link.href ? "page" : undefined}
-      class="flex items-center justify-between rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted/50 hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-    >
-      <span>{link.title}</span>
-      {link.isNew && <span class="size-1 rounded-full bg-foreground" aria-label="New component" />}
-    </a>
+<nav aria-label="Documentation" class="grid gap-6 px-3 pb-10 text-sm">
+  {navigation.map((group) => (
+    <div>
+      <p class="mb-2 px-2 text-xs font-medium text-muted-foreground">{group.title}</p>
+      <ul class="grid gap-0.5">
+        {group.links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={currentPath === link.href ? "page" : undefined}
+              data-active={
+                currentPath === link.href ||
+                (link.href === "/docs/components" && currentPath.startsWith("/docs/components/"))
+                  ? ""
+                  : undefined
+              }
+              class="flex min-h-[30px] items-center gap-2 rounded-md border border-transparent px-2 py-1 text-[0.8125rem] font-medium text-foreground transition-colors hover:bg-muted data-active:border-accent data-active:bg-accent data-active:text-accent-foreground"
+            >
+              {link.title}
+              {link.isNew && (
+                <span class="size-1.5 rounded-full bg-primary" aria-label="New component" />
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   ))}
 </nav>
+
+<script>
+  const sidebar = document.querySelector<HTMLElement>("[data-docs-sidebar]")
+  const key = "solid-ui-docs-sidebar"
+  if (sidebar) {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(key) ?? "null")
+      if (Number.isFinite(saved?.scrollTop)) sidebar.scrollTop = saved.scrollTop
+      if (saved?.pathname !== location.pathname) {
+        const active = sidebar.querySelector('[aria-current="page"]')
+        if (active) {
+          const { top, bottom } = active.getBoundingClientRect()
+          const viewport = sidebar.getBoundingClientRect()
+          if (top < viewport.top || bottom > viewport.bottom) {
+            sidebar.scrollTop += (top + bottom - viewport.top - viewport.bottom) / 2
+          }
+        }
+      }
+    } catch {
+      // The sidebar still works when storage is unavailable.
+    }
+    sidebar.addEventListener(
+      "scroll",
+      () => {
+        try {
+          sessionStorage.setItem(
+            key,
+            JSON.stringify({ pathname: location.pathname, scrollTop: sidebar.scrollTop })
+          )
+        } catch {
+          // The current scroll position is retained for this page.
+        }
+      },
+      { passive: true }
+    )
+  }
+</script>

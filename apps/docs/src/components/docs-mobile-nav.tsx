@@ -1,40 +1,88 @@
-import { MenuIcon } from "lucide-solid"
 import { createSignal, For } from "solid-js"
 
+import type { DocsNavigationGroup } from "~/lib/docs"
+import { cn } from "~/lib/utils"
 import { Button } from "~/registry/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "~/registry/ui/sheet"
+import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "~/registry/ui/popover"
 
-type Link = { title: string; href: string }
-export default function DocsMobileNav(props: { links: Link[]; currentPath: string }) {
+const mainLinks = [
+  { title: "Home", href: "/" },
+  { title: "Docs", href: "/docs" },
+  { title: "Components", href: "/docs/components" }
+]
+
+export default function DocsMobileNav(props: {
+  navigation: DocsNavigationGroup[]
+  currentPath: string
+}) {
   const [open, setOpen] = createSignal(false)
+  const groups = () => [
+    { title: "Menu", links: mainLinks },
+    ...props.navigation.map((group) => ({
+      title: group.title,
+      links: group.links.filter((link) => link.href !== "/docs/components")
+    }))
+  ]
+
   return (
-    <Sheet open={open()} onOpenChange={setOpen}>
-      <SheetTrigger
-        aria-label="Open navigation"
-        class="lg:hidden"
-        render={(partProps) => <Button {...partProps} variant="ghost" size="icon-sm" />}
+    <Popover open={open()} onOpenChange={setOpen}>
+      <PopoverTrigger
+        aria-label="Toggle menu"
+        render={(part) => (
+          <Button
+            {...part}
+            variant="ghost"
+            class="extend-touch-target h-8 shrink-0 gap-2.5 px-0! hover:bg-transparent lg:hidden"
+          />
+        )}
       >
-        <MenuIcon />
-      </SheetTrigger>
-      <SheetContent side="left" class="w-72 overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle>Documentation</SheetTitle>
-        </SheetHeader>
-        <nav aria-label="Mobile documentation" class="grid gap-0.5 px-4 pb-6">
-          <For each={props.links}>
-            {(link) => (
-              <a
-                href={link.href}
-                aria-current={props.currentPath === link.href ? "page" : undefined}
-                class="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-                onClick={() => setOpen(false)}
-              >
-                {link.title}
-              </a>
+        <span class="relative size-4 shrink-0" aria-hidden="true">
+          <span
+            class={cn(
+              "absolute left-0 h-0.5 w-4 bg-foreground transition-all duration-100 motion-reduce:transition-none",
+              open() ? "top-[0.4rem] -rotate-45" : "top-1"
+            )}
+          />
+          <span
+            class={cn(
+              "absolute left-0 h-0.5 w-4 bg-foreground transition-all duration-100 motion-reduce:transition-none",
+              open() ? "top-[0.4rem] rotate-45" : "top-2.5"
+            )}
+          />
+        </span>
+        <span class="text-lg leading-none font-medium">Menu</span>
+      </PopoverTrigger>
+      <PopoverContent
+        anchor="[data-docs-header]"
+        side="bottom"
+        sideOffset={0}
+        align="start"
+        collisionPadding={0}
+        class="max-h-(--available-height) w-dvw max-w-none overflow-y-auto overscroll-contain rounded-none border-0 bg-background p-0 ring-0 lg:hidden"
+      >
+        <PopoverTitle class="sr-only">Site navigation</PopoverTitle>
+        <nav aria-label="Mobile documentation" class="grid gap-8 px-6 py-6 sm:px-8">
+          <For each={groups()}>
+            {(group) => (
+              <div class="grid gap-2">
+                <p class="mb-1 text-sm font-medium text-muted-foreground">{group.title}</p>
+                <For each={group.links}>
+                  {(link) => (
+                    <a
+                      href={link.href}
+                      aria-current={props.currentPath === link.href ? "page" : undefined}
+                      class="w-fit rounded-sm text-xl leading-snug font-medium tracking-tight hover:text-primary aria-[current=page]:text-primary sm:text-2xl"
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.title}
+                    </a>
+                  )}
+                </For>
+              </div>
             )}
           </For>
         </nav>
-      </SheetContent>
-    </Sheet>
+      </PopoverContent>
+    </Popover>
   )
 }

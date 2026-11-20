@@ -25,3 +25,10 @@ minimumReleaseAgeExclude:
   - "@astrojs/*"
   - "solid-js"
   - "@solidjs/*"
+permissions:
+  "@solidjs/web":
+    skills: true
+  "@ui-sdk/core":
+    skills: true
+  solid-js:
+    skills: true

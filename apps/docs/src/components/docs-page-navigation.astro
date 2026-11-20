@@ -1,0 +1,48 @@
+---
+import { toDocsPath, type DocsPage, type PageNeighbors } from "~/lib/docs"
+import { buttonVariants } from "~/registry/ui/button"
+
+type Props = PageNeighbors<DocsPage> & { compact?: boolean }
+const { previous, next, compact = false } = Astro.props
+const links = [
+  { direction: "Previous", page: previous },
+  { direction: "Next", page: next }
+]
+---
+
+{(previous || next) && (
+  <nav
+    aria-label={compact ? "Page navigation" : "More documentation"}
+    class:list={["flex items-center gap-2", !compact && "mt-12 w-full"]}
+  >
+    {links.map(
+      ({ direction, page }) =>
+        page && (
+          <a
+            href={`${toDocsPath(page.id)}/`}
+            aria-label={`${direction} page, ${page.data.title}`}
+            class:list={[
+              buttonVariants({ variant: "secondary", size: compact ? "icon-sm" : "sm" }),
+              "shadow-none",
+              compact ? "extend-touch-target size-8 md:size-7" : "h-auto min-h-8 whitespace-normal",
+              !compact && direction === "Next" && "ml-auto"
+            ]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class:list={["size-4", direction === "Next" && "order-last"]}
+            >
+              <path d={direction === "Next" ? "M5 12h14m-7-7 7 7-7 7" : "M19 12H5m7-7-7 7 7 7"} />
+            </svg>
+            {!compact && <span>{page.data.title}</span>}
+          </a>
+        )
+    )}
+  </nav>
+)}

@@ -65,11 +65,11 @@ const SelectContent = (
       align="center"
       {...rest}
       class={cn(
-        "cn-select-content cn-menu-target cn-menu-translucent relative z-50 max-h-(--available-height) w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto",
+        "cn-select-content cn-menu-target cn-menu-translucent relative z-50 max-h-(--available-height) w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto ring-border dark:ring-border",
         props.class
       )}
     >
-      <SdkSelectList>{props.children}</SdkSelectList>
+      <SdkSelectList class="cn-select-list">{props.children}</SdkSelectList>
     </SdkSelectContent>
   )
 }

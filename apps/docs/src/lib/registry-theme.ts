@@ -45,6 +45,15 @@ export function adaptTheme(source: string, extension: string) {
       ) +
       end
   )
+  // The SDK list can contain ungrouped items as well as groups.
+  css = css.replace(
+    /(\.cn-select-group\s*\{\s*@apply\s+)([^;]+)(;\s*\})/g,
+    (_, start: string, utilities: string, end: string) => {
+      const classes = utilities.trim().split(/\s+/)
+      const padding = classes.find((name) => /^p-[\d.]+$/.test(name))
+      return `${start}${classes.filter((name) => name !== padding).join(" ")}${end}\n\n  .cn-select-list { @apply ${padding ?? "p-1"}; }`
+    }
+  )
   css = css.replace(
     /(\.cn-navigation-menu-link\s*\{)([^}]*)(\})/g,
     (_, start: string, body: string, end: string) =>
@@ -55,10 +64,13 @@ export function adaptTheme(source: string, extension: string) {
       end
   )
   css = css.replace(
-    /(\.cn-button-group\s*\{)([^}]*)(\})/g,
+    /(\.cn-button-group(?:-orientation-(?:horizontal|vertical))?\s*\{)([^}]*)(\})/g,
     (_, start: string, body: string, end: string) =>
       start +
-      body.replaceAll("[data-slot]", "[data-slot]:not([aria-hidden=true]):not([type=hidden])") +
+      body.replaceAll(
+        "[data-slot]",
+        "[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])"
+      ) +
       end
   )
   css = css.replace(

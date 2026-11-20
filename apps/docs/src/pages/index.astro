@@ -1,3 +1,17 @@
 ---
-return Astro.redirect("/docs/")
+import HomeHero from "~/components/home-hero.astro"
+import Showcase from "~/components/showcase"
+import SiteLayout from "~/layouts/site-layout.astro"
+
+const description =
+  "Accessible, composable components for Solid, inspired by shadcn/ui and powered by UI SDK."
 ---
+
+<SiteLayout title="Solid UI" {description}>
+  <main id="main-content" class="flex flex-1 flex-col" tabindex="-1">
+    <HomeHero />
+    <section aria-label="Component examples" class="flex-1 overflow-hidden">
+      <Showcase client:visible={{ rootMargin: "200px" }} />
+    </section>
+  </main>
+</SiteLayout>

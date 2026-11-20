@@ -1,0 +1,83 @@
+---
+import { buttonVariants } from "~/registry/ui/button"
+
+type Props = {
+  defaultPrototype: string
+  prototypeIds: string[]
+}
+
+const { defaultPrototype, prototypeIds } = Astro.props
+---
+
+<nav
+  aria-label="Hero prototypes"
+  data-hero-switcher={defaultPrototype}
+  class="fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 rounded-xl border bg-popover p-1 text-popover-foreground shadow-lg"
+  hidden
+>
+  <div class="flex items-center gap-0.5">
+    <span class="px-2 text-xs font-medium text-muted-foreground">Prototype</span>
+    {prototypeIds.map((id) => (
+      <a
+        href={`?prototype=${id}`}
+        data-hero-link={id}
+        aria-label={`Prototype ${id}`}
+        aria-current={id === defaultPrototype ? "page" : undefined}
+        class:list={[
+          buttonVariants({ variant: "ghost", size: "icon-sm" }),
+          "size-9 shadow-none aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
+        ]}
+      >
+        {id}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<script is:inline>
+  ;(() => {
+    const hero = document.querySelector("[data-home-hero]")
+    const switcher = document.querySelector("[data-hero-switcher]")
+    const variants = [...hero.querySelectorAll("[data-hero-variant]")]
+    const links = [...switcher.querySelectorAll("[data-hero-link]")]
+
+    function syncPrototype() {
+      const url = new URL(window.location.href)
+      const requested = url.searchParams.get("prototype")
+      const selected = variants.some((variant) => variant.dataset.heroVariant === requested)
+        ? requested
+        : switcher.dataset.heroSwitcher
+
+      for (const variant of variants) variant.hidden = variant.dataset.heroVariant !== selected
+      for (const link of links) {
+        url.searchParams.set("prototype", link.dataset.heroLink)
+        link.href = url.href
+        if (link.dataset.heroLink === selected) link.setAttribute("aria-current", "page")
+        else link.removeAttribute("aria-current")
+      }
+    }
+
+    for (const link of links) {
+      link.addEventListener("click", (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+          return
+        event.preventDefault()
+        if (link.href !== window.location.href) history.pushState(null, "", link.href)
+        syncPrototype()
+        if (hero.getBoundingClientRect().top < 0) window.scrollTo(0, 0)
+      })
+    }
+
+    window.addEventListener("popstate", syncPrototype)
+    syncPrototype()
+    switcher.hidden = false
+  })()
+</script>
+
+<style is:inline>
+  @media (width < 80rem) {
+    body:has([data-hero-switcher]:not([hidden])) {
+      padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+    }
+  }
+</style>

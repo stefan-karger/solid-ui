@@ -1,13 +1,74 @@
 import { expect, test, type Page } from "@playwright/test"
 
+function namedExample(page: Page, name: string) {
+  return page.locator(`article [data-slot="component-preview"] astro-island[props*="${name}"]`)
+}
+
 async function example(page: Page, slug: string) {
   await page.goto(`/docs/components/${slug}/`)
-  const island = page.locator("article astro-island").first()
+  const island = page.locator('article [data-slot="component-preview"] astro-island').first()
   await island.scrollIntoViewIfNeeded()
   await expect(island).not.toHaveAttribute("ssr", "")
   await expect(island).not.toContainText("The component preview could not be loaded.")
   return island
 }
+
+test("keeps the Select popup at trigger width in both alignment modes", async ({ page }) => {
+  await page.goto("/docs/components/select/")
+  const preview = namedExample(page, "select-align-item")
+  await preview.scrollIntoViewIfNeeded()
+  await expect(preview).not.toHaveAttribute("ssr", "")
+  const trigger = preview.getByRole("combobox")
+  const popup = preview.locator('[data-slot="select-content"][data-open]')
+
+  await trigger.click()
+  await expect(popup).toHaveCSS("width", await trigger.evaluate((el) => getComputedStyle(el).width))
+  await popup.getByRole("option", { name: "Pineapple", exact: true }).click()
+  await expect(trigger).toHaveText("Pineapple")
+  await trigger.click()
+  await expect(popup).toHaveCSS("width", await trigger.evaluate((el) => getComputedStyle(el).width))
+
+  await page.keyboard.press("Escape")
+  await expect(popup).toBeHidden()
+  await preview.getByRole("switch", { name: "Align Item" }).uncheck()
+  await trigger.click()
+  await expect(popup).toHaveCSS("width", await trigger.evaluate((el) => getComputedStyle(el).width))
+})
+
+test("keeps the homepage currency popup at trigger width", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 950 })
+  await page.goto("/")
+  const trigger = page.getByRole("combobox", { name: "Preferred Currency" })
+  await trigger.scrollIntoViewIfNeeded()
+  await expect(trigger.locator("xpath=ancestor::astro-island")).not.toHaveAttribute("ssr", "")
+
+  await trigger.click()
+  const popup = page.locator('[data-slot="select-content"][data-open]')
+  await expect(popup).toHaveCSS("width", await trigger.evaluate((el) => getComputedStyle(el).width))
+  await popup.getByRole("option", { name: "EUR — Euro", exact: true }).click()
+  await expect(trigger).toHaveText("EUR — Euro")
+})
+
+test("keeps the homepage button group edges when its menu opens", async ({ page }) => {
+  await page.goto("/")
+  const trigger = page.getByRole("button", { name: "Open quick actions" })
+  await trigger.scrollIntoViewIfNeeded()
+  await expect(trigger.locator("xpath=ancestor::astro-island")).not.toHaveAttribute("ssr", "")
+  const radius = await trigger.evaluate((el) => getComputedStyle(el).borderTopRightRadius)
+  expect(parseFloat(radius)).toBeGreaterThan(0)
+
+  await trigger.click()
+  const menu = page.getByRole("menu").filter({ hasText: "Quick Actions" })
+  await expect(menu).toBeVisible()
+  const menuRadius = await menu.evaluate((el) => getComputedStyle(el).borderTopRightRadius)
+  expect(parseFloat(menuRadius)).toBeGreaterThan(0)
+  await expect(menu).toHaveCSS("border-top-left-radius", menuRadius)
+  await expect(menu).toHaveCSS("border-bottom-left-radius", menuRadius)
+  await expect(trigger).toHaveCSS("border-top-right-radius", radius)
+  await expect(trigger).toHaveCSS("border-bottom-right-radius", radius)
+  await expect(trigger).toHaveCSS("border-right-width", "1px")
+  await expect(trigger).toHaveCSS("border-left-width", "0px")
+})
 
 test("calendar selects dates with keys and enforces unavailable days", async ({ page }) => {
   const calendar = await example(page, "calendar")
@@ -45,12 +106,12 @@ test("attachment state styling includes shimmer and respects reduced motion", as
 
 test("attachment triggers compose with links and SDK dialogs", async ({ page }) => {
   await page.goto("/docs/components/attachment/")
-  const image = page.locator('astro-island[props*="attachment-image"]')
+  const image = namedExample(page, "attachment-image")
   await expect(image.getByRole("link", { name: /^Open / }).first()).toHaveAttribute(
     "data-slot",
     "attachment-trigger"
   )
-  const preview = page.locator('astro-island[props*="attachment-trigger"]')
+  const preview = namedExample(page, "attachment-trigger")
   await preview.scrollIntoViewIfNeeded()
   await expect(preview).not.toHaveAttribute("ssr", "")
   const trigger = preview.getByRole("button", { name: "Preview research-summary.pdf" })
@@ -70,7 +131,7 @@ test("date picker opens a native calendar and restores trigger focus", async ({ 
   await expect(picker.getByRole("grid")).toBeHidden()
   await expect(trigger).toBeFocused()
   expect(await triggerElement!.evaluate((element) => element.isConnected)).toBe(true)
-  const editable = page.locator('astro-island[props*="date-picker-input"]')
+  const editable = namedExample(page, "date-picker-input")
   await editable.scrollIntoViewIfNeeded()
   await expect(editable).not.toHaveAttribute("ssr", "")
   const input = editable.getByRole("textbox", { name: "Subscription Date" })
@@ -174,7 +235,7 @@ test("toast actions, promise updates, and close use the native queue", async ({ 
   await toasts.first().getByRole("button", { name: "Close toast" }).click()
   await expect(region).not.toContainText("Event has been created")
 
-  const types = page.locator('astro-island[props*="sonner-types"]')
+  const types = namedExample(page, "sonner-types")
   await types.scrollIntoViewIfNeeded()
   await expect(types).not.toHaveAttribute("ssr", "")
   await types.getByRole("button", { name: "Promise" }).click()

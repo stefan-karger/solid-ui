@@ -6,16 +6,16 @@ const entries = headings.filter((heading) => heading.depth === 2 || heading.dept
 ---
 
 {entries.length > 0 && (
-  <nav aria-label="On this page" class="grid gap-2 text-xs" data-docs-toc>
-    {showTitle && <p class="mb-2 font-medium text-foreground">On this page</p>}
+  <nav aria-label="On this page" class="flex flex-col gap-2 p-4 pt-0 text-sm" data-docs-toc>
+    {showTitle && (
+      <p class="h-6 bg-background text-xs font-medium text-muted-foreground">On This Page</p>
+    )}
     {entries.map((heading) => (
       <a
         href={`#${heading.slug}`}
         data-toc-id={heading.slug}
-        class:list={[
-          "text-muted-foreground transition-colors hover:text-foreground aria-[current=location]:text-foreground",
-          { "pl-3": heading.depth === 3 }
-        ]}
+        data-depth={heading.depth}
+        class="text-[0.8rem] text-muted-foreground no-underline transition-colors hover:text-foreground aria-[current=location]:font-medium aria-[current=location]:text-foreground data-[depth=3]:pl-4 data-[depth=4]:pl-6"
       >
         {heading.text}
       </a>

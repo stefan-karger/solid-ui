@@ -127,7 +127,8 @@ test("native chips preserve the input, remove selections, and clear single value
   page
 }) => {
   await openExample(page, "combobox", "nova")
-  const multiple = page.locator('astro-island[props*="combobox-multiple"]')
+  const previews = page.locator('[data-slot="component-preview"]')
+  const multiple = previews.locator('astro-island[props*="combobox-multiple"]')
   const input = multiple.getByRole("combobox")
   const original = await input.elementHandle()
   await input.fill("No such framework")
@@ -144,7 +145,7 @@ test("native chips preserve the input, remove selections, and clear single value
   await expect(chips).toHaveCount(1)
   await expect(chips).toContainText("Next.js")
 
-  const single = page.locator('astro-island[props*="combobox-clear"]')
+  const single = previews.locator('astro-island[props*="combobox-clear"]')
   await single.getByRole("combobox").fill("Nuxt")
   await page.getByRole("option", { name: "Nuxt.js", exact: true }).click()
   const clear = single.getByRole("button", { name: "Clear selection" })

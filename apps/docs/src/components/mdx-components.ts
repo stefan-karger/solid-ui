@@ -1,7 +1,6 @@
 import ComponentPreview from "~/components/component-preview.astro"
 import ComponentSource from "~/components/component-source.astro"
 import ComponentsList from "~/components/components-list.astro"
-import DirectoryList from "~/components/directory-list.astro"
 import A from "~/components/docs/a.astro"
 import AccordionContent from "~/components/docs/accordion-content.astro"
 import AccordionItem from "~/components/docs/accordion-item.astro"
@@ -53,7 +52,6 @@ export const mdxComponents = {
   ComponentSource,
   ComponentsList,
   ComponentList: ComponentsList,
-  DirectoryList,
   Accordion,
   AccordionItem,
   AccordionTrigger,

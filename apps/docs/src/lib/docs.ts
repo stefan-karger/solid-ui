@@ -17,6 +17,11 @@ export type ComponentLink = {
   isNew: boolean
 }
 
+export type DocsNavigationGroup = {
+  title: string
+  links: { title: string; href: string; isNew?: boolean }[]
+}
+
 export type ComponentListVariant = "all" | "new"
 
 export type DocsCollectionLoader = () => Promise<DocsPage[]>
@@ -108,6 +113,19 @@ export function createComponentLinks(
       isNew: Boolean(page.data.new)
     }))
     .toSorted((a, b) => a.title.localeCompare(b.title) || a.href.localeCompare(b.href))
+}
+
+export function createDocsNavigation(pages: readonly DocsPageLike[]): DocsNavigationGroup[] {
+  return [
+    {
+      title: "Sections",
+      links: [
+        { title: "Introduction", href: "/docs" },
+        { title: "Components", href: "/docs/components" }
+      ]
+    },
+    { title: "Components", links: createComponentLinks(pages) }
+  ]
 }
 
 export async function getDocsPages(loadDocs: DocsCollectionLoader): Promise<DocsPage[]> {

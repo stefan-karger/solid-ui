@@ -10,10 +10,18 @@ const buttonGroupVariants = cva(
   {
     variants: {
       orientation: {
-        horizontal:
-          "cn-button-group-orientation-horizontal *:data-slot:rounded-r-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:rounded-l-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:border-l-0",
-        vertical:
-          "cn-button-group-orientation-vertical flex-col *:data-slot:rounded-b-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:rounded-t-none [&>[data-slot]:not([aria-hidden=true]):not([type=hidden])~[data-slot]:not([aria-hidden=true]):not([type=hidden])]:border-t-0"
+        horizontal: [
+          "cn-button-group-orientation-horizontal",
+          "[&>[data-slot]:not([popover],[data-presentation])]:rounded-r-none",
+          "[&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])]:rounded-l-none",
+          "[&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])]:border-l-0"
+        ],
+        vertical: [
+          "cn-button-group-orientation-vertical flex-col",
+          "[&>[data-slot]:not([popover],[data-presentation])]:rounded-b-none",
+          "[&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])]:rounded-t-none",
+          "[&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])]:border-t-0"
+        ]
       }
     },
     defaultVariants: {

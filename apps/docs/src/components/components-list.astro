@@ -15,7 +15,7 @@ const links = await getComponentLinks(() => getCollection("docs"), variant)
   <div class="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3" data-not-typeset>
     {links.map((link) => (
       <a
-        class="relative flex min-w-0 items-center rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+        class="relative flex min-w-0 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
         href={link.href}
       >
         <span class="truncate">{link.title}</span>

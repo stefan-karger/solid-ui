@@ -8,11 +8,15 @@ export function isDocsStyle(value: unknown): value is DocsStyle {
   return styles.some((style) => style === value)
 }
 
-export function readAppearance(storage: Pick<Storage, "getItem">, prefersDark = false) {
+export function readAppearance(
+  storage: Pick<Storage, "getItem">,
+  prefersDark = false,
+  defaultStyle: DocsStyle = "nova"
+) {
   try {
     const saved = JSON.parse(storage.getItem(appearanceKey) ?? "null")
     return {
-      style: isDocsStyle(saved?.style) ? saved.style : ("nova" as DocsStyle),
+      style: isDocsStyle(saved?.style) ? saved.style : defaultStyle,
       mode:
         saved?.mode === "dark" || saved?.mode === "light"
           ? (saved.mode as ColorMode)
@@ -21,7 +25,7 @@ export function readAppearance(storage: Pick<Storage, "getItem">, prefersDark = 
             : ("light" as const)
     }
   } catch {
-    return { style: "nova" as const, mode: prefersDark ? ("dark" as const) : ("light" as const) }
+    return { style: defaultStyle, mode: prefersDark ? ("dark" as const) : ("light" as const) }
   }
 }
 
@@ -44,4 +48,4 @@ export function saveAppearance(style: DocsStyle, mode: ColorMode) {
   applyAppearance(style, mode)
 }
 
-export const appearanceBootstrap = `(()=>{const styles=${JSON.stringify(styles)};let style="nova",mode=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";try{const p=JSON.parse(localStorage.getItem(${JSON.stringify(appearanceKey)})||"null");if(styles.includes(p?.style))style=p.style;if(p?.mode==="light"||p?.mode==="dark")mode=p.mode}catch{}const root=document.documentElement;for(const s of styles)root.classList.toggle("style-"+s,s===style);root.classList.toggle("dark",mode==="dark");root.style.colorScheme=mode;root.dataset.docsStyle=style;root.dataset.colorMode=mode})()`
+export const appearanceBootstrap = `(()=>{const styles=${JSON.stringify(styles)},root=document.documentElement;let style=root.dataset.defaultStyle||"nova",mode=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";try{const p=JSON.parse(localStorage.getItem(${JSON.stringify(appearanceKey)})||"null");if(styles.includes(p?.style))style=p.style;if(p?.mode==="light"||p?.mode==="dark")mode=p.mode}catch{}for(const s of styles)root.classList.toggle("style-"+s,s===style);root.classList.toggle("dark",mode==="dark");root.style.colorScheme=mode;root.dataset.docsStyle=style;root.dataset.colorMode=mode})()`

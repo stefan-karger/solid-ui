@@ -2,108 +2,64 @@
 import type { MarkdownHeading } from "astro"
 import { getCollection } from "astro:content"
 
-import DocsAppearance from "~/components/docs-appearance"
-import DocsMobileNav from "~/components/docs-mobile-nav"
 import DocsNavigation from "~/components/docs-navigation.astro"
 import DocsToc from "~/components/docs-toc.astro"
-import { appearanceBootstrap } from "~/lib/appearance"
-import { createComponentLinks } from "~/lib/docs"
+import SiteLayout from "~/layouts/site-layout.astro"
+import { createDocsNavigation } from "~/lib/docs"
 
-import "~/styles/global.css"
-
-type Props = { title?: string; headings?: MarkdownHeading[] }
-const { title = "Solid UI", headings = [] } = Astro.props
-const links = createComponentLinks(await getCollection("docs"))
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/docs"
-const mobileLinks = [
-  { title: "Introduction", href: "/docs" },
-  { title: "Directory", href: "/docs/directory" },
-  ...links
-]
+type Props = { title: string; description: string; headings?: MarkdownHeading[] }
+const { title, description, headings = [] } = Astro.props
+const navigation = createDocsNavigation(await getCollection("docs"))
+const currentPath = Astro.url.pathname.replace(/\/$/, "")
 ---
 
-<!doctype html>
-<html lang="en" class="layout-fixed style-nova">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <script is:inline set:html={appearanceBootstrap} />
-    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-    <title>{title} · Solid UI</title>
-  </head>
-  <body class="min-h-svh bg-background text-foreground antialiased">
-    <a
-      href="#docs-content"
-      class="sr-only z-100 rounded-md bg-foreground px-4 py-2 text-background focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
-    >
-      Skip to content
-    </a>
-    <header
-      class="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur"
-      data-docs-header
-    >
-      <div class="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 lg:px-8">
-        <DocsMobileNav links={mobileLinks} currentPath={currentPath} client:load />
-        <a
-          href="/docs"
-          class="mr-auto inline-flex items-center gap-2 text-sm font-semibold tracking-tight"
-          aria-label="Solid UI documentation"
-        >
-          <img src="/favicon.svg" alt="" width="26" height="26" class="size-6 shrink-0" />
-          <span>Solid UI</span>
-        </a>
-        <a
-          href="/docs/directory"
-          class="mr-3 hidden text-xs text-muted-foreground hover:text-foreground md:block"
-        >
-          Directory
-        </a>
-        <DocsAppearance client:load />
-      </div>
-    </header>
-    <div class="mx-auto grid w-full max-w-[1600px] grid-cols-1 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-8 lg:px-8 xl:grid-cols-[13rem_minmax(0,1fr)_12rem] xl:gap-10">
-      <aside
-        class="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto pt-7 pr-3 lg:block"
+<SiteLayout {title} {description} {navigation}>
+  <div class="grid w-full flex-1 grid-cols-1 items-start px-2 lg:grid-cols-[18rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)_18rem]">
+    <aside class="sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] min-w-0 overflow-hidden lg:block">
+      <div
+        aria-hidden="true"
+        data-sidebar-divider
+        class="pointer-events-none absolute top-12 right-2 bottom-0 w-px bg-[linear-gradient(to_bottom,transparent_0%,var(--border)_10%,var(--border)_90%,transparent_100%)]"
+      ></div>
+      <div
+        class="no-scrollbar h-full w-56 overflow-x-hidden overflow-y-auto overscroll-y-contain pt-12 pl-2.5"
         data-docs-sidebar
       >
-        <DocsNavigation links={links} currentPath={currentPath} />
-      </aside>
-      <main id="docs-content" class="min-w-0" tabindex="-1">
-        {headings.some((heading) => heading.depth === 2 || heading.depth === 3) && (
-          <details class="mx-4 mt-5 border-b pb-4 sm:mx-6 xl:hidden">
-            <summary class="cursor-pointer text-sm font-medium">On this page</summary>
-            <div class="pt-4">
-              <DocsToc headings={headings} showTitle={false} />
-            </div>
-          </details>
-        )}
-        <slot />
-      </main>
-      <aside class="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto pt-9 xl:block">
-        <DocsToc headings={headings} />
-      </aside>
-    </div>
-    <script>
-      import { initializeCodeCollapsibles } from "~/lib/code-collapsibles"
-      import { initializeCopyButtons } from "~/lib/copy-buttons"
-      import { initializeDirectoryBrowsers } from "~/lib/directory-browser"
-      import { initializeDocsAccordions } from "~/lib/docs-accordions"
-      import { initializeSourceThemes } from "~/lib/docs-source-theme"
-      import { initializeDocsTabs } from "~/lib/docs-tabs"
-      function initializeDocs() {
-        initializeDirectoryBrowsers()
-        initializeDocsAccordions()
-        initializeCodeCollapsibles()
-        initializeCopyButtons()
-        initializeDocsTabs()
-        initializeSourceThemes()
-        const sidebar = document.querySelector<HTMLElement>("[data-docs-sidebar]")
-        const current = sidebar?.querySelector<HTMLElement>('[aria-current="page"]')
-        if (sidebar && current) sidebar.scrollTop = current.offsetTop - sidebar.clientHeight / 3
-      }
-      initializeDocs()
-      document.addEventListener("astro:page-load", initializeDocs)
-    </script>
-  </body>
-</html>
+        <DocsNavigation {navigation} {currentPath} />
+      </div>
+    </aside>
+    <main id="main-content" class="min-w-0" tabindex="-1">
+      {headings.some((heading) => heading.depth === 2 || heading.depth === 3) && (
+        <details class="mx-4 mt-5 border-b pb-4 sm:mx-6 xl:hidden">
+          <summary class="cursor-pointer text-sm font-medium">On This Page</summary>
+          <div class="pt-4">
+            <DocsToc {headings} showTitle={false} />
+          </div>
+        </details>
+      )}
+      <slot />
+    </main>
+    <aside
+      data-docs-toc-rail
+      class="sticky top-[calc(var(--header-height)+1px)] no-scrollbar hidden max-h-[calc(100svh-var(--header-height)-1px)] overflow-y-auto overscroll-y-contain px-8 pt-12 pb-8 xl:block"
+    >
+      <DocsToc {headings} />
+    </aside>
+  </div>
+  <script>
+    import { initializeCodeCollapsibles } from "~/lib/code-collapsibles"
+    import { initializeCopyButtons } from "~/lib/copy-buttons"
+    import { initializeDocsAccordions } from "~/lib/docs-accordions"
+    import { initializeSourceThemes } from "~/lib/docs-source-theme"
+    import { initializeDocsTabs } from "~/lib/docs-tabs"
+    function initializeDocs() {
+      initializeDocsAccordions()
+      initializeCodeCollapsibles()
+      initializeCopyButtons()
+      initializeDocsTabs()
+      initializeSourceThemes()
+    }
+    initializeDocs()
+    document.addEventListener("astro:page-load", initializeDocs)
+  </script>
+</SiteLayout>

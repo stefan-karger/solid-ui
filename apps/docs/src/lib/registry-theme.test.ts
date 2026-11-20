@@ -40,6 +40,9 @@ describe("pinned upstream themes", () => {
         source.includes("data-[vaul-drawer-direction=bottom]:")
       )
       const original = extractStyleMap(source, theme)
+      const selectGroupPadding = original.get("cn-select-group")?.match(/\bp-[\d.]+\b/)?.[0]
+      expect(map.get("cn-select-list")).toBe(selectGroupPadding ?? "p-1")
+      expect(map.get("cn-select-group")).not.toMatch(/\bp-[\d.]+\b/)
       expect(map.get("cn-tabs-trigger")?.includes("data-[selected]:")).toBe(
         /\bdata-(?:selected|active):/.test(original.get("cn-tabs-trigger") ?? "")
       )

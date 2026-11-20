@@ -73,7 +73,7 @@ const CommandEmpty = (
     class?: string
     children?: JSX.Element
   }
-) => <SdkCommandEmpty {...props} class={cn("cn-command-empty", props.class)} />
+) => <SdkCommandEmpty {...props} class={cn("cn-command-empty empty:hidden", props.class)} />
 const CommandGroup = (
   props: Omit<ComponentProps<typeof SdkCommandGroup>, "class" | "children"> & {
     class?: string

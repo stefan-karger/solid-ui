@@ -7,6 +7,7 @@ import ts from "typescript-eslint"
 
 export default defineConfig(
   globalIgnores([
+    "docs/",
     "vendor/astro-solid/upstream/**",
     "**/node_modules/**",
     "**/dist/**",

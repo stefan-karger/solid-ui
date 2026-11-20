@@ -1019,6 +1019,10 @@
     @apply scroll-my-1;
   }
 
+  .cn-select-list {
+    @apply p-1;
+  }
+
   .cn-select-item-text {
     @apply flex flex-1 gap-2;
   }

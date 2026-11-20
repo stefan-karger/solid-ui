@@ -208,11 +208,11 @@
   }
 
   .cn-button-group-orientation-horizontal {
-    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-none!;
+    @apply [&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation]):not(:has(~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])))]:rounded-none!;
   }
 
   .cn-button-group-orientation-vertical {
-    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-none!;
+    @apply [&>[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation]):not(:has(~[data-slot]:not([aria-hidden=true],[type=hidden],[popover],[data-presentation])))]:rounded-none!;
   }
 
   .cn-button-group-text {
@@ -1032,7 +1032,11 @@
   }
 
   .cn-select-group {
-    @apply scroll-my-1.5 p-1.5;
+    @apply scroll-my-1.5;
+  }
+
+  .cn-select-list {
+    @apply p-1.5;
   }
 
   .cn-select-item-text {

@@ -1,0 +1,49 @@
+---
+title: Introduction
+description: Accessible components for Solid 2.0, built with UI SDK and Tailwind CSS. Take the source and make it your own.
+---
+
+Solid UI is an unofficial Solid 2.0 port of [shadcn/ui](https://ui.shadcn.com/).
+
+**Build your own component library with code you control.**
+
+With a packaged component library, you install a dependency and import its components. As your design system grows, you may need to add wrappers, override styles, or mix components with different APIs. Solid UI gives you the component source so you can make those changes in your own codebase.
+
+Solid UI is built around five principles.
+
+- **Open Code.** Copy the component source into your project and edit it there.
+- **Composition.** Combine explicit component parts to build the interface you need.
+- **Distribution.** Find the source files and dependencies together in the component registry.
+- **Beautiful Defaults.** Start with accessible components and styles that work together.
+- **AI-Ready.** Give coding tools source files and examples they can inspect and edit.
+
+## Open Code
+
+Solid UI hands you the source for each component. You can see how it renders, use it as a starting point, and change its styling or behavior alongside the rest of your app. For a concrete example, try editing your local copy of [Button](/docs/components/button/).
+
+<Accordion type="single" collapsible class="mt-6">
+  <AccordionItem value="upstream-updates">
+    <AccordionTrigger>How do upstream updates work?</AccordionTrigger>
+    <AccordionContent>
+      Update UI SDK to receive fixes to the behaviors your components use, such as focus management
+      and keyboard navigation. For changes to Solid UI's component source, compare the updated
+      source with your local copy and merge the changes you want to keep.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+## Composition
+
+Components expose named parts you can assemble. UI SDK connects those parts and manages interactions like focus and dismissal. For example, you can combine a trigger, content, a title, and an optional description in [Dialog](/docs/components/dialog/).
+
+## Distribution
+
+The registry records the source and dependencies behind each component. The **Manual** installation tab shows the source for the selected style and the dependencies it needs. Try it from any page in the [component catalog](/docs/components/).
+
+## Beautiful Defaults
+
+The components share a visual language so you can combine them in a form, menu, or page. Try the style selector to compare the available presets in light and dark mode. Tailwind CSS classes and shared color tokens give you a starting point for your own design system.
+
+## AI-Ready
+
+Coding tools can read the same component files you edit. Point them to an existing component and its examples when you want to build a new variation. Named parts and shared styling patterns give the tool concrete conventions to follow.
