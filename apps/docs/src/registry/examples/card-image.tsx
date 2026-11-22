@@ -16,7 +16,7 @@ export default function CardImage() {
       <img
         alt="Event cover"
         class="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
-        src="https://avatar.vercel.sh/shadcn1"
+        src="/solid-brand/launch-light.svg"
       />
       <CardHeader>
         <CardAction>

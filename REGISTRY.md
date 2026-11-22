@@ -1,4 +1,4 @@
-# Shadcn themes and SDK composition
+# Registry themes and SDK composition
 
 The registry uses UI SDK `0.1.0-beta.10` with Solid
 `2.0.1`. Components compose named SDK parts directly and import each part
@@ -11,26 +11,52 @@ The structural reference is shadcn/ui
 primarily its Base UI implementation. The audit also compared the Radix and
 new-york-v4 implementations. Delta Bar remains a project extension.
 
-## Upstream inputs and generated themes
+## Themes and shared styles
 
-`vendor/shadcn/styles/style-{vega,nova,maia,lyra,mira,luma,sera,rhea}.css` are byte-for-byte
-upstream inputs. `vendor/shadcn/revision.json` pins their revision and SHA-256
-checksums. The upstream MIT license is included. Formatting excludes the vendor
-directory so it cannot silently rewrite those inputs.
+Edit the eight themes directly in `apps/docs/src/registry/styles`. The docs load
+these stylesheets. The registry source exporter expands their semantic classes
+into Tailwind utilities for the selected style. Delta Bar rules live alongside
+the other components in each theme.
 
-Run `pnpm themes:generate` after changing the pinned inputs or the mapping in
-`apps/docs/src/lib/registry-theme.ts`. It writes the eight effective styles under
-`apps/docs/src/registry/styles`. The docs import those files, and
-`prepareRegistrySource` expands the same rules into the installed component's
-Tailwind classes. `pnpm themes:check`, included in `pnpm validate`, rejects stale
-outputs or modified upstream inputs.
+`apps/docs/src/registry/lib/style-utilities.css` defines shared component state
+variants, accordion keyframes, scroll fades, and shimmer. The docs and manual
+installation use the same file. The project LICENSE preserves the attribution
+for code and styles adapted from shadcn/ui.
 
-The mapping covers SDK slot names, orientation attributes, popup exit presence,
-Command group labels and highlight state, tab selection, native slider focus and
-dragging, navigation state, InputGroup focus hooks, and hidden form inputs in
-ButtonGroup selectors, OTP active state, and Drawer side attributes. Delta Bar's four rules per theme are separate extensions.
-Upstream-only Aria styles and components outside this registry remain in the
-inputs; they do not require adding those components to this project.
+## Publishing the Registry
+
+The normal Astro build uses the same catalog and source exporter as the docs
+to write the public registry JSON. Run `pnpm --filter docs build` to generate
+the site and registry together.
+
+| URL                             | Contents                                                    |
+| ------------------------------- | ----------------------------------------------------------- |
+| `/r/index.json`                 | Array of installable items and their dependency metadata    |
+| `/r/styles/<style>/<name>.json` | Installable item with file contents for a selected style    |
+| `/registry/index.json`          | Catalog for the published Solid UI CLI                      |
+| `/registry/ui/<name>.json`      | Default-style TypeScript source in the published CLI format |
+
+The files live under `apps/docs/dist`, which Git ignores. The build includes
+registry dependencies found in component imports and uses the workspace's
+tested versions for npm dependencies. Missing registry files and dependency
+cycles fail the build.
+
+Use `apps/docs` as the Vercel project root. Its build configuration runs
+`pnpm build` and publishes `dist`, including the registry from the same
+checkout as the docs. Include source files outside the project root so Vercel
+can access the workspace lockfile and the pinned Astro packages.
+
+The published `solidui-cli` 0.7.2 uses the production domain and its older
+initialization flow. Its `add` command passes an empty argument to the package
+manager. With pnpm 12, dependency installation stops at that argument.
+The compatibility endpoints expose its JSON format for existing clients.
+The `/r/` format also carries the shared stylesheet and its target path.
+See the [Introduction](./apps/docs/src/content/docs/index.mdx#shared-styles)
+for the manual installation steps.
+
+Items that import Lucide use the Solid 2 setup documented in
+[Compatibility patches](./patches/README.md#lucide-solid1410). The published
+`lucide-solid` package still declares a Solid 1 peer range.
 
 ## Component API changes
 
@@ -71,16 +97,16 @@ as their renderer and own the interaction props they forward to it.
 - SDK slider thumbs belong inside the track. A native range input inside each
   thumb receives focus, so themes use `:has(:focus-visible)`. Thumb identity stays
   stable as values change. Navigation Menu uses the SDK viewport and indicator.
-- Accordion animations use `--accordion-panel-height`. The component also bridges
-  that variable to tw-animate-css's height input for copied source. Collapsible
+- Accordion animations use `--accordion-panel-height`. The shared stylesheet defines
+  those keyframes for the docs and copied components. Collapsible
   examples use `--collapsible-panel-height`.
 - Registry previews keep a layout box for Astro `client:visible`, with explicit
   width and alignment. This avoids the zero-width tracks found by the audit.
 
 ## Verification
 
-`registry-theme.test.ts` verifies every upstream checksum, generated rule map,
-and source-export styling. Collection tests cover replacement search results,
+`registry-theme.test.ts` verifies SDK selectors and source-export styling across
+the eight themes. Collection tests cover replacement search results,
 object selection, explicit Select children, and SDK agent actions. Browser theme
 checks cover all eight styles in light/LTR and dark/RTL, slider geometry and stable
 keyboard focus, InputGroup focus, Command parts, accordion keyframes, checked
@@ -97,10 +123,8 @@ remain covered separately; the SDK callbacks expose their native behavior.
 
 ## Added component families
 
-The registry now includes Attachment, Bubble, Message, Marker, Message Scroller, Code Block, Trace, Questionnaire, Calendar, Carousel, Drawer, Input OTP, Resizable, Scroll Area, and Sonner. Interactive parts use SDK primitives. The Date Picker guide composes Calendar and Popover. The deprecated Toast guide points to Sonner, which uses the SDK toast queue.
+The registry now includes Attachment, Bubble, Message, Marker, Message Scroller, Code Block, Trace, Questionnaire, Calendar, Carousel, Drawer, Input OTP, Resizable, Scroll Area, and Toast. Interactive parts use SDK primitives. The Date Picker guide composes Calendar and Popover. Toast uses the SDK toast queue.
 
 Calendar uses ISO values and focusable table cells. Carousel uses the SDK page/controller API. Drawer uses native snap points and movement. OTP uses one native field. Message Scroller uses native Scroll Area stick-to-end behavior and a controller. Questionnaire composes radio, checkbox, and input controls with explicit ordered steps and controlled answers. Each page documents the Solid API differences. Code Block accepts text or pre-highlighted JSX and keeps syntax highlighting optional. Native presentational parts use fixed semantic elements; interactive parts expose SDK render composition.
 
 The component pages follow the pinned Radix catalog for titles, descriptions, sections, and preview names. Preview interactions use the Solid and UI SDK APIs. The Persian calendar and RTL sections are deferred. The upstream Chart uses React Recharts, and the Data Table guide uses TanStack Table v9, whose Solid adapter targets Solid 1.
-
-The global stylesheet imports `shadcn/tailwind.css` once, as shadcn does. This supplies accordion animations, scroll fade and shimmer. The theme generator uses explicit presence selectors for SDK selection state. Components use the shared utilities through their Tailwind classes.

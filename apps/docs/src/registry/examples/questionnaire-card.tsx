@@ -16,7 +16,7 @@ import {
   QuestionnaireProgress,
   useQuestionnaire
 } from "~/registry/ui/questionnaire"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 function Actions() {
   const state = useQuestionnaire()
   const last = () => state.step() === state.steps().length - 1

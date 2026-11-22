@@ -61,8 +61,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle
+  NavigationMenuTrigger
 } from "~/components/ui/navigation-menu"
 ```
 
@@ -72,15 +71,8 @@ import {
     <NavigationMenuItem>
       <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul class="w-96">
-          <NavigationMenuLink href="/docs">Introduction</NavigationMenuLink>
-        </ul>
+        <NavigationMenuLink href="/docs">Introduction</NavigationMenuLink>
       </NavigationMenuContent>
-    </NavigationMenuItem>
-    <NavigationMenuItem>
-      <NavigationMenuLink href="/docs" class={navigationMenuTriggerStyle()}>
-        Docs
-      </NavigationMenuLink>
     </NavigationMenuItem>
   </NavigationMenuList>
 </NavigationMenu>

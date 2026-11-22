@@ -35,7 +35,7 @@ export default function DialogCloseButton() {
             <Input
               id="dialog-close-button-link"
               readonly
-              value="https://ui.shadcn.com/docs/installation"
+              value="https://www.solid-ui.com/docs/"
             />
           </div>
         </div>

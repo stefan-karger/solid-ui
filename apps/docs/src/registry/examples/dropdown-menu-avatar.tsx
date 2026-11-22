@@ -25,14 +25,14 @@ export default function DropdownMenuAvatar() {
           class="h-12 w-full justify-start px-2"
         >
           <img
-            alt="shadcn"
+            alt="Alex"
             class="size-8 rounded-full object-cover"
-            src="https://github.com/shadcn.png"
+            src="/avatars/03.png"
           />
           <div class="grid flex-1 text-left text-sm leading-tight">
-            <span class="truncate font-semibold">shadcn</span>
+            <span class="truncate font-semibold">Alex</span>
             <span class="truncate text-xs text-muted-foreground">
-              shadcn@example.com
+              alex@example.com
             </span>
           </div>
           <ChevronsUpDownIcon class="ml-auto size-4 text-muted-foreground" />
@@ -72,9 +72,9 @@ export default function DropdownMenuAvatar() {
           class="rounded-full"
         >
           <img
-            alt="shadcn"
+            alt="Alex"
             class="size-8 rounded-full object-cover"
-            src="https://github.com/shadcn.png"
+            src="/avatars/03.png"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>

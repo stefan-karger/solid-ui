@@ -10,10 +10,6 @@ component: true
   previewClassName="h-[24.5rem]"
 />
 
-## About
-
-The `<Command />` component uses the [`cmdk`](https://github.com/dip/cmdk) component by [Dip](https://www.dip.org/).
-
 ## Installation
 
 <CodeTabs>
@@ -65,8 +61,10 @@ import {
   CommandItem,
   CommandEmpty
 } from "~/components/ui/command"
+```
 
-;<Command onAction={(value) => console.log(value)}>
+```tsx
+<Command onAction={(value) => console.log(value)}>
   <CommandInput aria-label="Search commands" placeholder="Search commands..." />
   <CommandList>
     <CommandGroup>
@@ -123,4 +121,4 @@ Scrollable command menu with multiple items.
 
 ## API Reference
 
-See the [cmdk](https://github.com/dip/cmdk) documentation for more information.
+See the [UI SDK Command API](https://ui-sdk.dev/docs/solid/components/command) for filtering options and keyboard behavior.

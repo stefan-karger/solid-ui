@@ -2,10 +2,10 @@
 
 Aligned 65 component docs and 435 preview placements with the pinned shadcn Radix
 catalog. The registry contains 63 UI components and 442 examples. Date Picker
-composes Calendar and Popover. Sonner uses the SDK toast queue.
+composes Calendar and Popover. Toast uses the SDK toast queue.
 
-The docs import `shadcn/tailwind.css` and define the Solid colors in the shared
-light and dark tokens. The header uses the Solid UI favicon. Browser coverage
+The docs define the Solid colors in the shared light and dark tokens.
+The header uses the Solid UI favicon. Browser coverage
 checks the colors of the page and preview buttons before hydration.
 
 # 2026-11-18

@@ -2,7 +2,6 @@
 title: Attachment
 description: Displays a file or image attachment with media, metadata, upload state, and actions.
 component: true
-new: true
 ---
 
 <ComponentPreview
@@ -68,7 +67,7 @@ import {
 ```tsx
 <Attachment>
   <AttachmentMedia>
-    <FileTextIcon />
+    <span aria-hidden="true">PDF</span>
   </AttachmentMedia>
   <AttachmentContent>
     <AttachmentTitle>sales-dashboard.pdf</AttachmentTitle>
@@ -76,7 +75,7 @@ import {
   </AttachmentContent>
   <AttachmentActions>
     <AttachmentAction aria-label="Remove sales-dashboard.pdf">
-      <XIcon />
+      Remove
     </AttachmentAction>
   </AttachmentActions>
 </Attachment>

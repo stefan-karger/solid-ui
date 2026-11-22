@@ -15,9 +15,7 @@
     "test": "vitest run",
     "test:adapter": "pnpm build && pnpm --filter docs exec astro build --root test/fixtures/adapter && playwright test",
     "test:watch": "vitest",
-    "themes:check": "node scripts/generate-themes.ts --check",
-    "themes:generate": "node scripts/generate-themes.ts",
-    "validate": "pnpm astro:check && pnpm themes:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter"
+    "validate": "pnpm astro:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter"
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.3",

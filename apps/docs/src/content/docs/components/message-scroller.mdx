@@ -2,7 +2,6 @@
 title: Message Scroller
 description: A chat scroll container that anchors turns, opens saved transcripts, follows streamed responses, loads history without jumping, and jumps to any message.
 component: true
-new: true
 ---
 
 <ComponentPreview
@@ -101,8 +100,26 @@ npx solidui-cli@latest add button
 
 ## Usage
 
-```tsx
-import { MessageScroller } from "~/components/ui/message-scroller"
+```tsx showLineNumbers
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerViewport
+} from "~/components/ui/message-scroller"
+```
+
+```tsx showLineNumbers
+<MessageScroller class="h-64">
+  <MessageScrollerViewport role="region" aria-label="Messages">
+    <MessageScrollerContent role="log" aria-relevant="additions">
+      <MessageScrollerItem>Could you check the preview?</MessageScrollerItem>
+      <MessageScrollerItem>It is ready to review.</MessageScrollerItem>
+    </MessageScrollerContent>
+  </MessageScrollerViewport>
+  <MessageScrollerButton />
+</MessageScroller>
 ```
 
 The root uses SDK Scroll Area with `stickToEnd`. Scroll up to pause following and return to the bottom or press `MessageScrollerButton` to resume. Use `createMessageScrollerController` to drive scrolling from another control.

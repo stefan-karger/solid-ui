@@ -1,5 +1,5 @@
 import { Bubble, BubbleContent, BubbleGroup } from "~/registry/ui/bubble"
-import { Toaster, createToaster } from "~/registry/ui/sonner"
+import { Toaster, createToaster } from "~/registry/ui/toast"
 
 export default function BubbleLinkButtonDemo() {
   const toast = createToaster()

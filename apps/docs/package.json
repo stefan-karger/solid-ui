@@ -46,7 +46,6 @@
     "clsx": "2.1.1",
     "lucide-solid": "1.41.0",
     "rehype-pretty-code": "0.14.5",
-    "shadcn": "4.23.0",
     "shiki": "4.5.0",
     "solid-js": "2.0.1",
     "tailwind-merge": "3.7.0",

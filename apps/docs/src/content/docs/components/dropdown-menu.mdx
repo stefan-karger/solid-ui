@@ -51,7 +51,6 @@ npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 ## Usage
 
 ```tsx showLineNumbers
-import { Button } from "~/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -65,12 +64,7 @@ import {
 
 ```tsx showLineNumbers
 <DropdownMenu>
-  <DropdownMenuTrigger
-    render={(partProps) => <Button {...partProps} variant="outline" />}
-    class="w-fit"
-  >
-    Open
-  </DropdownMenuTrigger>
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuGroup>
       <DropdownMenuLabel>My Account</DropdownMenuLabel>

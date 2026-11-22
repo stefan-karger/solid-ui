@@ -1,7 +1,7 @@
 import { Button } from "~/registry/ui/button"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 
-export default function SonnerTypes() {
+export default function ToastTypes() {
   const toast = createToaster()
   return (
     <>

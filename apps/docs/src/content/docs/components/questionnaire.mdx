@@ -2,7 +2,6 @@
 title: Questionnaire
 description: A multi-step questionnaire with single-choice, multiple-choice, freeform, and skippable questions.
 component: true
-new: true
 ---
 
 <ComponentPreview
@@ -58,8 +57,33 @@ npx solidui-cli@latest add button
 
 ## Usage
 
-```tsx
-import { Questionnaire } from "~/components/ui/questionnaire"
+```tsx showLineNumbers
+import {
+  Questionnaire,
+  QuestionnaireActions,
+  QuestionnaireChoice,
+  QuestionnaireChoices,
+  QuestionnaireError,
+  QuestionnaireItem,
+  QuestionnaireSubmit,
+  QuestionnaireTitle
+} from "~/components/ui/questionnaire"
+```
+
+```tsx showLineNumbers
+<Questionnaire steps={["direction"]} required={["direction"]}>
+  <QuestionnaireItem value="direction">
+    <QuestionnaireTitle>What should we prototype next?</QuestionnaireTitle>
+    <QuestionnaireChoices>
+      <QuestionnaireChoice value="search">Search</QuestionnaireChoice>
+      <QuestionnaireChoice value="navigation">Navigation</QuestionnaireChoice>
+    </QuestionnaireChoices>
+    <QuestionnaireError />
+  </QuestionnaireItem>
+  <QuestionnaireActions>
+    <QuestionnaireSubmit>Submit</QuestionnaireSubmit>
+  </QuestionnaireActions>
+</Questionnaire>
 ```
 
 Pass ordered question IDs as `steps`, and required IDs as `required`. Each `QuestionnaireItem` has a matching `value`. Choices default to a radio group; `multiple` uses a checkbox group. `QuestionnaireInput` edits a text answer. `onComplete` receives a record of strings or string arrays. `value` and `onValueChange` control answers; `step` and `onStepChange` control navigation. Required answers prevent Next, Skip, and completion. Titles, descriptions, progress, errors, and focus connect to the active step. This Solid composition replaces the React-only questionnaire package.

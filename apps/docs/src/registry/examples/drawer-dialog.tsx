@@ -40,12 +40,12 @@ function ProfileForm(props: { class?: string; onSave: () => void }) {
         <Input
           type="email"
           id="drawer-profile-email"
-          value="shadcn@example.com"
+          value="alex@example.com"
         />
       </div>
       <div class="grid gap-3">
         <Label for="drawer-profile-username">Username</Label>
-        <Input id="drawer-profile-username" value="@shadcn" />
+        <Input id="drawer-profile-username" value="@alex" />
       </div>
       <Button type="submit">Save changes</Button>
     </form>

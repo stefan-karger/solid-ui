@@ -65,16 +65,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "~/components/ui/alert-dialog"
-import { Button } from "~/components/ui/button"
 ```
 
 ```tsx showLineNumbers
 <AlertDialog>
-  <AlertDialogTrigger
-    render={(partProps) => <Button {...partProps} variant="outline" />}
-  >
-    Show Dialog
-  </AlertDialogTrigger>
+  <AlertDialogTrigger>Show Dialog</AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

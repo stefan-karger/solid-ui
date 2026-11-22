@@ -1,6 +1,6 @@
 import { Bubble, BubbleContent, BubbleReactions } from "~/registry/ui/bubble"
 import { Button } from "~/registry/ui/button"
-import { toast } from "~/registry/ui/sonner"
+import { toast } from "~/registry/ui/toast"
 
 export default function BubbleReactionsDemo() {
   return (

@@ -1,4 +1,3 @@
-// Keep the order in shadcn's pinned apps/v4/registry/styles.tsx.
 export const styles = [
   "vega",
   "nova",

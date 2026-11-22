@@ -53,18 +53,16 @@ npx solidui-cli@latest add button input textarea
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea
+  InputGroupText
 } from "~/components/ui/input-group"
 ```
 
 ```tsx showLineNumbers
 <InputGroup>
-  <InputGroupInput placeholder="Search..." />
+  <InputGroupInput aria-label="Website" placeholder="example.com" />
   <InputGroupAddon>
-    <SearchIcon />
+    <InputGroupText>https://</InputGroupText>
   </InputGroupAddon>
 </InputGroup>
 ```
@@ -249,9 +247,3 @@ All other props are forwarded to the underlying `<Textarea />`.
   </InputGroupAddon>
 </InputGroup>
 ```
-
-## Changelog
-
-### 2025-10-06 `InputGroup`
-
-Add the `min-w-0` class to the `InputGroup` component. See [diff](https://github.com/shadcn-ui/ui/pull/8341/files#diff-0e2ee95d0050ca4c5d82339df86c54e14a6739dc4638fdda0eec8f73aebc2da9).

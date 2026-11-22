@@ -2,7 +2,6 @@
 title: Resizable
 description: Accessible resizable panel groups and layouts with keyboard support.
 component: true
-new: true
 ---
 
 <ComponentPreview name="resizable-demo" previewClassName="h-80" />
@@ -52,8 +51,20 @@ npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 
 ## Usage
 
-```tsx
-import { ResizablePanelGroup } from "~/components/ui/resizable"
+```tsx showLineNumbers
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup
+} from "~/components/ui/resizable"
+```
+
+```tsx showLineNumbers
+<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel defaultSize={50}>Files</ResizablePanel>
+  <ResizableHandle aria-label="Resize panels" />
+  <ResizablePanel defaultSize={50}>Editor</ResizablePanel>
+</ResizablePanelGroup>
 ```
 
 Use `orientation`, `onLayoutChange`, and `onLayoutCommit` on `ResizablePanelGroup`. Each panel accepts `defaultSize`, `minSize`, `maxSize`, and `collapsible`. Percentages are numbers. Name each handle with `aria-label`. Native SDK controllers replace React panel refs.
@@ -86,9 +97,3 @@ Use the `withHandle` prop on `ResizableHandle` to show a visible handle.
 ## API Reference
 
 See the [UI SDK Resizable API](https://ui-sdk.dev/docs/solid/components/resizable) for layout, sizing, and keyboard controls.
-
-## Changelog
-
-### 2025-02-02 `react-resizable-panels` v4
-
-This change applies to shadcn’s React version. In Solid, use `orientation` for the axis and numeric percentages for panel sizes.

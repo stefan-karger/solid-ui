@@ -1,6 +1,80 @@
 import { expect, test } from "@playwright/test"
 
 import { styles } from "../apps/docs/src/lib/appearance"
+import {
+  registryItemSchema,
+  registryIndexSchema
+} from "../apps/docs/src/registry/schema"
+
+test("publishes installable and legacy CLI registry JSON in the production build", async ({
+  request
+}) => {
+  async function json(path: string): Promise<unknown> {
+    const response = await request.get(path)
+    expect(response.ok()).toBe(true)
+    expect(response.headers()["content-type"]).toContain("application/json")
+    return response.json()
+  }
+
+  const index = registryIndexSchema.parse(await json("/r/index.json"))
+  const names = new Set(index.map(({ name }) => name))
+  expect(names.has("toast")).toBe(true)
+  expect(names.has("sonner")).toBe(false)
+  for (const item of index) {
+    expect(item.type).not.toBe("registry:example")
+    for (const dependency of item.registryDependencies ?? []) {
+      expect(names.has(dependency)).toBe(true)
+    }
+  }
+
+  const nova = registryItemSchema.parse(
+    await json("/r/styles/nova/button.json")
+  )
+  const vega = registryItemSchema.parse(
+    await json("/r/styles/vega/button.json")
+  )
+  expect(nova.files?.[0]?.content).not.toBe(vega.files?.[0]?.content)
+  expect(nova.dependencies).toContain("solid-js@2.0.1")
+  expect(nova.registryDependencies).toContain("utils")
+  expect(nova.files?.[0]?.content).not.toContain("cn-button")
+  for (const path of [
+    "/r/button.json",
+    "/r/nova/button.json",
+    "/r/registry.json"
+  ]) {
+    expect((await request.get(path)).status()).toBe(404)
+  }
+
+  const styleUtilities = registryItemSchema.parse(
+    await json("/r/styles/nova/style-utilities.json")
+  )
+  expect(styleUtilities.files?.[0]).toMatchObject({
+    target: "styles/solid-ui.css",
+    content: expect.stringContaining("@utility shimmer")
+  })
+
+  const legacyIndex = await json("/registry/index.json")
+  expect(legacyIndex).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        name: "toast",
+        type: "ui",
+        files: ["ui/toast.tsx"]
+      })
+    ])
+  )
+  expect(await json("/registry/ui/toast.json")).toMatchObject({
+    name: "toast",
+    type: "ui",
+    registryDependencies: ["button"],
+    files: [
+      {
+        name: "toast.tsx",
+        content: expect.stringContaining("~/registry/ui/button")
+      }
+    ]
+  })
+})
 
 test("links the home page, docs, component catalog and project from the shared shell", async ({
   page

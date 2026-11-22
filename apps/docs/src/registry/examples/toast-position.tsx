@@ -1,7 +1,7 @@
 import { Button } from "~/registry/ui/button"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 
-export default function SonnerPosition() {
+export default function ToastPosition() {
   const toasters = {
     "top-left": createToaster(),
     "top-center": createToaster(),

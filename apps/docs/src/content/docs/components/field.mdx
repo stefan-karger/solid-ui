@@ -59,15 +59,12 @@ npx solidui-cli@latest add label separator
 ```tsx showLineNumbers
 import {
   Field,
-  FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
   FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle
+  FieldSet
 } from "~/components/ui/field"
 ```
 
@@ -78,16 +75,16 @@ import {
   <FieldGroup>
     <Field>
       <FieldLabel for="name">Full name</FieldLabel>
-      <Input id="name" autocomplete="off" placeholder="Evil Rabbit" />
+      <input id="name" autocomplete="off" placeholder="Evil Rabbit" />
       <FieldDescription>This appears on invoices and emails.</FieldDescription>
     </Field>
     <Field>
       <FieldLabel for="username">Username</FieldLabel>
-      <Input id="username" autocomplete="off" aria-invalid />
+      <input id="username" autocomplete="off" aria-invalid="true" />
       <FieldError>Choose another username.</FieldError>
     </Field>
     <Field orientation="horizontal">
-      <Checkbox id="newsletter" />
+      <input id="newsletter" type="checkbox" />
       <FieldLabel for="newsletter">Subscribe to the newsletter</FieldLabel>
     </Field>
   </FieldGroup>

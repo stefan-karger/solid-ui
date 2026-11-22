@@ -10,7 +10,7 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 
 export default function QuestionnaireMultiple() {
   const toast = createToaster()

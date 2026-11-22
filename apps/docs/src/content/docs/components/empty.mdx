@@ -53,7 +53,6 @@ import {
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
-  EmptyMedia,
   EmptyTitle
 } from "~/components/ui/empty"
 ```
@@ -61,9 +60,6 @@ import {
 ```tsx showLineNumbers
 <Empty>
   <EmptyHeader>
-    <EmptyMedia variant="icon">
-      <Icon />
-    </EmptyMedia>
     <EmptyTitle>No projects yet</EmptyTitle>
     <EmptyDescription>
       You haven&apos;t created any projects yet. Get started by creating your
@@ -71,7 +67,7 @@ import {
     </EmptyDescription>
   </EmptyHeader>
   <EmptyContent>
-    <Button>Create project</Button>
+    <button type="button">Create project</button>
   </EmptyContent>
 </Empty>
 ```

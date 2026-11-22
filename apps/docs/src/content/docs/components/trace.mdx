@@ -2,7 +2,6 @@
 title: Trace
 description: The building block for reasoning, tool calls, sources and more.
 component: true
-new: true
 ---
 
 <ComponentPreview name="trace-demo" previewClassName="h-auto" />
@@ -78,8 +77,16 @@ npx solidui-cli@latest add collapsible
 
 ## Usage
 
-```tsx
-import { Trace } from "~/components/ui/trace"
+```tsx showLineNumbers
+import { Trace, TraceLine, TraceTitle } from "~/components/ui/trace"
+```
+
+```tsx showLineNumbers
+<Trace>
+  <TraceLine>
+    <TraceTitle>Checked the registry metadata</TraceTitle>
+  </TraceLine>
+</Trace>
 ```
 
 `TraceLine` supports running, pending, and error status. Use `TraceCollapsible`, `TraceCollapsibleTrigger`, and `TraceCollapsibleContent` for optional details. The SDK handles keyboard activation, expanded state, and panel presence.

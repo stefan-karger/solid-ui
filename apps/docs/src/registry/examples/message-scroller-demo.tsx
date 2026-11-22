@@ -147,7 +147,7 @@ export default function MessageScrollerDemo() {
                   <EmptyMedia variant="icon">
                     <MessageCircleDashedIcon />
                   </EmptyMedia>
-                  <EmptyTitle>Morning, shadcn!</EmptyTitle>
+                  <EmptyTitle>Morning, Alex!</EmptyTitle>
                   <EmptyDescription>
                     What are we working on today? Press send to start a new
                     conversation

@@ -2,7 +2,6 @@
 title: Calendar
 description: A calendar component that allows users to select a date or a range of dates.
 component: true
-new: true
 ---
 
 <ComponentPreview name="calendar-demo" previewClassName="h-96" />
@@ -48,8 +47,12 @@ npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import { Calendar } from "~/components/ui/calendar"
+```
+
+```tsx showLineNumbers
+<Calendar aria-label="Select a date" />
 ```
 
 Dates use ISO strings, such as `"2026-11-17"`. Set `mode` to `single`, `multiple`, or `range`. `onValueChange` receives the ISO value. Use `months` for multiple grids and `min`, `max`, or `unavailable` for restrictions. The SDK renders focusable table cells, so days do not contain extra buttons.

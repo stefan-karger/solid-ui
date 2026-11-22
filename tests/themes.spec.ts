@@ -134,7 +134,7 @@ for (const theme of styles) {
           for (const rule of rules) {
             if (
               rule instanceof CSSKeyframesRule &&
-              rule.name === "accordion-down"
+              rule.name === "solid-accordion-down"
             )
               result.push(rule.cssText)
             else if ("cssRules" in rule)

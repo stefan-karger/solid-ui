@@ -34,9 +34,9 @@ At the current migration snapshot:
 - Preview markup is rendered during the static Astro build and hydrated when it approaches the
   viewport.
 - Docs include sidebar and mobile navigation, page contents, and persistent light/dark and style controls.
-- The docs and previews use the Solid color palette through shared shadcn tokens.
-- All eight current shadcn styles are available in upstream order: Vega, Nova, Maia, Lyra, Mira, Luma, Sera, Rhea.
-- Supported new shadcn families include messages, attachments, bubbles, traces, code blocks, questionnaires, and native SDK scrolling and notifications.
+- The docs and previews use shared Solid color tokens.
+- Eight styles are available: Vega, Nova, Maia, Lyra, Mira, Luma, Sera, and Rhea.
+- Supported component families include messages, attachments, bubbles, traces, code blocks, questionnaires, and native SDK scrolling and notifications.
 - Chart and Data Table still need Solid 2-compatible implementations.
 
 See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
@@ -128,10 +128,9 @@ pnpm build
 
 SDK imports use named aliases such as `Dialog as SdkDialog`, and components compose
 the SDK parts directly. Collection examples render explicit items and groups.
-The eight shadcn theme inputs stay unchanged in `vendor/shadcn`; run
-`pnpm themes:generate` after changing their revision or the SDK mapping.
-`pnpm validate` checks the generated output. See [SHADCN_PARITY.md](./SHADCN_PARITY.md)
-for the import convention, native collection APIs, and intentional SDK differences.
+Edit the theme CSS in `apps/docs/src/registry/styles`. The docs and registry
+source exporter share these files. See [REGISTRY.md](./REGISTRY.md) for theme
+maintenance, SDK conventions, and source export.
 
 When adding or updating a registry component:
 

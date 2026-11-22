@@ -18,7 +18,6 @@ export default defineConfig({
     stylesheet: "./apps/docs/src/styles/global.css"
   },
   ignorePatterns: [
-    "vendor/shadcn/**",
     "vendor/astro-solid/upstream/**",
     "**/node_modules/**",
     "**/dist/**",

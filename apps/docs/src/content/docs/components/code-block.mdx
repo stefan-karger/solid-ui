@@ -2,7 +2,6 @@
 title: Code Block
 description: Displays code, terminal output and diffs with an optional header, line numbers and a copy button.
 component: true
-new: true
 ---
 
 <ComponentPreview name="code-block-demo" previewClassName="h-auto" />
@@ -70,8 +69,27 @@ npx solidui-cli@latest add button
 
 ## Usage
 
-```tsx
-import { CodeBlock } from "~/components/ui/code-block"
+```tsx showLineNumbers
+import {
+  CodeBlock,
+  CodeBlockActions,
+  CodeBlockContent,
+  CodeBlockCopyButton,
+  CodeBlockHeader,
+  CodeBlockTitle
+} from "~/components/ui/code-block"
+```
+
+```tsx showLineNumbers
+<CodeBlock>
+  <CodeBlockHeader>
+    <CodeBlockTitle>Terminal</CodeBlockTitle>
+    <CodeBlockActions>
+      <CodeBlockCopyButton value="pnpm dev" />
+    </CodeBlockActions>
+  </CodeBlockHeader>
+  <CodeBlockContent>pnpm dev</CodeBlockContent>
+</CodeBlock>
 ```
 
 Compose header, title, actions, content, and footer inside `CodeBlock`. `CodeBlockContent` accepts plain text or explicit `CodeBlockLine` children. Set `lineNumbers`, `startLine`, or `wrap`; line variants are `added`, `removed`, and `highlighted`. `CodeBlockCopyButton` takes `value` and reports clipboard success or failure accessibly. The content accepts pre-highlighted JSX; it does not bundle a syntax highlighter.
@@ -169,7 +187,7 @@ Cap the height with a `max-h-*` class on `CodeBlockContent`. The content scrolls
 
 <ComponentPreview name="code-block-height" previewClassName="h-auto" />
 
-`CodeBlockContent` fades its edges with [`scroll-fade`](/docs/utils/scroll-fade) as it scrolls: left and right by default, top and bottom when it wraps. Add `scroll-fade-y` to a capped block that does not wrap.
+`CodeBlockContent` fades the left and right edges by default and the top and bottom edges when it wraps. Add `scroll-fade-y` from the [shared stylesheet](/docs/#shared-styles) to a capped block that does not wrap.
 
 ## Show More
 

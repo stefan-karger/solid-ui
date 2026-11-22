@@ -39,7 +39,13 @@ export default function RegistryPreview(props: RegistryPreviewProps) {
   // An Astro island selects its preview module once when it mounts.
   const Preview = untrack(() => getPreview(props.moduleId))
   const content = (
-    <Loading fallback={<p role="status">Loading component preview…</p>}>
+    <Loading
+      fallback={
+        <p class="m-auto text-center" role="status">
+          Loading component preview…
+        </p>
+      }
+    >
       <DirectionProvider
         class="grid w-full min-w-0 justify-items-center"
         direction={props.direction ?? "ltr"}

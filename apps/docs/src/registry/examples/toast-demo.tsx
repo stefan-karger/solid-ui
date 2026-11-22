@@ -1,8 +1,8 @@
 import { onCleanup } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
-import { Toaster, createToaster } from "~/registry/ui/sonner"
-export default function SonnerDemo() {
+import { Toaster, createToaster } from "~/registry/ui/toast"
+export default function ToastDemo() {
   const toast = createToaster()
   onCleanup(() => toast.dismiss())
   return (

@@ -45,6 +45,18 @@ The registry records the source and dependencies behind each component. The **Ma
 
 The components share a visual language so you can combine them in a form, menu, or page. Try the style selector to compare the available presets in light and dark mode. Tailwind CSS classes and shared color tokens give you a starting point for your own design system.
 
+## Shared Styles
+
+For manual installation, install `tw-animate-css` and save the shared stylesheet as `solid-ui.css` alongside your app stylesheet. It defines the component state variants, accordion animations, scroll fades, and text shimmer used by the registry.
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./solid-ui.css";
+```
+
+<ComponentSource name="style-utilities" title="solid-ui.css" />
+
 ## AI-Ready
 
 Coding tools can read the same component files you edit. Point them to an existing component and its examples when you want to build a new variation. Named parts and shared styling patterns give the tool concrete conventions to follow.

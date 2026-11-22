@@ -248,7 +248,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-demo",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-demo.tsx",
@@ -257,12 +257,12 @@ export const examples: Registry["items"] = [
     ]
   },
   {
-    name: "sonner-demo",
+    name: "toast-demo",
     type: "registry:example",
-    registryDependencies: ["sonner", "button"],
+    registryDependencies: ["toast", "button"],
     files: [
       {
-        path: "examples/sonner-demo.tsx",
+        path: "examples/toast-demo.tsx",
         type: "registry:example"
       }
     ]
@@ -3455,7 +3455,7 @@ export const examples: Registry["items"] = [
   {
     name: "bubble-reactions",
     type: "registry:example",
-    registryDependencies: ["sonner", "bubble", "button"],
+    registryDependencies: ["toast", "bubble", "button"],
     files: [{ path: "examples/bubble-reactions.tsx", type: "registry:example" }]
   },
   {
@@ -3621,24 +3621,24 @@ export const examples: Registry["items"] = [
     files: [{ path: "examples/resizable-handle.tsx", type: "registry:example" }]
   },
   {
-    name: "sonner-description",
+    name: "toast-description",
     type: "registry:example",
-    registryDependencies: ["sonner", "button"],
+    registryDependencies: ["toast", "button"],
     files: [
-      { path: "examples/sonner-description.tsx", type: "registry:example" }
+      { path: "examples/toast-description.tsx", type: "registry:example" }
     ]
   },
   {
-    name: "sonner-position",
+    name: "toast-position",
     type: "registry:example",
-    registryDependencies: ["sonner", "button"],
-    files: [{ path: "examples/sonner-position.tsx", type: "registry:example" }]
+    registryDependencies: ["toast", "button"],
+    files: [{ path: "examples/toast-position.tsx", type: "registry:example" }]
   },
   {
-    name: "sonner-types",
+    name: "toast-types",
     type: "registry:example",
-    registryDependencies: ["sonner", "button"],
-    files: [{ path: "examples/sonner-types.tsx", type: "registry:example" }]
+    registryDependencies: ["toast", "button"],
+    files: [{ path: "examples/toast-types.tsx", type: "registry:example" }]
   },
   {
     name: "trace-collapsible",
@@ -3969,7 +3969,7 @@ export const examples: Registry["items"] = [
   {
     name: "bubble-link-button",
     type: "registry:example",
-    registryDependencies: ["bubble", "sonner"],
+    registryDependencies: ["bubble", "toast"],
     files: [
       { path: "examples/bubble-link-button.tsx", type: "registry:example" }
     ]
@@ -3977,7 +3977,7 @@ export const examples: Registry["items"] = [
   {
     name: "marker-link-button",
     type: "registry:example",
-    registryDependencies: ["marker", "sonner"],
+    registryDependencies: ["marker", "toast"],
     files: [
       { path: "examples/marker-link-button.tsx", type: "registry:example" }
     ]
@@ -4081,7 +4081,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-multiple",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-multiple.tsx", type: "registry:example" }
     ]
@@ -4089,7 +4089,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-freeform",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-freeform.tsx", type: "registry:example" }
     ]
@@ -4097,7 +4097,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-animated",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-animated.tsx", type: "registry:example" }
     ]
@@ -4105,7 +4105,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-controlled",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-controlled.tsx",
@@ -4116,7 +4116,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-resume",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner", "button"],
+    registryDependencies: ["questionnaire", "toast", "button"],
     files: [
       { path: "examples/questionnaire-resume.tsx", type: "registry:example" }
     ]
@@ -4124,7 +4124,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-skip",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-skip.tsx", type: "registry:example" }
     ]
@@ -4270,7 +4270,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-shortcuts",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-shortcuts.tsx", type: "registry:example" }
     ]
@@ -4278,7 +4278,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-validation",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-validation.tsx",
@@ -4289,7 +4289,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-conditional",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-conditional.tsx",
@@ -4300,7 +4300,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-navigation-state",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       {
         path: "examples/questionnaire-navigation-state.tsx",
@@ -4311,7 +4311,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-progress",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner"],
+    registryDependencies: ["questionnaire", "toast"],
     files: [
       { path: "examples/questionnaire-progress.tsx", type: "registry:example" }
     ]
@@ -4319,7 +4319,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-card",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner", "card"],
+    registryDependencies: ["questionnaire", "toast", "card"],
     files: [
       { path: "examples/questionnaire-card.tsx", type: "registry:example" }
     ]
@@ -4327,7 +4327,7 @@ export const examples: Registry["items"] = [
   {
     name: "questionnaire-dialog",
     type: "registry:example",
-    registryDependencies: ["questionnaire", "sonner", "dialog", "button"],
+    registryDependencies: ["questionnaire", "toast", "dialog", "button"],
     files: [
       { path: "examples/questionnaire-dialog.tsx", type: "registry:example" }
     ]

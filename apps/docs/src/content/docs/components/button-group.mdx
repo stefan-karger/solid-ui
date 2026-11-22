@@ -53,18 +53,14 @@ npx solidui-cli@latest add separator
 
 ## Usage
 
-```tsx
-import {
-  ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText
-} from "~/components/ui/button-group"
+```tsx showLineNumbers
+import { ButtonGroup } from "~/components/ui/button-group"
 ```
 
 ```tsx showLineNumbers
-<ButtonGroup>
-  <Button>Button 1</Button>
-  <Button>Button 2</Button>
+<ButtonGroup aria-label="Editing actions">
+  <button type="button">Undo</button>
+  <button type="button">Redo</button>
 </ButtonGroup>
 ```
 

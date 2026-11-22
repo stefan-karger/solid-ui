@@ -13,7 +13,7 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 
 const itemClassName =
   "data-active:animate-in data-active:fade-in-0 data-active:slide-in-from-bottom-2 data-active:duration-300 motion-reduce:animate-none"

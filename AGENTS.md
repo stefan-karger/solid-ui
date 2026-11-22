@@ -12,9 +12,10 @@ the source hashes and reproducible archives. See `vendor/astro-solid/README.md`.
 
 Import SDK parts by name, aliasing each as `SdkXxx`. Compose them directly rather
 than introducing namespace imports or `Primitive.Root` maps. Use SDK `render` for
-composition and explicit collection children. Keep upstream theme inputs in
-`vendor/shadcn` unchanged; run `pnpm themes:generate` after changing the SDK mapping
-or pinned inputs. The docs and installed registry source use the generated themes.
+composition and explicit collection children. Edit the theme CSS directly in
+`apps/docs/src/registry/styles`. The docs and registry source export both use
+these styles. Shared Tailwind utilities live in
+`apps/docs/src/registry/lib/style-utilities.css`.
 
 Whenever changing the Solid 2 Astro adapter, compare its implementation and tests
 with Astro's official integration and renderer:

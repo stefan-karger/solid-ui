@@ -2,7 +2,6 @@
 title: Input OTP
 description: Accessible one-time password component with copy-paste functionality.
 component: true
-new: true
 ---
 
 <ComponentPreview name="input-otp-demo" />
@@ -52,8 +51,29 @@ npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 
 ## Usage
 
-```tsx
-import { InputOTP } from "~/components/ui/input-otp"
+```tsx showLineNumbers
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot
+} from "~/components/ui/input-otp"
+```
+
+```tsx showLineNumbers
+<InputOTP aria-label="Verification code" maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
 ```
 
 `InputOTP` owns one native input. Give each `InputOTPSlot` a zero-based `index`. Use `value`, `onValueChange`, `maxLength`, and `pattern` from the SDK. Slots use SDK active and fake-caret states and do not create extra tab stops.

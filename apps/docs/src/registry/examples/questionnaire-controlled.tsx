@@ -15,7 +15,7 @@ import {
   QuestionnaireSubmit,
   QuestionnaireTitle
 } from "~/registry/ui/questionnaire"
-import { createToaster, Toaster } from "~/registry/ui/sonner"
+import { createToaster, Toaster } from "~/registry/ui/toast"
 
 const itemLabels: Record<string, string> = {
   scope: "Change scope",

@@ -2,7 +2,6 @@
 title: Drawer
 description: A drawer component for React.
 component: true
-new: true
 ---
 
 <ComponentPreview name="drawer-demo" />
@@ -52,8 +51,32 @@ npm install @ui-sdk/solid @ui-sdk/core lucide-solid
 
 ## Usage
 
-```tsx
-import { Drawer } from "~/components/ui/drawer"
+```tsx showLineNumbers
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "~/components/ui/drawer"
+```
+
+```tsx showLineNumbers
+<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Activity goal</DrawerTitle>
+      <DrawerDescription>Review your daily goal.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose>Done</DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
 ```
 
 Use `side`, `snapPoints`, and `defaultSnapPoint` from the SDK. Content renders in place using the browser top layer. The SDK owns positioning and movement. There is no portal or Vaul compatibility layer.

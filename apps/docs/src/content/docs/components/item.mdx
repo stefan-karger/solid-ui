@@ -61,22 +61,18 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
-  ItemMedia,
   ItemTitle
 } from "~/components/ui/item"
 ```
 
 ```tsx showLineNumbers
 <Item>
-  <ItemMedia variant="icon">
-    <Icon />
-  </ItemMedia>
   <ItemContent>
     <ItemTitle>Title</ItemTitle>
     <ItemDescription>Description</ItemDescription>
   </ItemContent>
   <ItemActions>
-    <Button>Action</Button>
+    <button type="button">Open</button>
   </ItemActions>
 </Item>
 ```

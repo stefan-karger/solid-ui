@@ -38,7 +38,7 @@ const blocks: {
   },
   {
     language: "bash",
-    code: "pnpm dlx shadcn@latest add code-block"
+    code: "npx solidui-cli@latest add code-block"
   },
   {
     title: "components/search.tsx",

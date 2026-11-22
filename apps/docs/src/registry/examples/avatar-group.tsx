@@ -9,8 +9,8 @@ export default function AvatarGroupExample() {
   return (
     <AvatarGroup class="grayscale">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage src="/avatars/03.png" alt="@alex" />
+        <AvatarFallback>AM</AvatarFallback>
       </Avatar>
       <Avatar>
         <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />

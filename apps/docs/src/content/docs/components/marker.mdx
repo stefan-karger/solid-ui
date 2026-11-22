@@ -2,7 +2,6 @@
 title: Marker
 description: Displays an inline status, system note, bordered row, or labeled separator in a conversation.
 component: true
-new: true
 ---
 
 <ComponentPreview name="marker-demo" previewClassName="h-auto" />
@@ -50,8 +49,14 @@ npm install class-variance-authority
 
 ## Usage
 
-```tsx
-import { Marker } from "~/components/ui/marker"
+```tsx showLineNumbers
+import { Marker, MarkerContent } from "~/components/ui/marker"
+```
+
+```tsx showLineNumbers
+<Marker>
+  <MarkerContent>Explored four files</MarkerContent>
+</Marker>
 ```
 
 `variant` is `default`, `separator`, or `border`. `MarkerIcon` is decorative; `MarkerContent` contains the readable label.
@@ -71,7 +76,7 @@ Marker
 - Inline marker, bordered row, and labeled separator variants
 - Decorative icon slot that is hidden from assistive tech
 - Polymorphic root via `render` for link and button markers
-- Pairs with the [`shimmer`](/docs/utils/shimmer) utility for streaming status text
+- Pairs with the [`shimmer`](/docs/#shared-styles) utility for streaming status text
 - Customizable styling through the `class` prop on every part
 
 ## Variants
@@ -94,7 +99,7 @@ Set `role="status"` and include a [`Spinner`](/docs/components/spinner) for stre
 
 ## Shimmer
 
-Add the [`shimmer`](/docs/utils/shimmer) utility class to `MarkerContent` for an animated streaming-text effect. The utility ships with the `shadcn` package — see the shimmer docs for installation.
+Add `shimmer` to `MarkerContent` for animated streaming text. The class is included in the [shared stylesheet](/docs/#shared-styles).
 
 <ComponentPreview name="marker-shimmer" previewClassName="h-auto" />
 

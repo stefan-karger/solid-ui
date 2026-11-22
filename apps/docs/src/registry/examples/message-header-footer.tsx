@@ -21,7 +21,7 @@ export default function MessageHeaderFooterDemo() {
         <MessageContent>
           <Bubble>
             <BubbleContent>
-              Send the report to the team. Ping @shadcn if you need help.
+              Send the report to the team. Ping @alex if you need help.
             </BubbleContent>
           </Bubble>
           <MessageFooter>

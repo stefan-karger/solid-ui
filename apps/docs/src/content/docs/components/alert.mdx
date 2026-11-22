@@ -54,18 +54,16 @@ import {
   AlertDescription,
   AlertTitle
 } from "~/components/ui/alert"
-import { Button } from "~/components/ui/button"
 ```
 
 ```tsx showLineNumbers
 <Alert>
-  <InfoIcon />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
     You can add components and dependencies to your app using the cli.
   </AlertDescription>
   <AlertAction>
-    <Button variant="outline">Enable</Button>
+    <button type="button">Enable</button>
   </AlertAction>
 </Alert>
 ```

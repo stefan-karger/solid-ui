@@ -1,7 +1,7 @@
 import { GitBranchIcon, RotateCcwIcon } from "lucide-solid"
 
 import { Marker, MarkerContent, MarkerIcon } from "~/registry/ui/marker"
-import { Toaster, createToaster } from "~/registry/ui/sonner"
+import { Toaster, createToaster } from "~/registry/ui/toast"
 
 export default function MarkerLinkButtonDemo() {
   const toast = createToaster()

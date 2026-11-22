@@ -78,6 +78,54 @@ test("centers accordion previews horizontally while keeping them top aligned", a
   await expect(accordion).toHaveCSS("max-width", "384px")
 })
 
+test("centers the preview loading message independently of example alignment", async ({
+  page
+}) => {
+  let release!: () => void
+  const pending = new Promise<void>((resolve) => {
+    release = resolve
+  })
+  await page.route("**/_astro/dialog-demo.*.js", async (route) => {
+    await pending
+    await route.continue()
+  })
+  const preview = namedExample(page, "dialog-demo.tsx")
+  const loading = preview.getByRole("status").filter({
+    hasText: "Loading component preview"
+  })
+  try {
+    await page.goto("/docs/components/dialog/", {
+      waitUntil: "domcontentloaded"
+    })
+    await expect(loading).toBeVisible()
+    const offsets = await loading.evaluate((node) => {
+      const stage = node.closest<HTMLElement>("[data-align]")!
+      const initial = stage.style.alignItems
+      const positions = ["start", "center", "end"].map((alignment) => {
+        stage.style.alignItems = alignment
+        const area = stage.getBoundingClientRect()
+        const text = node.getBoundingClientRect()
+        return {
+          x: (text.left + text.right - area.left - area.right) / 2,
+          y: (text.top + text.bottom - area.top - area.bottom) / 2
+        }
+      })
+      stage.style.alignItems = initial
+      return positions
+    })
+    for (const { x, y } of offsets) {
+      expect(x).toBeCloseTo(0, 1)
+      expect(y).toBeCloseTo(0, 1)
+    }
+  } finally {
+    release()
+  }
+  await expect(loading).toHaveCount(0)
+  await expect(
+    preview.getByRole("button", { name: "Open Dialog", exact: true })
+  ).toBeVisible()
+})
+
 test("keeps the Select popup at trigger width in both alignment modes", async ({
   page
 }) => {
@@ -337,18 +385,34 @@ test("drawer edits content, dismisses, and restores focus", async ({
   )
 })
 
-test("toast actions, promise updates, and close use the native queue", async ({
+test("toast positions, actions, promises, and Escape use the native queue", async ({
   page
 }) => {
-  const sonner = await example(page, "sonner")
-  const showToast = sonner.getByRole("button", { name: "Show Toast" })
+  const preview = await example(page, "toast")
+  const showToast = preview.getByRole("button", { name: "Show Toast" })
   await showToast.click()
-  const region = sonner.getByRole("region", { name: /Notifications/ })
+  const region = preview.getByRole("region", { name: /Notifications/ })
+  const toasts = region.locator('[data-slot="toast"]')
   await expect(region).toContainText("Event has been created")
+  await expect(region.locator('[data-slot="toast-close"]')).toHaveCount(0)
+  await expect(region).toHaveAttribute("data-side", "top")
+  await expect(region).toHaveAttribute("data-align", "center")
+  await expect
+    .poll(() =>
+      toasts.first().evaluate((element) => {
+        const { left, top, width } = element.getBoundingClientRect()
+        const viewportCenter = document.documentElement.clientWidth / 2
+        return (
+          top >= 0 &&
+          top < 40 &&
+          Math.abs(left + width / 2 - viewportCenter) < 1
+        )
+      })
+    )
+    .toBe(true)
   await region.getByRole("button", { name: "Undo" }).click()
   await expect(region).toContainText("Event removed")
   await showToast.click()
-  const toasts = region.locator('[data-slot="toast"]')
   await expect(toasts).toHaveCount(2)
   await expect(toasts.first()).toContainText("Event has been created")
   await expect
@@ -361,16 +425,82 @@ test("toast actions, promise updates, and close use the native queue", async ({
       })
     )
     .toBe(true)
-  await toasts.first().getByRole("button", { name: "Close toast" }).click()
+  await toasts.first().press("Escape")
   await expect(region).not.toContainText("Event has been created")
 
-  const types = namedExample(page, "sonner-types")
+  const types = namedExample(page, "toast-types")
   await types.scrollIntoViewIfNeeded()
   await expect(types).not.toHaveAttribute("ssr", "")
   await types.getByRole("button", { name: "Promise" }).click()
   const promiseRegion = types.getByRole("region", { name: /Notifications/ })
-  await expect(promiseRegion).toContainText("Loading...")
-  await expect(promiseRegion).toContainText("Event has been created")
+  const promiseToast = promiseRegion.locator('[data-slot="toast"]')
+  const icon = promiseToast.locator('[data-slot="toast-icon"]')
+  await expect(promiseToast).toContainText("Loading...")
+  await expect(promiseToast).toHaveAttribute("data-type", "loading")
+  await expect(icon).toHaveClass(/lucide-loader-circle/)
+  await expect(promiseToast).toContainText("Event has been created")
+  await expect(promiseToast).toHaveAttribute("data-type", "success")
+  await expect(icon).toHaveClass(/lucide-circle-check/)
+
+  const positions = namedExample(page, "toast-position")
+  await positions.scrollIntoViewIfNeeded()
+  await expect(positions).not.toHaveAttribute("ssr", "")
+  await positions.getByRole("button", { name: "Bottom Left" }).click()
+  await expect(
+    positions.locator(
+      '[data-side="bottom"][data-align="start"] [data-slot="toast"]'
+    )
+  ).toBeVisible()
+})
+
+test("toast types share theme colors and use status icons in each color mode", async ({
+  page
+}) => {
+  const variants = [
+    { type: "default", icon: null },
+    { type: "success", icon: "circle-check" },
+    { type: "info", icon: "info" },
+    { type: "warning", icon: "triangle-alert" },
+    { type: "error", icon: "octagon-x" }
+  ]
+  const palettes = []
+  for (const mode of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme: mode })
+    await page.goto("/docs/components/toast/")
+    await expect(page.locator("html")).toHaveAttribute("data-color-mode", mode)
+    const preview = namedExample(page, "toast-types")
+    await preview.scrollIntoViewIfNeeded()
+    await expect(preview).not.toHaveAttribute("ssr", "")
+    const colors = []
+    for (const { type, icon } of variants) {
+      await preview
+        .getByRole("button", { name: new RegExp(`^${type}$`, "i") })
+        .click()
+      const notification = preview.locator(
+        `[data-slot="toast"][data-type="${type}"]`
+      )
+      const statusIcon = notification.locator('[data-slot="toast-icon"]')
+      await expect(notification).toBeVisible()
+      if (icon) {
+        await expect(statusIcon).toBeVisible()
+        await expect(statusIcon).toHaveAttribute("aria-hidden", "true")
+        await expect(statusIcon).toHaveClass(new RegExp(`lucide-${icon}\\b`))
+      } else {
+        await expect(statusIcon).toHaveCount(0)
+      }
+      colors.push(
+        await notification.evaluate((element) => {
+          const style = getComputedStyle(element)
+          return [style.backgroundColor, style.borderTopColor, style.color]
+        })
+      )
+      await notification.press("Escape")
+      await expect(notification).toHaveCount(0)
+    }
+    expect(colors.slice(1)).toEqual(variants.slice(1).map(() => colors[0]))
+    palettes.push(colors[0])
+  }
+  expect(palettes[0]).not.toEqual(palettes[1])
 })
 
 test("message scroller releases and resumes following growing content", async ({
@@ -384,7 +514,7 @@ test("message scroller releases and resumes following growing content", async ({
     viewport.evaluate(
       (n) => Math.abs(n.scrollHeight - n.clientHeight - n.scrollTop) < 2
     )
-  await expect(chat.getByText("Morning, shadcn!")).toBeVisible()
+  await expect(chat.getByText("Morning, Alex!")).toBeVisible()
   await send.click()
   await expect(transcript).toHaveAttribute("aria-busy", "false")
   await send.click()

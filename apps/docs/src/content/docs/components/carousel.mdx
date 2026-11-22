@@ -2,7 +2,6 @@
 title: Carousel
 description: A carousel with motion and swipe built using Embla.
 component: true
-new: true
 ---
 
 <ComponentPreview name="carousel-demo" previewClassName="h-80 sm:h-[32rem]" />
@@ -58,8 +57,28 @@ npx solidui-cli@latest add button
 
 ## Usage
 
-```tsx
-import { Carousel } from "~/components/ui/carousel"
+```tsx showLineNumbers
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselViewport
+} from "~/components/ui/carousel"
+```
+
+```tsx showLineNumbers
+<Carousel aria-label="Featured slides">
+  <CarouselViewport>
+    <CarouselContent>
+      <CarouselItem>Slide one</CarouselItem>
+      <CarouselItem>Slide two</CarouselItem>
+    </CarouselContent>
+  </CarouselViewport>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
 ```
 
 Compose `CarouselViewport` and `CarouselContent` under `Carousel`, then render explicit `CarouselItem` children. Native SDK `page`, `onPageChange`, `loop`, `slidesPerPage`, and `controller` replace Embla options and callbacks. Give vertical viewports an explicit height.

@@ -21,7 +21,9 @@ export default function InputGroupButtonExample() {
   let resetCopyTimeout: ReturnType<typeof setTimeout> | undefined
 
   const handleCopy = async () => {
-    await navigator.clipboard?.writeText("https://x.com/shadcn")
+    await navigator.clipboard?.writeText(
+      "https://github.com/stefan-karger/solid-ui"
+    )
     setIsCopied(true)
 
     if (resetCopyTimeout) {
@@ -36,7 +38,10 @@ export default function InputGroupButtonExample() {
   return (
     <div class="grid w-full max-w-sm gap-6">
       <InputGroup>
-        <InputGroupInput placeholder="https://x.com/shadcn" readonly />
+        <InputGroupInput
+          placeholder="https://github.com/stefan-karger/solid-ui"
+          readonly
+        />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
             aria-label="Copy"

@@ -2,7 +2,6 @@
 title: Message
 description: Displays a message in a conversation, with optional avatar, header, footer, and alignment.
 component: true
-new: true
 ---
 
 <ComponentPreview name="message-demo" previewClassName="h-auto" />
@@ -46,8 +45,14 @@ npx solidui-cli@latest add message
 
 ## Usage
 
-```tsx
-import { Message } from "~/components/ui/message"
+```tsx showLineNumbers
+import { Message, MessageContent } from "~/components/ui/message"
+```
+
+```tsx showLineNumbers
+<Message>
+  <MessageContent>How can I help you today?</MessageContent>
+</Message>
 ```
 
 Compose `MessageAvatar`, `MessageHeader`, `MessageContent`, and `MessageFooter`. Set `align="end"` for outgoing messages. Content can contain bubbles, attachments, code blocks, and traces.

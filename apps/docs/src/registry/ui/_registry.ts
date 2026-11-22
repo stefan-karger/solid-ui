@@ -5,7 +5,7 @@ export const ui: Registry["items"] = [
     name: "attachment",
     type: "registry:ui",
     dependencies: ["class-variance-authority"],
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "style-utilities"],
     files: [
       {
         path: "ui/attachment.tsx",
@@ -29,7 +29,7 @@ export const ui: Registry["items"] = [
     name: "marker",
     type: "registry:ui",
     dependencies: ["class-variance-authority"],
-    registryDependencies: ["utils"],
+    registryDependencies: ["utils", "style-utilities"],
     files: [
       {
         path: "ui/marker.tsx",
@@ -53,7 +53,7 @@ export const ui: Registry["items"] = [
     name: "trace",
     type: "registry:ui",
     dependencies: ["lucide-solid"],
-    registryDependencies: ["collapsible", "utils"],
+    registryDependencies: ["collapsible", "utils", "style-utilities"],
     files: [
       {
         path: "ui/trace.tsx",
@@ -65,7 +65,7 @@ export const ui: Registry["items"] = [
     name: "code-block",
     type: "registry:ui",
     dependencies: ["class-variance-authority", "lucide-solid"],
-    registryDependencies: ["button", "utils"],
+    registryDependencies: ["button", "utils", "style-utilities"],
     files: [
       {
         path: "ui/code-block.tsx",
@@ -158,13 +158,13 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    name: "sonner",
+    name: "toast",
     type: "registry:ui",
     dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
     registryDependencies: ["button", "utils"],
     files: [
       {
-        path: "ui/sonner.tsx",
+        path: "ui/toast.tsx",
         type: "registry:ui"
       }
     ]
@@ -182,10 +182,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    registryDependencies: [],
     name: "accordion",
     type: "registry:ui",
     dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    registryDependencies: ["style-utilities"],
     files: [
       {
         path: "ui/accordion.tsx",
@@ -685,10 +685,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
-    registryDependencies: [],
     name: "tabs",
     type: "registry:ui",
     dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
+    registryDependencies: ["style-utilities"],
     files: [
       {
         path: "ui/tabs.tsx",
@@ -722,7 +722,7 @@ export const ui: Registry["items"] = [
     name: "toggle-group",
     type: "registry:ui",
     dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
-    registryDependencies: ["toggle"],
+    registryDependencies: ["toggle", "style-utilities"],
     files: [
       {
         path: "ui/toggle-group.tsx",

@@ -1,4 +1,4 @@
-// Adapted from shadcn/ui at f50887a (MIT, see vendor/shadcn/LICENSE).
+// Adapted from shadcn/ui at f50887a (MIT, see the project LICENSE).
 import MessageScrollerDemo from "~/registry/examples/message-scroller-demo"
 
 import { AccountAccess } from "./account-access"

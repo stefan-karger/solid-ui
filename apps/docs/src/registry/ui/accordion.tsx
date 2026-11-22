@@ -76,10 +76,7 @@ type AccordionContentProps = Omit<
 const AccordionContent = (props: AccordionContentProps) => {
   const others = omit(props, "class", "children")
   return (
-    <SdkAccordionPanel
-      class="cn-accordion-content overflow-hidden [--radix-accordion-content-height:var(--accordion-panel-height)]"
-      {...others}
-    >
+    <SdkAccordionPanel class="cn-accordion-content overflow-hidden" {...others}>
       <div
         class={cn(
           "cn-accordion-content-inner h-(--accordion-panel-height) [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
