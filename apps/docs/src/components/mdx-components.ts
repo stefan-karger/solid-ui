@@ -1,3 +1,4 @@
+import AiPatternGrid from "~/components/ai-pattern-grid.astro"
 import ComponentPreview from "~/components/component-preview.astro"
 import ComponentSource from "~/components/component-source.astro"
 import ComponentsList from "~/components/components-list.astro"
@@ -48,6 +49,7 @@ import Tr from "~/components/docs/tr.astro"
 import Ul from "~/components/docs/ul.astro"
 
 export const mdxComponents = {
+  AiPatternGrid,
   ComponentPreview,
   ComponentSource,
   ComponentsList,

@@ -1,4 +1,4 @@
-import { highlightCode } from "~/registry/lib/code-highlighter"
+import { highlightCode } from "~/registry/lib/highlighter"
 
 import { isDocsStyle } from "./appearance"
 

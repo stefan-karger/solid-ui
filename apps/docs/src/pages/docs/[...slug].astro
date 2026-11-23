@@ -23,7 +23,6 @@ type Props = {
 
 const { page } = Astro.props
 const { Content, headings } = await render(page)
-const isIntroduction = toRouteId(page.id) === ""
 const pages = await getCollection("docs")
 const neighbors = findNeighbors(pages, page.id)
 const markdown = formatDocsMarkdown(page, pages)
@@ -35,7 +34,9 @@ const markdown = formatDocsMarkdown(page, pages)
   headings={headings}
 >
   <article
-    aria-label={isIntroduction ? "Introduction" : "MDX component examples"}
+    aria-label={
+      page.data.component ? "MDX component examples" : page.data.title
+    }
     class="mx-auto w-full max-w-160 px-4 pt-6 pb-14 font-sans text-[1.05rem] sm:text-[15px] md:px-0 lg:pt-12 [&_[data-rehype-pretty-code-figure]:first-child]:mt-0"
     data-slot="docs"
   >

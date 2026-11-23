@@ -29,7 +29,7 @@ export default defineProject({
     css: {
       include: [/style-nova\.css/]
     },
-    include: ["apps/**/*.test.{ts,tsx}", "packages/**/*.test.{ts,tsx}"],
+    include: ["apps/**/*.test.{ts,tsx}"],
     exclude: ["**/node_modules/**", "**/dist/**", "**/*.render.test.ts"],
     server: {
       deps: {

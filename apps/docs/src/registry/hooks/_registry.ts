@@ -6,8 +6,8 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     dependencies: ["shiki"],
     files: [
-      { path: "hooks/use-highlighted-code.tsx", type: "registry:hook" },
-      { path: "lib/code-highlighter.ts", type: "registry:lib" }
+      { path: "hooks/use-highlighted-code.ts", type: "registry:hook" },
+      { path: "lib/highlighter.tsx", type: "registry:lib" }
     ]
   },
   {

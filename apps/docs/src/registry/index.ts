@@ -1,11 +1,12 @@
-import { examples } from "~/registry/examples/_registry"
-import { hooks } from "~/registry/hooks/_registry"
-import { lib } from "~/registry/lib/_registry"
-import type { Registry } from "~/registry/schema"
-import { ui } from "~/registry/ui/_registry"
+import { examples } from "./examples/_registry.ts"
+import { aiExamples } from "./examples/ai-elements/_registry.ts"
+import { hooks } from "./hooks/_registry.ts"
+import { lib } from "./lib/_registry.ts"
+import type { Registry } from "./schema.ts"
+import { ui } from "./ui/_registry.ts"
 
 export const registry = {
   name: "SolidUI",
   homepage: "https://www.solid-ui.com",
-  items: [...lib, ...ui, ...hooks, ...examples]
+  items: [...lib, ...ui, ...hooks, ...examples, ...aiExamples]
 } satisfies Registry

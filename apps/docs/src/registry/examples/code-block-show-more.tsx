@@ -69,7 +69,7 @@ export default function CodeBlockShowMore() {
           id={id}
           lineNumbers
           class={
-            expanded() ? undefined : "max-h-64 scroll-fade-y overflow-y-hidden"
+            expanded() ? undefined : "max-h-64 overflow-y-hidden scroll-fade-y"
           }
         >
           <For each={lines()}>

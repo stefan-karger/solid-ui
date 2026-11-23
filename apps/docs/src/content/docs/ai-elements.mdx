@@ -1,0 +1,54 @@
+---
+title: AI Elements
+description: Patterns for agentic interfaces, built from Solid UI components.
+---
+
+AI Elements are patterns for building agentic interfaces. Each one is a composition of Solid UI components that you copy into your project. There is no package to install. The code is yours.
+
+A [Chat](/docs/ai-elements/chat/) is a list of [Message](/docs/ai-elements/message/) turns inside a [Message Scroller](/docs/components/message-scroller/). The steps an agent takes inside a turn, like [Reasoning](/docs/ai-elements/reasoning/), [Tool](/docs/ai-elements/tool/) and [Plan](/docs/ai-elements/plan/), are built on [Trace](/docs/components/trace/), so every step has the same shape.
+
+**Building a chatbot?** Start from the [streaming chat example](/docs/components/message-scroller/#following-the-live-edge).
+
+**Coming from [elements.ai-sdk.dev](https://elements.ai-sdk.dev)?** See [Migrating from AI SDK Elements](#migrating-from-ai-sdk-elements).
+
+## Patterns
+
+<AiPatternGrid />
+
+## Migrating from AI SDK Elements
+
+If you used AI SDK Elements from [elements.ai-sdk.dev](https://elements.ai-sdk.dev), here is what changes.
+
+### Existing projects
+
+You do not need to migrate. When you installed components from elements.ai-sdk.dev, the code was copied into your project. It is yours, and it keeps working as is.
+
+### What replaces each element
+
+| AI SDK Elements        | Solid UI                                                |
+| ---------------------- | ------------------------------------------------------- |
+| `agent.tsx`            | [Subagent](/docs/ai-elements/subagent/)                 |
+| `attachments.tsx`      | [Attachment](/docs/components/attachment/)              |
+| `chain-of-thought.tsx` | [Chain of Thought](/docs/ai-elements/chain-of-thought/) |
+| `checkpoint.tsx`       | [Checkpoint](/docs/ai-elements/checkpoint/)             |
+| `code-block.tsx`       | [Code Block](/docs/components/code-block/)              |
+| `commit.tsx`           | [Trace](/docs/components/trace/#commit)                 |
+| `confirmation.tsx`     | [Confirmation](/docs/ai-elements/confirmation/)         |
+| `context.tsx`          | [Context](/docs/ai-elements/context/)                   |
+| `conversation.tsx`     | [Chat](/docs/ai-elements/chat/)                         |
+| `file-tree.tsx`        | [File Tree](/docs/ai-elements/file-tree/)               |
+| `inline-citation.tsx`  | [Inline Citation](/docs/ai-elements/inline-citation/)   |
+| `message.tsx`          | [Message](/docs/ai-elements/message/)                   |
+| `model-selector.tsx`   | [Model Selector](/docs/ai-elements/model-selector/)     |
+| `plan.tsx`             | [Plan](/docs/ai-elements/plan/)                         |
+| `prompt-input.tsx`     | [Prompt Input](/docs/ai-elements/prompt-input/)         |
+| `question.tsx`         | [Questionnaire](/docs/components/questionnaire/)        |
+| `queue.tsx`            | [Queue](/docs/ai-elements/queue/)                       |
+| `reasoning.tsx`        | [Reasoning](/docs/ai-elements/reasoning/)               |
+| `sources.tsx`          | [Sources](/docs/ai-elements/sources/)                   |
+| `stack-trace.tsx`      | [Stack Trace](/docs/ai-elements/stack-trace/)           |
+| `suggestion.tsx`       | [Suggestion](/docs/ai-elements/suggestion/)             |
+| `task.tsx`             | [Task](/docs/ai-elements/task/)                         |
+| `terminal.tsx`         | [Terminal](/docs/ai-elements/terminal/)                 |
+| `test-results.tsx`     | [Test Results](/docs/ai-elements/test-results/)         |
+| `tool.tsx`             | [Tool](/docs/ai-elements/tool/)                         |

@@ -1,7 +1,7 @@
 import { render } from "@solidjs/web"
 import { afterEach, expect, it, vi } from "vitest"
 
-import { highlightCodeTokens } from "../lib/code-highlighter"
+import { highlightCodeTokens } from "../lib/highlighter"
 import { CodeBlockCopyButton } from "./code-block"
 
 let dispose: VoidFunction | undefined

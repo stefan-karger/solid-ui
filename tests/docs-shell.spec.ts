@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises"
+
 import { expect, test } from "@playwright/test"
 
 import { styles } from "../apps/docs/src/lib/appearance"
@@ -13,7 +15,9 @@ test("publishes installable and legacy CLI registry JSON in the production build
     const response = await request.get(path)
     expect(response.ok()).toBe(true)
     expect(response.headers()["content-type"]).toContain("application/json")
-    return response.json()
+    const body = await response.text()
+    expect(body).toBe(await readFile(`apps/docs/public${path}`, "utf8"))
+    return JSON.parse(body)
   }
 
   const index = registryIndexSchema.parse(await json("/r/index.json"))
@@ -192,6 +196,78 @@ test("links the home page, docs, component catalog and project from the shared s
   await expect(updates).toHaveAttribute("aria-expanded", "true")
   await navigation.getByRole("link", { name: "Home" }).click()
   await expect(page).toHaveURL("/")
+})
+
+test("lists AI patterns with working Solid UI examples in the docs", async ({
+  page,
+  request
+}) => {
+  await page.goto("/docs/components/trace/")
+  await page
+    .getByRole("article")
+    .getByRole("link", { name: "AI Elements" })
+    .click()
+  await expect(page).toHaveURL(/\/docs\/ai-elements\/?$/)
+  const article = page.getByRole("article", { name: "AI Elements" })
+  await expect(article.getByRole("heading", { name: "Patterns" })).toBeVisible()
+  await expect(
+    page
+      .getByRole("navigation", { name: "Documentation", exact: true })
+      .getByRole("link", { name: "AI Elements" })
+  ).toHaveAttribute("aria-current", "page")
+  await expect(
+    article
+      .getByRole("navigation", { name: "Page navigation", exact: true })
+      .getByRole("link", { name: "Previous page, Components" })
+  ).toHaveAttribute("href", "/docs/components/")
+
+  const grid = article.locator('[data-slot="ai-pattern-grid"]')
+  const table = article.getByRole("table").first()
+  await expect(table.locator("..")).toHaveCSS("border-top-width", "0px")
+  await expect(table.getByRole("row").first()).toHaveCSS(
+    "border-bottom-width",
+    "1px"
+  )
+  const links = await grid
+    .getByRole("link")
+    .evaluateAll((cards) =>
+      cards.map((card) => (card as HTMLAnchorElement).href)
+    )
+  expect(links).toHaveLength(21)
+  await Promise.all(
+    links.map(async (link) => {
+      const { pathname } = new URL(link)
+      expect(pathname).toMatch(/^\/docs\/ai-elements\/[^/]+\/$/)
+      const response = await request.get(pathname)
+      expect(response.ok(), pathname).toBe(true)
+      expect(await response.text(), link).toContain(
+        'data-slot="component-preview"'
+      )
+    })
+  )
+
+  const markdown = await request.get("/docs/ai-elements.md")
+  expect(markdown.ok()).toBe(true)
+  expect(await markdown.text()).toContain(
+    "- [Chain of Thought](/docs/ai-elements/chain-of-thought/)"
+  )
+})
+
+test("streams the confirmation example through a tool decision", async ({
+  page
+}) => {
+  await page.goto("/docs/ai-elements/confirmation/")
+  const preview = page
+    .locator('[data-slot="component-preview"] astro-island')
+    .first()
+  await preview.scrollIntoViewIfNeeded()
+  await expect(preview).not.toHaveAttribute("ssr", "")
+  await preview.getByRole("button", { name: "Send message" }).click()
+  await preview.getByRole("button", { name: "Deny", exact: true }).click()
+  await expect(
+    preview.getByText("Okay, I left the dist folder in place.")
+  ).toBeVisible()
+  await expect(preview.getByText(/^Denied rm/)).toBeVisible()
 })
 
 test("copies docs Markdown and offers the page actions and pagination", async ({

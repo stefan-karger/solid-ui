@@ -49,14 +49,16 @@ npx solidui-cli@latest add button
 
 <ComponentSource
   name="use-highlighted-code"
-  file="hooks/use-highlighted-code.tsx"
-  title="hooks/use-highlighted-code.tsx"
+  file="hooks/use-highlighted-code.ts"
+  title="hooks/use-highlighted-code.ts"
+  class="mt-4"
 />
 
 <ComponentSource
   name="use-highlighted-code"
-  file="lib/code-highlighter.ts"
-  title="lib/code-highlighter.ts"
+  file="lib/highlighter.tsx"
+  title="lib/highlighter.tsx"
+  class="mt-4"
 />
 
 <Step>Update the import paths to match your project setup.</Step>
@@ -250,7 +252,7 @@ Shiki uses its JavaScript regex engine, so there is no WASM to load.
 
 ### Languages
 
-Configure the available grammars in `lib/code-highlighter.ts`. Unrecognized languages render as plain text.
+Configure the available grammars in `lib/highlighter.tsx`. Unrecognized languages render as plain text.
 
 <ComponentPreview name="code-block-languages" previewClassName="h-auto" />
 
@@ -370,7 +372,7 @@ A row below the content, such as for a Show More button.
 
 Returns an accessor for the highlighted lines. Unrecognized languages render as plain text.
 
-| Argument   | Type               | Description                                                      |
-| ---------- | ------------------ | ---------------------------------------------------------------- |
-| `code`     | `Accessor<string>` | The code to highlight.                                           |
-| `language` | `Accessor<string>` | A language or alias from `lib/code-highlighter.ts`, or `"ansi"`. |
+| Argument   | Type               | Description                                                  |
+| ---------- | ------------------ | ------------------------------------------------------------ |
+| `code`     | `Accessor<string>` | The code to highlight.                                       |
+| `language` | `Accessor<string>` | A language or alias from `lib/highlighter.tsx`, or `"ansi"`. |

@@ -537,7 +537,7 @@ test("message scroller releases and resumes following growing content", async ({
   await expect.poll(atEnd).toBe(true)
 })
 
-test("code block preserves empty lines, diff markers, and copies its source", async ({
+test("code block fades overflow, wraps, copies, and preserves its line variants", async ({
   page,
   context
 }) => {
@@ -547,6 +547,32 @@ test("code block preserves empty lines, diff markers, and copies its source", as
   await expect(code.locator('[data-slot="code-block-line"]').nth(1)).toHaveText(
     "\n"
   )
+  const block = code.locator('[data-slot="code-block"]')
+  const content = block.locator('[data-slot="code-block-content"]')
+  const wrap = block.getByRole("button", { name: "Wrap lines" })
+  const overflows = () =>
+    content.evaluate((element) => element.scrollWidth > element.clientWidth)
+  const mask = () =>
+    content.evaluate((element) => getComputedStyle(element).maskImage)
+  await expect(block).toHaveCSS("border-top-left-radius", "18px")
+  await expect(block).toHaveCSS("border-top-width", "0px")
+  await expect(content).toHaveCSS(
+    "mask-image",
+    /linear-gradient\(to right.*min\(/
+  )
+  await expect.poll(overflows).toBe(true)
+  const startMask = await mask()
+  await content.evaluate(
+    (element) => (element.scrollLeft = element.scrollWidth)
+  )
+  await expect.poll(mask).not.toBe(startMask)
+  await wrap.click()
+  await expect(wrap).toHaveAttribute("aria-pressed", "true")
+  await expect(content).toHaveCSS(
+    "mask-image",
+    /linear-gradient\((?:to bottom|rgba)/
+  )
+  await expect.poll(overflows).toBe(false)
   await code.getByRole("button", { name: "Copy code" }).click()
   await expect(code.getByRole("button", { name: "Copied" })).toBeVisible()
   expect(
@@ -565,10 +591,30 @@ test("code block preserves empty lines, diff markers, and copies its source", as
     "Hello, {name}!",
     "</p>"
   ])
+
+  await page.getByRole("tab", { name: "Manual", exact: true }).click()
+  for (const file of ["hooks/use-highlighted-code.ts", "lib/highlighter.tsx"]) {
+    const source = page.getByRole("figure", { name: file, exact: true })
+    await expect(source).toBeVisible()
+    await expect(source).toHaveAttribute("data-registry-path", file)
+  }
 })
 
 test("trace disclosures toggle details with keyboard", async ({ page }) => {
   const trace = await example(page, "trace")
+  const diff = trace.getByRole("button", { name: /^Ran git diff/ })
+  const failure = trace.getByRole("button", { name: /^Failed to run pnpm/ })
+  const failureTitle = failure.locator('[data-slot="trace-title"]')
+  const chevron = failure.locator(':scope > [data-slot="trace-icon"] svg')
+  const replay = trace.getByRole("button", { name: "Replay", exact: true })
+  await expect(diff).toHaveAttribute("aria-expanded", "true")
+  await expect(trace.getByText(/1 file changed/)).toBeVisible()
+  const errorColor = await failureTitle.evaluate(
+    (element) => getComputedStyle(element).color
+  )
+  await expect(chevron).toHaveCSS("stroke", errorColor)
+  await expect(replay.locator("svg")).toBeVisible()
+
   const trigger = trace.getByRole("button", { name: "Used 2 sources" })
   const reference = trace.getByRole("link", { name: /^Continuous Integration/ })
   await trigger.focus()
@@ -577,6 +623,11 @@ test("trace disclosures toggle details with keyboard", async ({ page }) => {
   await expect(reference).toBeVisible()
   await trigger.press("Space")
   await expect(reference).toBeHidden()
+
+  await replay.click()
+  await expect(replay).toBeDisabled()
+  await expect(replay.locator("svg")).toBeVisible()
+  await expect(diff).toHaveAttribute("aria-expanded", "true")
 })
 
 test("questionnaire validates, preserves answers, and completes across step types", async ({

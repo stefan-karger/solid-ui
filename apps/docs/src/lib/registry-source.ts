@@ -37,6 +37,33 @@ const SCRIPT_LANGUAGES = new Set<RegistrySourceLanguage>([
 ])
 const preparedStyleMaps = new Map<string, Map<string, string>>()
 
+export function normalizeRegistryPath(
+  path: string,
+  itemName = "unknown"
+): string {
+  if (
+    !path ||
+    /^[a-zA-Z]:[\\/]/.test(path) ||
+    path.startsWith("/") ||
+    path.startsWith("\\")
+  ) {
+    throw new Error(
+      `[registry] Item "${itemName}" has an invalid absolute or empty path: "${path}"`
+    )
+  }
+
+  const normalized = path.replaceAll("\\", "/")
+  const segments = normalized.split("/")
+  if (
+    segments.some((segment) => !segment || segment === "." || segment === "..")
+  ) {
+    throw new Error(
+      `[registry] Item "${itemName}" has an invalid path segment: "${path}"`
+    )
+  }
+  return normalized
+}
+
 export function inferRegistryLanguage(path: string): RegistrySourceLanguage {
   const extension = path.split(".").pop()?.toLowerCase()
   return extension === "tsx" ||

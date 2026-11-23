@@ -71,7 +71,7 @@ export default function CodeBlockShowMoreScroll() {
           class={
             expanded()
               ? "max-h-96 scroll-fade-y"
-              : "max-h-64 scroll-fade-y overflow-y-hidden"
+              : "max-h-64 overflow-y-hidden scroll-fade-y"
           }
         >
           <For each={lines()}>

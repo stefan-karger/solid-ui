@@ -173,7 +173,7 @@ export function CodeBlockContent(
         ...props.style
       }}
       class={cn(
-        "cn-code-block-content min-h-0 min-w-0 overflow-auto text-start font-mono outline-none data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap",
+        "cn-code-block-content min-h-0 min-w-0 scrollbar-thin overflow-auto scroll-fade-x text-start font-mono outline-none data-wrap:scroll-fade-y data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap",
         props.class
       )}
     >

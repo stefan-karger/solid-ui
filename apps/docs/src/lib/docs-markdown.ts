@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content"
 
+import { aiPatterns } from "~/lib/ai-patterns"
 import {
   createComponentLinks,
   toDocsPath,
@@ -24,6 +25,14 @@ export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
   const body = (page.body ?? "")
     .replace(/<ComponentsList\s+variant=["']new["']\s*\/>/g, () => list("new"))
     .replace(/<ComponentsList\s*\/>/g, () => list("all"))
+    .replace(/<AiPatternGrid\s*\/>/g, () =>
+      aiPatterns
+        .map(
+          ({ title, href, description }) =>
+            `- [${title}](${href}) — ${description}`
+        )
+        .join("\n")
+    )
     .trim()
 
   return [

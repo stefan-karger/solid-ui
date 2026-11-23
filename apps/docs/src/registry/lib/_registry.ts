@@ -2,6 +2,18 @@ import type { Registry } from "~/registry/schema"
 
 export const lib: Registry["items"] = [
   {
+    name: "ai-demo-chat",
+    type: "registry:lib",
+    files: [{ path: "lib/ai-demo-chat.ts", type: "registry:lib" }]
+  },
+  {
+    name: "ai-demo-markdown",
+    type: "registry:lib",
+    dependencies: ["micromark"],
+    registryDependencies: ["code-block"],
+    files: [{ path: "lib/ai-demo-markdown.tsx", type: "registry:lib" }]
+  },
+  {
     name: "style-utilities",
     type: "registry:style",
     dependencies: ["tw-animate-css"],

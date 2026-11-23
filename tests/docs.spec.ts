@@ -2,12 +2,12 @@ import { readdirSync } from "node:fs"
 
 import { expect, test } from "@playwright/test"
 
-const pages = readdirSync("apps/docs/dist/docs/components", {
-  withFileTypes: true
-})
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => entry.name)
-  .sort()
+const pages = ["components", "ai-elements"].flatMap((section) =>
+  readdirSync(`apps/docs/dist/docs/${section}`, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => `${section}/${entry.name}`)
+    .sort()
+)
 
 for (const slug of pages) {
   test(`hydrates every preview on the ${slug} docs page`, async ({ page }) => {
@@ -16,7 +16,7 @@ for (const slug of pages) {
     page.on("console", (message) => {
       if (message.type() === "error") errors.push(message.text())
     })
-    const response = await page.goto(`/docs/components/${slug}/`)
+    const response = await page.goto(`/docs/${slug}/`)
     expect(response?.status()).toBe(200)
     const islands = page.locator("astro-island")
     for (const island of await islands.all()) {
@@ -28,7 +28,7 @@ for (const slug of pages) {
         "The component preview could not be loaded."
       )
     }
-    if (slug === "navigation-menu") {
+    if (slug === "components/navigation-menu") {
       const preview = page.locator('article[data-slot="docs"]')
       await preview
         .getByRole("button", { name: "Getting started", exact: true })

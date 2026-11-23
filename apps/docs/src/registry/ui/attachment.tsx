@@ -191,7 +191,7 @@ export function AttachmentGroup(
       {...props}
       data-slot="attachment-group"
       class={cn(
-        "cn-attachment-group flex min-w-0 scroll-fade-x snap-x snap-mandatory scrollbar-none overflow-x-auto overscroll-x-contain *:data-[slot=attachment]:flex-none *:data-[slot=attachment]:snap-start",
+        "cn-attachment-group flex min-w-0 snap-x snap-mandatory scrollbar-none overflow-x-auto overscroll-x-contain scroll-fade-x *:data-[slot=attachment]:flex-none *:data-[slot=attachment]:snap-start",
         props.class
       )}
     />

@@ -118,7 +118,7 @@ export function TraceCollapsibleTrigger(
     <CollapsibleTrigger
       {...rest}
       class={cn(
-        "cn-trace-collapsible-trigger group/trace-collapsible-trigger flex w-fit max-w-full min-w-0 cursor-pointer items-center text-left text-muted-foreground outline-none hover:text-foreground",
+        "cn-trace-collapsible-trigger group/trace-collapsible-trigger flex w-fit max-w-full min-w-0 cursor-pointer items-center text-left text-muted-foreground transition-colors outline-none hover:text-foreground has-[[data-slot=trace-line][data-status=error]]:text-destructive",
         props.class
       )}
       render={(part, state) => {

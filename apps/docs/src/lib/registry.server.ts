@@ -10,6 +10,7 @@ import {
 
 import {
   ACTIVE_REGISTRY_STYLE,
+  normalizeRegistryPath,
   prepareRegistrySource,
   type PreparedRegistrySource
 } from "./registry-source"
@@ -58,32 +59,7 @@ export type PreviewDescriptor = {
   blockPreview: boolean
 }
 
-export function normalizeRegistryPath(
-  path: string,
-  itemName = "unknown"
-): string {
-  if (
-    !path ||
-    /^[a-zA-Z]:[\\/]/.test(path) ||
-    path.startsWith("/") ||
-    path.startsWith("\\")
-  ) {
-    throw new Error(
-      `[registry] Item "${itemName}" has an invalid absolute or empty path: "${path}"`
-    )
-  }
-
-  const normalized = path.replaceAll("\\", "/")
-  const segments = normalized.split("/")
-  if (
-    segments.some((segment) => !segment || segment === "." || segment === "..")
-  ) {
-    throw new Error(
-      `[registry] Item "${itemName}" has an invalid path segment: "${path}"`
-    )
-  }
-  return normalized
-}
+export { normalizeRegistryPath } from "./registry-source"
 
 export function toRegistryModuleId(path: string, itemName?: string): string {
   return `/src/registry/${normalizeRegistryPath(path, itemName)}`

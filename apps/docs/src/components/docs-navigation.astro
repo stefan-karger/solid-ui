@@ -20,7 +20,9 @@ const { navigation, currentPath } = Astro.props
               data-active={
                 currentPath === link.href ||
                 (link.href === "/docs/components" &&
-                  currentPath.startsWith("/docs/components/"))
+                  currentPath.startsWith("/docs/components/")) ||
+                (link.href === "/docs/ai-elements" &&
+                  currentPath.startsWith("/docs/ai-elements/"))
                   ? ""
                   : undefined
               }

@@ -27,7 +27,8 @@ const commands = [
   {
     command: "git diff --stat HEAD~1 -- package.json pnpm-lock.yaml",
     output:
-      " package.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)"
+      " package.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    defaultOpen: true
   },
   {
     command: "pnpm install --frozen-lockfile",
@@ -110,7 +111,7 @@ export default function TraceDemo() {
                       </TraceLine>
                     }
                   >
-                    <TraceCollapsible>
+                    <TraceCollapsible defaultOpen={row.defaultOpen ?? false}>
                       <TraceCollapsibleTrigger>
                         <TraceLine status={row.failed ? "error" : undefined}>
                           <TraceIcon>
@@ -191,7 +192,7 @@ export default function TraceDemo() {
         disabled={running()}
         onClick={replay}
       >
-        <RotateCcwIcon /> Replay
+        <RotateCcwIcon aria-hidden="true" data-icon="inline-start" /> Replay
       </Button>
     </div>
   )

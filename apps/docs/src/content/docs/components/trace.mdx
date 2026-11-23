@@ -16,19 +16,19 @@ Use `Trace` for the steps an agent takes, like calling a tool, running a subagen
 
 Every pattern below is a composition of `Trace` parts. See [AI Elements](/docs/ai-elements) for examples and code.
 
-| Pattern                                                      | Shows                                                            |
-| ------------------------------------------------------------ | ---------------------------------------------------------------- |
-| [Chain of Thought](/docs/ai-elements/radix/chain-of-thought) | A summary that expands into the steps behind it.                 |
-| [Plan](/docs/ai-elements/radix/plan)                         | The steps the agent plans to take, and how far it has got.       |
-| [Queue](/docs/ai-elements/radix/queue)                       | The agent's todo list, split into what is left and what is done. |
-| [Reasoning](/docs/ai-elements/radix/reasoning)               | The agent's thinking as it streams.                              |
-| [Sources](/docs/ai-elements/radix/sources)                   | The links the agent used for a reply.                            |
-| [Stack Trace](/docs/ai-elements/radix/stack-trace)           | A failed tool call and its stack frames.                         |
-| [Subagent](/docs/ai-elements/radix/subagent)                 | A subagent run, with its tool calls and result.                  |
-| [Task](/docs/ai-elements/radix/task)                         | The steps the agent takes, as it takes them.                     |
-| [Terminal](/docs/ai-elements/radix/terminal)                 | A command the agent runs, with its output as it streams.         |
-| [Test Results](/docs/ai-elements/radix/test-results)         | A test run by the agent, with its suites and failures.           |
-| [Tool](/docs/ai-elements/radix/tool)                         | A tool call the agent makes, from input to output.               |
+| Pattern                                                 | Shows                                                            |
+| ------------------------------------------------------- | ---------------------------------------------------------------- |
+| [Chain of Thought](/docs/ai-elements/chain-of-thought/) | A summary that expands into the steps behind it.                 |
+| [Plan](/docs/ai-elements/plan/)                         | The steps the agent plans to take, and how far it has got.       |
+| [Queue](/docs/ai-elements/queue/)                       | The agent's todo list, split into what is left and what is done. |
+| [Reasoning](/docs/ai-elements/reasoning/)               | The agent's thinking as it streams.                              |
+| [Sources](/docs/ai-elements/sources/)                   | The links the agent used for a reply.                            |
+| [Stack Trace](/docs/ai-elements/stack-trace/)           | A failed tool call and its stack frames.                         |
+| [Subagent](/docs/ai-elements/subagent/)                 | A subagent run, with its tool calls and result.                  |
+| [Task](/docs/ai-elements/task/)                         | The steps the agent takes, as it takes them.                     |
+| [Terminal](/docs/ai-elements/terminal/)                 | A command the agent runs, with its output as it streams.         |
+| [Test Results](/docs/ai-elements/test-results/)         | A test run by the agent, with its suites and failures.           |
+| [Tool](/docs/ai-elements/tool/)                         | A tool call the agent makes, from input to output.               |
 
 ## Installation
 
@@ -197,15 +197,11 @@ A collapsible row whose detail is a `Trace` of link rows.
 
 <ComponentPreview name="trace-sources" previewClassName="h-auto" />
 
-See [Sources](/docs/ai-elements/radix/sources) for more examples.
-
 ## Chain of Thought
 
 A chain of thought is a collapsible row with step rows inside. Set the parent's status and title from its children.
 
 <ComponentPreview name="trace-steps" previewClassName="h-auto" />
-
-See [Chain of Thought](/docs/ai-elements/radix/chain-of-thought) and [Task](/docs/ai-elements/radix/task) for more examples.
 
 ## Commit
 
@@ -225,15 +221,11 @@ Render a `reasoning` part from the AI SDK. The row is a `TraceLine` until the fi
 
 <ComponentPreview name="trace-thinking" previewClassName="h-auto" />
 
-See [Reasoning](/docs/ai-elements/radix/reasoning) for more examples.
-
 ## Tool
 
-Render tool parts from the AI SDK. Map the tool part as in [Tool](/docs/ai-elements/radix/tool#states).
+Use a running row while the tool is working. When it completes, show the output inside a collapsible row and set the error status if the call failed.
 
 <ComponentPreview name="trace-tool-calls" previewClassName="h-auto" />
-
-See [Tool](/docs/ai-elements/radix/tool) for more examples.
 
 ## Accessibility
 

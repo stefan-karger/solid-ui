@@ -79,50 +79,39 @@
   inherits: false;
 }
 
-@theme inline {
-  @keyframes scroll-fade-reveal-t {
-    from {
-      --scroll-fade-t: 0px;
-    }
-    to {
-      --scroll-fade-t: var(
-        --_scroll-fade-size-t,
-        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
-      );
-    }
+@keyframes scroll-fade-reveal-t {
+  from {
+    --scroll-fade-t: 0px;
   }
-  @keyframes scroll-fade-reveal-b {
-    from {
-      --scroll-fade-b: var(
-        --_scroll-fade-size-b,
-        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
-      );
-    }
-    to {
-      --scroll-fade-b: 0px;
-    }
+  to {
+    --scroll-fade-t: var(--_scroll-fade-size-t);
   }
-  @keyframes scroll-fade-reveal-s {
-    from {
-      --scroll-fade-s: 0px;
-    }
-    to {
-      --scroll-fade-s: var(
-        --_scroll-fade-size-s,
-        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
-      );
-    }
+}
+
+@keyframes scroll-fade-reveal-b {
+  from {
+    --scroll-fade-b: var(--_scroll-fade-size-b);
   }
-  @keyframes scroll-fade-reveal-e {
-    from {
-      --scroll-fade-e: var(
-        --_scroll-fade-size-e,
-        var(--scroll-fade-size, min(12%, calc(var(--spacing) * 10)))
-      );
-    }
-    to {
-      --scroll-fade-e: 0px;
-    }
+  to {
+    --scroll-fade-b: 0px;
+  }
+}
+
+@keyframes scroll-fade-reveal-s {
+  from {
+    --scroll-fade-s: 0px;
+  }
+  to {
+    --scroll-fade-s: var(--_scroll-fade-size-s);
+  }
+}
+
+@keyframes scroll-fade-reveal-e {
+  from {
+    --scroll-fade-e: var(--_scroll-fade-size-e);
+  }
+  to {
+    --scroll-fade-e: 0px;
   }
 }
 
@@ -150,9 +139,10 @@
   mask-repeat: no-repeat;
 
   @supports (animation-timeline: scroll()) {
-    animation:
-      scroll-fade-reveal-t 1ms ease-in-out,
-      scroll-fade-reveal-b 1ms ease-in-out;
+    /* Chromium requires a separate timeline declaration after minification. */
+    animation-name: scroll-fade-reveal-t, scroll-fade-reveal-b;
+    animation-duration: 1ms;
+    animation-timing-function: ease-in-out;
     animation-timeline: scroll(self y), scroll(self y);
     animation-range:
       0 var(--scroll-fade-reveal, calc(var(--spacing) * 24)),
@@ -199,9 +189,9 @@
   mask-repeat: no-repeat;
 
   @supports (animation-timeline: scroll()) {
-    animation:
-      scroll-fade-reveal-s 1ms ease-in-out,
-      scroll-fade-reveal-e 1ms ease-in-out;
+    animation-name: scroll-fade-reveal-s, scroll-fade-reveal-e;
+    animation-duration: 1ms;
+    animation-timing-function: ease-in-out;
     animation-timeline: scroll(self inline), scroll(self inline);
     animation-range:
       0 var(--scroll-fade-reveal, calc(var(--spacing) * 24)),

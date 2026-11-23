@@ -25,9 +25,9 @@ for code and styles adapted from shadcn/ui.
 
 ## Publishing the Registry
 
-The normal Astro build uses the same catalog and source exporter as the docs
-to write the public registry JSON. Run `pnpm --filter docs build` to generate
-the site and registry together.
+Run `pnpm --filter docs build` to build the site. The `prebuild` script uses
+the same catalog and source exporter as the docs and generates the registry
+before Astro starts. Run `pnpm --filter docs prebuild` to refresh only the registry.
 
 | URL                             | Contents                                                    |
 | ------------------------------- | ----------------------------------------------------------- |
@@ -36,10 +36,11 @@ the site and registry together.
 | `/registry/index.json`          | Catalog for the published Solid UI CLI                      |
 | `/registry/ui/<name>.json`      | Default-style TypeScript source in the published CLI format |
 
-The files live under `apps/docs/dist`, which Git ignores. The build includes
-registry dependencies found in component imports and uses the workspace's
-tested versions for npm dependencies. Missing registry files and dependency
-cycles fail the build.
+The generated files live in `apps/docs/public/r` and
+`apps/docs/public/registry`. Git ignores both directories. Astro copies
+them into `dist` when building the site. The registry includes dependencies
+found in component imports and uses the workspace's tested npm versions.
+Missing registry files and dependency cycles fail the prebuild.
 
 Use `apps/docs` as the Vercel project root. Its build configuration runs
 `pnpm build` and publishes `dist`, including the registry from the same

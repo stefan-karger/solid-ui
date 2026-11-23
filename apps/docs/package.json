@@ -7,6 +7,8 @@
     "build": "astro build",
     "check": "astro check",
     "dev": "astro dev",
+    "prebuild": "node scripts/build-registry.ts",
+    "predev": "node scripts/build-registry.ts",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -45,6 +47,7 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "lucide-solid": "1.41.0",
+    "micromark": "4.0.2",
     "rehype-pretty-code": "0.14.5",
     "shiki": "4.5.0",
     "solid-js": "2.0.1",

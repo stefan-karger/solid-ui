@@ -1,4 +1,5 @@
-import type { HighlighterCore } from "shiki/core"
+import type { HighlighterCore, ThemedToken } from "shiki/core"
+import { For } from "solid-js"
 
 let highlighter: Promise<HighlighterCore> | undefined
 async function loadHighlighter() {
@@ -58,6 +59,25 @@ export async function highlightCodeTokens(code: string, language: string) {
     defaultColor: false,
     cssVariablePrefix: "--token-"
   }).tokens
+}
+
+export function renderHighlightedLines(lines: ThemedToken[][]) {
+  return lines.map((line) =>
+    line.length === 0 ? (
+      ""
+    ) : (
+      <For each={line}>
+        {(token) => (
+          <span
+            class="text-(--token-light) dark:text-(--token-dark)"
+            style={token.htmlStyle}
+          >
+            {token.content}
+          </span>
+        )}
+      </For>
+    )
+  )
 }
 
 export async function highlightCode(code: string, language = "text") {

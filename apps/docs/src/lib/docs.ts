@@ -32,6 +32,11 @@ export type PageNeighbors<T> = {
 }
 
 const DOC_EXTENSION_PATTERN = /\.mdx?$/
+const docsSections = [
+  { title: "Introduction", routeId: "" },
+  { title: "Components", routeId: "components" },
+  { title: "AI Elements", routeId: "ai-elements" }
+]
 
 export function toRouteId(id: string) {
   const routeId = id.replace(DOC_EXTENSION_PATTERN, "")
@@ -53,23 +58,20 @@ export function toDocsPath(routeId: string) {
 }
 
 export function sortDocsPages<T extends DocsPageLike>(pages: readonly T[]) {
+  const order = new Map(
+    docsSections.map(({ routeId }, index) => [routeId, index])
+  )
+  const sectionOrder = (id: string) =>
+    order.get(id) ??
+    (id.startsWith("ai-elements/") ? order.get("ai-elements")! : order.size)
   return pages.toSorted((a, b) => {
     const aRouteId = toRouteId(a.id)
     const bRouteId = toRouteId(b.id)
-
-    if (aRouteId === bRouteId) {
-      return a.id.localeCompare(b.id)
-    }
-
-    if (aRouteId === "") {
-      return -1
-    }
-
-    if (bRouteId === "") {
-      return 1
-    }
-
-    return aRouteId.localeCompare(bRouteId)
+    return (
+      sectionOrder(aRouteId) - sectionOrder(bRouteId) ||
+      aRouteId.localeCompare(bRouteId) ||
+      a.id.localeCompare(b.id)
+    )
   })
 }
 
@@ -127,12 +129,18 @@ export function createDocsNavigation(
   return [
     {
       title: "Sections",
-      links: [
-        { title: "Introduction", href: "/docs" },
-        { title: "Components", href: "/docs/components" }
-      ]
+      links: docsSections.map(({ title, routeId }) => ({
+        title,
+        href: toDocsPath(routeId)
+      }))
     },
-    { title: "Components", links: createComponentLinks(pages) }
+    { title: "Components", links: createComponentLinks(pages) },
+    {
+      title: "AI Elements",
+      links: sortDocsPages(pages)
+        .filter((page) => toRouteId(page.id).startsWith("ai-elements/"))
+        .map((page) => ({ title: page.data.title, href: toDocsPath(page.id) }))
+    }
   ]
 }
 
