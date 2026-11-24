@@ -190,7 +190,7 @@ for (const theme of styles) {
   test(`${theme} dark mode applies parent-relative variants`, async ({
     page
   }) => {
-    // Sera keeps upstream's outlined checked state, which never applies a fill.
+    // The resume example starts on a radio, which Sera outlines instead of filling.
     if (theme !== "sera") {
       await openExample(page, "questionnaire", theme, true)
       const resume = page.locator('astro-island[props*="questionnaire-resume"]')
