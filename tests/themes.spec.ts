@@ -235,6 +235,38 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} menus stay opaque outside the preset preview`, async ({
+    page
+  }) => {
+    const alpha = (node: Element) => {
+      const probe = document.createElement("canvas").getContext("2d")!
+      probe.fillStyle = getComputedStyle(node).backgroundColor
+      probe.fillRect(0, 0, 1, 1)
+      return probe.getImageData(0, 0, 1, 1).data[3]
+    }
+
+    await openExample(page, "select", theme)
+    await page
+      .locator('[data-slot="preview"] [data-slot="select-trigger"]')
+      .first()
+      .click()
+    const select = page.locator('[data-slot="select-content"]:visible').first()
+    await expect(select).toBeVisible()
+    expect(await select.evaluate(alpha)).toBe(255)
+    await page.keyboard.press("Escape")
+
+    await openExample(page, "dropdown-menu", theme)
+    await page
+      .locator('[data-slot="preview"] [data-slot="menu-trigger"]')
+      .first()
+      .click()
+    const menu = page.getByRole("menu").first()
+    await expect(menu).toBeVisible()
+    expect(await menu.evaluate(alpha)).toBe(255)
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {
@@ -261,7 +293,10 @@ test("native chips preserve the input, remove selections, and clear single value
 
   const single = previews.locator('astro-island[props*="combobox-clear"]')
   await single.getByRole("combobox").fill("Nuxt")
-  await page.getByRole("option", { name: "Nuxt.js", exact: true }).click()
+  await page
+    .getByRole("listbox", { name: "Select a framework" })
+    .getByRole("option", { name: "Nuxt.js", exact: true })
+    .click()
   const clear = single.getByRole("button", { name: "Clear selection" })
   await expect(clear).toBeVisible()
   await clear.click()

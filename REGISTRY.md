@@ -29,6 +29,11 @@ Inside theme files, write parent-relative variants before `dark:`, as in
 `.style-*` scope, the reverse order compiles to a selector that never matches.
 `registry-theme.test.ts` rejects the reverse order.
 
+Menu surfaces carry `cn-menu-target` and `cn-menu-translucent` as upstream does.
+They only take effect in the preset preview, where the preset's menu color
+inverts or blurs every menu. The exporter strips both tokens, matching shadcn's
+default `menuColor`, so installed menus are opaque.
+
 ## Publishing the Registry
 
 Run `pnpm --filter docs build` to build the site. The `prebuild` script uses

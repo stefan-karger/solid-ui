@@ -41,7 +41,7 @@ const DropdownMenuContent = (props: DropdownMenuContentProps) => (
     <SdkMenuContent
       {...props}
       class={cn(
-        "cn-dropdown-menu-content z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        "cn-dropdown-menu-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
         props.class
       )}
     />
@@ -140,7 +140,7 @@ const DropdownMenuSubContent = (props: DropdownMenuSubContentProps) => (
     <SdkMenuSubContent
       {...props}
       class={cn(
-        "cn-dropdown-menu-sub-content z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        "cn-dropdown-menu-sub-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
         props.class
       )}
     />

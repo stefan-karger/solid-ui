@@ -85,6 +85,10 @@ export function getRegistryDisplayPath(
   return registryPath
 }
 
+// Menu color helpers only apply in the preset preview. Like shadcn with its
+// default menu color, the exported source drops them.
+const PRESET_ONLY_TOKENS = new Set(["cn-menu-target", "cn-menu-translucent"])
+
 export function extractStyleMap(
   styleCss: string,
   styleName: string
@@ -147,7 +151,7 @@ export function extractStyleMap(
       )
     }
 
-    result.set(token, utilities)
+    if (!PRESET_ONLY_TOKENS.has(token)) result.set(token, utilities)
     selector.lastIndex = cursor
   }
 

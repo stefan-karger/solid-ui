@@ -44,7 +44,7 @@ const ContextMenuContent = (props: ContextMenuContentProps) => (
     <SdkMenuContent
       {...props}
       class={cn(
-        "cn-context-menu-content z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
+        "cn-context-menu-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
         props.class
       )}
     />
@@ -141,7 +141,7 @@ const ContextMenuSubContent = (props: ContextMenuSubContentProps) => (
     <SdkMenuSubContent
       {...props}
       class={cn(
-        "cn-context-menu-content cn-context-menu-sub-content cn-context-menu-subcontent z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
+        "cn-context-menu-content cn-context-menu-sub-content cn-context-menu-subcontent cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
         props.class
       )}
     />

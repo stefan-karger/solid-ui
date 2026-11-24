@@ -326,11 +326,26 @@ test("heading font, inversion and transparency apply to their intended elements"
   await expect(page.locator("astro-island[ssr]")).toHaveCount(0)
   await trigger.click()
   await expect(menu).toHaveCSS("background-color", "oklch(0.216 0.006 56.043)")
+  await page.keyboard.press("Escape")
+  const currency = page.locator("#preferred-currency")
+  const select = page.locator('[data-slot="select-content"]:visible')
+  await currency.click()
+  await expect(select).toHaveCSS(
+    "background-color",
+    "oklch(0.216 0.006 56.043)"
+  )
+  await page.keyboard.press("Escape")
 
   await page.goto(`${preview}?preset=b3`)
   await expect(page.locator("astro-island[ssr]")).toHaveCount(0)
   await trigger.click()
   await expect(menu).toHaveCSS(
+    "background-color",
+    /(?:oklab|oklch)\(0\.205 0 0 \/ 0\.7\)/
+  )
+  await page.keyboard.press("Escape")
+  await currency.click()
+  await expect(select).toHaveCSS(
     "background-color",
     /(?:oklab|oklch)\(0\.205 0 0 \/ 0\.7\)/
   )

@@ -59,7 +59,9 @@ describe("shadcn presets", () => {
     expect(theme.radius).toBe("0.875rem")
     expect(theme.light.accent).toBe(theme.light.primary)
     expect(theme.invertedMenu).toBe(true)
-    expect(presetThemeCss(theme)).toContain("html[data-preset-preview] :is(")
+    expect(presetThemeCss(theme)).toContain(
+      "html[data-preset-preview] .cn-menu-target{"
+    )
   })
 
   it("keeps translucent accents subtle and applies the radius limits of each style", () => {

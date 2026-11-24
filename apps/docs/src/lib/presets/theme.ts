@@ -181,8 +181,6 @@ function cssRule(selector: string, tokens: Record<string, string | undefined>) {
 
 export function presetThemeCss(theme: ReturnType<typeof resolvePresetTheme>) {
   const root = "html[data-preset-preview]"
-  const menu =
-    ".cn-menu-target,.cn-dropdown-menu-content,.cn-dropdown-menu-sub-content"
   return [
     cssRule(root, {
       ...theme.light,
@@ -190,6 +188,6 @@ export function presetThemeCss(theme: ReturnType<typeof resolvePresetTheme>) {
       "preview-font-heading": `"${theme.headingFamily}", var(--preview-font-sans)`
     }),
     cssRule(`${root}.dark`, theme.dark),
-    theme.invertedMenu ? cssRule(`${root} :is(${menu})`, theme.dark) : ""
+    theme.invertedMenu ? cssRule(`${root} .cn-menu-target`, theme.dark) : ""
   ].join("\n")
 }

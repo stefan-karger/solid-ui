@@ -57,7 +57,7 @@ const MenubarContent = (props: MenubarContentProps) => (
     <SdkMenuContent
       {...props}
       class={cn(
-        "cn-menubar-content z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        "cn-menubar-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
         props.class
       )}
     />
@@ -238,7 +238,7 @@ const MenubarSubContent = (props: MenubarSubContentProps) => (
     <SdkMenuSubContent
       {...props}
       class={cn(
-        "cn-menubar-sub-content z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        "cn-menubar-sub-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
         props.class
       )}
     />
