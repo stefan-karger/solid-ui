@@ -525,8 +525,20 @@ test("expands the full installation source and keeps the example preview capped"
   const preview = page
     .locator('[data-code-collapsible][data-variant="preview"]')
     .first()
-  await preview.getByRole("button", { name: "View Code", exact: true }).click()
+  const viewCode = preview.getByRole("button", {
+    name: "View Code",
+    exact: true
+  })
+  await viewCode.press("Enter")
   await expect(preview.locator("pre")).toHaveCSS("max-height", "288px")
+  // Keyboard focus follows the one visible control.
+  const collapse = preview.getByRole("button", { name: "Collapse" })
+  await expect(viewCode).toBeHidden()
+  await expect(collapse).toBeVisible()
+  await expect(collapse).toBeFocused()
+  await collapse.press("Enter")
+  await expect(collapse).toBeHidden()
+  await expect(viewCode).toBeFocused()
 })
 
 test("persists style and color mode and offers matching registry source", async ({

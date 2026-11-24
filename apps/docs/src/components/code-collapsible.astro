@@ -27,25 +27,32 @@ const isPreview = variant === "preview"
     <slot />
   </div>
 
-  {!isPreview && (
-    <div
-      class="absolute top-1.5 right-9 z-20 items-center"
-      data-code-control
-      data-code-top-control
+  <div
+    class={cn(
+      "absolute z-20 items-center",
+      isPreview ? "top-3 right-13" : "top-1.5 right-9"
+    )}
+    data-code-control
+    data-code-top-control
+  >
+    <button
+      class={cn(
+        "inline-flex h-7 items-center rounded-md px-2 text-sm text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        isPreview && "bg-code"
+      )}
+      data-code-toggle
+      data-code-top-toggle
+      type="button"
     >
-      <button
-        class="inline-flex h-7 items-center rounded-md px-2 text-sm text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50"
-        data-code-toggle
-        type="button"
-      >
-        <span data-code-label-collapsed>Expand</span>
-        <span data-code-label-expanded hidden>
-          Collapse
-        </span>
-      </button>
+      <span data-code-label-collapsed>Expand</span>
+      <span data-code-label-expanded hidden>
+        Collapse
+      </span>
+    </button>
+    {!isPreview && (
       <span aria-hidden="true" class="mx-1.5 h-4 w-px bg-border" />
-    </div>
-  )}
+    )}
+  </div>
 
   <div
     class={cn(
@@ -64,6 +71,7 @@ const isPreview = variant === "preview"
           : "h-8 rounded-md px-3 text-muted-foreground hover:text-foreground"
       )}
       data-code-toggle
+      data-code-reveal-toggle
       type="button"
     >
       <span data-code-label-collapsed>

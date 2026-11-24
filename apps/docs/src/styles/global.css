@@ -435,6 +435,12 @@
     display: flex;
   }
 
+  /* A collapsed preview offers only the View Code overlay. */
+  [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"][data-variant="preview"]
+    [data-code-top-control] {
+    display: none;
+  }
+
   [data-code-collapsible][data-code-enhanced="true"][data-expanded="false"]
     [data-code-reveal] {
     display: flex;

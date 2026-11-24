@@ -31,10 +31,27 @@ function initializeCodeCollapsible(root: HTMLElement) {
   setExpanded(false)
   root.dataset.codeEnhanced = "true"
 
+  const top = root.querySelector<HTMLButtonElement>("[data-code-top-toggle]")
+  const reveal = root.querySelector<HTMLButtonElement>(
+    "[data-code-reveal-toggle]"
+  )
+
   for (const toggle of toggles) {
-    toggle.addEventListener("click", () =>
-      setExpanded(root.dataset.expanded !== "true")
-    )
+    toggle.addEventListener("click", () => {
+      const expanded = root.dataset.expanded !== "true"
+      const hadFocus = document.activeElement === toggle
+      setExpanded(expanded)
+      if (!hadFocus) return
+      // The reveal overlay hides while expanded, and a collapsed preview hides
+      // its top control, so focus follows the control that stays visible.
+      if (expanded && toggle === reveal) top?.focus()
+      else if (
+        !expanded &&
+        toggle === top &&
+        root.dataset.variant === "preview"
+      )
+        reveal?.focus()
+    })
   }
 }
 
