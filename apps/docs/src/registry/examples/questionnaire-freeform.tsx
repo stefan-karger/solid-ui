@@ -27,6 +27,7 @@ export default function QuestionnaireFreeform() {
     <>
       <Toaster toaster={toast} />
       <Questionnaire
+        shortcuts="letters"
         class="mx-auto max-w-md"
         steps={["approach"]}
         required={["approach"]}

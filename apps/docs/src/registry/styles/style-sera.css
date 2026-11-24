@@ -1444,6 +1444,10 @@
     @apply size-4.5 translate-y-[--spacing(0.45)] border-input group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 group-data-checked/questionnaire-choice:border-foreground group-data-[type=checkbox]/questionnaire-choice:group-data-checked/questionnaire-choice:border-primary group-data-[type=checkbox]/questionnaire-choice:group-data-checked/questionnaire-choice:bg-primary group-data-[type=checkbox]/questionnaire-choice:group-data-checked/questionnaire-choice:text-primary-foreground;
   }
 
+  .cn-questionnaire-choice-indicator-dot {
+    @apply size-2 bg-foreground;
+  }
+
   .cn-questionnaire-choice-indicator-check {
     @apply size-3.5;
   }
@@ -1454,6 +1458,14 @@
 
   .cn-questionnaire-choice-description {
     @apply text-muted-foreground;
+  }
+
+  .cn-questionnaire-shortcut {
+    @apply size-5 translate-y-[--spacing(0.45)] items-center justify-center rounded-none border border-input bg-background font-mono text-[0.625rem] leading-none font-medium text-muted-foreground group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5;
+  }
+
+  .cn-questionnaire-input-wrapper {
+    @apply w-full;
   }
 
   .cn-questionnaire-input {

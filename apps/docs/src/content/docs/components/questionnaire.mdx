@@ -113,8 +113,8 @@ close and cancellation behavior, persistence, transport, and branching.
 
 ## Server Rendering
 
-Pass `items` to server-render the active item, progress, actions, and answer
-shortcuts. Use `useQuestionnaire` to read the active step and answers when building custom controls.
+The active item, progress, actions, and answer shortcuts render on the server
+from `steps` and the default answers. Use `useQuestionnaire` to read the active step and answers when building custom controls.
 
 ## Multiple Selection
 
@@ -148,7 +148,7 @@ Add `QuestionnaireSkip` when an optional item may be intentionally left unanswer
 
 ## Shortcuts
 
-Assign a letter or number key to each answer with `shortcuts`.
+Assign a letter or number key to each answer with `shortcuts`. Each choice shows its key, and pressing it selects the choice in the active item. Keys are case-insensitive and follow the order of the choices: `"letters"` assigns A to Z, and `"numbers"` assigns 1 to 9. Typing in a text field does not trigger shortcuts.
 
 <ComponentPreview
   align="end"
@@ -266,4 +266,4 @@ Use native forms and `useQuestionnaire` to build custom controls around the ques
 
 ## API Reference
 
-The root takes `steps`, `required`, `value`, `defaultValue`, `step`, and `defaultStep`. Subscribe with `onValueChange`, `onStepChange`, and `onComplete`. Navigation buttons also accept the Button `size` and `variant` props. `QuestionnaireActions` is a layout wrapper.
+The root takes `steps`, `required`, `value`, `defaultValue`, `step`, `defaultStep`, and `shortcuts` (`"letters"` or `"numbers"`). Subscribe with `onValueChange`, `onStepChange`, and `onComplete`. Navigation buttons also accept the Button `size` and `variant` props. `QuestionnaireActions` is a layout wrapper.

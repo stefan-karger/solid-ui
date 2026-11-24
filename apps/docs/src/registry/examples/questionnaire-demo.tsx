@@ -43,6 +43,7 @@ export default function QuestionnaireDemo() {
     <>
       <Toaster toaster={toast} />
       <Questionnaire
+        shortcuts="letters"
         class="mx-auto max-w-md"
         steps={["direction", "signals", "timing"]}
         required={["direction", "timing"]}

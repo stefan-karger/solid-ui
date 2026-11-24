@@ -26,6 +26,7 @@ export default function QuestionnaireMultiple() {
     <>
       <Toaster toaster={toast} />
       <Questionnaire
+        shortcuts="letters"
         class="mx-auto max-w-md"
         steps={["context"]}
         required={["context"]}

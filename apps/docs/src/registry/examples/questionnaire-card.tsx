@@ -45,6 +45,7 @@ export default function QuestionnaireCard() {
         </CardHeader>
         <CardContent>
           <Questionnaire
+            shortcuts="numbers"
             class="mx-auto max-w-md"
             steps={["task", "output"]}
             required={["task", "output"]}

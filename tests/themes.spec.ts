@@ -366,6 +366,65 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} questionnaire shows dots, checks and shortcuts`, async ({
+    page
+  }) => {
+    await openExample(page, "questionnaire", theme)
+    const previews = page.locator('[data-slot="component-preview"]')
+    const display = (locator: ReturnType<typeof page.locator>) =>
+      locator.evaluate((node) => getComputedStyle(node).display)
+
+    const demo = previews.locator('astro-island[props*="questionnaire-demo"]')
+    const radio = demo.locator('[data-slot="questionnaire-choice"]').first()
+    await radio.getByRole("radio").click()
+    await expect(radio).toHaveAttribute("data-checked", "")
+    expect(
+      await display(
+        radio.locator('[data-slot="questionnaire-choice-indicator-dot"]')
+      )
+    ).not.toBe("none")
+    expect(
+      await display(
+        radio.locator('[data-slot="questionnaire-choice-indicator-check"]')
+      )
+    ).toBe("none")
+
+    const multiple = previews.locator(
+      'astro-island[props*="questionnaire-multiple"]'
+    )
+    const checkbox = multiple
+      .locator('[data-slot="questionnaire-choice"]')
+      .first()
+    await checkbox.getByRole("checkbox").click()
+    await expect(checkbox).toHaveAttribute("data-checked", "")
+    expect(
+      await display(
+        checkbox.locator('[data-slot="questionnaire-choice-indicator-check"]')
+      )
+    ).not.toBe("none")
+    expect(
+      await display(
+        checkbox.locator('[data-slot="questionnaire-choice-indicator-dot"]')
+      )
+    ).toBe("none")
+
+    const shortcuts = previews.locator(
+      'astro-island[props*="questionnaire-shortcuts"]'
+    )
+    const badges = shortcuts.locator(
+      '[data-slot="questionnaire-choice-shortcut"]'
+    )
+    await expect(badges).toHaveText(["A", "B", "C"])
+    await expect(badges.first()).toBeVisible()
+    await shortcuts.getByRole("radio").first().focus()
+    await page.keyboard.press("b")
+    await expect(
+      shortcuts.locator('[data-slot="questionnaire-choice"]').nth(1)
+    ).toHaveAttribute("data-checked", "")
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {

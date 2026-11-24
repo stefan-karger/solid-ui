@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js"
 
+import { NativeSelect, NativeSelectOption } from "~/registry/ui/native-select"
 import {
   Questionnaire,
   QuestionnaireItem,
@@ -9,56 +10,41 @@ import {
   QuestionnaireError,
   QuestionnaireActions,
   QuestionnaireSubmit,
-  QuestionnaireDescription
+  QuestionnaireDescription,
+  type QuestionnaireShortcutMode
 } from "~/registry/ui/questionnaire"
 import { createToaster, Toaster } from "~/registry/ui/toast"
 
 export default function QuestionnaireShortcuts() {
   const toast = createToaster()
-  const [mode, setMode] = createSignal("letters")
+  const [mode, setMode] = createSignal<QuestionnaireShortcutMode | "none">(
+    "letters"
+  )
 
   return (
-    <div class="w-full max-w-md text-start">
+    <div class="relative mx-auto flex w-full max-w-md flex-col text-start">
       <Toaster toaster={toast} />
-      <label class="mb-2 flex gap-2 text-sm">
-        Shortcuts
-        <select
-          value={mode()}
-          onChange={(event) => setMode(event.currentTarget.value)}
-        >
-          <option value="letters">Letters</option>
-          <option value="numbers">Numbers</option>
-          <option value="none">None</option>
-        </select>
-      </label>
+      <NativeSelect
+        aria-label="Shortcut style"
+        class="absolute end-0 top-0"
+        value={mode()}
+        onChange={(event) =>
+          setMode(
+            event.currentTarget.value as QuestionnaireShortcutMode | "none"
+          )
+        }
+      >
+        <NativeSelectOption value="none">No shortcuts</NativeSelectOption>
+        <NativeSelectOption value="letters">Letters</NativeSelectOption>
+        <NativeSelectOption value="numbers">Numbers</NativeSelectOption>
+      </NativeSelect>
       <Questionnaire
-        class="mx-auto max-w-md"
+        class="mt-16"
         steps={["action"]}
         required={["action"]}
-        onKeyDown={(event) => {
-          if (
-            event.altKey ||
-            event.ctrlKey ||
-            event.metaKey ||
-            mode() === "none" ||
-            event.target instanceof HTMLSelectElement
-          )
-            return
-          const index = (mode() === "letters" ? "abc" : "123").indexOf(
-            event.key.toLowerCase()
-          )
-          const choice =
-            index < 0
-              ? undefined
-              : event.currentTarget.querySelectorAll<HTMLInputElement>(
-                  'input[type="radio"]'
-                )[index]
-          if (choice) {
-            event.preventDefault()
-            choice.focus()
-            choice.click()
-          }
-        }}
+        shortcuts={
+          mode() === "none" ? undefined : (mode() as QuestionnaireShortcutMode)
+        }
         onComplete={() => toast("Action confirmed")}
       >
         <QuestionnaireItem value="action">

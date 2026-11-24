@@ -17,6 +17,7 @@ import {
   merge,
   omit,
   Show,
+  untrack,
   useContext
 } from "solid-js"
 
@@ -24,7 +25,18 @@ import { cn } from "~/lib/utils"
 import { Button, type ButtonProps } from "~/registry/ui/button"
 
 export type QuestionnaireAnswers = Record<string, string | string[]>
+export type QuestionnaireShortcutMode = "letters" | "numbers"
+function shortcutKeys(mode: QuestionnaireShortcutMode | undefined) {
+  if (mode === "letters")
+    return Array.from({ length: 26 }, (_, index) =>
+      String.fromCharCode(65 + index)
+    )
+  if (mode === "numbers")
+    return Array.from({ length: 9 }, (_, index) => String(index + 1))
+  return []
+}
 type QuestionnaireState = {
+  shortcuts: () => QuestionnaireShortcutMode | undefined
   steps: () => string[]
   step: () => number
   answers: () => QuestionnaireAnswers
@@ -34,7 +46,10 @@ type QuestionnaireState = {
 }
 const QuestionnaireContext = createContext<QuestionnaireState>()
 const ItemContext = createContext<{ value: string; id: string }>()
-const ChoiceContext = createContext<() => boolean>(() => false)
+const ChoiceContext = createContext<{
+  multiple: () => boolean
+  register: (value: string) => number
+}>({ multiple: () => false, register: () => -1 })
 export function useQuestionnaire() {
   const context = useContext(QuestionnaireContext)
   if (!context) throw new Error("Questionnaire parts require a Questionnaire")
@@ -59,6 +74,7 @@ type QuestionnaireProps = Omit<
   defaultStep?: number
   onStepChange?: (step: number) => void
   onComplete?: (answers: QuestionnaireAnswers) => void
+  shortcuts?: QuestionnaireShortcutMode | undefined
 }
 export function Questionnaire(props: QuestionnaireProps) {
   const rest = omit(
@@ -73,13 +89,16 @@ export function Questionnaire(props: QuestionnaireProps) {
     "defaultStep",
     "onStepChange",
     "onComplete",
-    "onReset"
+    "onReset",
+    "onKeyDown",
+    "shortcuts"
   )
   const [answers, setAnswers] = createSignal(props.defaultValue ?? {})
   const [step, setStep] = createSignal(props.defaultStep ?? 0)
   const [error, setError] = createSignal("")
   let form!: HTMLFormElement
   const state: QuestionnaireState = {
+    shortcuts: () => props.shortcuts,
     steps: () => props.steps,
     step: () =>
       Math.max(0, Math.min(props.step ?? step(), props.steps.length - 1)),
@@ -140,6 +159,34 @@ export function Questionnaire(props: QuestionnaireProps) {
           props.onValueChange?.(props.defaultValue ?? {})
           props.onStepChange?.(props.defaultStep ?? 0)
           setError("")
+        }}
+        onKeyDown={(event) => {
+          if (typeof props.onKeyDown === "function") props.onKeyDown(event)
+          else if (props.onKeyDown)
+            props.onKeyDown[0](props.onKeyDown[1], event)
+          if (
+            event.defaultPrevented ||
+            !props.shortcuts ||
+            event.altKey ||
+            event.ctrlKey ||
+            event.metaKey ||
+            (event.target as HTMLElement).matches(
+              "textarea, select, [contenteditable]:not([contenteditable=false]), input:not([type=radio]):not([type=checkbox])"
+            )
+          )
+            return
+          const key = event.key.length === 1 ? event.key.toUpperCase() : ""
+          if (!shortcutKeys(props.shortcuts).includes(key)) return
+          const control = form
+            .querySelector(
+              `fieldset:not([hidden]) [data-slot="questionnaire-choice"][data-shortcut="${key}"]`
+            )
+            ?.querySelector<HTMLElement>('[role="radio"], [role="checkbox"]')
+          if (!control) return
+          event.preventDefault()
+          if (event.repeat) return
+          control.focus()
+          control.click()
         }}
         onSubmit={(event) => {
           event.preventDefault()
@@ -214,8 +261,14 @@ export function QuestionnaireChoices(props: {
       props.class
     )
   const multiple = createMemo(() => props.multiple ?? false)
+  // Shortcuts follow render order, which is the same on the server and client.
+  const order: string[] = []
+  const register = (value: string) => {
+    if (!order.includes(value)) order.push(value)
+    return order.indexOf(value)
+  }
   return (
-    <ChoiceContext value={multiple}>
+    <ChoiceContext value={{ multiple, register }}>
       <Show
         when={props.multiple}
         fallback={
@@ -261,7 +314,12 @@ export function QuestionnaireChoice(props: {
 }) {
   const state = useQuestionnaire(),
     item = useItem(),
-    multiple = useContext(ChoiceContext)
+    choices = useContext(ChoiceContext),
+    multiple = choices.multiple,
+    // Register once in render order; a choice keeps its shortcut position.
+    position = untrack(() => choices.register(props.value))
+  const shortcut = () =>
+    shortcutKeys(state.shortcuts())[position] as string | undefined
   const checked = () =>
     multiple()
       ? state.answers()[item.value]?.includes(props.value)
@@ -272,6 +330,7 @@ export function QuestionnaireChoice(props: {
       data-type={multiple() ? "checkbox" : "radio"}
       data-checked={checked() || undefined}
       data-disabled={props.disabled || undefined}
+      data-shortcut={shortcut()}
       class={cn(
         "cn-questionnaire-choice group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start text-start outline-none select-none data-disabled:opacity-50",
         props.class
@@ -283,6 +342,7 @@ export function QuestionnaireChoice(props: {
           <SdkRadio
             value={props.value}
             disabled={props.disabled ?? false}
+            aria-keyshortcuts={shortcut()}
             class="cn-questionnaire-choice-input absolute inset-0 z-10 size-full opacity-0"
           />
         }
@@ -290,20 +350,36 @@ export function QuestionnaireChoice(props: {
         <SdkCheckbox
           value={props.value}
           disabled={props.disabled ?? false}
+          aria-keyshortcuts={shortcut()}
           class="cn-questionnaire-choice-input absolute inset-0 z-10 size-full opacity-0"
         />
       </Show>
       <span
         aria-hidden="true"
-        class="cn-questionnaire-choice-indicator pointer-events-none flex shrink-0 items-center justify-center border group-data-[type=radio]/questionnaire-choice:rounded-full"
+        data-slot="questionnaire-choice-indicator"
+        class="cn-questionnaire-choice-indicator pointer-events-none relative flex shrink-0 items-center justify-center border group-data-[type=radio]/questionnaire-choice:rounded-full"
       >
-        <Show when={checked()}>
-          <CheckIcon class="cn-questionnaire-choice-indicator-check size-3" />
-        </Show>
+        <span
+          data-slot="questionnaire-choice-indicator-dot"
+          class="cn-questionnaire-choice-indicator-dot hidden rounded-full group-data-[type=checkbox]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
+        />
+        <CheckIcon
+          data-slot="questionnaire-choice-indicator-check"
+          class="cn-questionnaire-choice-indicator-check hidden group-data-[type=radio]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
+        />
       </span>
       <span class="cn-questionnaire-choice-label cn-questionnaire-choice-content flex min-w-0 flex-1 flex-col leading-snug">
         {props.children}
       </span>
+      <Show when={shortcut()}>
+        <span
+          aria-hidden="true"
+          data-slot="questionnaire-choice-shortcut"
+          class="cn-questionnaire-choice-shortcut cn-questionnaire-shortcut pointer-events-none ms-auto hidden shrink-0 group-data-[shortcut]/questionnaire-choice:inline-flex"
+        >
+          {shortcut()}
+        </span>
+      </Show>
     </label>
   )
 }
@@ -328,18 +404,23 @@ export function QuestionnaireInput(
     item = useItem(),
     rest = omit(props, "class")
   return (
-    <SdkInput
-      {...rest}
-      name={item.value}
-      aria-labelledby={`${item.id}-title`}
-      aria-describedby={`${item.id}-description`}
-      value={String(state.answers()[item.value] ?? "")}
-      onValueChange={(value) => state.answer(item.value, value)}
-      class={cn(
-        "cn-questionnaire-input min-h-11 w-full min-w-0 border p-2 outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        props.class
-      )}
-    />
+    <div
+      data-slot="questionnaire-input-wrapper"
+      class="cn-questionnaire-input-wrapper group/questionnaire-input relative min-w-0"
+    >
+      <SdkInput
+        {...rest}
+        name={item.value}
+        aria-labelledby={`${item.id}-title`}
+        aria-describedby={`${item.id}-description`}
+        value={String(state.answers()[item.value] ?? "")}
+        onValueChange={(value) => state.answer(item.value, value)}
+        class={cn(
+          "cn-questionnaire-input min-h-11 w-full min-w-0 border p-2 outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          props.class
+        )}
+      />
+    </div>
   )
 }
 export function QuestionnaireProgress(props: ComponentProps<"div">) {
