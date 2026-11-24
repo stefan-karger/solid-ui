@@ -4,7 +4,7 @@ import { Button } from "~/registry/ui/button"
 
 export default function ButtonSize() {
   return (
-    <div class="flex flex-col items-start gap-8 sm:flex-row">
+    <div class="flex flex-col flex-wrap items-start gap-8 sm:flex-row">
       <div class="flex items-start gap-2">
         <Button size="xs" variant="outline">
           Extra Small

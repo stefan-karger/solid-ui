@@ -320,6 +320,52 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} keeps button and questionnaire examples inside their previews`, async ({
+    page
+  }) => {
+    for (const slug of ["button", "questionnaire"]) {
+      await openExample(page, slug, theme)
+      // Theme fonts change text widths once they load.
+      await page.evaluate(() => document.fonts.ready)
+      const clipped = await page.evaluate(() => {
+        const scrolls = (node: Element) =>
+          ["auto", "scroll"].includes(getComputedStyle(node).overflowX)
+        return [...document.querySelectorAll('[data-slot="preview"]')].flatMap(
+          (preview) => {
+            const bounds = preview.getBoundingClientRect()
+            return [...preview.querySelectorAll("*")]
+              .filter((node) => {
+                if (node.closest("[popover], dialog")) return false
+                for (
+                  let parent = node.parentElement;
+                  parent && parent !== preview;
+                  parent = parent.parentElement
+                )
+                  if (scrolls(parent)) return false
+                const box = node.getBoundingClientRect()
+                if (!box.width && !box.height) return false
+                return (
+                  box.right > bounds.right + 1 || box.left < bounds.left - 1
+                )
+              })
+              .map(
+                (node) =>
+                  `${
+                    node
+                      .closest("astro-island")
+                      ?.getAttribute("props")
+                      ?.match(/[a-z]+-[a-z-]+/)?.[0]
+                  }: ${node.textContent?.trim().slice(0, 20)}`
+              )
+          }
+        )
+      })
+      expect(clipped, slug).toEqual([])
+    }
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {

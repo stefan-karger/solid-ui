@@ -100,7 +100,7 @@ export default function QuestionnaireResume() {
           <QuestionnaireInput aria-label="Saved migration note" />
         </QuestionnaireItem>
 
-        <QuestionnaireActions>
+        <QuestionnaireActions class="flex-wrap">
           <Button type="reset" variant="outline">
             Reset changes
           </Button>
