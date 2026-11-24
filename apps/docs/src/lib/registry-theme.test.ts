@@ -48,4 +48,17 @@ describe("registry themes", () => {
       )
     })
   }
+
+  it("keeps the upstream nova code block", () => {
+    const map = extractStyleMap(
+      readFileSync(
+        resolve("apps/docs/src/registry/styles/style-nova.css"),
+        "utf8"
+      ),
+      "nova"
+    )
+    expect(map.get("cn-code-block")).toContain("rounded-lg")
+    expect(map.get("cn-code-block-variant-default")).toContain("border-input")
+    expect(map.get("cn-code-block-variant-default")).not.toContain("bg-muted")
+  })
 })

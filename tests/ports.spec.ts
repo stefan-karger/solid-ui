@@ -555,8 +555,9 @@ test("code block fades overflow, wraps, copies, and preserves its line variants"
     content.evaluate((element) => element.scrollWidth > element.clientWidth)
   const mask = () =>
     content.evaluate((element) => getComputedStyle(element).maskImage)
-  await expect(block).toHaveCSS("border-top-left-radius", "18px")
-  await expect(block).toHaveCSS("border-top-width", "0px")
+  // Nova keeps the upstream bordered block.
+  await expect(block).toHaveCSS("border-top-left-radius", "10px")
+  await expect(block).toHaveCSS("border-top-width", "1px")
   await expect(content).toHaveCSS(
     "mask-image",
     /linear-gradient\(to right.*min\(/
