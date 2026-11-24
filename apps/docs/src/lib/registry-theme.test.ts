@@ -49,6 +49,20 @@ describe("registry themes", () => {
     })
   }
 
+  for (const theme of ["luma", "rhea"])
+    it(`styles the ${theme} code block copy button like upstream`, () => {
+      const map = extractStyleMap(
+        readFileSync(
+          resolve(`apps/docs/src/registry/styles/style-${theme}.css`),
+          "utf8"
+        ),
+        theme
+      )
+      expect(map.get("cn-code-block-copy-button")).toBe(
+        "hover:bg-foreground/5 dark:hover:bg-foreground/10"
+      )
+    })
+
   it("keeps the upstream nova code block", () => {
     const map = extractStyleMap(
       readFileSync(

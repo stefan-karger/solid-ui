@@ -104,7 +104,7 @@ export function CodeBlock(
 export function CodeBlockCopyButton(
   props: Omit<ButtonProps, "onClick"> & { value: string; onCopy?: () => void }
 ) {
-  const rest = omit(props, "value", "onCopy", "children")
+  const rest = omit(props, "value", "onCopy", "children", "class")
   const [copied, setCopied] = createSignal(false)
   const [failed, setFailed] = createSignal(false)
   let timer: ReturnType<typeof setTimeout> | undefined
@@ -129,6 +129,7 @@ export function CodeBlockCopyButton(
         {...rest}
         data-slot="code-block-copy-button"
         data-copied={copied() || undefined}
+        class={cn("cn-code-block-copy-button", props.class)}
         aria-label={
           copied() ? "Copied" : failed() ? "Copy failed" : "Copy code"
         }
