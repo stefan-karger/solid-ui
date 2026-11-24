@@ -33,6 +33,12 @@ describe("registry themes", () => {
         "data-unchecked:rtl:-translate-x-"
       )
       expect(map.get("cn-switch")).toContain("data-checked:")
+      // Nested theme scopes compile `dark:group-*` to a selector that never matches.
+      for (const [token, utilities] of map)
+        expect(
+          utilities.match(/(?:^|\s)dark:(?:group|peer|in)-\S+/g) ?? [],
+          `${token} must write parent variants before dark:`
+        ).toEqual([])
       const prepared = await prepareRegistrySource(
         'const classes = "cn-slider-thumb"',
         { registryPath: "ui/test.tsx", styleName: theme, styleCss: css }

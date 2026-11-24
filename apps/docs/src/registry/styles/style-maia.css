@@ -703,7 +703,7 @@
 
   /* MARK: Kbd */
   .cn-kbd {
-    @apply h-5 w-fit min-w-5 gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background dark:in-data-[slot=tooltip-content]:bg-background/10 [&_svg:not([class*='size-'])]:size-3;
+    @apply h-5 w-fit min-w-5 gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background in-data-[slot=tooltip-content]:dark:bg-background/10 [&_svg:not([class*='size-'])]:size-3;
   }
 
   .cn-kbd-group {
@@ -1457,7 +1457,7 @@
   }
 
   .cn-questionnaire-choice-indicator {
-    @apply size-4 translate-y-[--spacing(0.45)] rounded-[6px] border-input group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 group-data-checked/questionnaire-choice:border-primary group-data-checked/questionnaire-choice:bg-primary group-data-checked/questionnaire-choice:text-primary-foreground dark:bg-input/30 dark:group-data-checked/questionnaire-choice:bg-primary;
+    @apply size-4 translate-y-[--spacing(0.45)] rounded-[6px] border-input group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 group-data-checked/questionnaire-choice:border-primary group-data-checked/questionnaire-choice:bg-primary group-data-checked/questionnaire-choice:text-primary-foreground dark:bg-input/30 group-data-checked/questionnaire-choice:dark:bg-primary;
   }
 
   .cn-questionnaire-choice-indicator-check {

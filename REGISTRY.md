@@ -23,6 +23,12 @@ variants, accordion keyframes, scroll fades, and shimmer. The docs and manual
 installation use the same file. The project LICENSE preserves the attribution
 for code and styles adapted from shadcn/ui.
 
+Inside theme files, write parent-relative variants before `dark:`, as in
+`group-data-checked/questionnaire-choice:dark:bg-primary` or
+`in-data-[slot=tooltip-content]:dark:bg-background/10`. Under the nested
+`.style-*` scope, the reverse order compiles to a selector that never matches.
+`registry-theme.test.ts` rejects the reverse order.
+
 ## Publishing the Registry
 
 Run `pnpm --filter docs build` to build the site. The `prebuild` script uses

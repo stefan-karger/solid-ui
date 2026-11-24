@@ -186,6 +186,55 @@ for (const theme of styles) {
   }
 }
 
+for (const theme of styles) {
+  test(`${theme} dark mode applies parent-relative variants`, async ({
+    page
+  }) => {
+    // Sera keeps upstream's outlined checked state, which never applies a fill.
+    if (theme !== "sera") {
+      await openExample(page, "questionnaire", theme, true)
+      const resume = page.locator('astro-island[props*="questionnaire-resume"]')
+      const indicator = resume
+        .locator('[data-slot="questionnaire-choice"][data-checked]')
+        .first()
+        .locator(".cn-questionnaire-choice-indicator")
+      const [indicatorColor, primary] = await indicator.evaluate((node) => {
+        const probe = document.createElement("span")
+        probe.style.backgroundColor = "var(--primary)"
+        node.append(probe)
+        const result = [
+          getComputedStyle(node).backgroundColor,
+          getComputedStyle(probe).backgroundColor
+        ]
+        probe.remove()
+        return result
+      })
+      expect(indicatorColor).toBe(primary)
+    }
+
+    await openExample(page, "kbd", theme, true)
+    const tooltip = page.locator('astro-island[props*="kbd-tooltip"]')
+    await tooltip.locator('[data-slot="tooltip-trigger"]').first().hover()
+    const kbd = page
+      .locator('[data-slot="tooltip-content"] [data-slot="kbd"]')
+      .first()
+    await expect(kbd).toBeVisible()
+    const [kbdColor, expected] = await kbd.evaluate((node) => {
+      const probe = document.createElement("span")
+      probe.style.backgroundColor =
+        "color-mix(in oklab, var(--background) 10%, transparent)"
+      node.append(probe)
+      const result = [
+        getComputedStyle(node).backgroundColor,
+        getComputedStyle(probe).backgroundColor
+      ]
+      probe.remove()
+      return result
+    })
+    expect(kbdColor).toBe(expected)
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {
