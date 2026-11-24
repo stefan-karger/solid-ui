@@ -912,7 +912,7 @@
   }
 
   .cn-select-list {
-    @apply p-1;
+    @apply has-[>[data-slot=select-item]]:p-1;
   }
 
   .cn-select-item-text {

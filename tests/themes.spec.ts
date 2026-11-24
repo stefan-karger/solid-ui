@@ -425,6 +425,42 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} select pads groups and uses the theme ring`, async ({
+    page
+  }) => {
+    await openExample(page, "select", theme)
+    const groups = page.locator(
+      '[data-slot="component-preview"] astro-island[props*="select-groups"]'
+    )
+    await groups.locator('[data-slot="select-trigger"]').click()
+    const content = page.locator('[data-slot="select-content"]:visible')
+    await expect(content).toBeVisible()
+    const groupPadding =
+      { lyra: "0px", luma: "6px", sera: "6px" }[theme] ?? "4px"
+    await expect(
+      content.locator('[data-slot="select-group"]').first()
+    ).toHaveCSS("padding-top", groupPadding)
+    await expect(content.locator('[data-slot="select-list"]')).toHaveCSS(
+      "padding-top",
+      "0px"
+    )
+    const [shadow, ring] = await content.evaluate((node, theme) => {
+      const probe = document.createElement("span")
+      const amount = ["maia", "luma", "rhea"].includes(theme) ? 5 : 10
+      probe.style.color = `color-mix(in oklab, var(--foreground) ${amount}%, transparent)`
+      node.append(probe)
+      const result = [
+        getComputedStyle(node).boxShadow,
+        getComputedStyle(probe).color
+      ]
+      probe.remove()
+      return result
+    }, theme)
+    expect(shadow).toContain(ring)
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {

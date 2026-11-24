@@ -97,6 +97,9 @@ as their renderer and own the interaction props they forward to it.
 
 - Switches retain each upstream shape, including round Lyra and square Sera. Thumbs inherit
   custom track corners, align at the track edge, and move in the reading direction.
+- The UI SDK Select has no scroll-arrow parts, so there is no `SelectScrollUpButton` or
+  `SelectScrollDownButton`; long lists scroll natively. Groups carry upstream's padding,
+  and the list pads only items rendered outside a group.
 
 - SDK owns slots, roles, references, and state attributes. A wrapper cannot rename
   `tabs-tab`, `tabs-panel`, `accordion-panel`, or `slider-indicator` by passing a

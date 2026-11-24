@@ -6,6 +6,17 @@ import { describe, expect, it } from "vitest"
 import { styles } from "./appearance"
 import { extractStyleMap, prepareRegistrySource } from "./registry-source"
 
+const upstreamSelectGroup: Record<(typeof styles)[number], string> = {
+  vega: "scroll-my-1 p-1",
+  nova: "scroll-my-1 p-1",
+  maia: "scroll-my-1 p-1",
+  lyra: "scroll-my-1",
+  mira: "scroll-my-1 p-1",
+  luma: "scroll-my-1.5 p-1.5",
+  sera: "scroll-my-1.5 p-1.5",
+  rhea: "scroll-my-1.5 p-1"
+}
+
 describe("registry themes", () => {
   for (const theme of styles) {
     it(`uses SDK state selectors in ${theme} and exports the same styles`, async () => {
@@ -25,8 +36,13 @@ describe("registry themes", () => {
       expect(map.get("cn-combobox-empty")).not.toContain("group-data-empty")
       expect(map.get("cn-navigation-menu-link")).toContain("data-current:")
       expect(map.get("cn-input-otp-slot")).toContain("data-active:")
-      expect(map.get("cn-select-list")).toMatch(/^p-\d+(?:\.\d+)?$/)
-      expect(map.get("cn-select-group")).not.toMatch(/\bp-[\d.]+\b/)
+      // Upstream pads each group; the list pads only ungrouped items.
+      expect(new Set(map.get("cn-select-group")!.split(" "))).toEqual(
+        new Set(upstreamSelectGroup[theme].split(" "))
+      )
+      expect(map.get("cn-select-list")).toMatch(
+        /^has-\[>\[data-slot=select-item\]\]:p-[\d.]+$/
+      )
       expect(map.get("cn-tabs-trigger")).not.toContain("data-selected:")
       expect(map.get("cn-switch-thumb")).toContain("rtl:-translate-x-")
       expect(map.get("cn-switch-thumb")).toContain(

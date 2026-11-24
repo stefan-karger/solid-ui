@@ -64,7 +64,7 @@ export default function DocsAppearance(props: { defaultStyle?: DocsStyle }) {
         >
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent class="ring-border">
           <For each={styles}>
             {(name) => (
               <SelectItem

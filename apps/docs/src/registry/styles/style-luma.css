@@ -173,11 +173,11 @@
   }
 
   .cn-select-group {
-    @apply scroll-my-1.5;
+    @apply scroll-my-1.5 p-1.5;
   }
 
   .cn-select-list {
-    @apply p-1.5;
+    @apply has-[>[data-slot=select-item]]:p-1.5;
   }
 
   .cn-select-item-text {
