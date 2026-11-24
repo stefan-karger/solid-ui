@@ -6,14 +6,16 @@ import {
   SliderThumb as SdkSliderThumb,
   SliderControl as SdkSliderControl
 } from "@ui-sdk/solid/slider"
-import { createMemo, For, merge } from "solid-js"
+import { createMemo, For, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 type SliderProps = Omit<ComponentProps<typeof SdkSlider<number[]>>, "class"> & {
   class?: string
+  thumbLabels?: readonly string[]
 }
 const Slider = (props: SliderProps) => {
   const local = merge({ min: 0, max: 100, defaultValue: [50] }, props)
+  const rest = omit(props, "thumbLabels")
 
   const thumbCount = createMemo(
     () => (local.value ?? local.defaultValue).length
@@ -23,7 +25,7 @@ const Slider = (props: SliderProps) => {
       defaultValue={local.defaultValue}
       min={local.min}
       max={local.max}
-      {...props}
+      {...rest}
       class={cn(
         "w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto",
         props.class
@@ -36,7 +38,7 @@ const Slider = (props: SliderProps) => {
             {(index) => (
               <SdkSliderThumb
                 index={index}
-                aria-label={`Value ${index + 1}`}
+                aria-label={props.thumbLabels?.[index] ?? `Value ${index + 1}`}
                 class="cn-slider-thumb block shrink-0 select-none disabled:pointer-events-none disabled:opacity-50"
               />
             )}

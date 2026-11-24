@@ -28,7 +28,7 @@ export function AnalyticsCard() {
       <svg
         viewBox="0 0 100 86"
         preserveAspectRatio="none"
-        class="aspect-[1/0.35] w-full text-primary"
+        class="aspect-[1/0.35] w-full text-chart-1"
         role="img"
         aria-label="Visitor trend"
       >

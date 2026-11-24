@@ -1,0 +1,195 @@
+import { baseColors, type Preset } from "./decode"
+// The OKLCH values come from shadcn/ui f50887a, apps/v4/registry/themes.ts (MIT).
+import palettes from "./shadcn-colors.json"
+
+export const fontFamilies: Record<Preset["font"], string> = {
+  inter: "Inter Variable",
+  "noto-sans": "Noto Sans Variable",
+  "nunito-sans": "Nunito Sans Variable",
+  figtree: "Figtree Variable",
+  roboto: "Roboto Variable",
+  raleway: "Raleway Variable",
+  "dm-sans": "DM Sans Variable",
+  "public-sans": "Public Sans Variable",
+  outfit: "Outfit Variable",
+  "jetbrains-mono": "JetBrains Mono Variable",
+  geist: "Geist Variable",
+  "geist-mono": "Geist Mono Variable",
+  lora: "Lora Variable",
+  merriweather: "Merriweather Variable",
+  "playfair-display": "Playfair Display Variable",
+  "noto-serif": "Noto Serif Variable",
+  "roboto-slab": "Roboto Slab Variable",
+  oxanium: "Oxanium Variable",
+  manrope: "Manrope Variable",
+  "space-grotesk": "Space Grotesk Variable",
+  montserrat: "Montserrat Variable",
+  "ibm-plex-sans": "IBM Plex Sans Variable",
+  "source-sans-3": "Source Sans 3 Variable",
+  "instrument-sans": "Instrument Sans Variable",
+  "eb-garamond": "EB Garamond Variable",
+  "instrument-serif": "Instrument Serif"
+}
+
+const radii = {
+  default: "0.625rem",
+  none: "0px",
+  small: "0.45rem",
+  medium: "0.625rem",
+  large: "0.875rem"
+} satisfies Record<Preset["radius"], string>
+
+export function isCompatiblePresetColor(
+  name: Preset["theme"],
+  base: Preset["baseColor"]
+) {
+  return (
+    name !== "gray" &&
+    (name === base || !baseColors.some((color) => color === name))
+  )
+}
+
+function resolvePalette(
+  name: Preset["theme"],
+  base: Exclude<Preset["baseColor"], "gray">
+) {
+  return name !== "gray" && isCompatiblePresetColor(name, base) ? name : base
+}
+
+// Swatches follow shadcn/ui 055aa6b, apps/v4/app/(app)/(create)/components/theme-picker.tsx (MIT).
+export function presetColorSwatch(color: Preset["theme"]) {
+  const { dark } = palettes[color === "gray" ? "neutral" : color]
+  return baseColors.some((base) => base === color) && "muted-foreground" in dark
+    ? dark["muted-foreground"]
+    : dark.primary
+}
+
+// Picker order and groups from shadcn/ui 055aa6b, apps/v4/lib/font-definitions.ts (MIT).
+export const fontGroups = [
+  {
+    label: "Sans",
+    fonts: [
+      "geist",
+      "inter",
+      "noto-sans",
+      "nunito-sans",
+      "figtree",
+      "roboto",
+      "raleway",
+      "dm-sans",
+      "public-sans",
+      "outfit",
+      "oxanium",
+      "manrope",
+      "space-grotesk",
+      "montserrat",
+      "ibm-plex-sans",
+      "source-sans-3",
+      "instrument-sans"
+    ]
+  },
+  { label: "Mono", fonts: ["geist-mono", "jetbrains-mono"] },
+  {
+    label: "Serif",
+    fonts: [
+      "noto-serif",
+      "roboto-slab",
+      "merriweather",
+      "lora",
+      "playfair-display",
+      "eb-garamond",
+      "instrument-serif"
+    ]
+  }
+] as const satisfies readonly {
+  label: string
+  fonts: readonly Preset["font"][]
+}[]
+
+export function fontLabel(font: Preset["font"]) {
+  return fontFamilies[font].replace(/ Variable$/, "")
+}
+
+export function resolvePresetTheme(preset: Preset) {
+  const base = preset.baseColor === "gray" ? "neutral" : preset.baseColor
+  const theme = resolvePalette(preset.theme, base)
+  const chart = resolvePalette(preset.chartColor, base)
+  const translucentMenu = preset.menuColor.endsWith("translucent")
+  const invertedMenu = preset.menuColor.startsWith("inverted")
+
+  const radius =
+    preset.style === "lyra" || preset.style === "sera"
+      ? radii.none
+      : preset.style === "rhea" && preset.radius === "large"
+        ? radii.default
+        : radii[preset.radius]
+
+  function colors(mode: "light" | "dark") {
+    const merged = {
+      ...palettes[base][mode],
+      ...palettes[theme][mode]
+    }
+    const chartColors = palettes[chart][mode]
+
+    return {
+      ...merged,
+      "chart-1": chartColors["chart-1"],
+      "chart-2": chartColors["chart-2"],
+      "chart-3": chartColors["chart-3"],
+      "chart-4": chartColors["chart-4"],
+      "chart-5": chartColors["chart-5"],
+      ...(preset.menuAccent === "bold" &&
+        !translucentMenu && {
+          accent: merged.primary,
+          "accent-foreground": merged["primary-foreground"]
+        }),
+      "destructive-foreground":
+        mode === "dark" ? "oklch(0.58 0.22 27)" : "oklch(0.97 0.01 17)",
+      surface: mode === "dark" ? "oklch(0.2 0 0)" : "oklch(0.98 0 0)",
+      "surface-foreground":
+        mode === "dark" ? "oklch(0.708 0 0)" : "var(--foreground)",
+      code: "var(--surface)",
+      "code-foreground": "var(--surface-foreground)",
+      "code-highlight": "var(--accent)",
+      "code-number": mode === "dark" ? "oklch(0.708 0 0)" : "oklch(0.556 0 0)",
+      selection: mode === "dark" ? "oklch(0.922 0 0)" : "oklch(0 0 0)",
+      "selection-foreground":
+        mode === "dark" ? "oklch(0.205 0 0)" : "oklch(1 0 0)",
+      radius
+    }
+  }
+
+  return {
+    light: colors("light"),
+    dark: colors("dark"),
+    radius,
+    fontFamily: fontFamilies[preset.font],
+    headingFamily:
+      fontFamilies[
+        preset.fontHeading === "inherit" ? preset.font : preset.fontHeading
+      ],
+    translucentMenu,
+    invertedMenu
+  }
+}
+
+function cssRule(selector: string, tokens: Record<string, string | undefined>) {
+  return `${selector}{${Object.entries(tokens)
+    .map(([key, value]) => `--${key}:${value};`)
+    .join("")}}`
+}
+
+export function presetThemeCss(theme: ReturnType<typeof resolvePresetTheme>) {
+  const root = "html[data-preset-preview]"
+  const menu =
+    ".cn-menu-target,.cn-dropdown-menu-content,.cn-dropdown-menu-sub-content"
+  return [
+    cssRule(root, {
+      ...theme.light,
+      "preview-font-sans": `"${theme.fontFamily}", system-ui, sans-serif`,
+      "preview-font-heading": `"${theme.headingFamily}", var(--preview-font-sans)`
+    }),
+    cssRule(`${root}.dark`, theme.dark),
+    theme.invertedMenu ? cssRule(`${root} :is(${menu})`, theme.dark) : ""
+  ].join("\n")
+}

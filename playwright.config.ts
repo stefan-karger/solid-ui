@@ -15,6 +15,7 @@ export default defineConfig({
         "**/docs.spec.ts",
         "**/themes.spec.ts",
         "**/docs-shell.spec.ts",
+        "**/preset-preview.spec.ts",
         "**/ports.spec.ts"
       ],
       use: { baseURL: "http://127.0.0.1:4322" }
@@ -25,6 +26,7 @@ export default defineConfig({
         "**/docs.spec.ts",
         "**/themes.spec.ts",
         "**/docs-shell.spec.ts",
+        "**/preset-preview.spec.ts",
         "**/ports.spec.ts"
       ],
       use: { baseURL: "http://127.0.0.1:4323" }
@@ -35,6 +37,7 @@ export default defineConfig({
         "**/docs.spec.ts",
         "**/themes.spec.ts",
         "**/docs-shell.spec.ts",
+        "**/preset-preview.spec.ts",
         "**/ports.spec.ts"
       ],
       use: { baseURL: "http://127.0.0.1:4324" }

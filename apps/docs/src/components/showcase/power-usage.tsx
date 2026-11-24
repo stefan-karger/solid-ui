@@ -39,7 +39,7 @@ export function PowerUsage() {
             {(item) => (
               <div class="flex h-full flex-1 flex-col justify-end gap-1.5">
                 <div
-                  class="min-h-2 rounded-t bg-primary"
+                  class="min-h-2 rounded-t bg-chart-2"
                   style={{ height: `${(item.usage / maxUsage) * 100}%` }}
                 />
                 <span class="text-center text-xs text-muted-foreground">

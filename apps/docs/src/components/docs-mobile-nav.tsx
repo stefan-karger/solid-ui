@@ -13,7 +13,8 @@ import {
 const mainLinks = [
   { title: "Home", href: "/" },
   { title: "Docs", href: "/docs" },
-  { title: "Components", href: "/docs/components" }
+  { title: "Components", href: "/docs/components" },
+  { title: "Create", href: "/create" }
 ]
 
 export default function DocsMobileNav(props: {

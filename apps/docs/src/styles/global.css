@@ -73,11 +73,12 @@
   --input: #c3ccd9;
   --ring: #008edc;
 
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Solid blue ramp, light to deep, as shadcn's single-hue chart palettes. */
+  --chart-1: #8fd0f7;
+  --chart-2: #0aa0ef;
+  --chart-3: #0a7fd1;
+  --chart-4: #0a5fb0;
+  --chart-5: #0a4593;
 
   --sidebar: var(--surface);
   --sidebar-foreground: var(--foreground);
@@ -115,26 +116,40 @@
   --input: #4f5b6b;
   --ring: var(--accent-foreground);
 
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-
   --surface: #122339;
   --code-number: oklch(0.72 0 0);
   --selection: #054670;
+
+  /* Re-derive aliases so a nested .dark scope does not inherit light values. */
+  --card-foreground: var(--foreground);
+  --popover-foreground: var(--foreground);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --surface-foreground: var(--foreground);
+  --code: var(--surface);
+  --code-foreground: var(--surface-foreground);
+  --code-highlight: var(--accent);
+  --selection-foreground: var(--foreground);
 }
 
 @theme inline {
   --breakpoint-3xl: 1600px;
   --breakpoint-4xl: 2000px;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: var(--preview-radius-sm, calc(var(--radius) - 4px));
+  --radius-md: var(--preview-radius-md, calc(var(--radius) - 2px));
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: var(--preview-radius-xl, calc(var(--radius) + 4px));
   --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: var(--preview-radius-3xl, 1.5rem);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -180,10 +195,18 @@
   --color-selection: var(--selection);
   --color-selection-foreground: var(--selection-foreground);
 
-  --font-sans:
-    "Geist Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-heading: var(--font-sans);
+  --font-sans: var(
+    --preview-font-sans,
+    "Geist Variable",
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji"
+  );
+  --font-heading: var(--preview-font-heading, var(--font-sans));
 
   --font-mono:
     "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco,

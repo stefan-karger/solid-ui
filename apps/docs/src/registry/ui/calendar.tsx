@@ -114,7 +114,7 @@ export function CalendarDayButton(
     <SdkCalendarDay
       {...props}
       class={cn(
-        "size-(--cell-size) rounded-(--cell-radius) text-sm outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring data-outside:text-muted-foreground data-range-middle:rounded-none data-today:font-bold data-[selected]:bg-primary data-[selected]:text-primary-foreground data-disabled:opacity-40",
+        "size-(--cell-size) rounded-(--cell-radius) text-center text-sm outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring data-outside:text-muted-foreground data-range-middle:rounded-none data-today:font-bold data-[selected]:bg-primary data-[selected]:text-primary-foreground data-disabled:opacity-40",
         props.class
       )}
     />

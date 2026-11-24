@@ -214,6 +214,7 @@ test("calendar selects dates with keys and enforces unavailable days", async ({
   const selected = calendar.locator(
     '[data-slot="calendar-day"][aria-selected="true"]'
   )
+  await expect(selected).toHaveCSS("text-align", "center")
   await selected.focus()
   await selected.press("ArrowRight")
   await page.keyboard.press("Enter")

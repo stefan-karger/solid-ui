@@ -102,7 +102,7 @@ export function DividendIncome() {
                   <For each={holding.data}>
                     {(item) => (
                       <div
-                        class="min-h-1 flex-1 rounded-t-sm bg-primary"
+                        class="min-h-1 flex-1 rounded-t-sm bg-chart-2"
                         style={{
                           height: `${(item.value / Math.max(...holding.data.map((point) => point.value))) * 100}%`
                         }}

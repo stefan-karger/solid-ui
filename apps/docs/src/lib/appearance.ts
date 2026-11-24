@@ -40,14 +40,19 @@ export function readAppearance(
   }
 }
 
+export function applyColorMode(mode: ColorMode) {
+  const root = document.documentElement
+  root.classList.toggle("dark", mode === "dark")
+  root.style.colorScheme = mode
+  root.dataset.colorMode = mode
+}
+
 export function applyAppearance(style: DocsStyle, mode: ColorMode) {
   const root = document.documentElement
   for (const name of styles)
     root.classList.toggle(`style-${name}`, name === style)
-  root.classList.toggle("dark", mode === "dark")
-  root.style.colorScheme = mode
+  applyColorMode(mode)
   root.dataset.docsStyle = style
-  root.dataset.colorMode = mode
   window.dispatchEvent(
     new CustomEvent("solid-ui:appearance", { detail: { style, mode } })
   )
@@ -62,4 +67,30 @@ export function saveAppearance(style: DocsStyle, mode: ColorMode) {
   applyAppearance(style, mode)
 }
 
-export const appearanceBootstrap = `(()=>{const styles=${JSON.stringify(styles)},root=document.documentElement;let style=root.dataset.defaultStyle||"nova",mode=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";try{const p=JSON.parse(localStorage.getItem(${JSON.stringify(appearanceKey)})||"null");if(styles.includes(p?.style))style=p.style;if(p?.mode==="light"||p?.mode==="dark")mode=p.mode}catch{}for(const s of styles)root.classList.toggle("style-"+s,s===style);root.classList.toggle("dark",mode==="dark");root.style.colorScheme=mode;root.dataset.docsStyle=style;root.dataset.colorMode=mode})()`
+function createAppearanceBootstrap(includeStyle: boolean) {
+  const styleScript = `
+    const styles = ${JSON.stringify(styles)};
+    const style = styles.includes(saved?.style)
+      ? saved.style
+      : root.dataset.defaultStyle || "nova";
+    for (const name of styles) root.classList.toggle("style-" + name, name === style);
+    root.dataset.docsStyle = style;`
+
+  return `(() => {
+    const root = document.documentElement;
+    let saved;
+    try {
+      saved = JSON.parse(localStorage.getItem(${JSON.stringify(appearanceKey)}) || "null");
+    } catch {}
+    const mode = saved?.mode === "light" || saved?.mode === "dark"
+      ? saved.mode
+      : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    ${includeStyle ? styleScript : ""}
+    root.classList.toggle("dark", mode === "dark");
+    root.style.colorScheme = mode;
+    root.dataset.colorMode = mode;
+  })()`
+}
+
+export const appearanceBootstrap = createAppearanceBootstrap(true)
+export const colorModeBootstrap = createAppearanceBootstrap(false)

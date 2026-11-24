@@ -94,6 +94,13 @@ const onComponentsPage =
           >
             Components
           </a>
+          <a
+            href="/create/"
+            aria-current={currentPath === "/create" ? "page" : undefined}
+            class="text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:text-foreground"
+          >
+            Create
+          </a>
         </nav>
         <div class="ml-auto flex min-w-0 items-center gap-0.5 min-[360px]:gap-1 sm:gap-2">
           <DocsSearch navigation={navigation} client:load />

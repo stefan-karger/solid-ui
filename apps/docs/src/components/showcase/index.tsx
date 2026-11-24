@@ -1,4 +1,7 @@
 // Adapted from shadcn/ui at f50887a (MIT, see the project LICENSE).
+
+import { For, type Component } from "solid-js"
+
 import MessageScrollerDemo from "~/registry/examples/message-scroller-demo"
 
 import { AccountAccess } from "./account-access"
@@ -31,6 +34,64 @@ import { SavingsTargets as SkeletonSavingsTargets } from "./skeleton/savings-tar
 import { TransferFunds as SkeletonTransferFunds } from "./skeleton/transfer-funds"
 import { UIElements as SkeletonUIElements } from "./skeleton/ui-elements"
 import { UIElements } from "./ui-elements"
+
+function MessageScroller() {
+  return (
+    <div class="**:[.text-center.text-xs]:hidden">
+      <MessageScrollerDemo />
+    </div>
+  )
+}
+
+export type ShowcaseCard = { id: string; component: Component }
+
+// The home page and the /preview page show exactly these cards, column by column.
+export const showcaseColumns: readonly {
+  class: string
+  cards: readonly ShowcaseCard[]
+}[] = [
+  {
+    class: "flex flex-col items-start gap-(--gap)",
+    cards: [
+      { id: "ui-elements", component: UIElements },
+      { id: "sidebar-nav", component: SidebarNav },
+      { id: "savings-targets", component: SavingsTargets }
+    ]
+  },
+  {
+    class: "hidden flex-col gap-(--gap) lg:flex",
+    cards: [
+      { id: "contribution-history", component: ContributionHistory },
+      { id: "claimable-balance", component: ClaimableBalance },
+      { id: "dividend-income", component: DividendIncome }
+    ]
+  },
+  {
+    class: "hidden flex-col gap-(--gap) min-[1400px]:flex",
+    cards: [
+      { id: "new-milestone", component: NewMilestone },
+      { id: "payout-threshold", component: PayoutThreshold },
+      { id: "account-access", component: AccountAccess }
+    ]
+  },
+  {
+    class: "flex flex-col gap-(--gap)",
+    cards: [
+      { id: "qr-connect", component: QrConnect },
+      { id: "message-scroller", component: MessageScroller },
+      { id: "payments", component: Payments }
+    ]
+  },
+  {
+    class: "hidden flex-col gap-(--gap) min-[1900px]:flex",
+    cards: [
+      { id: "empty-distribute-track", component: EmptyDistributeTrack },
+      { id: "analytics-card", component: AnalyticsCard },
+      { id: "notification-settings", component: NotificationSettings },
+      { id: "power-usage", component: PowerUsage }
+    ]
+  }
+]
 
 function CardsSkeletonRails() {
   return (
@@ -85,34 +146,13 @@ export default function Showcase() {
     >
       <CardsSkeletonRails />
       <div class="relative z-10 mx-auto grid w-full grid-cols-1 gap-(--gap) **:data-[slot=card]:w-full min-[1400px]:grid-cols-4! min-[1900px]:grid-cols-5! md:w-auto md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] 2xl:max-w-[1900px]">
-        <div class="flex flex-col items-start gap-(--gap)">
-          <UIElements />
-          <SidebarNav />
-          <SavingsTargets />
-        </div>
-        <div class="hidden flex-col gap-(--gap) lg:flex">
-          <ContributionHistory />
-          <ClaimableBalance />
-          <DividendIncome />
-        </div>
-        <div class="hidden flex-col gap-(--gap) min-[1400px]:flex">
-          <NewMilestone />
-          <PayoutThreshold />
-          <AccountAccess />
-        </div>
-        <div class="flex flex-col gap-(--gap)">
-          <QrConnect />
-          <div class="**:[.text-center.text-xs]:hidden">
-            <MessageScrollerDemo />
-          </div>
-          <Payments />
-        </div>
-        <div class="hidden flex-col gap-(--gap) min-[1900px]:flex">
-          <EmptyDistributeTrack />
-          <AnalyticsCard />
-          <NotificationSettings />
-          <PowerUsage />
-        </div>
+        <For each={showcaseColumns}>
+          {(column) => (
+            <div class={column.class}>
+              <For each={column.cards}>{(card) => <card.component />}</For>
+            </div>
+          )}
+        </For>
       </div>
       <div class="pointer-events-none absolute inset-x-0 top-0 z-1 h-120 bg-linear-to-b from-background via-muted to-transparent dark:hidden" />
       <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t from-background via-muted/80 to-transparent lg:h-80 xl:h-64 dark:via-background/80" />

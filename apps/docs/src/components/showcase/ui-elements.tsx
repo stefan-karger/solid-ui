@@ -40,7 +40,7 @@ export function UIElements() {
   return (
     <Card class="w-full">
       <CardContent class="flex flex-col gap-6">
-        <div class="flex gap-2 max-md:flex-wrap">
+        <div class="flex flex-wrap gap-2">
           <Button>
             Button{" "}
             <ShowcaseIcon name="ArrowRight02Icon" data-icon="inline-end" />
@@ -67,7 +67,7 @@ export function UIElements() {
             />
           </Field>
         </FieldGroup>
-        <div class="flex items-center gap-2 max-md:flex-wrap">
+        <div class="flex flex-wrap items-center gap-2">
           <div class="flex gap-2">
             <Badge>Badge</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -93,7 +93,7 @@ export function UIElements() {
             aria-label="Enable compact notifications"
           />
         </div>
-        <div class="flex items-center gap-4 max-md:flex-wrap">
+        <div class="flex flex-wrap items-center gap-4">
           <AlertDialog>
             <AlertDialogTrigger
               render={(part) => <Button {...part} variant="outline" />}
