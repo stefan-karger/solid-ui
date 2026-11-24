@@ -80,4 +80,24 @@ describe("registry catalog", () => {
       ).toBeUndefined()
     }
   })
+
+  it("ships installable icons inline, hidden unless they are named", async () => {
+    const findings: string[] = []
+    for (const item of registry.items) {
+      if (item.type === "registry:example") continue
+      for (const file of item.files ?? []) {
+        const { code } = await getRegistrySource({
+          name: item.name,
+          file: file.path
+        })
+        // Lucide still targets Solid 1, so installable items must not import it.
+        if (code.includes('from "lucide-solid"'))
+          findings.push(`${file.path}: imports lucide-solid`)
+        for (const [svg] of code.matchAll(/<svg\b[^>]*>/g))
+          if (!/aria-hidden="true"|aria-label=|\{\.\.\.props\}/.test(svg))
+            findings.push(`${file.path}: unlabeled visible svg`)
+      }
+    }
+    expect(findings).toEqual([])
+  })
 })

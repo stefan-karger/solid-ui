@@ -1,5 +1,5 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps } from "@solidjs/web"
-import { ChevronLeftIcon, ChevronRightIcon, Ellipsis } from "lucide-solid"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -63,7 +63,20 @@ const PaginationPrevious = (props: PaginationPreviousProps) => {
       class={cn("cn-pagination-previous", props.class)}
       {...others}
     >
-      <ChevronLeftIcon data-icon="inline-start" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        data-icon="inline-start"
+      >
+        <path d="m15 18-6-6 6-6" />
+      </svg>
       <span class="cn-pagination-previous-text hidden sm:block">Previous</span>
     </PaginationLink>
   )
@@ -81,7 +94,20 @@ const PaginationNext = (props: PaginationNextProps) => {
       {...others}
     >
       <span class="cn-pagination-next-text hidden sm:block">Next</span>
-      <ChevronRightIcon data-icon="inline-end" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        data-icon="inline-end"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </svg>
     </PaginationLink>
   )
 }
@@ -98,7 +124,21 @@ const PaginationEllipsis = (props: PaginationEllipsisProps) => (
       props.class
     )}
   >
-    <Ellipsis />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="19" cy="12" r="1" />
+      <circle cx="5" cy="12" r="1" />
+    </svg>
     <span class="sr-only">More pages</span>
   </span>
 )

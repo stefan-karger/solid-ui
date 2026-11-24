@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps } from "@solidjs/web"
 import {
   Calendar as SdkCalendar,
@@ -12,7 +13,6 @@ import {
   CalendarWeekdays as SdkCalendarWeekdays,
   CalendarWeeks as SdkCalendarWeeks
 } from "@ui-sdk/solid/calendar"
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-solid"
 import { omit } from "solid-js"
 import { For } from "solid-js"
 
@@ -37,7 +37,22 @@ export function CalendarPrevious(
         props.class
       )}
     >
-      {props.children ?? <ChevronLeftIcon class="size-4 rtl:rotate-180" />}
+      {props.children ?? (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-4 rtl:rotate-180"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      )}
     </SdkCalendarPrevious>
   )
 }
@@ -55,7 +70,22 @@ export function CalendarNext(
         props.class
       )}
     >
-      {props.children ?? <ChevronRightIcon class="size-4 rtl:rotate-180" />}
+      {props.children ?? (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-4 rtl:rotate-180"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      )}
     </SdkCalendarNext>
   )
 }

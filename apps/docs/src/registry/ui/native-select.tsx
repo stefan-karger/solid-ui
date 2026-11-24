@@ -1,5 +1,5 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
-import { ChevronDownIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -26,11 +26,21 @@ const NativeSelect = (rawProps: NativeSelectProps) => {
         class="cn-native-select outline-none disabled:pointer-events-none disabled:cursor-not-allowed"
         {...others}
       />
-      <ChevronDownIcon
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
         aria-hidden="true"
         class="cn-native-select-icon pointer-events-none absolute select-none"
         data-slot="native-select-icon"
-      />
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
     </div>
   )
 }

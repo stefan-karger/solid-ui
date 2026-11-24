@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
 import {
   Dialog as SdkDialog,
@@ -8,7 +9,6 @@ import {
   DialogTitle as SdkDialogTitle,
   DialogDescription as SdkDialogDescription
 } from "@ui-sdk/solid/dialog"
-import { XIcon } from "lucide-solid"
 import { merge, omit, Show, type Component } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -87,7 +87,20 @@ const SheetContent = (props: SheetContentProps) => {
 
             class="cn-sheet-close"
           >
-            <XIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
             <span class="sr-only">Close</span>
           </SdkDialogClose>
         </Show>

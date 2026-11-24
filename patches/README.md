@@ -18,10 +18,10 @@ lazy data before Astro's normal renderer bootstrap.
 
 ## `lucide-solid@1.41.0`
 
-Ports the Solid 1 implementation and JSX types to the Solid 2 APIs used by this registry. The
-package's `solid` export condition points to its JSX source, which the Solid Vite plugin compiles.
-Its precompiled builds target Solid 1 and are not used. Projects that render these components,
-including the adapter fixture, declare `lucide-solid` so Astro bundles it for SSR.
+Ports the Solid 1 implementation and JSX types to the Solid 2 APIs. Only the docs examples use
+Lucide; installable registry items inline their icons. The package's `solid` export condition
+points to its JSX source, which the Solid Vite plugin compiles. Its precompiled builds target
+Solid 1 and are not used.
 
 Lucide needs this compatibility port because it does not yet publish a Solid 2 version. Remove this patch when
 an official Solid 2 implementation is available.

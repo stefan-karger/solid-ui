@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
 import {
   NavigationMenu as SdkNavigationMenu,
@@ -10,7 +11,6 @@ import {
   NavigationMenuIndicator as SdkNavigationMenuIndicator
 } from "@ui-sdk/solid/navigation-menu"
 import { cva } from "class-variance-authority"
-import { ChevronDownIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -82,10 +82,20 @@ const NavigationMenuTrigger = (props: NavigationMenuTriggerProps) => {
     >
       {props.children}
       {showIcon() && (
-        <ChevronDownIcon
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
           class="cn-navigation-menu-trigger-icon"
           aria-hidden="true"
-        />
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       )}
     </SdkNavigationMenuTrigger>
   )

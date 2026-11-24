@@ -40,7 +40,6 @@ export const ui: Registry["items"] = [
   {
     name: "message",
     type: "registry:ui",
-    dependencies: [],
     registryDependencies: ["utils"],
     files: [
       {
@@ -52,7 +51,6 @@ export const ui: Registry["items"] = [
   {
     name: "trace",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     registryDependencies: ["collapsible", "utils", "style-utilities"],
     files: [
       {
@@ -64,7 +62,7 @@ export const ui: Registry["items"] = [
   {
     name: "code-block",
     type: "registry:ui",
-    dependencies: ["class-variance-authority", "lucide-solid"],
+    dependencies: ["class-variance-authority"],
     registryDependencies: ["button", "utils", "style-utilities"],
     files: [
       {
@@ -76,7 +74,7 @@ export const ui: Registry["items"] = [
   {
     name: "calendar",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["utils"],
     files: [
       {
@@ -88,7 +86,7 @@ export const ui: Registry["items"] = [
   {
     name: "carousel",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button", "utils"],
     files: [
       {
@@ -100,7 +98,7 @@ export const ui: Registry["items"] = [
   {
     name: "drawer",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["utils"],
     files: [
       {
@@ -112,7 +110,7 @@ export const ui: Registry["items"] = [
   {
     name: "input-otp",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["utils"],
     files: [
       {
@@ -124,7 +122,7 @@ export const ui: Registry["items"] = [
   {
     name: "resizable",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["utils"],
     files: [
       {
@@ -136,7 +134,7 @@ export const ui: Registry["items"] = [
   {
     name: "scroll-area",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["utils"],
     files: [
       {
@@ -148,7 +146,7 @@ export const ui: Registry["items"] = [
   {
     name: "message-scroller",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button", "utils"],
     files: [
       {
@@ -160,7 +158,7 @@ export const ui: Registry["items"] = [
   {
     name: "toast",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button", "utils"],
     files: [
       {
@@ -172,7 +170,7 @@ export const ui: Registry["items"] = [
   {
     name: "questionnaire",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button", "utils"],
     files: [
       {
@@ -184,7 +182,7 @@ export const ui: Registry["items"] = [
   {
     name: "accordion",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["style-utilities"],
     files: [
       {
@@ -254,7 +252,6 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "breadcrumb",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/breadcrumb.tsx",
@@ -300,7 +297,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "checkbox",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/checkbox.tsx",
@@ -311,7 +308,7 @@ export const ui: Registry["items"] = [
   {
     name: "command",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["dialog", "input-group"],
     files: [
       {
@@ -324,7 +321,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "context-menu",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/context-menu.tsx",
@@ -347,12 +344,7 @@ export const ui: Registry["items"] = [
   {
     name: "combobox",
     type: "registry:ui",
-    dependencies: [
-      "@ui-sdk/solid",
-      "@ui-sdk/core",
-      "class-variance-authority",
-      "lucide-solid"
-    ],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
     registryDependencies: ["button", "input-group"],
     files: [
       {
@@ -374,7 +366,7 @@ export const ui: Registry["items"] = [
   {
     name: "dialog",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button"],
     files: [
       {
@@ -386,7 +378,6 @@ export const ui: Registry["items"] = [
   {
     name: "direction",
     type: "registry:ui",
-    dependencies: [],
     files: [
       {
         path: "ui/direction.tsx",
@@ -398,7 +389,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "dropdown-menu",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/dropdown-menu.tsx",
@@ -499,7 +490,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "menubar",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/menubar.tsx",
@@ -510,7 +501,6 @@ export const ui: Registry["items"] = [
   {
     name: "native-select",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/native-select.tsx",
@@ -522,12 +512,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "navigation-menu",
     type: "registry:ui",
-    dependencies: [
-      "@ui-sdk/solid",
-      "@ui-sdk/core",
-      "class-variance-authority",
-      "lucide-solid"
-    ],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
     files: [
       {
         path: "ui/navigation-menu.tsx",
@@ -538,7 +523,6 @@ export const ui: Registry["items"] = [
   {
     name: "pagination",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -587,7 +571,7 @@ export const ui: Registry["items"] = [
     registryDependencies: [],
     name: "select",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/select.tsx",
@@ -598,7 +582,7 @@ export const ui: Registry["items"] = [
   {
     name: "sheet",
     type: "registry:ui",
-    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button"],
     files: [
       {
@@ -610,7 +594,7 @@ export const ui: Registry["items"] = [
   {
     name: "sidebar",
     type: "registry:ui",
-    dependencies: ["class-variance-authority", "lucide-solid"],
+    dependencies: ["class-variance-authority"],
     registryDependencies: [
       "button",
       "input",
@@ -640,7 +624,6 @@ export const ui: Registry["items"] = [
   {
     name: "spinner",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/spinner.tsx",

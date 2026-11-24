@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps, JSX } from "@solidjs/web"
 import {
   Combobox as SdkCombobox,
@@ -18,7 +19,6 @@ import {
   ComboboxValue as SdkComboboxValue,
   ComboboxSeparator as SdkComboboxSeparator
 } from "@ui-sdk/solid/combobox"
-import { CheckIcon, ChevronDownIcon, XIcon } from "lucide-solid"
 import { omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -82,7 +82,20 @@ const ComboboxTrigger = (
     class={cn("cn-combobox-trigger", props.class)}
   >
     {props.children ?? (
-      <ChevronDownIcon class="cn-combobox-trigger-icon pointer-events-none" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-trigger-icon pointer-events-none"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
     )}
   </SdkComboboxTrigger>
 )
@@ -100,7 +113,21 @@ const ComboboxClear = (
     {...props}
     class={cn("cn-combobox-clear", props.class)}
   >
-    <XIcon class="cn-combobox-clear-icon pointer-events-none" />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      class="cn-combobox-clear-icon pointer-events-none"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
   </SdkComboboxClear>
 )
 const ComboboxContent = (
@@ -151,7 +178,20 @@ const ComboboxItem = (
   >
     {props.children}
     <SdkComboboxItemIndicator class="cn-combobox-item-indicator">
-      <CheckIcon class="cn-combobox-item-indicator-icon pointer-events-none" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-item-indicator-icon pointer-events-none"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
     </SdkComboboxItemIndicator>
   </SdkComboboxItem>
 )
@@ -232,7 +272,23 @@ const ComboboxChipRemove = (
     {...props}
     class={cn("cn-combobox-chip-remove", props.class)}
   >
-    {props.children ?? <XIcon class="cn-combobox-chip-indicator-icon" />}
+    {props.children ?? (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-chip-indicator-icon"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    )}
   </SdkComboboxChipRemove>
 )
 const ComboboxChipInput = (

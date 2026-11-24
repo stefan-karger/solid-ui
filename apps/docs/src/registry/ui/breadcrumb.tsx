@@ -1,10 +1,10 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import {
   dynamic,
   type ComponentProps,
   type ValidComponent,
   type JSX
 } from "@solidjs/web"
-import { ChevronRightIcon, EllipsisIcon } from "lucide-solid"
 import {
   isStatic,
   createContext,
@@ -132,7 +132,20 @@ const BreadcrumbSeparator = <T extends ValidComponent = "span">(
       {...others}
     >
       {props.children ?? separator?.() ?? (
-        <ChevronRightIcon class="cn-rtl-flip" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="cn-rtl-flip"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
       )}
     </Comp>
   )
@@ -151,7 +164,21 @@ const BreadcrumbEllipsis = (props: BreadcrumbEllipsisProps) => (
       props.class
     )}
   >
-    <EllipsisIcon />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="19" cy="12" r="1" />
+      <circle cx="5" cy="12" r="1" />
+    </svg>
     <span class="sr-only">More</span>
   </span>
 )

@@ -78,9 +78,13 @@ The `/r/` format also carries the shared stylesheet and its target path.
 See the [Introduction](./apps/docs/src/content/docs/index.mdx#shared-styles)
 for the manual installation steps.
 
-Items that import Lucide use the Solid 2 setup documented in
-[Compatibility patches](./patches/README.md#lucide-solid1410). The published
-`lucide-solid` package still declares a Solid 1 peer range.
+Installable items inline their icons as SVG markup copied from Lucide. The
+published `lucide-solid` package still declares a Solid 1 peer range, so items
+do not depend on it. Each inlined icon keeps Lucide's 24px stroke geometry and
+is decorative with `aria-hidden="true"` unless the component names it, as
+Spinner does. Each file credits Lucide, and the project LICENSE carries the
+full ISC notice. Docs examples still import `lucide-solid` through the
+[compatibility patch](./patches/README.md#lucide-solid1410).
 
 ## Component API changes
 

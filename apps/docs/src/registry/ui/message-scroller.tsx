@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps } from "@solidjs/web"
 import {
   ScrollArea as SdkScrollArea,
@@ -5,7 +6,6 @@ import {
   ScrollAreaContent as SdkScrollAreaContent,
   ScrollAreaScrollToEnd as SdkScrollAreaScrollToEnd
 } from "@ui-sdk/solid/scroll-area"
-import { ArrowDownIcon } from "lucide-solid"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -83,7 +83,22 @@ export function MessageScrollerButton(
         props.class
       )}
     >
-      {props.children ?? <ArrowDownIcon />}
+      {props.children ?? (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14" />
+          <path d="m19 12-7 7-7-7" />
+        </svg>
+      )}
     </SdkScrollAreaScrollToEnd>
   )
 }

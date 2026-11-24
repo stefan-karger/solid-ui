@@ -314,10 +314,11 @@ test("toast positions, actions, promises, and Escape use the native queue", asyn
   const icon = promiseToast.locator('[data-slot="toast-icon"]')
   await expect(promiseToast).toContainText("Loading...")
   await expect(promiseToast).toHaveAttribute("data-type", "loading")
-  await expect(icon).toHaveClass(/lucide-loader-circle/)
+  await expect(icon).toHaveClass(/animate-spin/)
   await expect(promiseToast).toContainText("Event has been created")
   await expect(promiseToast).toHaveAttribute("data-type", "success")
-  await expect(icon).toHaveClass(/lucide-circle-check/)
+  await expect(icon).toBeVisible()
+  await expect(icon).not.toHaveClass(/animate-spin/)
 
   const positions = namedExample(page, "toast-position")
   await positions.scrollIntoViewIfNeeded()

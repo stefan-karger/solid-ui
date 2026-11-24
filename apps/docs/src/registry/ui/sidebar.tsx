@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import {
   dynamic,
   type ComponentProps,
@@ -5,7 +6,6 @@ import {
   type ValidComponent
 } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
-import { PanelLeftIcon } from "lucide-solid"
 import {
   isStatic,
   createContext,
@@ -293,7 +293,21 @@ const SidebarTrigger = (props: SidebarTriggerProps) => {
       }}
       {...others}
     >
-      <PanelLeftIcon class="size-4" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="size-4"
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2" />
+        <path d="M9 3v18" />
+      </svg>
       <span class="sr-only">Toggle Sidebar</span>
     </Button>
   )

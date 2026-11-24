@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
 import {
   Menu as SdkMenu,
@@ -15,7 +16,6 @@ import {
   MenuRadioItem as SdkMenuRadioItem,
   MenuSeparator as SdkMenuSeparator
 } from "@ui-sdk/solid/menu"
-import { CheckIcon, ChevronRightIcon } from "lucide-solid"
 import { createUniqueId, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -125,7 +125,20 @@ const DropdownMenuSubTrigger = (props: DropdownMenuSubTriggerProps) => {
       {...others}
     >
       {props.children}
-      <ChevronRightIcon class="ml-auto" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="ml-auto"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </svg>
     </SdkMenuSubTrigger>
   )
 }
@@ -168,7 +181,19 @@ const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
     >
       <span class="cn-dropdown-menu-item-indicator pointer-events-none">
         <SdkMenuItemIndicator>
-          <CheckIcon />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
         </SdkMenuItemIndicator>
       </span>
       {props.children}
@@ -202,7 +227,19 @@ const DropdownMenuRadioItem = (props: DropdownMenuRadioItemProps) => {
     >
       <span class="cn-dropdown-menu-item-indicator pointer-events-none">
         <SdkMenuItemIndicator>
-          <CheckIcon />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
         </SdkMenuItemIndicator>
       </span>
       {props.children}

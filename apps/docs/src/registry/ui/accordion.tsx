@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { JSX } from "@solidjs/web"
 import { type ComponentProps } from "@solidjs/web"
 import {
@@ -7,7 +8,6 @@ import {
   AccordionTrigger as SdkAccordionTrigger,
   AccordionPanel as SdkAccordionPanel
 } from "@ui-sdk/solid/accordion"
-import { ChevronDownIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -61,10 +61,21 @@ const AccordionTrigger = (props: AccordionTriggerProps) => {
         render={renderTrigger}
       >
         {props.children}
-        <ChevronDownIcon
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
           class="cn-accordion-trigger-icon pointer-events-none shrink-0 duration-300 group-aria-expanded/accordion-trigger:rotate-180"
           data-slot="accordion-trigger-icon"
-        />
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </SdkAccordionTrigger>
     </SdkAccordionHeader>
   )

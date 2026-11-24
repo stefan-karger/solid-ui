@@ -29,9 +29,6 @@ describe("workspace compatibility target", () => {
       expect(docs.dependencies[pkg]).toBe("0.1.0-beta.10")
       expect(fixture.dependencies[pkg]).toBe(docs.dependencies[pkg])
     }
-    expect(fixture.dependencies["lucide-solid"]).toBe(
-      docs.dependencies["lucide-solid"]
-    )
     expect(root.devDependencies["@solidjs/vite-plugin"]).toBe("3.0.1")
     const workspace = readFileSync(resolve("pnpm-workspace.yaml"), "utf8")
     for (const pkg of [
