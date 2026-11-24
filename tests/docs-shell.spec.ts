@@ -5,7 +5,9 @@ import { expect, test } from "@playwright/test"
 import { styles } from "../apps/docs/src/lib/appearance"
 import {
   registryItemSchema,
-  registryIndexSchema
+  registryIndexSchema,
+  registrySchema,
+  stylesSchema
 } from "../apps/docs/src/registry/schema"
 
 test("publishes installable and legacy CLI registry JSON in the production build", async ({
@@ -41,10 +43,36 @@ test("publishes installable and legacy CLI registry JSON in the production build
   expect(nova.dependencies).toContain("solid-js@2.0.1")
   expect(nova.registryDependencies).toContain("utils")
   expect(nova.files?.[0]?.content).not.toContain("cn-button")
+  expect(nova.$schema).toBe("https://ui.shadcn.com/schema/registry-item.json")
+
+  expect(stylesSchema.parse(await json("/r/styles/index.json"))).toEqual(
+    styles.map((name) =>
+      expect.objectContaining({ name, label: expect.any(String) })
+    )
+  )
+  for (const style of styles) {
+    const catalog = registrySchema.parse(
+      await json(`/r/styles/${style}/registry.json`)
+    )
+    expect(catalog.items.some(({ name }) => name === "button")).toBe(true)
+    expect(
+      catalog.items.flatMap(({ files }) => files ?? [])
+    ).not.toContainEqual(
+      expect.objectContaining({ content: expect.anything() })
+    )
+  }
+  const example = registryItemSchema.parse(
+    await json("/r/styles/lyra/item-example.json")
+  )
+  expect(example.type).toBe("registry:example")
+  expect(example.registryDependencies).toEqual(["button", "example", "item"])
+  expect(example.files?.[0]?.content).toContain('from "~/components/example"')
+
   for (const path of [
     "/r/button.json",
     "/r/nova/button.json",
-    "/r/registry.json"
+    "/r/registry.json",
+    "/registry-source/nova/ui/button.tsx.json"
   ]) {
     expect((await request.get(path)).status()).toBe(404)
   }

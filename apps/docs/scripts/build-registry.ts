@@ -21,10 +21,9 @@ const installableTypes = new Set<RegistryItem["type"]>([
   "registry:component",
   "registry:block"
 ])
+const ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json"
 const installedDependencies = manifest.dependencies
-const items = registrySchema
-  .parse(registry)
-  .items.filter(({ type }) => installableTypes.has(type))
+const { name: registryName, homepage, items } = registrySchema.parse(registry)
 const names = new Set<string>()
 const owners = new Map<string, string>()
 for (const item of items) {
@@ -84,7 +83,7 @@ async function prepareItem(item: RegistryItem) {
           ? posix.join(posix.dirname(file.path), fileName)
           : fileName
               .replace(/^~\/components\/ui\//, "ui/")
-              .replace(/^~\/(?=lib\/|hooks\/)/, "")
+              .replace(/^~\/(?=components\/|lib\/|hooks\/)/, "")
         const owner = owners.get(path.replace(/\.(?:tsx?|jsx?)$/, ""))
         if (!owner)
           throw new Error(
@@ -123,7 +122,7 @@ function visit(name: string) {
   if (visiting.has(name))
     throw new Error(`[registry] Dependency cycle at "${name}"`)
   const item = byName.get(name)
-  if (!item) throw new Error(`[registry] No installable item named "${name}"`)
+  if (!item) throw new Error(`[registry] No item named "${name}"`)
   visiting.add(name)
   for (const dependency of item.registryDependencies) visit(dependency)
   visiting.delete(name)
@@ -131,31 +130,48 @@ function visit(name: string) {
 }
 for (const name of byName.keys()) visit(name)
 
+const installable = catalog.filter(({ type }) => installableTypes.has(type))
+function withFileMetadata(item: (typeof catalog)[number]) {
+  return {
+    ...item,
+    files: item.files.map(({ path, type, target }) => ({ path, type, target }))
+  }
+}
+
+// Mirrors shadcn's apps/v4 public/r layout. index.json lists the installable
+// items. styles/<style> holds every item, including examples, and the
+// registry.json catalog for that style.
 const modernFiles = new Map<string, unknown>([
+  ["index.json", installable.map(withFileMetadata)],
   [
-    "index.json",
-    catalog.map((item) => ({
-      ...item,
-      files: item.files.map(({ path, type, target }) => ({
-        path,
-        type,
-        target
-      }))
+    "styles/index.json",
+    styles.map((name) => ({
+      name,
+      label: `${name[0]!.toUpperCase()}${name.slice(1)}`
     }))
   ]
 ])
 for (const style of styles) {
+  modernFiles.set(`styles/${style}/registry.json`, {
+    name: registryName,
+    homepage,
+    items: catalog.map(withFileMetadata)
+  })
   for (const item of catalog) {
     const files =
       style === ACTIVE_REGISTRY_STYLE
         ? item.files
         : await prepareFiles(item, style)
-    modernFiles.set(`styles/${style}/${item.name}.json`, { ...item, files })
+    modernFiles.set(`styles/${style}/${item.name}.json`, {
+      $schema: ITEM_SCHEMA,
+      ...item,
+      files
+    })
   }
 }
 
 // The published CLI installs TypeScript files into its configured component directory.
-const legacyItems = catalog.filter(
+const legacyItems = installable.filter(
   ({ type, name }) =>
     name !== "utils" && (type === "registry:ui" || type === "registry:hook")
 )

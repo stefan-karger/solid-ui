@@ -1,6 +1,6 @@
 import { InboxIcon } from "lucide-solid"
 
-import { Example, ExampleWrapper } from "~/registry/examples/example"
+import { Example, ExampleWrapper } from "~/registry/components/example"
 import { Button } from "~/registry/ui/button"
 import {
   Item,

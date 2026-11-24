@@ -11,6 +11,7 @@ type Props = Omit<HTMLAttributes<"figure">, "title"> & {
   language: string
   title?: string
   copyClass?: string
+  registryItem?: string
   registryPath?: string
 }
 
@@ -20,6 +21,7 @@ const {
   language,
   title,
   copyClass,
+  registryItem,
   registryPath,
   class: className,
   ...props
@@ -29,6 +31,7 @@ const {
 <figure
   class={cn("relative [&_pre]:min-w-0 [&_pre]:overflow-auto", className)}
   data-rehype-pretty-code-figure
+  data-registry-item={registryItem}
   data-registry-path={registryPath}
   data-source-style={registryPath ? "nova" : undefined}
   {...props}

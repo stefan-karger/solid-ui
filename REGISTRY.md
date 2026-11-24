@@ -40,12 +40,24 @@ Run `pnpm --filter docs build` to build the site. The `prebuild` script uses
 the same catalog and source exporter as the docs and generates the registry
 before Astro starts. Run `pnpm --filter docs prebuild` to refresh only the registry.
 
-| URL                             | Contents                                                    |
-| ------------------------------- | ----------------------------------------------------------- |
-| `/r/index.json`                 | Array of installable items and their dependency metadata    |
-| `/r/styles/<style>/<name>.json` | Installable item with file contents for a selected style    |
-| `/registry/index.json`          | Catalog for the published Solid UI CLI                      |
-| `/registry/ui/<name>.json`      | Default-style TypeScript source in the published CLI format |
+| URL                               | Contents                                                    |
+| --------------------------------- | ----------------------------------------------------------- |
+| `/r/index.json`                   | Array of installable items and their dependency metadata    |
+| `/r/styles/index.json`            | Available styles as `{ name, label }`                       |
+| `/r/styles/<style>/registry.json` | Catalog of every item for a style, without file contents    |
+| `/r/styles/<style>/<name>.json`   | Item, including examples, with file contents for a style    |
+| `/registry/index.json`            | Catalog for the published Solid UI CLI                      |
+| `/registry/ui/<name>.json`        | Default-style TypeScript source in the published CLI format |
+
+The `/r/` layout follows shadcn/ui's own registry
+([`f50887a`](https://github.com/shadcn-ui/ui/blob/f50887ae68d0fdcbfbe86b57be08af94a4c88a68/apps/v4/scripts/build-registry.mts)).
+`<style>` is a visual style such as `nova`. Upstream prefixes it with the
+primitive base, as in `base-nova`, but Solid UI has only the UI SDK base.
+Registry dependencies use plain item names and resolve within this registry.
+Item files use the Solid `~/` aliases.
+
+The docs load style-specific source from `/r/styles/<style>/<name>.json` when
+the reader changes the style.
 
 The generated files live in `apps/docs/public/r` and
 `apps/docs/public/registry`. Git ignores both directories. Astro copies

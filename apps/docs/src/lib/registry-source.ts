@@ -26,7 +26,8 @@ type PrepareRegistrySourceOptions = {
 const INTERNAL_ALIASES = [
   ["~/registry/ui/", "~/components/ui/"],
   ["~/registry/lib/", "~/lib/"],
-  ["~/registry/hooks/", "~/hooks/"]
+  ["~/registry/hooks/", "~/hooks/"],
+  ["~/registry/components/", "~/components/"]
 ] as const
 
 const SCRIPT_LANGUAGES = new Set<RegistrySourceLanguage>([
@@ -225,7 +226,7 @@ export async function prepareRegistrySource(
     code = replaceSemanticTokens(code, styleMap, options.registryPath)
   }
 
-  if (/~\/registry\/(?:ui|lib|hooks)\//.test(code)) {
+  if (/~\/registry\/(?:ui|lib|hooks|components)\//.test(code)) {
     throw new Error(
       `[registry-source] Internal registry alias remains in ${options.registryPath}`
     )

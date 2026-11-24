@@ -145,6 +145,7 @@ const blockHref = `/view/${encodeURIComponent(name)}`
         <CodeCollapsible variant="preview" data-slot="code">
           <ComponentCode
             code={source.code}
+            registryItem={name}
             registryPath={source.registryPath}
             highlightedCode={highlightedCode}
             language={source.language}

@@ -34,6 +34,7 @@ const highlightedCode = await highlightCode(source.code, resolvedLanguage)
   <CodeCollapsible variant="source" class={className} {...props}>
     <ComponentCode
       code={source.code}
+      registryItem={name}
       registryPath={source.registryPath}
       highlightedCode={highlightedCode}
       language={resolvedLanguage}
@@ -44,6 +45,7 @@ const highlightedCode = await highlightCode(source.code, resolvedLanguage)
 ) : (
   <ComponentCode
     code={source.code}
+    registryItem={name}
     registryPath={source.registryPath}
     highlightedCode={highlightedCode}
     language={resolvedLanguage}

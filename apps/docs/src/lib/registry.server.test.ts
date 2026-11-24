@@ -161,13 +161,8 @@ describe("registry catalog", () => {
 
   it("imports every SSR-safe preview with a callable default export", () => {
     for (const item of registry.items) {
-      if (
-        !["registry:example", "registry:component", "registry:block"].includes(
-          item.type
-        )
-      ) {
-        continue
-      }
+      // Components such as `example` are helper modules with named exports.
+      if (!["registry:example", "registry:block"].includes(item.type)) continue
 
       const descriptor = resolvePreview(item.name)
       if (descriptor.clientOnly) continue
