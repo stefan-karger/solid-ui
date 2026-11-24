@@ -117,7 +117,7 @@ const ComboboxContent = (
     align="start"
     {...props}
     class={cn(
-      "cn-combobox-content cn-menu-target cn-menu-translucent group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) origin-(--transform-origin)",
+      "cn-combobox-content cn-menu-target cn-menu-translucent group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+--spacing(7))] origin-(--transform-origin) [[data-slot=combobox-chips]~&]:min-w-(--anchor-width)",
       props.class
     )}
   />

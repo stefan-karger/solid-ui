@@ -267,6 +267,33 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} combobox popups span their input group`, async ({ page }) => {
+    await openExample(page, "combobox", theme)
+    const previews = page.locator('[data-slot="component-preview"]')
+    const content = page.locator('[data-slot="combobox-content"]:visible')
+    const width = (locator: typeof content) =>
+      locator.evaluate((node) => node.getBoundingClientRect().width)
+
+    const demo = previews.locator('astro-island[props*="combobox-demo"]')
+    await demo.locator('[data-slot="combobox-trigger"]').click()
+    await expect(content).toHaveCount(1)
+    const group = await width(demo.locator('[data-slot="input-group"]'))
+    // Upstream adds a fixed trigger width; rounded themes keep a few pixels of inset.
+    expect(await width(content)).toBeGreaterThanOrEqual(group - 8)
+    await page.keyboard.press("Escape")
+    await expect(content).toHaveCount(0)
+
+    const multiple = previews.locator(
+      'astro-island[props*="combobox-multiple"]'
+    )
+    await multiple.getByRole("combobox").click()
+    await expect(content).toHaveCount(1)
+    const chips = await width(multiple.locator('[data-slot="combobox-chips"]'))
+    expect(Math.abs((await width(content)) - chips)).toBeLessThanOrEqual(2)
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {
