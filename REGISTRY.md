@@ -132,21 +132,19 @@ as their renderer and own the interaction props they forward to it.
 
 ## Verification
 
-`registry-theme.test.ts` verifies SDK selectors and source-export styling across
-the eight themes. Collection tests cover replacement search results,
-object selection, explicit Select children, and SDK agent actions. Browser theme
-checks cover all eight styles in light/LTR and dark/RTL, slider geometry and stable
-keyboard focus, InputGroup focus, Command parts, accordion keyframes, checked
-controls, and selected tabs. The adapter's SSR/hydration and DOM-identity checks
-remain part of `pnpm validate`.
+Tests cover behavior Solid UI owns and SDK integration that can regress. Unit
+tests cover the registry catalog and source export, the preset codec, the
+adapter, and component logic such as filtered auto-highlight, Questionnaire
+answers and shortcuts, and slider thumb identity. Browser tests hydrate every
+docs preview and exercise the component flows. They also check SDK controls in
+all eight styles in light/LTR and dark/RTL. The suite does not pin
+one-off pixel geometry or palette values, and it does not retest SDK behavior
+through thin wrappers.
 
-These tests validate the SDK integration and the supported theme states. They do
-not claim identical DOM or pixel equality with Radix or Base UI.
+These tests do not claim identical DOM or pixel equality with Radix or Base UI.
 
-An SDK beta.6 limitation surfaced during the agent check: setting a composed,
-object-valued Select by label emitted its string key. Agent-controlled examples
-and tests use string choice values. Pointer and keyboard selection of objects
-remain covered separately; the SDK callbacks expose their native behavior.
+An SDK beta.6 limitation: setting a composed, object-valued Select by label
+emitted its string key. Agent-controlled examples use string choice values.
 
 ## Added component families
 

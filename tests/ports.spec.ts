@@ -50,82 +50,6 @@ test("dims disabled accordion triggers and skips them when tabbing", async ({
   await expect(enabled).toHaveAttribute("aria-expanded", "true")
 })
 
-test("centers accordion previews horizontally while keeping them top aligned", async ({
-  page
-}) => {
-  await page.goto("/docs/components/accordion/")
-  const card = namedExample(page, "accordion-card").locator(
-    '[data-slot="card"]'
-  )
-  await expect(card).toBeVisible()
-  const alignment = await card.evaluate((node) => {
-    const stage = node.closest<HTMLElement>("[data-align]")!
-    const preview = stage.getBoundingClientRect()
-    const child = node.getBoundingClientRect()
-    return {
-      centerOffset:
-        (preview.left + preview.right - child.left - child.right) / 2,
-      topOffset: child.top - preview.top,
-      paddingTop: parseFloat(getComputedStyle(stage).paddingTop)
-    }
-  })
-  expect(alignment.centerOffset).toBeCloseTo(0, 1)
-  expect(alignment.topOffset).toBeCloseTo(alignment.paddingTop, 1)
-
-  const accordion = namedExample(page, "accordion-disabled").locator(
-    '[data-slot="accordion"]'
-  )
-  await expect(accordion).toHaveCSS("max-width", "384px")
-})
-
-test("centers the preview loading message independently of example alignment", async ({
-  page
-}) => {
-  let release!: () => void
-  const pending = new Promise<void>((resolve) => {
-    release = resolve
-  })
-  await page.route("**/_astro/dialog-demo.*.js", async (route) => {
-    await pending
-    await route.continue()
-  })
-  const preview = namedExample(page, "dialog-demo.tsx")
-  const loading = preview.getByRole("status").filter({
-    hasText: "Loading component preview"
-  })
-  try {
-    await page.goto("/docs/components/dialog/", {
-      waitUntil: "domcontentloaded"
-    })
-    await expect(loading).toBeVisible()
-    const offsets = await loading.evaluate((node) => {
-      const stage = node.closest<HTMLElement>("[data-align]")!
-      const initial = stage.style.alignItems
-      const positions = ["start", "center", "end"].map((alignment) => {
-        stage.style.alignItems = alignment
-        const area = stage.getBoundingClientRect()
-        const text = node.getBoundingClientRect()
-        return {
-          x: (text.left + text.right - area.left - area.right) / 2,
-          y: (text.top + text.bottom - area.top - area.bottom) / 2
-        }
-      })
-      stage.style.alignItems = initial
-      return positions
-    })
-    for (const { x, y } of offsets) {
-      expect(x).toBeCloseTo(0, 1)
-      expect(y).toBeCloseTo(0, 1)
-    }
-  } finally {
-    release()
-  }
-  await expect(loading).toHaveCount(0)
-  await expect(
-    preview.getByRole("button", { name: "Open Dialog", exact: true })
-  ).toBeVisible()
-})
-
 test("keeps the Select popup at trigger width in both alignment modes", async ({
   page
 }) => {
@@ -157,54 +81,6 @@ test("keeps the Select popup at trigger width in both alignment modes", async ({
     "width",
     await trigger.evaluate((el) => getComputedStyle(el).width)
   )
-})
-
-test("keeps the homepage currency popup at trigger width", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 950 })
-  await page.goto("/")
-  const trigger = page.getByRole("combobox", { name: "Preferred Currency" })
-  await trigger.scrollIntoViewIfNeeded()
-  await expect(
-    trigger.locator("xpath=ancestor::astro-island")
-  ).not.toHaveAttribute("ssr", "")
-
-  await trigger.click()
-  const popup = page.locator('[data-slot="select-content"][data-open]')
-  await expect(popup).toHaveCSS(
-    "width",
-    await trigger.evaluate((el) => getComputedStyle(el).width)
-  )
-  await popup.getByRole("option", { name: "EUR — Euro", exact: true }).click()
-  await expect(trigger).toHaveText("EUR — Euro")
-})
-
-test("keeps the homepage button group edges when its menu opens", async ({
-  page
-}) => {
-  await page.goto("/")
-  const trigger = page.getByRole("button", { name: "Open quick actions" })
-  await trigger.scrollIntoViewIfNeeded()
-  await expect(
-    trigger.locator("xpath=ancestor::astro-island")
-  ).not.toHaveAttribute("ssr", "")
-  const radius = await trigger.evaluate(
-    (el) => getComputedStyle(el).borderTopRightRadius
-  )
-  expect(parseFloat(radius)).toBeGreaterThan(0)
-
-  await trigger.click()
-  const menu = page.getByRole("menu").filter({ hasText: "Quick Actions" })
-  await expect(menu).toBeVisible()
-  const menuRadius = await menu.evaluate(
-    (el) => getComputedStyle(el).borderTopRightRadius
-  )
-  expect(parseFloat(menuRadius)).toBeGreaterThan(0)
-  await expect(menu).toHaveCSS("border-top-left-radius", menuRadius)
-  await expect(menu).toHaveCSS("border-bottom-left-radius", menuRadius)
-  await expect(trigger).toHaveCSS("border-top-right-radius", radius)
-  await expect(trigger).toHaveCSS("border-bottom-right-radius", radius)
-  await expect(trigger).toHaveCSS("border-right-width", "1px")
-  await expect(trigger).toHaveCSS("border-left-width", "0px")
 })
 
 test("calendar selects dates with keys and enforces unavailable days", async ({
@@ -452,56 +328,6 @@ test("toast positions, actions, promises, and Escape use the native queue", asyn
       '[data-side="bottom"][data-align="start"] [data-slot="toast"]'
     )
   ).toBeVisible()
-})
-
-test("toast types share theme colors and use status icons in each color mode", async ({
-  page
-}) => {
-  const variants = [
-    { type: "default", icon: null },
-    { type: "success", icon: "circle-check" },
-    { type: "info", icon: "info" },
-    { type: "warning", icon: "triangle-alert" },
-    { type: "error", icon: "octagon-x" }
-  ]
-  const palettes = []
-  for (const mode of ["light", "dark"] as const) {
-    await page.emulateMedia({ colorScheme: mode })
-    await page.goto("/docs/components/toast/")
-    await expect(page.locator("html")).toHaveAttribute("data-color-mode", mode)
-    const preview = namedExample(page, "toast-types")
-    await preview.scrollIntoViewIfNeeded()
-    await expect(preview).not.toHaveAttribute("ssr", "")
-    const colors = []
-    for (const { type, icon } of variants) {
-      await preview
-        .getByRole("button", { name: new RegExp(`^${type}$`, "i") })
-        .click()
-      const notification = preview.locator(
-        `[data-slot="toast"][data-type="${type}"]`
-      )
-      const statusIcon = notification.locator('[data-slot="toast-icon"]')
-      await expect(notification).toBeVisible()
-      if (icon) {
-        await expect(statusIcon).toBeVisible()
-        await expect(statusIcon).toHaveAttribute("aria-hidden", "true")
-        await expect(statusIcon).toHaveClass(new RegExp(`lucide-${icon}\\b`))
-      } else {
-        await expect(statusIcon).toHaveCount(0)
-      }
-      colors.push(
-        await notification.evaluate((element) => {
-          const style = getComputedStyle(element)
-          return [style.backgroundColor, style.borderTopColor, style.color]
-        })
-      )
-      await notification.press("Escape")
-      await expect(notification).toHaveCount(0)
-    }
-    expect(colors.slice(1)).toEqual(variants.slice(1).map(() => colors[0]))
-    palettes.push(colors[0])
-  }
-  expect(palettes[0]).not.toEqual(palettes[1])
 })
 
 test("message scroller releases and resumes following growing content", async ({

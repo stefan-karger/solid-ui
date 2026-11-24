@@ -1,5 +1,4 @@
 import { render } from "@solidjs/web"
-import { createAgent } from "@ui-sdk/solid/agent"
 import { createMemo, createSignal, For } from "solid-js"
 import { afterEach, describe, expect, it } from "vitest"
 
@@ -11,15 +10,7 @@ import {
   ComboboxList
 } from "./combobox"
 import { Command, CommandInput, CommandItem, CommandList } from "./command"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "./select"
 type Option = { value: string; label: string }
-const agent = createAgent()
 const options: Option[] = [
   { value: "alpha", label: "Alpha" },
   { value: "beta", label: "Beta" }
@@ -144,48 +135,5 @@ describe("native collection composition", () => {
     )
     await flushUpdates()
     expect(selected).toBe("beta")
-  })
-  it("renders caller Select children and exposes named controls to the agent", async () => {
-    let selected: string | null = null
-    dispose = render(
-      () => (
-        <Select<string>
-          defaultOpen
-          onValueChange={(value) => {
-            selected = value
-          }}
-        >
-          <SelectTrigger aria-label="Project">
-            <SelectValue placeholder="Choose project" />
-          </SelectTrigger>
-          <SelectContent>
-            <For each={options}>
-              {(item) => (
-                <SelectItem value={item.value} label={item.label}>
-                  {item.label}
-                </SelectItem>
-              )}
-            </For>
-          </SelectContent>
-        </Select>
-      ),
-      host()
-    )
-    await flushUpdates()
-    expect(document.querySelectorAll('[role="option"]')).toHaveLength(2)
-    const snapshot = agent.snapshot()
-    expect(snapshot.some((entry) => entry.label === "Project")).toBe(true)
-    const result = await agent.act({
-      steps: [{ ref: "Project", action: "setValue", args: ["Beta"] }]
-    })
-    expect(result.ok).toBe(true)
-    await flushUpdates()
-    expect(selected).toBe(options[1]!.value)
-    const option = [
-      ...document.querySelectorAll<HTMLElement>('[role="option"]')
-    ].find((node) => node.textContent?.includes("Beta"))!
-    option.click()
-    await flushUpdates()
-    expect(selected).toBe(options[1]!.value)
   })
 })

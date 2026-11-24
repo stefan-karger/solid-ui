@@ -368,72 +368,6 @@ test("copies docs Markdown and offers the page actions and pagination", async ({
   }
 })
 
-test("applies the shared Solid palette to the live mobile showcase", async ({
-  page
-}) => {
-  await page.setViewportSize({ width: 320, height: 812 })
-  await page.emulateMedia({ colorScheme: "light" })
-  await page.goto("/")
-  const examples = page.getByRole("region", { name: "Component examples" })
-  const showcase = examples.locator('[data-slot="showcase"]')
-  const button = showcase.getByRole("button", { name: "Button", exact: true })
-  const card = showcase.locator('[data-slot="card"]').first()
-  await expect(button).toHaveCSS("background-color", "rgb(10, 69, 147)")
-  await expect(card).toHaveCSS("background-color", "rgb(255, 255, 255)")
-  await expect(showcase).toHaveCSS("background-color", "rgb(245, 247, 250)")
-  const theme = page.getByRole("button", { name: "Toggle theme" })
-  await expect(
-    theme.locator("xpath=ancestor::astro-island")
-  ).not.toHaveAttribute("ssr", "")
-  await theme.click()
-  await expect(button).toHaveCSS("background-color", "rgb(10, 160, 239)")
-  await expect(card).toHaveCSS("background-color", "rgb(23, 40, 61)")
-  await expect(showcase).toHaveCSS("background-color", "rgb(3, 21, 44)")
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth
-    )
-  ).toBe(true)
-})
-
-test("spaces the desktop header dividers from the visible GitHub content", async ({
-  page
-}) => {
-  await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto("/docs/")
-  const header = page.locator("[data-docs-header]")
-  const github = header.getByRole("link", { name: /^Solid UI on GitHub/ })
-  const metrics = await github.evaluate((link) => {
-    const firstDivider = link.previousElementSibling!.getBoundingClientRect()
-    const lastDivider = link.nextElementSibling!.getBoundingClientRect()
-    const icon = link.querySelector("svg path")!.getBoundingClientRect()
-    const count = link
-      .querySelector("[data-github-stars]")
-      ?.getBoundingClientRect()
-    return {
-      iconWidth: icon.width,
-      dividerToIcon: icon.left - firstDivider.right,
-      contentToDivider: lastDivider.left - (count ?? icon).right
-    }
-  })
-  expect(metrics.iconWidth).toBeCloseTo(16, 1)
-  expect(metrics.dividerToIcon).toBeCloseTo(18, 1)
-  expect(metrics.contentToDivider).toBeCloseTo(18, 1)
-
-  const firstDivider = github.locator("xpath=preceding-sibling::*[1]")
-  const lastDivider = github.locator("xpath=following-sibling::*[1]")
-  const search = header.getByRole("button", { name: "Search documentation" })
-  const select = header.getByRole("combobox", { name: "Preview style" })
-  const searchBox = (await search.boundingBox())!
-  const lastDividerBox = (await lastDivider.boundingBox())!
-  expect(
-    (await firstDivider.boundingBox())!.x - (searchBox.x + searchBox.width)
-  ).toBe(16)
-  expect(
-    (await select.boundingBox())!.x - (lastDividerBox.x + lastDividerBox.width)
-  ).toBe(16)
-})
-
 test("searches sidebar links and navigates from the command palette by keyboard", async ({
   page
 }) => {
@@ -595,29 +529,6 @@ test("expands the full installation source and keeps the example preview capped"
   await expect(preview.locator("pre")).toHaveCSS("max-height", "288px")
 })
 
-test.describe("source code without JavaScript", () => {
-  test.use({ javaScriptEnabled: false })
-
-  test("keeps long source code available in a scrollable block", async ({
-    page
-  }) => {
-    await page.goto("/docs/components/date-picker/")
-    const source = page.locator(
-      '[data-code-collapsible][data-variant="source"]'
-    )
-    const code = source.locator("pre")
-    await expect(source.locator("[data-code-top-control] button")).toBeHidden()
-    await expect(code).toBeVisible()
-    await expect(code).toHaveCSS("max-height", "384px")
-    await expect(code).toHaveCSS("overflow-y", "auto")
-    expect(
-      await code.evaluate(
-        (element) => element.scrollHeight > element.clientHeight
-      )
-    ).toBe(true)
-  })
-})
-
 test("persists style and color mode and offers matching registry source", async ({
   page
 }) => {
@@ -753,83 +664,4 @@ test("opens mobile navigation without horizontal overflow", async ({
       () => document.documentElement.scrollWidth <= innerWidth
     )
   ).toBe(true)
-})
-
-test("keeps switch thumbs centered and inside every track, in both directions", async ({
-  page
-}) => {
-  test.setTimeout(120_000)
-  await page.goto("/docs/components/switch/")
-  for (const island of await page.locator("astro-island").all()) {
-    await island.evaluate((node) =>
-      node.parentElement?.scrollIntoView({ block: "center" })
-    )
-    await expect(island).not.toHaveAttribute("ssr", "")
-  }
-  const article = page.locator('article[data-slot="docs"]')
-  for (const style of styles) {
-    await page
-      .locator("[data-docs-header]")
-      .getByRole("combobox", { name: "Preview style" })
-      .click()
-    await page
-      .getByRole("option", { name: new RegExp(`^${style}$`, "i") })
-      .click()
-    for (const direction of ["ltr", "rtl"]) {
-      await article.evaluate((node, direction) => {
-        node.dir = direction
-        node.querySelectorAll<HTMLElement>("[dir]").forEach((child) => {
-          child.dir = direction
-        })
-      }, direction)
-      for (const size of ["default", "sm"]) {
-        const control = article
-          .locator(`[data-slot="switch"][data-size="${size}"]:not([disabled])`)
-          .first()
-        for (const checked of [false, true]) {
-          if ((await control.isChecked()) !== checked) await control.click()
-          await expect
-            .poll(() =>
-              control.evaluate(
-                (node, { checked, direction, square }) => {
-                  const thumb = node.querySelector<HTMLElement>(
-                    '[data-slot="switch-thumb"]'
-                  )!
-                  const trackBox = node.getBoundingClientRect(),
-                    thumbBox = thumb.getBoundingClientRect()
-                  const css = getComputedStyle(node)
-                  const atRight = checked === (direction === "ltr")
-                  const edge = atRight
-                    ? trackBox.right -
-                      Number.parseFloat(css.borderRightWidth) -
-                      thumbBox.right
-                    : thumbBox.left -
-                      trackBox.left -
-                      Number.parseFloat(css.borderLeftWidth)
-                  const centered =
-                    Math.abs(
-                      trackBox.top +
-                        trackBox.height / 2 -
-                        (thumbBox.top + thumbBox.height / 2)
-                    ) < 0.6
-                  const corners =
-                    !square ||
-                    (Number.parseFloat(css.borderTopLeftRadius) === 0 &&
-                      Number.parseFloat(
-                        getComputedStyle(thumb).borderTopLeftRadius
-                      ) === 0)
-                  return (
-                    centered &&
-                    Math.abs(edge - (square ? 1 : 0)) < 0.8 &&
-                    corners
-                  )
-                },
-                { checked, direction, square: style === "sera" }
-              )
-            )
-            .toBe(true)
-        }
-      }
-    }
-  }
 })

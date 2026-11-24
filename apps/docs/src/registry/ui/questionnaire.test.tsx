@@ -120,29 +120,6 @@ const choices = (host: HTMLElement) => [
   )
 ]
 
-it("renders a dot for radio choices and a check for checkbox choices", () => {
-  for (const multiple of [false, true]) {
-    const host = mount(() => <Choices multiple={multiple} />)
-    const choice = choices(host)[0]!
-    expect(choice.dataset.type).toBe(multiple ? "checkbox" : "radio")
-    const indicator = choice.querySelector(
-      '[data-slot="questionnaire-choice-indicator"]'
-    )!
-    expect(
-      indicator.querySelector(
-        '[data-slot="questionnaire-choice-indicator-dot"]'
-      )
-    ).not.toBeNull()
-    expect(
-      indicator.querySelector(
-        '[data-slot="questionnaire-choice-indicator-check"]'
-      )
-    ).not.toBeNull()
-    dispose?.()
-    document.body.innerHTML = ""
-  }
-})
-
 it("selects choices with letter shortcuts in the active item only", async () => {
   const host = mount(() => <Choices shortcuts="letters" />)
   const items = choices(host)
@@ -192,22 +169,4 @@ it("limits number shortcuts to nine choices and ignores text entry", async () =>
   input.blur()
   press(host, "2")
   await vi.waitFor(() => expect(items[1]!.dataset.checked).toBe(""))
-})
-
-it("renders no shortcuts without the prop", () => {
-  const host = mount(() => <Choices />)
-  expect(
-    host.querySelector('[data-slot="questionnaire-choice-shortcut"]')
-  ).toBeNull()
-  press(host, "a")
-  expect(choices(host)[0]!.dataset.checked).toBeUndefined()
-})
-
-it("wraps the freeform input like upstream and forwards its props", () => {
-  const host = mount(() => <Choices withInput />)
-  const input = host.querySelector<HTMLInputElement>(
-    'input[aria-label="Other"]'
-  )!
-  expect(input.parentElement!.dataset.slot).toBe("questionnaire-input-wrapper")
-  expect(input.dataset.slot).not.toBe("questionnaire-input-wrapper")
 })

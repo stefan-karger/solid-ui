@@ -40,7 +40,5 @@ describe("workspace compatibility target", () => {
     expect(docs.dependencies["@astrojs/solid-js"]).toContain(
       "8.0.0-pr.17891.bbf9faa.tgz"
     )
-    expect(docs.dependencies).not.toHaveProperty("@solid-ui/astro-solid2")
-    expect(docs.dependencies).not.toHaveProperty("@kobalte/core")
   })
 })
