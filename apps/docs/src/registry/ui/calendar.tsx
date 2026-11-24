@@ -98,7 +98,7 @@ export function CalendarWeekday(
     <SdkCalendarWeekday
       {...props}
       class={cn(
-        "h-(--cell-size) text-xs font-normal text-muted-foreground",
+        "cn-calendar-weekday h-(--cell-size) font-normal text-muted-foreground",
         props.class
       )}
     />

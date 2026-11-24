@@ -232,6 +232,10 @@
     @apply h-8 pr-2 pl-3 text-xs font-semibold tracking-wide uppercase;
   }
 
+  .cn-calendar-weekday {
+    @apply text-xs;
+  }
+
   /* MARK: Card */
   .cn-card {
     @apply gap-(--card-spacing) overflow-hidden bg-card py-(--card-spacing) text-sm text-card-foreground shadow-sm ring-1 ring-foreground/5 [--card-spacing:--spacing(8)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(5)] *:[img:first-child]:rounded-none *:[img:last-child]:rounded-none;

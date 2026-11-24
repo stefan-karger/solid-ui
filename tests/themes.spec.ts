@@ -294,6 +294,32 @@ for (const theme of styles) {
   })
 }
 
+for (const theme of styles) {
+  test(`${theme} calendar weekday labels stay apart`, async ({ page }) => {
+    await openExample(page, "calendar", theme)
+    const cramped = await page
+      .locator('[data-slot="preview"] [data-slot="calendar-weekdays"]')
+      .first()
+      .evaluate((row) =>
+        [...row.querySelectorAll('[data-slot="calendar-weekday"]')]
+          .filter((cell) => {
+            const range = document.createRange()
+            range.selectNodeContents(cell)
+            const label = range.getBoundingClientRect().width
+            const probe = document.createElement("span")
+            probe.style.cssText =
+              "position:absolute;display:block;width:var(--cell-size)"
+            cell.append(probe)
+            const size = probe.getBoundingClientRect().width
+            probe.remove()
+            return label > size - 2
+          })
+          .map((cell) => cell.textContent)
+      )
+    expect(cramped).toEqual([])
+  })
+}
+
 test("native chips preserve the input, remove selections, and clear single values", async ({
   page
 }) => {

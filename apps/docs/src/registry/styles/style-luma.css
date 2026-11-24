@@ -1259,6 +1259,10 @@
     @apply h-8 pr-2 pl-3;
   }
 
+  .cn-calendar-weekday {
+    @apply text-xs;
+  }
+
   /* MARK: Carousel */
   .cn-carousel-previous {
     @apply rounded-full;
