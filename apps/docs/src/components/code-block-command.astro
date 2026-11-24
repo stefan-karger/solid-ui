@@ -128,6 +128,7 @@ const instanceId = `code-block-command-${randomUUID()}`
 
 <script>
   import { copyToClipboard } from "~/lib/clipboard"
+  import { setCopyFeedback } from "~/lib/copy-buttons"
 
   const STORAGE_KEY = "solid-ui-package-manager"
   const CHANGE_EVENT = "solid-ui:package-manager-change"
@@ -167,15 +168,7 @@ const instanceId = `code-block-command-${randomUUID()}`
     if (resetTimer !== undefined) window.clearTimeout(resetTimer)
     copyResetTimers.delete(copyButton)
 
-    delete copyButton.dataset.copied
-    copyButton.setAttribute("aria-label", "Copy command")
-    root
-      .querySelector<SVGElement>("[data-copy-icon]")
-      ?.classList.remove("hidden")
-    root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden")
-
-    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
-    if (copyStatus) copyStatus.textContent = ""
+    setCopyFeedback(copyButton, root, "command", "idle")
   }
 
   function setPackageManager(
@@ -292,24 +285,10 @@ const instanceId = `code-block-command-${randomUUID()}`
       if (!command) return
 
       const operationId = nextCopyOperation(copyButton)
-      if (
-        !(await copyToClipboard(command)) ||
-        copyOperationIds.get(copyButton) !== operationId
-      ) {
-        return
-      }
+      const copied = await copyToClipboard(command)
+      if (copyOperationIds.get(copyButton) !== operationId) return
 
-      copyButton.dataset.copied = "true"
-      copyButton.setAttribute("aria-label", "Command copied")
-      root
-        .querySelector<SVGElement>("[data-copy-icon]")
-        ?.classList.add("hidden")
-      root
-        .querySelector<SVGElement>("[data-check-icon]")
-        ?.classList.remove("hidden")
-
-      const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
-      if (copyStatus) copyStatus.textContent = "Command copied"
+      setCopyFeedback(copyButton, root, "command", copied ? "success" : "error")
 
       const previousResetTimer = copyResetTimers.get(copyButton)
       if (previousResetTimer !== undefined)
