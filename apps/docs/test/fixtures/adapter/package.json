@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@ui-sdk/core": "0.1.0-beta.10",
-    "@ui-sdk/solid": "0.1.0-beta.10"
+    "@ui-sdk/solid": "0.1.0-beta.10",
+    "lucide-solid": "1.41.0"
   }
 }

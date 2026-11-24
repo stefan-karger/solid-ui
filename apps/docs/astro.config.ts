@@ -1,5 +1,3 @@
-import { fileURLToPath } from "node:url"
-
 import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
 import solid from "@astrojs/solid-js"
@@ -15,7 +13,6 @@ import {
 } from "./src/lib/highlight-code"
 
 export default defineConfig({
-  output: "static",
   integrations: [mdx(), solid()],
   markdown: {
     processor: unified({
@@ -30,28 +27,12 @@ export default defineConfig({
         rehypeCommandMetadata
       ]
     }),
+    // rehype-pretty-code highlights code blocks instead of Astro's Shiki.
     syntaxHighlight: false
   },
   vite: {
+    // UI SDK installation guide: pre-bundling core would load a second copy.
     optimizeDeps: { exclude: ["@ui-sdk/core"] },
-    plugins: [tailwindcss()],
-    resolve: {
-      alias: [
-        { find: "solid-js/web", replacement: "@solidjs/web" },
-        {
-          find: /^lucide-solid$/,
-          replacement: fileURLToPath(
-            new URL(
-              "./node_modules/lucide-solid/dist/source/lucide-solid.jsx",
-              import.meta.url
-            )
-          )
-        },
-        {
-          find: "~",
-          replacement: fileURLToPath(new URL("./src", import.meta.url))
-        }
-      ]
-    }
+    plugins: [tailwindcss()]
   }
 })

@@ -10,16 +10,8 @@ export default defineConfig({
   vite: {
     optimizeDeps: { exclude: ["@ui-sdk/core"] },
     resolve: {
-      alias: {
-        "~": fileURLToPath(new URL("../../../src", import.meta.url)),
-        "solid-js/web": "@solidjs/web",
-        "lucide-solid": fileURLToPath(
-          new URL(
-            "../../../node_modules/lucide-solid/dist/source/lucide-solid.jsx",
-            import.meta.url
-          )
-        )
-      }
+      // The fixture renders the docs' registry examples from outside the docs root.
+      alias: { "~": fileURLToPath(new URL("../../../src", import.meta.url)) }
     }
   }
 })
