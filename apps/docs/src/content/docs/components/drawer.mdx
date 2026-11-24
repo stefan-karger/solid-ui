@@ -1,6 +1,6 @@
 ---
 title: Drawer
-description: A drawer component for React.
+description: A panel that slides in from an edge of the screen, with dragging and snap points.
 component: true
 ---
 
@@ -8,7 +8,7 @@ component: true
 
 ## About
 
-Drawer is built on top of [Vaul](https://github.com/emilkowalski/vaul) by [emilkowalski](https://twitter.com/emilkowalski).
+Drawer is built on the [UI SDK Drawer](https://ui-sdk.dev/docs/solid/components/drawer). It shares Dialog's focus and dismissal behavior and adds dragging, snap points, and a handle you can use with the keyboard.
 
 ## Installation
 
@@ -79,7 +79,7 @@ import {
 </Drawer>
 ```
 
-Use `side`, `snapPoints`, and `defaultSnapPoint` from the SDK. Content renders in place using the browser top layer. The SDK owns positioning and movement. There is no portal or Vaul compatibility layer.
+Use `side`, `snapPoints`, and `defaultSnapPoint` from the SDK. Content renders in place using the browser top layer. The SDK owns positioning and movement.
 
 See the [UI SDK drawer API](https://ui-sdk.dev/docs/solid/components/drawer) for native options and keyboard behavior.
 
@@ -117,4 +117,4 @@ You can combine the `Dialog` and `Drawer` components to create a responsive dial
 
 ## API Reference
 
-See the [Vaul documentation](https://vaul.emilkowal.ski/getting-started) for the full API reference.
+See the [UI SDK Drawer API](https://ui-sdk.dev/docs/solid/components/drawer) for the full API reference.

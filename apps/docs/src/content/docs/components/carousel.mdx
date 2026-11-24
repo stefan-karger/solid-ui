@@ -1,6 +1,6 @@
 ---
 title: Carousel
-description: A carousel with motion and swipe built using Embla.
+description: A carousel with motion, swipe, and keyboard paging.
 component: true
 ---
 
@@ -8,7 +8,7 @@ component: true
 
 ## About
 
-The carousel component is built using the [Embla Carousel](https://www.embla-carousel.com/) library.
+Carousel is built on the [UI SDK Carousel](https://ui-sdk.dev/docs/solid/components/carousel), which handles paging, swiping, looping, autoplay, and keyboard support.
 
 ## Installation
 
@@ -81,7 +81,7 @@ import {
 </Carousel>
 ```
 
-Compose `CarouselViewport` and `CarouselContent` under `Carousel`, then render explicit `CarouselItem` children. Native SDK `page`, `onPageChange`, `loop`, `slidesPerPage`, and `controller` replace Embla options and callbacks. Give vertical viewports an explicit height.
+Compose `CarouselViewport` and `CarouselContent` under `Carousel`, then render explicit `CarouselItem` children. Configure it with props on `Carousel`, such as `page`, `onPageChange`, `loop`, `slidesPerPage`, and `controller`. Give vertical viewports an explicit height.
 
 See the [UI SDK carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for native options and keyboard behavior.
 
@@ -91,9 +91,10 @@ Use the following composition to build a `Carousel`:
 
 ```text
 Carousel
-├── CarouselContent
-│   ├── CarouselItem
-│   └── CarouselItem
+├── CarouselViewport
+│   └── CarouselContent
+│       ├── CarouselItem
+│       └── CarouselItem
 ├── CarouselPrevious
 └── CarouselNext
 ```
@@ -118,26 +119,27 @@ Use the `orientation` prop to set the orientation of the carousel.
 
 ## Options
 
-You can pass options to the carousel using the `opts` prop. See the [Embla Carousel docs](https://www.embla-carousel.com/api/options/) for more information.
+Pass options as props on `Carousel`:
 
-## API
+- `loop` continues from the last page to the first.
+- `slidesPerPage` sets how many slides one page holds, or `"auto"` to fit as many as the viewport shows.
+- `align` sets where a page lines up in the viewport.
+- `dragFree`, `skipSnaps`, and `drag` control how swipes and drags move the slides.
 
-Use a state and the `setApi` props to get an instance of the carousel API.
+See the [UI SDK Carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for every option.
+
+## Controlled
+
+Use `page` and `onPageChange` to read and set the current page. `onPageChange` receives the requested page and change details whose `reason` explains the change. `onPageChangeComplete` runs once the slides come to rest. To page the carousel from elsewhere, pass a `controller` created with `createCarouselController()`.
 
 <ComponentPreview name="carousel-api" previewClassName="sm:h-[32rem]" />
 
-## Events
+## Autoplay
 
-You can listen to events using the api instance from `setApi`.
-
-See the [Embla Carousel docs](https://www.embla-carousel.com/api/events/) for more information on using events.
-
-## Plugins
-
-You can use the `plugins` prop to add plugins to the carousel.
+Use `defaultPlaying` or `playing` with `interval` to rotate through the pages. Rotation pauses while the carousel is hovered, scrolled out of view, or in a hidden tab, and stops when the user pages. It doesn't start on its own when the user prefers reduced motion.
 
 <ComponentPreview name="carousel-plugin" previewClassName="sm:h-[32rem]" />
 
 ## API Reference
 
-See the [Embla Carousel docs](https://www.embla-carousel.com/api/) for more information on props and plugins.
+See the [UI SDK Carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for the full API reference.
