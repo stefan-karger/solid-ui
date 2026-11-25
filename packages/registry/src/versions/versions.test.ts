@@ -2,7 +2,11 @@ import { readFileSync } from "node:fs"
 
 import { describe, expect, it } from "vitest"
 
-import { computeSupportedVersions, toSupportedRange } from "./compute.ts"
+import {
+  computeSupportedVersions,
+  toRequirementRange,
+  toSupportedRange
+} from "./compute.ts"
 import { SUPPORTED_VERSIONS, supportedRange } from "./index.ts"
 
 const read = (path: string) =>
@@ -29,6 +33,14 @@ describe("supported versions", () => {
     expect(() => toSupportedRange("solid-js", "^2.0.1")).toThrow(
       "solid-js must be pinned to an exact version"
     )
+  })
+
+  it("lets a project keep older patches of its requirements", () => {
+    // The solid-v2 template's lockfile pins solid-js 2.0.0.
+    expect(toRequirementRange("solid-js", "2.0.1")).toBe("^2.0.0")
+    // A minor can add utilities the components use.
+    expect(toRequirementRange("tailwindcss", "4.3.5")).toBe("^4.3.0")
+    expect(toRequirementRange("x", "1.0.0-rc.1")).toBe("1.0.0-rc.1")
   })
 
   it("lists the project requirements apart from the packages it installs", () => {

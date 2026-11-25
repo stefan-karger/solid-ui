@@ -235,23 +235,23 @@ describe("init", () => {
 
   it("prints the update command when it can't ask and --yes is off", async () => {
     const cwd = createProject()
-    const pnpmLowest: Installer = async (dir) => {
-      // pnpm resolving the lowest versions the template's ranges allow.
+    const olderMinor: Installer = async (dir) => {
+      // A lockfile that resolves an older Tailwind CSS minor.
       writeFileSync(
-        path.join(dir, "node_modules/solid-js/package.json"),
-        JSON.stringify({ name: "solid-js", version: "2.0.0" })
+        path.join(dir, "node_modules/tailwindcss/package.json"),
+        JSON.stringify({ name: "tailwindcss", version: "4.2.1" })
       )
     }
     const { messages } = await init(
       cwd,
       { yes: false, preset: "b0" },
-      { install: pnpmLowest }
+      { install: olderMinor }
     )
     const text = messages.join("\n")
     expect(text).toContain(
-      `solid-js 2.0.0 (needs ${supportedRange("solid-js")})`
+      `tailwindcss 4.2.1 (needs ${supportedRange("tailwindcss")})`
     )
-    expect(text).toMatch(/Update them with:\n\n {2}\S+ \S+ solid-js@\^/)
+    expect(text).toMatch(/Update them with:\n\n {2}\S+ \S+ tailwindcss@\^/)
   })
 
   describe("in a project nobody installed yet", () => {
@@ -260,15 +260,15 @@ describe("init", () => {
       ...Object.fromEntries(
         Object.keys(supportedInstall).map((name) => [name, "^2.0.0"])
       ),
-      tailwindcss: "^4.3.5",
+      tailwindcss: "^4.2.0",
       vite: "^8.3.8",
       "@solidjs/vite-plugin": "^3.0.0",
       typescript: "^7.0.2"
     }
     const fresh = () => createProject({ installed: {}, declared })
 
-    // An install of package.json that resolves `versions` (the template's
-    // pnpm lockfile pins solid-js 2.0.0).
+    // An install of package.json that resolves `versions`, as a lockfile
+    // would pin them.
     function installing(versions: Record<string, string> = {}) {
       const calls: string[][] = []
       const install: Installer = async (dir, specs) => {
@@ -298,17 +298,31 @@ describe("init", () => {
       expect(existsSync(path.join(cwd, "components.json"))).toBe(true)
     })
 
-    it("updates versions the install left below the ranges with --yes", async () => {
+    it("keeps older patches, like the template lockfile's Solid 2.0.0", async () => {
       const cwd = fresh()
-      const { calls, install } = installing({ "solid-js": "2.0.0" })
+      const { calls, install } = installing({
+        "solid-js": "2.0.0",
+        "@solidjs/web": "2.0.0",
+        "@solidjs/vite-plugin": "3.0.0"
+      })
       const { messages } = await init(cwd, {}, { install })
-      expect(calls[1]).toEqual([`solid-js@${supportedRange("solid-js")}`])
-      expect(messages).toContain("task: Updated solid-js")
+      expect(messages.join("\n")).not.toContain("older than")
+      expect(calls.flat().some((spec) => spec.startsWith("solid-js@"))).toBe(
+        false
+      )
+    })
+
+    it("updates an older minor with --yes", async () => {
+      const cwd = fresh()
+      const { calls, install } = installing({ tailwindcss: "4.2.1" })
+      const { messages } = await init(cwd, {}, { install })
+      expect(calls[1]).toEqual([`tailwindcss@${supportedRange("tailwindcss")}`])
+      expect(messages).toContain("task: Updated tailwindcss")
     })
 
     it("stops before writing files when it may not update them", async () => {
       const cwd = fresh()
-      const { install } = installing({ "solid-js": "2.0.0" })
+      const { install } = installing({ tailwindcss: "4.2.1" })
       await expect(
         init(cwd, { yes: false, preset: "b0" }, { install })
       ).rejects.toThrow(/Update them with:[\s\S]*Then run init again\./)

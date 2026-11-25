@@ -36,3 +36,17 @@ after a build. Run `pnpm validate:full`, which adds every browser test (about se
 minutes), once at the end of a plan, a larger task or a loop, and before handing back
 changes to the adapter, the themes or shared docs rendering. Tag a browser test
 `@smoke` in its title only when it guards a core path in a few seconds.
+
+## solidui-cli
+
+The CLI never changes the version of a package a project already has without
+asking. `--yes` is the consent for requirements below the tested ranges, which
+the components need; any other installed version outside a tested range is
+kept with a warning.
+
+Requirement ranges (`solid-js`, `@solidjs/web`, `tailwindcss`, `vite`,
+`@solidjs/vite-plugin`) start at the pin's minor, `^major.minor.0`: older
+patches are fine, a minor can add features the components use. Packages the
+CLI installs start at the pin, `^<pin>`; UI SDK prereleases stay pinned. Both
+come from `packages/registry/src/versions/compute.ts`; run
+`pnpm sync:versions` after changing a pin.

@@ -1,6 +1,12 @@
 // The exact pins in the repository are the versions the docs and tests run
-// against. Supported ranges are derived from them: `^<pin>` for a release and
-// the pin itself for a prerelease, since prereleases may break between builds.
+// against. Supported ranges are derived from them; a prerelease stays pinned,
+// since prereleases may break between builds.
+//
+// Packages init installs get `^<pin>`: a new install starts at the tested
+// version. Requirements a project already has start at the pin's minor:
+// patches only fix bugs, so an older patch is fine and init leaves it alone,
+// while a minor can add features the components use (Tailwind utilities,
+// Vite's resolve.tsconfigPaths).
 
 export type PackageManifest = {
   dependencies?: Record<string, string>
@@ -31,6 +37,12 @@ export function toSupportedRange(name: string, pin: string | undefined) {
   return pin.includes("-") ? pin : `^${pin}`
 }
 
+// `^major.minor.0` for a requirement's pin, the pin itself for a prerelease.
+export function toRequirementRange(name: string, pin: string | undefined) {
+  const range = toSupportedRange(name, pin)
+  return range.startsWith("^") ? range.replace(/\.\d+$/, ".0") : range
+}
+
 function pinOf(manifest: PackageManifest, name: string) {
   return manifest.dependencies?.[name] ?? manifest.devDependencies?.[name]
 }
@@ -41,9 +53,9 @@ export function computeSupportedVersions(
 ): SupportedVersions {
   const requirements: Record<string, string> = {}
   for (const name of DOCS_REQUIREMENTS)
-    requirements[name] = toSupportedRange(name, pinOf(docs, name))
+    requirements[name] = toRequirementRange(name, pinOf(docs, name))
   for (const name of ROOT_REQUIREMENTS)
-    requirements[name] = toSupportedRange(name, pinOf(root, name))
+    requirements[name] = toRequirementRange(name, pinOf(root, name))
 
   const packages: Record<string, string> = {}
   for (const [name, pin] of Object.entries(docs.dependencies ?? {}).sort(
