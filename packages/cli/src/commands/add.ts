@@ -19,6 +19,7 @@ import { runAddPreflight } from "~/preflight/add"
 import { readPackageJson } from "~/project/package-json"
 import { createRegistryClient, type RegistryClient } from "~/registry/client"
 import { installableItems, resolveTree } from "~/registry/resolve"
+import { badge, color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
 import {
   detectAgent,
@@ -52,7 +53,7 @@ function anchorNotes(specs: string[]) {
       : undefined
     return anchor && range && anchor !== range
       ? [
-          `The registry uses ${name} ${range}; ${CLI_NAME} ${CLI_VERSION} was tested with ${anchor}. Update with: npx ${CLI_NAME}@latest`
+          `The registry uses ${name} ${range}; ${CLI_NAME} ${CLI_VERSION} was tested with ${anchor}. Update with: ${color.command(`npx ${CLI_NAME}@latest`)}`
         ]
       : []
   })
@@ -69,7 +70,7 @@ async function chooseItems(
   if (names.length) return names
   if (!interactive)
     throw new CliError(
-      `Name the components to add, for example: npx ${CLI_NAME}@latest add button`
+      `Name the components to add, for example: ${color.command(`npx ${CLI_NAME}@latest add button`)}`
     )
   return ui.multiselect(
     "Which components would you like to add?",
@@ -87,6 +88,7 @@ export async function runAdd(
   const install = deps.install ?? installPackages
   const cwd = path.resolve(options.cwd)
 
+  ui.intro(badge())
   const project = runAddPreflight(cwd)
   const { config } = project
   const client = deps.client ?? createRegistryClient()
@@ -107,7 +109,7 @@ export async function runAdd(
     interactive
   )
   if (!selected.length) {
-    ui.warn("No components selected.")
+    ui.outro("No components selected.")
     return
   }
 
@@ -161,14 +163,20 @@ export async function runAdd(
   }
 
   const lines = [
-    ...written.created.map((file) => `Created ${file}`),
-    ...written.updated.map((file) => `Updated ${file}`),
-    ...written.unchanged.map((file) => `Unchanged ${file}`),
-    ...written.skipped.map((file) => `Kept ${file} (differs from the registry)`)
+    ...written.created.map((file) => `${color.added("Created")} ${file}`),
+    ...written.updated.map((file) => `${color.changed("Updated")} ${file}`),
+    ...written.unchanged.map((file) => `${color.muted("Unchanged")} ${file}`),
+    ...written.skipped.map(
+      (file) =>
+        `${color.kept("Kept")} ${file} ${color.muted("(differs from the registry)")}`
+    )
   ]
   ui.success(lines.join("\n"))
   if (written.skipped.length && !options.overwrite)
-    ui.info("Run add with --overwrite to replace files that differ.")
+    ui.info(
+      `Run add with ${color.command("--overwrite")} to replace files that differ.`
+    )
+  ui.outro(`Added ${selected.join(", ")}.`)
 }
 
 export const add = new Command()

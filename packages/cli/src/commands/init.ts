@@ -39,6 +39,7 @@ import {
   type ViteConfig
 } from "~/project/vite"
 import { createRegistryClient, type RegistryClient } from "~/registry/client"
+import { badge, color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
 import {
   detectAgent,
@@ -170,7 +171,7 @@ async function checkVersionsAfterInstall(
   }
   const commands = groups.map(
     ({ dev, specs }) =>
-      `  ${formatCommand(installCommand(specs, { agent, dev }))}`
+      `  ${color.command(formatCommand(installCommand(specs, { agent, dev })))}`
   )
   ui.info(`Update them with:\n\n${commands.join("\n")}`)
 }
@@ -208,7 +209,7 @@ async function choosePreset(
   )
   if (choice === "custom") {
     ui.note(
-      `Build your preset at ${CREATE_URL}, then run the command it copies:\n\n  npx ${CLI_NAME}@latest init --preset <code>`,
+      `Build your preset at ${CREATE_URL}, then run the command it copies:\n\n  ${color.command(`npx ${CLI_NAME}@latest init --preset <code>`)}`,
       "Custom preset"
     )
     return null
@@ -222,7 +223,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   const install = deps.install ?? installPackages
   const cwd = path.resolve(options.cwd)
 
-  ui.intro(`${CLI_NAME} ${CLI_VERSION}`)
+  ui.intro(badge())
 
   const preflight = runInitPreflight(cwd, {
     cliVersion: CLI_VERSION,
@@ -342,14 +343,18 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 
   ui.note(
     [
-      `Preset ${code} (style ${preset.style})`,
+      `Preset ${color.command(code)} ${color.muted(`(style ${preset.style})`)}`,
       "",
-      ...files.map((file) => `write  ${rel(cwd, file.path)}`),
-      ...changes.map((change) => `update ${change}`),
+      ...files.map((file) => `${color.added("write  ")}${rel(cwd, file.path)}`),
+      ...changes.map((change) => `${color.changed("update ")}${change}`),
       ...(viteStep.kind === "manual"
-        ? [`skip   ${viteName} (add resolve.tsconfigPaths yourself)`]
+        ? [
+            `${color.kept("skip   ")}${viteName} ${color.muted("(add resolve.tsconfigPaths yourself)")}`
+          ]
         : []),
-      ...(plan.install.length ? ["", `install ${plan.install.join(" ")}`] : [])
+      ...(plan.install.length
+        ? ["", `${color.added("install")} ${plan.install.join(" ")}`]
+        : [])
     ].join("\n"),
     "init will"
   )
@@ -377,9 +382,11 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     [
       ...written
         .flatMap(({ created, updated }) => [...created, ...updated])
-        .map((file) => `Wrote ${file}`),
-      ...changes.map((change) => `Updated ${change}`),
-      ...written.flatMap(({ skipped }) => skipped).map((file) => `Kept ${file}`)
+        .map((file) => `${color.added("Wrote")} ${file}`),
+      ...changes.map((change) => `${color.changed("Updated")} ${change}`),
+      ...written
+        .flatMap(({ skipped }) => skipped)
+        .map((file) => `${color.kept("Kept")} ${file}`)
     ].join("\n")
   )
 
@@ -400,17 +407,18 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     )
   }
 
-  const addButton = `npx ${CLI_NAME}@latest add button`
+  const addButton = color.command(`npx ${CLI_NAME}@latest add button`)
   if (viteStep.kind === "manual") {
     ui.warn(
-      `Vite can't resolve ~/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${TSCONFIG_PATHS_ENTRY} to the config, for example:\n\n${TSCONFIG_PATHS_SNIPPET}`
+      `Vite can't resolve ~/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${color.command(TSCONFIG_PATHS_ENTRY)} to the config, for example:\n\n${color.command(TSCONFIG_PATHS_SNIPPET)}`
     )
     ui.outro(
       `Finish the ${viteName} step above, then add a component with: ${addButton}`
     )
     return
   }
-  ui.outro(`Solid UI is set up. Add a component with: ${addButton}`)
+  ui.note(addButton, "Add your first component")
+  ui.outro("Solid UI is set up.")
 }
 
 export const init = new Command()

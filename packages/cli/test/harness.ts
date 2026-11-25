@@ -1,3 +1,5 @@
+import { stripVTControlCharacters } from "node:util"
+
 import type { RegistryItem } from "@solid-ui/registry/schema"
 
 import { createRegistryClient } from "~/registry/client"
@@ -80,8 +82,13 @@ export function recordingUi(
   } = {}
 ) {
   const messages: string[] = []
+  // Recorded without colors, so tests read the text.
   const record = (kind: string) => (message: string, title?: string) =>
-    messages.push(`${kind}${title ? `(${title})` : ""}: ${message}`)
+    messages.push(
+      stripVTControlCharacters(
+        `${kind}${title ? `(${title})` : ""}: ${message}`
+      )
+    )
   const ui: Ui = {
     intro: record("intro"),
     outro: record("outro"),

@@ -33,7 +33,8 @@ function cancelled<T>(value: T | symbol): T {
 }
 
 export const terminalUi: Ui = {
-  intro: (title) => p.intro(title),
+  // A blank line, then the badge, as create-solid prints it.
+  intro: (title) => p.intro(`\n${title}`),
   outro: (message) => p.outro(message),
   info: (message) => p.log.info(message),
   success: (message) => p.log.success(message),
