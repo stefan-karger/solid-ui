@@ -20,7 +20,7 @@ import { supportedRange } from "@solid-ui/registry/versions"
 import { Command } from "commander"
 
 import { CREATE_URL } from "~/constants"
-import { planDependencies, type DependencyPlan } from "~/install/dependencies"
+import { planDependencies, resolveConflicts } from "~/install/dependencies"
 import {
   resolveTargetPath,
   writeFiles,
@@ -105,24 +105,6 @@ async function choosePreset(
     return null
   }
   return DEFAULT_PRESETS[choice as keyof typeof DEFAULT_PRESETS].preset
-}
-
-async function resolveConflicts(
-  plan: DependencyPlan,
-  ui: Ui,
-  interactive: boolean
-) {
-  const install = [...plan.install]
-  for (const conflict of plan.conflicts) {
-    const question = `${conflict.name} ${conflict.found} is outside the tested range ${conflict.range}. Install ${conflict.spec}?`
-    if (interactive && (await ui.confirm(question, false)))
-      install.push(conflict.spec)
-    else
-      ui.warn(
-        `Kept ${conflict.name} ${conflict.found}. Solid UI is tested with ${conflict.range}.`
-      )
-  }
-  return install
 }
 
 export async function runInit(options: InitOptions, deps: InitDeps = {}) {

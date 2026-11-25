@@ -16,6 +16,9 @@ export type PlannedFile = {
 export type WriteResult = {
   created: string[]
   updated: string[]
+  // Identical to what the registry ships.
+  unchanged: string[]
+  // Different, but kept because overwriting wasn't allowed.
   skipped: string[]
 }
 
@@ -77,13 +80,18 @@ export async function writeFiles(
     confirm?: (relativePath: string) => Promise<boolean>
   }
 ): Promise<WriteResult> {
-  const result: WriteResult = { created: [], updated: [], skipped: [] }
+  const result: WriteResult = {
+    created: [],
+    updated: [],
+    unchanged: [],
+    skipped: []
+  }
   for (const file of files) {
     const relative = path.relative(cwd, file.path).split(path.sep).join("/")
     const content = `${normalize(file.content)}\n`
     if (existsSync(file.path)) {
       if (normalize(readFileSync(file.path, "utf8")) === normalize(content)) {
-        result.skipped.push(relative)
+        result.unchanged.push(relative)
         continue
       }
       const replace =

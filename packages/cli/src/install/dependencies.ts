@@ -1,5 +1,6 @@
 import type { PackageJson } from "~/project/package-json"
 import { resolveVersion, satisfies } from "~/project/versions"
+import type { Ui } from "~/utils/ui"
 
 export type DependencyConflict = {
   name: string
@@ -46,4 +47,24 @@ export function planDependencies(
     else plan.conflicts.push({ name, range, found: resolved.version, spec })
   }
   return plan
+}
+
+// The specs to install: the missing packages, plus each conflict the user
+// agrees to change. Without a prompt, installed versions stay as they are.
+export async function resolveConflicts(
+  plan: DependencyPlan,
+  ui: Ui,
+  interactive: boolean
+) {
+  const install = [...plan.install]
+  for (const conflict of plan.conflicts) {
+    const question = `${conflict.name} ${conflict.found} is outside the tested range ${conflict.range}. Install ${conflict.spec}?`
+    if (interactive && (await ui.confirm(question, false)))
+      install.push(conflict.spec)
+    else
+      ui.warn(
+        `Kept ${conflict.name} ${conflict.found}. Solid UI is tested with ${conflict.range}.`
+      )
+  }
+  return install
 }
