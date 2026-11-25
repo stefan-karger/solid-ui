@@ -37,7 +37,7 @@ test.beforeEach(async ({ page }) => {
   expect(errors).toEqual([])
 })
 
-test("hydrates independent islands, preserves slots and replaces client-only fallbacks", async ({
+test("hydrates independent islands, preserves slots and replaces client-only fallbacks @smoke", async ({
   page
 }) => {
   // Cold Vite dependency discovery can reload the document after its first load.
@@ -97,7 +97,7 @@ test("hydrates independent islands, preserves slots and replaces client-only fal
 
 // Adapted from upstream solid-component.test.ts: lazy-only CSS must reach the
 // initial HTML, including static islands, and be deduplicated per page.
-test("delivers lazy CSS before hydration and deduplicates production styles", async ({
+test("delivers lazy CSS before hydration and deduplicates production styles @smoke", async ({
   page,
   request,
   browser
@@ -127,7 +127,7 @@ test("delivers lazy CSS before hydration and deduplicates production styles", as
   await initial.close()
 })
 
-test("disposes on astro:unmount", async ({ page }) => {
+test("disposes on astro:unmount @smoke", async ({ page }) => {
   await page.evaluate(() => {
     document.body.dataset.disposed = "0"
     window.addEventListener("counter:disposed", () => {
@@ -142,7 +142,7 @@ test("disposes on astro:unmount", async ({ page }) => {
   await expect(page.locator("body")).toHaveAttribute("data-disposed", "1")
 })
 
-test("dismisses a modal dialog and restores trigger focus", async ({
+test("dismisses a modal dialog and restores trigger focus @smoke", async ({
   page
 }) => {
   const trigger = page.getByRole("button", { name: "Open Dialog", exact: true })
@@ -159,7 +159,7 @@ test("dismisses a modal dialog and restores trigger focus", async ({
   await expect(trigger).toBeFocused()
 })
 
-test("dismisses menus with Escape and activates tabs with the keyboard", async ({
+test("dismisses menus with Escape and activates tabs with the keyboard @smoke", async ({
   page
 }) => {
   const trigger = page
@@ -180,7 +180,7 @@ test("dismisses menus with Escape and activates tabs with the keyboard", async (
   ).toBeVisible()
 })
 
-test("filters a combobox and selects an option without hydration errors", async ({
+test("filters a combobox and selects an option without hydration errors @smoke", async ({
   page
 }) => {
   const input = page.locator("#combobox").getByRole("combobox")

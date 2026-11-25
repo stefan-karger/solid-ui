@@ -9,8 +9,19 @@ const pages = ["components", "ai-elements"].flatMap((section) =>
     .sort()
 )
 
+// `pnpm validate` hydrates these representative pages; `validate:full` all of them.
+const smoke = new Set([
+  "components/button",
+  "components/combobox",
+  "components/dialog",
+  "ai-elements/prompt-input"
+])
+
 for (const slug of pages) {
-  test(`hydrates every preview on the ${slug} docs page`, async ({ page }) => {
+  const tag = smoke.has(slug) ? " @smoke" : ""
+  test(`hydrates every preview on the ${slug} docs page${tag}`, async ({
+    page
+  }) => {
     const errors: string[] = []
     page.on("pageerror", (error) => errors.push(error.message))
     page.on("console", (message) => {

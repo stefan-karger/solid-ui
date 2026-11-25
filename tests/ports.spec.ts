@@ -19,7 +19,7 @@ async function example(page: Page, slug: string) {
   return island
 }
 
-test("dims disabled accordion triggers and skips them when tabbing", async ({
+test("dims disabled accordion triggers and skips them when tabbing @smoke", async ({
   page
 }) => {
   await page.goto("/docs/components/accordion/")
@@ -50,7 +50,7 @@ test("dims disabled accordion triggers and skips them when tabbing", async ({
   await expect(enabled).toHaveAttribute("aria-expanded", "true")
 })
 
-test("keeps the Select popup at trigger width in both alignment modes", async ({
+test("keeps the Select popup at trigger width in both alignment modes @smoke", async ({
   page
 }) => {
   await page.goto("/docs/components/select/")
@@ -198,7 +198,7 @@ test("carousel pages through explicit slides and supports keyboard navigation", 
   ).toHaveText("2")
 })
 
-test("OTP edits one native field and updates every visual slot", async ({
+test("OTP edits one native field and updates every visual slot @smoke", async ({
   page
 }) => {
   const otp = await example(page, "input-otp")

@@ -24,6 +24,8 @@ export default defineProject({
     // Persistent transforms retain stale import.meta.glob file lists after ports.
     fsModuleCache: false,
     name: "dom",
+    // `pnpm validate` runs the suite beside the builds and type checks.
+    testTimeout: 15_000,
     environment: "happy-dom",
     setupFiles: ["./tests/setup-dom.ts"],
     css: {

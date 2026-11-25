@@ -115,13 +115,14 @@ The development command starts the Astro documentation application.
 
 ### Verification
 
-Run the complete repository validation before submitting changes:
+Run the fast validation while working and the full validation before submitting changes:
 
 ```bash
 pnpm validate
+pnpm validate:full
 ```
 
-This verifies upstream source hashes and reproducible Astro archives, then checks formatting, linting, TypeScript/Astro diagnostics, unit and SSR tests, the docs production build, and browser tests in dev and production mode.
+Both verify upstream source hashes and reproducible Astro archives and check formatting, linting, TypeScript/Astro diagnostics, unit and SSR tests and the production builds in parallel. `pnpm validate` then runs the browser tests tagged `@smoke`; `pnpm validate:full` runs every browser test in dev and production mode. CI runs the fast validation on every pull request push and the full browser suite on `main`, on manual runs and on pull requests labeled `full-ci`.
 
 Oxfmt owns formatting, import ordering, package.json ordering, and Tailwind class sorting.
 ESLint owns linting. The recommended VS Code extensions use the same tools, including for
@@ -136,6 +137,7 @@ pnpm check
 pnpm test
 pnpm test:watch
 pnpm test:adapter
+pnpm test:e2e
 pnpm build
 ```
 

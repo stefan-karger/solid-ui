@@ -273,7 +273,9 @@ test("the site toggle overrides the system mode and updates an embedded preset p
   await expect(root).toHaveClass("style-sera")
 })
 
-test("default and unsupported presets use neutral colors", async ({ page }) => {
+test("default and unsupported presets use neutral colors @smoke", async ({
+  page
+}) => {
   await page.emulateMedia({ colorScheme: "light" })
   await page.goto(preview)
   const root = page.locator("html")
@@ -285,7 +287,7 @@ test("default and unsupported presets use neutral colors", async ({ page }) => {
   await expect(page.locator("#preset-notice")).toBeVisible()
 })
 
-test("the static HTML already renders the cards with the neutral preview base", async ({
+test("the static HTML already renders the cards with the neutral preview base @smoke", async ({
   browser,
   baseURL
 }) => {
