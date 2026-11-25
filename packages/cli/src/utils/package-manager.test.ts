@@ -86,12 +86,25 @@ describe("detectAgent", () => {
       await detectAgent(cwd, { ui, prompt: true, available: everything })
     ).toBe("bun")
     expect(messages.join("\n")).toContain(
-      "pnpm-lock.yaml belongs to pnpm, but init runs through npx"
+      "This project has pnpm-lock.yaml from pnpm, but init runs through npx"
     )
 
-    // Without a prompt: the lockfile's tool when it is installed, else npm.
-    expect(await detectAgent(cwd, { available: everything })).toBe("pnpm")
-    expect(await detectAgent(cwd, { available: async () => false })).toBe("npm")
+    // Without a prompt the command decides: npm create solid copies the
+    // template's pnpm-lock.yaml, then npx solidui-cli init --yes.
+    expect(await detectAgent(cwd, { available: everything })).toBe("npm")
+    // Started with node directly, as when testing a local build.
+    ranWith(null)
+    expect(await detectAgent(cwd, { available: everything })).toBe("npm")
+    // Nothing to choose from when only npm is installed.
+    const quiet = recordingUi({ select: "pnpm" })
+    expect(
+      await detectAgent(cwd, {
+        ui: quiet.ui,
+        prompt: true,
+        available: async () => false
+      })
+    ).toBe("npm")
+    expect(quiet.messages).toEqual([])
   })
 
   it("uses npm for npx without another tool's lockfile", async () => {

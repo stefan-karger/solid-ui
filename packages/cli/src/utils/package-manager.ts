@@ -135,9 +135,10 @@ export type DetectOptions = {
 // The package manager to install with, so a project never gets a second one:
 //  1. the one that installed node_modules,
 //  2. the packageManager field,
-//  3. the tool that ran the CLI when it isn't npx (pnpm dlx, bunx, yarn dlx),
-//  4. for npx, the lockfile's tool. Templates ship lockfiles, so npx with
-//     another tool's lockfile asks, or uses that tool when it is installed.
+//  3. the tool that ran the CLI: npx means npm, pnpm dlx pnpm, bunx bun.
+// A lockfile alone doesn't decide: create-solid copies the template's
+// pnpm-lock.yaml into every new app, whichever tool scaffolded it. When npx
+// meets another tool's lockfile, init asks in a terminal, npm first.
 export async function detectAgent(
   cwd: string,
   { ui, prompt = false, available = isAvailable }: DetectOptions = {}
@@ -145,31 +146,33 @@ export async function detectAgent(
   const installed = installedBy(cwd) ?? packageManagerField(cwd)
   if (installed) return installed
 
-  const command = getUserAgent()
-  if (command && command !== "npm") return command
+  // Run without a package manager (node dist/index.js) counts as npx.
+  const command = getUserAgent() ?? "npm"
+  if (command !== "npm") return command
 
   const lock = findLockfile(cwd)
-  if (!lock || lock.agent === "npm") return "npm"
+  if (!lock || lock.agent === "npm" || !ui || !prompt) return "npm"
 
-  const candidates: Agent[] = [lock.agent, "npm", "pnpm", "yarn", "bun"]
-  const usable = (
-    await Promise.all(
-      [...new Set(candidates)].map(async (agent) =>
-        agent === "npm" || (await available(agent)) ? [agent] : []
-      )
+  const others = await Promise.all(
+    [...new Set<Agent>([lock.agent, "pnpm", "yarn", "bun"])].map(
+      async (agent) => ((await available(agent)) ? [agent] : [])
     )
-  ).flat()
-  if (ui && prompt)
-    return ui.select(
-      `${lock.file} belongs to ${lock.agent}, but init runs through npx. Which package manager does this project use?`,
-      usable.map((agent) => ({
-        value: agent,
-        label: agent,
-        ...(agent === lock.agent ? { hint: `matches ${lock.file}` } : {})
-      })),
-      usable[0]
-    )
-  return usable[0]!
+  )
+  const usable: Agent[] = ["npm", ...others.flat()]
+  if (usable.length === 1) return "npm"
+  return ui.select(
+    `This project has ${lock.file} from ${lock.agent}, but init runs through npx. Which package manager should install the dependencies?`,
+    usable.map((agent) => {
+      const hint =
+        agent === "npm"
+          ? "you ran npx"
+          : agent === lock.agent
+            ? `matches ${lock.file}`
+            : undefined
+      return { value: agent, label: agent, ...(hint ? { hint } : {}) }
+    }),
+    "npm"
+  )
 }
 
 export function installCommand(
