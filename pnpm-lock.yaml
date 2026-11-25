@@ -462,9 +462,21 @@ importers:
       execa:
         specifier: ^10.2.1
         version: 10.2.1
+      jsonc-parser:
+        specifier: ^3.3.1
+        version: 3.3.1
+      package-manager-detector:
+        specifier: ^1.9.0
+        version: 1.9.0
       recast:
         specifier: ^0.24.3
         version: 0.24.3
+      semver:
+        specifier: ^7.8.6
+        version: 7.8.6
+      tailwind-merge:
+        specifier: ^3.7.1
+        version: 3.7.1
       ts-morph:
         specifier: ^28.0.0
         version: 28.0.0
@@ -474,6 +486,9 @@ importers:
       valibot:
         specifier: ^1.5.0
         version: 1.5.0(typescript@6.0.3)
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
     devDependencies:
       '@solid-ui/registry':
         specifier: workspace:*
@@ -481,6 +496,9 @@ importers:
       '@types/node':
         specifier: 24.19.2
         version: 24.19.2
+      '@types/semver':
+        specifier: ^7.8.0
+        version: 7.8.0
       tsup:
         specifier: ^9.0.0
         version: 9.0.0(jiti@2.7.0)(postcss@8.5.33)(typescript@6.0.3)(yaml@2.9.1)
@@ -2260,6 +2278,9 @@ packages:
 
   '@types/node@24.19.2':
     resolution: {integrity: sha512-93d49wCWJkCyN87MxLpNN6KXPCwFw7bVUg79mGUV1OS40JGWwVCr8n61DXCSqz7CV6/VfPkb7xec7uP2M+QHWQ==}
+
+  '@types/semver@7.8.0':
+    resolution: {integrity: sha512-1mAINjtQCXXeLkJ9ehXkwOcBpqtLxiVtKhpUf83DdRNdQKV0iXZpaHYqRr7nj+wvxuJzoAmAwXI+sCNMv1CzLQ==}
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
@@ -4087,6 +4108,11 @@ packages:
 
   semver@7.8.5:
     resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.8.6:
+    resolution: {integrity: sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -6324,6 +6350,8 @@ snapshots:
   '@types/node@24.19.2':
     dependencies:
       undici-types: 7.24.6
+
+  '@types/semver@7.8.0': {}
 
   '@types/unist@2.0.11': {}
 
@@ -8586,6 +8614,8 @@ snapshots:
   sax@1.6.1: {}
 
   semver@7.8.5: {}
+
+  semver@7.8.6: {}
 
   seroval-plugins@1.8.0(seroval@1.8.1):
     dependencies:
