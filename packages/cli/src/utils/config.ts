@@ -72,7 +72,9 @@ export function getRawConfig(cwd: string) {
 
     return v.parse(RawConfigSchema, config)
   } catch (error) {
-    throw new Error(`Invalid configuration found in ${cwd}/ui.config.json.`)
+    throw new Error(`Invalid configuration found in ${cwd}/ui.config.json.`, {
+      cause: error
+    })
   }
 }
 

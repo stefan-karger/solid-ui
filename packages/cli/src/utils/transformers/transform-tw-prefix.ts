@@ -104,15 +104,8 @@ export function applyPrefix(input: string, prefix: string = "") {
   const prefixed: string[] = []
   for (const className of classNames) {
     const [variant, value, modifier] = splitClassName(className)
-    if (variant) {
-      modifier
-        ? prefixed.push(`${variant}:${prefix}${value}/${modifier}`)
-        : prefixed.push(`${variant}:${prefix}${value}`)
-    } else {
-      modifier
-        ? prefixed.push(`${prefix}${value}/${modifier}`)
-        : prefixed.push(`${prefix}${value}`)
-    }
+    const base = variant ? `${variant}:${prefix}${value}` : `${prefix}${value}`
+    prefixed.push(modifier ? `${base}/${modifier}` : base)
   }
   return prefixed.join(" ")
 }

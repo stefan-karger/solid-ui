@@ -37,9 +37,11 @@ async function fetchRegistry(paths: string[]) {
       })
     )
     return results
-  } catch (e) {
-    console.log(e)
-    throw new Error(`Failed to fetch registry from ${BASE_URL}.`)
+  } catch (error) {
+    console.log(error)
+    throw new Error(`Failed to fetch registry from ${BASE_URL}.`, {
+      cause: error
+    })
   }
 }
 
@@ -49,8 +51,10 @@ export async function getRegistryIndex() {
     return v
       .parse(RegistryIndexSchema, result)
       .filter((item) => item.type === "ui")
-  } catch (e) {
-    throw new Error(`Failed to fetch components from registry.`)
+  } catch (error) {
+    throw new Error(`Failed to fetch components from registry.`, {
+      cause: error
+    })
   }
 }
 
@@ -84,7 +88,9 @@ export async function fetchTree(tree: RegistryIndex) {
     const results = await fetchRegistry(paths)
 
     return v.parse(v.array(RegistryItemSchema), results)
-  } catch (e) {
-    throw new Error(`Failed to fetch components from registry.`)
+  } catch (error) {
+    throw new Error(`Failed to fetch components from registry.`, {
+      cause: error
+    })
   }
 }
