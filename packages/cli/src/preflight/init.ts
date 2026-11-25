@@ -20,7 +20,7 @@ import {
   satisfies,
   type ResolvedVersion
 } from "~/project/versions"
-import { readViteConfig, resolvesTildeAlias } from "~/project/vite"
+import { readViteConfig, type ViteConfig } from "~/project/vite"
 
 export type PreflightIssue = {
   level: "error" | "warning"
@@ -49,8 +49,8 @@ export type InitProject = {
   needsTildeAlias: boolean
   // Path target for `~/*`: ./src/* when the project has a src folder.
   tildeTarget: string
-  // True when Vite's config shows nothing that resolves `~/`.
-  needsViteAliasHint: boolean
+  // The Vite config and how init makes it resolve `~/`; null without one.
+  vite: ViteConfig | null
   hasConfig: boolean
   versions: Record<string, ResolvedVersion>
 }
@@ -226,7 +226,6 @@ export function runInitPreflight(
     return { ok: false, issues }
 
   const needsTildeAlias = !(TILDE_ALIAS in tsPaths(tsconfig))
-  const vite = readViteConfig(cwd)
   return {
     ok: true,
     issues,
@@ -236,7 +235,7 @@ export function runInitPreflight(
       tsconfig,
       needsTildeAlias,
       tildeTarget: existsSync(path.join(cwd, "src")) ? "./src/*" : "./*",
-      needsViteAliasHint: !vite || !resolvesTildeAlias(vite.text),
+      vite: readViteConfig(cwd),
       hasConfig: existsSync(path.join(cwd, CONFIG_FILE)),
       versions
     }

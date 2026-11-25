@@ -39,12 +39,38 @@ export const TEMPLATE_TSCONFIG = `{
 }
 `
 
-export const TEMPLATE_VITE_CONFIG = `import { defineConfig } from 'vite';
+// vite.config.ts of the solid-v2 Tailwind starter (331a9bd).
+export const TEMPLATE_VITE_CONFIG = `import tailwindcss from '@tailwindcss/vite';
+import { fileRoutes } from 'filesystem-routing/vite';
+import { defineConfig } from 'vitest/config';
 import solid from '@solidjs/vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [solid({ start: true }), tailwindcss()],
+  // Turnkey client mode: no index.html and no mount file — the plugin generates
+  // the entries around src/App.tsx (wrapped in src/Document.tsx) and \`vite build\`
+  // prerenders the shell into a purely static dist/client.
+  plugins: [
+    // \`extensions\` makes @solidjs/vite-plugin also compile the \`?pick=\` route
+    // modules the fileRoutes plugin emits (their ids end in a query string).
+    solid({ start: true, extensions: ['.jsx', '.tsx'], diagnostics: true }), // add \`ssr: true\` for streaming SSR
+    fileRoutes({ types: true }),
+    tailwindcss(),
+  ],
+  server: {
+    port: 3000,
+  },
+  test: {
+    environment: 'jsdom',
+    globals: false,
+    setupFiles: ['./vitest-setup.ts'],
+    // if you have few tests, try commenting this
+    // out to improve performance:
+    isolate: false,
+  },
+  build: {
+    target: 'esnext',
+    assetsInlineLimit: 0,
+  },
 });
 `
 

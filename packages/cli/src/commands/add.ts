@@ -20,7 +20,11 @@ import { readPackageJson } from "~/project/package-json"
 import { createRegistryClient, type RegistryClient } from "~/registry/client"
 import { installableItems, resolveTree } from "~/registry/resolve"
 import { CliError } from "~/utils/errors"
-import { installPackages, type Installer } from "~/utils/package-manager"
+import {
+  detectAgent,
+  installPackages,
+  type Installer
+} from "~/utils/package-manager"
 import { terminalUi, type Ui } from "~/utils/ui"
 import { CLI_NAME, CLI_VERSION } from "~/utils/version"
 
@@ -147,12 +151,14 @@ export async function runAdd(
   for (const note of anchorNotes(specs)) ui.info(note)
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, specs)
   const installs = await resolveConflicts(plan, ui, interactive && !options.yes)
-  if (installs.length)
+  if (installs.length) {
+    const agent = await detectAgent(cwd)
     await ui.task(
-      `Installing ${installs.length} packages`,
-      () => install(cwd, installs),
+      `Installing ${installs.length} packages with ${agent}`,
+      () => install(cwd, installs, { agent }),
       `Installed ${installs.join(", ")}.`
     )
+  }
 
   const lines = [
     ...written.created.map((file) => `Created ${file}`),

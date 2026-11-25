@@ -16,8 +16,9 @@ import {
   parsePresetInput,
   type Preset
 } from "@solid-ui/registry/preset"
-import { supportedRange } from "@solid-ui/registry/versions"
+import { SUPPORTED_VERSIONS, supportedRange } from "@solid-ui/registry/versions"
 import { Command } from "commander"
+import type { Agent } from "package-manager-detector"
 
 import { CREATE_URL } from "~/constants"
 import { planDependencies, resolveConflicts } from "~/install/dependencies"
@@ -31,10 +32,21 @@ import { runInitPreflight, type InitProject } from "~/preflight/init"
 import { patchAppCss } from "~/project/app-css"
 import { readPackageJson } from "~/project/package-json"
 import { addTildeAlias } from "~/project/tsconfig"
-import { TSCONFIG_PATHS_SNIPPET } from "~/project/vite"
+import { resolveVersion, satisfies } from "~/project/versions"
+import {
+  TSCONFIG_PATHS_ENTRY,
+  TSCONFIG_PATHS_SNIPPET,
+  type ViteConfig
+} from "~/project/vite"
 import { createRegistryClient, type RegistryClient } from "~/registry/client"
 import { CliError } from "~/utils/errors"
-import { installPackages, type Installer } from "~/utils/package-manager"
+import {
+  detectAgent,
+  formatCommand,
+  installCommand,
+  installPackages,
+  type Installer
+} from "~/utils/package-manager"
 import { terminalUi, type Ui } from "~/utils/ui"
 import { CLI_NAME, CLI_VERSION } from "~/utils/version"
 
@@ -64,6 +76,103 @@ function spec(name: string) {
 
 function rel(cwd: string, file: string) {
   return path.relative(cwd, file).split(path.sep).join("/")
+}
+
+type ViteStep =
+  | { kind: "none" }
+  | { kind: "write"; path: string; text: string; enable: boolean }
+  | { kind: "manual"; reason: string }
+
+// How init makes Vite resolve `~/`. A config that turns tsconfigPaths off
+// is only changed after asking, or with --yes.
+async function planViteStep(
+  vite: ViteConfig | null,
+  options: InitOptions,
+  ui: Ui,
+  interactive: boolean
+): Promise<ViteStep> {
+  if (!vite) return { kind: "manual", reason: "the project has no vite.config" }
+  const { plan } = vite
+  if (plan.kind === "resolved") return { kind: "none" }
+  if (plan.kind === "manual") return plan
+  if (
+    plan.enable &&
+    interactive &&
+    !options.yes &&
+    !(await ui.confirm(
+      `${path.basename(vite.path)} sets resolve.tsconfigPaths to false. Solid UI components import through ~/, which needs it. Set it to true?`,
+      true
+    ))
+  )
+    return { kind: "manual", reason: "you kept resolve.tsconfigPaths: false" }
+  return {
+    kind: "write",
+    path: vite.path,
+    text: plan.text,
+    enable: plan.enable
+  }
+}
+
+// Requirements an install moved outside the tested ranges, for example when
+// the package manager resolves the lowest versions the ranges allow.
+function versionsOutsideRanges(cwd: string) {
+  const pkg = readPackageJson(cwd) ?? {}
+  return Object.entries(SUPPORTED_VERSIONS.requirements).flatMap(
+    ([name, range]) => {
+      const found = resolveVersion(cwd, pkg, name)
+      return found.source === "installed" && !satisfies(found.version, range)
+        ? [
+            {
+              name,
+              version: found.version,
+              range,
+              dev: Boolean(pkg.devDependencies?.[name])
+            }
+          ]
+        : []
+    }
+  )
+}
+
+async function checkVersionsAfterInstall(
+  cwd: string,
+  agent: Agent,
+  install: Installer,
+  ui: Ui,
+  ask: boolean
+) {
+  const outside = versionsOutsideRanges(cwd)
+  if (!outside.length) return
+  const groups = [false, true]
+    .map((dev) => ({
+      dev,
+      specs: outside
+        .filter((entry) => entry.dev === dev)
+        .map(({ name, range }) => `${name}@${range}`)
+    }))
+    .filter(({ specs }) => specs.length)
+  ui.warn(
+    [
+      `The install left packages outside the versions ${CLI_NAME} ${CLI_VERSION} supports:`,
+      ...outside.map(
+        ({ name, version, range }) => `  ${name} ${version} (needs ${range})`
+      )
+    ].join("\n")
+  )
+  if (ask && (await ui.confirm("Update them now?", true))) {
+    for (const { dev, specs } of groups)
+      await ui.task(
+        `Updating ${specs.join(", ")}`,
+        () => install(cwd, specs, { agent, dev }),
+        `Updated ${specs.join(", ")}.`
+      )
+    return
+  }
+  const commands = groups.map(
+    ({ dev, specs }) =>
+      `  ${formatCommand(installCommand(specs, { agent, dev }))}`
+  )
+  ui.info(`Update them with:\n\n${commands.join("\n")}`)
 }
 
 async function choosePreset(
@@ -217,14 +326,28 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     ...solidUiCssPackages(preset).map(spec)
   ])
 
+  const viteStep = await planViteStep(project.vite, options, ui, interactive)
+  const viteName = project.vite ? rel(cwd, project.vite.path) : "vite.config.ts"
+  const changes = [
+    ...(appCss !== patchedAppCss ? [project.tailwindCss] : []),
+    ...(project.needsTildeAlias
+      ? [`${rel(cwd, project.tsconfig.path)} (add "~/*")`]
+      : []),
+    ...(viteStep.kind === "write"
+      ? [
+          `${viteName} (${viteStep.enable ? "set resolve.tsconfigPaths to true" : "add resolve.tsconfigPaths"})`
+        ]
+      : [])
+  ]
+
   ui.note(
     [
       `Preset ${code} (style ${preset.style})`,
       "",
       ...files.map((file) => `write  ${rel(cwd, file.path)}`),
-      ...(appCss !== patchedAppCss ? [`update ${project.tailwindCss}`] : []),
-      ...(project.needsTildeAlias
-        ? [`update ${rel(cwd, project.tsconfig.path)} (add "~/*")`]
+      ...changes.map((change) => `update ${change}`),
+      ...(viteStep.kind === "manual"
+        ? [`skip   ${viteName} (add resolve.tsconfigPaths yourself)`]
         : []),
       ...(plan.install.length ? ["", `install ${plan.install.join(" ")}`] : [])
     ].join("\n"),
@@ -236,6 +359,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   if (project.needsTildeAlias)
     writeFileSync(project.tsconfig.path, tsconfigText)
   if (appCss !== patchedAppCss) writeFileSync(appCssPath, patchedAppCss)
+  if (viteStep.kind === "write") writeFileSync(viteStep.path, viteStep.text)
   const written = [
     await writeFiles(owned, cwd, { overwrite: true }),
     await writeFiles(source, cwd, {
@@ -254,27 +378,39 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
       ...written
         .flatMap(({ created, updated }) => [...created, ...updated])
         .map((file) => `Wrote ${file}`),
+      ...changes.map((change) => `Updated ${change}`),
       ...written.flatMap(({ skipped }) => skipped).map((file) => `Kept ${file}`)
     ].join("\n")
   )
 
   const specs = await resolveConflicts(plan, ui, interactive)
-  if (specs.length)
+  if (specs.length) {
+    const agent = await detectAgent(cwd)
     await ui.task(
-      `Installing ${specs.length} packages`,
-      () => install(cwd, specs),
+      `Installing ${specs.length} packages with ${agent}`,
+      () => install(cwd, specs, { agent }),
       `Installed ${specs.join(", ")}.`
     )
-
-  if (project.needsViteAliasHint) {
-    ui.note(
-      `Vite needs to resolve the ~/ alias. Add this to vite.config.ts:\n\n${TSCONFIG_PATHS_SNIPPET}`,
-      "One more step"
+    await checkVersionsAfterInstall(
+      cwd,
+      agent,
+      install,
+      ui,
+      interactive && !options.yes
     )
   }
-  ui.outro(
-    `Solid UI is set up. Add a component with: npx ${CLI_NAME}@latest add button`
-  )
+
+  const addButton = `npx ${CLI_NAME}@latest add button`
+  if (viteStep.kind === "manual") {
+    ui.warn(
+      `Vite can't resolve ~/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${TSCONFIG_PATHS_ENTRY} to the config, for example:\n\n${TSCONFIG_PATHS_SNIPPET}`
+    )
+    ui.outro(
+      `Finish the ${viteName} step above, then add a component with: ${addButton}`
+    )
+    return
+  }
+  ui.outro(`Solid UI is set up. Add a component with: ${addButton}`)
 }
 
 export const init = new Command()

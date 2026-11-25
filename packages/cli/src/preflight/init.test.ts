@@ -28,7 +28,7 @@ describe("init preflight", () => {
       tailwindCss: "src/App.css",
       needsTildeAlias: true,
       tildeTarget: "./src/*",
-      needsViteAliasHint: true,
+      vite: { plan: { kind: "patch", enable: false } },
       hasConfig: false
     })
   })
@@ -51,7 +51,7 @@ describe("init preflight", () => {
     const result = runInitPreflight(cwd, options)
     expect(result.ok && result.project).toMatchObject({
       needsTildeAlias: false,
-      needsViteAliasHint: false,
+      vite: { plan: { kind: "resolved" } },
       hasConfig: true
     })
   })

@@ -74,7 +74,10 @@ export function fakeRegistry(items = registryItems()) {
 }
 
 export function recordingUi(
-  answers: { confirm?: boolean; select?: unknown } = {}
+  answers: {
+    confirm?: boolean | ((message: string) => boolean)
+    select?: unknown
+  } = {}
 ) {
   const messages: string[] = []
   const record = (kind: string) => (message: string, title?: string) =>
@@ -89,7 +92,12 @@ export function recordingUi(
     note: record("note"),
     select: async () => answers.select as never,
     multiselect: async () => (answers.select ?? []) as never,
-    confirm: async () => answers.confirm ?? false,
+    confirm: async (message) => {
+      messages.push(`confirm: ${message}`)
+      return typeof answers.confirm === "function"
+        ? answers.confirm(message)
+        : (answers.confirm ?? false)
+    },
     task: async (_message, run) => run()
   }
   return { ui, messages }
