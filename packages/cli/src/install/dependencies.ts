@@ -49,21 +49,32 @@ export function planDependencies(
   return plan
 }
 
+// A prerelease range is one exact build (UI SDK betas): the components are
+// written against it, and other betas may break them.
+const isExactBuild = (range: string) => range.includes("-")
+
 // The specs to install: the missing packages, plus each conflict the user
-// agrees to change. Without a prompt, installed versions stay as they are.
+// agrees to change. Installed versions only change after a yes; --yes is
+// that yes for the exact builds the components need, never for the rest.
 export async function resolveConflicts(
   plan: DependencyPlan,
   ui: Ui,
-  interactive: boolean
+  { ask, yes }: { ask: boolean; yes: boolean }
 ) {
   const install = [...plan.install]
   for (const conflict of plan.conflicts) {
-    const question = `${conflict.name} ${conflict.found} is outside the tested range ${conflict.range}. Install ${conflict.spec}?`
-    if (interactive && (await ui.confirm(question, false)))
-      install.push(conflict.spec)
+    const { name, found, range, spec } = conflict
+    const needed = isExactBuild(range)
+    const question = needed
+      ? `The components need ${name} ${range}, the project has ${found}. Install ${spec}?`
+      : `${name} ${found} is outside the tested range ${range}. Install ${spec}?`
+    if ((needed && yes) || (ask && (await ui.confirm(question, needed))))
+      install.push(spec)
     else
       ui.warn(
-        `Kept ${conflict.name} ${conflict.found}. Solid UI is tested with ${conflict.range}.`
+        needed
+          ? `Kept ${name} ${found}. The components are built for ${range} and may break with another build.`
+          : `Kept ${name} ${found}. Solid UI is tested with ${range}.`
       )
   }
   return install

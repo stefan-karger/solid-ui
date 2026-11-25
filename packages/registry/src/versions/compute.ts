@@ -20,15 +20,17 @@ export type SupportedVersions = {
   packages: Record<string, string>
 }
 
-// Read from the root manifest, where the adapter and CLI tests pin them.
-export const ROOT_REQUIREMENTS = ["vite", "@solidjs/vite-plugin"] as const
-
-// Read from the docs manifest.
-export const DOCS_REQUIREMENTS = [
+// Packages a project brings itself. The registry never lists them as
+// dependencies and the CLI never installs them.
+export const PROJECT_PACKAGES = [
   "solid-js",
   "@solidjs/web",
   "tailwindcss"
 ] as const
+
+// The project packages init checks. @solidjs/web moves in lockstep with
+// solid-js, and a Solid 2 app comes with Vite 8 and its Solid plugin.
+export const REQUIREMENTS = ["solid-js", "tailwindcss"] as const
 
 export function toSupportedRange(name: string, pin: string | undefined) {
   if (!pin || !/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(pin)) {
@@ -48,21 +50,22 @@ function pinOf(manifest: PackageManifest, name: string) {
 }
 
 export function computeSupportedVersions(
-  root: PackageManifest,
   docs: PackageManifest
 ): SupportedVersions {
   const requirements: Record<string, string> = {}
-  for (const name of DOCS_REQUIREMENTS)
+  for (const name of REQUIREMENTS)
     requirements[name] = toRequirementRange(name, pinOf(docs, name))
-  for (const name of ROOT_REQUIREMENTS)
-    requirements[name] = toRequirementRange(name, pinOf(root, name))
 
   const packages: Record<string, string> = {}
   for (const [name, pin] of Object.entries(docs.dependencies ?? {}).sort(
     ([a], [b]) => a.localeCompare(b)
   )) {
     // Workspace and file links are not published versions.
-    if (name in requirements || /^(?:workspace|file):/.test(pin)) continue
+    if (
+      (PROJECT_PACKAGES as readonly string[]).includes(name) ||
+      /^(?:workspace|file):/.test(pin)
+    )
+      continue
     packages[name] = toSupportedRange(name, pin)
   }
 

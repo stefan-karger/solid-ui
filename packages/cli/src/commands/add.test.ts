@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs"
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import path from "node:path"
 
 import { DEFAULT_ALIASES } from "@solid-ui/registry/config"
@@ -225,6 +225,25 @@ describe("add", () => {
     await expect(add(shadcn, ["button"])).rejects.toThrow(
       /doesn't match solidui-cli 1\.x:\n {2}(?:style|\(root\))/
     )
+  })
+
+  it("replaces another UI SDK beta only with consent", async () => {
+    const cwd = setUp()
+    const file = path.join(cwd, "node_modules/@ui-sdk/solid/package.json")
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(
+      file,
+      JSON.stringify({ name: "@ui-sdk/solid", version: "0.1.0-beta.12" })
+    )
+
+    const kept = await add(cwd, ["dropdown-menu"])
+    expect(kept.installer.calls.flat()).not.toContain(UI_SDK)
+    expect(kept.messages.join("\n")).toContain(
+      "Kept @ui-sdk/solid 0.1.0-beta.12. The components are built for"
+    )
+
+    const replaced = await add(cwd, ["dropdown-menu"], { yes: true })
+    expect(replaced.installer.calls.flat()).toContain(UI_SDK)
   })
 
   it("notes when the registry is ahead of the CLI's UI SDK anchor", async () => {

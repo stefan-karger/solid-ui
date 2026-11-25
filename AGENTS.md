@@ -40,13 +40,14 @@ changes to the adapter, the themes or shared docs rendering. Tag a browser test
 ## solidui-cli
 
 The CLI never changes the version of a package a project already has without
-asking. `--yes` is the consent for requirements below the tested ranges, which
-the components need; any other installed version outside a tested range is
-kept with a warning.
+asking. `--yes` is the consent only where the components need it: the
+requirements below their tested ranges and the exact UI SDK beta. Any other
+installed version outside a tested range is kept with a warning.
 
-Requirement ranges (`solid-js`, `@solidjs/web`, `tailwindcss`, `vite`,
-`@solidjs/vite-plugin`) start at the pin's minor, `^major.minor.0`: older
-patches are fine, a minor can add features the components use. Packages the
-CLI installs start at the pin, `^<pin>`; UI SDK prereleases stay pinned. Both
-come from `packages/registry/src/versions/compute.ts`; run
+init checks two requirements, `solid-js` and `tailwindcss`. Their ranges
+start at the pin's minor, `^major.minor.0`: older patches are fine, a minor
+can add features the components use. `@solidjs/web` follows `solid-js`, and a
+Solid 2 app comes with Vite 8 and its plugin, so they aren't checked. Packages
+the CLI installs start at the pin, `^<pin>`; UI SDK betas stay pinned to one
+build. All of it comes from `packages/registry/src/versions/compute.ts`; run
 `pnpm sync:versions` after changing a pin.

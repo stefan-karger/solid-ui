@@ -38,7 +38,6 @@ export type PreflightIssue = {
     | "missing-css"
     | "no-typescript"
     | "jsx-import-source"
-    | "unsupported-framework"
   message: string
 }
 
@@ -73,7 +72,6 @@ export type InitPreflightOptions = {
 // Solid and Tailwind majors below these belong to the legacy registry.
 const LEGACY_MAJORS: Record<string, number> = {
   "solid-js": 2,
-  "@solidjs/web": 2,
   tailwindcss: 4
 }
 
@@ -84,7 +82,7 @@ function formatRanges() {
 
 function legacyMessage(found: string[]) {
   return [
-    "solidui-cli 1.x requires Solid 2 (solid-js and @solidjs/web) and Tailwind CSS 4.",
+    "solidui-cli 1.x requires Solid 2 and Tailwind CSS 4.",
     `Found ${found.join(", ")}.`,
     "",
     "These are the minimum requirements from solidui-cli 1.0 on. For the previous",
@@ -157,16 +155,11 @@ export function runInitPreflight(
   const missing = legacy.length
     ? []
     : Object.values(versions).filter((entry) => entry.source === "missing")
-  for (const entry of missing) {
-    const framework =
-      entry.name === "vite" || entry.name === "@solidjs/vite-plugin"
+  for (const entry of missing)
     error(
-      framework ? "unsupported-framework" : "missing-requirement",
-      framework
-        ? `${entry.name} is not installed. solidui-cli supports Solid apps built with Vite and @solidjs/vite-plugin.\nSee ${INSTALLATION_URL}.`
-        : `${entry.name} is not installed. Install it, then run init again.\nSee ${INSTALLATION_URL}.`
+      "missing-requirement",
+      `${entry.name} is not installed. Install it, then run init again.\nSee ${INSTALLATION_URL}.`
     )
-  }
 
   // Versions init can't bring into range stop it here: newer ones, another
   // major, or a declared range that can't install a supported version.

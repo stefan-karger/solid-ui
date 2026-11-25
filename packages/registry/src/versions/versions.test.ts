@@ -13,15 +13,12 @@ const read = (path: string) =>
   JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"))
 
 describe("supported versions", () => {
-  it("matches the pins in the root and docs manifests", () => {
+  it("matches the pins in the docs manifest", () => {
     expect(
       SUPPORTED_VERSIONS,
       "Run `pnpm sync:versions` after changing a pinned version."
     ).toEqual(
-      computeSupportedVersions(
-        read("../../../../package.json"),
-        read("../../../../apps/docs/package.json")
-      )
+      computeSupportedVersions(read("../../../../apps/docs/package.json"))
     )
   })
 
@@ -45,12 +42,11 @@ describe("supported versions", () => {
 
   it("lists the project requirements apart from the packages it installs", () => {
     expect(Object.keys(SUPPORTED_VERSIONS.requirements).sort()).toEqual([
-      "@solidjs/vite-plugin",
-      "@solidjs/web",
       "solid-js",
-      "tailwindcss",
-      "vite"
+      "tailwindcss"
     ])
+    // The project brings @solidjs/web; the CLI never installs it.
+    expect(supportedRange("@solidjs/web")).toBeUndefined()
     expect(supportedRange("clsx")).toMatch(/^\^/)
     expect(supportedRange("@solid-ui/registry")).toBeUndefined()
   })

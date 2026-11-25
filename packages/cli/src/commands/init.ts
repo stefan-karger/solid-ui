@@ -434,7 +434,10 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
       `${color.kept("Kept")} ${file} ${color.muted("(yours differs from the registry)")}`
     )
 
-  const specs = await resolveConflicts(plan, ui, interactive && !options.yes)
+  const specs = await resolveConflicts(plan, ui, {
+    ask: interactive && !options.yes,
+    yes: options.yes
+  })
   if (specs.length) {
     await ui.task(
       `Installing ${specs.length} packages with ${agent}`,

@@ -154,7 +154,10 @@ export async function runAdd(
   const specs = items.flatMap((item) => item.dependencies ?? [])
   for (const note of anchorNotes(specs)) ui.info(note)
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, specs)
-  const installs = await resolveConflicts(plan, ui, interactive && !options.yes)
+  const installs = await resolveConflicts(plan, ui, {
+    ask: interactive && !options.yes,
+    yes: options.yes
+  })
   if (installs.length) {
     const agent = detectAgent(cwd)
     await ui.task(

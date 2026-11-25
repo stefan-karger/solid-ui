@@ -8,7 +8,10 @@ import {
   normalizeRegistryPath,
   prepareRegistrySource
 } from "@solid-ui/registry/source"
-import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
+import {
+  PROJECT_PACKAGES,
+  SUPPORTED_VERSIONS
+} from "@solid-ui/registry/versions"
 import ts from "typescript"
 
 import { styles, type DocsStyle } from "../src/lib/appearance.ts"
@@ -23,10 +26,8 @@ const installableTypes = new Set<RegistryItem["type"]>([
   "registry:block"
 ])
 const ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json"
-// A project brings Solid itself; solidui-cli init checks its version.
-const projectRequirements = new Set(
-  Object.keys(SUPPORTED_VERSIONS.requirements)
-)
+// A project brings Solid and Tailwind CSS itself.
+const projectPackages = new Set<string>(PROJECT_PACKAGES)
 
 function dependencySpec(name: string) {
   const range = SUPPORTED_VERSIONS.packages[name]
@@ -119,7 +120,7 @@ async function prepareItem(item: RegistryItem) {
     ...item,
     files,
     dependencies: [...packages]
-      .filter((name) => !projectRequirements.has(name))
+      .filter((name) => !projectPackages.has(name))
       .sort()
       .map(dependencySpec),
     registryDependencies: [...registryDependencies].sort()

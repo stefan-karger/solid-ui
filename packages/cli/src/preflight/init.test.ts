@@ -89,22 +89,14 @@ describe("init preflight", () => {
     )
   })
 
-  it("rejects versions outside the tested ranges in either direction", () => {
-    const vite = SUPPORTED_VERSIONS.requirements.vite!
-    const nextMajor = `${semver.major(semver.minVersion(vite)!) + 1}.0.0`
-    const older = semver.minVersion(
-      SUPPORTED_VERSIONS.requirements.tailwindcss!
-    )!
-    const olderPatch =
-      older.patch > 0
-        ? `${older.major}.${older.minor}.${older.patch - 1}`
-        : `${older.major}.0.0`
+  it("rejects versions newer than the tested ranges", () => {
+    const solid = SUPPORTED_VERSIONS.requirements["solid-js"]!
+    const nextMajor = `${semver.major(semver.minVersion(solid)!) + 1}.0.0`
     const result = runInitPreflight(
       createProject({
         installed: {
           ...supportedInstall,
-          vite: nextMajor,
-          tailwindcss: olderPatch,
+          "solid-js": nextMajor,
           typescript: "7.0.2"
         }
       }),
@@ -113,31 +105,29 @@ describe("init preflight", () => {
     expect(codes(result)).toEqual(["error:unsupported-version"])
     const text = message(result, "unsupported-version")
     expect(text).toContain("solidui-cli 1.0.0 supports these versions")
-    expect(text).toContain(`vite ${nextMajor}`)
-    expect(text).toContain(`vite ${vite}`)
+    expect(text).toContain(`solid-js ${nextMajor}`)
+    expect(text).toContain(`solid-js ${solid}`)
     expect(text).toContain("npx solidui-cli@latest init")
   })
 
   it("reads the lowest declared version before an install", () => {
-    const { vite, ...rest } = supportedInstall
+    const { tailwindcss, ...rest } = supportedInstall
     const cwd = createProject({
       installed: { ...rest, typescript: "7.0.2" },
-      declared: { vite: `^${vite}` }
+      declared: { tailwindcss: `^${tailwindcss}` }
     })
     const result = runInitPreflight(cwd, options)
     expect(codes(result)).toEqual([])
-    expect(result.ok && result.project.versions.vite).toMatchObject({
+    expect(result.ok && result.project.versions.tailwindcss).toMatchObject({
       source: "declared",
-      version: vite
+      version: tailwindcss
     })
   })
 
-  it("needs Vite with the Solid plugin, TypeScript and one Tailwind stylesheet", () => {
-    const rest = { ...supportedInstall }
-    delete rest["@solidjs/vite-plugin"]
+  it("needs TypeScript and one Tailwind stylesheet", () => {
     const result = runInitPreflight(
       createProject({
-        installed: { ...rest },
+        installed: { ...supportedInstall },
         files: {
           "src/App.css": "@import 'tailwindcss';\n",
           "src/other.css": '@import "tailwindcss" source(none);\n'
@@ -146,7 +136,6 @@ describe("init preflight", () => {
       options
     )
     expect(codes(result)).toEqual([
-      "error:unsupported-framework",
       "error:ambiguous-tailwind-css",
       "error:no-typescript"
     ])

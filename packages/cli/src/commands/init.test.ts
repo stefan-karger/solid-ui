@@ -257,12 +257,8 @@ describe("init", () => {
   describe("in a project nobody installed yet", () => {
     // The solid-v2 template's package.json: ranges, no node_modules.
     const declared = {
-      ...Object.fromEntries(
-        Object.keys(supportedInstall).map((name) => [name, "^2.0.0"])
-      ),
+      "solid-js": "^2.0.0",
       tailwindcss: "^4.2.0",
-      vite: "^8.3.8",
-      "@solidjs/vite-plugin": "^3.0.0",
       typescript: "^7.0.2"
     }
     const fresh = () => createProject({ installed: {}, declared })
@@ -332,7 +328,7 @@ describe("init", () => {
     it("still stops ranges that can't reach a supported version", async () => {
       const cwd = createProject({
         installed: {},
-        declared: { ...declared, vite: "^9.0.0" }
+        declared: { ...declared, "solid-js": "^3.0.0" }
       })
       await expect(init(cwd)).rejects.toThrow("init stopped")
     })
@@ -345,8 +341,8 @@ describe("init", () => {
       calls.push({ specs, dev })
       if (calls.length === 1)
         writeFileSync(
-          path.join(dir, "node_modules/vite/package.json"),
-          JSON.stringify({ name: "vite", version: "8.0.0" })
+          path.join(dir, "node_modules/tailwindcss/package.json"),
+          JSON.stringify({ name: "tailwindcss", version: "4.2.1" })
         )
     }
     await init(
@@ -355,7 +351,7 @@ describe("init", () => {
       { interactive: true, confirm: () => true, install }
     )
     expect(calls.at(-1)).toEqual({
-      specs: [`vite@${supportedRange("vite")}`],
+      specs: [`tailwindcss@${supportedRange("tailwindcss")}`],
       dev: false
     })
   })
