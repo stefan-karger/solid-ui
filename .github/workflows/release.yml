@@ -7,40 +7,43 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
-    name: Build & Publish Release
+    name: Version or publish packages
     if: github.repository == 'stefan-karger/solid-ui'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v7
 
-      - name: Use PNPM
-        uses: pnpm/action-setup@v4.0.0
+      # Reads the pnpm version from packageManager in package.json.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
         with:
-          version: 8.6.12
+          cache: true
 
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
         with:
-          node-version: 18
-          cache: "pnpm"
+          node-version: 24.22.0
+          registry-url: https://registry.npmjs.org
 
-      - name: Install NPM Dependencies
-        run: pnpm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Build the package
+      - name: Build the CLI
         run: pnpm build:cli
 
-      - name: Create Release Pull Request or Publish
-        id: changesets
-        uses: changesets/action@v1.4.1
+      - name: Create the version pull request or publish
+        uses: changesets/action@v2
         with:
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
-          publish: npx changeset publish
+          commit-message: "chore(release): version packages"
+          pr-title: "chore(release): version packages"
+          publish-script: pnpm changeset publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-          NODE_ENV: "production"
