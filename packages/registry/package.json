@@ -1,0 +1,18 @@
+{
+  "name": "@solid-ui/registry",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Presets, themes, schemas and registry helpers shared by the Solid UI docs and CLI.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./styles": "./src/styles.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "6.0.3"
+  }
+}

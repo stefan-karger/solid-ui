@@ -1,20 +1,11 @@
-export const styles = [
-  "vega",
-  "nova",
-  "maia",
-  "lyra",
-  "mira",
-  "luma",
-  "sera",
-  "rhea"
-] as const
-export type DocsStyle = (typeof styles)[number]
+import { isStyle, styles, type Style } from "@solid-ui/registry/styles"
+
+export { styles }
+export type DocsStyle = Style
 export type ColorMode = "light" | "dark"
 export const appearanceKey = "solid-ui-appearance"
 
-export function isDocsStyle(value: unknown): value is DocsStyle {
-  return styles.some((style) => style === value)
-}
+export const isDocsStyle = isStyle
 
 export function readAppearance(
   storage: Pick<Storage, "getItem">,

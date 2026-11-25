@@ -377,6 +377,9 @@ importers:
       '@fontsource/instrument-serif':
         specifier: 5.3.0
         version: 5.3.0
+      '@solid-ui/registry':
+        specifier: workspace:*
+        version: link:../../packages/registry
       '@solidjs/web':
         specifier: 2.0.1
         version: 2.0.1(solid-js@2.0.1)
@@ -472,12 +475,24 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(typescript@6.0.3)
     devDependencies:
+      '@solid-ui/registry':
+        specifier: workspace:*
+        version: link:../registry
       '@types/node':
         specifier: 24.19.2
         version: 24.19.2
       tsup:
         specifier: ^9.0.0
         version: 9.0.0(jiti@2.7.0)(postcss@8.5.33)(typescript@6.0.3)(yaml@2.9.1)
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+
+  packages/registry:
+    devDependencies:
+      '@types/node':
+        specifier: 24.19.2
+        version: 24.19.2
       typescript:
         specifier: 6.0.3
         version: 6.0.3

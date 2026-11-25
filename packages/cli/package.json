@@ -57,6 +57,7 @@
     "valibot": "^1.5.0"
   },
   "devDependencies": {
+    "@solid-ui/registry": "workspace:*",
     "@types/node": "24.19.2",
     "tsup": "^9.0.0",
     "typescript": "6.0.3"
