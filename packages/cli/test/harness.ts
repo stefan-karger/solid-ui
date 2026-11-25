@@ -105,7 +105,12 @@ export function recordingUi(
         ? answers.confirm(message)
         : (answers.confirm ?? false)
     },
-    task: async (_message, run) => run()
+    // Records the line a finished step leaves behind.
+    task: async (message, run, done) => {
+      const result = await run()
+      messages.push(stripVTControlCharacters(`task: ${done ?? message}`))
+      return result
+    }
   }
   return { ui, messages }
 }

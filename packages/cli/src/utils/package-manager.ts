@@ -79,3 +79,10 @@ export const installPackages: Installer = async (cwd, specs, options) => {
     )
   }
 }
+
+// The line a finished install leaves: the names while they fit on a line.
+export function installedMessage(names: string[], agent: Agent) {
+  return names.length <= 3
+    ? `Installed ${names.join(", ")}.`
+    : `Installed ${names.length} packages with ${agent}.`
+}

@@ -139,7 +139,7 @@ describe("add", () => {
       ]
     ])
     expect(messages.join("\n")).toContain(
-      "Created src/components/ui/button.tsx"
+      "task: Wrote src/components/ui/button.tsx"
     )
   })
 
@@ -181,9 +181,13 @@ describe("add", () => {
     const kept = await add(cwd, ["button"])
     expect(read(cwd, "src/components/ui/button.tsx")).toBe("// mine\n")
     expect(kept.messages.join("\n")).toContain(
-      "Kept src/components/ui/button.tsx (differs from the registry)"
+      "Kept src/components/ui/button.tsx (yours differs from the registry)"
     )
-    expect(kept.messages.join("\n")).toContain("Unchanged src/lib/utils.ts")
+    // Files that match the registry get no line.
+    expect(kept.messages.join("\n")).not.toContain("src/lib/utils.ts")
+    expect(kept.messages.at(-2)).toBe(
+      "info: Run add with --overwrite to replace files that differ."
+    )
 
     await add(cwd, ["button"], { overwrite: true })
     expect(read(cwd, "src/components/ui/button.tsx")).toContain("inline-flex")

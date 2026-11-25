@@ -5,21 +5,14 @@ import type { ComponentsJson } from "@solid-ui/registry/config"
 import type { RegistryItemFile } from "@solid-ui/registry/schema"
 
 import { resolveAlias, type TsConfigFile } from "~/project/tsconfig"
+import { color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
+import type { Ui } from "~/utils/ui"
 
 export type PlannedFile = {
   // Absolute target path.
   path: string
   content: string
-}
-
-export type WriteResult = {
-  created: string[]
-  updated: string[]
-  // Identical to what the registry ships.
-  unchanged: string[]
-  // Different, but kept because overwriting wasn't allowed.
-  skipped: string[]
 }
 
 const FOLDERS: Partial<
@@ -70,43 +63,48 @@ export function resolveTargetPath(
 
 const normalize = (text: string) => text.replace(/\r\n?/g, "\n").trimEnd()
 
-// Writes the files. Identical files are skipped; a different one is replaced
-// when overwrite allows it, else when `confirm` agrees.
-export async function writeFiles(
+export type ApplyResult = {
+  written: string[]
+  // Different from the registry, kept because replacing wasn't allowed.
+  kept: string[]
+}
+
+// Writes the files one step at a time, each with its own spinner line.
+// Identical files are skipped silently; a different one is replaced when
+// overwrite allows it, else when `confirm` agrees (asked before its step).
+export async function applyFiles(
   files: PlannedFile[],
   cwd: string,
+  ui: Ui,
   options: {
     overwrite: boolean
     confirm?: (relativePath: string) => Promise<boolean>
   }
-): Promise<WriteResult> {
-  const result: WriteResult = {
-    created: [],
-    updated: [],
-    unchanged: [],
-    skipped: []
-  }
+): Promise<ApplyResult> {
+  const result: ApplyResult = { written: [], kept: [] }
   for (const file of files) {
     const relative = path.relative(cwd, file.path).split(path.sep).join("/")
     const content = `${normalize(file.content)}\n`
-    if (existsSync(file.path)) {
-      if (normalize(readFileSync(file.path, "utf8")) === normalize(content)) {
-        result.unchanged.push(relative)
+    const exists = existsSync(file.path)
+    if (exists) {
+      if (normalize(readFileSync(file.path, "utf8")) === normalize(content))
         continue
-      }
       const replace =
         options.overwrite || ((await options.confirm?.(relative)) ?? false)
       if (!replace) {
-        result.skipped.push(relative)
+        result.kept.push(relative)
         continue
       }
-      writeFileSync(file.path, content)
-      result.updated.push(relative)
-    } else {
-      mkdirSync(path.dirname(file.path), { recursive: true })
-      writeFileSync(file.path, content)
-      result.created.push(relative)
     }
+    await ui.task(
+      `${exists ? "Updating" : "Writing"} ${relative}`,
+      async () => {
+        mkdirSync(path.dirname(file.path), { recursive: true })
+        writeFileSync(file.path, content)
+      },
+      `${exists ? color.changed("Updated") : color.added("Wrote")} ${relative}`
+    )
+    result.written.push(relative)
   }
   return result
 }

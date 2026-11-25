@@ -21,10 +21,14 @@ import { Command } from "commander"
 import type { Agent } from "package-manager-detector"
 
 import { CREATE_URL } from "~/constants"
-import { planDependencies, resolveConflicts } from "~/install/dependencies"
 import {
+  parseSpec,
+  planDependencies,
+  resolveConflicts
+} from "~/install/dependencies"
+import {
+  applyFiles,
   resolveTargetPath,
-  writeFiles,
   type PlannedFile
 } from "~/install/files"
 import { transformSource } from "~/install/transform"
@@ -45,6 +49,7 @@ import {
   detectAgent,
   formatCommand,
   installCommand,
+  installedMessage,
   installPackages,
   type Installer
 } from "~/utils/package-manager"
@@ -258,7 +263,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
         client.item(preset.style, "utils"),
         client.item(preset.style, "style-utilities")
       ]),
-    `Loaded the ${preset.style} style.`
+    `Loaded the ${preset.style} style for preset ${color.command(code)}.`
   )
   const utilitiesCss = utilities?.files?.[0]?.content
   if (!utils?.files?.length || !utilitiesCss)
@@ -319,7 +324,6 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     path: resolveTargetPath(file, config, tsconfig, cwd),
     content: transformSource(file.path, file.content ?? "", config)
   }))
-  const files = [...owned, ...source]
 
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, [
     ...(utils.dependencies ?? []),
@@ -329,66 +333,48 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 
   const viteStep = await planViteStep(project.vite, options, ui, interactive)
   const viteName = project.vite ? rel(cwd, project.vite.path) : "vite.config.ts"
-  const changes = [
-    ...(appCss !== patchedAppCss ? [project.tailwindCss] : []),
-    ...(project.needsTildeAlias
-      ? [`${rel(cwd, project.tsconfig.path)} (add "~/*")`]
-      : []),
-    ...(viteStep.kind === "write"
-      ? [
-          `${viteName} (${viteStep.enable ? "set resolve.tsconfigPaths to true" : "add resolve.tsconfigPaths"})`
-        ]
-      : [])
-  ]
 
-  ui.note(
-    [
-      `Preset ${color.command(code)} ${color.muted(`(style ${preset.style})`)}`,
-      "",
-      ...files.map((file) => `${color.added("write  ")}${rel(cwd, file.path)}`),
-      ...changes.map((change) => `${color.changed("update ")}${change}`),
-      ...(viteStep.kind === "manual"
-        ? [
-            `${color.kept("skip   ")}${viteName} ${color.muted("(add resolve.tsconfigPaths yourself)")}`
-          ]
-        : []),
-      ...(plan.install.length
-        ? ["", `${color.added("install")} ${plan.install.join(" ")}`]
-        : [])
-    ].join("\n"),
-    "init will"
-  )
-  if (interactive && !options.yes && !(await ui.confirm("Continue?", true)))
-    throw new CliError("Cancelled.", 0)
+  // One spinner line per step: "Writing x" turns into "Wrote x".
+  const update = (file: string, note: string, write: () => void) =>
+    ui.task(
+      `Updating ${file}`,
+      async () => write(),
+      `${color.changed("Updated")} ${file}${note ? ` ${color.muted(`(${note})`)}` : ""}`
+    )
 
+  const written = await applyFiles(owned, cwd, ui, { overwrite: true })
+  if (appCss !== patchedAppCss)
+    await update(project.tailwindCss, "", () =>
+      writeFileSync(appCssPath, patchedAppCss)
+    )
   if (project.needsTildeAlias)
-    writeFileSync(project.tsconfig.path, tsconfigText)
-  if (appCss !== patchedAppCss) writeFileSync(appCssPath, patchedAppCss)
-  if (viteStep.kind === "write") writeFileSync(viteStep.path, viteStep.text)
-  const written = [
-    await writeFiles(owned, cwd, { overwrite: true }),
-    await writeFiles(source, cwd, {
-      overwrite: false,
-      confirm: async (file) =>
-        interactive &&
-        !options.yes &&
-        ui.confirm(
-          `${file} differs from the registry version. Replace it?`,
-          false
-        )
-    })
-  ]
-  ui.success(
-    [
-      ...written
-        .flatMap(({ created, updated }) => [...created, ...updated])
-        .map((file) => `${color.added("Wrote")} ${file}`),
-      ...changes.map((change) => `${color.changed("Updated")} ${change}`),
-      ...written
-        .flatMap(({ skipped }) => skipped)
-        .map((file) => `${color.kept("Kept")} ${file}`)
-    ].join("\n")
-  )
+    await update(rel(cwd, project.tsconfig.path), 'added "~/*"', () =>
+      writeFileSync(project.tsconfig.path, tsconfigText)
+    )
+  if (viteStep.kind === "write") {
+    const { path: vitePath, text, enable } = viteStep
+    await update(
+      viteName,
+      enable
+        ? "set resolve.tsconfigPaths to true"
+        : "added resolve.tsconfigPaths",
+      () => writeFileSync(vitePath, text)
+    )
+  }
+  const kept = await applyFiles(source, cwd, ui, {
+    overwrite: false,
+    confirm: async (file) =>
+      interactive &&
+      !options.yes &&
+      ui.confirm(
+        `${file} differs from the registry version. Replace it?`,
+        false
+      )
+  })
+  for (const file of [...written.kept, ...kept.kept])
+    ui.info(
+      `${color.kept("Kept")} ${file} ${color.muted("(yours differs from the registry)")}`
+    )
 
   const specs = await resolveConflicts(plan, ui, interactive)
   if (specs.length) {
@@ -396,7 +382,10 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     await ui.task(
       `Installing ${specs.length} packages with ${agent}`,
       () => install(cwd, specs, { agent }),
-      `Installed ${specs.join(", ")}.`
+      installedMessage(
+        specs.map((entry) => parseSpec(entry).name),
+        agent
+      )
     )
     await checkVersionsAfterInstall(
       cwd,

@@ -99,12 +99,17 @@ describe("init", () => {
         "defineConfig({\n  resolve: { tsconfigPaths: true },\n"
       )
     )
-    const summary = messages.find((message) => message.startsWith("success:"))
-    expect(summary).toContain("Updated src/App.css")
-    expect(summary).toContain('Updated tsconfig.json (add "~/*")')
-    expect(summary).toContain(
-      "Updated vite.config.ts (add resolve.tsconfigPaths)"
-    )
+    // One line per finished step, in the order init takes them.
+    expect(messages.filter((message) => message.startsWith("task:"))).toEqual([
+      `task: Loaded the nova style for preset ${config.preset}.`,
+      "task: Wrote components.json",
+      "task: Wrote src/solid-ui.css",
+      "task: Updated src/App.css",
+      'task: Updated tsconfig.json (added "~/*")',
+      "task: Updated vite.config.ts (added resolve.tsconfigPaths)",
+      "task: Wrote src/lib/utils.ts",
+      expect.stringMatching(/^task: Installed \d+ packages with /)
+    ])
     expect(messages.join("\n")).not.toContain("Vite can't resolve")
   })
 
@@ -192,7 +197,7 @@ describe("init", () => {
     )
     expect(read(kept, "vite.config.ts")).toBe(off)
     const text = asked.messages.join("\n")
-    expect(text).toContain("skip   vite.config.ts")
+    expect(text).not.toContain("Updated vite.config.ts")
     expect(text).toContain(
       "init left vite.config.ts alone because you kept resolve.tsconfigPaths: false"
     )

@@ -10,8 +10,8 @@ import {
   resolveConflicts
 } from "~/install/dependencies"
 import {
+  applyFiles,
   resolveTargetPath,
-  writeFiles,
   type PlannedFile
 } from "~/install/files"
 import { transformSource } from "~/install/transform"
@@ -23,6 +23,7 @@ import { badge, color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
 import {
   detectAgent,
+  installedMessage,
   installPackages,
   type Installer
 } from "~/utils/package-manager"
@@ -141,7 +142,7 @@ export async function runAdd(
     })
   )
 
-  const written = await writeFiles(files, cwd, {
+  const written = await applyFiles(files, cwd, ui, {
     overwrite: options.overwrite,
     confirm: async (file) =>
       interactive &&
@@ -158,25 +159,26 @@ export async function runAdd(
     await ui.task(
       `Installing ${installs.length} packages with ${agent}`,
       () => install(cwd, installs, { agent }),
-      `Installed ${installs.join(", ")}.`
+      installedMessage(
+        installs.map((entry) => parseSpec(entry).name),
+        agent
+      )
     )
   }
 
-  const lines = [
-    ...written.created.map((file) => `${color.added("Created")} ${file}`),
-    ...written.updated.map((file) => `${color.changed("Updated")} ${file}`),
-    ...written.unchanged.map((file) => `${color.muted("Unchanged")} ${file}`),
-    ...written.skipped.map(
-      (file) =>
-        `${color.kept("Kept")} ${file} ${color.muted("(differs from the registry)")}`
+  for (const file of written.kept)
+    ui.info(
+      `${color.kept("Kept")} ${file} ${color.muted("(yours differs from the registry)")}`
     )
-  ]
-  ui.success(lines.join("\n"))
-  if (written.skipped.length && !options.overwrite)
+  if (written.kept.length && !options.overwrite)
     ui.info(
       `Run add with ${color.command("--overwrite")} to replace files that differ.`
     )
-  ui.outro(`Added ${selected.join(", ")}.`)
+  ui.outro(
+    written.written.length || installs.length
+      ? `Added ${selected.join(", ")}.`
+      : `${selected.join(", ")} ${selected.length === 1 ? "is" : "are"} already up to date.`
+  )
 }
 
 export const add = new Command()
