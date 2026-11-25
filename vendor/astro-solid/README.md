@@ -11,7 +11,7 @@ Solid 1. The PR is open and targets Solid 2. Its head is pinned to
 `c7a2f1d16a08bab8c9e2d380e0991fb22a5bafc1`.
 
 The docs, test runtime, signals and both compiler backends use Solid 2.0.1.
-The Vite plugin is 3.0.1. UI SDK Core and Solid are 0.1.0-beta.10, whose Solid
+The Vite plugin is 3.0.1. UI SDK Core and Solid are 0.1.0-beta.17, whose Solid
 peer range includes 2.0.1. Solid and UI SDK runtime code is used as published.
 
 ## Source and packaging

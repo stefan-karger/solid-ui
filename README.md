@@ -58,7 +58,7 @@ See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
 ### Compatibility constraints
 
 - The docs and tests pin `solid-js`, `@solidjs/web`, and `@solidjs/signals` to `2.0.1`.
-- UI SDK Solid and Core are pinned to `0.1.0-beta.10`. Kobalte and Corvu are not runtime dependencies.
+- UI SDK Solid and Core are pinned to `0.1.0-beta.17`. Kobalte and Corvu are not runtime dependencies.
 - The official `@solidjs/vite-plugin@3.0.1` uses both compiler backends at `2.0.1`.
 - Astro is pinned to 7.4.12, Vite to 8.3.8, MDX to 8.1.6, and Tailwind to 4.3.5.
 - Published Astro Solid packages still require Solid 1. The docs use PR #17891 at `bbf9faa`, with tested client fixes and an early hydration bootstrap. See [provenance and replacement steps](./vendor/astro-solid/README.md).

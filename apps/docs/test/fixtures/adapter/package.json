@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@ui-sdk/core": "0.1.0-beta.10",
-    "@ui-sdk/solid": "0.1.0-beta.10"
+    "@ui-sdk/core": "0.1.0-beta.17",
+    "@ui-sdk/solid": "0.1.0-beta.17"
   }
 }

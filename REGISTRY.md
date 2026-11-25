@@ -1,6 +1,6 @@
 # Registry themes and SDK composition
 
-The registry uses UI SDK `0.1.0-beta.10` with Solid
+The registry uses UI SDK `0.1.0-beta.17` with Solid
 `2.0.1`. Components compose named SDK parts directly and import each part
 as `SdkXxx`, following [spec-01's convention](https://github.com/shuding/spec-01/tree/b8f91b6646d9280d9de8e0f5b2c6453cb4f237cb/registry/hardware/ui).
 There are no SDK namespace imports, `Primitive.Root` maps, fake portals, or

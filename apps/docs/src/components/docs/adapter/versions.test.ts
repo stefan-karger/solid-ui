@@ -26,7 +26,7 @@ describe("workspace compatibility target", () => {
         ).toBe("^2.0.0")
     }
     for (const pkg of ["@ui-sdk/core", "@ui-sdk/solid"]) {
-      expect(docs.dependencies[pkg]).toBe("0.1.0-beta.10")
+      expect(docs.dependencies[pkg]).toBe("0.1.0-beta.17")
       expect(fixture.dependencies[pkg]).toBe(docs.dependencies[pkg])
     }
     expect(root.devDependencies["@solidjs/vite-plugin"]).toBe("3.0.1")
