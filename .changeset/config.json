@@ -1,8 +1,10 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "stefan-karger/solid-ui" }
+    {
+      "repo": "stefan-karger/solid-ui"
+    }
   ],
   "commit": false,
   "fixed": [],
@@ -10,5 +12,9 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [],
+  "privatePackages": {
+    "version": true,
+    "tag": false
+  }
 }
