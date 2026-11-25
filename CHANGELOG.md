@@ -1,3 +1,67 @@
+# 2026-11-25
+
+Moved the project into the Solid UI repository as v2. The v1 state is
+tagged `v1-final`. The v1 docs and root tooling were removed, and
+solid-ui-next was merged with its history. The CLI now builds, lints and
+typechecks with the workspace tooling. Its Tailwind prefix transformer no
+longer throws, and it declares its own valibot dependency. CI runs
+`pnpm validate`, and the release workflow uses Node 24 and pnpm 12. A
+Changeset versions the docs from 0.5.1 to 1.0.0. Changesets 3 needs
+`privatePackages.version` for that.
+
+`/registry/` (solidui-cli 0.7) and `/r/<name>.json` (v1 shadcn installs)
+serve the unchanged v1 files from `apps/docs/registry-v1`. Solid 1 and
+Tailwind 3 projects keep working until they switch.
+
+Examples, MDX pages and the docs site inline their Lucide icons as SVG,
+like the components. Examples that pass icons as values declare local
+icon components. lucide-solid, its compatibility patch and its peer-range
+exception are gone. The Spinner customization snippet uses Solid 2.
+
+Updated the root tooling, the docs dependencies outside the pinned
+stack, and the CLI to Babel 8, ts-morph 28, commander 15, clack 1,
+valibot 1 and tsup 9. The CLI requires Node ^22.18 or >=24.11. Solid
+2.0.1, Astro with PR #17891, UI SDK beta.10 and TypeScript 6.0.3 stay
+pinned.
+
+# 2026-11-24
+
+Installable components inline their icons as SVG. They no longer depend
+on lucide-solid, and a registry test rejects unlabeled visible icons.
+Expanding a collapsed preview moves focus to a Collapse control, and
+collapsing returns it to View Code. Failed code and command copies say
+"Copy failed" and announce the failure.
+
+The registry publishes every item, examples included, per style under
+`/r/styles/<style>/` with `styles/index.json` and a catalog per style,
+following shadcn's own registry layout. The docs load style-specific
+source from there, which replaces the separate registry-source route.
+
+Added the Create page and the preset preview. Questionnaire gets choice
+shortcuts and radio dots. Select groups, Combobox popups, translucent
+menus, Nova and Luma/Rhea code blocks, and Mira calendar weekdays match
+upstream. Dark group variants stay scoped to their theme, and Sera
+examples wrap instead of clipping. The docs describe the UI SDK
+primitives instead of React libraries, and links to unported guides are
+gone. The test suite keeps only tests with real regression value. Unit
+tests went from 154 to 84 and browser tests from 220 to 171. The Astro
+config drops redundant aliases.
+
+# 2026-11-23
+
+Ported the AI Elements pages and their examples, and streamlined the
+registry build.
+
+# 2026-11-22
+
+Published a registry per style and simplified the docs themes. The
+vendored shadcn style sources are no longer needed.
+
+# 2026-11-20
+
+Aligned component documentation and previews, polished the site and its
+Solid branding, and balanced the header divider spacing.
+
 # 2026-11-19
 
 Aligned 65 component docs and 435 preview placements with the pinned shadcn Radix
