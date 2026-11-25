@@ -97,7 +97,10 @@ export function recordingUi(
     warn: record("warn"),
     error: record("error"),
     note: record("note"),
-    select: async () => answers.select as never,
+    select: async (message) => {
+      messages.push(`select: ${message}`)
+      return answers.select as never
+    },
     multiselect: async () => (answers.select ?? []) as never,
     confirm: async (message) => {
       messages.push(`confirm: ${message}`)

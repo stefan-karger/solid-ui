@@ -3,6 +3,7 @@ import path from "node:path"
 
 import { CONFIG_FILE, LEGACY_CONFIG_FILE } from "@solid-ui/registry/config"
 import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
+import semver from "semver"
 
 import { INSTALLATION_URL, LEGACY_CLI_VERSION } from "~/constants"
 import { findTailwindStylesheets } from "~/project/css"
@@ -14,6 +15,7 @@ import {
   type TsConfigFile
 } from "~/project/tsconfig"
 import {
+  canUpdateInto,
   isBelowRange,
   majorOf,
   resolveVersion,
@@ -21,6 +23,7 @@ import {
   type ResolvedVersion
 } from "~/project/versions"
 import { readViteConfig, type ViteConfig } from "~/project/vite"
+import { cliCommand } from "~/utils/package-manager"
 
 export type PreflightIssue = {
   level: "error" | "warning"
@@ -29,7 +32,6 @@ export type PreflightIssue = {
     | "legacy-project"
     | "legacy-versions"
     | "unsupported-version"
-    | "unresolved-version"
     | "missing-requirement"
     | "no-tailwind-css"
     | "ambiguous-tailwind-css"
@@ -52,6 +54,9 @@ export type InitProject = {
   // The Vite config and how init makes it resolve `~/`; null without one.
   vite: ViteConfig | null
   hasConfig: boolean
+  // Requirements package.json declares that aren't installed yet; init
+  // installs the dependencies first.
+  needsInstall: boolean
   versions: Record<string, ResolvedVersion>
 }
 
@@ -86,11 +91,11 @@ function legacyMessage(found: string[]) {
     "registry (Solid 1, Kobalte and Corvu, Tailwind CSS 3), use version",
     `${LEGACY_CLI_VERSION} directly:`,
     "",
-    `  npx solidui-cli@${LEGACY_CLI_VERSION} init`
+    `  ${cliCommand("init", LEGACY_CLI_VERSION)}`
   ].join("\n")
 }
 
-function rangeMessage(cliVersion: string, found: ResolvedVersion[]) {
+export function rangeMessage(cliVersion: string, found: ResolvedVersion[]) {
   const describe = (entry: ResolvedVersion) =>
     "version" in entry ? `${entry.name} ${entry.version}` : entry.name
   const newer = found.some(
@@ -104,7 +109,7 @@ function rangeMessage(cliVersion: string, found: ResolvedVersion[]) {
     `Found ${found.map(describe).join(", ")}.`,
     "",
     newer
-      ? "Newer versions are supported once a solidui-cli release has been tested with them.\nCheck for one with: npx solidui-cli@latest init"
+      ? `Newer versions are supported once a solidui-cli release has been tested with them.\nCheck for one with: ${cliCommand("init")}`
       : "Update the packages listed above, then run init again."
   ].join("\n")
 }
@@ -131,7 +136,7 @@ export function runInitPreflight(
   if (existsSync(path.join(cwd, LEGACY_CONFIG_FILE))) {
     error(
       "legacy-project",
-      `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry.\nKeep using that version for this project:\n\n  npx solidui-cli@${LEGACY_CLI_VERSION} add <component>\n\nTo move to Solid UI 1.x, upgrade to Solid 2 and Tailwind CSS 4, delete ${LEGACY_CONFIG_FILE} and run init again.`
+      `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry.\nKeep using that version for this project:\n\n  ${cliCommand("add <component>", LEGACY_CLI_VERSION)}\n\nTo move to Solid UI 1.x, upgrade to Solid 2 and Tailwind CSS 4, delete ${LEGACY_CONFIG_FILE} and run init again.`
     )
   }
 
@@ -163,21 +168,25 @@ export function runInitPreflight(
     )
   }
 
-  for (const entry of Object.values(versions)) {
-    if (!legacy.length && entry.source === "unresolved") {
-      error(
-        "unresolved-version",
-        `Could not tell which ${entry.name} version "${entry.declared}" means. Install the dependencies first, for example with \`npm install\`.`
-      )
-    }
-  }
-
+  // Versions init can't bring into range stop it here: newer ones, another
+  // major, or a declared range that can't install a supported version.
+  // Older versions within the major are fine; init updates them after the
+  // install. A range it can't read waits for the install.
   if (!legacy.length) {
-    const outside = Object.values(versions).filter(
-      (entry) =>
-        "version" in entry &&
-        !satisfies(entry.version, SUPPORTED_VERSIONS.requirements[entry.name]!)
-    )
+    const outside = Object.values(versions).filter((entry) => {
+      const range = SUPPORTED_VERSIONS.requirements[entry.name]!
+      if (entry.source === "installed")
+        return !(
+          satisfies(entry.version, range) || canUpdateInto(entry.version, range)
+        )
+      if (entry.source === "declared")
+        return !(
+          semver.intersects(entry.declared, range, {
+            includePrerelease: true
+          }) || canUpdateInto(entry.version, range)
+        )
+      return false
+    })
     if (outside.length)
       error("unsupported-version", rangeMessage(options.cliVersion, outside))
   }
@@ -237,6 +246,9 @@ export function runInitPreflight(
       tildeTarget: existsSync(path.join(cwd, "src")) ? "./src/*" : "./*",
       vite: readViteConfig(cwd),
       hasConfig: existsSync(path.join(cwd, CONFIG_FILE)),
+      needsInstall: Object.values(versions).some(
+        (entry) => entry.source === "declared" || entry.source === "unresolved"
+      ),
       versions
     }
   }

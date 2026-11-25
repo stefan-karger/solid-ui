@@ -1,15 +1,18 @@
-import { existsSync } from "node:fs"
+import { existsSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
 
 import { execa } from "execa"
 import type { Agent } from "package-manager-detector"
 import { resolveCommand } from "package-manager-detector/commands"
-import { detect, getUserAgent } from "package-manager-detector/detect"
+import { getUserAgent } from "package-manager-detector/detect"
 
 import { CliError } from "./errors"
+import type { Ui } from "./ui"
+import { CLI_NAME } from "./version"
 
 export type InstallOptions = { agent: Agent; dev?: boolean }
 
+// Adds `specs` to the project; no specs installs what package.json lists.
 export type Installer = (
   cwd: string,
   specs: string[],
@@ -26,20 +29,147 @@ const INSTALL_MARKERS: [string, Agent][] = [
   ["node_modules/.deno", "deno"]
 ]
 
-// In each folder from cwd up, the package manager that installed
-// node_modules wins over lockfiles: a template can ship another manager's
-// files, and installing with the wrong one replaces node_modules and
-// resolves every range again. Then come the lockfiles and the packageManager
-// field, and last the tool that ran the CLI.
-export async function detectAgent(cwd: string): Promise<Agent> {
+const LOCKFILES: [string, Agent][] = [
+  ["bun.lock", "bun"],
+  ["bun.lockb", "bun"],
+  ["pnpm-lock.yaml", "pnpm"],
+  ["yarn.lock", "yarn"],
+  ["package-lock.json", "npm"],
+  ["npm-shrinkwrap.json", "npm"],
+  ["deno.lock", "deno"]
+]
+
+// Where the search for a project's package manager stops going up.
+const ROOT_MARKERS = [".git", "pnpm-workspace.yaml"]
+
+const NAMES: Record<string, Agent> = {
+  npm: "npm",
+  pnpm: "pnpm",
+  yarn: "yarn",
+  bun: "bun",
+  deno: "deno"
+}
+
+// The lockfile written last: a real install writes its own next to the
+// one a template shipped.
+function newestLockfile(dir: string) {
+  return LOCKFILES.map(([file, agent]) => ({
+    file,
+    agent,
+    path: path.join(dir, file)
+  }))
+    .filter((lock) => existsSync(lock.path))
+    .map((lock) => ({ ...lock, time: statSync(lock.path).mtimeMs }))
+    .sort((a, b) => b.time - a.time)[0]
+}
+
+function* upwards(cwd: string) {
   for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
+    yield dir
+    if (path.dirname(dir) === dir) return
+  }
+}
+
+function isRoot(dir: string) {
+  return (
+    ROOT_MARKERS.some((marker) => existsSync(path.join(dir, marker))) ||
+    LOCKFILES.some(([file]) => existsSync(path.join(dir, file)))
+  )
+}
+
+// The package manager that installed node_modules, up to the project root.
+function installedBy(cwd: string): Agent | null {
+  for (const dir of upwards(cwd)) {
     for (const [marker, agent] of INSTALL_MARKERS)
       if (existsSync(path.join(dir, marker))) return agent
-    const found = await detect({ cwd: dir, stopDir: dir })
-    if (found) return found.agent
-    if (path.dirname(dir) === dir) break
+    if (existsSync(path.join(dir, "node_modules"))) {
+      const lock = newestLockfile(dir)
+      if (lock) return lock.agent
+    }
+    if (isRoot(dir)) return null
   }
-  return getUserAgent() ?? "npm"
+  return null
+}
+
+function packageManagerField(cwd: string): Agent | null {
+  for (const dir of upwards(cwd)) {
+    const file = path.join(dir, "package.json")
+    if (existsSync(file)) {
+      try {
+        const field = JSON.parse(readFileSync(file, "utf8")).packageManager
+        const name = typeof field === "string" ? field.split("@")[0]! : ""
+        if (NAMES[name]) return NAMES[name]
+      } catch {
+        // An unreadable package.json has no say.
+      }
+    }
+    if (isRoot(dir)) return null
+  }
+  return null
+}
+
+function findLockfile(cwd: string) {
+  for (const dir of upwards(cwd)) {
+    const lock = newestLockfile(dir)
+    if (lock) return lock
+    if (isRoot(dir)) return null
+  }
+  return null
+}
+
+async function isAvailable(agent: Agent) {
+  const result = await execa(agent.split("@")[0]!, ["--version"], {
+    reject: false,
+    stdin: "ignore"
+  })
+  return result.exitCode === 0
+}
+
+export type DetectOptions = {
+  // Asks when the command and the lockfile disagree.
+  ui?: Ui
+  prompt?: boolean
+  available?: (agent: Agent) => Promise<boolean>
+}
+
+// The package manager to install with, so a project never gets a second one:
+//  1. the one that installed node_modules,
+//  2. the packageManager field,
+//  3. the tool that ran the CLI when it isn't npx (pnpm dlx, bunx, yarn dlx),
+//  4. for npx, the lockfile's tool. Templates ship lockfiles, so npx with
+//     another tool's lockfile asks, or uses that tool when it is installed.
+export async function detectAgent(
+  cwd: string,
+  { ui, prompt = false, available = isAvailable }: DetectOptions = {}
+): Promise<Agent> {
+  const installed = installedBy(cwd) ?? packageManagerField(cwd)
+  if (installed) return installed
+
+  const command = getUserAgent()
+  if (command && command !== "npm") return command
+
+  const lock = findLockfile(cwd)
+  if (!lock || lock.agent === "npm") return "npm"
+
+  const candidates: Agent[] = [lock.agent, "npm", "pnpm", "yarn", "bun"]
+  const usable = (
+    await Promise.all(
+      [...new Set(candidates)].map(async (agent) =>
+        agent === "npm" || (await available(agent)) ? [agent] : []
+      )
+    )
+  ).flat()
+  if (ui && prompt)
+    return ui.select(
+      `${lock.file} belongs to ${lock.agent}, but init runs through npx. Which package manager does this project use?`,
+      usable.map((agent) => ({
+        value: agent,
+        label: agent,
+        ...(agent === lock.agent ? { hint: `matches ${lock.file}` } : {})
+      })),
+      usable[0]
+    )
+  return usable[0]!
 }
 
 export function installCommand(
@@ -47,7 +177,9 @@ export function installCommand(
   { agent, dev }: InstallOptions
 ) {
   const args = agent === "deno" ? specs.map((spec) => `npm:${spec}`) : specs
-  const command = resolveCommand(agent, "add", dev ? ["-D", ...args] : args)
+  const command = specs.length
+    ? resolveCommand(agent, "add", dev ? ["-D", ...args] : args)
+    : resolveCommand(agent, "install", [])
   if (!command)
     throw new CliError(`Could not build an install command for ${agent}.`)
   return command
@@ -57,10 +189,9 @@ export function formatCommand(command: { command: string; args: string[] }) {
   return [command.command, ...command.args].join(" ")
 }
 
-// Installs the packages in one call. The package manager's output only
-// shows when it fails, so it doesn't break the CLI's layout.
+// Runs the install. The package manager's output only shows when it fails,
+// so it doesn't break the CLI's layout.
 export const installPackages: Installer = async (cwd, specs, options) => {
-  if (!specs.length) return
   const command = installCommand(specs, options)
   const result = await execa(command.command, command.args, {
     cwd,
@@ -85,4 +216,17 @@ export function installedMessage(names: string[], agent: Agent) {
   return names.length <= 3
     ? `Installed ${names.join(", ")}.`
     : `Installed ${names.length} packages with ${agent}.`
+}
+
+// A solidui-cli command to copy, run the way the user started this one:
+// npx, pnpm dlx, bunx or yarn dlx.
+export function cliCommand(args: string, version = "latest") {
+  const agent = getUserAgent() ?? "npm"
+  const command = resolveCommand(agent, "execute", [
+    `${CLI_NAME}@${version}`,
+    ...args.split(" ").filter(Boolean)
+  ])
+  return command
+    ? formatCommand(command)
+    : `npx ${CLI_NAME}@${version} ${args}`.trim()
 }

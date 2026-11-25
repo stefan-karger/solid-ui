@@ -11,7 +11,7 @@ import {
 import { LEGACY_CLI_VERSION } from "~/constants"
 import { findAppTsConfig, type TsConfigFile } from "~/project/tsconfig"
 import { CliError } from "~/utils/errors"
-import { CLI_NAME } from "~/utils/version"
+import { cliCommand } from "~/utils/package-manager"
 
 export type AddProject = {
   cwd: string
@@ -26,10 +26,10 @@ export function runAddPreflight(cwd: string): AddProject {
   if (!existsSync(configPath)) {
     if (existsSync(path.join(cwd, LEGACY_CONFIG_FILE)))
       throw new CliError(
-        `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry. Keep using that version here:\n\n  npx solidui-cli@${LEGACY_CLI_VERSION} add <component>`
+        `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry. Keep using that version here:\n\n  ${cliCommand("add <component>", LEGACY_CLI_VERSION)}`
       )
     throw new CliError(
-      `No ${CONFIG_FILE} in ${cwd}. Set up the project first:\n\n  npx ${CLI_NAME}@latest init`
+      `No ${CONFIG_FILE} in ${cwd}. Set up the project first:\n\n  ${cliCommand("init")}`
     )
   }
 
@@ -45,7 +45,7 @@ export function runAddPreflight(cwd: string): AddProject {
       .map((issue) => `  ${issue.path.join(".") || "(root)"}: ${issue.message}`)
       .join("\n")
     throw new CliError(
-      `${CONFIG_FILE} doesn't match solidui-cli 1.x:\n${details}\n\nRun \`npx ${CLI_NAME}@latest init --force\` to write it again.`
+      `${CONFIG_FILE} doesn't match solidui-cli 1.x:\n${details}\n\nRun \`${cliCommand("init --force")}\` to write it again.`
     )
   }
 

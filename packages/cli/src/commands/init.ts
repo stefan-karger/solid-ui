@@ -32,11 +32,15 @@ import {
   type PlannedFile
 } from "~/install/files"
 import { transformSource } from "~/install/transform"
-import { runInitPreflight, type InitProject } from "~/preflight/init"
+import {
+  rangeMessage,
+  runInitPreflight,
+  type InitProject
+} from "~/preflight/init"
 import { patchAppCss } from "~/project/app-css"
 import { readPackageJson } from "~/project/package-json"
 import { addTildeAlias } from "~/project/tsconfig"
-import { resolveVersion, satisfies } from "~/project/versions"
+import { canUpdateInto, resolveVersion, satisfies } from "~/project/versions"
 import {
   TSCONFIG_PATHS_ENTRY,
   TSCONFIG_PATHS_SNIPPET,
@@ -46,6 +50,7 @@ import { createRegistryClient, type RegistryClient } from "~/registry/client"
 import { badge, color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
 import {
+  cliCommand,
   detectAgent,
   formatCommand,
   installCommand,
@@ -119,8 +124,8 @@ async function planViteStep(
   }
 }
 
-// Requirements an install moved outside the tested ranges, for example when
-// the package manager resolves the lowest versions the ranges allow.
+// Installed requirements outside the tested ranges, for example when a
+// template's lockfile installs older versions.
 function versionsOutsideRanges(cwd: string) {
   const pkg = readPackageJson(cwd) ?? {}
   return Object.entries(SUPPORTED_VERSIONS.requirements).flatMap(
@@ -140,15 +145,40 @@ function versionsOutsideRanges(cwd: string) {
   )
 }
 
-async function checkVersionsAfterInstall(
+type AlignOptions = {
+  ask: boolean
+  yes: boolean
+  // Before init writes files a version it can't fix stops it; afterwards
+  // init only warns.
+  required: boolean
+}
+
+// Updates requirements below the tested ranges within their major, after
+// asking or with --yes.
+async function alignVersions(
   cwd: string,
-  agent: Agent,
+  getAgent: () => Promise<Agent>,
   install: Installer,
   ui: Ui,
-  ask: boolean
+  { ask, yes, required }: AlignOptions
 ) {
   const outside = versionsOutsideRanges(cwd)
   if (!outside.length) return
+
+  const stuck = outside.filter(
+    ({ version, range }) => !canUpdateInto(version, range)
+  )
+  if (stuck.length) {
+    const message = rangeMessage(
+      CLI_VERSION,
+      stuck.map(({ name, version }) => ({ name, source: "installed", version }))
+    )
+    if (required) throw new CliError(message)
+    ui.warn(message)
+    return
+  }
+
+  const agent = await getAgent()
   const groups = [false, true]
     .map((dev) => ({
       dev,
@@ -159,26 +189,35 @@ async function checkVersionsAfterInstall(
     .filter(({ specs }) => specs.length)
   ui.warn(
     [
-      `The install left packages outside the versions ${CLI_NAME} ${CLI_VERSION} supports:`,
+      `These packages are older than the versions ${CLI_NAME} ${CLI_VERSION} supports:`,
       ...outside.map(
         ({ name, version, range }) => `  ${name} ${version} (needs ${range})`
       )
     ].join("\n")
   )
-  if (ask && (await ui.confirm("Update them now?", true))) {
-    for (const { dev, specs } of groups)
-      await ui.task(
-        `Updating ${specs.join(", ")}`,
-        () => install(cwd, specs, { agent, dev }),
-        `Updated ${specs.join(", ")}.`
-      )
+  if (yes || (ask && (await ui.confirm("Update them now?", true)))) {
+    const names = outside.map(({ name }) => name).join(", ")
+    await ui.task(
+      `Updating ${names} with ${agent}`,
+      async () => {
+        for (const { dev, specs } of groups)
+          await install(cwd, specs, { agent, dev })
+      },
+      `${color.changed("Updated")} ${names}`
+    )
     return
   }
-  const commands = groups.map(
-    ({ dev, specs }) =>
-      `  ${color.command(formatCommand(installCommand(specs, { agent, dev })))}`
-  )
-  ui.info(`Update them with:\n\n${commands.join("\n")}`)
+  const commands = groups
+    .map(
+      ({ dev, specs }) =>
+        `  ${color.command(formatCommand(installCommand(specs, { agent, dev })))}`
+    )
+    .join("\n")
+  if (required)
+    throw new CliError(
+      `Update them with:\n\n${commands}\n\nThen run init again.`
+    )
+  ui.info(`Update them with:\n\n${commands}`)
 }
 
 async function choosePreset(
@@ -214,7 +253,7 @@ async function choosePreset(
   )
   if (choice === "custom") {
     ui.note(
-      `Build your preset at ${CREATE_URL}, then run the command it copies:\n\n  ${color.command(`npx ${CLI_NAME}@latest init --preset <code>`)}`,
+      `Build your preset at ${CREATE_URL}, then run the command it copies:\n\n  ${color.command(cliCommand("init --preset <code>"))}`,
       "Custom preset"
     )
     return null
@@ -254,6 +293,34 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   const preset = await choosePreset(options, ui, interactive)
   if (!preset) return
   const code = encodePreset(preset)
+
+  // The package manager is settled once, when the first install needs it;
+  // it may ask when the command and the lockfile disagree.
+  let agent: Agent | undefined
+  const getAgent = async () =>
+    (agent ??= await detectAgent(cwd, {
+      ui,
+      prompt: interactive && !options.yes
+    }))
+  const align = { ask: interactive && !options.yes, yes: options.yes }
+
+  if (project.needsInstall) {
+    const pm = await getAgent()
+    await ui.task(
+      `Installing dependencies with ${pm}`,
+      () => install(cwd, [], { agent: pm }),
+      `Installed dependencies with ${pm}.`
+    )
+    const pkg = readPackageJson(cwd) ?? {}
+    const missing = Object.keys(SUPPORTED_VERSIONS.requirements).filter(
+      (name) => resolveVersion(cwd, pkg, name).source !== "installed"
+    )
+    if (missing.length)
+      throw new CliError(
+        `${missing.join(", ")} still ${missing.length === 1 ? "isn't" : "aren't"} installed after ${pm} install.`
+      )
+  }
+  await alignVersions(cwd, getAgent, install, ui, { ...align, required: true })
 
   const client = deps.client ?? createRegistryClient()
   const [utils, utilities] = await ui.task(
@@ -378,7 +445,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 
   const specs = await resolveConflicts(plan, ui, interactive)
   if (specs.length) {
-    const agent = await detectAgent(cwd)
+    const agent = await getAgent()
     await ui.task(
       `Installing ${specs.length} packages with ${agent}`,
       () => install(cwd, specs, { agent }),
@@ -387,16 +454,13 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
         agent
       )
     )
-    await checkVersionsAfterInstall(
-      cwd,
-      agent,
-      install,
-      ui,
-      interactive && !options.yes
-    )
+    await alignVersions(cwd, getAgent, install, ui, {
+      ...align,
+      required: false
+    })
   }
 
-  const addButton = color.command(`npx ${CLI_NAME}@latest add button`)
+  const addButton = color.command(cliCommand("add button"))
   if (viteStep.kind === "manual") {
     ui.warn(
       `Vite can't resolve ~/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${color.command(TSCONFIG_PATHS_ENTRY)} to the config, for example:\n\n${color.command(TSCONFIG_PATHS_SNIPPET)}`

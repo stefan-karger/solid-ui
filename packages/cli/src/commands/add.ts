@@ -22,6 +22,7 @@ import { installableItems, resolveTree } from "~/registry/resolve"
 import { badge, color } from "~/utils/colors"
 import { CliError } from "~/utils/errors"
 import {
+  cliCommand,
   detectAgent,
   installedMessage,
   installPackages,
@@ -54,7 +55,7 @@ function anchorNotes(specs: string[]) {
       : undefined
     return anchor && range && anchor !== range
       ? [
-          `The registry uses ${name} ${range}; ${CLI_NAME} ${CLI_VERSION} was tested with ${anchor}. Update with: ${color.command(`npx ${CLI_NAME}@latest`)}`
+          `The registry uses ${name} ${range}; ${CLI_NAME} ${CLI_VERSION} was tested with ${anchor}. Update with: ${color.command(cliCommand(""))}`
         ]
       : []
   })
@@ -71,7 +72,7 @@ async function chooseItems(
   if (names.length) return names
   if (!interactive)
     throw new CliError(
-      `Name the components to add, for example: ${color.command(`npx ${CLI_NAME}@latest add button`)}`
+      `Name the components to add, for example: ${color.command(cliCommand("add button"))}`
     )
   return ui.multiselect(
     "Which components would you like to add?",

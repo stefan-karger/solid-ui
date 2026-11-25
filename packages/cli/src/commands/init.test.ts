@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import path from "node:path"
 
 import { componentsJsonSchema } from "@solid-ui/registry/config"
@@ -233,7 +233,7 @@ describe("init", () => {
     expect(messages.at(-2)).toContain("resolve: { tsconfigPaths: true }")
   })
 
-  it("warns when the install leaves requirements outside the ranges", async () => {
+  it("prints the update command when it can't ask and --yes is off", async () => {
     const cwd = createProject()
     const pnpmLowest: Installer = async (dir) => {
       // pnpm resolving the lowest versions the template's ranges allow.
@@ -242,12 +242,86 @@ describe("init", () => {
         JSON.stringify({ name: "solid-js", version: "2.0.0" })
       )
     }
-    const { messages } = await init(cwd, {}, { install: pnpmLowest })
+    const { messages } = await init(
+      cwd,
+      { yes: false, preset: "b0" },
+      { install: pnpmLowest }
+    )
     const text = messages.join("\n")
     expect(text).toContain(
       `solid-js 2.0.0 (needs ${supportedRange("solid-js")})`
     )
     expect(text).toMatch(/Update them with:\n\n {2}\S+ \S+ solid-js@\^/)
+  })
+
+  describe("in a project nobody installed yet", () => {
+    // The solid-v2 template's package.json: ranges, no node_modules.
+    const declared = {
+      ...Object.fromEntries(
+        Object.keys(supportedInstall).map((name) => [name, "^2.0.0"])
+      ),
+      tailwindcss: "^4.3.5",
+      vite: "^8.3.8",
+      "@solidjs/vite-plugin": "^3.0.0",
+      typescript: "^7.0.2"
+    }
+    const fresh = () => createProject({ installed: {}, declared })
+
+    // An install of package.json that resolves `versions` (the template's
+    // pnpm lockfile pins solid-js 2.0.0).
+    function installing(versions: Record<string, string> = {}) {
+      const calls: string[][] = []
+      const install: Installer = async (dir, specs) => {
+        calls.push(specs)
+        if (specs.length) return
+        for (const [name, version] of Object.entries({
+          ...supportedInstall,
+          typescript: "7.0.2",
+          ...versions
+        })) {
+          const file = path.join(dir, "node_modules", name, "package.json")
+          mkdirSync(path.dirname(file), { recursive: true })
+          writeFileSync(file, JSON.stringify({ name, version }))
+        }
+      }
+      return { calls, install }
+    }
+
+    it("installs the dependencies first", async () => {
+      const cwd = fresh()
+      const { calls, install } = installing()
+      const { messages } = await init(cwd, {}, { install })
+      expect(calls[0]).toEqual([])
+      expect(messages.find((line) => line.startsWith("task:"))).toMatch(
+        /^task: Installed dependencies with \S+\.$/
+      )
+      expect(existsSync(path.join(cwd, "components.json"))).toBe(true)
+    })
+
+    it("updates versions the install left below the ranges with --yes", async () => {
+      const cwd = fresh()
+      const { calls, install } = installing({ "solid-js": "2.0.0" })
+      const { messages } = await init(cwd, {}, { install })
+      expect(calls[1]).toEqual([`solid-js@${supportedRange("solid-js")}`])
+      expect(messages).toContain("task: Updated solid-js")
+    })
+
+    it("stops before writing files when it may not update them", async () => {
+      const cwd = fresh()
+      const { install } = installing({ "solid-js": "2.0.0" })
+      await expect(
+        init(cwd, { yes: false, preset: "b0" }, { install })
+      ).rejects.toThrow(/Update them with:[\s\S]*Then run init again\./)
+      expect(existsSync(path.join(cwd, "components.json"))).toBe(false)
+    })
+
+    it("still stops ranges that can't reach a supported version", async () => {
+      const cwd = createProject({
+        installed: {},
+        declared: { ...declared, vite: "^9.0.0" }
+      })
+      await expect(init(cwd)).rejects.toThrow("init stopped")
+    })
   })
 
   it("updates requirements the install moved when asked", async () => {

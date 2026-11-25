@@ -67,3 +67,14 @@ export function isBelowRange(version: string, range: string) {
   const lowest = semver.minVersion(range)
   return lowest ? semver.lt(version, lowest) : false
 }
+
+// True when `version` is below `range` but in its major, so updating the
+// package within the major reaches the range.
+export function canUpdateInto(version: string, range: string) {
+  const lowest = semver.minVersion(range)
+  return (
+    !!lowest &&
+    semver.lt(version, lowest) &&
+    semver.major(version) === lowest.major
+  )
+}
