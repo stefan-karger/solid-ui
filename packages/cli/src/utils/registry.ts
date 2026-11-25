@@ -1,6 +1,11 @@
 import * as v from "valibot"
 
-const BASE_URL = "https://www.solid-ui.com"
+const DEFAULT_BASE_URL = "https://www.solid-ui.com"
+
+// Lets the CLI run against a local docs server or a preview deploy.
+const BASE_URL = (
+  process.env.SOLID_UI_REGISTRY_URL?.trim() || DEFAULT_BASE_URL
+).replace(/\/+$/, "")
 
 export const RegistryIndexSchema = v.array(
   v.object({
