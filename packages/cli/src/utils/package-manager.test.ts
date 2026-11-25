@@ -3,7 +3,6 @@ import path from "node:path"
 
 import { afterEach, describe, expect, it, vi } from "vitest"
 
-import { recordingUi } from "../../test/harness"
 import { createProject } from "../../test/project"
 import {
   cliCommand,
@@ -24,8 +23,6 @@ function ranWith(tool: "npm" | "pnpm" | "bun" | "yarn" | null) {
   )
 }
 
-const everything = async () => true
-
 // The solid-v2 templates ship a pnpm lockfile and workspace file.
 const TEMPLATE_FILES = {
   "pnpm-lock.yaml": "lockfileVersion: '9.0'\n",
@@ -37,7 +34,7 @@ afterEach(() => {
 })
 
 describe("detectAgent", () => {
-  it("keeps the manager that installed node_modules", async () => {
+  it("keeps the manager that installed node_modules", () => {
     ranWith("bun")
     // npm install in the solid-v2 template.
     const npm = project({
@@ -45,13 +42,13 @@ describe("detectAgent", () => {
       "node_modules/.package-lock.json": "{}",
       "package-lock.json": "{}"
     })
-    expect(await detectAgent(npm)).toBe("npm")
+    expect(detectAgent(npm)).toBe("npm")
 
     const pnpm = project({ "node_modules/.modules.yaml": "" })
-    expect(await detectAgent(pnpm)).toBe("pnpm")
+    expect(detectAgent(pnpm)).toBe("pnpm")
   })
 
-  it("reads the newest lockfile when node_modules has no marker", async () => {
+  it("reads the newest lockfile when node_modules has no marker", () => {
     ranWith("npm")
     // bun install wrote bun.lock after the template's pnpm lockfile.
     const cwd = project({
@@ -61,68 +58,38 @@ describe("detectAgent", () => {
     })
     const scaffolded = new Date(Date.now() - 60_000)
     utimesSync(path.join(cwd, "pnpm-lock.yaml"), scaffolded, scaffolded)
-    expect(await detectAgent(cwd)).toBe("bun")
+    expect(detectAgent(cwd)).toBe("bun")
   })
 
-  it("follows the command for a project nobody installed yet", async () => {
+  it("follows the command for a project nobody installed yet", () => {
     for (const tool of ["pnpm", "bun", "yarn"] as const) {
       ranWith(tool)
-      expect(await detectAgent(project(TEMPLATE_FILES))).toBe(tool)
+      expect(detectAgent(project(TEMPLATE_FILES))).toBe(tool)
     }
     ranWith("bun")
     const pinned = project({
       ...TEMPLATE_FILES,
       "package.json": JSON.stringify({ packageManager: "pnpm@10.0.0" })
     })
-    expect(await detectAgent(pinned)).toBe("pnpm")
+    expect(detectAgent(pinned)).toBe("pnpm")
   })
 
-  it("asks under npx when the lockfile belongs to another tool", async () => {
+  it("uses npm for npx, also with the template's pnpm lockfile", () => {
+    // npm create solid copies pnpm-lock.yaml, then npx solidui-cli init.
     ranWith("npm")
-    const cwd = project(TEMPLATE_FILES)
-
-    const { ui, messages } = recordingUi({ select: "bun" })
-    expect(
-      await detectAgent(cwd, { ui, prompt: true, available: everything })
-    ).toBe("bun")
-    expect(messages.join("\n")).toContain(
-      "This project has pnpm-lock.yaml from pnpm, but init runs through npx"
-    )
-
-    // Without a prompt the command decides: npm create solid copies the
-    // template's pnpm-lock.yaml, then npx solidui-cli init --yes.
-    expect(await detectAgent(cwd, { available: everything })).toBe("npm")
+    expect(detectAgent(project(TEMPLATE_FILES))).toBe("npm")
     // Started with node directly, as when testing a local build.
     ranWith(null)
-    expect(await detectAgent(cwd, { available: everything })).toBe("npm")
-    // Nothing to choose from when only npm is installed.
-    const quiet = recordingUi({ select: "pnpm" })
-    expect(
-      await detectAgent(cwd, {
-        ui: quiet.ui,
-        prompt: true,
-        available: async () => false
-      })
-    ).toBe("npm")
-    expect(quiet.messages).toEqual([])
+    expect(detectAgent(project(TEMPLATE_FILES))).toBe("npm")
   })
 
-  it("uses npm for npx without another tool's lockfile", async () => {
-    ranWith("npm")
-    expect(await detectAgent(project({}))).toBe("npm")
-    ranWith(null)
-    expect(await detectAgent(project({ "package-lock.json": "{}" }))).toBe(
-      "npm"
-    )
-  })
-
-  it("looks in parent folders for a workspace root", async () => {
+  it("looks in parent folders for a workspace root", () => {
     ranWith("bun")
     const root = project({
       "node_modules/.modules.yaml": "",
       "apps/web/package.json": "{}"
     })
-    expect(await detectAgent(path.join(root, "apps/web"))).toBe("pnpm")
+    expect(detectAgent(path.join(root, "apps/web"))).toBe("pnpm")
   })
 })
 

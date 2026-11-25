@@ -157,7 +157,7 @@ type AlignOptions = {
 // asking or with --yes.
 async function alignVersions(
   cwd: string,
-  getAgent: () => Promise<Agent>,
+  agent: Agent,
   install: Installer,
   ui: Ui,
   { ask, yes, required }: AlignOptions
@@ -178,7 +178,6 @@ async function alignVersions(
     return
   }
 
-  const agent = await getAgent()
   const groups = [false, true]
     .map((dev) => ({
       dev,
@@ -294,22 +293,14 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   if (!preset) return
   const code = encodePreset(preset)
 
-  // The package manager is settled once, when the first install needs it;
-  // it may ask when the command and the lockfile disagree.
-  let agent: Agent | undefined
-  const getAgent = async () =>
-    (agent ??= await detectAgent(cwd, {
-      ui,
-      prompt: interactive && !options.yes
-    }))
+  const agent = detectAgent(cwd)
   const align = { ask: interactive && !options.yes, yes: options.yes }
 
   if (project.needsInstall) {
-    const pm = await getAgent()
     await ui.task(
-      `Installing dependencies with ${pm}`,
-      () => install(cwd, [], { agent: pm }),
-      `Installed dependencies with ${pm}.`
+      `Installing dependencies with ${agent}`,
+      () => install(cwd, [], { agent }),
+      `Installed dependencies with ${agent}.`
     )
     const pkg = readPackageJson(cwd) ?? {}
     const missing = Object.keys(SUPPORTED_VERSIONS.requirements).filter(
@@ -317,10 +308,10 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     )
     if (missing.length)
       throw new CliError(
-        `${missing.join(", ")} still ${missing.length === 1 ? "isn't" : "aren't"} installed after ${pm} install.`
+        `${missing.join(", ")} still ${missing.length === 1 ? "isn't" : "aren't"} installed after ${agent} install.`
       )
   }
-  await alignVersions(cwd, getAgent, install, ui, { ...align, required: true })
+  await alignVersions(cwd, agent, install, ui, { ...align, required: true })
 
   const client = deps.client ?? createRegistryClient()
   const [utils, utilities] = await ui.task(
@@ -445,7 +436,6 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 
   const specs = await resolveConflicts(plan, ui, interactive)
   if (specs.length) {
-    const agent = await getAgent()
     await ui.task(
       `Installing ${specs.length} packages with ${agent}`,
       () => install(cwd, specs, { agent }),
@@ -454,7 +444,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
         agent
       )
     )
-    await alignVersions(cwd, getAgent, install, ui, {
+    await alignVersions(cwd, agent, install, ui, {
       ...align,
       required: false
     })

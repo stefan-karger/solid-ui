@@ -7,7 +7,6 @@ import { resolveCommand } from "package-manager-detector/commands"
 import { getUserAgent } from "package-manager-detector/detect"
 
 import { CliError } from "./errors"
-import type { Ui } from "./ui"
 import { CLI_NAME } from "./version"
 
 export type InstallOptions = { agent: Agent; dev?: boolean }
@@ -108,71 +107,12 @@ function packageManagerField(cwd: string): Agent | null {
   return null
 }
 
-function findLockfile(cwd: string) {
-  for (const dir of upwards(cwd)) {
-    const lock = newestLockfile(dir)
-    if (lock) return lock
-    if (isRoot(dir)) return null
-  }
-  return null
-}
-
-async function isAvailable(agent: Agent) {
-  const result = await execa(agent.split("@")[0]!, ["--version"], {
-    reject: false,
-    stdin: "ignore"
-  })
-  return result.exitCode === 0
-}
-
-export type DetectOptions = {
-  // Asks when the command and the lockfile disagree.
-  ui?: Ui
-  prompt?: boolean
-  available?: (agent: Agent) => Promise<boolean>
-}
-
-// The package manager to install with, so a project never gets a second one:
-//  1. the one that installed node_modules,
-//  2. the packageManager field,
-//  3. the tool that ran the CLI: npx means npm, pnpm dlx pnpm, bunx bun.
-// A lockfile alone doesn't decide: create-solid copies the template's
-// pnpm-lock.yaml into every new app, whichever tool scaffolded it. When npx
-// meets another tool's lockfile, init asks in a terminal, npm first.
-export async function detectAgent(
-  cwd: string,
-  { ui, prompt = false, available = isAvailable }: DetectOptions = {}
-): Promise<Agent> {
-  const installed = installedBy(cwd) ?? packageManagerField(cwd)
-  if (installed) return installed
-
-  // Run without a package manager (node dist/index.js) counts as npx.
-  const command = getUserAgent() ?? "npm"
-  if (command !== "npm") return command
-
-  const lock = findLockfile(cwd)
-  if (!lock || lock.agent === "npm" || !ui || !prompt) return "npm"
-
-  const others = await Promise.all(
-    [...new Set<Agent>([lock.agent, "pnpm", "yarn", "bun"])].map(
-      async (agent) => ((await available(agent)) ? [agent] : [])
-    )
-  )
-  const usable: Agent[] = ["npm", ...others.flat()]
-  if (usable.length === 1) return "npm"
-  return ui.select(
-    `This project has ${lock.file} from ${lock.agent}, but init runs through npx. Which package manager should install the dependencies?`,
-    usable.map((agent) => {
-      const hint =
-        agent === "npm"
-          ? "you ran npx"
-          : agent === lock.agent
-            ? `matches ${lock.file}`
-            : undefined
-      return { value: agent, label: agent, ...(hint ? { hint } : {}) }
-    }),
-    "npm"
-  )
+// The package manager to install with: the one that installed node_modules,
+// else the packageManager field, else the tool that ran the CLI (npx or node
+// directly means npm). A lockfile alone doesn't decide: create-solid copies
+// the template's pnpm-lock.yaml into every new app.
+export function detectAgent(cwd: string): Agent {
+  return installedBy(cwd) ?? packageManagerField(cwd) ?? getUserAgent() ?? "npm"
 }
 
 export function installCommand(

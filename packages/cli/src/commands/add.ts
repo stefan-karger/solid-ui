@@ -156,7 +156,7 @@ export async function runAdd(
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, specs)
   const installs = await resolveConflicts(plan, ui, interactive && !options.yes)
   if (installs.length) {
-    const agent = await detectAgent(cwd)
+    const agent = detectAgent(cwd)
     await ui.task(
       `Installing ${installs.length} packages with ${agent}`,
       () => install(cwd, installs, { agent }),
