@@ -19,8 +19,8 @@ export default defineConfig({
   },
   ignorePatterns: [
     "vendor/astro-solid/upstream/**",
-    // Frozen v1 registry, published byte for byte.
-    "apps/docs/registry-v1/**",
+    // Frozen v1 registry for solidui-cli 0.7, published byte for byte.
+    "apps/docs/public/registry/**",
     "**/node_modules/**",
     "**/dist/**",
     "**/.astro/**",

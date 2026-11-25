@@ -1,4 +1,4 @@
-import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises"
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { posix } from "node:path"
 
 import ts from "typescript"
@@ -185,22 +185,5 @@ async function writeRegistry(files: Map<string, unknown>) {
   }
 }
 
-// v1 clients keep receiving the frozen v1 registry: solidui-cli 0.7 reads
-// /registry/, and shadcn CLI installs used /r/<name>.json. Neither overlaps
-// the v2 layout, and the copy fails instead of overwriting a v2 file.
-const v1 = new URL("../registry-v1/", import.meta.url)
-const legacy = new URL("../public/registry/", import.meta.url)
-
 await writeRegistry(modernFiles)
-await rm(legacy, { recursive: true, force: true })
-await cp(new URL("registry/", v1), legacy, { recursive: true })
-const v1Items = await readdir(new URL("r/", v1))
-for (const file of v1Items) {
-  await cp(new URL(`r/${file}`, v1), new URL(file, publicR), {
-    force: false,
-    errorOnExist: true
-  })
-}
-console.log(
-  `Registry built: ${modernFiles.size} files in public/r, plus ${v1Items.length} v1 items in public/r and the v1 CLI registry in public/registry.`
-)
+console.log(`Registry built: ${modernFiles.size} files in public/r.`)

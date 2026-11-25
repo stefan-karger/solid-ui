@@ -10,7 +10,7 @@ import {
   stylesSchema
 } from "../apps/docs/src/registry/schema"
 
-test("publishes the v2 registry and the frozen v1 registry in the production build", async ({
+test("publishes the v2 registry and the static v1 CLI registry in the production build", async ({
   request
 }) => {
   async function json(path: string): Promise<unknown> {
@@ -69,6 +69,7 @@ test("publishes the v2 registry and the frozen v1 registry in the production bui
   expect(example.files?.[0]?.content).toContain('from "~/components/example"')
 
   for (const path of [
+    "/r/button.json",
     "/r/nova/button.json",
     "/r/registry.json",
     "/registry-source/nova/ui/button.tsx.json"
@@ -84,16 +85,12 @@ test("publishes the v2 registry and the frozen v1 registry in the production bui
     content: expect.stringContaining("@utility shimmer")
   })
 
-  // solidui-cli 0.7 and v1 shadcn installs keep receiving v1 unchanged.
-  for (const path of [
-    "/registry/index.json",
-    "/registry/ui/button.json",
-    "/r/button.json"
-  ]) {
-    expect(await json(path)).toEqual(
-      JSON.parse(await readFile(`apps/docs/registry-v1${path}`, "utf8"))
-    )
-  }
+  // solidui-cli 0.7 keeps receiving the static v1 registry.
+  expect(await json("/registry/index.json")).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ name: "button", type: "ui" })
+    ])
+  )
   expect(await json("/registry/ui/button.json")).toMatchObject({
     name: "button",
     files: [{ content: expect.stringContaining("@kobalte/core") }]

@@ -40,15 +40,14 @@ Run `pnpm --filter docs build` to build the site. The `prebuild` script uses
 the same catalog and source exporter as the docs and generates the registry
 before Astro starts. Run `pnpm --filter docs prebuild` to refresh only the registry.
 
-| URL                               | Contents                                                  |
-| --------------------------------- | --------------------------------------------------------- |
-| `/r/index.json`                   | Array of installable items and their dependency metadata  |
-| `/r/styles/index.json`            | Available styles as `{ name, label }`                     |
-| `/r/styles/<style>/registry.json` | Catalog of every item for a style, without file contents  |
-| `/r/styles/<style>/<name>.json`   | Item, including examples, with file contents for a style  |
-| `/r/<name>.json`                  | Frozen v1 item for shadcn CLI installs (Solid 1, Kobalte) |
-| `/registry/index.json`            | Frozen v1 catalog for `solidui-cli` 0.7                   |
-| `/registry/ui/<name>.json`        | Frozen v1 component source for `solidui-cli` 0.7          |
+| URL                               | Contents                                                 |
+| --------------------------------- | -------------------------------------------------------- |
+| `/r/index.json`                   | Array of installable items and their dependency metadata |
+| `/r/styles/index.json`            | Available styles as `{ name, label }`                    |
+| `/r/styles/<style>/registry.json` | Catalog of every item for a style, without file contents |
+| `/r/styles/<style>/<name>.json`   | Item, including examples, with file contents for a style |
+| `/registry/index.json`            | Frozen v1 catalog for `solidui-cli` 0.7                  |
+| `/registry/ui/<name>.json`        | Frozen v1 component source for `solidui-cli` 0.7         |
 
 The `/r/` layout follows shadcn/ui's own registry
 ([`f50887a`](https://github.com/shadcn-ui/ui/blob/f50887ae68d0fdcbfbe86b57be08af94a4c88a68/apps/v4/scripts/build-registry.mts)).
@@ -60,11 +59,8 @@ Item files use the Solid `~/` aliases.
 The docs load style-specific source from `/r/styles/<style>/<name>.json` when
 the reader changes the style.
 
-The generated files live in `apps/docs/public/r` and
-`apps/docs/public/registry`. Git ignores both directories. The prebuild
-copies the v1 files from `apps/docs/registry-v1` into them byte for byte and
-fails if a v1 file would replace a v2 file. Astro copies
-them into `dist` when building the site. The registry includes dependencies
+The generated files live in `apps/docs/public/r`, which Git ignores. Astro
+copies them into `dist` when building the site. The registry includes dependencies
 found in component imports and uses the workspace's tested npm versions.
 Missing registry files and dependency cycles fail the prebuild.
 
@@ -73,10 +69,11 @@ Use `apps/docs` as the Vercel project root. Its build configuration runs
 checkout as the docs. Include source files outside the project root so Vercel
 can access the workspace lockfile and the pinned Astro packages.
 
-The published `solidui-cli` 0.7.2 and shadcn CLI installs from v1 use the
-production domain. Their projects run Solid 1, Kobalte and Tailwind CSS 3 or 4,
-so the v1 endpoints keep serving the v1 registry from the `v1-final` tag
-instead of v2 source. This gives existing users time to switch. The v2 `/r/` format also carries the shared stylesheet and its target path.
+The published `solidui-cli` 0.7.2 uses the production domain, and its
+projects run Solid 1, Kobalte and Tailwind CSS 3. `apps/docs/public/registry`
+holds the v1 registry from the `v1-final` tag as static, committed files, so
+these users keep working until they switch. No script touches it. Delete the
+folder when the transition period ends. The v2 `/r/` format also carries the shared stylesheet and its target path.
 See the [Introduction](./apps/docs/src/content/docs/index.mdx#shared-styles)
 for the manual installation steps.
 

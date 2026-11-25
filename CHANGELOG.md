@@ -9,9 +9,9 @@ longer throws, and it declares its own valibot dependency. CI runs
 Changeset versions the docs from 0.5.1 to 1.0.0. Changesets 3 needs
 `privatePackages.version` for that.
 
-`/registry/` (solidui-cli 0.7) and `/r/<name>.json` (v1 shadcn installs)
-serve the unchanged v1 files from `apps/docs/registry-v1`. Solid 1 and
-Tailwind 3 projects keep working until they switch.
+`apps/docs/public/registry` holds the v1 registry from `v1-final` as static
+files, so solidui-cli 0.7 keeps installing v1 components into Solid 1 and
+Tailwind 3 projects until they switch.
 
 Examples, MDX pages and the docs site inline their Lucide icons as SVG,
 like the components. Examples that pass icons as values declare local

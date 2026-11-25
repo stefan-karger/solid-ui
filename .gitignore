@@ -17,6 +17,5 @@ test-results
 /docs/
 /plans/
 /apps/docs/public/r/
-/apps/docs/public/registry/
 .agents/
 skills-lock.json
