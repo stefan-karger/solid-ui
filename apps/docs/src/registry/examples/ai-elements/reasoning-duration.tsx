@@ -1,4 +1,4 @@
-import { CircleCheckIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
 import {
   Trace,
@@ -18,7 +18,20 @@ export default function ReasoningDuration() {
         <TraceCollapsibleTrigger>
           <TraceLine>
             <TraceIcon>
-              <CircleCheckIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="m16 9-5.5 5.5L8 12" />
+              </svg>
             </TraceIcon>
             <TraceTitle>Thought</TraceTitle>
             <TraceDescription>12s</TraceDescription>

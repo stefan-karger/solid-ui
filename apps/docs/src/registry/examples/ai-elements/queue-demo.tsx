@@ -1,10 +1,4 @@
-import {
-  CircleCheckIcon,
-  CircleDotIcon,
-  CircleIcon,
-  ListChecksIcon,
-  ListTodoIcon
-} from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
 import {
@@ -100,11 +94,49 @@ function TodoLine(componentProps: { todo: Todo; streaming: boolean }) {
       >
         <TraceIcon>
           {todo.status === "completed" ? (
-            <CircleCheckIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="m16 9-5.5 5.5L8 12" />
+            </svg>
           ) : todo.status === "in_progress" ? (
-            <CircleDotIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
           ) : (
-            <CircleIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+            </svg>
           )}
         </TraceIcon>
         <TraceTitle>{todo.content}</TraceTitle>
@@ -126,7 +158,23 @@ function TodoQueue(componentProps: { todos: Todo[]; streaming: boolean }) {
             <TraceCollapsibleTrigger>
               <TraceLine>
                 <TraceIcon>
-                  <ListTodoIcon />
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M13 5h8" />
+                    <path d="M13 12h8" />
+                    <path d="M13 19h8" />
+                    <path d="m3 17 2 2 4-4" />
+                    <rect x="3" y="4" width="6" height="6" rx="1" />
+                  </svg>
                 </TraceIcon>
                 <TraceTitle>{pending.length} to do</TraceTitle>
               </TraceLine>
@@ -147,7 +195,23 @@ function TodoQueue(componentProps: { todos: Todo[]; streaming: boolean }) {
             <TraceCollapsibleTrigger>
               <TraceLine>
                 <TraceIcon>
-                  <ListChecksIcon />
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M13 5h8" />
+                    <path d="M13 12h8" />
+                    <path d="M13 19h8" />
+                    <path d="m3 17 2 2 4-4" />
+                    <path d="m3 7 2 2 4-4" />
+                  </svg>
                 </TraceIcon>
                 <TraceTitle>{completed.length} completed</TraceTitle>
               </TraceLine>

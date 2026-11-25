@@ -1,4 +1,4 @@
-import { ChevronDownIcon, EllipsisIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
 import {
@@ -34,7 +34,22 @@ export default function InputGroupDropdown() {
               )}
               aria-label="More"
             >
-              <EllipsisIcon class="size-4" />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="size-4"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
+              </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuGroup>
@@ -58,7 +73,20 @@ export default function InputGroupDropdown() {
               class="pr-1.5 text-xs"
             >
               {scope()}
-              <ChevronDownIcon class="size-3" />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="size-3"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="[--radius:0.95rem]">
               <DropdownMenuGroup>

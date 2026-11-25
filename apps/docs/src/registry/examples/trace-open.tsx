@@ -1,4 +1,4 @@
-import { TerminalIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -21,7 +21,20 @@ export default function TraceOpen() {
         <TraceCollapsibleTrigger>
           <TraceLine>
             <TraceIcon>
-              <TerminalIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 19h8" />
+                <path d="m4 17 6-6-6-6" />
+              </svg>
             </TraceIcon>
             <TraceTitle>Ran node --version</TraceTitle>
           </TraceLine>
@@ -38,7 +51,20 @@ export default function TraceOpen() {
         <TraceCollapsibleTrigger>
           <TraceLine>
             <TraceIcon>
-              <TerminalIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 19h8" />
+                <path d="m4 17 6-6-6-6" />
+              </svg>
             </TraceIcon>
             <TraceTitle>Ran pnpm --version</TraceTitle>
           </TraceLine>

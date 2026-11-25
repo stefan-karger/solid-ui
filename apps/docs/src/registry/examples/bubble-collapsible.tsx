@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
 import { Bubble, BubbleContent } from "~/registry/ui/bubble"
@@ -39,10 +39,21 @@ export default function BubbleCollapsible() {
                     class="gap-1 p-0 text-muted-foreground"
                   >
                     {open() ? "Show less" : "Show more"}
-                    <ChevronDownIcon
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
                       data-icon="inline-end"
                       class="group-data-open/button:rotate-180"
-                    />
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
                   </Button>
                 )}
               />

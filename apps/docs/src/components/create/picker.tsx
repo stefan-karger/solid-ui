@@ -1,3 +1,4 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 // Picker parts follow shadcn/ui 055aa6b, apps/v4/app/(app)/(create)/components/picker.tsx (MIT).
 // The neutral overlay colors are swapped for the docs site's dark Solid palette.
 import { type ComponentProps } from "@solidjs/web"
@@ -9,7 +10,6 @@ import {
   MenuSeparator as SdkMenuSeparator,
   MenuTrigger as SdkMenuTrigger
 } from "@ui-sdk/solid/menu"
-import { CheckIcon } from "lucide-solid"
 import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -78,7 +78,20 @@ function PickerRadioItem(
     >
       <span class="pointer-events-none absolute right-2 flex items-center justify-center text-accent-foreground">
         <SdkMenuItemIndicator>
-          <CheckIcon class="size-4 pointer-coarse:size-5" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="size-4 pointer-coarse:size-5"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
         </SdkMenuItemIndicator>
       </span>
       {props.children}

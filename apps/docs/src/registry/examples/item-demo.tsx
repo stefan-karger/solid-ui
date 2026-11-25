@@ -1,4 +1,4 @@
-import { BadgeCheckIcon, ChevronRightIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -29,13 +29,40 @@ export default function ItemDemo() {
 
       <Item as="a" href="#" size="sm" variant="outline">
         <ItemMedia variant="icon">
-          <BadgeCheckIcon class="size-5" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="size-5"
+          >
+            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+            <path d="m16 9-5.5 5.5L8 12" />
+          </svg>
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Your profile has been verified.</ItemTitle>
         </ItemContent>
         <ItemActions>
-          <ChevronRightIcon class="size-4" />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="size-4"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
         </ItemActions>
       </Item>
     </div>

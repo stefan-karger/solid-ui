@@ -1,8 +1,8 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import {
   CalendarMonthSelect as SdkCalendarMonthSelect,
   CalendarYearSelect as SdkCalendarYearSelect
 } from "@ui-sdk/solid/calendar"
-import { ChevronDownIcon } from "lucide-solid"
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -41,7 +41,19 @@ export default function DatePickerTime() {
             )}
           >
             {date() ? formatDate.format(new Date(date()!)) : "Select date"}
-            <ChevronDownIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
           </PopoverTrigger>
           <PopoverContent class="w-auto overflow-hidden p-0" align="start">
             <Calendar

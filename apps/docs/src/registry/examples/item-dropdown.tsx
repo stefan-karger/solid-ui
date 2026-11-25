@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
 import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
@@ -44,7 +44,20 @@ export default function ItemDropdown() {
         class="w-fit"
       >
         Select
-        <ChevronDownIcon class="size-4" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-4"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end" class="w-56">
         <DropdownMenuGroup>

@@ -1,4 +1,4 @@
-import { AudioLinesIcon, PlusIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
 import { Button } from "~/registry/ui/button"
 import { ButtonGroup } from "~/registry/ui/button-group"
@@ -14,7 +14,20 @@ export default function ButtonGroupNested() {
     <ButtonGroup>
       <ButtonGroup>
         <Button variant="outline" size="icon">
-          <PlusIcon />
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
         </Button>
       </ButtonGroup>
       <ButtonGroup>
@@ -26,7 +39,24 @@ export default function ButtonGroupNested() {
                 <InputGroupAddon {...partProps} align="inline-end" />
               )}
             >
-              <AudioLinesIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M2 10v3" />
+                <path d="M6 6v11" />
+                <path d="M10 3v18" />
+                <path d="M14 8v7" />
+                <path d="M18 5v13" />
+                <path d="M22 10v3" />
+              </svg>
             </TooltipTrigger>
             <TooltipContent>Voice Mode</TooltipContent>
           </Tooltip>

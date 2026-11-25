@@ -1,11 +1,6 @@
-import {
-  FileCodeIcon,
-  FileTextIcon,
-  TableIcon,
-  XIcon,
-  type LucideIcon
-} from "lucide-solid"
-import { For } from "solid-js"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps } from "@solidjs/web"
+import { For, type Component } from "solid-js"
 
 import {
   Attachment,
@@ -18,10 +13,77 @@ import {
   AttachmentTitle
 } from "~/registry/ui/attachment"
 
+function FileCodeIcon(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <path d="M10 12.5 8 15l2 2.5" />
+      <path d="m14 12.5 2 2.5-2 2.5" />
+    </svg>
+  )
+}
+
+function FileTextIcon(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <path d="M10 9H8" />
+      <path d="M16 13H8" />
+      <path d="M16 17H8" />
+    </svg>
+  )
+}
+
+function TableIcon(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 3v18" />
+      <rect width="18" height="18" x="3" y="3" rx="2" />
+      <path d="M3 9h18" />
+      <path d="M3 15h18" />
+    </svg>
+  )
+}
+
 type Item = {
   name: string
   meta: string
-  icon?: LucideIcon
+  icon?: Component<ComponentProps<"svg">>
   src?: string
 }
 
@@ -61,7 +123,20 @@ export default function AttachmentGroupDemo() {
                 </AttachmentContent>
                 <AttachmentActions>
                   <AttachmentAction aria-label={`Remove ${item.name}`}>
-                    <XIcon />
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
                   </AttachmentAction>
                 </AttachmentActions>
               </Attachment>

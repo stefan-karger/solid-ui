@@ -1,4 +1,4 @@
-import { RotateCcwIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal, For, onCleanup, Show } from "solid-js"
 
 import { useHighlightedCode } from "~/registry/hooks/use-highlighted-code"
@@ -93,7 +93,21 @@ export default function CodeBlockMarkdown() {
           class="mt-auto self-start"
           onClick={replay}
         >
-          <RotateCcwIcon /> Replay
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>{" "}
+          Replay
         </Button>
       </Show>
     </div>

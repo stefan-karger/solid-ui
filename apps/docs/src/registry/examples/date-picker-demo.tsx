@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -27,7 +27,19 @@ export default function DatePickerDemo() {
         <span>
           {date() ? formatDate.format(new Date(date()!)) : "Pick a date"}
         </span>
-        <ChevronDownIcon />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </PopoverTrigger>
       <PopoverContent class="w-auto p-0" align="start">
         <Calendar

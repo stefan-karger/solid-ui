@@ -1,9 +1,4 @@
-import {
-  CircleCheckIcon,
-  CircleDotIcon,
-  CircleIcon,
-  RouteIcon
-} from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
 import {
@@ -85,7 +80,21 @@ function PlanRow(componentProps: {
         <TraceCollapsibleTrigger>
           <TraceLine status={running ? "running" : undefined}>
             <TraceIcon>
-              <RouteIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="6" cy="19" r="3" />
+                <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+                <circle cx="18" cy="5" r="3" />
+              </svg>
             </TraceIcon>
             <TraceTitle>{plan.title}</TraceTitle>
             <TraceDescription>
@@ -109,11 +118,49 @@ function PlanRow(componentProps: {
                   >
                     <TraceIcon>
                       {step.status === "done" ? (
-                        <CircleCheckIcon />
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="m16 9-5.5 5.5L8 12" />
+                        </svg>
                       ) : step.status === "running" ? (
-                        <CircleDotIcon />
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <circle cx="12" cy="12" r="1" />
+                          <circle cx="12" cy="12" r="10" />
+                        </svg>
                       ) : (
-                        <CircleIcon />
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                        </svg>
                       )}
                     </TraceIcon>
                     <TraceTitle>{step.title}</TraceTitle>

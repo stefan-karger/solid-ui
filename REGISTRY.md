@@ -78,13 +78,14 @@ The `/r/` format also carries the shared stylesheet and its target path.
 See the [Introduction](./apps/docs/src/content/docs/index.mdx#shared-styles)
 for the manual installation steps.
 
-Installable items inline their icons as SVG markup copied from Lucide. The
-published `lucide-solid` package still declares a Solid 1 peer range, so items
-do not depend on it. Each inlined icon keeps Lucide's 24px stroke geometry and
-is decorative with `aria-hidden="true"` unless the component names it, as
-Spinner does. Each file credits Lucide, and the project LICENSE carries the
-full ISC notice. Docs examples still import `lucide-solid` through the
-[compatibility patch](./patches/README.md#lucide-solid1410).
+Components, examples, and the docs site inline their icons as SVG markup
+copied from Lucide. The published `lucide-solid` package still declares a
+Solid 1 peer range, so nothing depends on it. Each inlined icon keeps Lucide's
+24px stroke geometry and is decorative with `aria-hidden="true"` unless the
+markup names it, as Spinner does. Examples that pass icons as values, such as
+Command items, declare them as local components that accept SVG props. Each
+file credits Lucide in its first line, and the project LICENSE carries the
+full ISC notice.
 
 ## Component API changes
 

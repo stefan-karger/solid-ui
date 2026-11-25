@@ -1,10 +1,4 @@
-import {
-  CheckIcon,
-  CircleDashedIcon,
-  FileCodeIcon,
-  FlaskConicalIcon,
-  XIcon
-} from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
 import { CodeBlock, CodeBlockContent } from "~/registry/ui/code-block"
@@ -93,7 +87,20 @@ function TestRow(componentProps: { test: Test }) {
           <TraceCollapsibleTrigger>
             <TraceLine status="error">
               <TraceIcon>
-                <XIcon />
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
               </TraceIcon>
               <TraceTitle>{test.name}</TraceTitle>
             </TraceLine>
@@ -111,7 +118,42 @@ function TestRow(componentProps: { test: Test }) {
     return (
       <TraceLine>
         <TraceIcon>
-          {test.status === "skipped" ? <CircleDashedIcon /> : <CheckIcon />}
+          {test.status === "skipped" ? (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10.1 2.182a10 10 0 0 1 3.8 0" />
+              <path d="M13.9 21.818a10 10 0 0 1-3.8 0" />
+              <path d="M17.609 3.721a10 10 0 0 1 2.69 2.7" />
+              <path d="M2.182 13.9a10 10 0 0 1 0-3.8" />
+              <path d="M20.279 17.609a10 10 0 0 1-2.7 2.69" />
+              <path d="M21.818 10.1a10 10 0 0 1 0 3.8" />
+              <path d="M3.721 6.391a10 10 0 0 1 2.7-2.69" />
+              <path d="M6.391 20.279a10 10 0 0 1-2.69-2.7" />
+            </svg>
+          ) : (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          )}
         </TraceIcon>
         <TraceTitle>
           {test.status === "skipped" ? `Skipped ${test.name}` : test.name}
@@ -131,7 +173,21 @@ export default function TestResultsSuites() {
         <TraceCollapsibleTrigger>
           <TraceLine status={summary.failed > 0 ? "error" : undefined}>
             <TraceIcon>
-              <FlaskConicalIcon />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+                <path d="M6.453 15h11.094" />
+                <path d="M8.5 2h7" />
+              </svg>
             </TraceIcon>
             <TraceTitle>Ran {formatCounts(summary)}</TraceTitle>
           </TraceLine>
@@ -151,7 +207,22 @@ export default function TestResultsSuites() {
                             status={counts.failed > 0 ? "error" : undefined}
                           >
                             <TraceIcon>
-                              <FileCodeIcon />
+                              <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                                <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                                <path d="M10 12.5 8 15l2 2.5" />
+                                <path d="m14 12.5 2 2.5-2 2.5" />
+                              </svg>
                             </TraceIcon>
                             <TraceTitle>
                               {suite.name}, {formatCounts(counts)}

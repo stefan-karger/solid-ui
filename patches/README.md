@@ -15,13 +15,3 @@ the unmodified PR. See [the pinned source and replacement process](../vendor/ast
 The integration patch for `@astrojs/solid-js@8.0.0-pr.17891.bbf9faa` adds an
 idempotent head bootstrap. The Label docs page otherwise executes serialized
 lazy data before Astro's normal renderer bootstrap.
-
-## `lucide-solid@1.41.0`
-
-Ports the Solid 1 implementation and JSX types to the Solid 2 APIs. Only the docs examples use
-Lucide; installable registry items inline their icons. The package's `solid` export condition
-points to its JSX source, which the Solid Vite plugin compiles. Its precompiled builds target
-Solid 1 and are not used.
-
-Lucide needs this compatibility port because it does not yet publish a Solid 2 version. Remove this patch when
-an official Solid 2 implementation is available.

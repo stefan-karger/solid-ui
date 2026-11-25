@@ -216,7 +216,6 @@ overrides:
 patchedDependencies:
   '@astrojs/solid-js-renderer@0.2.0-pr.17891.bbf9faa': 5fe45d8fe165f44c0da6a8ba05dd07680c07441cc6bd15c987ccf3a30fed25c6
   '@astrojs/solid-js@8.0.0-pr.17891.bbf9faa': 394fca38b7dd71f6678eb7128aa3fb409b070101080333dc837fac7f89b37fb9
-  lucide-solid@1.41.0: d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c
 
 importers:
 
@@ -393,9 +392,6 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      lucide-solid:
-        specifier: 1.41.0
-        version: 1.41.0(patch_hash=d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c)(solid-js@2.0.1)
       micromark:
         specifier: 4.0.2
         version: 4.0.2
@@ -2861,11 +2857,6 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
-
-  lucide-solid@1.41.0:
-    resolution: {integrity: sha512-kqAHyabxyoI9badC2nTvvW88d90E4NYyXtBEFdHI5mKQYegw4NW6vXook7UU69tjBzO578bYVwbNqLT1Q5VRLw==}
-    peerDependencies:
-      solid-js: ^1.4.7
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -6550,10 +6541,6 @@ snapshots:
     dependencies:
       yallist: 3.1.1
     optional: true
-
-  lucide-solid@1.41.0(patch_hash=d80bb39e9b221f1953720527f35fe92a561eb3c10fb1dbbaeef6161cf8c1e78c)(solid-js@2.0.1):
-    dependencies:
-      solid-js: 2.0.1
 
   magic-string@0.30.21:
     dependencies:

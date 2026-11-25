@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal, createUniqueId, For } from "solid-js"
 
 import { useHighlightedCode } from "~/registry/hooks/use-highlighted-code"
@@ -84,7 +84,20 @@ export default function CodeBlockShowMore() {
             aria-controls={id}
             onClick={() => setExpanded(!expanded())}
           >
-            <ChevronDownIcon class="transition-transform in-aria-expanded:rotate-180" />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="transition-transform in-aria-expanded:rotate-180"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
             {expanded() ? "Show less" : "Show more"}
           </Button>
         </CodeBlockFooter>

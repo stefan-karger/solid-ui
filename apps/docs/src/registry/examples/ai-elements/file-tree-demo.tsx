@@ -1,4 +1,4 @@
-import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createSignal, createMemo } from "solid-js"
 
 import { cn } from "~/lib/utils"
@@ -68,8 +68,33 @@ function FileTreeNode(componentProps: {
                   size="sm"
                   class="group/folder-trigger w-full justify-start font-normal aria-expanded:bg-transparent aria-expanded:hover:bg-muted dark:aria-expanded:hover:bg-muted/50"
                 >
-                  <ChevronRightIcon class="transition-transform group-aria-expanded/folder-trigger:rotate-90" />
-                  <FolderIcon />
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    class="transition-transform group-aria-expanded/folder-trigger:rotate-90"
+                  >
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+                  </svg>
                   {node.name}
                 </Button>
               )}
@@ -105,7 +130,20 @@ function FileTreeNode(componentProps: {
             }
             onClick={() => componentProps.onSelect(node.path)}
           >
-            <FileIcon />
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+              <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+            </svg>
             {node.name}
           </Button>
         )

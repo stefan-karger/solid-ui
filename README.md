@@ -51,7 +51,7 @@ See [TODO.md](./TODO.md) for the dependency-grouped compatibility backlog and
 - Published Astro Solid packages still require Solid 1. The docs use PR #17891 at `bbf9faa`, with tested client fixes and an early hydration bootstrap. See [provenance and replacement steps](./vendor/astro-solid/README.md).
 - UI SDK Core stays out of Vite dependency prebundling to preserve shared behavior identity.
 - UI SDK popups use the browser top layer. Themes use its state attributes and CSS variables. Declare `@layer ui-sdk;` before Tailwind in consumer stylesheets too.
-- Lucide Solid still needs the local compatibility patch and source alias. See [patches/README.md](./patches/README.md). Solid and UI SDK use their published runtime code.
+- Icons are inlined as SVG from Lucide, whose Solid package still targets Solid 1. Solid and UI SDK use their published runtime code.
 - The docs build a static site. No deployment SSR adapter is configured.
 - Solid Devtools remain optional and unvalidated with Solid 2.
 - Oxfmt owns formatting. ESLint checks TypeScript, Astro, accessibility, Solid 2, and tests.

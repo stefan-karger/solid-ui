@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon, GlobeIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
 import {
@@ -59,7 +59,21 @@ function Sources(componentProps: { sources: SourcePart[] }) {
           <TraceCollapsibleTrigger>
             <TraceLine>
               <TraceIcon>
-                <GlobeIcon />
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
               </TraceIcon>
               <TraceTitle>Used {sources.length} sources</TraceTitle>
             </TraceLine>
@@ -76,7 +90,20 @@ function Sources(componentProps: { sources: SourcePart[] }) {
                           <span class="sr-only"> (opens in a new tab)</span>
                         </TraceTitle>
                         <TraceIcon>
-                          <ArrowUpRightIcon />
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M7 7h10v10" />
+                            <path d="M7 17 17 7" />
+                          </svg>
                         </TraceIcon>
                       </TraceLine>
                     </a>
