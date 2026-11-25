@@ -144,11 +144,20 @@ export function encodePreset(preset: Preset): string {
   return `b${code}`
 }
 
+export function isPresetCode(code: string): boolean {
+  return /^b[0-9A-Za-z]{1,9}$/.test(code)
+}
+
 export function decodePreset(code: string): Preset | null {
-  if (!/^b[0-9A-Za-z]{1,9}$/.test(code)) return null
+  if (!isPresetCode(code)) return null
 
   let bits = 0
   for (const digit of code.slice(1)) bits = bits * 62 + BASE62.indexOf(digit)
 
   return bits < 2 ** 51 ? unpackPreset(bits) : null
+}
+
+// Accepts a bare code or the `--preset <code>` the Create page copies.
+export function parsePresetInput(input: string): Preset | null {
+  return decodePreset(input.trim().replace(/^--preset\s+/i, ""))
 }

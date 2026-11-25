@@ -1,8 +1,10 @@
 ---
+import { defaultPreset } from "@solid-ui/registry/preset"
+import { resolvePresetTheme } from "@solid-ui/registry/theme"
+
 import ShowcasePreview from "~/components/showcase/preview"
 import { colorModeBootstrap } from "~/lib/appearance"
-import { defaultPreset } from "~/lib/presets/decode"
-import { presetThemeCss, resolvePresetTheme } from "~/lib/presets/theme"
+import { presetThemeCss } from "~/lib/presets/theme"
 
 import "~/styles/global.css"
 import "~/styles/preset-preview.css"
@@ -35,18 +37,20 @@ const defaultCss = presetThemeCss(resolvePresetTheme(defaultPreset))
 </html>
 
 <script>
+  import { decodePreset, defaultPreset } from "@solid-ui/registry/preset"
+  import { resolvePresetTheme } from "@solid-ui/registry/theme"
+
   import {
     appearanceKey,
     applyColorMode,
     readAppearance
   } from "~/lib/appearance"
-  import { decodePreset, defaultPreset } from "~/lib/presets/decode"
   import {
     presetShortcut,
     presetShortcutMessage,
     presetUpdateMessage
   } from "~/lib/presets/preview-channel"
-  import { presetThemeCss, resolvePresetTheme } from "~/lib/presets/theme"
+  import { presetThemeCss } from "~/lib/presets/theme"
 
   const root = document.documentElement
   const preference = matchMedia("(prefers-color-scheme: dark)")

@@ -1,5 +1,5 @@
 // Style glyphs from shadcn/ui f50887a, apps/v4/registry/styles.tsx (MIT).
-import type { Preset } from "~/lib/presets/decode"
+import type { Preset } from "@solid-ui/registry/preset"
 
 const shapes = {
   vega: () => (

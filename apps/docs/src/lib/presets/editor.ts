@@ -1,10 +1,11 @@
 import {
   decodePreset,
   encodePreset,
+  normalizePreset,
+  parsePresetInput,
   presetOptions,
   type Preset
-} from "./decode"
-import { isCompatiblePresetColor } from "./theme"
+} from "@solid-ui/registry/preset"
 
 export type PresetField = keyof Preset
 export type PresetLocks = ReadonlySet<PresetField>
@@ -41,32 +42,9 @@ const shufflePresets = shuffleCodes
   .map(decodePreset)
   .filter((preset) => preset !== null)
 
-export function normalizeEditorPreset(preset: Preset): Preset {
-  const baseColor = preset.baseColor === "gray" ? "neutral" : preset.baseColor
-  return {
-    ...preset,
-    baseColor,
-    theme: isCompatiblePresetColor(preset.theme, baseColor)
-      ? preset.theme
-      : baseColor,
-    chartColor: isCompatiblePresetColor(preset.chartColor, baseColor)
-      ? preset.chartColor
-      : baseColor,
-    radius:
-      preset.style === "lyra" || preset.style === "sera"
-        ? "none"
-        : preset.style === "rhea" && preset.radius === "large"
-          ? "default"
-          : preset.radius,
-    menuAccent: preset.menuColor.endsWith("translucent")
-      ? "subtle"
-      : preset.menuAccent
-  }
-}
-
 export function parseEditorPreset(input: string): Preset | null {
-  const preset = decodePreset(input.trim().replace(/^--preset\s+/i, ""))
-  return preset && normalizeEditorPreset(preset)
+  const preset = parsePresetInput(input)
+  return preset && normalizePreset(preset)
 }
 
 function keepLockedHeading(current: Preset, next: Preset, locks: PresetLocks) {
@@ -96,7 +74,7 @@ export function editPreset(
     if (!locks.has("fontHeading")) next.fontHeading = "inherit"
     keepLockedHeading(current, next, locks)
   }
-  const normalized = normalizeEditorPreset(next)
+  const normalized = normalizePreset(next)
   if (normalized[field] !== value) return null
   for (const locked of locks) {
     if (locked !== field && normalized[locked] !== next[locked]) return null
@@ -115,7 +93,7 @@ export function shufflePreset(
     const next = { ...preset }
     for (const field of locks) Object.assign(next, { [field]: current[field] })
     keepLockedHeading(current, next, locks)
-    const normalized = normalizeEditorPreset(next)
+    const normalized = normalizePreset(next)
     if ([...locks].some((field) => normalized[field] !== next[field])) continue
     const code = encodePreset(normalized)
     if (code !== currentCode) candidates.set(code, normalized)

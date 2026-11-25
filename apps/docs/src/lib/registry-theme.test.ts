@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 
+import { extractStyleMap } from "@solid-ui/registry/source"
 import { describe, expect, it } from "vitest"
 
 import { styles } from "./appearance"
-import { extractStyleMap } from "./registry-source"
 
 describe("registry themes", () => {
   it.each(styles)("writes parent variants before dark: in %s", (theme) => {

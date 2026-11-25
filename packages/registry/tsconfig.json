@@ -7,5 +7,5 @@
     "erasableSyntaxOnly": true,
     "types": ["node"]
   },
-  "include": ["src"]
+  "include": ["src", "scripts", "vitest.config.ts"]
 }

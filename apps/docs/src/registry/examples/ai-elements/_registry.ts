@@ -1,4 +1,4 @@
-import type { Registry } from "~/registry/schema"
+import type { Registry } from "@solid-ui/registry/schema"
 
 export const aiExamples: Registry["items"] = [
   {

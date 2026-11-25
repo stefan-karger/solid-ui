@@ -1,7 +1,8 @@
+import { inferRegistryLanguage } from "@solid-ui/registry/source"
+
 import { highlightCode } from "~/registry/lib/highlighter"
 
 import { isDocsStyle } from "./appearance"
-import { inferRegistryLanguage } from "./registry-source"
 
 type PublishedItem = { files: { path: string; content: string }[] }
 

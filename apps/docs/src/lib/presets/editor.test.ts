@@ -1,11 +1,11 @@
-import { describe, expect, it } from "vitest"
-
 import {
   decodePreset,
   defaultPreset,
   encodePreset,
   presetOptions
-} from "./decode"
+} from "@solid-ui/registry/preset"
+import { describe, expect, it } from "vitest"
+
 import {
   editPreset,
   parseEditorPreset,

@@ -1,7 +1,7 @@
+import type { Registry } from "@solid-ui/registry/schema"
 import { describe, expect, it } from "vitest"
 
 import { registry } from "~/registry"
-import type { Registry } from "~/registry/schema"
 
 import {
   getRegistryFile,

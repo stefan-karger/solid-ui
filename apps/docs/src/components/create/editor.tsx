@@ -1,14 +1,15 @@
-import { type JSX } from "@solidjs/web"
-import { createEffect, createSignal, For, onSettled, Show } from "solid-js"
-
-import { copyToClipboard } from "~/lib/clipboard"
 import {
   baseColors,
   defaultPreset,
   encodePreset,
   presetOptions,
   type Preset
-} from "~/lib/presets/decode"
+} from "@solid-ui/registry/preset"
+import { fontFamilies } from "@solid-ui/registry/theme"
+import { type JSX } from "@solidjs/web"
+import { createEffect, createSignal, For, onSettled, Show } from "solid-js"
+
+import { copyToClipboard } from "~/lib/clipboard"
 import {
   editPreset,
   parseEditorPreset,
@@ -21,12 +22,7 @@ import {
   presetShortcutMessage,
   presetUpdateMessage
 } from "~/lib/presets/preview-channel"
-import {
-  fontFamilies,
-  fontGroups,
-  fontLabel,
-  presetColorSwatch
-} from "~/lib/presets/theme"
+import { fontGroups, fontLabel, presetColorSwatch } from "~/lib/presets/theme"
 import { Button } from "~/registry/ui/button"
 
 import { createActionClass, OpenPreset } from "./open-preset"

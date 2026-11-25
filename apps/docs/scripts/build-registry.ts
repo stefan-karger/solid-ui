@@ -1,17 +1,17 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { posix } from "node:path"
 
-import ts from "typescript"
-
-import manifest from "../package.json" with { type: "json" }
-import { styles, type DocsStyle } from "../src/lib/appearance.ts"
+import { registrySchema, type RegistryItem } from "@solid-ui/registry/schema"
 import {
   ACTIVE_REGISTRY_STYLE,
   normalizeRegistryPath,
   prepareRegistrySource
-} from "../src/lib/registry-source.ts"
+} from "@solid-ui/registry/source"
+import ts from "typescript"
+
+import manifest from "../package.json" with { type: "json" }
+import { styles, type DocsStyle } from "../src/lib/appearance.ts"
 import { registry } from "../src/registry/index.ts"
-import { registrySchema, type RegistryItem } from "../src/registry/schema.ts"
 
 const installableTypes = new Set<RegistryItem["type"]>([
   "registry:ui",

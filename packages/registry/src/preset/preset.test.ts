@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest"
 
-import { decodePreset, defaultPreset, presetOptions } from "./decode"
+import { resolvePresetTheme } from "../theme/index.ts"
 import {
-  fontGroups,
-  fontLabel,
-  presetColorSwatch,
-  presetThemeCss,
-  resolvePresetTheme
-} from "./theme"
+  decodePreset,
+  defaultPreset,
+  isPresetCode,
+  parsePresetInput
+} from "./codec.ts"
+import { normalizePreset } from "./normalize.ts"
 
 describe("shadcn presets", () => {
   it("decodes the upstream example without exposing the icon library", () => {
@@ -59,9 +59,6 @@ describe("shadcn presets", () => {
     expect(theme.radius).toBe("0.875rem")
     expect(theme.light.accent).toBe(theme.light.primary)
     expect(theme.invertedMenu).toBe(true)
-    expect(presetThemeCss(theme)).toContain(
-      "html[data-preset-preview] .cn-menu-target{"
-    )
   })
 
   it("keeps translucent accents subtle and applies the radius limits of each style", () => {
@@ -94,23 +91,34 @@ describe("shadcn presets", () => {
   })
 })
 
-describe("create picker data", () => {
-  it("groups every supported font once, in shadcn's picker order", () => {
-    const grouped = fontGroups.flatMap((group) => group.fonts)
-    expect(new Set(grouped).size).toBe(grouped.length)
-    expect([...grouped].sort()).toEqual([...presetOptions.font].sort())
-    expect(fontGroups.map((group) => group.label)).toEqual([
-      "Sans",
-      "Mono",
-      "Serif"
-    ])
-    expect(fontLabel("source-sans-3")).toBe("Source Sans 3")
+describe("preset input", () => {
+  it("accepts a bare code or the copied --preset flag", () => {
+    expect(isPresetCode("b2Whd5Ob2")).toBe(true)
+    expect(isPresetCode("--preset b2Whd5Ob2")).toBe(false)
+    expect(parsePresetInput(" --preset b2Whd5Ob2 ")).toEqual(
+      decodePreset("b2Whd5Ob2")
+    )
+    expect(parsePresetInput("not-a-code")).toBeNull()
   })
 
-  it("uses muted foreground for base color swatches and primary for accents", () => {
-    expect(presetColorSwatch("stone")).not.toBe(presetColorSwatch("cyan"))
-    expect(presetColorSwatch("cyan")).toBe(
-      resolvePresetTheme({ ...defaultPreset, theme: "cyan" }).dark.primary
-    )
+  it("normalizes colors, radius and menu accent like the Create page", () => {
+    expect(
+      normalizePreset({
+        ...defaultPreset,
+        style: "lyra",
+        baseColor: "gray",
+        theme: "stone",
+        chartColor: "gray",
+        radius: "large",
+        menuColor: "default-translucent",
+        menuAccent: "bold"
+      })
+    ).toMatchObject({
+      baseColor: "neutral",
+      theme: "neutral",
+      chartColor: "neutral",
+      radius: "none",
+      menuAccent: "subtle"
+    })
   })
 })

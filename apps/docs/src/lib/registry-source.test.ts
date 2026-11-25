@@ -1,15 +1,15 @@
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 
-import { describe, expect, it } from "vitest"
-
-import { styles } from "./appearance"
 import {
   extractStyleMap,
   getRegistryDisplayPath,
   inferRegistryLanguage,
   prepareRegistrySource
-} from "./registry-source"
+} from "@solid-ui/registry/source"
+import { describe, expect, it } from "vitest"
+
+import { styles } from "./appearance"
 
 const styleCss = `
 @layer components {

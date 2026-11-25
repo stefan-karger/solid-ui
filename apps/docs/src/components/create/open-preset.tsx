@@ -1,7 +1,7 @@
+import type { Preset } from "@solid-ui/registry/preset"
 import { type JSX } from "@solidjs/web"
 import { createSignal, Show } from "solid-js"
 
-import type { Preset } from "~/lib/presets/decode"
 import { parseEditorPreset } from "~/lib/presets/editor"
 import { Button } from "~/registry/ui/button"
 import {

@@ -23,10 +23,13 @@
     "pub:beta": "pnpm --filter solidui-cli pub:beta",
     "pub:release": "pnpm --filter solidui-cli pub:release",
     "release": "changeset version",
+    "sync:versions": "pnpm --filter @solid-ui/registry sync:versions",
     "test": "vitest run",
-    "test:adapter": "pnpm build && pnpm --filter docs exec astro build --root test/fixtures/adapter && playwright test",
+    "test:adapter": "pnpm build && pnpm --filter docs exec astro build --root test/fixtures/adapter && pnpm test:e2e",
+    "test:e2e": "playwright test",
     "test:watch": "vitest",
-    "validate": "pnpm astro:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter"
+    "validate": "node scripts/validate.ts",
+    "validate:full": "node scripts/validate.ts --full"
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.3",

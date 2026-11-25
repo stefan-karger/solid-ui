@@ -1,19 +1,18 @@
-import { z } from "zod"
-
-import { registry } from "~/registry"
 import {
   registrySchema,
   type Registry,
   type RegistryItem,
   type RegistryItemFile
-} from "~/registry/schema"
-
+} from "@solid-ui/registry/schema"
 import {
   ACTIVE_REGISTRY_STYLE,
   normalizeRegistryPath,
   prepareRegistrySource,
   type PreparedRegistrySource
-} from "./registry-source"
+} from "@solid-ui/registry/source"
+import { z } from "zod"
+
+import { registry } from "~/registry"
 
 const rawRegistryFileLoaders = import.meta.glob<string>(
   "../registry/**/*.{ts,tsx,js,jsx,css,json}",
@@ -59,7 +58,7 @@ export type PreviewDescriptor = {
   blockPreview: boolean
 }
 
-export { normalizeRegistryPath } from "./registry-source"
+export { normalizeRegistryPath } from "@solid-ui/registry/source"
 
 export function toRegistryModuleId(path: string, itemName?: string): string {
   return `/src/registry/${normalizeRegistryPath(path, itemName)}`

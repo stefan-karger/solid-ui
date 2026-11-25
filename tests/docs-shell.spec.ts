@@ -8,9 +8,9 @@ import {
   registryIndexSchema,
   registrySchema,
   stylesSchema
-} from "../apps/docs/src/registry/schema"
+} from "../packages/registry/src/schema"
 
-test("publishes the v2 registry and the static v1 CLI registry in the production build", async ({
+test("publishes the v2 registry and the static v1 CLI registry in the production build @smoke", async ({
   request
 }) => {
   async function json(path: string): Promise<unknown> {
@@ -97,7 +97,7 @@ test("publishes the v2 registry and the static v1 CLI registry in the production
   })
 })
 
-test("links the home page, docs, component catalog and project from the shared shell", async ({
+test("links the home page, docs, component catalog and project from the shared shell @smoke", async ({
   page
 }) => {
   await page.goto("/?prototype=1")
@@ -406,7 +406,7 @@ test("searches sidebar links and navigates from the command palette by keyboard"
   await expect(trigger).toBeFocused()
 })
 
-test("bootstraps hydration before serialized lazy island data", async ({
+test("bootstraps hydration before serialized lazy island data @smoke", async ({
   request
 }) => {
   const response = await request.get("/docs/components/label/")
@@ -530,7 +530,7 @@ test("expands the full installation source and keeps the example preview capped"
   await expect(viewCode).toBeFocused()
 })
 
-test("persists style and color mode and offers matching registry source", async ({
+test("persists style and color mode and offers matching registry source @smoke", async ({
   page
 }) => {
   const errors: string[] = []

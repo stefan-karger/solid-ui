@@ -6,10 +6,19 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    "./styles": "./src/styles.ts"
+    "./preset": "./src/preset/index.ts",
+    "./schema": "./src/schema.ts",
+    "./source": "./src/source.ts",
+    "./styles": "./src/styles.ts",
+    "./theme": "./src/theme/index.ts",
+    "./versions": "./src/versions/index.ts"
   },
   "scripts": {
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "sync:versions": "node scripts/sync-versions.ts"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
