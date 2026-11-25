@@ -65,7 +65,9 @@ export const init = new Command()
 
       // make sure all the directories exist
       for (const [key, resolvedPath] of Object.entries(config.resolvedPaths)) {
-        let dirname = path.extname(resolvedPath) ? path.dirname(resolvedPath) : resolvedPath
+        let dirname = path.extname(resolvedPath)
+          ? path.dirname(resolvedPath)
+          : resolvedPath
 
         if (key === "utils" && resolvedPath.endsWith("/utils")) {
           dirname = dirname.replace(/\/utils$/, "") // remove /utils at the end
@@ -80,11 +82,18 @@ export const init = new Command()
 
       await writeFile(
         config.resolvedPaths.tailwindConfig,
-        templates.TAILWIND_CONFIG.replace("<%- prefix %>", config.tailwind.prefix),
+        templates.TAILWIND_CONFIG.replace(
+          "<%- prefix %>",
+          config.tailwind.prefix
+        ),
         "utf-8"
       )
 
-      await writeFile(config.resolvedPaths.tailwindCss, templates.TAILWIND_CSS, "utf-8")
+      await writeFile(
+        config.resolvedPaths.tailwindCss,
+        templates.TAILWIND_CSS,
+        "utf-8"
+      )
 
       await writeFile(
         `${config.resolvedPaths.utils}.${extension}`,
@@ -97,11 +106,15 @@ export const init = new Command()
       spinner.start(`Installing dependencies...`)
 
       const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, [
-        "add",
-        packageManager === "deno" ? "--npm" : "",
-        ...PROJECT_DEPENDENCIES,
-      ], { cwd });
+      await execa(
+        packageManager,
+        [
+          "add",
+          packageManager === "deno" ? "--npm" : "",
+          ...PROJECT_DEPENDENCIES
+        ],
+        { cwd }
+      )
 
       spinner.stop(`Dependencies installed.`)
 

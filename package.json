@@ -11,25 +11,27 @@
     "astro:build": "node scripts/build-astro-solid.ts",
     "astro:check": "node scripts/build-astro-solid.ts --check",
     "build": "turbo run build",
+    "build:cli": "turbo run build --filter=solidui-cli",
+    "build:docs": "turbo run build --filter=docs",
+    "changeset": "changeset",
     "check": "turbo run check",
     "dev": "turbo run dev",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "lint": "eslint . --cache --max-warnings 0",
     "lint:fix": "eslint . --cache --fix --max-warnings 0",
+    "pub:beta": "pnpm --filter solidui-cli pub:beta",
+    "pub:release": "pnpm --filter solidui-cli pub:release",
+    "release": "changeset version",
     "test": "vitest run",
     "test:adapter": "pnpm build && pnpm --filter docs exec astro build --root test/fixtures/adapter && playwright test",
     "test:watch": "vitest",
-    "validate": "pnpm astro:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter",
-    "build:cli": "turbo run build --filter=solidui-cli",
-    "build:docs": "turbo run build --filter=docs",
-    "changeset": "changeset",
-    "release": "changeset version",
-    "pub:beta": "pnpm --filter solidui-cli pub:beta",
-    "pub:release": "pnpm --filter solidui-cli pub:release"
+    "validate": "pnpm astro:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter"
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.3",
+    "@changesets/changelog-github": "1.0.1",
+    "@changesets/cli": "3.0.3",
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.65.1",
     "@solidjs/vite-plugin": "3.0.1",
@@ -47,9 +49,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.2",
     "vite": "8.3.8",
-    "vitest": "5.0.5",
-    "@changesets/changelog-github": "1.0.1",
-    "@changesets/cli": "3.0.3"
+    "vitest": "5.0.5"
   },
   "devEngines": {
     "runtime": {

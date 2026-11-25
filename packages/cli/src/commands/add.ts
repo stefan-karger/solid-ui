@@ -46,14 +46,19 @@ export const add = new Command()
 
       const registryIndex = await getRegistryIndex()
 
-      let selectedComponents = options.all ? registryIndex.map((v) => v.name) : options.components
+      let selectedComponents = options.all
+        ? registryIndex.map((v) => v.name)
+        : options.components
       if (!selectedComponents.length) {
         const prompts = await p.group(
           {
             components: () =>
               p.multiselect<string>({
                 message: `Which ${highlight("components")} would you like to add?`,
-                options: registryIndex.map((v) => ({ label: v.name, value: v.name })),
+                options: registryIndex.map((v) => ({
+                  label: v.name,
+                  value: v.name
+                })),
                 maxItems: 10
               })
           },
@@ -148,11 +153,15 @@ export const add = new Command()
         // install dependencies
         if (item.dependencies?.length) {
           const packageManager = await getPackageManager(cwd)
-          await execa(packageManager, [
-            "add",
-            packageManager === "deno" ? "--npm" : "",
-            ...item.dependencies,
-          ], { cwd });
+          await execa(
+            packageManager,
+            [
+              "add",
+              packageManager === "deno" ? "--npm" : "",
+              ...item.dependencies
+            ],
+            { cwd }
+          )
         }
       }
 

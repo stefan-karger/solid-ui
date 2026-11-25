@@ -2,7 +2,10 @@ import { SyntaxKind } from "ts-morph"
 
 import type { Transformer } from "~/utils/transformers"
 
-export const transformTwPrefix: Transformer = async ({ sourceFile, config }) => {
+export const transformTwPrefix: Transformer = async ({
+  sourceFile,
+  config
+}) => {
   if (!config.tailwind.prefix) {
     return sourceFile
   }
@@ -30,14 +33,18 @@ export const transformTwPrefix: Transformer = async ({ sourceFile, config }) => 
           .find((node) => node.getName() === "variants")
           ?.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
           .forEach((node) => {
-            node.getDescendantsOfKind(SyntaxKind.PropertyAssignment).forEach((node) => {
-              const classNames = node.getInitializerIfKind(SyntaxKind.StringLiteral)
-              if (classNames) {
-                classNames?.replaceWithText(
-                  `"${applyPrefix(classNames.getText()?.replace(/"/g, ""), config.tailwind.prefix)}"`
+            node
+              .getDescendantsOfKind(SyntaxKind.PropertyAssignment)
+              .forEach((node) => {
+                const classNames = node.getInitializerIfKind(
+                  SyntaxKind.StringLiteral
                 )
-              }
-            })
+                if (classNames) {
+                  classNames?.replaceWithText(
+                    `"${applyPrefix(classNames.getText()?.replace(/"/g, ""), config.tailwind.prefix)}"`
+                  )
+                }
+              })
           })
       }
     })
@@ -69,11 +76,13 @@ export const transformTwPrefix: Transformer = async ({ sourceFile, config }) => 
               node.isKind(SyntaxKind.ConditionalExpression) ||
               node.isKind(SyntaxKind.BinaryExpression)
             ) {
-              node.getChildrenOfKind(SyntaxKind.StringLiteral).forEach((node) => {
-                node.replaceWithText(
-                  `"${applyPrefix(node.getText()?.replace(/"/g, ""), config.tailwind.prefix)}"`
-                )
-              })
+              node
+                .getChildrenOfKind(SyntaxKind.StringLiteral)
+                .forEach((node) => {
+                  node.replaceWithText(
+                    `"${applyPrefix(node.getText()?.replace(/"/g, ""), config.tailwind.prefix)}"`
+                  )
+                })
             }
 
             if (node.isKind(SyntaxKind.StringLiteral)) {
@@ -100,7 +109,9 @@ export function applyPrefix(input: string, prefix: string = "") {
         ? prefixed.push(`${variant}:${prefix}${value}/${modifier}`)
         : prefixed.push(`${variant}:${prefix}${value}`)
     } else {
-      modifier ? prefixed.push(`${prefix}${value}/${modifier}`) : prefixed.push(`${prefix}${value}`)
+      modifier
+        ? prefixed.push(`${prefix}${value}/${modifier}`)
+        : prefixed.push(`${prefix}${value}`)
     }
   }
   return prefixed.join(" ")

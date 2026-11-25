@@ -32,7 +32,9 @@ async function createTempSourceFile(filename: string) {
 
 export async function transform(props: TransformProps) {
   const tempFile = await createTempSourceFile(props.filename)
-  const sourceFile = project.createSourceFile(tempFile, props.raw, { scriptKind: ScriptKind.TSX })
+  const sourceFile = project.createSourceFile(tempFile, props.raw, {
+    scriptKind: ScriptKind.TSX
+  })
 
   transformImport({ sourceFile, ...props })
   transformTwPrefix({ sourceFile, ...props })

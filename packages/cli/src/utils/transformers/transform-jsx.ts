@@ -62,7 +62,10 @@ const PARSE_OPTIONS: ParserOptions = {
   ]
 }
 
-export const transformJsx: Transformer<string> = async ({ sourceFile, config }) => {
+export const transformJsx: Transformer<string> = async ({
+  sourceFile,
+  config
+}) => {
   const output = sourceFile.getFullText()
 
   if (config.tsx) {

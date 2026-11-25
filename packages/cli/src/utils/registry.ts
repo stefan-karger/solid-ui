@@ -46,7 +46,9 @@ async function fetchRegistry(paths: string[]) {
 export async function getRegistryIndex() {
   try {
     const [result] = await fetchRegistry(["index.json"])
-    return v.parse(RegistryIndexSchema, result).filter((item) => item.type === "ui")
+    return v
+      .parse(RegistryIndexSchema, result)
+      .filter((item) => item.type === "ui")
   } catch (e) {
     throw new Error(`Failed to fetch components from registry.`)
   }
@@ -71,7 +73,8 @@ export async function resolveTree(index: RegistryIndex, names: string[]) {
 
   // filter out duplicates
   return tree.filter(
-    (component, idx, self) => self.findIndex((c) => c.name === component.name) === idx
+    (component, idx, self) =>
+      self.findIndex((c) => c.name === component.name) === idx
   )
 }
 
