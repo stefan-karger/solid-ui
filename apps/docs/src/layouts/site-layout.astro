@@ -71,8 +71,10 @@ const onComponentsPage =
             Home
           </a>
           <a
-            href="/docs/"
-            aria-current={currentPath === "/docs" ? "page" : undefined}
+            href="/docs/installation/"
+            aria-current={
+              currentPath === "/docs/installation" ? "page" : undefined
+            }
             class:list={[
               "transition-colors hover:text-foreground",
               currentPath.startsWith("/docs") && !onComponentsPage

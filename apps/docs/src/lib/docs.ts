@@ -34,6 +34,8 @@ export type PageNeighbors<T> = {
 const DOC_EXTENSION_PATTERN = /\.mdx?$/
 const docsSections = [
   { title: "Introduction", routeId: "" },
+  { title: "Installation", routeId: "installation" },
+  { title: "CLI", routeId: "cli" },
   { title: "Components", routeId: "components" },
   { title: "AI Elements", routeId: "ai-elements" }
 ]
@@ -61,9 +63,13 @@ export function sortDocsPages<T extends DocsPageLike>(pages: readonly T[]) {
   const order = new Map(
     docsSections.map(({ routeId }, index) => [routeId, index])
   )
+  // AI patterns and framework guides sort with their section; component
+  // pages come last.
   const sectionOrder = (id: string) =>
     order.get(id) ??
-    (id.startsWith("ai-elements/") ? order.get("ai-elements")! : order.size)
+    (/^(?:ai-elements|installation)\//.test(id)
+      ? order.get(id.split("/")[0]!)!
+      : order.size)
   return pages.toSorted((a, b) => {
     const aRouteId = toRouteId(a.id)
     const bRouteId = toRouteId(b.id)

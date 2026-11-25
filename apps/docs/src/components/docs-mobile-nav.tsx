@@ -12,7 +12,7 @@ import {
 
 const mainLinks = [
   { title: "Home", href: "/" },
-  { title: "Docs", href: "/docs" },
+  { title: "Docs", href: "/docs/installation" },
   { title: "Components", href: "/docs/components" },
   { title: "Create", href: "/create" }
 ]

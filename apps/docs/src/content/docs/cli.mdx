@@ -1,0 +1,114 @@
+---
+title: CLI
+description: Use solidui-cli to set up Solid UI and add components to your project.
+---
+
+## init
+
+Use `init` to set up Solid UI in a Solid 2 project. It writes `components.json`, the theme in `solid-ui.css` and the `cn` helper, wires up the `~/` alias and installs the shared packages.
+
+```bash
+npx solidui-cli@latest init
+```
+
+**Options**
+
+```txt
+Usage: solidui-cli init [options]
+
+Options:
+  -c, --cwd <dir>      the project directory (default: current directory)
+  -p, --preset <code>  a preset code from solid-ui.com/create
+  -y, --yes            skip the prompts and use the defaults
+  -f, --force          replace an existing components.json and solid-ui.css
+  --css <file>         the app stylesheet that imports Tailwind CSS
+  -h, --help           display help for command
+```
+
+## add
+
+Use `add` to copy components into your project and install what they need. Without names, it lets you pick from the catalog.
+
+```bash
+npx solidui-cli@latest add [components...]
+```
+
+**Options**
+
+```txt
+Usage: solidui-cli add [options] [components...]
+
+Options:
+  -c, --cwd <dir>  the project directory (default: current directory)
+  -o, --overwrite  replace files that differ
+  -y, --yes        skip the prompts; keep files that differ
+  -a, --all        add every component
+  -h, --help       display help for command
+```
+
+## Examples
+
+### Skip the prompts
+
+In CI, scripts or coding agents, pass `--yes` together with the preset:
+
+```bash
+npx solidui-cli@latest init --preset <code> --yes
+```
+
+Without `--preset`, `--yes` uses the Nova preset. `--yes` never overwrites your files: `init` keeps a changed `lib/utils.ts` and `add` keeps components that differ from the registry. It does update packages the components can't work without, like an older Tailwind CSS minor or another UI SDK beta. Other packages outside the tested ranges stay as they are, with a warning.
+
+### Switch the theme
+
+Build a new preset on the [Create](/create) page and run `init` again with `--force`:
+
+```bash
+npx solidui-cli@latest init --preset <code> --force
+```
+
+This replaces only `components.json` and `solid-ui.css` and installs the new fonts, so colors, fonts and radius change everywhere and your components stay untouched. If the new preset also changes the style, for example from Nova to Lyra, components you add from then on use the new style. Re-add the ones you already have with `--overwrite` to switch them too, which replaces your edits to those files.
+
+### Update components
+
+`add` never replaces a component you changed. It keeps your copy and tells you which files differ. To take the registry version:
+
+```bash
+npx solidui-cli@latest add button --overwrite
+```
+
+Commit your changes first, then compare the diff and merge back the edits you want to keep.
+
+### Use your package manager
+
+Run the CLI with the package manager your project uses, for example `pnpm dlx` or `bunx`. When nothing is installed yet, `init` installs the dependencies with that tool. The solid-v2 templates ship a `pnpm-lock.yaml`, so the lockfile can't tell which tool you chose. Once `node_modules` exists, the CLI keeps using the package manager that installed it, or the one in the `packageManager` field of `package.json`.
+
+### Choose the app stylesheet
+
+`init` imports `solid-ui.css` into the stylesheet that imports Tailwind CSS. If more than one stylesheet does, name the one your app loads:
+
+```bash
+npx solidui-cli@latest init --css src/styles/app.css
+```
+
+### Fix unresolved imports
+
+Components import each other through the `~/` alias. If Vite reports `Failed to resolve import "~/components/ui/..."`, it isn't reading the alias from `tsconfig.json`. `init` adds the option for you, but it leaves configs it can't edit safely alone, for example one built with `mergeConfig`. Add it yourself:
+
+```ts title="vite.config.ts"
+export default defineConfig({
+  resolve: { tsconfigPaths: true },
+  plugins: [solid(), tailwindcss()]
+})
+```
+
+### Unsupported versions
+
+`init` stops when `solid-js` or `tailwindcss` is newer than the [tested versions](/docs/installation/#tested-versions). Newer versions ship with a CLI patch release once the components are tested with them, so run `solidui-cli@latest` again later. An older minor within the same major is fine: `init` offers to update it.
+
+### Solid 1 projects
+
+Solid UI 1.x needs Solid 2 and Tailwind CSS 4. Projects on Solid 1 and Tailwind CSS 3, or with a `ui.config.json`, keep using the previous registry through version 0.7.2:
+
+```bash
+npx solidui-cli@0.7.2 add button
+```

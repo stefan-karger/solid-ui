@@ -212,14 +212,31 @@ test("links the home page, docs, component catalog and project from the shared s
   ).toHaveCSS("border-top-width", "0px")
   await navigation.getByRole("link", { name: "Docs", exact: true }).click()
   await expect(
+    page.getByRole("heading", { name: "Installation", level: 1 })
+  ).toBeVisible()
+  await page
+    .getByRole("article")
+    .locator("a[data-not-typeset]", { hasText: "Vite" })
+    .click()
+  await expect(
+    page.getByRole("heading", { name: "Vite", level: 1 })
+  ).toBeVisible()
+  await expect(
+    page
+      .getByRole("article")
+      .locator("a[data-not-typeset]", { hasText: "New Project" })
+  ).toHaveAttribute("href", "#new-project")
+  await expect(page.locator("h2#new-project")).toBeVisible()
+  await page.goto("/docs/")
+  await expect(
     page.getByRole("heading", { name: "Introduction", level: 1 })
   ).toBeVisible()
   const introduction = page.getByRole("article", { name: "Introduction" })
   await expect(
     introduction
       .getByRole("navigation", { name: "Page navigation", exact: true })
-      .getByRole("link", { name: "Next page, Components" })
-  ).toHaveAttribute("href", "/docs/components/")
+      .getByRole("link", { name: "Next page, Installation" })
+  ).toHaveAttribute("href", "/docs/installation/")
   await expect(introduction.locator("[data-docs-accordion]")).toHaveAttribute(
     "data-accordion-enhanced",
     "true"
@@ -231,6 +248,29 @@ test("links the home page, docs, component catalog and project from the shared s
   await expect(updates).toHaveAttribute("aria-expanded", "true")
   await navigation.getByRole("link", { name: "Home" }).click()
   await expect(page).toHaveURL("/")
+})
+
+test("links the CLI examples and tested versions by anchor", async ({
+  page
+}) => {
+  await page.goto("/docs/cli/#switch-the-theme")
+  await expect(page.locator("h3#switch-the-theme")).toBeInViewport()
+  for (const id of [
+    "skip-the-prompts",
+    "update-components",
+    "use-your-package-manager",
+    "fix-unresolved-imports",
+    "solid-1-projects"
+  ])
+    await expect(page.locator(`h3#${id}`)).toHaveCount(1)
+  await page
+    .getByRole("article")
+    .getByRole("link", { name: "tested versions" })
+    .click()
+  await expect(page).toHaveURL(/\/docs\/installation\/#tested-versions$/)
+  const versions = page.locator("#tested-versions")
+  await expect(versions).toContainText("Built for Solid 2 and Tailwind CSS 4")
+  await expect(versions).toContainText(supportedRange("@ui-sdk/solid")!)
 })
 
 test("lists AI patterns with working Solid UI examples in the docs", async ({

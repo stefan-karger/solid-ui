@@ -38,6 +38,7 @@ import Pre from "~/components/docs/pre.astro"
 import Step from "~/components/docs/step.astro"
 import Steps from "~/components/docs/steps.astro"
 import Strong from "~/components/docs/strong.astro"
+import SupportedVersions from "~/components/docs/supported-versions.astro"
 import Table from "~/components/docs/table.astro"
 import TabsContent from "~/components/docs/tabs-content.astro"
 import TabsList from "~/components/docs/tabs-list.astro"
@@ -79,6 +80,7 @@ export const mdxComponents = {
   TabsContent,
   Tab: "div",
   Step,
+  SupportedVersions,
   Steps,
   h1: H1,
   h2: H2,

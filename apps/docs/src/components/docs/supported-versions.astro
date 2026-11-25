@@ -1,0 +1,30 @@
+---
+import { supportedRange } from "@solid-ui/registry/versions"
+
+import Callout from "~/components/docs/callout.astro"
+
+// Read from the ranges solidui-cli checks, so the text can't drift from the
+// pins: "2" for ^2.0.0, "4.3" for ^4.3.0.
+function release(name: string) {
+  const [major, minor] = supportedRange(name)!.replace(/^\^/, "").split(".")
+  return minor === "0" ? major : `${major}.${minor}`
+}
+const solid = release("solid-js")
+const tailwind = release("tailwindcss")
+const uiSdk = supportedRange("@ui-sdk/solid")
+---
+
+<Callout
+  id="tested-versions"
+  class="mb-6 scroll-mt-28 border-blue-600 bg-blue-100 text-blue-950 dark:border-blue-400 dark:bg-blue-950 dark:text-blue-50"
+>
+  <p class="leading-relaxed">
+    <strong class="font-semibold">
+      Built for Solid {solid} and Tailwind CSS {tailwind}.
+    </strong>{" "}
+    The components are tested with UI SDK {uiSdk}, which the CLI installs for
+    you. init checks your versions and offers to update older ones; newer
+    releases are supported once a CLI update has been tested with them. Still on
+    Solid 1 or Tailwind CSS 3? Use solidui-cli@0.7.2.
+  </p>
+</Callout>
