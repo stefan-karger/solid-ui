@@ -5,9 +5,17 @@ export async function getPackageManager(
 ): Promise<"yarn" | "pnpm" | "bun" | "npm" | "deno"> {
   const packageManager = await detect({ programmatic: true, cwd: targetDir })
 
-  if (packageManager === "yarn@berry") return "yarn"
-  if (packageManager === "pnpm@6") return "pnpm"
-  if (packageManager === "bun") return "bun"
-
-  return packageManager ?? "npm"
+  switch (packageManager) {
+    case "yarn":
+    case "yarn@berry":
+      return "yarn"
+    case "pnpm":
+    case "pnpm@6":
+      return "pnpm"
+    case "bun":
+    case "deno":
+      return packageManager
+    default:
+      return "npm"
+  }
 }

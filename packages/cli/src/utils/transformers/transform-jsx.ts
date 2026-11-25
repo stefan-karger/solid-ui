@@ -1,6 +1,5 @@
 import { transformFromAstSync } from "@babel/core"
 import { parse, type ParserOptions } from "@babel/parser"
-// @ts-expect-error The plugin ships no type declarations.
 import transformTypescript from "@babel/plugin-transform-typescript"
 import * as recast from "recast"
 
@@ -20,42 +19,15 @@ const PARSE_OPTIONS: ParserOptions = {
   allowReturnOutsideFunction: true,
   startLine: 1,
   tokens: true,
+  // Babel 8 parses finished proposals by default and dropped the decimal,
+  // record and tuple, and minimal pipeline proposals.
   plugins: [
-    "asyncGenerators",
-    "bigInt",
-    "classPrivateMethods",
-    "classPrivateProperties",
-    "classProperties",
-    "classStaticBlock",
-    "decimal",
     "decorators-legacy",
     "doExpressions",
-    "dynamicImport",
     "exportDefaultFrom",
-    "exportNamespaceFrom",
     "functionBind",
     "functionSent",
-    "importAssertions",
-    "importMeta",
-    "nullishCoalescingOperator",
-    "numericSeparator",
-    "objectRestSpread",
-    "optionalCatchBinding",
-    "optionalChaining",
-    [
-      "pipelineOperator",
-      {
-        proposal: "minimal"
-      }
-    ],
-    [
-      "recordAndTuple",
-      {
-        syntaxType: "hash"
-      }
-    ],
     "throwExpressions",
-    "topLevelAwait",
     "v8intrinsic",
     "typescript",
     "jsx"
