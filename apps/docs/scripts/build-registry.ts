@@ -1,15 +1,16 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { posix } from "node:path"
 
+import { componentsJsonJsonSchema } from "@solid-ui/registry/config"
 import { registrySchema, type RegistryItem } from "@solid-ui/registry/schema"
 import {
   ACTIVE_REGISTRY_STYLE,
   normalizeRegistryPath,
   prepareRegistrySource
 } from "@solid-ui/registry/source"
+import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
 import ts from "typescript"
 
-import manifest from "../package.json" with { type: "json" }
 import { styles, type DocsStyle } from "../src/lib/appearance.ts"
 import { registry } from "../src/registry/index.ts"
 
@@ -22,7 +23,19 @@ const installableTypes = new Set<RegistryItem["type"]>([
   "registry:block"
 ])
 const ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json"
-const installedDependencies = manifest.dependencies
+// A project brings Solid itself; solidui-cli init checks its version.
+const projectRequirements = new Set(
+  Object.keys(SUPPORTED_VERSIONS.requirements)
+)
+
+function dependencySpec(name: string) {
+  const range = SUPPORTED_VERSIONS.packages[name]
+  if (!range)
+    throw new Error(
+      `[registry] Pin ${name} in apps/docs/package.json and run pnpm sync:versions`
+    )
+  return `${name}@${range}`
+}
 const { name: registryName, homepage, items } = registrySchema.parse(registry)
 const names = new Set<string>()
 const owners = new Map<string, string>()
@@ -60,6 +73,7 @@ async function prepareFiles(item: RegistryItem, styleName: DocsStyle) {
         {
           registryPath,
           styleName,
+          keepMenuMarkers: true,
           styleCss,
           ...(file.target ? { target: file.target } : {})
         }
@@ -104,11 +118,10 @@ async function prepareItem(item: RegistryItem) {
   return {
     ...item,
     files,
-    dependencies: [...packages].sort().map((name) => {
-      const version =
-        installedDependencies[name as keyof typeof installedDependencies]
-      return version ? `${name}@${version}` : name
-    }),
+    dependencies: [...packages]
+      .filter((name) => !projectRequirements.has(name))
+      .sort()
+      .map(dependencySpec),
     registryDependencies: [...registryDependencies].sort()
   }
 }
@@ -186,4 +199,11 @@ async function writeRegistry(files: Map<string, unknown>) {
 }
 
 await writeRegistry(modernFiles)
-console.log(`Registry built: ${modernFiles.size} files in public/r.`)
+await writeFile(
+  new URL("../public/schema.json", import.meta.url),
+  `${JSON.stringify(componentsJsonJsonSchema(), null, 2)}
+`
+)
+console.log(
+  `Registry built: ${modernFiles.size} files in public/r and public/schema.json.`
+)

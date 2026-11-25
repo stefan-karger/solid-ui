@@ -1,38 +1,19 @@
 import { type Preset } from "../preset/codec.ts"
 import { isCompatiblePresetColor } from "../preset/normalize.ts"
+import { fontFamilies } from "./fonts.ts"
 // The OKLCH values come from shadcn/ui f50887a, apps/v4/registry/themes.ts (MIT).
 import palettes from "./palettes.json" with { type: "json" }
 
 export { palettes }
-
-export const fontFamilies: Record<Preset["font"], string> = {
-  inter: "Inter Variable",
-  "noto-sans": "Noto Sans Variable",
-  "nunito-sans": "Nunito Sans Variable",
-  figtree: "Figtree Variable",
-  roboto: "Roboto Variable",
-  raleway: "Raleway Variable",
-  "dm-sans": "DM Sans Variable",
-  "public-sans": "Public Sans Variable",
-  outfit: "Outfit Variable",
-  "jetbrains-mono": "JetBrains Mono Variable",
-  geist: "Geist Variable",
-  "geist-mono": "Geist Mono Variable",
-  lora: "Lora Variable",
-  merriweather: "Merriweather Variable",
-  "playfair-display": "Playfair Display Variable",
-  "noto-serif": "Noto Serif Variable",
-  "roboto-slab": "Roboto Slab Variable",
-  oxanium: "Oxanium Variable",
-  manrope: "Manrope Variable",
-  "space-grotesk": "Space Grotesk Variable",
-  montserrat: "Montserrat Variable",
-  "ibm-plex-sans": "IBM Plex Sans Variable",
-  "source-sans-3": "Source Sans 3 Variable",
-  "instrument-sans": "Instrument Sans Variable",
-  "eb-garamond": "EB Garamond Variable",
-  "instrument-serif": "Instrument Serif"
-}
+export {
+  fontCategory,
+  fontFamilies,
+  fontPackage,
+  fontStack,
+  presetFonts,
+  type Font,
+  type FontCategory
+} from "./fonts.ts"
 
 const radii = {
   default: "0.625rem",

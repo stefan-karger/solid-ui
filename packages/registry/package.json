@@ -6,6 +6,9 @@
   "license": "MIT",
   "type": "module",
   "exports": {
+    "./config": "./src/config.ts",
+    "./css": "./src/css.ts",
+    "./menu": "./src/menu.ts",
     "./preset": "./src/preset/index.ts",
     "./schema": "./src/schema.ts",
     "./source": "./src/source.ts",
@@ -18,6 +21,7 @@
     "sync:versions": "node scripts/sync-versions.ts"
   },
   "dependencies": {
+    "tailwind-merge": "3.7.1",
     "zod": "4.6.7"
   },
   "devDependencies": {

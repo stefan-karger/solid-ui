@@ -9,6 +9,7 @@ import {
   registrySchema,
   stylesSchema
 } from "../packages/registry/src/schema"
+import { supportedRange } from "../packages/registry/src/versions"
 
 test("publishes the v2 registry and the static v1 CLI registry in the production build @smoke", async ({
   request
@@ -40,10 +41,27 @@ test("publishes the v2 registry and the static v1 CLI registry in the production
     await json("/r/styles/vega/button.json")
   )
   expect(nova.files?.[0]?.content).not.toBe(vega.files?.[0]?.content)
-  expect(nova.dependencies).toContain("solid-js@2.0.1")
+  // Projects bring Solid; other packages use the ranges the docs are tested with.
+  expect(nova.dependencies).toEqual(["class-variance-authority@^0.7.1"])
   expect(nova.registryDependencies).toContain("utils")
   expect(nova.files?.[0]?.content).not.toContain("cn-button")
   expect(nova.$schema).toBe("https://ui.shadcn.com/schema/registry-item.json")
+
+  // The CLI resolves the menu markers from the project's menu color.
+  const menu = registryItemSchema.parse(
+    await json("/r/styles/nova/dropdown-menu.json")
+  )
+  expect(menu.files?.[0]?.content).toContain(
+    "cn-menu-target cn-menu-translucent"
+  )
+  expect(menu.dependencies).toContain(
+    `@ui-sdk/solid@${supportedRange("@ui-sdk/solid")}`
+  )
+
+  expect(await json("/schema.json")).toMatchObject({
+    type: "object",
+    required: ["style", "preset", "tailwind"]
+  })
 
   expect(stylesSchema.parse(await json("/r/styles/index.json"))).toEqual(
     styles.map((name) =>

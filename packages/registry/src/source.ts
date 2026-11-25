@@ -1,3 +1,5 @@
+import { MENU_MARKERS } from "./menu.ts"
+
 export const ACTIVE_REGISTRY_STYLE = "nova"
 
 export type RegistrySourceLanguage =
@@ -21,6 +23,9 @@ type PrepareRegistrySourceOptions = {
   styleName: string
   styleCss?: string
   target?: string
+  // Keep the menu marker classes for the CLI, which resolves them from the
+  // project's menu color. Without it they are removed, as for the default.
+  keepMenuMarkers?: boolean
 }
 
 const INTERNAL_ALIASES = [
@@ -86,9 +91,9 @@ export function getRegistryDisplayPath(
   return registryPath
 }
 
-// Menu color helpers only apply in the preset preview. Like shadcn with its
-// default menu color, the exported source drops them.
-const PRESET_ONLY_TOKENS = new Set(["cn-menu-target", "cn-menu-translucent"])
+// Menu color markers have no utilities of their own. The Create preview styles
+// them from the preset, and the CLI resolves them with transformMenu.
+const PRESET_ONLY_TOKENS = new Set<string>(MENU_MARKERS)
 
 export function extractStyleMap(
   styleCss: string,
@@ -170,7 +175,8 @@ function rewriteInternalAliases(source: string): string {
 function replaceSemanticTokens(
   source: string,
   styleMap: Map<string, string>,
-  registryPath: string
+  registryPath: string,
+  keep: ReadonlySet<string>
 ): string {
   const stringLiteral = /(["'`])(?:\\.|(?!\1)[\s\S])*?\1/g
 
@@ -186,6 +192,7 @@ function replaceSemanticTokens(
       .slice(1, -1)
       .replace(/(?:^|\s)\bcn-[a-z0-9-]+\b(?=\s|$)/g, (segment: string) => {
         const token = segment.trim()
+        if (keep.has(token)) return segment
         const utilities = styleMap.get(token)
         if (!utilities) return ""
 
@@ -223,7 +230,12 @@ export async function prepareRegistrySource(
       preparedStyleMaps.get(options.styleCss) ??
       extractStyleMap(options.styleCss, options.styleName)
     preparedStyleMaps.set(options.styleCss, styleMap)
-    code = replaceSemanticTokens(code, styleMap, options.registryPath)
+    code = replaceSemanticTokens(
+      code,
+      styleMap,
+      options.registryPath,
+      options.keepMenuMarkers ? PRESET_ONLY_TOKENS : new Set()
+    )
   }
 
   if (/~\/registry\/(?:ui|lib|hooks|components)\//.test(code)) {
@@ -231,7 +243,10 @@ export async function prepareRegistrySource(
       `[registry-source] Internal registry alias remains in ${options.registryPath}`
     )
   }
-  if (SCRIPT_LANGUAGES.has(language) && /\bcn-[a-z0-9-]+\b/.test(code)) {
+  const unresolved = options.keepMenuMarkers
+    ? code.replace(/\bcn-menu-(?:target|translucent)\b/g, "")
+    : code
+  if (SCRIPT_LANGUAGES.has(language) && /\bcn-[a-z0-9-]+\b/.test(unresolved)) {
     throw new Error(
       `[registry-source] Semantic class remains in ${options.registryPath}`
     )
