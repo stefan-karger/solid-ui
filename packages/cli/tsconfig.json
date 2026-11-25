@@ -8,6 +8,7 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
+    "resolveJsonModule": true,
     "strict": true,
     "outDir": "./dist",
     "paths": {

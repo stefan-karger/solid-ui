@@ -4,9 +4,11 @@ import { resolvePresetTheme } from "../theme/index.ts"
 import {
   decodePreset,
   defaultPreset,
+  encodePreset,
   isPresetCode,
   parsePresetInput
 } from "./codec.ts"
+import { DEFAULT_PRESETS } from "./defaults.ts"
 import { normalizePreset } from "./normalize.ts"
 
 describe("shadcn presets", () => {
@@ -119,6 +121,20 @@ describe("preset input", () => {
       chartColor: "neutral",
       radius: "none",
       menuAccent: "subtle"
+    })
+  })
+})
+
+describe("default presets", () => {
+  it("has one normalized preset per style that survives a round trip", () => {
+    for (const [style, { preset }] of Object.entries(DEFAULT_PRESETS)) {
+      expect(preset.style).toBe(style)
+      expect(normalizePreset(preset)).toEqual(preset)
+      expect(decodePreset(encodePreset(preset))).toEqual(preset)
+    }
+    expect(DEFAULT_PRESETS.sera.preset).toMatchObject({
+      radius: "none",
+      fontHeading: "playfair-display"
     })
   })
 })

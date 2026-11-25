@@ -3,5 +3,6 @@
   "entry": ["src/index.ts"],
   "splitting": false,
   "clean": true,
-  "format": "esm"
+  "format": "esm",
+  "noExternal": ["@solid-ui/registry"]
 }
