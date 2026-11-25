@@ -1,0 +1,16 @@
+---
+import CreateEditor from "~/components/create/editor"
+import SiteLayout from "~/layouts/site-layout.astro"
+
+import "~/styles/preset-preview.css"
+---
+
+<SiteLayout title="Create" description="Create and share a Solid UI preset.">
+  <main
+    id="main-content"
+    class="flex h-[calc(100svh-var(--header-height))] min-h-88 flex-col section-soft"
+    tabindex="-1"
+  >
+    <CreateEditor client:load />
+  </main>
+</SiteLayout>

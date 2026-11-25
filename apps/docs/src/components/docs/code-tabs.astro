@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import Tabs from "~/components/docs/tabs.astro"
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div">
+
+const { class: className, ...props } = Astro.props
+---
+
+<Tabs
+  defaultValue="cli"
+  storageKey="solid-ui-installation-method"
+  class={cn("mt-6 *:data-[tabs-list]:gap-6", className)}
+  data-slot="code-tabs"
+  {...props}
+>
+  <slot />
+</Tabs>

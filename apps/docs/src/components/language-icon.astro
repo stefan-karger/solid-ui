@@ -1,0 +1,48 @@
+---
+type Props = {
+  language: string
+  class?: string
+}
+
+const { language, class: className } = Astro.props
+const label = ["ts", "tsx", "typescript"].includes(language)
+  ? "TS"
+  : ["js", "jsx", "javascript"].includes(language)
+    ? "JS"
+    : language === "css"
+      ? "CSS"
+      : language === "json"
+        ? "{}"
+        : ""
+---
+
+{label ? (
+  <svg aria-hidden="true" class={className} viewBox="0 0 24 24">
+    <rect width="24" height="24" rx="1.5" fill="currentColor" />
+    <text
+      x="21"
+      y="19"
+      fill="var(--color-code)"
+      font-family="var(--font-mono)"
+      font-size={label.length > 2 ? "7" : "9"}
+      font-weight="600"
+      text-anchor="end"
+    >
+      {label}
+    </text>
+  </svg>
+) : (
+  <svg
+    aria-hidden="true"
+    class={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+    <polyline points="14 2 14 8 20 8" />
+  </svg>
+)}

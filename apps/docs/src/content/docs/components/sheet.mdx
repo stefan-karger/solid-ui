@@ -1,0 +1,118 @@
+---
+title: Sheet
+description: Extends the Dialog component to display content that complements the main content of the screen.
+component: true
+---
+
+<ComponentPreview name="sheet-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add sheet
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sheet" title="components/ui/sheet.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from "~/components/ui/sheet"
+```
+
+```tsx showLineNumbers
+<Sheet>
+  <SheetTrigger>Open</SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Are you absolutely sure?</SheetTitle>
+      <SheetDescription>This action cannot be undone.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+## Composition
+
+Use the following composition to build a `Sheet`:
+
+```text
+Sheet
+├── SheetTrigger
+└── SheetContent
+    ├── SheetHeader
+    │   ├── SheetTitle
+    │   └── SheetDescription
+    └── SheetFooter
+```
+
+## Side
+
+Use the `side` prop on `SheetContent` to set the edge of the screen where the sheet appears. Values are `top`, `right`, `bottom`, or `left`.
+
+<ComponentPreview name="sheet-side" />
+
+## No Close Button
+
+Use `showCloseButton={false}` on `SheetContent` to hide the close button.
+
+<ComponentPreview name="sheet-no-close-button" />
+
+## API Reference
+
+| Part               | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| `Sheet`            | Root component that controls open state and focus behavior.  |
+| `SheetTrigger`     | Interactive element used to open the sheet.                  |
+| `SheetContent`     | Sliding panel rendered in a portal with an overlay.          |
+| `SheetHeader`      | Layout wrapper for title and description content.            |
+| `SheetTitle`       | Accessible heading for the sheet content.                    |
+| `SheetDescription` | Supporting text that describes the sheet purpose.            |
+| `SheetFooter`      | Footer container for actions, usually submit/cancel buttons. |
+| `SheetClose`       | Interactive element used to close the sheet.                 |
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/dialog) documentation for more information.

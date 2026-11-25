@@ -1,0 +1,116 @@
+---
+title: Radio Group
+description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+component: true
+---
+
+<ComponentPreview name="radio-group-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add radio-group
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="radio-group" title="components/ui/radio-group.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group"
+```
+
+```tsx showLineNumbers
+<RadioGroup defaultValue="option-one">
+  <div class="flex items-center gap-3">
+    <RadioGroupItem id="option-one" value="option-one" />
+    <label for="option-one">Option One</label>
+  </div>
+  <div class="flex items-center gap-3">
+    <RadioGroupItem id="option-two" value="option-two" />
+    <label for="option-two">Option Two</label>
+  </div>
+</RadioGroup>
+```
+
+## Composition
+
+Use the following composition to build a `RadioGroup`:
+
+```text
+RadioGroup
+├── RadioGroupItem
+└── RadioGroupItem
+```
+
+## Description
+
+Radio group items with a description using the `Field` component.
+
+<ComponentPreview name="radio-group-description" />
+
+## Choice Card
+
+Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
+
+<ComponentPreview name="radio-group-choice-card" />
+
+## Fieldset
+
+Use `FieldSet` and `FieldLegend` to group radio items with a label and description.
+
+<ComponentPreview name="radio-group-fieldset" />
+
+## Disabled
+
+Use the `disabled` prop on `RadioGroupItem` to disable an option.
+
+<ComponentPreview name="radio-group-disabled" />
+
+## Invalid
+
+Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
+
+<ComponentPreview name="radio-group-invalid" />
+
+## API Reference
+
+| Part             | Description                                                      |
+| ---------------- | ---------------------------------------------------------------- |
+| `RadioGroup`     | Root container that manages single selection in a group.         |
+| `RadioGroupItem` | Radio option with hidden input and visual checked state control. |
+
+The root and items use UI SDK Radio components. Use `onValueChange` for value changes.
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/radio) documentation for more information.

@@ -1,0 +1,138 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+component: true
+---
+
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add hover-card
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="hover-card" title="components/ui/hover-card.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
+} from "~/components/ui/hover-card"
+```
+
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>
+    SolidJS - Simple and performant reactivity for building user interfaces.
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Composition
+
+Use the following composition to build a `HoverCard`:
+
+```text
+HoverCard
+├── HoverCardTrigger
+└── HoverCardContent
+```
+
+## Trigger Delays
+
+Use `openDelay` and `closeDelay` on `HoverCard` to control when content opens and closes.
+
+```tsx showLineNumbers
+<HoverCard delay={100} closeDelay={200}>
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent side="left" sideOffset={8}>
+    Content
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Positioning
+
+Use `side`, `align`, and `sideOffset` on `HoverCardContent` to position the content.
+
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
+
+## Basic
+
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
+
+## Sides
+
+<ComponentPreview name="hover-card-sides" previewClassName="h-[22rem]" />
+
+## API Reference
+
+| Part               | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `HoverCard`        | Root component that manages delays and floating state.    |
+| `HoverCardTrigger` | Interactive trigger that opens content on hover or focus. |
+| `HoverCardContent` | Floating card content rendered inside a portal.           |
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/hover-card) documentation for more information.

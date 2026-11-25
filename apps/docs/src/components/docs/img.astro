@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"img"> & {
+  alt: string
+}
+
+const {
+  alt,
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  ...props
+} = Astro.props
+---
+
+<img
+  alt={alt}
+  class={cn("mt-6 block h-auto max-w-full rounded-md border", className)}
+  loading={loading}
+  decoding={decoding}
+  {...props}
+/>

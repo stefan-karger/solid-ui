@@ -1,0 +1,13 @@
+@import "@fontsource-variable/eb-garamond";
+@import "@fontsource/instrument-serif";
+
+html[data-preset-preview] {
+  --preview-radius-sm: calc(var(--radius) * 0.6);
+  --preview-radius-md: calc(var(--radius) * 0.8);
+  --preview-radius-xl: calc(var(--radius) * 1.4);
+  --preview-radius-3xl: calc(var(--radius) * 2.2);
+}
+
+html[data-preset-preview] [data-slot="card-title"] {
+  font-family: var(--preview-font-heading);
+}

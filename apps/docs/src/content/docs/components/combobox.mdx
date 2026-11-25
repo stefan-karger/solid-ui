@@ -1,0 +1,204 @@
+---
+title: Combobox
+description: Autocomplete input with a list of suggestions.
+component: true
+---
+
+<ComponentPreview
+  name="combobox-demo"
+  description="A combobox with a list of frameworks."
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add combobox
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button input-group
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="combobox" title="components/ui/combobox.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  ComboboxEmpty
+} from "~/components/ui/combobox"
+
+;<Combobox>
+  <ComboboxInput
+    aria-label="Framework"
+    placeholder="Select a framework"
+    showClear
+  />
+  <ComboboxContent>
+    <ComboboxList>
+      <ComboboxItem value="solid">Solid</ComboboxItem>
+      <ComboboxItem value="astro">Astro</ComboboxItem>
+    </ComboboxList>
+    <ComboboxEmpty>No framework found.</ComboboxEmpty>
+  </ComboboxContent>
+</Combobox>
+```
+
+Use `value` and `onValueChange` for selection, and `query` and `onQueryChange` for controlled search text. Set `autoHighlight="always"` to highlight an option as the list opens. Object values use `itemToValue` and `itemToLabel`. Multiple selection uses `multiple`, `ComboboxChips`, `ComboboxValue`, `ComboboxChip`, and `ComboboxChipRemove`.
+
+## Composition
+
+### Simple
+
+A single-line input and a flat list (see [Basic](#basic)).
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
+
+### With chips
+
+Multi-select with `multiple`, chips, and a chips input (see [Multiple](#multiple)).
+
+```text
+Combobox
+├── ComboboxChips
+│   ├── ComboboxValue
+│   │   └── ComboboxChip
+│   │       └── ComboboxChipRemove
+│   └── ComboboxChipInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
+
+### With groups
+
+Render items inside each `ComboboxGroup` and use a separator between groups (see [Groups](#groups)).
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxGroup
+        │   ├── ComboboxLabel
+        │   ├── ComboboxItem
+        │   └── ComboboxItem
+        ├── ComboboxSeparator
+        └── ComboboxGroup
+            ├── ComboboxLabel
+            ├── ComboboxItem
+            └── ComboboxItem
+```
+
+## Basic
+
+A simple combobox with a list of frameworks.
+
+<ComponentPreview name="combobox-basic" />
+
+## Multiple
+
+Use `multiple` and `ComboboxChips` to select more than one option and show each selection as a chip.
+
+<ComponentPreview name="combobox-multiple" />
+
+## Clear Button
+
+Use `showClear` on `ComboboxInput` to show a clear button.
+
+<ComponentPreview name="combobox-clear" />
+
+## Groups
+
+Use `ComboboxGroup` and `ComboboxSeparator` to group items.
+
+<ComponentPreview name="combobox-groups" />
+
+## Custom Items
+
+Render a custom component inside `ComboboxItem`. For object values, pass `itemToValue` and `itemToLabel` to `Combobox`.
+
+<ComponentPreview name="combobox-custom" />
+
+## Invalid
+
+Set `aria-invalid` on `ComboboxInput` to show the invalid state.
+
+<ComponentPreview name="combobox-invalid" />
+
+## Disabled
+
+Set `disabled` on `ComboboxInput` to disable the input.
+
+<ComponentPreview name="combobox-disabled" />
+
+## Auto Highlight
+
+Use the `autoHighlight` prop to automatically highlight the first item on filter.
+
+<ComponentPreview name="combobox-auto-highlight" />
+
+## Popup
+
+Use the `render` prop on `ComboboxTrigger` to open the popup from a button. Put `ComboboxInput` inside `ComboboxContent` to search within the popup.
+
+<ComponentPreview name="combobox-popup" />
+
+## Input Group
+
+Put an `InputGroupAddon` inside `ComboboxInput` to add an icon alongside the search field.
+
+<ComponentPreview name="combobox-input-group" />
+
+## API Reference
+
+See the [UI SDK Combobox API](https://ui-sdk.dev/docs/solid/components/combobox) for selection, filtering, and keyboard behavior.

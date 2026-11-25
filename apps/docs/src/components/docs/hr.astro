@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"hr">
+
+const { class: className, ...props } = Astro.props
+---
+
+<hr class={cn("my-4 md:my-8", className)} {...props} />

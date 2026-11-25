@@ -1,0 +1,73 @@
+diff --git a/dist/client.d.ts b/dist/client.d.ts
+index ed114ce65595c8650b0a3139061c2687110f5b7c..6797ae766a5f70b90cf5b83da8d6d34bc1736387 100644
+--- a/dist/client.d.ts
++++ b/dist/client.d.ts
+@@ -1,4 +1,4 @@
+ declare const _default: (element: HTMLElement) => (Component: any, props: any, slotted: any, { client }: {
+     client: string;
+-}) => void;
++}) => Promise<void>;
+ export default _default;
+diff --git a/dist/client.js b/dist/client.js
+index 1a5c9f83b4a10f02dda93c028e98e76071652cea..2139474177f3e584438a0a27a01cfd635918ea84 100644
+--- a/dist/client.js
++++ b/dist/client.js
+@@ -1,7 +1,13 @@
+-import { createStore, reconcile } from 'solid-js';
++import { createStore, reconcile, onHydrationEnd } from 'solid-js';
+ import { createComponent, hydrate, render } from '@solidjs/web';
+ const alreadyInitializedElements = new WeakMap();
++// Solid shares hydration state between roots, including deferred lazy preloads.
++let startup = Promise.resolve();
+ export default (element) => (Component, props, slotted, { client }) => {
++    let cancelled = false;
++    element.addEventListener('astro:unmount', () => { cancelled = true; }, { once: true });
++    const task = startup.then(async () => {
++    if (cancelled) return;
+     if (!element.hasAttribute('ssr'))
+         return;
+     const isHydrate = client !== 'only';
+@@ -22,7 +28,9 @@ export default (element) => (Component, props, slotted, { client }) => {
+             while ((slot = iterator.nextNode()))
+                 _slots[slot.getAttribute('name') || 'default'] = slot;
+         }
+-        for (const [key, value] of Object.entries(slotted)) {
++        for (const [rawKey, value] of Object.entries(slotted)) {
++            // Match the server renderer for hydrated and client-only slots.
++            const key = rawKey.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
+             if (_slots[key])
+                 continue;
+             _slots[key] = document.createElement('astro-slot');
+@@ -55,9 +63,21 @@ export default (element) => (Component, props, slotted, { client }) => {
+         // no boundary of its own, and hydration structure must match. Async is
+         // first-class in Solid 2.0; components that want a fallback bring
+         // their own Loading boundary (present in both renders).
+-        const fn = () => createComponent(Component, store);
++        let complete;
++        const ready = isHydrate ? new Promise(resolve => { complete = resolve; }) : undefined;
++        const fn = () => {
++            try { return createComponent(Component, store); }
++            finally {
++                // Register after this root actually starts, which may be deferred
++                // behind lazy module preloads. Let Solid's cleanup timer finish.
++                if (complete) onHydrationEnd(() => queueMicrotask(() => setTimeout(complete, 0)));
++            }
++        };
+         let dispose;
+         if (isHydrate) {
++            // A previous island may have completed the document-wide hydration pass.
++            // Start this root in hydration mode so SDK parts claim their SSR nodes.
++            if (globalThis._$HY) globalThis._$HY.done = false;
+             dispose = hydrate(fn, element, { renderId });
+         }
+         else {
+@@ -67,5 +87,9 @@ export default (element) => (Component, props, slotted, { client }) => {
+             dispose = render(fn, element);
+         }
+         element.addEventListener('astro:unmount', () => dispose(), { once: true });
++        await ready;
+     }
++    });
++    startup = task.catch(() => {});
++    return task;
+ };

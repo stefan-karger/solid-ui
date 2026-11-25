@@ -1,0 +1,133 @@
+---
+title: Calendar
+description: A calendar component that allows users to select a date or a range of dates.
+component: true
+---
+
+<ComponentPreview name="calendar-demo" previewClassName="h-96" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add calendar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="calendar" title="components/ui/calendar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { Calendar } from "~/components/ui/calendar"
+```
+
+```tsx showLineNumbers
+<Calendar aria-label="Select a date" />
+```
+
+Dates use ISO strings, such as `"2026-11-17"`. Set `mode` to `single`, `multiple`, or `range`. `onValueChange` receives the ISO value. Use `months` for multiple grids and `min`, `max`, or `unavailable` for restrictions. The SDK renders focusable table cells, so days do not contain extra buttons.
+
+See the [UI SDK calendar API](https://ui-sdk.dev/docs/solid/components/calendar) for native options and keyboard behavior.
+
+## About
+
+The `Calendar` component styles the grid, day cells, and navigation from [UI SDK Calendar](https://ui-sdk.dev/docs/solid/components/calendar).
+
+## Date Picker
+
+You can use the `<Calendar>` component to build a date picker. See the [Date Picker](/docs/components/date-picker) page for more information.
+
+## Persian / Hijri / Jalali Calendar
+
+The upstream example uses a Persian calendar with right-to-left layout.
+
+## Selected Date (With TimeZone)
+
+The Calendar component accepts a `timeZone` prop to ensure dates are displayed and selected in the user's local timezone.
+
+**Note:** If you notice a selected date offset (for example, selecting the 20th highlights the 19th), make sure the `timeZone` prop is set to the user's local timezone.
+
+The SDK uses `timeZone` to determine today. Without it, the SDK reads the browser time zone after hydration.
+
+## Basic
+
+A basic calendar styled with `class="rounded-lg border"`.
+
+<ComponentPreview name="calendar-basic" previewClassName="h-96" />
+
+## Range Calendar
+
+Use the `mode="range"` prop to enable range selection.
+
+<ComponentPreview name="calendar-range" previewClassName="h-[36rem] md:h-96" />
+
+## Month and Year Selector
+
+Use month and year dropdowns to change the calendar's visible month.
+
+<ComponentPreview name="calendar-caption" previewClassName="h-96" />
+
+## Presets
+
+<ComponentPreview name="calendar-presets" previewClassName="h-[650px]" />
+
+## Date and Time Picker
+
+<ComponentPreview name="calendar-time" previewClassName="h-[600px]" />
+
+## Booked dates
+
+<ComponentPreview name="calendar-booked-dates" previewClassName="h-96" />
+
+## Custom Cell Size
+
+<ComponentPreview
+  name="calendar-custom-days"
+  title="Custom Cell Size"
+  description="A calendar with custom cell size that's responsive."
+  class="**:[.preview]:h-[560px]"
+/>
+
+Set `--cell-size` to a fixed value or use responsive utilities such as `[--cell-size:2rem] sm:[--cell-size:2.5rem]`.
+
+## Week Numbers
+
+Add a column to the calendar grid to display ISO week numbers.
+
+<ComponentPreview name="calendar-week-numbers" previewClassName="h-96" />
+
+## API Reference
+
+See the [UI SDK Calendar API](https://ui-sdk.dev/docs/solid/components/calendar) for supported options and slot states.
+
+## Changelog

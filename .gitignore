@@ -1,35 +1,22 @@
+node_modules
 dist
-.solid
-.output
-.vercel
-.netlify
+.astro
 .turbo
-netlify
-
-# Environment
+coverage
+playwright-report
+test-results
+.vitest-dump
+.eslintcache
+.DS_Store
+*.local
 .env
 .env*.local
+.vercel
+.idea/
 
-# dependencies
-/node_modules
-
-# IDEs and editors
-/.idea
-.project
-.classpath
-*.launch
-.settings/
-.vscode/
-
-# Temp
-gitignore
-
-# System Files
-.DS_Store
-Thumbs.db
-
-
-app.config.timestamp*
-
-.vscode/settings.json
-
+/docs/
+/plans/
+/apps/docs/public/r/
+/apps/docs/public/registry/
+.agents/
+skills-lock.json

@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div">
+
+const { class: className, ...props } = Astro.props
+---
+
+<div
+  class={cn("cn-kbd-group inline-flex items-center", className)}
+  data-slot="kbd-group"
+  {...props}
+>
+  <slot />
+</div>

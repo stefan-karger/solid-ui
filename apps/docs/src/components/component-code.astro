@@ -1,0 +1,51 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import CopyButton from "~/components/copy-button.astro"
+import LanguageIcon from "~/components/language-icon.astro"
+import { cn } from "~/lib/utils"
+
+type Props = Omit<HTMLAttributes<"figure">, "title"> & {
+  code: string
+  highlightedCode: string
+  language: string
+  title?: string
+  copyClass?: string
+  registryItem?: string
+  registryPath?: string
+}
+
+const {
+  code,
+  highlightedCode,
+  language,
+  title,
+  copyClass,
+  registryItem,
+  registryPath,
+  class: className,
+  ...props
+} = Astro.props
+---
+
+<figure
+  class={cn("relative [&_pre]:min-w-0 [&_pre]:overflow-auto", className)}
+  data-rehype-pretty-code-figure
+  data-registry-item={registryItem}
+  data-registry-path={registryPath}
+  data-source-style={registryPath ? "nova" : undefined}
+  {...props}
+>
+  {title && (
+    <figcaption
+      class="flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:opacity-70"
+      data-language={language}
+      data-rehype-pretty-code-title
+    >
+      <LanguageIcon language={language} />
+      {title}
+    </figcaption>
+  )}
+  <CopyButton value={code} class={copyClass} />
+  <div data-not-typeset data-source-content set:html={highlightedCode} />
+</figure>

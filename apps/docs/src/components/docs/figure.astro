@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+type Props = HTMLAttributes<"figure">
+
+const { class: className, ...props } = Astro.props
+---
+
+<figure class={className} {...props}>
+  <slot />
+</figure>

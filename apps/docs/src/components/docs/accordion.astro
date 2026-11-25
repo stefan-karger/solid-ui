@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div"> & {
+  type?: "single" | "multiple"
+  collapsible?: boolean
+  defaultValue?: string | string[]
+}
+
+const {
+  class: className,
+  type = "single",
+  collapsible = false,
+  defaultValue,
+  ...props
+} = Astro.props
+const defaultValues = Array.isArray(defaultValue)
+  ? defaultValue
+  : [defaultValue]
+const encodedDefault = defaultValues
+  .filter((value): value is string => Boolean(value))
+  .join(",")
+---
+
+<div
+  class={cn("cn-accordion flex w-full flex-col", className)}
+  data-accordion-enhanced="false"
+  data-collapsible={collapsible ? "" : undefined}
+  data-default-value={encodedDefault || undefined}
+  data-docs-accordion
+  data-not-typeset
+  data-slot="accordion"
+  data-type={type}
+  {...props}
+>
+  <slot />
+</div>

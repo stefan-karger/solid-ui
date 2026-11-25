@@ -1,0 +1,70 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content"
+
+import DocsCopyPage from "~/components/docs-copy-page"
+import DocsPageNavigation from "~/components/docs-page-navigation.astro"
+import { mdxComponents } from "~/components/mdx-components"
+import DocsLayout from "~/layouts/docs-layout.astro"
+import { findNeighbors, toDocsPath, toRouteId } from "~/lib/docs"
+import { formatDocsMarkdown } from "~/lib/docs-markdown"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("docs")
+
+  return pages.map((page) => ({
+    params: { slug: toRouteId(page.id) || undefined },
+    props: { page }
+  }))
+}
+
+type Props = {
+  page: CollectionEntry<"docs">
+}
+
+const { page } = Astro.props
+const { Content, headings } = await render(page)
+const pages = await getCollection("docs")
+const neighbors = findNeighbors(pages, page.id)
+const markdown = formatDocsMarkdown(page, pages)
+---
+
+<DocsLayout
+  title={page.data.title}
+  description={page.data.description}
+  headings={headings}
+>
+  <article
+    aria-label={
+      page.data.component ? "MDX component examples" : page.data.title
+    }
+    class="mx-auto w-full max-w-160 px-4 pt-6 pb-14 font-sans text-[1.05rem] sm:text-[15px] md:px-0 lg:pt-12 [&_[data-rehype-pretty-code-figure]:first-child]:mt-0"
+    data-slot="docs"
+  >
+    <header class="mb-8 flex flex-col gap-2">
+      <div class="flex items-center justify-between gap-4 md:items-start">
+        <h1 class="min-w-0 scroll-m-28 font-heading text-3xl font-semibold tracking-tight">
+          {page.data.title}
+        </h1>
+        <div class="flex shrink-0 items-center gap-2">
+          <div class="hidden sm:block" data-docs-copy-page>
+            <DocsCopyPage
+              {markdown}
+              pagePath={toDocsPath(page.id)}
+              client:media="(min-width: 640px)"
+            />
+          </div>
+          <DocsPageNavigation {...neighbors} compact />
+        </div>
+      </div>
+      <p class="text-[1.05rem] text-muted-foreground sm:text-base sm:text-balance md:max-w-[80%]">
+        {page.data.description}
+      </p>
+    </header>
+
+    <div class="w-full text-[1.125em]/[1.75] *:first:mt-0 md:text-[1em]/[1.75]">
+      <Content components={mdxComponents} />
+    </div>
+
+    <DocsPageNavigation {...neighbors} />
+  </article>
+</DocsLayout>

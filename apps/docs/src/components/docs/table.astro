@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"table">
+
+const { class: className, ...props } = Astro.props
+---
+
+<div class="my-6 w-full scrollbar-none overflow-x-auto overscroll-x-contain scroll-fade-x">
+  <table
+    class={cn("w-full text-sm [&_tbody_tr:last-child]:border-b-0", className)}
+    {...props}
+  >
+    <slot />
+  </table>
+</div>

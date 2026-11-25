@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"td">
+
+const { class: className, ...props } = Astro.props
+---
+
+<td
+  class={cn(
+    "py-3 pe-4 text-left [[align=center]]:text-center [[align=right]]:text-right",
+    className
+  )}
+  {...props}
+>
+  <slot />
+</td>

@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"kbd">
+
+const { class: className, ...props } = Astro.props
+---
+
+<kbd
+  class={cn(
+    "cn-kbd pointer-events-none inline-flex items-center justify-center select-none",
+    className
+  )}
+  data-slot="kbd"
+  {...props}
+>
+  <slot />
+</kbd>

@@ -1,0 +1,27 @@
+---
+type Props = {
+  variant: "icon" | "icon-flat" | "launch"
+  class?: string
+}
+
+const { variant, class: className } = Astro.props
+const dimensions =
+  variant === "launch"
+    ? { width: 315, height: 78 }
+    : { width: 201, height: 187 }
+---
+
+<span class:list={["inline-flex shrink-0", className]} aria-hidden="true">
+  <img
+    src={`/solid-brand/${variant}-light.svg`}
+    {...dimensions}
+    alt=""
+    class="block h-full w-auto dark:hidden"
+  />
+  <img
+    src={`/solid-brand/${variant}-dark.svg`}
+    {...dimensions}
+    alt=""
+    class="hidden h-full w-auto dark:block"
+  />
+</span>
