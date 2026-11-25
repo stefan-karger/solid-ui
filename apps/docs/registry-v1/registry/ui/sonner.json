@@ -1,0 +1,13 @@
+{
+  "name": "sonner",
+  "dependencies": [
+    "solid-sonner"
+  ],
+  "files": [
+    {
+      "name": "sonner.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\n\nimport { Toaster as Sonner } from \"solid-sonner\"\n\ntype ToasterProps = ComponentProps<typeof Sonner>\n\nconst Toaster: Component<ToasterProps> = (props) => {\n  return (\n    <Sonner\n      class=\"toaster group\"\n      toastOptions={{\n        classes: {\n          toast:\n            \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg\",\n          description: \"group-[.toast]:text-muted-foreground\",\n          actionButton: \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground\",\n          cancelButton: \"group-[.toast]:bg-muted group-[.toast]:text-muted-foreground\"\n        }\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n"
+    }
+  ],
+  "type": "ui"
+}

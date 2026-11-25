@@ -19,6 +19,8 @@ export default defineConfig({
   },
   ignorePatterns: [
     "vendor/astro-solid/upstream/**",
+    // Frozen v1 registry, published byte for byte.
+    "apps/docs/registry-v1/**",
     "**/node_modules/**",
     "**/dist/**",
     "**/.astro/**",

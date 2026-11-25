@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:ui",
+  "title": "Alert",
+  "description": "An alert component",
+  "dependencies": [
+    "@kobalte/core",
+    "class-variance-authority",
+    "solid-js"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/alert.tsx",
+      "content": "import type { Component, ComponentProps, ValidComponent } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport * as AlertPrimitive from \"@kobalte/core/alert\"\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\"\nimport type { VariantProps } from \"class-variance-authority\"\nimport { cva } from \"class-variance-authority\"\n\nimport { cn } from \"~/lib/utils\"\n\nconst alertVariants = cva(\n  \"relative w-full rounded-lg border p-4 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-background text-foreground\",\n        destructive:\n          \"border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive\"\n      }\n    },\n    defaultVariants: {\n      variant: \"default\"\n    }\n  }\n)\n\ntype AlertRootProps<T extends ValidComponent = \"div\"> = AlertPrimitive.AlertRootProps<T> &\n  VariantProps<typeof alertVariants> & { class?: string | undefined }\n\nconst Alert = <T extends ValidComponent = \"div\">(props: PolymorphicProps<T, AlertRootProps<T>>) => {\n  const [local, others] = splitProps(props as AlertRootProps, [\"class\", \"variant\"])\n  return (\n    <AlertPrimitive.Root\n      class={cn(alertVariants({ variant: props.variant }), local.class)}\n      {...others}\n    />\n  )\n}\n\nconst AlertTitle: Component<ComponentProps<\"h5\">> = (props) => {\n  const [local, others] = splitProps(props, [\"class\"])\n  return <h5 class={cn(\"mb-1 font-medium leading-none tracking-tight\", local.class)} {...others} />\n}\n\nconst AlertDescription: Component<ComponentProps<\"div\">> = (props) => {\n  const [local, others] = splitProps(props, [\"class\"])\n  return <div class={cn(\"text-sm [&_p]:leading-relaxed\", local.class)} {...others} />\n}\n\nexport { Alert, AlertTitle, AlertDescription }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

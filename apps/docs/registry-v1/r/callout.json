@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "callout",
+  "type": "registry:ui",
+  "title": "Callout",
+  "description": "A callout component",
+  "dependencies": [
+    "solid-js",
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/callout.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport type { VariantProps } from \"class-variance-authority\"\nimport { cva } from \"class-variance-authority\"\n\nimport { cn } from \"~/lib/utils\"\n\nconst calloutVariants = cva(\"rounded-md border-l-4 p-2 pl-4\", {\n  variants: {\n    variant: {\n      default: \"border-info-foreground bg-info text-info-foreground\",\n      success: \"border-success-foreground bg-success text-success-foreground\",\n      warning: \"border-warning-foreground bg-warning text-warning-foreground\",\n      error: \"border-error-foreground bg-error text-error-foreground\"\n    }\n  },\n  defaultVariants: {\n    variant: \"default\"\n  }\n})\n\ntype CalloutProps = ComponentProps<\"div\"> & VariantProps<typeof calloutVariants>\n\nconst Callout: Component<CalloutProps> = (props) => {\n  const [local, others] = splitProps(props, [\"class\", \"variant\"])\n  return <div class={cn(calloutVariants({ variant: local.variant }), local.class)} {...others} />\n}\n\nconst CalloutTitle: Component<ComponentProps<\"h3\">> = (props) => {\n  const [local, others] = splitProps(props, [\"class\"])\n  return <h3 class={cn(\"font-semibold\", local.class)} {...others} />\n}\n\nconst CalloutContent: Component<ComponentProps<\"div\">> = (props) => {\n  const [local, others] = splitProps(props, [\"class\"])\n  return <div class={cn(\"mt-2\", local.class)} {...others} />\n}\n\nexport { Callout, CalloutTitle, CalloutContent }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

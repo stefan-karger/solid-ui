@@ -1,0 +1,95 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "css",
+  "type": "registry:theme",
+  "description": "Solid UI base CSS",
+  "files": [],
+  "cssVars": {
+    "light": {
+      "info": "oklch(0.95 0.024 236.81)",
+      "info-foreground": "oklch(0.68 0.148143 238.1044)",
+      "success": "oklch(0.95 0.0506 162.83)",
+      "success-foreground": "oklch(0.69 0.1481 162.37)",
+      "warning": "oklch(0.96 0.0569 95.61)",
+      "warning-foreground": "oklch(0.71 0.186 48.13)",
+      "error": "oklch(0.93 0.0314 17.73)",
+      "error-foreground": "oklch(0.64 0.2082 25.38)",
+      "radius": "0.5rem"
+    },
+    "dark": {
+      "info": "oklch(0.28 0.0875 267.91)",
+      "info-foreground": "oklch(0.68 0.148143 238.1044)",
+      "success": "oklch(0.26 0.0487 172.54)",
+      "success-foreground": "oklch(0.69 0.1481 162.37)",
+      "warning": "oklch(0.29 0.0638 53.82)",
+      "warning-foreground": "oklch(0.71 0.186 48.13)",
+      "error": "oklch(0.26 0.0886 26.05)",
+      "error-foreground": "oklch(0.64 0.2082 25.38)"
+    }
+  },
+  "css": {
+    "@layer base": {
+      "::-webkit-scrollbar": {
+        "@apply": "w-4"
+      },
+      "::-webkit-scrollbar-thumb": {
+        "@apply": "rounded-full border-4 border-transparent bg-accent bg-clip-content"
+      },
+      "::-webkit-scrollbar-corner": {
+        "@apply": "hidden"
+      }
+    },
+    "@keyframes accordion-down": {
+      "from": {
+        "height": "0"
+      },
+      "to": {
+        "height": "var(--kb-accordion-content-height)"
+      }
+    },
+    "@keyframes accordion-up": {
+      "from": {
+        "height": "var(--kb-accordion-content-height)"
+      },
+      "to": {
+        "height": "0"
+      }
+    },
+    "@keyframes content-show": {
+      "from": {
+        "opacity": "0",
+        "transform": "scale(0.96)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes content-hide": {
+      "from": {
+        "opacity": "1",
+        "transform": "scale(1)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "scale(0.96)"
+      }
+    },
+    "@utility container": {
+      "@apply": "px-8",
+      "@media (width >=--theme(--breakpoint-sm))": {
+        "@apply": "max-w-none"
+      },
+      "@media (max-width: 640px)": {
+        "@apply": "px-4"
+      }
+    },
+    "@utility step": {
+      "counter-increment": "step",
+      "&:before": {
+        "@apply": "absolute ml-[-50px] mt-[-4px] inline-flex h-9 w-9 items-center justify-center rounded-full border-4 border-background bg-muted text-center -indent-px font-mono text-base font-medium",
+        "content": "counter(step)"
+      }
+    }
+  }
+}

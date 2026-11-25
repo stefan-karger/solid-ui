@@ -1,0 +1,10 @@
+{
+  "name": "badge",
+  "files": [
+    {
+      "name": "badge.tsx",
+      "content": "import type { Component, ComponentProps } from \"solid-js\"\nimport { splitProps } from \"solid-js\"\n\nimport type { VariantProps } from \"class-variance-authority\"\nimport { cva } from \"class-variance-authority\"\n\nimport { cn } from \"~/lib/utils\"\n\nconst badgeVariants = cva(\n  \"inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"border-transparent bg-primary text-primary-foreground\",\n        secondary: \"border-transparent bg-secondary text-secondary-foreground\",\n        outline: \"text-foreground\",\n        success: \"border-success-foreground bg-success text-success-foreground\",\n        warning: \"border-warning-foreground bg-warning text-warning-foreground\",\n        error: \"border-error-foreground bg-error text-error-foreground\"\n      }\n    },\n    defaultVariants: {\n      variant: \"default\"\n    }\n  }\n)\n\ntype BadgeProps = ComponentProps<\"div\"> &\n  VariantProps<typeof badgeVariants> & {\n    round?: boolean\n  }\n\nconst Badge: Component<BadgeProps> = (props) => {\n  const [local, others] = splitProps(props, [\"class\", \"variant\", \"round\"])\n  return (\n    <div\n      class={cn(\n        badgeVariants({ variant: local.variant }),\n        local.round && \"rounded-full\",\n        local.class\n      )}\n      {...others}\n    />\n  )\n}\n\nexport type { BadgeProps }\nexport { Badge, badgeVariants }\n"
+    }
+  ],
+  "type": "ui"
+}

@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises"
 import { posix } from "node:path"
 
 import ts from "typescript"
@@ -170,59 +170,37 @@ for (const style of styles) {
   }
 }
 
-// The published CLI installs TypeScript files into its configured component directory.
-const legacyItems = installable.filter(
-  ({ type, name }) =>
-    name !== "utils" && (type === "registry:ui" || type === "registry:hook")
-)
-const legacyNames = new Set(legacyItems.map(({ name }) => name))
-const legacyFiles = new Map<string, unknown>()
-const legacyIndex = legacyItems.map((item) => {
-  const metadata = {
-    name: item.name,
-    type: "ui",
-    dependencies: item.dependencies,
-    registryDependencies: item.registryDependencies.filter((name) =>
-      legacyNames.has(name)
-    )
-  }
-  legacyFiles.set(`ui/${item.name}.json`, {
-    ...metadata,
-    files: item.files.map(({ path, content }) => ({
-      name: posix.basename(path),
-      content: content
-        .replaceAll(/(["'])~\/components\/ui\//g, "$1~/registry/ui/")
-        .replaceAll(
-          /(["'])~\/(?:hooks\/|lib\/(?!utils["']))/g,
-          "$1~/registry/ui/"
-        )
-    }))
-  })
-  return { ...metadata, files: item.files.map(({ path }) => path) }
-})
-legacyFiles.set("index.json", legacyIndex)
+const publicR = new URL("../public/r/", import.meta.url)
 
-async function writeRegistry(
-  folder: "r" | "registry",
-  files: Map<string, unknown>
-) {
-  const directory = new URL(`../public/${folder}/`, import.meta.url)
-  await rm(directory, { recursive: true, force: true })
+async function writeRegistry(files: Map<string, unknown>) {
+  await rm(publicR, { recursive: true, force: true })
   const parents = new Set([...files.keys()].map((file) => posix.dirname(file)))
   await Promise.all(
     [...parents].map((parent) =>
-      mkdir(new URL(`${parent}/`, directory), { recursive: true })
+      mkdir(new URL(`${parent}/`, publicR), { recursive: true })
     )
   )
   for (const [path, payload] of files) {
-    await writeFile(new URL(path, directory), JSON.stringify(payload))
+    await writeFile(new URL(path, publicR), JSON.stringify(payload))
   }
 }
 
-await Promise.all([
-  writeRegistry("r", modernFiles),
-  writeRegistry("registry", legacyFiles)
-])
+// v1 clients keep receiving the frozen v1 registry: solidui-cli 0.7 reads
+// /registry/, and shadcn CLI installs used /r/<name>.json. Neither overlaps
+// the v2 layout, and the copy fails instead of overwriting a v2 file.
+const v1 = new URL("../registry-v1/", import.meta.url)
+const legacy = new URL("../public/registry/", import.meta.url)
+
+await writeRegistry(modernFiles)
+await rm(legacy, { recursive: true, force: true })
+await cp(new URL("registry/", v1), legacy, { recursive: true })
+const v1Items = await readdir(new URL("r/", v1))
+for (const file of v1Items) {
+  await cp(new URL(`r/${file}`, v1), new URL(file, publicR), {
+    force: false,
+    errorOnExist: true
+  })
+}
 console.log(
-  `Registry built: ${modernFiles.size} files in public/r and ${legacyFiles.size} files in public/registry.`
+  `Registry built: ${modernFiles.size} files in public/r, plus ${v1Items.length} v1 items in public/r and the v1 CLI registry in public/registry.`
 )
