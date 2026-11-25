@@ -1,4 +1,9 @@
-import { Field, FieldContent, FieldDescription, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel
+} from "~/registry/ui/field"
 import { Switch } from "~/registry/ui/switch"
 
 export default function SwitchDescription() {

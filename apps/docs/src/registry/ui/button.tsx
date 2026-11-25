@@ -1,11 +1,8 @@
-import * as ButtonPrimitive from "@kobalte/core/button"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { dynamic, type ComponentProps, type ValidComponent } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
-import { omit } from "solid-js"
+import { isStatic, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
 const buttonVariants = cva(
   "group/button cn-button inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
@@ -35,23 +32,32 @@ const buttonVariants = cva(
     }
   }
 )
-
-type ButtonProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  ButtonPrimitive.ButtonRootProps<T>
+type ButtonProps<T extends ValidComponent = "button"> = Omit<
+  ComponentProps<NoInfer<T>>,
+  "as" | "class" | "variant" | "size"
 > &
-  VariantProps<typeof buttonVariants> &
-  Pick<ComponentProps<T>, "class">
+  VariantProps<typeof buttonVariants> & {
+    as?: T
+    class?: string
+  }
 
-const Button = <T extends ValidComponent = "button">(props: ButtonProps<T>) => {
-  const others = omit(props as ButtonProps, "variant", "size", "class")
+function Button<T extends ValidComponent = "button">(props: ButtonProps<T>) {
+  const Comp = dynamic<ValidComponent>(() => props.as ?? "button", {
+    static: isStatic(props, "as")
+  })
+  const rest = omit(props, "as", "class", "variant", "size")
   return (
-    <ButtonPrimitive.Root
-      class={cn(buttonVariants({ variant: props.variant, size: props.size }), props.class)}
+    <Comp
+      type={(props.as ?? "button") === "button" ? "button" : undefined}
       data-slot="button"
-      {...others}
+      data-variant={props.variant === undefined ? "default" : props.variant}
+      data-size={props.size === undefined ? "default" : props.size}
+      class={cn(
+        buttonVariants({ variant: props.variant, size: props.size }),
+        props.class
+      )}
+      {...rest}
     />
   )
 }
-
-export { Button, type ButtonProps, buttonVariants }
+export { Button, buttonVariants, type ButtonProps }

@@ -30,7 +30,7 @@ npx solidui-cli@latest add radio-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -48,7 +48,6 @@ npm install @kobalte/core
 ## Usage
 
 ```tsx
-import { Label } from "~/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group"
 ```
 
@@ -56,11 +55,11 @@ import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group"
 <RadioGroup defaultValue="option-one">
   <div class="flex items-center gap-3">
     <RadioGroupItem id="option-one" value="option-one" />
-    <Label for="option-one">Option One</Label>
+    <label for="option-one">Option One</label>
   </div>
   <div class="flex items-center gap-3">
     <RadioGroupItem id="option-two" value="option-two" />
-    <Label for="option-two">Option Two</Label>
+    <label for="option-two">Option Two</label>
   </div>
 </RadioGroup>
 ```
@@ -72,37 +71,34 @@ Use the following composition to build a `RadioGroup`:
 ```text
 RadioGroup
 ├── RadioGroupItem
-├── RadioGroupItem
 └── RadioGroupItem
 ```
 
-## Examples
-
-### Description
+## Description
 
 Radio group items with a description using the `Field` component.
 
 <ComponentPreview name="radio-group-description" />
 
-### Choice Card
+## Choice Card
 
 Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
 
 <ComponentPreview name="radio-group-choice-card" />
 
-### Fieldset
+## Fieldset
 
 Use `FieldSet` and `FieldLegend` to group radio items with a label and description.
 
 <ComponentPreview name="radio-group-fieldset" />
 
-### Disabled
+## Disabled
 
-Use the `disabled` prop on `RadioGroupItem` to disable individual options.
+Use the `disabled` prop on `RadioGroupItem` to disable an option.
 
 <ComponentPreview name="radio-group-disabled" />
 
-### Invalid
+## Invalid
 
 Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
 
@@ -110,13 +106,11 @@ Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show val
 
 ## API Reference
 
-### Core Parts
-
 | Part             | Description                                                      |
 | ---------------- | ---------------------------------------------------------------- |
 | `RadioGroup`     | Root container that manages single selection in a group.         |
 | `RadioGroupItem` | Radio option with hidden input and visual checked state control. |
 
-All supported Kobalte radio group root and item props are forwarded.
+The root and items use UI SDK Radio components. Use `onValueChange` for value changes.
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/radio-group) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/radio) documentation for more information.

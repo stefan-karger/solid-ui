@@ -32,30 +32,33 @@ const Alert = (props: AlertProps) => {
 
 type AlertTitleProps = ComponentProps<"h5">
 
-const AlertTitle = (props: AlertTitleProps) => {
-  const others = omit(props, "class")
-  return <h5 class={cn("cn-alert-title", props.class)} data-slot="alert-title" {...others} />
-}
+const AlertTitle = (props: AlertTitleProps) => (
+  <h5
+    data-slot="alert-title"
+    {...props}
+    class={cn("cn-alert-title", props.class)}
+  />
+)
 
 type AlertDescriptionProps = ComponentProps<"div">
 
-const AlertDescription = (props: AlertDescriptionProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      class={cn("cn-alert-description", props.class)}
-      data-slot="alert-description"
-      {...others}
-    />
-  )
-}
+const AlertDescription = (props: AlertDescriptionProps) => (
+  <div
+    data-slot="alert-description"
+    {...props}
+    class={cn("cn-alert-description", props.class)}
+  />
+)
 
 type AlertActionProps = ComponentProps<"div">
 
-const AlertAction = (props: AlertActionProps) => {
-  const others = omit(props, "class")
-  return <div class={cn("cn-alert-action", props.class)} data-slot="alert-action" {...others} />
-}
+const AlertAction = (props: AlertActionProps) => (
+  <div
+    data-slot="alert-action"
+    {...props}
+    class={cn("cn-alert-action", props.class)}
+  />
+)
 
 export {
   Alert,

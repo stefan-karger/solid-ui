@@ -1,0 +1,148 @@
+---
+import { getCollection } from "astro:content"
+
+import DocsAppearance from "~/components/docs-appearance"
+import DocsMobileNav from "~/components/docs-mobile-nav"
+import DocsSearch from "~/components/docs-search"
+import GitHubLink from "~/components/github-link.astro"
+import { appearanceBootstrap } from "~/lib/appearance"
+import { createDocsNavigation, type DocsNavigationGroup } from "~/lib/docs"
+import { repositoryUrl } from "~/lib/site"
+
+import "~/styles/global.css"
+
+type Props = {
+  title: string
+  description: string
+  navigation?: DocsNavigationGroup[]
+}
+const { title, description } = Astro.props
+const navigation =
+  Astro.props.navigation ?? createDocsNavigation(await getCollection("docs"))
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
+const isHome = currentPath === "/"
+const defaultStyle = isHome ? "rhea" : "nova"
+const onComponentsPage =
+  currentPath === "/docs/components" ||
+  currentPath.startsWith("/docs/components/")
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class={`style-${defaultStyle}`}
+  data-default-style={defaultStyle}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
+    <script is:inline set:html={appearanceBootstrap} />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <title>{title === "Solid UI" ? title : `${title} · Solid UI`}</title>
+  </head>
+  <body class="flex min-h-svh flex-col bg-background font-sans text-foreground antialiased [--header-height:3.5rem] lg:[--header-height:4rem]">
+    <a
+      href="#main-content"
+      class="sr-only z-100 rounded-md bg-foreground px-4 py-2 text-background focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+    >
+      Skip to content
+    </a>
+    <header
+      class="sticky top-0 z-40 bg-background/95 backdrop-blur"
+      data-docs-header
+    >
+      <div class="flex h-(--header-height) w-full items-center gap-1 px-2 min-[360px]:gap-2 min-[360px]:px-3 sm:gap-4 sm:px-6 xl:px-8">
+        <DocsMobileNav
+          navigation={navigation}
+          currentPath={currentPath}
+          client:load
+        />
+        <nav
+          aria-label="Main navigation"
+          class="hidden items-center gap-5 text-sm font-medium lg:flex"
+        >
+          <a
+            href="/"
+            aria-current={isHome ? "page" : undefined}
+            class="text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:text-foreground"
+          >
+            Home
+          </a>
+          <a
+            href="/docs/"
+            aria-current={currentPath === "/docs" ? "page" : undefined}
+            class:list={[
+              "transition-colors hover:text-foreground",
+              currentPath.startsWith("/docs") && !onComponentsPage
+                ? "text-foreground"
+                : "text-muted-foreground"
+            ]}
+          >
+            Docs
+          </a>
+          <a
+            href="/docs/components/"
+            aria-current={
+              currentPath === "/docs/components" ? "page" : undefined
+            }
+            class:list={[
+              "transition-colors hover:text-foreground",
+              onComponentsPage ? "text-foreground" : "text-muted-foreground"
+            ]}
+          >
+            Components
+          </a>
+          <a
+            href="/create/"
+            aria-current={currentPath === "/create" ? "page" : undefined}
+            class="text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:text-foreground"
+          >
+            Create
+          </a>
+        </nav>
+        <div class="ml-auto flex min-w-0 items-center gap-0.5 min-[360px]:gap-1 sm:gap-2">
+          <DocsSearch navigation={navigation} client:load />
+          <div
+            class="ms-2 hidden h-4 w-px shrink-0 bg-border lg:block"
+            aria-hidden="true"
+          ></div>
+          <GitHubLink />
+          <div
+            class="h-4 w-px shrink-0 bg-border sm:me-2"
+            aria-hidden="true"
+          ></div>
+          <DocsAppearance {defaultStyle} client:load />
+        </div>
+      </div>
+    </header>
+    <slot />
+    {isHome && (
+      <footer class="px-4 py-5 text-center text-sm text-muted-foreground">
+        Built by{" "}
+        <a
+          href="https://x.com/shadcn"
+          class="font-medium underline underline-offset-4 hover:text-foreground"
+        >
+          shadcn
+        </a>
+        . Ported to Solid by{" "}
+        <a
+          href="https://x.com/karger_stefan"
+          class="font-medium underline underline-offset-4 hover:text-foreground"
+        >
+          Stefan Karger
+        </a>
+        . The source code is available on{" "}
+        <a
+          href={repositoryUrl}
+          class="font-medium underline underline-offset-4 hover:text-foreground"
+        >
+          GitHub
+        </a>
+        .
+      </footer>
+    )}
+  </body>
+</html>

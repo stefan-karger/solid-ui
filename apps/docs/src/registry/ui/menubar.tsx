@@ -1,106 +1,88 @@
-import * as MenubarPrimitive from "@kobalte/core/menubar"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
-import { CheckIcon, ChevronRightIcon } from "lucide-solid"
-import { merge, omit } from "solid-js"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Menu as SdkMenu,
+  MenuTrigger as SdkMenuTrigger,
+  MenuContent as SdkMenuContent,
+  MenuGroup as SdkMenuGroup,
+  MenuItem as SdkMenuItem,
+  MenuCheckboxItem as SdkMenuCheckboxItem,
+  MenuItemIndicator as SdkMenuItemIndicator,
+  MenuRadioGroup as SdkMenuRadioGroup,
+  MenuRadioItem as SdkMenuRadioItem,
+  MenuGroupLabel as SdkMenuGroupLabel,
+  MenuSeparator as SdkMenuSeparator,
+  MenuSub as SdkMenuSub,
+  MenuSubTrigger as SdkMenuSubTrigger,
+  MenuSubContent as SdkMenuSubContent
+} from "@ui-sdk/solid/menu"
+import { Menubar as SdkMenubar } from "@ui-sdk/solid/menubar"
+import { createUniqueId, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-type MenubarProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarRootProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const Menubar = <T extends ValidComponent = "div">(props: MenubarProps<T>) => {
-  const others = omit(props as MenubarProps, "class")
-  return (
-    <MenubarPrimitive.Root
-      data-slot="menubar"
-      class={cn("cn-menubar flex items-center", props.class)}
-      {...others}
+type MenubarProps = Omit<ComponentProps<typeof SdkMenubar>, "class"> & {
+  class?: string
+}
+const Menubar = (props: MenubarProps) => (
+  <SdkMenubar
+    {...props}
+    class={cn("cn-menubar flex items-center", props.class)}
+  />
+)
+type MenubarMenuProps = ComponentProps<typeof SdkMenu>
+const MenubarMenu = (props: MenubarMenuProps) => <SdkMenu {...props} />
+type MenubarTriggerProps = Omit<
+  ComponentProps<typeof SdkMenuTrigger>,
+  "class"
+> & {
+  class?: string
+}
+const MenubarTrigger = (props: MenubarTriggerProps) => (
+  <SdkMenuTrigger
+    {...props}
+    class={cn(
+      "cn-menubar-trigger flex items-center outline-hidden select-none",
+      props.class
+    )}
+  />
+)
+type MenubarContentProps = Omit<
+  ComponentProps<typeof SdkMenuContent>,
+  "class"
+> & {
+  class?: string
+}
+const MenubarContent = (props: MenubarContentProps) => (
+  <>
+    <SdkMenuContent
+      {...props}
+      class={cn(
+        "cn-menubar-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        props.class
+      )}
     />
-  )
+  </>
+)
+type MenubarGroupProps = Omit<ComponentProps<typeof SdkMenuGroup>, "class"> & {
+  class?: string
 }
-
-type MenubarMenuProps = MenubarPrimitive.MenubarMenuProps
-
-const MenubarMenu = (props: MenubarMenuProps) => {
-  const others = omit(props, "gutter")
-  return <MenubarPrimitive.Menu data-slot="menubar-menu" gutter={props.gutter ?? 8} {...others} />
+const MenubarGroup = (props: MenubarGroupProps) => (
+  <SdkMenuGroup {...props} class={props.class} />
+)
+type MenubarItemProps = (Omit<ComponentProps<typeof SdkMenuItem>, "class"> & {
+  class?: string
+}) & {
+  inset?: boolean
+  variant?: "default" | "destructive"
 }
-
-type MenubarPortalProps = MenubarPrimitive.MenubarPortalProps
-
-const MenubarPortal = (props: MenubarPortalProps) => {
-  return <MenubarPrimitive.Portal data-slot="menubar-portal" {...props} />
-}
-
-type MenubarTriggerProps<T extends ValidComponent = "button"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarTriggerProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarTrigger = <T extends ValidComponent = "button">(props: MenubarTriggerProps<T>) => {
-  const others = omit(props as MenubarTriggerProps, "class")
+const MenubarItem = (rawProps: MenubarItemProps) => {
+  const local = merge(
+    { variant: "default" } as MenubarItemProps,
+    rawProps
+  ) as MenubarItemProps
+  const others = omit(rawProps, "class", "inset", "variant")
   return (
-    <MenubarPrimitive.Trigger
-      data-slot="menubar-trigger"
-      class={cn("cn-menubar-trigger flex items-center outline-hidden select-none", props.class)}
-      {...others}
-    />
-  )
-}
-
-type MenubarContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarContent = <T extends ValidComponent = "div">(props: MenubarContentProps<T>) => {
-  const others = omit(props as MenubarContentProps, "class")
-  return (
-    <MenubarPortal>
-      <MenubarPrimitive.Content
-        data-slot="menubar-content"
-        class={cn(
-          "cn-menubar-content z-50 max-h-(--kb-popper-available-height) min-w-32 origin-(--kb-menu-content-transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
-          props.class
-        )}
-        {...others}
-      />
-    </MenubarPortal>
-  )
-}
-
-type MenubarGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarGroupProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarGroup = <T extends ValidComponent = "div">(props: MenubarGroupProps<T>) => {
-  const others = omit(props as MenubarGroupProps, "class")
-  return <MenubarPrimitive.Group data-slot="menubar-group" class={props.class} {...others} />
-}
-
-type MenubarItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    inset?: boolean
-    variant?: "default" | "destructive"
-  }
-
-const MenubarItem = <T extends ValidComponent = "div">(rawProps: MenubarItemProps<T>) => {
-  const local = merge({ variant: "default" } as MenubarItemProps<T>, rawProps) as MenubarItemProps
-  const others = omit(rawProps as MenubarItemProps, "class", "inset", "variant")
-  return (
-    <MenubarPrimitive.Item
-      data-slot="menubar-item"
+    <SdkMenuItem
       data-inset={local.inset || undefined}
       data-variant={local.variant}
       class={cn(
@@ -111,20 +93,21 @@ const MenubarItem = <T extends ValidComponent = "div">(rawProps: MenubarItemProp
     />
   )
 }
-
-type MenubarCheckboxItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarCheckboxItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const MenubarCheckboxItem = <T extends ValidComponent = "div">(
-  props: MenubarCheckboxItemProps<T>
-) => {
-  const others = omit(props as MenubarCheckboxItemProps, "class", "children")
+type MenubarCheckboxItemProps = Omit<
+  Omit<ComponentProps<typeof SdkMenuCheckboxItem>, "value"> & {
+    value?: string
+  },
+  "class"
+> & {
+  class?: string
+}
+const MenubarCheckboxItem = (props: MenubarCheckboxItemProps) => {
+  const others = omit(props, "class", "children", "value")
+  const value = createUniqueId()
   return (
-    <MenubarPrimitive.CheckboxItem
-      data-slot="menubar-checkbox-item"
+    <SdkMenuCheckboxItem
+      value={props.value ?? value}
+
       class={cn(
         "cn-menubar-checkbox-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         props.class
@@ -135,39 +118,45 @@ const MenubarCheckboxItem = <T extends ValidComponent = "div">(
         data-slot="menubar-checkbox-item-indicator"
         class="cn-menubar-checkbox-item-indicator pointer-events-none absolute flex items-center justify-center"
       >
-        <MenubarPrimitive.ItemIndicator>
-          <CheckIcon />
-        </MenubarPrimitive.ItemIndicator>
+        <SdkMenuItemIndicator>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </SdkMenuItemIndicator>
       </span>
       {props.children}
-    </MenubarPrimitive.CheckboxItem>
+    </SdkMenuCheckboxItem>
   )
 }
-
-type MenubarRadioGroupProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarRadioGroupProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarRadioGroup = <T extends ValidComponent = "div">(props: MenubarRadioGroupProps<T>) => {
-  const others = omit(props as MenubarRadioGroupProps, "class")
-  return (
-    <MenubarPrimitive.RadioGroup data-slot="menubar-radio-group" class={props.class} {...others} />
-  )
+type MenubarRadioGroupProps = Omit<
+  ComponentProps<typeof SdkMenuRadioGroup>,
+  "class"
+> & {
+  class?: string
 }
-
-type MenubarRadioItemProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarRadioItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const MenubarRadioItem = <T extends ValidComponent = "div">(props: MenubarRadioItemProps<T>) => {
-  const others = omit(props as MenubarRadioItemProps, "class", "children")
+const MenubarRadioGroup = (props: MenubarRadioGroupProps) => (
+  <SdkMenuRadioGroup {...props} class={props.class} />
+)
+type MenubarRadioItemProps = Omit<
+  ComponentProps<typeof SdkMenuRadioItem>,
+  "class"
+> & {
+  class?: string
+}
+const MenubarRadioItem = (props: MenubarRadioItemProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <MenubarPrimitive.RadioItem
-      data-slot="menubar-radio-item"
+    <SdkMenuRadioItem
       class={cn(
         "cn-menubar-radio-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         props.class
@@ -178,84 +167,78 @@ const MenubarRadioItem = <T extends ValidComponent = "div">(props: MenubarRadioI
         data-slot="menubar-radio-item-indicator"
         class="cn-menubar-radio-item-indicator pointer-events-none absolute flex items-center justify-center"
       >
-        <MenubarPrimitive.ItemIndicator>
-          <CheckIcon />
-        </MenubarPrimitive.ItemIndicator>
+        <SdkMenuItemIndicator>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </SdkMenuItemIndicator>
       </span>
       {props.children}
-    </MenubarPrimitive.RadioItem>
+    </SdkMenuRadioItem>
   )
 }
-
-type MenubarLabelProps<T extends ValidComponent = "span"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarGroupLabelProps<T>
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    inset?: boolean
-  }
-
-const MenubarLabel = <T extends ValidComponent = "span">(props: MenubarLabelProps<T>) => {
-  const others = omit(props as MenubarLabelProps, "class", "inset")
+type MenubarLabelProps = (Omit<
+  ComponentProps<typeof SdkMenuGroupLabel>,
+  "class"
+> & {
+  class?: string
+}) & {
+  inset?: boolean
+}
+const MenubarLabel = (props: MenubarLabelProps) => {
+  const others = omit(props, "class", "inset")
   return (
-    <MenubarPrimitive.GroupLabel
-      data-slot="menubar-label"
+    <SdkMenuGroupLabel
       data-inset={props.inset || undefined}
       class={cn("cn-menubar-label data-inset:pl-8", props.class)}
       {...others}
     />
   )
 }
-
-type MenubarSeparatorProps<T extends ValidComponent = "hr"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarSeparatorProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarSeparator = <T extends ValidComponent = "hr">(props: MenubarSeparatorProps<T>) => {
-  const others = omit(props as MenubarSeparatorProps, "class")
-  return (
-    <MenubarPrimitive.Separator
-      data-slot="menubar-separator"
-      class={cn("cn-menubar-separator -mx-1 my-1 h-px", props.class)}
-      {...others}
-    />
-  )
+type MenubarSeparatorProps = Omit<
+  ComponentProps<typeof SdkMenuSeparator>,
+  "class"
+> & {
+  class?: string
 }
-
+const MenubarSeparator = (props: MenubarSeparatorProps) => (
+  <SdkMenuSeparator
+    {...props}
+    class={cn("cn-menubar-separator -mx-1 my-1 h-px", props.class)}
+  />
+)
 type MenubarShortcutProps = ComponentProps<"span">
-
-const MenubarShortcut = (props: MenubarShortcutProps) => {
-  const others = omit(props, "class")
-  return (
-    <span
-      data-slot="menubar-shortcut"
-      class={cn("cn-menubar-shortcut ml-auto", props.class)}
-      {...others}
-    />
-  )
+const MenubarShortcut = (props: MenubarShortcutProps) => (
+  <span
+    data-slot="menubar-shortcut"
+    {...props}
+    class={cn("cn-menubar-shortcut ml-auto", props.class)}
+  />
+)
+type MenubarSubProps = ComponentProps<typeof SdkMenuSub>
+const MenubarSub = (props: MenubarSubProps) => <SdkMenuSub {...props} />
+type MenubarSubTriggerProps = (Omit<
+  ComponentProps<typeof SdkMenuSubTrigger>,
+  "class"
+> & {
+  class?: string
+}) & {
+  inset?: boolean
 }
-
-type MenubarSubProps = MenubarPrimitive.MenubarSubProps
-
-const MenubarSub = (props: MenubarSubProps) => {
-  return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />
-}
-
-type MenubarSubTriggerProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarSubTriggerProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children"> & {
-    inset?: boolean
-  }
-
-const MenubarSubTrigger = <T extends ValidComponent = "div">(props: MenubarSubTriggerProps<T>) => {
-  const others = omit(props as MenubarSubTriggerProps, "class", "children", "inset")
+const MenubarSubTrigger = (props: MenubarSubTriggerProps) => {
+  const others = omit(props, "class", "children", "inset")
   return (
-    <MenubarPrimitive.SubTrigger
-      data-slot="menubar-sub-trigger"
+    <SdkMenuSubTrigger
       data-inset={props.inset || undefined}
       class={cn(
         "cn-menubar-sub-trigger flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -264,48 +247,54 @@ const MenubarSubTrigger = <T extends ValidComponent = "div">(props: MenubarSubTr
       {...others}
     >
       {props.children}
-      <ChevronRightIcon class="ml-auto" />
-    </MenubarPrimitive.SubTrigger>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="ml-auto"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    </SdkMenuSubTrigger>
   )
 }
-
-type MenubarSubContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  MenubarPrimitive.MenubarSubContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const MenubarSubContent = <T extends ValidComponent = "div">(props: MenubarSubContentProps<T>) => {
-  const others = omit(props as MenubarSubContentProps, "class")
-  return (
-    <MenubarPrimitive.Portal>
-      <MenubarPrimitive.SubContent
-        data-slot="menubar-sub-content"
-        class={cn(
-          "cn-menubar-sub-content z-50 max-h-(--kb-popper-available-height) min-w-32 origin-(--kb-menu-content-transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
-          props.class
-        )}
-        {...others}
-      />
-    </MenubarPrimitive.Portal>
-  )
+type MenubarSubContentProps = Omit<
+  ComponentProps<typeof SdkMenuSubContent>,
+  "class"
+> & {
+  class?: string
 }
-
+const MenubarSubContent = (props: MenubarSubContentProps) => (
+  <>
+    <SdkMenuSubContent
+      {...props}
+      class={cn(
+        "cn-menubar-sub-content cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
+        props.class
+      )}
+    />
+  </>
+)
 export {
   Menubar,
-  MenubarMenu,
-  MenubarPortal,
-  MenubarTrigger,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarGroup,
   MenubarItem,
-  MenubarCheckboxItem,
+  MenubarLabel,
+  MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
-  MenubarLabel,
   MenubarSeparator,
   MenubarShortcut,
   MenubarSub,
+  MenubarSubContent,
   MenubarSubTrigger,
-  MenubarSubContent
+  MenubarTrigger
 }

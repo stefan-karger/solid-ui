@@ -38,63 +38,59 @@ const instanceId = `code-block-command-${randomUUID()}`
     </div>
 
     <div aria-label="Package manager" class="flex items-center" role="tablist">
-      {
-        PACKAGE_MANAGERS.map((packageManager) => {
-          const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
-          const tabId = `${instanceId}-${packageManager}-tab`
-          const panelId = `${instanceId}-${packageManager}-panel`
-
-          return (
-            <button
-              aria-controls={panelId}
-              aria-selected={isActive ? "true" : "false"}
-              class="h-7 rounded-md border border-transparent px-2 pt-0.5 font-mono text-sm text-muted-foreground shadow-none outline-none transition-colors hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=active]:border-input data-[state=active]:bg-background data-[state=active]:text-foreground"
-              data-command-tab
-              data-package-manager={packageManager}
-              data-state={isActive ? "active" : "inactive"}
-              id={tabId}
-              role="tab"
-              tabindex={isActive ? 0 : -1}
-              type="button"
-            >
-              {packageManager}
-            </button>
-          )
-        })
-      }
-    </div>
-  </div>
-
-  <div class="no-scrollbar overflow-x-auto">
-    {
-      PACKAGE_MANAGERS.map((packageManager) => {
+      {PACKAGE_MANAGERS.map((packageManager) => {
         const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
         const tabId = `${instanceId}-${packageManager}-tab`
         const panelId = `${instanceId}-${packageManager}-panel`
 
         return (
-          <div
-            aria-labelledby={tabId}
-            data-command-panel
-            data-command={commands[packageManager]}
+          <button
+            aria-controls={panelId}
+            aria-selected={isActive ? "true" : "false"}
+            class="h-7 rounded-md border border-transparent px-2 pt-0.5 font-mono text-sm text-muted-foreground shadow-none transition-colors outline-none hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[state=active]:border-input data-[state=active]:bg-background data-[state=active]:text-foreground"
+            data-command-tab
             data-package-manager={packageManager}
             data-state={isActive ? "active" : "inactive"}
-            hidden={!isActive}
-            id={panelId}
-            role="tabpanel"
-            tabindex="0"
+            id={tabId}
+            role="tab"
+            tabindex={isActive ? 0 : -1}
+            type="button"
           >
-            {/* prettier-ignore */}
-            <pre class="px-4 py-3.5"><code class="relative block font-mono text-sm leading-none text-foreground" data-language="bash" set:text={commands[packageManager]} /></pre>
-          </div>
+            {packageManager}
+          </button>
         )
-      })
-    }
+      })}
+    </div>
+  </div>
+
+  <div class="no-scrollbar overflow-x-auto">
+    {PACKAGE_MANAGERS.map((packageManager) => {
+      const isActive = packageManager === DEFAULT_PACKAGE_MANAGER
+      const tabId = `${instanceId}-${packageManager}-tab`
+      const panelId = `${instanceId}-${packageManager}-panel`
+
+      return (
+        <div
+          aria-labelledby={tabId}
+          data-command-panel
+          data-command={commands[packageManager]}
+          data-package-manager={packageManager}
+          data-state={isActive ? "active" : "inactive"}
+          hidden={!isActive}
+          id={panelId}
+          role="tabpanel"
+          tabindex="0"
+        >
+          {/* prettier-ignore */}
+          <pre class="px-4 py-3.5"><code class="relative block font-mono text-sm leading-none text-foreground" data-language="bash" set:text={commands[packageManager]} /></pre>
+        </div>
+      )
+    })}
   </div>
 
   <button
     aria-label="Copy command"
-    class="absolute top-2 right-2 z-10 flex size-7 items-center justify-center rounded-md text-code-foreground opacity-70 outline-none transition-[color,opacity,box-shadow] hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    class="absolute top-2 right-2 z-10 flex size-7 items-center justify-center rounded-md text-code-foreground opacity-70 transition-[color,opacity,box-shadow] outline-none hover:bg-muted hover:opacity-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
     data-copy-command
     data-slot="copy-button"
     type="button"
@@ -132,17 +128,25 @@ const instanceId = `code-block-command-${randomUUID()}`
 
 <script>
   import { copyToClipboard } from "~/lib/clipboard"
+  import { setCopyFeedback } from "~/lib/copy-buttons"
 
   const STORAGE_KEY = "solid-ui-package-manager"
   const CHANGE_EVENT = "solid-ui:package-manager-change"
   const DEFAULT_PACKAGE_MANAGER = "pnpm"
   type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
-  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set(["pnpm", "npm", "yarn", "bun"])
+  const PACKAGE_MANAGERS: ReadonlySet<string> = new Set([
+    "pnpm",
+    "npm",
+    "yarn",
+    "bun"
+  ])
   const copyOperationIds = new WeakMap<HTMLButtonElement, number>()
   const copyResetTimers = new WeakMap<HTMLButtonElement, number>()
 
-  function isPackageManager(value: string | undefined): value is PackageManager {
+  function isPackageManager(
+    value: string | undefined
+  ): value is PackageManager {
     return value !== undefined && PACKAGE_MANAGERS.has(value)
   }
 
@@ -153,7 +157,9 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function resetCopyFeedback(root: HTMLElement) {
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
+    const copyButton = root.querySelector<HTMLButtonElement>(
+      "[data-copy-command]"
+    )
     if (!copyButton) return
 
     nextCopyOperation(copyButton)
@@ -162,21 +168,21 @@ const instanceId = `code-block-command-${randomUUID()}`
     if (resetTimer !== undefined) window.clearTimeout(resetTimer)
     copyResetTimers.delete(copyButton)
 
-    delete copyButton.dataset.copied
-    copyButton.setAttribute("aria-label", "Copy command")
-    root.querySelector<SVGElement>("[data-copy-icon]")?.classList.remove("hidden")
-    root.querySelector<SVGElement>("[data-check-icon]")?.classList.add("hidden")
-
-    const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
-    if (copyStatus) copyStatus.textContent = ""
+    setCopyFeedback(copyButton, root, "command", "idle")
   }
 
-  function setPackageManager(root: HTMLElement, packageManager: PackageManager, focus = false) {
+  function setPackageManager(
+    root: HTMLElement,
+    packageManager: PackageManager,
+    focus = false
+  ) {
     if (root.dataset.packageManager !== packageManager) resetCopyFeedback(root)
 
     root.dataset.packageManager = packageManager
 
-    for (const tab of root.querySelectorAll<HTMLElement>("[data-command-tab]")) {
+    for (const tab of root.querySelectorAll<HTMLElement>(
+      "[data-command-tab]"
+    )) {
       const isActive = tab.dataset.packageManager === packageManager
       tab.dataset.state = isActive ? "active" : "inactive"
       tab.setAttribute("aria-selected", String(isActive))
@@ -184,7 +190,9 @@ const instanceId = `code-block-command-${randomUUID()}`
       if (isActive && focus) tab.focus()
     }
 
-    for (const panel of root.querySelectorAll<HTMLElement>("[data-command-panel]")) {
+    for (const panel of root.querySelectorAll<HTMLElement>(
+      "[data-command-panel]"
+    )) {
       const isActive = panel.dataset.packageManager === packageManager
       panel.dataset.state = isActive ? "active" : "inactive"
       panel.hidden = !isActive
@@ -198,7 +206,9 @@ const instanceId = `code-block-command-${randomUUID()}`
       // Storage may be disabled; the command block remains fully functional.
     }
 
-    window.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: packageManager }))
+    window.dispatchEvent(
+      new CustomEvent(CHANGE_EVENT, { detail: packageManager })
+    )
   }
 
   function getStoredPackageManager() {
@@ -211,14 +221,19 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function synchronizePackageManager(packageManager: PackageManager) {
-    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+    for (const root of document.querySelectorAll<HTMLElement>(
+      "[data-code-block-command]"
+    )) {
       setPackageManager(root, packageManager)
     }
   }
 
   function handlePackageManagerChange(event: Event) {
     const packageManager = (event as CustomEvent<unknown>).detail
-    if (typeof packageManager === "string" && isPackageManager(packageManager)) {
+    if (
+      typeof packageManager === "string" &&
+      isPackageManager(packageManager)
+    ) {
       synchronizePackageManager(packageManager)
     }
   }
@@ -228,9 +243,14 @@ const instanceId = `code-block-command-${randomUUID()}`
     root.dataset.initialized = "true"
 
     const tabs = [...root.querySelectorAll<HTMLElement>("[data-command-tab]")]
-    const copyButton = root.querySelector<HTMLButtonElement>("[data-copy-command]")
+    const copyButton = root.querySelector<HTMLButtonElement>(
+      "[data-copy-command]"
+    )
 
-    setPackageManager(root, getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER)
+    setPackageManager(
+      root,
+      getStoredPackageManager() ?? DEFAULT_PACKAGE_MANAGER
+    )
 
     for (const [index, tab] of tabs.entries()) {
       tab.addEventListener("click", () => {
@@ -243,7 +263,8 @@ const instanceId = `code-block-command-${randomUUID()}`
       tab.addEventListener("keydown", (event) => {
         let nextIndex: number | undefined
         if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length
-        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length
+        if (event.key === "ArrowLeft")
+          nextIndex = (index - 1 + tabs.length) % tabs.length
         if (event.key === "Home") nextIndex = 0
         if (event.key === "End") nextIndex = tabs.length - 1
         if (nextIndex === undefined) return
@@ -264,20 +285,14 @@ const instanceId = `code-block-command-${randomUUID()}`
       if (!command) return
 
       const operationId = nextCopyOperation(copyButton)
-      if (!(await copyToClipboard(command)) || copyOperationIds.get(copyButton) !== operationId) {
-        return
-      }
+      const copied = await copyToClipboard(command)
+      if (copyOperationIds.get(copyButton) !== operationId) return
 
-      copyButton.dataset.copied = "true"
-      copyButton.setAttribute("aria-label", "Command copied")
-      root.querySelector<SVGElement>("[data-copy-icon]")?.classList.add("hidden")
-      root.querySelector<SVGElement>("[data-check-icon]")?.classList.remove("hidden")
-
-      const copyStatus = root.querySelector<HTMLElement>("[data-copy-status]")
-      if (copyStatus) copyStatus.textContent = "Command copied"
+      setCopyFeedback(copyButton, root, "command", copied ? "success" : "error")
 
       const previousResetTimer = copyResetTimers.get(copyButton)
-      if (previousResetTimer !== undefined) window.clearTimeout(previousResetTimer)
+      if (previousResetTimer !== undefined)
+        window.clearTimeout(previousResetTimer)
 
       copyResetTimers.set(
         copyButton,
@@ -287,7 +302,9 @@ const instanceId = `code-block-command-${randomUUID()}`
   }
 
   function initializeCommandBlocks() {
-    for (const root of document.querySelectorAll<HTMLElement>("[data-code-block-command]")) {
+    for (const root of document.querySelectorAll<HTMLElement>(
+      "[data-code-block-command]"
+    )) {
       initializeCommandBlock(root)
     }
   }

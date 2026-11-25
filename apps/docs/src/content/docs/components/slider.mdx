@@ -30,7 +30,7 @@ npx solidui-cli@latest add slider
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -55,31 +55,29 @@ import { Slider } from "~/components/ui/slider"
 <Slider defaultValue={[33]} max={100} step={1} />
 ```
 
-## Examples
-
-### Range
+## Range
 
 Use an array with two values for a range slider.
 
 <ComponentPreview name="slider-range" />
 
-### Multiple
+## Multiple Thumbs
 
 Use an array with multiple values for multiple thumbs.
 
 <ComponentPreview name="slider-multiple" />
 
-### Vertical
+## Vertical
 
 Use `orientation="vertical"` for a vertical slider.
 
 <ComponentPreview name="slider-vertical" />
 
-### Controlled
+## Controlled
 
 <ComponentPreview name="slider-controlled" />
 
-### Disabled
+## Disabled
 
 Use the `disabled` prop to disable the slider.
 
@@ -87,10 +85,8 @@ Use the `disabled` prop to disable the slider.
 
 ## API Reference
 
-### Core Parts
-
 | Part     | Description                                                       |
 | -------- | ----------------------------------------------------------------- |
 | `Slider` | Slider root with built-in track, fill, thumbs, and hidden inputs. |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/slider) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/slider) documentation for more information.

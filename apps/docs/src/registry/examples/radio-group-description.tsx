@@ -1,4 +1,9 @@
-import { Field, FieldContent, FieldDescription, FieldLabel } from "~/registry/ui/field"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel
+} from "~/registry/ui/field"
 import { RadioGroup, RadioGroupItem } from "~/registry/ui/radio-group"
 
 export default function RadioGroupDescription() {
@@ -8,7 +13,9 @@ export default function RadioGroupDescription() {
         <RadioGroupItem id="desc-r1" value="default" />
         <FieldContent>
           <FieldLabel for="desc-r1">Default</FieldLabel>
-          <FieldDescription>Standard spacing for most use cases.</FieldDescription>
+          <FieldDescription>
+            Standard spacing for most use cases.
+          </FieldDescription>
         </FieldContent>
       </Field>
       <Field orientation="horizontal">
@@ -22,7 +29,9 @@ export default function RadioGroupDescription() {
         <RadioGroupItem id="desc-r3" value="compact" />
         <FieldContent>
           <FieldLabel for="desc-r3">Compact</FieldLabel>
-          <FieldDescription>Minimal spacing for dense layouts.</FieldDescription>
+          <FieldDescription>
+            Minimal spacing for dense layouts.
+          </FieldDescription>
         </FieldContent>
       </Field>
     </RadioGroup>

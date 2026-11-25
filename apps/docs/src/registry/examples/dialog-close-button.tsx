@@ -15,13 +15,17 @@ import { Label } from "~/registry/ui/label"
 export default function DialogCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger as={Button} variant="outline">
+      <DialogTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+      >
         Share
       </DialogTrigger>
       <DialogContent class="sm:max-w-md" showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>
+          <DialogDescription>
+            Anyone who has this link will be able to view this.
+          </DialogDescription>
         </DialogHeader>
         <div class="flex items-center gap-2">
           <div class="grid flex-1 gap-2">
@@ -31,12 +35,15 @@ export default function DialogCloseButton() {
             <Input
               id="dialog-close-button-link"
               readonly
-              value="https://ui.shadcn.com/docs/installation"
+              value="https://www.solid-ui.com/docs/"
             />
           </div>
         </div>
         <DialogFooter class="sm:justify-start">
-          <DialogClose as={Button} type="button">
+          <DialogClose
+            render={(partProps) => <Button {...partProps} />}
+            type="button"
+          >
             Close
           </DialogClose>
         </DialogFooter>

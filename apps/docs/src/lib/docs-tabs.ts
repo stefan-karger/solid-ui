@@ -7,7 +7,10 @@ type TabsChangeDetail = {
   value: string
 }
 
-function scopedElements<T extends Element>(root: HTMLElement, selector: string) {
+function scopedElements<T extends Element>(
+  root: HTMLElement,
+  selector: string
+) {
   return [...root.querySelectorAll<T>(selector)].filter(
     (element) => element.closest("[data-docs-tabs]") === root
   )
@@ -16,22 +19,33 @@ function scopedElements<T extends Element>(root: HTMLElement, selector: string) 
 function initializeDocsTabsRoot(root: HTMLElement) {
   if (root.dataset.tabsInitialized === "true") return
 
-  const allTriggers = scopedElements<HTMLButtonElement>(root, "[data-tabs-trigger]")
+  const allTriggers = scopedElements<HTMLButtonElement>(
+    root,
+    "[data-tabs-trigger]"
+  )
   const allPanels = scopedElements<HTMLElement>(root, "[data-tabs-content]")
-  const panelValues = new Set(allPanels.map((panel) => panel.dataset.value).filter(Boolean))
+  const panelValues = new Set(
+    allPanels.map((panel) => panel.dataset.value).filter(Boolean)
+  )
   const values = [
     ...new Set(
       allTriggers
         .map((trigger) => trigger.dataset.value)
-        .filter((value): value is string => Boolean(value) && panelValues.has(value))
+        .filter(
+          (value): value is string => Boolean(value) && panelValues.has(value)
+        )
     )
   ]
 
   if (!values.length) return
 
   const validValues = new Set(values)
-  const triggers = allTriggers.filter((trigger) => validValues.has(trigger.dataset.value ?? ""))
-  const panels = allPanels.filter((panel) => validValues.has(panel.dataset.value ?? ""))
+  const triggers = allTriggers.filter((trigger) =>
+    validValues.has(trigger.dataset.value ?? "")
+  )
+  const panels = allPanels.filter((panel) =>
+    validValues.has(panel.dataset.value ?? "")
+  )
   const rootId = ++tabsId
 
   for (const value of values) {
@@ -107,7 +121,8 @@ function initializeDocsTabsRoot(root: HTMLElement) {
 
       if (event.key === "ArrowLeft")
         nextIndex = (currentIndex - 1 + triggers.length) % triggers.length
-      if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % triggers.length
+      if (event.key === "ArrowRight")
+        nextIndex = (currentIndex + 1) % triggers.length
       if (event.key === "Home") nextIndex = 0
       if (event.key === "End") nextIndex = triggers.length - 1
       if (nextIndex === undefined) return
@@ -125,7 +140,11 @@ function initializeDocsTabsRoot(root: HTMLElement) {
   if (storageKey) {
     document.addEventListener(TABS_CHANGE_EVENT, (event) => {
       const detail = (event as CustomEvent<Partial<TabsChangeDetail>>).detail
-      if (detail?.storageKey === storageKey && detail.value && validValues.has(detail.value)) {
+      if (
+        detail?.storageKey === storageKey &&
+        detail.value &&
+        validValues.has(detail.value)
+      ) {
         setValue(detail.value)
       }
     })
@@ -137,7 +156,9 @@ function initializeDocsTabsRoot(root: HTMLElement) {
 }
 
 export function initializeDocsTabs() {
-  for (const root of document.querySelectorAll<HTMLElement>("[data-docs-tabs]")) {
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-docs-tabs]"
+  )) {
     initializeDocsTabsRoot(root)
   }
 }

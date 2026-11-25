@@ -1,19 +1,19 @@
 import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 
-export default function AvatarSize() {
+export default function AvatarSizeExample() {
   return (
     <div class="flex flex-wrap items-center gap-2 grayscale">
       <Avatar size="sm">
-        <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="/avatars/03.png" alt="@alex" />
+        <AvatarFallback>AM</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="/avatars/03.png" alt="@alex" />
+        <AvatarFallback>AM</AvatarFallback>
       </Avatar>
       <Avatar size="lg">
-        <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="/avatars/03.png" alt="@alex" />
+        <AvatarFallback>AM</AvatarFallback>
       </Avatar>
     </div>
   )

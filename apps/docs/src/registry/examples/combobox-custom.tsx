@@ -1,74 +1,103 @@
-import { Dynamic } from "@solidjs/web"
-import { ChartNoAxesColumnIcon, MegaphoneIcon, PaletteIcon, type LucideIcon } from "lucide-solid"
+import { For } from "solid-js"
 
 import {
   Combobox,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-  ComboboxItemText,
-  ComboboxList,
-  ComboboxTrigger
+  ComboboxList
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemTitle
+} from "~/registry/ui/item"
 
-type Repository = {
-  value: string
-  label: string
-  description: string
-  icon: LucideIcon
-}
-
-const repositories: Repository[] = [
+const countries = [
+  { code: "", value: "", continent: "", label: "Select country" },
   {
-    value: "design-system",
-    label: "design-system",
-    description: "Shared components and tokens",
-    icon: PaletteIcon
+    code: "ar",
+    value: "argentina",
+    label: "Argentina",
+    continent: "South America"
+  },
+  { code: "au", value: "australia", label: "Australia", continent: "Oceania" },
+  { code: "br", value: "brazil", label: "Brazil", continent: "South America" },
+  { code: "ca", value: "canada", label: "Canada", continent: "North America" },
+  { code: "cn", value: "china", label: "China", continent: "Asia" },
+  {
+    code: "co",
+    value: "colombia",
+    label: "Colombia",
+    continent: "South America"
+  },
+  { code: "eg", value: "egypt", label: "Egypt", continent: "Africa" },
+  { code: "fr", value: "france", label: "France", continent: "Europe" },
+  { code: "de", value: "germany", label: "Germany", continent: "Europe" },
+  { code: "it", value: "italy", label: "Italy", continent: "Europe" },
+  { code: "jp", value: "japan", label: "Japan", continent: "Asia" },
+  { code: "ke", value: "kenya", label: "Kenya", continent: "Africa" },
+  { code: "mx", value: "mexico", label: "Mexico", continent: "North America" },
+  {
+    code: "nz",
+    value: "new-zealand",
+    label: "New Zealand",
+    continent: "Oceania"
+  },
+  { code: "ng", value: "nigeria", label: "Nigeria", continent: "Africa" },
+  {
+    code: "za",
+    value: "south-africa",
+    label: "South Africa",
+    continent: "Africa"
+  },
+  { code: "kr", value: "south-korea", label: "South Korea", continent: "Asia" },
+  {
+    code: "gb",
+    value: "united-kingdom",
+    label: "United Kingdom",
+    continent: "Europe"
   },
   {
-    value: "marketing-site",
-    label: "marketing-site",
-    description: "Landing pages and content",
-    icon: MegaphoneIcon
-  },
-  {
-    value: "analytics-api",
-    label: "analytics-api",
-    description: "Event ingestion service",
-    icon: ChartNoAxesColumnIcon
+    code: "us",
+    value: "united-states",
+    label: "United States",
+    continent: "North America"
   }
 ]
 
-export default function ComboboxCustom() {
+export default function ComboboxWithCustomItems() {
   return (
-    <Combobox<Repository>
-      options={repositories}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      placeholder="Select a repository"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>
-          <Dynamic class="size-4 text-muted-foreground" component={props.item.rawValue.icon} />
-          <ComboboxItemText class="flex-col gap-0">
-            <span class="font-medium">{props.item.rawValue.label}</span>
-            <span class="text-xs text-muted-foreground">{props.item.rawValue.description}</span>
-          </ComboboxItemText>
-        </ComboboxItem>
-      )}
+    <Combobox<(typeof countries)[number]>
+      itemToLabel={(country) => country.label}
+      itemToValue={(country) => country.value}
     >
-      <ComboboxControl class="max-w-md">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxTrigger />
-        </InputGroupAddon>
-      </ComboboxControl>
+      <ComboboxInput
+        placeholder="Search countries..."
+        aria-label="Search countries"
+      />
       <ComboboxContent>
-        <ComboboxList />
-        <ComboboxEmpty>No repository found.</ComboboxEmpty>
+        <ComboboxEmpty>No countries found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={countries.filter((country) => country.code !== "")}>
+            {(country) => (
+              <ComboboxItem value={country} label={country.label}>
+                <Item size="xs" class="p-0">
+                  <ItemContent>
+                    <ItemTitle class="whitespace-nowrap">
+                      {country.label}
+                    </ItemTitle>
+                    <ItemDescription>
+                      {country.continent} ({country.code})
+                    </ItemDescription>
+                  </ItemContent>
+                </Item>
+              </ComboboxItem>
+            )}
+          </For>
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   )

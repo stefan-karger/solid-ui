@@ -47,19 +47,21 @@ import { AspectRatio } from "~/components/ui/aspect-ratio"
 
 ```tsx
 <AspectRatio ratio={16 / 9}>
-  <Image src="..." alt="Image" className="rounded-md object-cover" />
+  <img
+    src="/photo.jpg"
+    alt="Mountain landscape"
+    class="size-full object-cover"
+  />
 </AspectRatio>
 ```
 
-## Examples
-
-### Square
+## Square
 
 A square aspect ratio component using the `ratio={1 / 1}` prop. This is useful for displaying images in a square format.
 
 <ComponentPreview name="aspect-ratio-square" />
 
-### Portrait
+## Portrait
 
 A portrait aspect ratio component using the `ratio={9 / 16}` prop. This is useful for displaying images in a portrait format.
 

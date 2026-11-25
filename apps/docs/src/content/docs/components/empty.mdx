@@ -27,6 +27,12 @@ npx solidui-cli@latest add empty
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="empty" title="components/ui/empty.tsx" />
@@ -47,7 +53,6 @@ import {
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
-  EmptyMedia,
   EmptyTitle
 } from "~/components/ui/empty"
 ```
@@ -55,16 +60,14 @@ import {
 ```tsx showLineNumbers
 <Empty>
   <EmptyHeader>
-    <EmptyMedia variant="icon">
-      <Icon />
-    </EmptyMedia>
     <EmptyTitle>No projects yet</EmptyTitle>
     <EmptyDescription>
-      You haven&apos;t created any projects yet. Get started by creating your first project.
+      You haven&apos;t created any projects yet. Get started by creating your
+      first project.
     </EmptyDescription>
   </EmptyHeader>
   <EmptyContent>
-    <Button>Create project</Button>
+    <button type="button">Create project</button>
   </EmptyContent>
 </Empty>
 ```
@@ -82,33 +85,31 @@ Empty
 └── EmptyContent
 ```
 
-## Examples
+## Outline
 
-### Outline
-
-Use `EmptyMedia` with `variant="icon"` and an outline-style action.
+Use the `border` utility class to create an outline empty state.
 
 <ComponentPreview name="empty-outline" previewClassName="h-96 p-6 md:p-10" />
 
-### Background
+## Background
 
 Use the `bg-*` and `bg-gradient-*` utilities to add a background to the empty state.
 
 <ComponentPreview name="empty-background" previewClassName="h-96 p-0" />
 
-### Avatar
+## Avatar
 
 Use the `EmptyMedia` component to display an avatar in the empty state.
 
 <ComponentPreview name="empty-avatar" previewClassName="h-96 p-0" />
 
-### Avatar Group
+## Avatar Group
 
 Use the `EmptyMedia` component to display an avatar group in the empty state.
 
 <ComponentPreview name="empty-avatar-group" previewClassName="h-96 p-0" />
 
-### Input Group
+## InputGroup
 
 You can add an `InputGroup` component to the `EmptyContent` component.
 

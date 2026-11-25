@@ -1,46 +1,43 @@
-import * as HoverCardPrimitive from "@kobalte/core/hover-card"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
+type HoverCardProps = ComponentProps<typeof SdkHoverCard>
+import { type ComponentProps } from "@solidjs/web"
+import {
+  HoverCard as SdkHoverCard,
+  HoverCardTrigger as SdkHoverCardTrigger,
+  HoverCardContent as SdkHoverCardContent
+} from "@ui-sdk/solid/hover-card"
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const HoverCard = (props: HoverCardPrimitive.HoverCardRootProps) => {
-  const others = omit(props, "gutter")
-  return <HoverCardPrimitive.Root data-slot="hover-card" gutter={props.gutter ?? 4} {...others} />
+const HoverCard = (props: HoverCardProps) => <SdkHoverCard {...props} />
+type HoverCardTriggerProps = Omit<
+  ComponentProps<typeof SdkHoverCardTrigger>,
+  "class"
+> & {
+  class?: string
 }
-
-type HoverCardTriggerProps<T extends ValidComponent = "a"> = PolymorphicProps<
-  T,
-  HoverCardPrimitive.HoverCardTriggerProps<T>
->
-
-const HoverCardTrigger = <T extends ValidComponent = "a">(props: HoverCardTriggerProps<T>) => (
-  <HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />
+const HoverCardTrigger = (props: HoverCardTriggerProps) => (
+  <SdkHoverCardTrigger {...props} />
 )
-
-type HoverCardContentProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  HoverCardPrimitive.HoverCardContentProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children">
-
-const HoverCardContent = <T extends ValidComponent = "div">(props: HoverCardContentProps<T>) => {
-  const others = omit(props as HoverCardContentProps, "class", "children")
+type HoverCardContentProps = Omit<
+  ComponentProps<typeof SdkHoverCardContent>,
+  "class"
+> & {
+  class?: string
+}
+const HoverCardContent = (props: HoverCardContentProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <HoverCardPrimitive.Portal>
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
+    <>
+      <SdkHoverCardContent
         class={cn(
-          "cn-hover-card-content z-50 origin-(--kb-hovercard-content-transform-origin) outline-hidden",
+          "cn-hover-card-content z-50 origin-(--transform-origin) outline-hidden",
           props.class
         )}
         {...others}
       >
         {props.children}
-      </HoverCardPrimitive.Content>
-    </HoverCardPrimitive.Portal>
+      </SdkHoverCardContent>
+    </>
   )
 }
-
-export { HoverCard, HoverCardTrigger, HoverCardContent }
+export { HoverCard, HoverCardContent, HoverCardTrigger }

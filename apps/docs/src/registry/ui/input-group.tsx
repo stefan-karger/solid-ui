@@ -9,20 +9,17 @@ import { Textarea } from "~/registry/ui/textarea"
 
 type InputGroupProps = ComponentProps<"div">
 
-const InputGroup = (props: InputGroupProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="input-group"
-      role="group"
-      class={cn(
-        "cn-input-group group/input-group relative flex w-full min-w-0 items-center outline-none has-[>textarea]:h-auto",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const InputGroup = (props: InputGroupProps) => (
+  <div
+    data-slot="input-group"
+    role="group"
+    {...props}
+    class={cn(
+      "cn-input-group group/input-group relative flex w-full min-w-0 items-center outline-none has-[>textarea]:h-auto",
+      props.class
+    )}
+  />
+)
 
 const inputGroupAddonVariants = cva(
   "cn-input-group-addon flex cursor-text items-center justify-center select-none",
@@ -31,8 +28,10 @@ const inputGroupAddonVariants = cva(
       align: {
         "inline-start": "cn-input-group-addon-align-inline-start order-first",
         "inline-end": "cn-input-group-addon-align-inline-end order-last",
-        "block-start": "cn-input-group-addon-align-block-start order-first w-full justify-start",
-        "block-end": "cn-input-group-addon-align-block-end order-last w-full justify-start"
+        "block-start":
+          "cn-input-group-addon-align-block-start order-first w-full justify-start",
+        "block-end":
+          "cn-input-group-addon-align-block-end order-last w-full justify-start"
       }
     },
     defaultVariants: {
@@ -41,9 +40,13 @@ const inputGroupAddonVariants = cva(
   }
 )
 
-type InputGroupAddonProps = ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>
+type InputGroupAddonProps = ComponentProps<"div"> &
+  VariantProps<typeof inputGroupAddonVariants>
 
-const handleInputGroupAddonClick: JSX.EventHandler<HTMLDivElement, MouseEvent> = (event) => {
+const handleInputGroupAddonClick: JSX.EventHandler<
+  HTMLDivElement,
+  MouseEvent
+> = (event) => {
   if ((event.target as HTMLElement).closest("button")) {
     return
   }
@@ -65,19 +68,22 @@ const InputGroupAddon = (props: InputGroupAddonProps) => {
   )
 }
 
-const inputGroupButtonVariants = cva("cn-input-group-button flex items-center shadow-none", {
-  variants: {
-    size: {
-      xs: "cn-input-group-button-size-xs",
-      sm: "cn-input-group-button-size-sm",
-      "icon-xs": "cn-input-group-button-size-icon-xs",
-      "icon-sm": "cn-input-group-button-size-icon-sm"
+const inputGroupButtonVariants = cva(
+  "cn-input-group-button flex items-center shadow-none",
+  {
+    variants: {
+      size: {
+        xs: "cn-input-group-button-size-xs",
+        sm: "cn-input-group-button-size-sm",
+        "icon-xs": "cn-input-group-button-size-icon-xs",
+        "icon-sm": "cn-input-group-button-size-icon-sm"
+      }
+    },
+    defaultVariants: {
+      size: "xs"
     }
-  },
-  defaultVariants: {
-    size: "xs"
   }
-})
+)
 
 type InputGroupButtonProps = Omit<ButtonProps, "size"> &
   VariantProps<typeof inputGroupButtonVariants> & {
@@ -102,53 +108,49 @@ const InputGroupButton = (props: InputGroupButtonProps) => {
 
 type InputGroupTextProps = ComponentProps<"span">
 
-const InputGroupText = (props: InputGroupTextProps) => {
-  const others = omit(props, "class")
-  return (
-    <span
-      class={cn("cn-input-group-text flex items-center [&_svg]:pointer-events-none", props.class)}
-      {...others}
-    />
-  )
-}
+const InputGroupText = (props: InputGroupTextProps) => (
+  <span
+    {...props}
+    class={cn(
+      "cn-input-group-text flex items-center [&_svg]:pointer-events-none",
+      props.class
+    )}
+  />
+)
 
 type InputGroupInputProps = ComponentProps<"input">
 
-const InputGroupInput = (props: InputGroupInputProps) => {
-  const others = omit(props, "class")
-  return (
-    <Input
-      data-slot="input-group-control"
-      class={cn("cn-input-group-input flex-1", props.class)}
-      {...others}
-    />
-  )
-}
+const InputGroupInput = (props: InputGroupInputProps) => (
+  <Input
+    data-slot="input-group-control"
+    data-ui="input-group-control"
+    {...props}
+    class={cn("cn-input-group-input flex-1", props.class)}
+  />
+)
 
 type InputGroupTextareaProps = ComponentProps<"textarea">
 
-const InputGroupTextarea = (props: InputGroupTextareaProps) => {
-  const others = omit(props, "class")
-  return (
-    <Textarea
-      data-slot="input-group-control"
-      class={cn("cn-input-group-textarea flex-1 resize-none", props.class)}
-      {...others}
-    />
-  )
-}
+const InputGroupTextarea = (props: InputGroupTextareaProps) => (
+  <Textarea
+    data-slot="input-group-control"
+    data-ui="input-group-control"
+    {...props}
+    class={cn("cn-input-group-textarea flex-1 resize-none", props.class)}
+  />
+)
 
 export {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
-  InputGroupText,
   InputGroupInput,
+  InputGroupText,
   InputGroupTextarea,
-  type InputGroupProps,
   type InputGroupAddonProps,
   type InputGroupButtonProps,
-  type InputGroupTextProps,
   type InputGroupInputProps,
-  type InputGroupTextareaProps
+  type InputGroupProps,
+  type InputGroupTextareaProps,
+  type InputGroupTextProps
 }

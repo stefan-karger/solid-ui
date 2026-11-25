@@ -4,10 +4,9 @@ description: A provider component that sets the text direction for your applicat
 component: true
 ---
 
-The `DirectionProvider` component sets the reading direction for your application. Use it to
-support both left-to-right and right-to-left interfaces from a single component tree.
+The `DirectionProvider` component is used to set the text direction (`ltr` or `rtl`) for your application. This is essential for supporting right-to-left languages like Arabic, Hebrew, and Persian.
 
-<ComponentPreview name="direction-demo" previewClassName="h-auto p-6" />
+Here's a preview of the component in RTL mode. Use the language selector to switch the language. To see more examples, look for the RTL section on components pages.
 
 ## Installation
 
@@ -30,12 +29,6 @@ npx solidui-cli@latest add direction
 
 <Steps class="mb-0 pt-2">
 
-<Step>Install the following dependencies:</Step>
-
-```bash
-npm install @kobalte/core
-```
-
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="direction" title="components/ui/direction.tsx" />
@@ -57,7 +50,9 @@ import { DirectionProvider } from "~/components/ui/direction"
 ```tsx showLineNumbers
 <html lang="ar" dir="rtl">
   <body>
-    <DirectionProvider direction="rtl">{/* Your app content */}</DirectionProvider>
+    <DirectionProvider direction="rtl">
+      <main>محتوى التطبيق</main>
+    </DirectionProvider>
   </body>
 </html>
 ```
@@ -75,21 +70,3 @@ const Example = () => {
   return <div>Current direction: {direction()}</div>
 }
 ```
-
-## API Reference
-
-### Core Parts
-
-| Name                | Description                                      |
-| ------------------- | ------------------------------------------------ |
-| `DirectionProvider` | Provides direction context to child content.     |
-| `useDirection`      | Returns a getter for the current text direction. |
-
-### DirectionProvider
-
-| Prop        | Type             |
-| ----------- | ---------------- |
-| `direction` | `"ltr" \| "rtl"` |
-| `locale`    | `string`         |
-
-See the [Kobalte](https://kobalte.dev/docs/core/utilities/i18n) documentation for more information.

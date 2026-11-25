@@ -2,7 +2,7 @@ import { ToggleGroup, ToggleGroupItem } from "~/registry/ui/toggle-group"
 
 export default function ToggleGroupOutline() {
   return (
-    <ToggleGroup defaultValue="all" variant="outline">
+    <ToggleGroup defaultValue={["all"]} variant="outline">
       <ToggleGroupItem aria-label="Toggle all" value="all">
         All
       </ToggleGroupItem>

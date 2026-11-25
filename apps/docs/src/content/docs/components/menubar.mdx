@@ -30,7 +30,7 @@ npx solidui-cli@latest add menubar
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -87,49 +87,63 @@ Use the following composition to build a `Menubar`:
 
 ```text
 Menubar
+├── MenubarMenu
+│   ├── MenubarTrigger
+│   └── MenubarContent
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarItem
+│       │   └── MenubarItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarCheckboxItem
+│       │   └── MenubarCheckboxItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   └── MenubarRadioGroup
+│       │       ├── MenubarRadioItem
+│       │       └── MenubarRadioItem
+│       └── MenubarSub
+│           ├── MenubarSubTrigger
+│           └── MenubarSubContent
+│               └── MenubarGroup
+│                   ├── MenubarLabel
+│                   ├── MenubarItem
+│                   └── MenubarItem
 └── MenubarMenu
     ├── MenubarTrigger
     └── MenubarContent
-        ├── MenubarGroup
-        │   ├── MenubarLabel
-        │   └── MenubarItem
-        ├── MenubarCheckboxItem
-        ├── MenubarRadioGroup
-        │   └── MenubarRadioItem
-        ├── MenubarSeparator
-        └── MenubarSub
-            ├── MenubarSubTrigger
-            └── MenubarSubContent
-                └── MenubarItem
+        └── MenubarGroup
+            ├── MenubarLabel
+            ├── MenubarItem
+            └── MenubarItem
 ```
 
-## Examples
-
-### Checkbox
+## Checkbox
 
 Use `MenubarCheckboxItem` for toggleable options.
 
 <ComponentPreview name="menubar-checkbox" />
 
-### Radio
+## Radio
 
 Use `MenubarRadioGroup` and `MenubarRadioItem` for single-select options.
 
 <ComponentPreview name="menubar-radio" />
 
-### Submenu
+## Submenu
 
 Use `MenubarSub`, `MenubarSubTrigger`, and `MenubarSubContent` for nested menus.
 
 <ComponentPreview name="menubar-submenu" />
 
-### With Icons
+## With Icons
 
 <ComponentPreview name="menubar-icons" />
 
 ## API Reference
-
-### Core Parts
 
 | Part                  | Description                                                    |
 | --------------------- | -------------------------------------------------------------- |
@@ -149,4 +163,4 @@ Use `MenubarSub`, `MenubarSubTrigger`, and `MenubarSubContent` for nested menus.
 | `MenubarLabel`        | Non-interactive section label for grouped items.               |
 | `MenubarShortcut`     | Right-aligned helper text for keyboard shortcuts or meta info. |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/menubar) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/menubar) documentation for more information.

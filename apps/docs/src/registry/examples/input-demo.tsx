@@ -6,7 +6,9 @@ export default function InputDemo() {
     <Field class="w-full max-w-xs">
       <FieldLabel for="input-demo-api-key">API Key</FieldLabel>
       <Input id="input-demo-api-key" placeholder="sk-..." type="password" />
-      <FieldDescription>Your API key is encrypted and stored securely.</FieldDescription>
+      <FieldDescription>
+        Your API key is encrypted and stored securely.
+      </FieldDescription>
     </Field>
   )
 }

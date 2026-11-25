@@ -1,17 +1,16 @@
-import { LoaderCircleIcon } from "lucide-solid"
-
 import { Button } from "~/registry/ui/button"
+import { Spinner } from "~/registry/ui/spinner"
 
 export default function ButtonSpinner() {
   return (
-    <div class="flex flex-wrap items-center gap-2">
-      <Button disabled>
-        <LoaderCircleIcon class="size-4 animate-spin" />
-        Saving...
+    <div class="flex gap-2">
+      <Button variant="outline" disabled>
+        <Spinner data-icon="inline-start" />
+        Generating
       </Button>
-      <Button disabled size="icon" variant="outline">
-        <LoaderCircleIcon class="size-4 animate-spin" />
-        <span class="sr-only">Loading</span>
+      <Button variant="secondary" disabled>
+        Downloading
+        <Spinner data-icon="inline-start" />
       </Button>
     </div>
   )

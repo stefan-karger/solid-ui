@@ -4,8 +4,31 @@ description: A styled native HTML select element with consistent design system i
 component: true
 ---
 
-<Callout variant="info" showIcon>
-  For a styled select component, see the [Select](/docs/components/select) component.
+{/* Inline SVG icon from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors. */}
+
+<Callout
+  variant="info"
+  icon={
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      class="translate-y-[3px]!"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
+    </svg>
+  }
+>
+  For a styled select component, see the [Select](/docs/components/select)
+  component.
 </Callout>
 
 <ComponentPreview name="native-select-demo" />
@@ -46,11 +69,7 @@ npx solidui-cli@latest add native-select
 ## Usage
 
 ```tsx showLineNumbers
-import {
-  NativeSelect,
-  NativeSelectOptGroup,
-  NativeSelectOption
-} from "~/components/ui/native-select"
+import { NativeSelect, NativeSelectOption } from "~/components/ui/native-select"
 ```
 
 ```tsx showLineNumbers
@@ -76,23 +95,47 @@ NativeSelect
     └── NativeSelectOption
 ```
 
-## Examples
+### Simple
 
-### Groups
+Options placed directly under `NativeSelect` (no `NativeSelectOptGroup`).
+
+```text
+NativeSelect
+├── NativeSelectOption
+├── NativeSelectOption
+├── NativeSelectOption
+└── NativeSelectOption
+```
+
+### With groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelectOptGroup
+│   ├── NativeSelectOption
+│   └── NativeSelectOption
+└── NativeSelectOptGroup
+    ├── NativeSelectOption
+    └── NativeSelectOption
+```
+
+## Groups
 
 Use `NativeSelectOptGroup` to organize options into categories.
 
 <ComponentPreview name="native-select-groups" />
 
-### Disabled
+## Disabled
 
 Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
 <ComponentPreview name="native-select-disabled" />
 
-### Invalid
+## Invalid
 
-Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the Field component for styling.
+Set `aria-invalid` on `NativeSelect` and `data-invalid` on `Field` to show a validation error.
 
 <ComponentPreview name="native-select-invalid" />
 
@@ -102,14 +145,6 @@ Use `aria-invalid` to show validation errors and the `data-invalid` attribute to
 - Use `Select` for custom styling, animations, or complex interactions.
 
 ## API Reference
-
-### Core Parts
-
-| Part                   | Description                                            |
-| ---------------------- | ------------------------------------------------------ |
-| `NativeSelect`         | Wrapper around the native `select` element and icon.   |
-| `NativeSelectOption`   | Individual option rendered as a native `option` node.  |
-| `NativeSelectOptGroup` | Groups related options using native `optgroup` markup. |
 
 ### NativeSelect
 

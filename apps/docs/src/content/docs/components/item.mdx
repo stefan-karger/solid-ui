@@ -29,6 +29,18 @@ npx solidui-cli@latest add item
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add separator
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="item" title="components/ui/item.tsx" />
@@ -49,22 +61,18 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
-  ItemMedia,
   ItemTitle
 } from "~/components/ui/item"
 ```
 
 ```tsx showLineNumbers
 <Item>
-  <ItemMedia variant="icon">
-    <Icon />
-  </ItemMedia>
   <ItemContent>
     <ItemTitle>Title</ItemTitle>
     <ItemDescription>Description</ItemDescription>
   </ItemContent>
   <ItemActions>
-    <Button>Action</Button>
+    <button type="button">Open</button>
   </ItemActions>
 </Item>
 ```
@@ -74,17 +82,18 @@ import {
 Use the following composition to build an `Item`:
 
 ```text
-Item
-├── ItemHeader
-├── ItemMedia
-├── ItemContent
-│   ├── ItemTitle
-│   └── ItemDescription
-├── ItemActions
-└── ItemFooter
+ItemGroup
+└── Item
+    ├── ItemHeader
+    ├── ItemMedia
+    ├── ItemContent
+    │   ├── ItemTitle
+    │   └── ItemDescription
+    ├── ItemActions
+    └── ItemFooter
 ```
 
-Use `ItemGroup` to stack related items together, with `ItemSeparator` between items when needed.
+Use `ItemSeparator` between items in a group when needed.
 
 ## Item vs Field
 
@@ -94,51 +103,49 @@ If you only need to display content such as a title, description, and actions, u
 
 ## Variant
 
-Use the `variant` prop to change the visual style of an item.
+Use the `variant` prop to change the visual style of the item.
 
 <ComponentPreview name="item-variant" previewClassName="h-96" />
 
 ## Size
 
-Use the `size` prop to adjust spacing density. Available sizes are `default`, `sm`, and `xs`.
+Use the `size` prop to change the size of the item. Available sizes are `default`, `sm`, and `xs`.
 
 <ComponentPreview name="item-size" previewClassName="h-96" />
 
-## Examples
+## Icon
 
-### Icon
-
-Use `ItemMedia` with `variant="icon"` to display icons.
+Use `ItemMedia` with `variant="icon"` to display an icon.
 
 <ComponentPreview name="item-icon" />
 
-### Avatar
+## Avatar
 
 You can use `ItemMedia` with `variant="avatar"` to display an avatar.
 
 <ComponentPreview name="item-avatar" />
 
-### Image
+## Image
 
-Use `ItemMedia` with `variant="image"` for thumbnail-driven rows.
+Use `ItemMedia` with `variant="image"` to display an image.
 
 <ComponentPreview name="item-image" />
 
-### Group
+## Group
 
 Use `ItemGroup` to group related items together.
 
 <ComponentPreview name="item-group" previewClassName="h-96" />
 
-### Header
+## Header
 
 Use `ItemHeader` to add a header above the item content.
 
 <ComponentPreview name="item-header" previewClassName="h-96" />
 
-### Link
+## Link
 
-Use the polymorphic `as` prop to render the item as a link. The hover and focus states will be applied to the anchor element.
+Use the `as` prop to render `Item` as a link. The anchor receives the hover and focus styles.
 
 <ComponentPreview name="item-link" />
 
@@ -154,7 +161,7 @@ Use the polymorphic `as` prop to render the item as a link. The hover and focus 
 </Item>
 ```
 
-### Dropdown
+## Dropdown
 
 <ComponentPreview name="item-dropdown" />
 

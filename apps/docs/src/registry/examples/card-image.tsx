@@ -16,7 +16,7 @@ export default function CardImage() {
       <img
         alt="Event cover"
         class="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
-        src="https://avatar.vercel.sh/shadcn1"
+        src="/solid-brand/launch-light.svg"
       />
       <CardHeader>
         <CardAction>
@@ -24,7 +24,8 @@ export default function CardImage() {
         </CardAction>
         <CardTitle>Design systems meetup</CardTitle>
         <CardDescription>
-          A practical talk on component APIs, accessibility, and shipping faster.
+          A practical talk on component APIs, accessibility, and shipping
+          faster.
         </CardDescription>
       </CardHeader>
       <CardFooter>

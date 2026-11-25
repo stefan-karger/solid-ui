@@ -1,5 +1,6 @@
-import { Dynamic } from "@solidjs/web"
-import { CreditCard, Settings, User, type LucideIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps } from "@solidjs/web"
+import { For, type Component } from "solid-js"
 import { createMemo, createSignal, Show } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -15,11 +16,71 @@ import {
   CommandShortcut
 } from "~/registry/ui/command"
 
+function CreditCard(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <rect width="20" height="14" x="2" y="5" rx="2" />
+      <line x1="2" x2="22" y1="10" y2="10" />
+    </svg>
+  )
+}
+
+function Settings(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  )
+}
+
+function User(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
 type CommandOption = {
   value: string
   label: string
   shortcut?: string
-  icon: LucideIcon
+  icon: Component<ComponentProps<"svg">>
 }
 
 type CommandGroupOption = {
@@ -73,31 +134,36 @@ export default function CommandShortcuts() {
         Open Menu
       </Button>
       <CommandDialog onOpenChange={handleOpenChange} open={open()}>
-        <Command<CommandOption, CommandGroupOption>
-          onInputChange={setQuery}
-          placeholder="Type a command or search..."
-          options={filteredOptions()}
-          optionGroupChildren="items"
-          optionValue="value"
-          optionTextValue="label"
-          optionLabel="label"
-          itemComponent={(props) => (
-            <CommandItem item={props.item}>
-              <Dynamic class="size-4" component={props.item.rawValue.icon} />
-              <span>{props.item.rawValue.label}</span>
-              <Show when={props.item.rawValue.shortcut}>
-                {(shortcut) => <CommandShortcut>{shortcut()}</CommandShortcut>}
-              </Show>
-            </CommandItem>
-          )}
-          sectionComponent={(props) => (
-            <CommandGroup>
-              <CommandGroupLabel>{props.section.rawValue.heading}</CommandGroupLabel>
-            </CommandGroup>
-          )}
-        >
-          <CommandInput />
-          <CommandList />
+        <Command onQueryChange={setQuery}>
+          <CommandInput
+            placeholder="Type a command or search..."
+            aria-label="Type a command or search..."
+          />
+          <CommandList>
+            <For each={filteredOptions()}>
+              {(group) => (
+                <CommandGroup>
+                  <CommandGroupLabel>{group.heading}</CommandGroupLabel>
+                  <For each={group["items"]}>
+                    {(option) => (
+                      <CommandItem
+                        value={option["value"]}
+                        label={option["label"]}
+                      >
+                        <option.icon class="size-4" />
+                        <span>{option.label}</span>
+                        <Show when={option.shortcut}>
+                          {(shortcut) => (
+                            <CommandShortcut>{shortcut()}</CommandShortcut>
+                          )}
+                        </Show>
+                      </CommandItem>
+                    )}
+                  </For>
+                </CommandGroup>
+              )}
+            </For>
+          </CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
         </Command>
       </CommandDialog>

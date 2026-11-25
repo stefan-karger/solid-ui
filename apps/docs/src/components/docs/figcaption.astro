@@ -9,7 +9,8 @@ type Props = HTMLAttributes<"figcaption"> & {
 }
 
 const { class: className, ...props } = Astro.props
-const language = typeof props["data-language"] === "string" ? props["data-language"] : ""
+const language =
+  typeof props["data-language"] === "string" ? props["data-language"] : ""
 ---
 
 <figcaption

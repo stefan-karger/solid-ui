@@ -36,14 +36,16 @@ function tabsMarkup({
 }
 
 function renderTabs(fixtures: TabsFixture[] = [{}]) {
-  document.body.innerHTML = fixtures.map((fixture) => tabsMarkup(fixture)).join("")
+  document.body.innerHTML = fixtures
+    .map((fixture) => tabsMarkup(fixture))
+    .join("")
   return [...document.querySelectorAll<HTMLElement>("[data-docs-tabs]")]
 }
 
 function triggers(root: HTMLElement) {
-  return [...root.querySelectorAll<HTMLButtonElement>("[data-tabs-trigger]")].filter(
-    (trigger) => trigger.closest("[data-docs-tabs]") === root
-  )
+  return [
+    ...root.querySelectorAll<HTMLButtonElement>("[data-tabs-trigger]")
+  ].filter((trigger) => trigger.closest("[data-docs-tabs]") === root)
 }
 
 function panels(root: HTMLElement) {
@@ -83,18 +85,26 @@ describe("initializeDocsTabs", () => {
     initializeDocsTabs()
     const tabs = triggers(root)
 
-    tabs[0]!.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }))
+    tabs[0]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true })
+    )
     expect(root.dataset.value).toBe("three")
     expect(document.activeElement).toBe(tabs[2])
 
-    tabs[2]!.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }))
+    tabs[2]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true })
+    )
     expect(root.dataset.value).toBe("one")
     expect(document.activeElement).toBe(tabs[0])
 
-    tabs[0]!.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }))
+    tabs[0]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "End", bubbles: true })
+    )
     expect(root.dataset.value).toBe("three")
 
-    tabs[2]!.dispatchEvent(new KeyboardEvent("keydown", { key: "Home", bubbles: true }))
+    tabs[2]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Home", bubbles: true })
+    )
     expect(root.dataset.value).toBe("one")
   })
 
@@ -113,7 +123,9 @@ describe("initializeDocsTabs", () => {
       ["inactive", "false", -1],
       ["active", "true", 0]
     ])
-    expect(panels(root).map((panel) => [panel.dataset.state, panel.hidden])).toEqual([
+    expect(
+      panels(root).map((panel) => [panel.dataset.state, panel.hidden])
+    ).toEqual([
       ["inactive", true],
       ["active", false]
     ])
@@ -129,7 +141,9 @@ describe("initializeDocsTabs", () => {
     expect(new Set(allPanels.map((panel) => panel.id)).size).toBe(4)
     for (const root of roots) {
       for (const trigger of triggers(root)) {
-        const panel = panels(root).find((item) => item.dataset.value === trigger.dataset.value)!
+        const panel = panels(root).find(
+          (item) => item.dataset.value === trigger.dataset.value
+        )!
         expect(trigger.getAttribute("aria-controls")).toBe(panel.id)
         expect(panel.getAttribute("aria-labelledby")).toBe(trigger.id)
       }
@@ -137,13 +151,19 @@ describe("initializeDocsTabs", () => {
   })
 
   it("persists an installation selection and synchronizes roots sharing its key", () => {
-    const roots = renderTabs([{ storageKey: "installation" }, { storageKey: "installation" }])
+    const roots = renderTabs([
+      { storageKey: "installation" },
+      { storageKey: "installation" }
+    ])
     initializeDocsTabs()
 
     triggers(roots[0]!)[1]!.click()
 
     expect(localStorage.getItem("installation")).toBe("manual")
-    expect(roots.map((root) => root.dataset.value)).toEqual(["manual", "manual"])
+    expect(roots.map((root) => root.dataset.value)).toEqual([
+      "manual",
+      "manual"
+    ])
   })
 
   it("falls back from unavailable or malformed stored values", () => {
@@ -190,7 +210,9 @@ describe("initializeDocsTabs", () => {
       .querySelector<HTMLElement>("[data-tabs-content]")!
       .insertAdjacentHTML("beforeend", tabsMarkup({ defaultValue: "manual" }))
     initializeDocsTabs()
-    const inner = outer.querySelector<HTMLElement>("[data-docs-tabs] [data-docs-tabs]")!
+    const inner = outer.querySelector<HTMLElement>(
+      "[data-docs-tabs] [data-docs-tabs]"
+    )!
 
     expect(outer.dataset.value).toBe("cli")
     expect(inner.dataset.value).toBe("manual")

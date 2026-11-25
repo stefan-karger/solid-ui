@@ -1,4 +1,4 @@
-import { PlusIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
 import { Button } from "~/registry/ui/button"
 import {
@@ -26,8 +26,27 @@ export default function ItemAvatar() {
           <ItemDescription>Last seen 5 minutes ago</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button aria-label="Invite" class="rounded-full" size="icon-sm" variant="outline">
-            <PlusIcon class="size-4" />
+          <Button
+            aria-label="Invite"
+            class="rounded-full"
+            size="icon-sm"
+            variant="outline"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="size-4"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
           </Button>
         </ItemActions>
       </Item>
@@ -54,7 +73,9 @@ export default function ItemAvatar() {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>No Team Members</ItemTitle>
-          <ItemDescription>Invite your team to collaborate on this project.</ItemDescription>
+          <ItemDescription>
+            Invite your team to collaborate on this project.
+          </ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button size="sm" variant="outline">

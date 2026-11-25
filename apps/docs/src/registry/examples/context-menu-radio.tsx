@@ -24,15 +24,17 @@ export default function ContextMenuRadio() {
       <ContextMenuContent>
         <ContextMenuGroup>
           <ContextMenuLabel>People</ContextMenuLabel>
-          <ContextMenuRadioGroup onChange={setUser} value={user()}>
-            <ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
+          <ContextMenuRadioGroup onValueChange={setUser} value={user()}>
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
             <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
           </ContextMenuRadioGroup>
         </ContextMenuGroup>
         <ContextMenuSeparator />
         <ContextMenuGroup>
           <ContextMenuLabel>Theme</ContextMenuLabel>
-          <ContextMenuRadioGroup onChange={setTheme} value={theme()}>
+          <ContextMenuRadioGroup onValueChange={setTheme} value={theme()}>
             <ContextMenuRadioItem value="light">Light</ContextMenuRadioItem>
             <ContextMenuRadioItem value="dark">Dark</ContextMenuRadioItem>
             <ContextMenuRadioItem value="system">System</ContextMenuRadioItem>

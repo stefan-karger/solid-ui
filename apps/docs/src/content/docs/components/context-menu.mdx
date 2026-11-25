@@ -6,7 +6,7 @@ component: true
 
 <ComponentPreview
   name="context-menu-demo"
-  description="A context menu with shortcuts, toggles, and nested submenu items."
+  description="A context menu with sub menu items."
 />
 
 ## Installation
@@ -33,7 +33,7 @@ npx solidui-cli@latest add context-menu
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -81,70 +81,76 @@ ContextMenu
 └── ContextMenuContent
     ├── ContextMenuGroup
     │   ├── ContextMenuLabel
+    │   ├── ContextMenuItem
     │   └── ContextMenuItem
-    ├── ContextMenuCheckboxItem
-    ├── ContextMenuRadioGroup
-    │   └── ContextMenuRadioItem
     ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuCheckboxItem
+    │   └── ContextMenuCheckboxItem
+    ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   └── ContextMenuRadioGroup
+    │       ├── ContextMenuRadioItem
+    │       └── ContextMenuRadioItem
     └── ContextMenuSub
         ├── ContextMenuSubTrigger
         └── ContextMenuSubContent
-            └── ContextMenuItem
+            └── ContextMenuGroup
+                ├── ContextMenuItem
+                └── ContextMenuItem
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A simple context menu with a few actions.
 
 <ComponentPreview name="context-menu-basic" />
 
-### Submenu
+## Submenu
 
 Use `ContextMenuSub` to nest secondary actions.
 
 <ComponentPreview name="context-menu-submenu" />
 
-### Shortcuts
+## Shortcuts
 
 Add `ContextMenuShortcut` to show keyboard hints.
 
 <ComponentPreview name="context-menu-shortcuts" />
 
-### Groups
+## Groups
 
 Group related actions and separate them with dividers.
 
 <ComponentPreview name="context-menu-groups" />
 
-### Icons
+## Icons
 
 Combine icons with labels for quick scanning.
 
 <ComponentPreview name="context-menu-icons" />
 
-### Checkboxes
+## Checkboxes
 
 Use `ContextMenuCheckboxItem` for toggles.
 
 <ComponentPreview name="context-menu-checkboxes" />
 
-### Radio
+## Radio
 
 Use `ContextMenuRadioItem` for exclusive choices.
 
 <ComponentPreview name="context-menu-radio" />
 
-### Destructive
+## Destructive
 
 Use `variant="destructive"` to style the menu item as destructive.
 
 <ComponentPreview name="context-menu-destructive" />
 
 ## API Reference
-
-### Core Parts
 
 | Part                      | Description                                         |
 | ------------------------- | --------------------------------------------------- |
@@ -163,4 +169,4 @@ Use `variant="destructive"` to style the menu item as destructive.
 | `ContextMenuRadioGroup`   | Group container for mutually-exclusive options.     |
 | `ContextMenuRadioItem`    | Radio item used inside `ContextMenuRadioGroup`.     |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/context-menu) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/menu) documentation for more information.

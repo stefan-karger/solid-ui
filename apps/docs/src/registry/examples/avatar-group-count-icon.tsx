@@ -1,4 +1,4 @@
-import { PlusIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
 import {
   Avatar,
@@ -8,23 +8,39 @@ import {
   AvatarImage
 } from "~/registry/ui/avatar"
 
-export default function AvatarGroupCountIcon() {
+export default function AvatarGroupCountIconExample() {
   return (
     <AvatarGroup class="grayscale">
       <Avatar>
-        <AvatarImage alt="@stefan-karger" src="https://github.com/stefan-karger.png" />
-        <AvatarFallback>SK</AvatarFallback>
+        <AvatarImage src="/avatars/03.png" alt="@alex" />
+        <AvatarFallback>AM</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage alt="@carere" src="https://github.com/carere.png" />
-        <AvatarFallback>KA</AvatarFallback>
+        <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+        <AvatarFallback>LR</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage alt="@ryansolid" src="https://github.com/ryansolid.png" />
-        <AvatarFallback>RC</AvatarFallback>
+        <AvatarImage
+          src="https://github.com/evilrabbit.png"
+          alt="@evilrabbit"
+        />
+        <AvatarFallback>ER</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>
-        <PlusIcon class="size-3" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14" />
+          <path d="M12 5v14" />
+        </svg>
       </AvatarGroupCount>
     </AvatarGroup>
   )

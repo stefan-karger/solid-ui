@@ -1,11 +1,19 @@
-import { Field, FieldDescription, FieldLabel, FieldLegend, FieldSet } from "~/registry/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldLabel,
+  FieldLegend,
+  FieldSet
+} from "~/registry/ui/field"
 import { RadioGroup, RadioGroupItem } from "~/registry/ui/radio-group"
 
 export default function FieldRadio() {
   return (
     <FieldSet class="w-full max-w-xs">
       <FieldLegend variant="label">Subscription Plan</FieldLegend>
-      <FieldDescription>Yearly and lifetime plans offer significant savings.</FieldDescription>
+      <FieldDescription>
+        Yearly and lifetime plans offer significant savings.
+      </FieldDescription>
       <RadioGroup defaultValue="monthly">
         <Field orientation="horizontal">
           <RadioGroupItem value="monthly" id="plan-monthly" />

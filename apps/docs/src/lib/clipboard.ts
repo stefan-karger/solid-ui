@@ -1,4 +1,4 @@
-// TODO: Replace this temporary console feedback with Sonner toasts once they are available.
+// TODO: Replace this temporary console feedback with Toast notifications.
 export async function copyToClipboard(value: string) {
   if (!navigator.clipboard?.writeText) {
     console.error("[clipboard] Clipboard API is unavailable.")

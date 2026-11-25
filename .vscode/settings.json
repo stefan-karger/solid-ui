@@ -1,12 +1,10 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.format.oxc": "explicit",
-    "source.fixAll.oxc": "explicit"
+    "source.fixAll.eslint": "explicit"
   },
   "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
@@ -29,5 +27,14 @@
   "[css]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "oxc.requireConfig": true
+  "oxc.requireConfig": true,
+  "oxc.enable.oxlint": false,
+  "oxc.enable.oxfmt": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "astro"
+  ]
 }

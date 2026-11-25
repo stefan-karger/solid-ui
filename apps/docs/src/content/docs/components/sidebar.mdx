@@ -6,12 +6,18 @@ component: true
 
 <figure class="flex flex-col gap-4">
   <ComponentPreview name="sidebar-demo" type="block" class="w-full" />
-  <p class="text-center text-sm text-muted-foreground">A sidebar that collapses to icons.</p>
+  <figcaption class="text-center text-sm text-gray-500">
+    A sidebar that collapses to icons.
+  </figcaption>
 </figure>
 
-Sidebars are one of the most complex components to build. They are central to any application and often contain a lot of moving parts.
+Sidebars are one of the most complex components to build. They are central
+to any application and often contain a lot of moving parts.
 
-We now have a solid foundation to build on top of. Composable. Themeable. Customizable.
+We now have a solid foundation to build on top of. Composable. Themeable.
+Customizable.
+
+[Browse the Blocks Library](/blocks).
 
 ## Installation
 
@@ -34,17 +40,15 @@ npx solidui-cli@latest add sidebar
 
 <Steps class="mb-0 pt-2">
 
-<Step>Install the following dependencies:</Step>
+<Step>Install the required Solid UI dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npx solidui-cli@latest add button input separator sheet skeleton tooltip
 ```
 
-<Step>Copy and paste the following files into your project.</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="sidebar" title="components/ui/sidebar.tsx" />
-
-<ComponentSource name="use-mobile" title="components/hooks/use-mobile.ts" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -53,32 +57,6 @@ npm install @kobalte/core
 </TabsContent>
 
 </CodeTabs>
-
-## Structure
-
-A `Sidebar` component is composed of the following parts:
-
-- `SidebarProvider` handles collapsible state.
-- `Sidebar` is the sidebar container.
-- `SidebarHeader` and `SidebarFooter` stay at the top and bottom of the sidebar.
-- `SidebarContent` is the scrollable content area.
-- `SidebarGroup` defines a section inside `SidebarContent`.
-- `SidebarTrigger` toggles the sidebar.
-
-<img
-  src="/images/sidebar-structure.png"
-  width="2862"
-  height="1840"
-  alt="Sidebar structure"
-  class="mt-6 w-full overflow-hidden rounded-lg border dark:hidden"
-/>
-<img
-  src="/images/sidebar-structure-dark.png"
-  width="2862"
-  height="1840"
-  alt="Sidebar structure"
-  class="mt-6 hidden w-full overflow-hidden rounded-lg border dark:block"
-/>
 
 ## Usage
 
@@ -131,22 +109,55 @@ SidebarProvider
 ├── Sidebar
 │   ├── SidebarHeader
 │   ├── SidebarContent
+│   │   ├── SidebarGroup
+│   │   │   ├── SidebarGroupLabel
+│   │   │   ├── SidebarGroupAction
+│   │   │   ├── SidebarGroupContent
+│   │   │   └── SidebarMenu
+│   │   │       ├── SidebarMenuItem
+│   │   │       │   ├── SidebarMenuButton
+│   │   │       │   ├── SidebarMenuAction
+│   │   │       │   └── SidebarMenuBadge
+│   │   │       └── SidebarMenuItem
+│   │   │           ├── SidebarMenuButton
+│   │   │           └── SidebarMenuSub
+│   │   │               ├── SidebarMenuSubItem
+│   │   │               └── SidebarMenuSubItem
 │   │   └── SidebarGroup
-│   │       ├── SidebarGroupLabel
-│   │       ├── SidebarGroupAction
-│   │       └── SidebarGroupContent
-│   │           └── SidebarMenu
-│   │               └── SidebarMenuItem
-│   │                   ├── SidebarMenuButton
-│   │                   ├── SidebarMenuAction
-│   │                   ├── SidebarMenuBadge
-│   │                   └── SidebarMenuSub
-│   │                       └── SidebarMenuSubItem
+│   │       └── SidebarMenu
+│   │           ├── SidebarMenuItem
+│   │           └── SidebarMenuItem
 │   ├── SidebarFooter
 │   └── SidebarRail
 ├── SidebarInset
 └── SidebarTrigger
 ```
+
+## Structure
+
+A `Sidebar` component is composed of the following parts:
+
+- `SidebarProvider` handles collapsible state.
+- `Sidebar` is the sidebar container.
+- `SidebarHeader` and `SidebarFooter` stay at the top and bottom of the sidebar.
+- `SidebarContent` is the scrollable content area.
+- `SidebarGroup` defines a section inside `SidebarContent`.
+- `SidebarTrigger` toggles the sidebar.
+
+<img
+  src="/images/sidebar-structure.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar structure"
+  class="mt-6 w-full overflow-hidden rounded-lg border dark:hidden"
+/>
+<img
+  src="/images/sidebar-structure-dark.png"
+  width="2862"
+  height="1840"
+  alt="Sidebar structure"
+  class="mt-6 hidden w-full overflow-hidden rounded-lg border dark:block"
+/>
 
 ## SidebarProvider
 
@@ -212,7 +223,8 @@ The main `Sidebar` component renders the responsive, collapsible sidebar shell.
 | `none`      | A non-collapsible sidebar.                                   |
 
 <Callout>
-  **Note:** If you use the `inset` variant, wrap your page content in `SidebarInset`.
+  **Note:** If you use the `inset` variant, wrap your page content in
+  `SidebarInset`.
 </Callout>
 
 ```tsx showLineNumbers
@@ -232,7 +244,15 @@ Use `useSidebar` when you need to read or control the shared sidebar state.
 import { useSidebar } from "~/components/ui/sidebar"
 
 export function AppSidebar() {
-  const { state, open, setOpen, openMobile, setOpenMobile, isMobile, toggleSidebar } = useSidebar()
+  const {
+    state,
+    open,
+    setOpen,
+    openMobile,
+    setOpenMobile,
+    isMobile,
+    toggleSidebar
+  } = useSidebar()
 }
 ```
 
@@ -256,11 +276,14 @@ Use `SidebarHeader` to add a sticky header region to the sidebar.
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger as={SidebarMenuButton} class="">
+          <DropdownMenuTrigger
+            render={(partProps) => <SidebarMenuButton {...partProps} />}
+            class=""
+          >
             Select Workspace
             <ChevronDownIcon class="ml-auto" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent class="w-(--kb-popper-anchor-width)">
+          <DropdownMenuContent class="w-(--anchor-width)">
             <DropdownMenuItem>
               <span>Acme Inc</span>
             </DropdownMenuItem>
@@ -325,7 +348,10 @@ To make a `SidebarGroup` collapsible, wrap it in `Collapsible`.
 ```tsx showLineNumbers
 <Collapsible defaultOpen>
   <SidebarGroup>
-    <CollapsibleTrigger as={SidebarGroupLabel} class="group/collapsible-trigger w-full">
+    <CollapsibleTrigger
+      render={(partProps) => <SidebarGroupLabel {...partProps} />}
+      class="group/collapsible-trigger w-full"
+    >
       Help
       <ChevronDownIcon class="ml-auto transition-transform group-data-[expanded]/collapsible-trigger:rotate-180" />
     </CollapsibleTrigger>
@@ -537,3 +563,5 @@ Use data attributes to style the sidebar across different states.
   <SidebarMenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
 </SidebarMenuItem>
 ```
+
+## Changelog

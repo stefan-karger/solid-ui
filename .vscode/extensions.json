@@ -1,3 +1,8 @@
 {
-  "recommendations": ["astro-build.astro-vscode", "oxc.oxc-vscode", "bradlc.vscode-tailwindcss"]
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "oxc.oxc-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss"
+  ]
 }

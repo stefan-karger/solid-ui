@@ -1,66 +1,36 @@
-import { createMemo, createSignal } from "solid-js"
+import { For } from "solid-js"
 
 import {
   Combobox,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-  ComboboxList,
-  ComboboxTrigger
+  ComboboxList
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
 
-type Emoji = {
-  value: string
-  label: string
-}
-
-const emojis: Emoji[] = [
-  { value: "sparkles", label: "Sparkles" },
-  { value: "rocket", label: "Rocket" },
-  { value: "wave", label: "Waving Hand" },
-  { value: "fire", label: "Fire" },
-  { value: "party", label: "Party Popper" },
-  { value: "target", label: "Target" }
-]
+const frameworks = [
+  "Next.js",
+  "SvelteKit",
+  "Nuxt.js",
+  "Remix",
+  "Astro"
+] as const
 
 export default function ComboboxAutoHighlight() {
-  const [query, setQuery] = createSignal("")
-
-  const filteredEmojis = createMemo(() => {
-    const normalizedQuery = query().trim().toLowerCase()
-
-    if (!normalizedQuery) {
-      return emojis
-    }
-
-    return emojis.filter((emoji) => emoji.label.toLowerCase().includes(normalizedQuery))
-  })
-
   return (
-    <Combobox<Emoji>
-      autoHighlight
-      options={filteredEmojis()}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      onInputChange={setQuery}
-      placeholder="Search emojis"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
-    >
-      <ComboboxControl class="max-w-sm">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxTrigger />
-        </InputGroupAddon>
-      </ComboboxControl>
+    <Combobox<string> autoHighlight>
+      <ComboboxInput
+        placeholder="Select a framework"
+        aria-label="Select a framework"
+      />
       <ComboboxContent>
-        <ComboboxList />
-        <ComboboxEmpty>No emoji found.</ComboboxEmpty>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={frameworks}>
+            {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+          </For>
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   )

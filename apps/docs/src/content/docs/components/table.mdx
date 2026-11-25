@@ -84,40 +84,38 @@ Table
 ├── TableCaption
 ├── TableHeader
 │   └── TableRow
+│       ├── TableHead
+│       ├── TableHead
+│       ├── TableHead
 │       └── TableHead
 ├── TableBody
+│   ├── TableRow
+│   │   ├── TableCell
+│   │   ├── TableCell
+│   │   ├── TableCell
+│   │   └── TableCell
 │   └── TableRow
+│       ├── TableCell
+│       ├── TableCell
+│       ├── TableCell
 │       └── TableCell
 └── TableFooter
-    └── TableRow
-        └── TableCell
 ```
 
-## Examples
-
-### Footer
+## Footer
 
 Use the `<TableFooter />` component to add a footer to the table.
 
 <ComponentPreview name="table-footer" />
 
-### Actions
+## Actions
 
 A table showing actions for each row using a `<DropdownMenu />` component.
 
 <ComponentPreview name="table-actions" />
 
-## API Reference
+## Data Table
 
-### Core Parts
+You can use the `<Table />` component to build more complex data tables. It renders plain table markup, so it composes with any headless table library for sorting, filtering, and pagination. A Data Table guide will follow once a Solid 2-compatible TanStack Table adapter is available.
 
-| Part           | Description                                           |
-| -------------- | ----------------------------------------------------- |
-| `Table`        | Responsive wrapper and table root element.            |
-| `TableHeader`  | Header section that groups heading rows.              |
-| `TableBody`    | Main body section for data rows.                      |
-| `TableFooter`  | Footer section for totals and aggregate values.       |
-| `TableRow`     | Row element shared by header, body, and footer.       |
-| `TableHead`    | Header cell for column labels.                        |
-| `TableCell`    | Standard body or footer cell.                         |
-| `TableCaption` | Caption text shown below the table for extra context. |
+You can also see an example of a data table in the [Tasks](/examples/tasks) demo.

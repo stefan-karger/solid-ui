@@ -54,35 +54,33 @@ import { Kbd } from "~/components/ui/kbd"
 Use the following composition to build `Kbd` and `KbdGroup`:
 
 ```text
+Kbd
 KbdGroup
-├── Kbd
 ├── Kbd
 └── Kbd
 ```
 
-## Examples
+## Group
 
-### Group
-
-Use `KbdGroup` to group keyboard keys together.
+Use the `KbdGroup` component to group keyboard keys together.
 
 <ComponentPreview name="kbd-group" />
 
-### Button
+## Button
 
-Use `Kbd` inside `Button` to display keyboard shortcuts in button labels.
+Use the `Kbd` component inside a `Button` component to display a keyboard key inside a button.
 
 <ComponentPreview name="kbd-button" />
 
-### Tooltip
+## Tooltip
 
-Use `Kbd` inside `TooltipContent` to show shortcuts for actions.
+You can use the `Kbd` component inside a `Tooltip` component to display a tooltip with a keyboard key.
 
 <ComponentPreview name="kbd-tooltip" />
 
-### Input Group
+## Input Group
 
-Use `Kbd` inside `InputGroupAddon` to display shortcuts next to an input.
+You can use the `Kbd` component inside a `InputGroupAddon` component to display a keyboard key inside an input group.
 
 <ComponentPreview name="kbd-input-group" />
 

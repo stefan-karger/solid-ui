@@ -7,10 +7,17 @@ type Props = HTMLAttributes<"img"> & {
   alt: string
 }
 
-const { class: className, loading = "lazy", decoding = "async", ...props } = Astro.props
+const {
+  alt,
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  ...props
+} = Astro.props
 ---
 
 <img
+  alt={alt}
   class={cn("mt-6 block h-auto max-w-full rounded-md border", className)}
   loading={loading}
   decoding={decoding}

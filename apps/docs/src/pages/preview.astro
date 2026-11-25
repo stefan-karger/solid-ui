@@ -1,0 +1,105 @@
+---
+import ShowcasePreview from "~/components/showcase/preview"
+import { colorModeBootstrap } from "~/lib/appearance"
+import { defaultPreset } from "~/lib/presets/decode"
+import { presetThemeCss, resolvePresetTheme } from "~/lib/presets/theme"
+
+import "~/styles/global.css"
+import "~/styles/preset-preview.css"
+
+const defaultCss = presetThemeCss(resolvePresetTheme(defaultPreset))
+---
+
+<!doctype html>
+<html lang="en" data-preset-preview class="style-nova">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preview · Solid UI</title>
+    <style is:inline id="preset-theme" set:html={defaultCss}></style>
+    <script is:inline set:html={colorModeBootstrap} />
+  </head>
+  <body class="min-h-svh bg-background font-sans text-foreground antialiased">
+    <main aria-label="Component preview">
+      <p
+        id="preset-notice"
+        role="status"
+        class="px-4 pt-4 text-sm text-muted-foreground"
+        hidden
+      >
+        This preset is unsupported or invalid. Showing the default preview.
+      </p>
+      <ShowcasePreview client:idle />
+    </main>
+  </body>
+</html>
+
+<script>
+  import {
+    appearanceKey,
+    applyColorMode,
+    readAppearance
+  } from "~/lib/appearance"
+  import { decodePreset, defaultPreset } from "~/lib/presets/decode"
+  import {
+    presetShortcut,
+    presetShortcutMessage,
+    presetUpdateMessage
+  } from "~/lib/presets/preview-channel"
+  import { presetThemeCss, resolvePresetTheme } from "~/lib/presets/theme"
+
+  const root = document.documentElement
+  const preference = matchMedia("(prefers-color-scheme: dark)")
+  function syncMode() {
+    const { mode } = readAppearance(
+      { getItem: (key) => localStorage.getItem(key) },
+      preference.matches
+    )
+    applyColorMode(mode)
+  }
+  preference.addEventListener("change", syncMode)
+  window.addEventListener("storage", ({ key }) => {
+    if (key === appearanceKey || key === null) syncMode()
+  })
+  syncMode()
+
+  let activeStyle = defaultPreset.style
+  function applyPreset(preset: NonNullable<ReturnType<typeof decodePreset>>) {
+    const theme = resolvePresetTheme(preset)
+    document.getElementById("preset-theme")!.textContent = presetThemeCss(theme)
+    root.classList.replace(`style-${activeStyle}`, `style-${preset.style}`)
+    activeStyle = preset.style
+    root.toggleAttribute("data-menu-translucent", theme.translucentMenu)
+    document.getElementById("preset-notice")!.hidden = true
+  }
+
+  const code = new URLSearchParams(location.search).get("preset")
+  if (code !== null) {
+    const preset = decodePreset(code)
+    if (preset) applyPreset(preset)
+    else document.getElementById("preset-notice")!.hidden = false
+  }
+  if (window.parent !== window) {
+    window.addEventListener("message", (event) => {
+      if (
+        event.origin !== location.origin ||
+        event.source !== window.parent ||
+        event.data?.type !== presetUpdateMessage ||
+        typeof event.data.code !== "string"
+      )
+        return
+      const preset = decodePreset(event.data.code)
+      if (preset) applyPreset(preset)
+    })
+    window.addEventListener("keydown", (event) => {
+      const key = presetShortcut(event)
+      if (key) {
+        event.preventDefault()
+        window.parent.postMessage(
+          { type: presetShortcutMessage, key },
+          location.origin
+        )
+      }
+    })
+  }
+</script>

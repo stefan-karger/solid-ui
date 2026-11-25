@@ -30,10 +30,17 @@ const items = [
 
 export default function AccordionBorders() {
   return (
-    <Accordion class="max-w-lg rounded-lg border" collapsible defaultValue={["billing"]}>
+    <Accordion
+      class="max-w-lg rounded-lg border"
+      collapsible
+      defaultValue={["billing"]}
+    >
       <For each={items}>
         {(item) => (
-          <AccordionItem class="border-b px-4 last:border-b-0" value={item.value}>
+          <AccordionItem
+            class="border-b px-4 last:border-b-0"
+            value={item.value}
+          >
             <AccordionTrigger>{item.trigger}</AccordionTrigger>
             <AccordionContent>{item.content}</AccordionContent>
           </AccordionItem>

@@ -16,13 +16,19 @@ export default function DropdownMenuRadioGroupExample() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Panel Position
       </DropdownMenuTrigger>
       <DropdownMenuContent class="min-w-44">
         <DropdownMenuGroup>
           <DropdownMenuLabel>Placement</DropdownMenuLabel>
-          <DropdownMenuRadioGroup onChange={setPosition} value={position()}>
+          <DropdownMenuRadioGroup
+            onValueChange={setPosition}
+            value={position()}
+          >
             <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="right" disabled>

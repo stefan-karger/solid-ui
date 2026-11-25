@@ -1,9 +1,12 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content"
 
+import DocsCopyPage from "~/components/docs-copy-page"
+import DocsPageNavigation from "~/components/docs-page-navigation.astro"
 import { mdxComponents } from "~/components/mdx-components"
 import DocsLayout from "~/layouts/docs-layout.astro"
-import { getComponentNeighbors, toDocsPath, toRouteId } from "~/lib/docs"
+import { findNeighbors, toDocsPath, toRouteId } from "~/lib/docs"
+import { formatDocsMarkdown } from "~/lib/docs-markdown"
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs")
@@ -19,57 +22,49 @@ type Props = {
 }
 
 const { page } = Astro.props
-const { Content } = await render(page)
-const componentNeighbors = page.data.component
-  ? await getComponentNeighbors(page.id, () => getCollection("docs"))
-  : { previous: null, next: null }
+const { Content, headings } = await render(page)
+const pages = await getCollection("docs")
+const neighbors = findNeighbors(pages, page.id)
+const markdown = formatDocsMarkdown(page, pages)
 ---
 
-<DocsLayout title={page.data.title}>
+<DocsLayout
+  title={page.data.title}
+  description={page.data.description}
+  headings={headings}
+>
   <article
-    aria-label="MDX component examples"
-    class="mx-auto w-full max-w-2xl px-4 py-4 font-sans [&_[data-rehype-pretty-code-figure]:first-child]:mt-0 sm:py-8"
+    aria-label={
+      page.data.component ? "MDX component examples" : page.data.title
+    }
+    class="mx-auto w-full max-w-160 px-4 pt-6 pb-14 font-sans text-[1.05rem] sm:text-[15px] md:px-0 lg:pt-12 [&_[data-rehype-pretty-code-figure]:first-child]:mt-0"
     data-slot="docs"
   >
     <header class="mb-8 flex flex-col gap-2">
-      <h1 class="scroll-m-28 font-heading text-3xl font-bold tracking-tight">
-        {page.data.title}
-      </h1>
-      <p class="text-muted-foreground text-[1.05rem] sm:text-base sm:text-balance">
+      <div class="flex items-center justify-between gap-4 md:items-start">
+        <h1 class="min-w-0 scroll-m-28 font-heading text-3xl font-semibold tracking-tight">
+          {page.data.title}
+        </h1>
+        <div class="flex shrink-0 items-center gap-2">
+          <div class="hidden sm:block" data-docs-copy-page>
+            <DocsCopyPage
+              {markdown}
+              pagePath={toDocsPath(page.id)}
+              client:media="(min-width: 640px)"
+            />
+          </div>
+          <DocsPageNavigation {...neighbors} compact />
+        </div>
+      </div>
+      <p class="text-[1.05rem] text-muted-foreground sm:text-base sm:text-balance md:max-w-[80%]">
         {page.data.description}
       </p>
     </header>
 
-    <div class="w-full *:first:mt-0">
+    <div class="w-full text-[1.125em]/[1.75] *:first:mt-0 md:text-[1em]/[1.75]">
       <Content components={mdxComponents} />
     </div>
 
-    {
-      page.data.component && (componentNeighbors.previous || componentNeighbors.next) && (
-        <footer class="mt-16 flex w-full items-center gap-2 border-t pt-6">
-          {componentNeighbors.previous && (
-            <a
-              aria-label={`Previous component: ${componentNeighbors.previous.data.title}`}
-              class="border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              href={toDocsPath(componentNeighbors.previous.id)}
-            >
-              <span aria-hidden="true">←</span>
-              <span class="ml-2">{componentNeighbors.previous.data.title}</span>
-            </a>
-          )}
-
-          {componentNeighbors.next && (
-            <a
-              aria-label={`Next component: ${componentNeighbors.next.data.title}`}
-              class="border-input bg-background hover:bg-accent hover:text-accent-foreground ml-auto inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              href={toDocsPath(componentNeighbors.next.id)}
-            >
-              <span class="mr-2">{componentNeighbors.next.data.title}</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          )}
-        </footer>
-      )
-    }
+    <DocsPageNavigation {...neighbors} />
   </article>
 </DocsLayout>

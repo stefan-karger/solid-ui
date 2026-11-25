@@ -1,55 +1,70 @@
 import { type ComponentProps } from "@solidjs/web"
-import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
 type TableProps = ComponentProps<"table">
 
-const Table = (props: TableProps) => {
-  const others = omit(props, "class")
-  return (
-    <div class="cn-table-container" data-slot="table-container">
-      <table class={cn("cn-table", props.class)} data-slot="table" {...others} />
-    </div>
-  )
-}
+const Table = (props: TableProps) => (
+  <div class="cn-table-container" data-slot="table-container">
+    <table data-slot="table" {...props} class={cn("cn-table", props.class)} />
+  </div>
+)
 
-const TableHeader = (props: ComponentProps<"thead">) => {
-  const others = omit(props, "class")
-  return <thead class={cn("cn-table-header", props.class)} data-slot="table-header" {...others} />
-}
+const TableHeader = (props: ComponentProps<"thead">) => (
+  <thead
+    data-slot="table-header"
+    {...props}
+    class={cn("cn-table-header", props.class)}
+  />
+)
 
-const TableBody = (props: ComponentProps<"tbody">) => {
-  const others = omit(props, "class")
-  return <tbody class={cn("cn-table-body", props.class)} data-slot="table-body" {...others} />
-}
+const TableBody = (props: ComponentProps<"tbody">) => (
+  <tbody
+    data-slot="table-body"
+    {...props}
+    class={cn("cn-table-body", props.class)}
+  />
+)
 
-const TableFooter = (props: ComponentProps<"tfoot">) => {
-  const others = omit(props, "class")
-  return <tfoot class={cn("cn-table-footer", props.class)} data-slot="table-footer" {...others} />
-}
+const TableFooter = (props: ComponentProps<"tfoot">) => (
+  <tfoot
+    data-slot="table-footer"
+    {...props}
+    class={cn("cn-table-footer", props.class)}
+  />
+)
 
-const TableRow = (props: ComponentProps<"tr">) => {
-  const others = omit(props, "class")
-  return <tr class={cn("cn-table-row", props.class)} data-slot="table-row" {...others} />
-}
+const TableRow = (props: ComponentProps<"tr">) => (
+  <tr
+    data-slot="table-row"
+    {...props}
+    class={cn("cn-table-row", props.class)}
+  />
+)
 
-const TableHead = (props: ComponentProps<"th">) => {
-  const others = omit(props, "class")
-  return <th class={cn("cn-table-head", props.class)} data-slot="table-head" {...others} />
-}
+const TableHead = (props: ComponentProps<"th">) => (
+  <th
+    data-slot="table-head"
+    {...props}
+    class={cn("cn-table-head", props.class)}
+  />
+)
 
-const TableCell = (props: ComponentProps<"td">) => {
-  const others = omit(props, "class")
-  return <td class={cn("cn-table-cell", props.class)} data-slot="table-cell" {...others} />
-}
+const TableCell = (props: ComponentProps<"td">) => (
+  <td
+    data-slot="table-cell"
+    {...props}
+    class={cn("cn-table-cell", props.class)}
+  />
+)
 
-const TableCaption = (props: ComponentProps<"caption">) => {
-  const others = omit(props, "class")
-  return (
-    <caption class={cn("cn-table-caption", props.class)} data-slot="table-caption" {...others} />
-  )
-}
+const TableCaption = (props: ComponentProps<"caption">) => (
+  <caption
+    data-slot="table-caption"
+    {...props}
+    class={cn("cn-table-caption", props.class)}
+  />
+)
 
 export {
   Table,

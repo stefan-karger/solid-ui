@@ -1,4 +1,4 @@
-import { EllipsisIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -9,7 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/registry/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "~/registry/ui/table"
 
 const products = [
   {
@@ -46,16 +53,37 @@ export default function TableActions() {
               <TableCell class="font-medium">{product.name}</TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell class="text-right">
-                <DropdownMenu placement="bottom-end">
-                  <DropdownMenuTrigger as={Button} class="size-8" size="icon" variant="ghost">
-                    <EllipsisIcon />
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    render={(partProps) => (
+                      <Button {...partProps} size="icon" variant="ghost" />
+                    )}
+                    class="size-8"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="1" />
+                      <circle cx="19" cy="12" r="1" />
+                      <circle cx="5" cy="12" r="1" />
+                    </svg>
                     <span class="sr-only">Open menu</span>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent side="bottom" align="end">
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Duplicate</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                    <DropdownMenuItem variant="destructive">
+                      Delete
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

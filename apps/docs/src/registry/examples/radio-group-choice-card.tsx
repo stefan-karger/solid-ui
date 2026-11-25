@@ -1,4 +1,10 @@
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "~/registry/ui/field"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldTitle
+} from "~/registry/ui/field"
 import { RadioGroup, RadioGroupItem } from "~/registry/ui/radio-group"
 
 export default function RadioGroupChoiceCard() {
@@ -8,7 +14,9 @@ export default function RadioGroupChoiceCard() {
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Plus</FieldTitle>
-            <FieldDescription>For individuals and small teams.</FieldDescription>
+            <FieldDescription>
+              For individuals and small teams.
+            </FieldDescription>
           </FieldContent>
           <RadioGroupItem id="plus-plan" value="plus" />
         </Field>
@@ -26,7 +34,9 @@ export default function RadioGroupChoiceCard() {
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Enterprise</FieldTitle>
-            <FieldDescription>For large teams and enterprises.</FieldDescription>
+            <FieldDescription>
+              For large teams and enterprises.
+            </FieldDescription>
           </FieldContent>
           <RadioGroupItem id="enterprise-plan" value="enterprise" />
         </Field>

@@ -1,9 +1,18 @@
-import { useComboboxContext } from "@kobalte/core/combobox"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as CommandPrimitive from "@kobalte/core/search"
-import { type ComponentProps, type ValidComponent } from "@solidjs/web"
-import { CheckIcon, SearchIcon } from "lucide-solid"
-import { createEffect, merge, Show, omit } from "solid-js"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps, JSX } from "@solidjs/web"
+import {
+  Command as SdkCommand,
+  CommandInput as SdkCommandInput,
+  CommandList as SdkCommandList,
+  CommandEmpty as SdkCommandEmpty,
+  CommandGroup as SdkCommandGroup,
+  CommandGroupLabel as SdkCommandGroupLabel,
+  CommandSeparator as SdkCommandSeparator,
+  CommandItem as SdkCommandItem,
+  CommandShortcut as SdkCommandShortcut,
+  CommandItemText as SdkCommandItemText
+} from "@ui-sdk/solid/command"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import {
@@ -14,265 +23,179 @@ import {
   DialogTitle
 } from "~/registry/ui/dialog"
 import { InputGroup, InputGroupAddon } from "~/registry/ui/input-group"
-
-type CommandProps<Option, OptGroup = never, T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  CommandPrimitive.SearchRootProps<Option, OptGroup, T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const Command = <Option, OptGroup = never, T extends ValidComponent = "div">(
-  props: CommandProps<Option, OptGroup, T>
-) => {
-  const others = omit(props as CommandProps<Option>, "class", "open")
-  return (
-    <CommandPrimitive.Root
-      data-slot="command"
-      class={cn("cn-command flex size-full flex-col overflow-hidden", props.class)}
-      open={props.open ?? true}
-      {...others}
-    />
-  )
-}
-
-type CommandDialogProps = Omit<ComponentProps<typeof Dialog>, "children"> &
-  Pick<ComponentProps<"div">, "class" | "children"> & {
-    title?: string
-    description?: string
-    showCloseButton?: boolean
+const Command = (
+  props: Omit<ComponentProps<typeof SdkCommand>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
   }
-
+) => (
+  <SdkCommand
+    {...props}
+    class={cn(
+      "cn-command flex size-full flex-col overflow-hidden",
+      props.class
+    )}
+  />
+)
+const CommandInput = (
+  props: Omit<ComponentProps<typeof SdkCommandInput>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <div data-ui="command-input-wrapper" class="cn-command-input-wrapper">
+    <InputGroup class="cn-command-input-group">
+      <SdkCommandInput
+        aria-label="Search commands"
+        data-ui="input-group-control"
+        {...props}
+        class={cn(
+          "cn-command-input outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+          props.class
+        )}
+      />
+      <InputGroupAddon>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          data-ui="command-input-icon"
+          class="cn-command-input-icon"
+        >
+          <path d="m21 21-4.34-4.34" />
+          <circle cx="11" cy="11" r="8" />
+        </svg>
+      </InputGroupAddon>
+    </InputGroup>
+  </div>
+)
+const CommandList = (
+  props: Omit<ComponentProps<typeof SdkCommandList>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandList
+    {...props}
+    class={cn("cn-command-list overflow-x-hidden overflow-y-auto", props.class)}
+  />
+)
+const CommandEmpty = (
+  props: Omit<ComponentProps<typeof SdkCommandEmpty>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandEmpty
+    {...props}
+    class={cn("cn-command-empty empty:hidden", props.class)}
+  />
+)
+const CommandGroup = (
+  props: Omit<ComponentProps<typeof SdkCommandGroup>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => <SdkCommandGroup {...props} class={cn("cn-command-group", props.class)} />
+const CommandGroupLabel = SdkCommandGroupLabel
+const CommandSeparator = (
+  props: Omit<
+    ComponentProps<typeof SdkCommandSeparator>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandSeparator
+    {...props}
+    class={cn("cn-command-separator", props.class)}
+  />
+)
+const CommandShortcut = (
+  props: Omit<
+    ComponentProps<typeof SdkCommandShortcut>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandShortcut
+    {...props}
+    class={cn("cn-command-shortcut", props.class)}
+  />
+)
+const CommandItem = (
+  props: Omit<ComponentProps<typeof SdkCommandItem>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandItem
+    {...props}
+    class={cn(
+      "cn-command-item group/command-item relative flex cursor-default items-center outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-50",
+      props.class
+    )}
+  />
+)
+const CommandItemLabel = SdkCommandItemText
+const CommandItemDescription = (props: ComponentProps<"span">) => (
+  <span {...props} />
+)
+type CommandDialogProps = ComponentProps<typeof Dialog> & {
+  class?: string
+  title?: string
+  description?: string
+  showCloseButton?: boolean
+}
 const CommandDialog = (props: CommandDialogProps) => {
-  const local = merge(
-    {
-      title: "Command Palette",
-      description: "Search for a command to run...",
-      showCloseButton: false
-    },
-    props
-  ) as CommandDialogProps
-  const others = omit(
-    props as CommandDialogProps,
+  const rest = omit(
+    props,
+    "class",
     "title",
     "description",
     "showCloseButton",
-    "children",
-    "class"
+    "children"
   )
   return (
-    <Dialog {...others}>
-      <DialogHeader class="sr-only">
-        <DialogTitle>{local.title}</DialogTitle>
-        <DialogDescription>{local.description}</DialogDescription>
-      </DialogHeader>
+    <Dialog {...rest}>
       <DialogContent
-        class={cn("cn-command-dialog top-1/3 translate-y-0 overflow-hidden p-0", local.class)}
-        showCloseButton={local.showCloseButton ?? false}
+        class={cn(
+          "cn-command-dialog top-1/3 translate-y-0 overflow-hidden p-0",
+          props.class
+        )}
+        showCloseButton={props.showCloseButton ?? false}
       >
-        {local.children}
+        <DialogHeader class="sr-only">
+          <DialogTitle>{props.title ?? "Command Palette"}</DialogTitle>
+          <DialogDescription>
+            {props.description ?? "Search for a command to run..."}
+          </DialogDescription>
+        </DialogHeader>
+        {props.children}
       </DialogContent>
     </Dialog>
   )
 }
-
-type CommandInputProps = CommandPrimitive.SearchInputProps & {
-  class?: string | undefined
-}
-
-const CommandInput = (props: CommandInputProps) => {
-  const others = omit(props, "class")
-  return (
-    <CommandPrimitive.Control data-slot="command-input-wrapper" class="cn-command-input-wrapper">
-      <InputGroup class="cn-command-input-group">
-        <CommandPrimitive.Input
-          data-slot="command-input"
-          class={cn(
-            "cn-command-input outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-            props.class
-          )}
-          {...others}
-        />
-        <InputGroupAddon>
-          <SearchIcon class="cn-command-input-icon" />
-        </InputGroupAddon>
-      </InputGroup>
-    </CommandPrimitive.Control>
-  )
-}
-
-const CommandContent = CommandPrimitive.Content
-
-type CommandListProps<Option, OptGroup = never, T extends ValidComponent = "ul"> = PolymorphicProps<
-  T,
-  CommandPrimitive.SearchListboxProps<Option, OptGroup, T>
-> &
-  Pick<ComponentProps<T>, "class"> & {
-    autoHighlightFirst?: boolean | undefined
-  }
-
-const CommandList = <Option, OptGroup = never, T extends ValidComponent = "ul">(
-  props: CommandListProps<Option, OptGroup, T>
-) => {
-  const local = merge({ autoHighlightFirst: true }, props) as CommandListProps<Option>
-  const others = omit(props as CommandListProps<Option>, "class", "autoHighlightFirst")
-  const context = useComboboxContext()
-  createEffect(
-    () => {
-      const autoHighlightFirst = local.autoHighlightFirst
-      const isOpen = context.isOpen()
-      if (!autoHighlightFirst || !isOpen) {
-        return
-      }
-      const keyboardDelegate = context.keyboardDelegate()
-      if (keyboardDelegate.getFirstKey == null) return
-      const firstKey = keyboardDelegate.getFirstKey()
-      const listState = context.listState()
-      const selectionManager = listState.selectionManager()
-      const focusedKey = selectionManager.focusedKey()
-      const collection = listState.collection()
-
-      return {
-        collectionHasFocusedKey: focusedKey != null && collection.getItem(focusedKey) != null,
-        firstKey,
-        focusedKey,
-        selectionManager
-      }
-    },
-    (state) => {
-      if (state == null) return
-      const { collectionHasFocusedKey, firstKey, focusedKey, selectionManager } = state
-      if (firstKey == null) {
-        if (focusedKey != null) {
-          selectionManager.setFocusedKey(undefined)
-        }
-        return
-      }
-      if (!collectionHasFocusedKey) {
-        selectionManager.setFocusedKey(firstKey)
-      }
-    }
-  )
-  return (
-    <CommandPrimitive.Listbox
-      data-slot="command-list"
-      class={cn("cn-command-list overflow-x-hidden overflow-y-auto", local.class)}
-      {...others}
-    />
-  )
-}
-
-type CommandEmptyProps<T extends ValidComponent = "div"> = PolymorphicProps<
-  T,
-  CommandPrimitive.SearchNoResultProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const CommandEmpty = <T extends ValidComponent = "div">(props: CommandEmptyProps<T>) => {
-  const others = omit(props as CommandEmptyProps, "class")
-  return (
-    <CommandPrimitive.NoResult
-      data-slot="command-empty"
-      class={cn("cn-command-empty", props.class)}
-      {...others}
-    />
-  )
-}
-
-type CommandGroupProps<T extends ValidComponent = "li"> = PolymorphicProps<
-  T,
-  CommandPrimitive.SearchSectionProps<T>
-> &
-  Pick<ComponentProps<T>, "class">
-
-const CommandGroup = <T extends ValidComponent = "li">(props: CommandGroupProps<T>) => {
-  const others = omit(props as CommandGroupProps, "class")
-  return (
-    <CommandPrimitive.Section
-      data-slot="command-group"
-      class={cn("cn-command-group", props.class)}
-      {...others}
-    />
-  )
-}
-
-type CommandItemProps<T extends ValidComponent = "li"> = PolymorphicProps<
-  T,
-  CommandPrimitive.SearchItemProps<T>
-> &
-  Pick<ComponentProps<T>, "class" | "children"> & {
-    showIndicator?: boolean
-  }
-
-const CommandItem = <T extends ValidComponent = "li">(props: CommandItemProps<T>) => {
-  const local = merge({ showIndicator: true }, props) as CommandItemProps
-  const others = omit(props as CommandItemProps, "class", "children", "showIndicator")
-  return (
-    <CommandPrimitive.Item
-      data-slot="command-item"
-      class={cn(
-        "cn-command-item group/command-item data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        local.class
-      )}
-      {...others}
-    >
-      {local.children}
-      <Show when={local.showIndicator}>
-        <CheckIcon class="cn-command-item-indicator ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-selected/command-item:opacity-100" />
-      </Show>
-    </CommandPrimitive.Item>
-  )
-}
-
-type CommandShortcutProps = ComponentProps<"span">
-
-const CommandShortcut = (props: CommandShortcutProps) => {
-  const others = omit(props, "class")
-  return (
-    <span data-slot="command-shortcut" class={cn("cn-command-shortcut", props.class)} {...others} />
-  )
-}
-
-type CommandSeparatorProps = ComponentProps<"div">
-
-const CommandSeparator = (props: CommandSeparatorProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="command-separator"
-      role="separator"
-      class={cn("cn-command-separator", props.class)}
-      {...others}
-    />
-  )
-}
-
-const CommandItemLabel = CommandPrimitive.ItemLabel
-
-const CommandItemDescription = CommandPrimitive.ItemDescription
-
-const CommandGroupLabel = (props: ComponentProps<"div">) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="command-group-label"
-      class={cn("cn-command-group-label", props.class)}
-      {...others}
-    />
-  )
-}
-
 export {
   Command,
-  CommandDialog,
   CommandInput,
-  CommandContent,
   CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandItem,
-  CommandShortcut,
+  CommandGroupLabel,
   CommandSeparator,
+  CommandShortcut,
+  CommandItem,
   CommandItemLabel,
   CommandItemDescription,
-  CommandGroupLabel
+  CommandDialog
 }

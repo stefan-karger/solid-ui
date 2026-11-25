@@ -1,37 +1,30 @@
-import { getReadingDirection, I18nProvider, useLocale, type Direction } from "@kobalte/core/i18n"
-import { type JSX } from "@solidjs/web"
+import type { JSX } from "@solidjs/web"
 import { createContext, useContext, type Accessor } from "solid-js"
 
+type Direction = "ltr" | "rtl"
 type DirectionProviderProps = {
   children: JSX.Element
   direction?: Direction
   locale?: string
+  class?: string
 }
-
-const DEFAULT_LTR_LOCALE = "en-US"
-
-const DEFAULT_RTL_LOCALE = "ar"
-
-const DirectionContext = createContext<() => Direction>()
-
+const DirectionContext = createContext<Accessor<Direction>>(() => "ltr")
 const DirectionProvider = (props: DirectionProviderProps) => {
   const direction = () =>
-    props.direction ?? (props.locale ? getReadingDirection(props.locale) : "ltr")
-  const locale = () =>
-    props.locale ?? (direction() === "rtl" ? DEFAULT_RTL_LOCALE : DEFAULT_LTR_LOCALE)
+    props.direction ??
+    (props.locale && /^(ar|fa|he|ur)(-|$)/i.test(props.locale) ? "rtl" : "ltr")
   return (
     <DirectionContext value={direction}>
-      <I18nProvider locale={locale()}>{props.children}</I18nProvider>
+      <div dir={direction()} lang={props.locale} class={props.class}>
+        {props.children}
+      </div>
     </DirectionContext>
   )
 }
-
-const useDirection = (): Accessor<Direction> => {
-  const direction = useContext(DirectionContext)
-  if (direction) {
-    return direction
-  }
-  return useLocale().direction
+const useDirection = (): Accessor<Direction> => useContext(DirectionContext)
+export {
+  DirectionProvider,
+  useDirection,
+  type Direction,
+  type DirectionProviderProps
 }
-
-export { DirectionProvider, type Direction, type DirectionProviderProps, useDirection }

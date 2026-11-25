@@ -1,6 +1,7 @@
 ---
 // oxlint-disable-next-line import/no-unassigned-import
 import "~/styles/global.css"
+import { appearanceBootstrap } from "~/lib/appearance"
 
 type Props = {
   title?: string
@@ -15,6 +16,7 @@ const { title = "Solid UI Preview" } = Astro.props
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline set:html={appearanceBootstrap} />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <title>{title}</title>
   </head>
@@ -24,3 +26,17 @@ const { title = "Solid UI Preview" } = Astro.props
     </main>
   </body>
 </html>
+
+<script>
+  import { applyAppearance, readAppearance } from "~/lib/appearance"
+  function sync() {
+    const { style, mode } = readAppearance(
+      { getItem: (key) => localStorage.getItem(key) },
+      matchMedia("(prefers-color-scheme: dark)").matches
+    )
+    applyAppearance(style, mode)
+  }
+  window.addEventListener("storage", sync)
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync)
+  sync()
+</script>

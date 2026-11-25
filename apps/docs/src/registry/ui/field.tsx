@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, type VariantProps } from "class-variance-authority"
-import { createMemo, For, Show, omit } from "solid-js"
+import { createMemo, For, omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
 import { Label } from "~/registry/ui/label"
@@ -10,16 +10,13 @@ type FieldSetProps = ComponentProps<"fieldset"> & {
   class?: string | undefined
 }
 
-const FieldSet = (props: FieldSetProps) => {
-  const others = omit(props, "class")
-  return (
-    <fieldset
-      data-slot="field-set"
-      class={cn("cn-field-set flex flex-col", props.class)}
-      {...others}
-    />
-  )
-}
+const FieldSet = (props: FieldSetProps) => (
+  <fieldset
+    data-slot="field-set"
+    {...props}
+    class={cn("cn-field-set flex flex-col", props.class)}
+  />
+)
 
 type FieldLegendProps = ComponentProps<"legend"> & {
   class?: string | undefined
@@ -42,28 +39,26 @@ type FieldGroupProps = ComponentProps<"div"> & {
   class?: string | undefined
 }
 
-const FieldGroup = (props: FieldGroupProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="field-group"
-      class={cn(
-        "group/field-group cn-field-group @container/field-group flex w-full flex-col",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const FieldGroup = (props: FieldGroupProps) => (
+  <div
+    data-slot="field-group"
+    {...props}
+    class={cn(
+      "group/field-group cn-field-group @container/field-group flex w-full flex-col",
+      props.class
+    )}
+  />
+)
 
 const fieldVariants = cva("group/field cn-field flex w-full", {
   variants: {
     orientation: {
-      vertical: "cn-field-orientation-vertical flex-col *:w-full [&>.sr-only]:w-auto",
+      vertical:
+        "cn-field-orientation-vertical flex-col [&>.sr-only]:w-auto [&>:where(:not([popover],[data-presentation]))]:w-full",
       horizontal:
         "cn-field-orientation-horizontal flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
       responsive:
-        "cn-field-orientation-responsive flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px"
+        "cn-field-orientation-responsive flex-col @md/field-group:flex-row @md/field-group:items-center @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto [&>:where(:not([popover],[data-presentation]))]:w-full @md/field-group:[&>:where(:not([popover],[data-presentation]))]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px"
     }
   },
   defaultVariants: {
@@ -93,73 +88,64 @@ type FieldContentProps = ComponentProps<"div"> & {
   class?: string | undefined
 }
 
-const FieldContent = (props: FieldContentProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="field-content"
-      class={cn(
-        "group/field-content cn-field-content flex flex-1 flex-col leading-snug",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const FieldContent = (props: FieldContentProps) => (
+  <div
+    data-slot="field-content"
+    {...props}
+    class={cn(
+      "group/field-content cn-field-content flex flex-1 flex-col leading-snug",
+      props.class
+    )}
+  />
+)
 
 type FieldLabelProps = ComponentProps<typeof Label> & {
   class?: string | undefined
 }
 
-const FieldLabel = (props: FieldLabelProps) => {
-  const others = omit(props, "class")
-  return (
-    <Label
-      data-slot="field-label"
-      class={cn(
-        "group/field-label peer/field-label cn-field-label flex w-fit leading-snug",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const FieldLabel = (props: FieldLabelProps) => (
+  <Label
+    data-slot="field-label"
+    {...props}
+    class={cn(
+      "group/field-label peer/field-label cn-field-label flex w-fit leading-snug",
+      "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+      props.class
+    )}
+  />
+)
 
 type FieldTitleProps = ComponentProps<"div"> & {
   class?: string | undefined
 }
 
-const FieldTitle = (props: FieldTitleProps) => {
-  const others = omit(props, "class")
-  return (
-    <div
-      data-slot="field-label"
-      class={cn("cn-field-title flex w-fit items-center leading-snug", props.class)}
-      {...others}
-    />
-  )
-}
+const FieldTitle = (props: FieldTitleProps) => (
+  <div
+    data-slot="field-label"
+    {...props}
+    class={cn(
+      "cn-field-title flex w-fit items-center leading-snug",
+      props.class
+    )}
+  />
+)
 
 type FieldDescriptionProps = ComponentProps<"p"> & {
   class?: string | undefined
 }
 
-const FieldDescription = (props: FieldDescriptionProps) => {
-  const others = omit(props, "class")
-  return (
-    <p
-      data-slot="field-description"
-      class={cn(
-        "cn-field-description leading-normal font-normal group-has-data-[orientation=horizontal]/field:text-balance",
-        "last:mt-0 nth-last-2:-mt-1",
-        "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
-        props.class
-      )}
-      {...others}
-    />
-  )
-}
+const FieldDescription = (props: FieldDescriptionProps) => (
+  <p
+    data-slot="field-description"
+    {...props}
+    class={cn(
+      "cn-field-description leading-normal font-normal group-has-data-[orientation=horizontal]/field:text-balance",
+      "last:mt-0 nth-last-2:-mt-1",
+      "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+      props.class
+    )}
+  />
+)
 
 type FieldSeparatorProps = ComponentProps<"div"> & {
   class?: string | undefined
@@ -208,14 +194,20 @@ const FieldError = (props: FieldErrorProps) => {
     if (!props.errors?.length) {
       return null
     }
-    const uniqueErrors = [...new Map(props.errors.map((error) => [error?.message, error])).values()]
+    const uniqueErrors = [
+      ...new Map(props.errors.map((error) => [error?.message, error])).values()
+    ]
     if (uniqueErrors.length === 1) {
       return uniqueErrors[0]?.message
     }
     return (
       <ul class="ml-4 flex list-disc flex-col gap-1">
         <For each={uniqueErrors}>
-          {(error) => <Show when={error?.message}>{(message) => <li>{message()}</li>}</Show>}
+          {(error) => (
+            <Show when={error?.message}>
+              {(message) => <li>{message()}</li>}
+            </Show>
+          )}
         </For>
       </ul>
     )

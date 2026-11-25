@@ -46,7 +46,8 @@ export default function ItemImage() {
               </ItemMedia>
               <ItemContent>
                 <ItemTitle class="line-clamp-1">
-                  {track.title} - <span class="text-muted-foreground">{track.album}</span>
+                  {track.title} -{" "}
+                  <span class="text-muted-foreground">{track.album}</span>
                 </ItemTitle>
                 <ItemDescription>{track.artist}</ItemDescription>
               </ItemContent>

@@ -17,6 +17,11 @@ export type ComponentLink = {
   isNew: boolean
 }
 
+export type DocsNavigationGroup = {
+  title: string
+  links: { title: string; href: string; isNew?: boolean }[]
+}
+
 export type ComponentListVariant = "all" | "new"
 
 export type DocsCollectionLoader = () => Promise<DocsPage[]>
@@ -27,6 +32,11 @@ export type PageNeighbors<T> = {
 }
 
 const DOC_EXTENSION_PATTERN = /\.mdx?$/
+const docsSections = [
+  { title: "Introduction", routeId: "" },
+  { title: "Components", routeId: "components" },
+  { title: "AI Elements", routeId: "ai-elements" }
+]
 
 export function toRouteId(id: string) {
   const routeId = id.replace(DOC_EXTENSION_PATTERN, "")
@@ -48,23 +58,20 @@ export function toDocsPath(routeId: string) {
 }
 
 export function sortDocsPages<T extends DocsPageLike>(pages: readonly T[]) {
+  const order = new Map(
+    docsSections.map(({ routeId }, index) => [routeId, index])
+  )
+  const sectionOrder = (id: string) =>
+    order.get(id) ??
+    (id.startsWith("ai-elements/") ? order.get("ai-elements")! : order.size)
   return pages.toSorted((a, b) => {
     const aRouteId = toRouteId(a.id)
     const bRouteId = toRouteId(b.id)
-
-    if (aRouteId === bRouteId) {
-      return a.id.localeCompare(b.id)
-    }
-
-    if (aRouteId === "") {
-      return -1
-    }
-
-    if (bRouteId === "") {
-      return 1
-    }
-
-    return aRouteId.localeCompare(bRouteId)
+    return (
+      sectionOrder(aRouteId) - sectionOrder(bRouteId) ||
+      aRouteId.localeCompare(bRouteId) ||
+      a.id.localeCompare(b.id)
+    )
   })
 }
 
@@ -74,7 +81,9 @@ export function findNeighbors<T extends DocsPageLike>(
 ): PageNeighbors<T> {
   const sortedPages = sortDocsPages(pages)
   const normalizedCurrentId = toRouteId(currentId)
-  const index = sortedPages.findIndex((page) => toRouteId(page.id) === normalizedCurrentId)
+  const index = sortedPages.findIndex(
+    (page) => toRouteId(page.id) === normalizedCurrentId
+  )
 
   if (index === -1) {
     return { previous: null, next: null }
@@ -101,16 +110,43 @@ export function createComponentLinks(
   variant: ComponentListVariant = "all"
 ): ComponentLink[] {
   return pages
-    .filter((page) => page.data.component && (variant === "all" || page.data.new))
+    .filter(
+      (page) => page.data.component && (variant === "all" || page.data.new)
+    )
     .map((page) => ({
       title: page.data.title,
       href: toDocsPath(page.id),
       isNew: Boolean(page.data.new)
     }))
-    .toSorted((a, b) => a.title.localeCompare(b.title) || a.href.localeCompare(b.href))
+    .toSorted(
+      (a, b) => a.title.localeCompare(b.title) || a.href.localeCompare(b.href)
+    )
 }
 
-export async function getDocsPages(loadDocs: DocsCollectionLoader): Promise<DocsPage[]> {
+export function createDocsNavigation(
+  pages: readonly DocsPageLike[]
+): DocsNavigationGroup[] {
+  return [
+    {
+      title: "Sections",
+      links: docsSections.map(({ title, routeId }) => ({
+        title,
+        href: toDocsPath(routeId)
+      }))
+    },
+    { title: "Components", links: createComponentLinks(pages) },
+    {
+      title: "AI Elements",
+      links: sortDocsPages(pages)
+        .filter((page) => toRouteId(page.id).startsWith("ai-elements/"))
+        .map((page) => ({ title: page.data.title, href: toDocsPath(page.id) }))
+    }
+  ]
+}
+
+export async function getDocsPages(
+  loadDocs: DocsCollectionLoader
+): Promise<DocsPage[]> {
   return sortDocsPages(await loadDocs())
 }
 
@@ -118,7 +154,10 @@ export async function getNeighbors(id: string, loadDocs: DocsCollectionLoader) {
   return findNeighbors(await getDocsPages(loadDocs), id)
 }
 
-export async function getComponentNeighbors(id: string, loadDocs: DocsCollectionLoader) {
+export async function getComponentNeighbors(
+  id: string,
+  loadDocs: DocsCollectionLoader
+) {
   return findComponentNeighbors(await getDocsPages(loadDocs), id)
 }
 

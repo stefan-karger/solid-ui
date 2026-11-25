@@ -1,58 +1,37 @@
-import { createSignal } from "solid-js"
+import { For } from "solid-js"
 
 import {
   Combobox,
-  ComboboxClear,
   ComboboxContent,
-  ComboboxControl,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
 
-type Language = {
-  value: string
-  label: string
-}
+const frameworks = [
+  "Next.js",
+  "SvelteKit",
+  "Nuxt.js",
+  "Remix",
+  "Astro"
+] as const
 
-const languages: Language[] = [
-  { value: "typescript", label: "TypeScript" },
-  { value: "python", label: "Python" },
-  { value: "go", label: "Go" },
-  { value: "rust", label: "Rust" },
-  { value: "ruby", label: "Ruby" }
-]
-
-export default function ComboboxClearExample() {
-  const [value, setValue] = createSignal<Language | null>(null)
-
+export default function ComboboxWithClear() {
   return (
-    <Combobox<Language>
-      options={languages}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      value={value()}
-      onChange={setValue}
-      placeholder="Choose a language"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
-    >
-      <ComboboxControl<Language> class="max-w-sm">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxClear
-            aria-label="Clear selection"
-            class="text-muted-foreground transition-colors hover:text-foreground"
-          />
-        </InputGroupAddon>
-      </ComboboxControl>
+    <Combobox<string> defaultValue={frameworks[0]}>
+      <ComboboxInput
+        placeholder="Select a framework"
+        aria-label="Select a framework"
+        showClear
+      />
       <ComboboxContent>
-        <ComboboxList />
-        <ComboboxEmpty>No language found.</ComboboxEmpty>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={frameworks}>
+            {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+          </For>
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   )

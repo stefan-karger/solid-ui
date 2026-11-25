@@ -1,0 +1,57 @@
+{
+  "repository": "https://github.com/withastro/astro",
+  "pullRequest": 17891,
+  "revision": "bbf9faa205689d1cd86a0575a775c99d57785e42",
+  "baseRevision": "3ac5ad3ae05ddc461bcc7748f0c55fd6da056652",
+  "packages": [
+    {
+      "name": "@astrojs/solid-js",
+      "path": "packages/integrations/solid",
+      "version": "8.0.0-pr.17891.bbf9faa",
+      "archive": "astrojs-solid-js-8.0.0-pr.17891.bbf9faa.tgz",
+      "dependencies": {
+        "@astrojs/internal-helpers": "0.13.2",
+        "@astrojs/solid-js-renderer": "0.2.0-pr.17891.bbf9faa",
+        "@solidjs/vite-plugin": "3.0.1",
+        "vite": "8.3.8"
+      }
+    },
+    {
+      "name": "@astrojs/solid-js-renderer",
+      "path": "packages/renderers/solid-js",
+      "version": "0.2.0-pr.17891.bbf9faa",
+      "archive": "astrojs-solid-js-renderer-0.2.0-pr.17891.bbf9faa.tgz",
+      "dependencies": {
+        "@astrojs/runtime": "0.1.1",
+        "vitefu": "1.1.3"
+      }
+    }
+  ],
+  "files": {
+    "LICENSE": "4aa72be797aad0e5e21827eaae6a1df9e122d7a401f07d2c308a6b9a5f0e1278",
+    "packages/integrations/solid/CHANGELOG.md": "5a26da07ef864eb363d59c0b6788fa5f25f943d5a0b6ed92a1f5ebdf7d4bf281",
+    "packages/integrations/solid/README.md": "62c8e6cd2a088c26b3aee34acd2d6be3566a937cf1eb7443ea8f9144dcb3ece5",
+    "packages/integrations/solid/package.json": "11387200b56d8b5258f6c9b7b9359c9d30ffdb879ec3ec08d2e7cc4b0be134bc",
+    "packages/integrations/solid/src/client.ts": "8b687b68aec2259c6a6f159a99b94c9c0122ca18222c12a273b761aa958e92ce",
+    "packages/integrations/solid/src/container-renderer.ts": "cfb43a18fc3adb7b442f700a393eed730904033dc75807b8cf8682a5fcb198c0",
+    "packages/integrations/solid/src/index.ts": "d51937da1c27694ccb7fa9fb512b79dc4872a3e7e12bb0b264229251e992a565",
+    "packages/integrations/solid/src/server-function-endpoint.ts": "fb135eb8b1af0ab920b5df0f7c519b8311e6fc1c67cef6451c75900f63c8f11b",
+    "packages/integrations/solid/src/server.ts": "afbfa159eb2dbf6f2408aaaf6cb39ae0bec76bf673d9943bef62e7965cf46e28",
+    "packages/integrations/solid/src/virtual.d.ts": "1531f6ed06195294d3c7bc8713f8ab0a52e7366d051f671610c26bdf34cc3064",
+    "packages/integrations/solid/tsconfig.build.json": "c4c4e09c25938cd2eb339d5a5829e1862a0e4e83bed98282f8ac46d67aff7139",
+    "packages/integrations/solid/tsconfig.json": "3c81eb098731ae6160550027f3085a1b16dfa50028bd251767fd59ff8fdb913b",
+    "packages/renderers/solid-js/CHANGELOG.md": "821dcaaadfe764c738e9670c724e62b7aaa67acec3aaf7d9d5596ec91ca2ed90",
+    "packages/renderers/solid-js/README.md": "fd68939e4dd91a021f08bb9bf963e34b77ee32f2b2920ae71ec1ae04012abc8b",
+    "packages/renderers/solid-js/package.json": "2106b71017de04eb264225683779cc76bf3c12a3c5bb46ed88a43b31db39e4c1",
+    "packages/renderers/solid-js/src/client.ts": "df61f05a77c05d8d22599435a9e251d3d8090085b8bf520402da2f55589a02fb",
+    "packages/renderers/solid-js/src/container-renderer.ts": "d8743b471a1549527eaa646efd8265fee9e746178b27c1d0a60c593d05febc76",
+    "packages/renderers/solid-js/src/context.ts": "9f2c5765e93de9f51e42b85277d3f943a4986d1747c5cde3f515f76761da900b",
+    "packages/renderers/solid-js/src/index.ts": "574f697ab385aff813331f3667db2b704ab5eb0641f9b89352bd91390b03c169",
+    "packages/renderers/solid-js/src/server.ts": "c0158382875ea1a10b9b1f63f67b11c1fb06ef7d3582f9a88dfdacbf964b4043",
+    "packages/renderers/solid-js/src/types.ts": "7c57028af3c2a3a661030f27cf7e10a9a4e8f839048e81074011db03fcbc6760",
+    "packages/renderers/solid-js/src/virtual.d.ts": "d9e5665fad0d28017f68cc138aa7e88a6df2ce55c222705bb4f87e4d0334e4c6",
+    "packages/renderers/solid-js/tsconfig.build.json": "a980788d7943ac6ba30de162bed9f46f64ecfe4772f3eb6a9b44e1c10a0ddfde",
+    "packages/renderers/solid-js/tsconfig.json": "e4374c6470853a5502c1c0ac2bfafc815ea985c94a1392c7b26ba00d5dc4da23",
+    "packages/renderers/solid-js/tsconfig.test.json": "a7784a9dcb5214e90381b70a309b435638918687f9402304dfa658e1ab9cd499"
+  }
+}

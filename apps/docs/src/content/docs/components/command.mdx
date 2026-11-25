@@ -4,7 +4,11 @@ description: Command menu for search and quick actions.
 component: true
 ---
 
-<ComponentPreview name="command-demo" previewClassName="h-[24.5rem]" />
+<ComponentPreview
+  name="command-demo"
+  align="start"
+  previewClassName="h-[24.5rem]"
+/>
 
 ## Installation
 
@@ -27,10 +31,10 @@ npx solidui-cli@latest add command
 
 <Steps class="mb-0 pt-2">
 
-<Step>Install the following dependencies:</Step>
+<Step>Install the required Solid UI dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npx solidui-cli@latest add dialog input-group
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -47,44 +51,33 @@ npm install @kobalte/core
 
 ## Usage
 
-```tsx showLineNumbers
+```tsx
 import {
   Command,
-  CommandEmpty,
+  CommandInput,
+  CommandList,
   CommandGroup,
   CommandGroupLabel,
-  CommandInput,
   CommandItem,
-  CommandList,
-  CommandSeparator
+  CommandEmpty
 } from "~/components/ui/command"
 ```
 
-```tsx showLineNumbers
-<Command
-  options={options()}
-  onInputChange={(query) => setOptions(queryEmojiData(query))}
-  onChange={(result) => setEmoji(result)}
-  optionValue="name"
-  optionLabel="name"
-  placeholder="Search an emoji…"
-  itemComponent={(props) => (
-    <CommandItem item={props.item}>{props.item.rawValue.label}</CommandItem>
-  )}
-  sectionComponent={(props) => (
-    <>
-      {props.section.index > 0 ? <CommandSeparator /> : null}
-      <CommandGroup>
-        <CommandGroupLabel>{props.section.rawValue.heading}</CommandGroupLabel>
-      </CommandGroup>
-    </>
-  )}
->
-  <CommandInput />
-  <CommandList />
+```tsx
+<Command onAction={(value) => console.log(value)}>
+  <CommandInput aria-label="Search commands" placeholder="Search commands..." />
+  <CommandList>
+    <CommandGroup>
+      <CommandGroupLabel>Suggestions</CommandGroupLabel>
+      <CommandItem value="calendar">Calendar</CommandItem>
+      <CommandItem value="settings">Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
   <CommandEmpty>No results found.</CommandEmpty>
 </Command>
 ```
+
+`onAction` receives the command value when a command runs. `onValueChange` reports the highlighted command. Use `query` and `onQueryChange` to control search text; native filtering works with composed items. `CommandDialog` wraps the command palette in a named dialog.
 
 ## Composition
 
@@ -93,55 +86,34 @@ Use the following composition to build a `Command`:
 ```text
 Command
 ├── CommandInput
-├── CommandList
-│   ├── CommandGroup
-│   │   ├── CommandGroupLabel
-│   │   ├── CommandItem
-│   │   └── CommandItem
-│   ├── CommandSeparator
-│   └── CommandGroup
-│       └── CommandItem
-└── CommandEmpty
+└── CommandList
+    ├── CommandEmpty
+    ├── CommandGroup
+    │   ├── CommandItem
+    │   └── CommandItem
+    ├── CommandSeparator
+    └── CommandGroup
+        ├── CommandItem
+        └── CommandItem
 ```
 
-## Dialog Usage
-
-Use `CommandDialog` when you want a command palette rendered in a dialog.
-
-```tsx showLineNumbers
-import { Command, CommandDialog, CommandInput, CommandList } from "~/components/ui/command"
-
-export function CommandPalette() {
-  return (
-    <CommandDialog open={open()} onOpenChange={setOpen}>
-      <Command options={commands()} optionValue="value" optionLabel="label" optionTextValue="label">
-        <CommandInput placeholder="Search commands..." />
-        <CommandList />
-      </Command>
-    </CommandDialog>
-  )
-}
-```
-
-## Examples
-
-### Basic
+## Basic
 
 A simple command menu in a dialog.
 
 <ComponentPreview name="command-basic" />
 
-### Shortcuts
+## Shortcuts
 
 <ComponentPreview name="command-shortcuts" />
 
-### Groups
+## Groups
 
-A command menu with groups, icons, and separators.
+A command menu with groups, icons and separators.
 
 <ComponentPreview name="command-groups" />
 
-### Scrollable
+## Scrollable
 
 Scrollable command menu with multiple items.
 
@@ -149,22 +121,4 @@ Scrollable command menu with multiple items.
 
 ## API Reference
 
-### Core Parts
-
-| Part                     | Description                                                    |
-| ------------------------ | -------------------------------------------------------------- |
-| `Command`                | Root searchable command container.                             |
-| `CommandDialog`          | Dialog wrapper for palette-style command menus.                |
-| `CommandInput`           | Search input field with integrated icon.                       |
-| `CommandList`            | Listbox container for command results.                         |
-| `CommandEmpty`           | Empty state shown when no command matches.                     |
-| `CommandGroup`           | Section wrapper for grouped commands.                          |
-| `CommandGroupLabel`      | Label for a command section.                                   |
-| `CommandSeparator`       | Visual divider between command groups.                         |
-| `CommandItem`            | Selectable command row.                                        |
-| `CommandItemLabel`       | Primary label region inside a command item.                    |
-| `CommandItemDescription` | Secondary description region inside a command item.            |
-| `CommandShortcut`        | Right-aligned keyboard shortcut text inside a command item.    |
-| `CommandContent`         | Optional content wrapper from the underlying search primitive. |
-
-See the [Kobalte](https://kobalte.dev/docs/core/components/search) documentation for more information.
+See the [UI SDK Command API](https://ui-sdk.dev/docs/solid/components/command) for filtering options and keyboard behavior.

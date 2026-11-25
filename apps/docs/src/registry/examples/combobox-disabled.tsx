@@ -1,47 +1,37 @@
+import { For } from "solid-js"
+
 import {
   Combobox,
   ComboboxContent,
-  ComboboxControl,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-  ComboboxList,
-  ComboboxTrigger
+  ComboboxList
 } from "~/registry/ui/combobox"
-import { InputGroupAddon } from "~/registry/ui/input-group"
 
-type Workspace = {
-  value: string
-  label: string
-}
-
-const workspaces: Workspace[] = [
-  { value: "engineering", label: "Engineering" },
-  { value: "marketing", label: "Marketing" },
-  { value: "support", label: "Support" }
-]
+const frameworks = [
+  "Next.js",
+  "SvelteKit",
+  "Nuxt.js",
+  "Remix",
+  "Astro"
+] as const
 
 export default function ComboboxDisabled() {
   return (
-    <Combobox<Workspace>
-      defaultValue={workspaces[0]!}
-      disabled
-      options={workspaces}
-      optionValue="value"
-      optionLabel="label"
-      optionTextValue="label"
-      placeholder="Select workspace"
-      itemComponent={(props) => (
-        <ComboboxItem item={props.item}>{props.item.rawValue.label}</ComboboxItem>
-      )}
-    >
-      <ComboboxControl class="max-w-sm">
-        <ComboboxInput />
-        <InputGroupAddon align="inline-end">
-          <ComboboxTrigger />
-        </InputGroupAddon>
-      </ComboboxControl>
+    <Combobox<string>>
+      <ComboboxInput
+        placeholder="Select a framework"
+        aria-label="Select a framework"
+        disabled
+      />
       <ComboboxContent>
-        <ComboboxList />
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          <For each={frameworks}>
+            {(item) => <ComboboxItem value={item}>{item}</ComboboxItem>}
+          </For>
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   )

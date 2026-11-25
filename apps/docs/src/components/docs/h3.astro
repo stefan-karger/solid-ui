@@ -7,34 +7,35 @@ import { cn } from "~/lib/utils"
 type Props = HTMLAttributes<"h3">
 
 const { class: className, id, ...props } = Astro.props
-const slotContent = Astro.slots.has("default") ? await Astro.slots.render("default") : ""
-const headingId = id === undefined ? createHeadingId(slotContent) || undefined : id
+const slotContent = Astro.slots.has("default")
+  ? await Astro.slots.render("default")
+  : ""
+const headingId =
+  id === undefined ? createHeadingId(slotContent) || undefined : id
 ---
 
 <h3
   id={headingId}
   class={cn(
-    "mt-12 scroll-m-28 font-heading text-lg font-medium tracking-tight *:[code]:text-xl [&+p]:mt-4!",
+    "mt-12 scroll-m-28 font-heading text-[1.125em]/[1.45] font-semibold [&_code]:text-[0.9em] [&+p]:mt-4!",
     className
   )}
   {...props}
 >
-  {
-    headingId ? (
-      <a
-        class="group/heading inline-flex items-baseline gap-2 no-underline outline-none"
-        href={`#${headingId}`}
-      >
-        <Fragment set:html={slotContent} />
-        <span
-          aria-hidden="true"
-          class="text-muted-foreground opacity-0 transition-opacity group-hover/heading:opacity-100 group-focus-within/heading:opacity-100"
-        >
-          #
-        </span>
-      </a>
-    ) : (
+  {headingId ? (
+    <a
+      class="group/heading inline-flex items-baseline gap-2 no-underline outline-none"
+      href={`#${headingId}`}
+    >
       <Fragment set:html={slotContent} />
-    )
-  }
+      <span
+        aria-hidden="true"
+        class="text-muted-foreground opacity-0 transition-opacity group-focus-within/heading:opacity-100 group-hover/heading:opacity-100"
+      >
+        #
+      </span>
+    </a>
+  ) : (
+    <Fragment set:html={slotContent} />
+  )}
 </h3>

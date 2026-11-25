@@ -1,7 +1,7 @@
+import AiPatternGrid from "~/components/ai-pattern-grid.astro"
 import ComponentPreview from "~/components/component-preview.astro"
 import ComponentSource from "~/components/component-source.astro"
 import ComponentsList from "~/components/components-list.astro"
-import DirectoryList from "~/components/directory-list.astro"
 import A from "~/components/docs/a.astro"
 import AccordionContent from "~/components/docs/accordion-content.astro"
 import AccordionItem from "~/components/docs/accordion-item.astro"
@@ -49,11 +49,11 @@ import Tr from "~/components/docs/tr.astro"
 import Ul from "~/components/docs/ul.astro"
 
 export const mdxComponents = {
+  AiPatternGrid,
   ComponentPreview,
   ComponentSource,
   ComponentsList,
   ComponentList: ComponentsList,
-  DirectoryList,
   Accordion,
   AccordionItem,
   AccordionTrigger,

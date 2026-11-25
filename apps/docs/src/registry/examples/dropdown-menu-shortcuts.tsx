@@ -13,7 +13,10 @@ import {
 export default function DropdownMenuShortcuts() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Open
       </DropdownMenuTrigger>
       <DropdownMenuContent>

@@ -1,7 +1,14 @@
 import { createSignal, For } from "solid-js"
 
 import { Checkbox } from "~/registry/ui/checkbox"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/registry/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "~/registry/ui/table"
 
 const tableData = [
   {
@@ -62,9 +69,10 @@ export default function CheckboxInTable() {
             <Checkbox
               id="select-all-checkbox"
               name="select-all-checkbox"
-              checked={allChecked()}
-              indeterminate={someChecked() && !allChecked()}
-              onChange={handleSelectAll}
+              checked={
+                someChecked() && !allChecked() ? "indeterminate" : allChecked()
+              }
+              onCheckedChange={(checked) => handleSelectAll(checked === true)}
             />
           </TableHead>
           <TableHead>Name</TableHead>
@@ -75,13 +83,17 @@ export default function CheckboxInTable() {
       <TableBody>
         <For each={tableData}>
           {(row) => (
-            <TableRow data-state={selectedRows().has(row.id) ? "selected" : undefined}>
+            <TableRow
+              data-state={selectedRows().has(row.id) ? "selected" : undefined}
+            >
               <TableCell>
                 <Checkbox
                   id={`row-${row.id}-checkbox`}
                   name={`row-${row.id}-checkbox`}
                   checked={selectedRows().has(row.id)}
-                  onChange={(checked) => handleSelectRow(row.id, checked === true)}
+                  onCheckedChange={(checked) =>
+                    handleSelectRow(row.id, checked === true)
+                  }
                 />
               </TableCell>
               <TableCell class="font-medium">{row.name}</TableCell>

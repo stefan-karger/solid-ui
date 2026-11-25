@@ -30,7 +30,7 @@ npx solidui-cli@latest add popover
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -60,9 +60,7 @@ import {
 
 ```tsx showLineNumbers
 <Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">Open Popover</Button>
-  </PopoverTrigger>
+  <PopoverTrigger>Open Popover</PopoverTrigger>
   <PopoverContent>
     <PopoverHeader>
       <PopoverTitle>Title</PopoverTitle>
@@ -80,34 +78,27 @@ Use the following composition to build a `Popover`:
 Popover
 ├── PopoverTrigger
 └── PopoverContent
-    └── PopoverHeader
-        ├── PopoverTitle
-        └── PopoverDescription
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A simple popover with a header, title, and description.
 
 <ComponentPreview name="popover-basic" />
 
-### Alignments
+## Align
 
 Use the `align` prop on `PopoverContent` to control the horizontal alignment.
 
 <ComponentPreview name="popover-alignments" />
 
-### Form
+## With Form
 
 A popover with form fields inside.
 
 <ComponentPreview name="popover-form" />
 
 ## API Reference
-
-### Core Parts
 
 | Part                 | Description                                              |
 | -------------------- | -------------------------------------------------------- |
@@ -120,4 +111,4 @@ A popover with form fields inside.
 | `PopoverDescription` | Supporting description text for contextual information.  |
 | `PopoverCloseButton` | Optional close control for dismissible content patterns. |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/popover) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/popover) documentation for more information.

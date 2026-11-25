@@ -27,6 +27,12 @@ npx solidui-cli@latest add input-group
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button input textarea
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="input-group" title="components/ui/input-group.tsx" />
@@ -45,18 +51,16 @@ npx solidui-cli@latest add input-group
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea
+  InputGroupText
 } from "~/components/ui/input-group"
 ```
 
 ```tsx showLineNumbers
 <InputGroup>
-  <InputGroupInput placeholder="Search..." />
+  <InputGroupInput aria-label="Website" placeholder="example.com" />
   <InputGroupAddon>
-    <SearchIcon />
+    <InputGroupText>https://</InputGroupText>
   </InputGroupAddon>
 </InputGroup>
 ```
@@ -79,67 +83,66 @@ InputGroup
 Use the `align` prop on `InputGroupAddon` to position the addon relative to the control.
 
 <Callout>
-  For proper focus management, `InputGroupAddon` should be placed after `InputGroupInput` or
-  `InputGroupTextarea` in the DOM. Use the `align` prop to visually position the addon.
+  For proper focus management, `InputGroupAddon` should be placed after
+  `InputGroupInput` or `InputGroupTextarea` in the DOM. Use the `align` prop to
+  visually position the addon.
 </Callout>
 
 ### inline-start
 
-Use `align="inline-start"` to place the addon at the start of the input. This is the default.
+Use `align="inline-start"` to position the addon at the start of the input. This is the default.
 
 <ComponentPreview name="input-group-inline-start" previewClassName="h-48" />
 
 ### inline-end
 
-Use `align="inline-end"` to place the addon at the end of the input.
+Use `align="inline-end"` to position the addon at the end of the input.
 
 <ComponentPreview name="input-group-inline-end" previewClassName="h-48" />
 
 ### block-start
 
-Use `align="block-start"` to place the addon above a textarea-like control.
+Use `align="block-start"` to position the addon above the input.
 
 <ComponentPreview name="input-group-block-start" previewClassName="h-96" />
 
 ### block-end
 
-Use `align="block-end"` to place the addon below a textarea-like control.
+Use `align="block-end"` to position the addon below the input.
 
 <ComponentPreview name="input-group-block-end" previewClassName="h-[26rem]" />
 
-## Examples
-
-### Icon
+## Icon
 
 <ComponentPreview name="input-group-icon" previewClassName="h-80" />
 
-### Text
+## Text
 
 <ComponentPreview name="input-group-text" previewClassName="h-80" />
 
-### Button
+## Button
 
 <ComponentPreview name="input-group-button" previewClassName="h-72" />
 
-### Kbd
+## Kbd
 
 <ComponentPreview name="input-group-kbd" previewClassName="h-40" />
 
-### Dropdown
+## Dropdown
 
 <ComponentPreview name="input-group-dropdown" previewClassName="h-56" />
 
-### Spinner
+## Spinner
 
 <ComponentPreview name="input-group-spinner" previewClassName="h-80" />
 
-### Textarea
+## Textarea
 
 <ComponentPreview name="input-group-textarea" previewClassName="h-96" />
 
-### Custom Input
+## Custom Input
 
-Add `data-slot="input-group-control"` to a custom control for automatic focus state handling.
+Add `data-slot="input-group-control"` to a custom input so `InputGroup` can style its focus state. This example uses a custom `textarea`.
 
 <ComponentPreview name="input-group-custom" previewClassName="h-56" />
 

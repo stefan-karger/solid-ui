@@ -1,7 +1,9 @@
 import { defineConfig } from "oxfmt"
 
 export default defineConfig({
-  printWidth: 100,
+  astro: true,
+  endOfLine: "lf",
+  printWidth: 80,
   tabWidth: 2,
   useTabs: false,
   semi: false,
@@ -16,7 +18,7 @@ export default defineConfig({
     stylesheet: "./apps/docs/src/styles/global.css"
   },
   ignorePatterns: [
-    "**/*.astro",
+    "vendor/astro-solid/upstream/**",
     "**/node_modules/**",
     "**/dist/**",
     "**/.astro/**",

@@ -1,0 +1,19 @@
+---
+import LinkedCard from "~/components/docs/linked-card.astro"
+import { aiPatterns } from "~/lib/ai-patterns"
+---
+
+<ul
+  class="mt-6 grid list-none grid-cols-1 gap-4 sm:grid-cols-2"
+  data-slot="ai-pattern-grid"
+  data-not-typeset
+>
+  {aiPatterns.map(({ title, description, href }) => (
+    <li>
+      <LinkedCard href={href} class="h-full items-start gap-1 text-sm sm:p-6">
+        <span class="font-medium">{title}</span>
+        <span class="leading-relaxed text-muted-foreground">{description}</span>
+      </LinkedCard>
+    </li>
+  ))}
+</ul>

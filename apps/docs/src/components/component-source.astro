@@ -14,7 +14,15 @@ type Props = Omit<HTMLAttributes<"figure">, "title"> & {
   collapsible?: boolean
 }
 
-const { name, file, title, language, collapsible = true, class: className, ...props } = Astro.props
+const {
+  name,
+  file,
+  title,
+  language,
+  collapsible = true,
+  class: className,
+  ...props
+} = Astro.props
 if (!name) throw new Error("[registry] ComponentSource requires a name")
 
 const source = await getRegistrySource({ name, ...(file ? { file } : {}) })
@@ -22,25 +30,27 @@ const resolvedLanguage = language ?? source.language
 const highlightedCode = await highlightCode(source.code, resolvedLanguage)
 ---
 
-{
-  collapsible ? (
-    <CodeCollapsible variant="source" class={className} {...props}>
-      <ComponentCode
-        code={source.code}
-        highlightedCode={highlightedCode}
-        language={resolvedLanguage}
-        title={title ?? source.displayPath}
-        class="m-0! md:mx-0!"
-      />
-    </CodeCollapsible>
-  ) : (
+{collapsible ? (
+  <CodeCollapsible variant="source" class={className} {...props}>
     <ComponentCode
       code={source.code}
+      registryItem={name}
+      registryPath={source.registryPath}
       highlightedCode={highlightedCode}
       language={resolvedLanguage}
       title={title ?? source.displayPath}
-      class={className}
-      {...props}
+      class="m-0! md:mx-0!"
     />
-  )
-}
+  </CodeCollapsible>
+) : (
+  <ComponentCode
+    code={source.code}
+    registryItem={name}
+    registryPath={source.registryPath}
+    highlightedCode={highlightedCode}
+    language={resolvedLanguage}
+    title={title ?? source.displayPath}
+    class={className}
+    {...props}
+  />
+)}

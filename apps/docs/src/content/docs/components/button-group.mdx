@@ -30,7 +30,13 @@ npx solidui-cli@latest add button-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install class-variance-authority
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add separator
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -47,14 +53,14 @@ npm install @kobalte/core
 
 ## Usage
 
-```tsx
-import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "~/components/ui/button-group"
+```tsx showLineNumbers
+import { ButtonGroup } from "~/components/ui/button-group"
 ```
 
 ```tsx showLineNumbers
-<ButtonGroup>
-  <Button>Button 1</Button>
-  <Button>Button 2</Button>
+<ButtonGroup aria-label="Editing actions">
+  <button type="button">Undo</button>
+  <button type="button">Redo</button>
 </ButtonGroup>
 ```
 
@@ -64,10 +70,9 @@ Use the following composition to build a `ButtonGroup`:
 
 ```text
 ButtonGroup
-├── Button / Input / SelectTrigger
+├── Button or Input
 ├── ButtonGroupSeparator
-├── ButtonGroupText
-└── Button / Input / SelectTrigger
+└── ButtonGroupText
 ```
 
 ## Accessibility
@@ -84,80 +89,72 @@ ButtonGroup
 </ButtonGroup>
 ```
 
-## Button Group vs Toggle Group
+## ButtonGroup vs ToggleGroup
 
 - Use `ButtonGroup` for grouped action buttons.
 - Use `ToggleGroup` when each control represents a selected or pressed state.
 
-## Examples
+## Orientation
 
-### Orientation
-
-Set the `orientation` prop to switch between horizontal and vertical layouts.
+Set the `orientation` prop to change the button group layout.
 
 <ComponentPreview name="button-group-orientation" />
 
-### Size
+## Size
 
-Set `size` on each `Button` to build compact or spacious groups.
+Control the size of buttons using the `size` prop on individual buttons.
 
 <ComponentPreview name="button-group-size" />
 
-### Nested
+## Nested
 
-Nest groups to combine segmented controls with separate action clusters.
+Nest `<ButtonGroup>` components to create button groups with spacing.
 
 <ComponentPreview name="button-group-nested" />
 
-### Separator
+## Separator
 
-Use `ButtonGroupSeparator` to add a visual divider between adjacent controls.
+The `ButtonGroupSeparator` component visually divides buttons within a group.
 
 Buttons with variant `outline` do not need a separator since they have a border. For other variants, a separator is recommended to improve the visual hierarchy.
 
 <ComponentPreview name="button-group-separator" />
 
-### Split
+## Split
 
 Create a split button group by adding two buttons separated by a `ButtonGroupSeparator`.
 
 <ComponentPreview name="button-group-split" />
 
-### Input
+## Input
 
 Wrap an `Input` component with buttons.
 
 <ComponentPreview name="button-group-input" />
 
-### Input Group
+## Input Group
 
-Compose nested controls by combining `ButtonGroup` with `InputGroup`.
+Wrap an `InputGroup` component to create complex input layouts.
 
 <ComponentPreview name="button-group-input-group" />
 
-### Dropdown Menu
+## Dropdown Menu
 
 Create a split button group with a `DropdownMenu` component.
 
 <ComponentPreview name="button-group-dropdown" />
 
-### Select
+## Select
 
 Pair with a `Select` component.
 
 <ComponentPreview name="button-group-select" />
 
-### Popover
+## Popover
 
 Use with a `Popover` component.
 
 <ComponentPreview name="button-group-popover" />
-
-### Text as Label
-
-Render `ButtonGroupText` as a custom component with the `as` prop.
-
-<ComponentPreview name="button-group-text" />
 
 ## API Reference
 

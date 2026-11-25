@@ -1,0 +1,183 @@
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import { For, createMemo } from "solid-js"
+
+import {
+  useDemoChat,
+  type UIMessage,
+  createChat,
+  getMessageText
+} from "~/registry/lib/ai-demo-chat"
+import { Bubble, BubbleContent } from "~/registry/ui/bubble"
+import { Button } from "~/registry/ui/button"
+import { Message, MessageContent } from "~/registry/ui/message"
+import {
+  Trace,
+  TraceCollapsible,
+  TraceCollapsibleContent,
+  TraceCollapsibleTrigger,
+  TraceIcon,
+  TraceLine,
+  TraceTitle
+} from "~/registry/ui/trace"
+
+const chat = createChat()
+  .user("How do I start an Astro project with pnpm?")
+  .assistant(({ writer }) => {
+    writer.text(
+      "Run pnpm create astro@latest and follow the prompts. It scaffolds the project and installs the dependencies."
+    )
+    writer.sourceUrl({
+      url: "https://docs.astro.build/en/install-and-setup/",
+      title: "Install Astro | docs.astro.build"
+    })
+    writer.sourceUrl({
+      url: "https://www.npmjs.com/package/create-astro",
+      title: "create-astro | npmjs.com"
+    })
+    writer.sourceUrl({
+      url: "https://docs.astro.build/en/install-and-setup/",
+      title: "Install Astro | docs.astro.build"
+    })
+    writer.sourceUrl({
+      url: "https://pnpm.io/cli/create",
+      title: "pnpm create | pnpm.io"
+    })
+  })
+
+const transcript = chat.get()
+const [question] = chat.get(1)
+const transport = chat.transport({ delayMs: 20 })
+
+type SourcePart = Extract<UIMessage["parts"][number], { type: "source-url" }>
+
+function Sources(componentProps: { sources: SourcePart[] }) {
+  const content = createMemo(() => {
+    const { sources } = componentProps
+    return (
+      <Trace>
+        <TraceCollapsible defaultOpen>
+          <TraceCollapsibleTrigger>
+            <TraceLine>
+              <TraceIcon>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
+              </TraceIcon>
+              <TraceTitle>Used {sources.length} sources</TraceTitle>
+            </TraceLine>
+          </TraceCollapsibleTrigger>
+          <TraceCollapsibleContent>
+            <Trace>
+              {
+                <For each={sources}>
+                  {(source) => (
+                    <a href={source.url} target="_blank" rel="noreferrer">
+                      <TraceLine>
+                        <TraceTitle>
+                          {source.title ?? new URL(source.url).hostname}
+                          <span class="sr-only"> (opens in a new tab)</span>
+                        </TraceTitle>
+                        <TraceIcon>
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M7 7h10v10" />
+                            <path d="M7 17 17 7" />
+                          </svg>
+                        </TraceIcon>
+                      </TraceLine>
+                    </a>
+                  )}
+                </For>
+              }
+            </Trace>
+          </TraceCollapsibleContent>
+        </TraceCollapsible>
+      </Trace>
+    )
+  })
+  return <>{content()}</>
+}
+
+export default function SourcesDemo() {
+  const { messages, sendMessage, setMessages, status } = useDemoChat({
+    messages: transcript,
+    transport
+  })
+  const busy = () => status() === "submitted" || status() === "streaming"
+
+  return (
+    <div class="flex min-h-72 w-full max-w-sm flex-col gap-4 py-6 text-sm">
+      {
+        <For each={messages()}>
+          {(message) => {
+            const content = createMemo(() => {
+              if (message.role === "user") {
+                return (
+                  <Message align="end">
+                    <MessageContent>
+                      <Bubble align="end" variant="muted">
+                        <BubbleContent>{getMessageText(message)}</BubbleContent>
+                      </Bubble>
+                    </MessageContent>
+                  </Message>
+                )
+              }
+
+              const sources = message.parts
+                .filter((part) => part.type === "source-url")
+                .filter(
+                  (part, index, all) =>
+                    all.findIndex((other) => other.url === part.url) === index
+                )
+              const text = getMessageText(message)
+
+              return (
+                <Message>
+                  <MessageContent class="gap-4">
+                    {text && <p>{text}</p>}
+                    {sources.length > 0 && <Sources sources={sources} />}
+                  </MessageContent>
+                </Message>
+              )
+            })
+            return <>{content()}</>
+          }}
+        </For>
+      }
+      {!busy() && (
+        <Button
+          variant="outline"
+          size="sm"
+          class="mt-auto self-start"
+          onClick={() => {
+            setMessages([])
+            sendMessage(question)
+          }}
+        >
+          Replay
+        </Button>
+      )}
+    </div>
+  )
+}

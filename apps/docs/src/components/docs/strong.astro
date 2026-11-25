@@ -8,6 +8,6 @@ type Props = HTMLAttributes<"strong">
 const { class: className, ...props } = Astro.props
 ---
 
-<strong class={cn("font-medium", className)} {...props}>
+<strong class={cn("font-semibold", className)} {...props}>
   <slot />
 </strong>

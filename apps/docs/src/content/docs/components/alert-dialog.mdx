@@ -30,7 +30,13 @@ npx solidui-cli@latest add alert-dialog
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -59,19 +65,17 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from "~/components/ui/alert-dialog"
-import { Button } from "~/components/ui/button"
 ```
 
 ```tsx showLineNumbers
 <AlertDialog>
-  <AlertDialogTrigger as={Button} variant="outline">
-    Show Dialog
-  </AlertDialogTrigger>
+  <AlertDialogTrigger>Show Dialog</AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete your account from our servers.
+        This action cannot be undone. This will permanently delete your account
+        from our servers.
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
@@ -91,62 +95,45 @@ AlertDialog
 ├── AlertDialogTrigger
 └── AlertDialogContent
     ├── AlertDialogHeader
+    │   ├── AlertDialogMedia
     │   ├── AlertDialogTitle
-    │   ├── AlertDialogDescription
-    │   └── AlertDialogMedia
+    │   └── AlertDialogDescription
     └── AlertDialogFooter
         ├── AlertDialogCancel
         └── AlertDialogAction
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A basic alert dialog with a title, description, and cancel and continue buttons.
 
 <ComponentPreview name="alert-dialog-basic" previewClassName="h-56" />
 
-### Small
+## Small
 
-Use the `size="sm"` prop to render a compact alert dialog.
+Use the `size="sm"` prop to make the alert dialog smaller.
 
 <ComponentPreview name="alert-dialog-small" previewClassName="h-56" />
 
-### Media
+## Media
 
-Use `AlertDialogMedia` to add a visual cue such as an icon.
+Use the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
 
 <ComponentPreview name="alert-dialog-media" previewClassName="h-56" />
 
-### Small with Media
+## Small with Media
 
-Combine `size="sm"` with `AlertDialogMedia` for compact confirmation flows.
+Use the `size="sm"` prop to make the alert dialog smaller and the `AlertDialogMedia` component to add a media element such as an icon or image to the alert dialog.
 
 <ComponentPreview name="alert-dialog-small-media" previewClassName="h-56" />
 
-### Destructive
+## Destructive
 
-Use `variant="destructive"` on the trigger and action to highlight irreversible operations.
+Use the `AlertDialogAction` component to add a destructive action button to the alert dialog.
 
 <ComponentPreview name="alert-dialog-destructive" previewClassName="h-56" />
 
 ## API Reference
-
-### Core Parts
-
-| Part                     | Description                                                      |
-| ------------------------ | ---------------------------------------------------------------- |
-| `AlertDialog`            | Root component that manages open state and accessibility wiring. |
-| `AlertDialogTrigger`     | Interactive element used to open the alert dialog.               |
-| `AlertDialogContent`     | Overlay + content container rendered in a portal.                |
-| `AlertDialogHeader`      | Layout wrapper for title, description, and optional media.       |
-| `AlertDialogMedia`       | Optional visual element shown before heading content.            |
-| `AlertDialogTitle`       | Accessible heading for the alert dialog content.                 |
-| `AlertDialogDescription` | Supporting text for the dialog action context.                   |
-| `AlertDialogFooter`      | Action layout container for cancel/confirm controls.             |
-| `AlertDialogCancel`      | Close button styled for dismissive actions.                      |
-| `AlertDialogAction`      | Close button styled for primary or destructive confirmation.     |
 
 ### size
 
@@ -156,4 +143,4 @@ Use the `size` props on the `AlertDialogContent` component to control the size o
 | ------ | ------------------- | ----------- |
 | `size` | `"default" \| "sm"` | `"default"` |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/alert-dialog) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/alert-dialog) documentation for more information.

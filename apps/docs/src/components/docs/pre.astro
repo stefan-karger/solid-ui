@@ -20,21 +20,22 @@ const {
   ...props
 } = Astro.props
 
-const commandProps = npm && yarn && pnpm && bun ? { npm, yarn, pnpm, bun } : undefined
-const preContent = commandProps ? undefined : await Astro.slots.render("default")
+const commandProps =
+  npm && yarn && pnpm && bun ? { npm, yarn, pnpm, bun } : undefined
+const preContent = commandProps
+  ? undefined
+  : await Astro.slots.render("default")
 ---
 
-{
-  commandProps ? (
-    <CodeBlockCommand {...commandProps} />
-  ) : (
-    <pre
-      class={cn(
-        "no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none has-data-highlighted-line:px-0 has-data-line-numbers:px-0",
-        className
-      )}
-      set:html={preContent}
-      {...props}
-    />
-  )
-}
+{commandProps ? (
+  <CodeBlockCommand {...commandProps} />
+) : (
+  <pre
+    class={cn(
+      "no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none has-data-highlighted-line:px-0 has-data-line-numbers:px-0",
+      className
+    )}
+    set:html={preContent}
+    {...props}
+  />
+)}

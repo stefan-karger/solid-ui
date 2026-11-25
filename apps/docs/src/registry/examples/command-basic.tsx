@@ -1,3 +1,4 @@
+import { For } from "solid-js"
 import { createMemo, createSignal } from "solid-js"
 
 import { Button } from "~/registry/ui/button"
@@ -68,25 +69,30 @@ export default function CommandBasic() {
         Open Menu
       </Button>
       <CommandDialog onOpenChange={handleOpenChange} open={open()}>
-        <Command<CommandOption, CommandGroupOption>
-          onInputChange={setQuery}
-          placeholder="Type a command or search..."
-          options={filteredOptions()}
-          optionGroupChildren="items"
-          optionValue="value"
-          optionTextValue="label"
-          optionLabel="label"
-          itemComponent={(props) => (
-            <CommandItem item={props.item}>{props.item.rawValue.label}</CommandItem>
-          )}
-          sectionComponent={(props) => (
-            <CommandGroup>
-              <CommandGroupLabel>{props.section.rawValue.heading}</CommandGroupLabel>
-            </CommandGroup>
-          )}
-        >
-          <CommandInput />
-          <CommandList />
+        <Command onQueryChange={setQuery}>
+          <CommandInput
+            placeholder="Type a command or search..."
+            aria-label="Type a command or search..."
+          />
+          <CommandList>
+            <For each={filteredOptions()}>
+              {(group) => (
+                <CommandGroup>
+                  <CommandGroupLabel>{group.heading}</CommandGroupLabel>
+                  <For each={group["items"]}>
+                    {(option) => (
+                      <CommandItem
+                        value={option["value"]}
+                        label={option["label"]}
+                      >
+                        {option.label}
+                      </CommandItem>
+                    )}
+                  </For>
+                </CommandGroup>
+              )}
+            </For>
+          </CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
         </Command>
       </CommandDialog>

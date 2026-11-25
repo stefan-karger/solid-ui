@@ -3,35 +3,51 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "astro:build": "node scripts/build-astro-solid.ts",
+    "astro:check": "node scripts/build-astro-solid.ts --check",
     "build": "turbo run build",
     "check": "turbo run check",
     "dev": "turbo run dev",
-    "format": "oxfmt . && pnpm format:astro",
-    "format:astro": "prettier \"apps/docs/**/*.astro\" --write",
-    "format:astro:check": "prettier \"apps/docs/**/*.astro\" --check",
-    "format:check": "oxfmt --check . && pnpm format:astro:check",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "eslint . --cache --max-warnings 0",
+    "lint:fix": "eslint . --cache --fix --max-warnings 0",
     "test": "vitest run",
+    "test:adapter": "pnpm build && pnpm --filter docs exec astro build --root test/fixtures/adapter && playwright test",
     "test:watch": "vitest",
-    "validate": "pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build"
+    "validate": "pnpm astro:check && pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:adapter"
   },
   "devDependencies": {
-    "@solidjs/web": "2.0.0-rc.6",
-    "happy-dom": "20.10.6",
-    "oxfmt": "0.59.0",
-    "oxlint": "1.74.0",
-    "prettier": "3.8.1",
-    "prettier-plugin-astro": "0.14.1",
-    "solid-js": "2.0.0-rc.6",
-    "turbo": "2.10.5",
+    "@astrojs/compiler-rs": "0.5.3",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.65.1",
+    "@solidjs/vite-plugin": "3.0.1",
+    "@solidjs/web": "2.0.1",
+    "@types/node": "24.19.2",
+    "@vitest/eslint-plugin": "1.6.27",
+    "eslint": "10.13.0",
+    "eslint-plugin-astro": "3.2.1",
+    "eslint-plugin-jsx-a11y-x": "0.2.0",
+    "eslint-plugin-solid": "0.18.1",
+    "happy-dom": "21.0.3",
+    "oxfmt": "0.73.0",
+    "solid-js": "2.0.1",
+    "turbo": "2.11.9",
     "typescript": "6.0.3",
-    "vite-plugin-solid": "3.0.0-next.27",
-    "vitest": "4.1.10"
+    "typescript-eslint": "8.71.2",
+    "vite": "8.3.8",
+    "vitest": "5.0.5"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.22.0",
+      "onFail": "download"
+    }
   },
   "engines": {
-    "node": ">=24 <25",
-    "pnpm": "11.13.1"
+    "node": ">=24.22.0 <25",
+    "pnpm": "12.14.0"
   },
-  "packageManager": "pnpm@11.13.1"
+  "packageManager": "pnpm@12.14.0"
 }

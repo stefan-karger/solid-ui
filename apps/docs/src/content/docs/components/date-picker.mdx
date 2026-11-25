@@ -1,0 +1,69 @@
+---
+title: Date Picker
+description: A date picker component with range and presets.
+component: true
+---
+
+<ComponentPreview name="date-picker-demo" />
+
+## Installation
+
+The Date Picker is built using a composition of the `<Popover />` and the `<Calendar />` components.
+
+See the installation instructions for [Popover](/docs/components/popover#installation) and [Calendar](/docs/components/calendar#installation).
+
+## Usage
+
+<ComponentSource
+  name="date-picker-demo"
+  title="components/example-date-picker.tsx"
+/>
+
+See the [UI SDK Calendar API](https://ui-sdk.dev/docs/solid/components/calendar) for date values, selection modes, and keyboard behavior.
+
+## Composition
+
+A date picker is built from `Popover` and `Calendar` (there is no `DatePicker` root component):
+
+```text
+Popover
+├── PopoverTrigger
+└── PopoverContent
+    └── Calendar
+```
+
+## Basic
+
+A basic date picker component.
+
+<ComponentPreview name="date-picker-basic" />
+
+## Range Picker
+
+A date picker component for selecting a range of dates.
+
+<ComponentPreview name="date-picker-range" />
+
+## Date of Birth
+
+A date picker component for selecting a date of birth. This component includes a dropdown caption layout for date and month selection.
+
+<ComponentPreview name="date-picker-dob" />
+
+## Input
+
+A date picker component with an input field for selecting a date.
+
+<ComponentPreview name="date-picker-input" />
+
+## Time Picker
+
+A date picker component with a time input field for selecting a time.
+
+<ComponentPreview name="date-picker-time" />
+
+## Natural Language Picker
+
+This component uses the `chrono-node` library to parse natural language dates.
+
+<ComponentPreview name="date-picker-natural-language" />

@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
@@ -8,5 +9,10 @@
     },
     "types": ["astro/client"]
   },
-  "include": [".astro/types.d.ts", "src/**/*", "astro.config.ts"]
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "scripts/**/*",
+    "astro.config.ts"
+  ]
 }

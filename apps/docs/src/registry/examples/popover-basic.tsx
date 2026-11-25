@@ -10,14 +10,18 @@ import {
 
 export default function PopoverBasic() {
   return (
-    <Popover placement="bottom-start">
-      <PopoverTrigger as={Button} variant="outline">
+    <Popover>
+      <PopoverTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+      >
         Open Popover
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent side="bottom" align="start">
         <PopoverHeader>
           <PopoverTitle>Dimensions</PopoverTitle>
-          <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>
+          <PopoverDescription>
+            Set the dimensions for the layer.
+          </PopoverDescription>
         </PopoverHeader>
       </PopoverContent>
     </Popover>

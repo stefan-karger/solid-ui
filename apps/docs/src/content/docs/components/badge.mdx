@@ -27,10 +27,10 @@ npx solidui-cli@latest add badge
 
 <Steps class="mb-0 pt-2">
 
-<Step>Install the following dependency:</Step>
+<Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install class-variance-authority
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -52,48 +52,40 @@ import { Badge } from "~/components/ui/badge"
 ```
 
 ```tsx
-<Badge variant="default | outline | secondary | destructive">Badge</Badge>
+<Badge variant="secondary">Badge</Badge>
 ```
 
-## Examples
-
-### Variants
+## Variants
 
 Use the `variant` prop to change the variant of the badge.
 
 <ComponentPreview name="badge-variants" />
 
-### Icon
+## With Icon
 
 You can render an icon inside the badge. Use `data-icon="inline-start"` to render the icon on the left and `data-icon="inline-end"` to render the icon on the right.
 
 <ComponentPreview name="badge-icon" />
 
-### Spinner
+## With Spinner
 
 You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
 
 <ComponentPreview name="badge-spinner" />
 
-### Link
+## Link
 
 Use the `as` prop to render a link as a badge.
 
 <ComponentPreview name="badge-link" />
 
-### Custom Colors
+## Custom Colors
 
 You can customize the colors of a badge by adding custom classes such as `bg-green-50 dark:bg-green-800` to the `Badge` component.
 
 <ComponentPreview name="badge-colors" />
 
 ## API Reference
-
-### Core Parts
-
-| Part    | Description                          |
-| ------- | ------------------------------------ |
-| `Badge` | Root element that displays badge UI. |
 
 ### Badge
 
@@ -103,4 +95,4 @@ You can customize the colors of a badge by adding custom classes such as `bg-gre
 | `class`   | `string`                                                                      | -           |
 | `as`      | `ValidComponent`                                                              | `"span"`    |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/badge) documentation for more information.
+Badge forwards native span attributes and supports `as` for links.

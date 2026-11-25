@@ -8,6 +8,10 @@ type Props = HTMLAttributes<"div">
 const { class: className, ...props } = Astro.props
 ---
 
-<div class={cn("cn-alert-action", className)} data-slot="alert-action" {...props}>
+<div
+  class={cn("cn-alert-action", className)}
+  data-slot="alert-action"
+  {...props}
+>
   <slot />
 </div>

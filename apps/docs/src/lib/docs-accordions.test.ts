@@ -16,7 +16,9 @@ function accordionMarkup({
   items: fixtureItems = [{ value: "one" }, { value: "two" }, { value: "three" }]
 }: AccordionFixture = {}) {
   const collapsibleAttribute = collapsible ? " data-collapsible" : ""
-  const defaultAttribute = defaultValue ? ` data-default-value="${defaultValue}"` : ""
+  const defaultAttribute = defaultValue
+    ? ` data-default-value="${defaultValue}"`
+    : ""
 
   return `
     <div data-docs-accordion data-type="${type}"${collapsibleAttribute}${defaultAttribute}>
@@ -33,26 +35,28 @@ function accordionMarkup({
 }
 
 function renderAccordions(fixtures: AccordionFixture[] = [{}]) {
-  document.body.innerHTML = fixtures.map((fixture) => accordionMarkup(fixture)).join("")
+  document.body.innerHTML = fixtures
+    .map((fixture) => accordionMarkup(fixture))
+    .join("")
   return [...document.querySelectorAll<HTMLElement>("[data-docs-accordion]")]
 }
 
 function items(root: HTMLElement) {
-  return [...root.querySelectorAll<HTMLElement>("[data-accordion-item]")].filter(
-    (item) => item.closest("[data-docs-accordion]") === root
-  )
+  return [
+    ...root.querySelectorAll<HTMLElement>("[data-accordion-item]")
+  ].filter((item) => item.closest("[data-docs-accordion]") === root)
 }
 
 function triggers(root: HTMLElement) {
-  return [...root.querySelectorAll<HTMLButtonElement>("[data-accordion-trigger]")].filter(
-    (trigger) => trigger.closest("[data-docs-accordion]") === root
-  )
+  return [
+    ...root.querySelectorAll<HTMLButtonElement>("[data-accordion-trigger]")
+  ].filter((trigger) => trigger.closest("[data-docs-accordion]") === root)
 }
 
 function panels(root: HTMLElement) {
-  return [...root.querySelectorAll<HTMLElement>("[data-accordion-content]")].filter(
-    (panel) => panel.closest("[data-docs-accordion]") === root
-  )
+  return [
+    ...root.querySelectorAll<HTMLElement>("[data-accordion-content]")
+  ].filter((panel) => panel.closest("[data-docs-accordion]") === root)
 }
 
 describe("initializeDocsAccordions", () => {
@@ -69,11 +73,17 @@ describe("initializeDocsAccordions", () => {
 
     expect(root.dataset.accordionEnhanced).toBe("true")
     expect(root.dataset.value).toBe("two")
-    expect(panels(root).map((panel) => panel.hidden)).toEqual([true, false, true])
+    expect(panels(root).map((panel) => panel.hidden)).toEqual([
+      true,
+      false,
+      true
+    ])
   })
 
   it("allows a collapsible single accordion to close its open item", () => {
-    const root = renderAccordions([{ collapsible: true, defaultValue: "one" }])[0]!
+    const root = renderAccordions([
+      { collapsible: true, defaultValue: "one" }
+    ])[0]!
     initializeDocsAccordions()
 
     triggers(root)[0]!.click()
@@ -94,11 +104,17 @@ describe("initializeDocsAccordions", () => {
   })
 
   it("supports multiple encoded defaults and independent toggles", () => {
-    const root = renderAccordions([{ type: "multiple", defaultValue: "one,three" }])[0]!
+    const root = renderAccordions([
+      { type: "multiple", defaultValue: "one,three" }
+    ])[0]!
     initializeDocsAccordions()
 
     expect(root.dataset.value).toBe("one,three")
-    expect(panels(root).map((panel) => panel.hidden)).toEqual([false, true, false])
+    expect(panels(root).map((panel) => panel.hidden)).toEqual([
+      false,
+      true,
+      false
+    ])
     triggers(root)[1]!.click()
     expect(root.dataset.value).toBe("one,two,three")
     triggers(root)[0]!.click()
@@ -109,7 +125,11 @@ describe("initializeDocsAccordions", () => {
     const root = renderAccordions([
       {
         defaultValue: "two",
-        items: [{ value: "one" }, { value: "two", disabled: true }, { value: "three" }]
+        items: [
+          { value: "one" },
+          { value: "two", disabled: true },
+          { value: "three" }
+        ]
       }
     ])[0]!
     initializeDocsAccordions()
@@ -117,7 +137,9 @@ describe("initializeDocsAccordions", () => {
 
     expect(root.dataset.value).toBe("one")
     expect(buttons[1]!.getAttribute("aria-disabled")).toBe("true")
-    buttons[0]!.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }))
+    buttons[0]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true })
+    )
     expect(document.activeElement).toBe(buttons[2])
   })
 
@@ -134,8 +156,12 @@ describe("initializeDocsAccordions", () => {
         const panel = panels(root)[index]!
         expect(trigger.getAttribute("aria-controls")).toBe(panel.id)
         expect(panel.getAttribute("aria-labelledby")).toBe(trigger.id)
-        expect(trigger.getAttribute("aria-expanded")).toBe(index === 0 ? "true" : "false")
-        expect(items(root)[index]!.dataset.state).toBe(index === 0 ? "open" : "closed")
+        expect(trigger.getAttribute("aria-expanded")).toBe(
+          index === 0 ? "true" : "false"
+        )
+        expect(items(root)[index]!.dataset.state).toBe(
+          index === 0 ? "open" : "closed"
+        )
       }
     }
   })
@@ -145,13 +171,21 @@ describe("initializeDocsAccordions", () => {
     initializeDocsAccordions()
     const buttons = triggers(root)
 
-    buttons[0]!.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }))
+    buttons[0]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true })
+    )
     expect(document.activeElement).toBe(buttons[2])
-    buttons[2]!.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }))
+    buttons[2]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true })
+    )
     expect(document.activeElement).toBe(buttons[0])
-    buttons[0]!.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }))
+    buttons[0]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "End", bubbles: true })
+    )
     expect(document.activeElement).toBe(buttons[2])
-    buttons[2]!.dispatchEvent(new KeyboardEvent("keydown", { key: "Home", bubbles: true }))
+    buttons[2]!.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Home", bubbles: true })
+    )
     expect(document.activeElement).toBe(buttons[0])
   })
 
@@ -167,7 +201,11 @@ describe("initializeDocsAccordions", () => {
   it("ignores malformed items without breaking valid siblings", () => {
     const root = renderAccordions([
       {
-        items: [{ value: "one" }, { value: "broken", complete: false }, { value: "three" }]
+        items: [
+          { value: "one" },
+          { value: "broken", complete: false },
+          { value: "three" }
+        ]
       }
     ])[0]!
     initializeDocsAccordions()
@@ -180,7 +218,10 @@ describe("initializeDocsAccordions", () => {
 
   it("ignores malformed roots and is idempotent for valid roots", () => {
     const roots = renderAccordions([{ type: "invalid" }, {}])
-    const addEventListener = vi.spyOn(triggers(roots[1]!)[0]!, "addEventListener")
+    const addEventListener = vi.spyOn(
+      triggers(roots[1]!)[0]!,
+      "addEventListener"
+    )
 
     initializeDocsAccordions()
     initializeDocsAccordions()

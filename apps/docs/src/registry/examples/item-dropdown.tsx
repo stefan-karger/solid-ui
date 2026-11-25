@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
 import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
@@ -10,7 +10,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/registry/ui/dropdown-menu"
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "~/registry/ui/item"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle
+} from "~/registry/ui/item"
 
 const people = [
   {
@@ -32,12 +38,28 @@ const people = [
 
 export default function ItemDropdown() {
   return (
-    <DropdownMenu placement="bottom-end">
-      <DropdownMenuTrigger as={Button} class="w-fit" variant="outline">
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={(partProps) => <Button {...partProps} variant="outline" />}
+        class="w-fit"
+      >
         Select
-        <ChevronDownIcon class="size-4" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-4"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </DropdownMenuTrigger>
-      <DropdownMenuContent class="w-56">
+      <DropdownMenuContent side="bottom" align="end" class="w-56">
         <DropdownMenuGroup>
           <For each={people}>
             {(person) => (
@@ -46,12 +68,16 @@ export default function ItemDropdown() {
                   <ItemMedia>
                     <Avatar class="size-6.5">
                       <AvatarImage src={person.avatar} class="grayscale" />
-                      <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
+                      <AvatarFallback>
+                        {person.username.charAt(0)}
+                      </AvatarFallback>
                     </Avatar>
                   </ItemMedia>
                   <ItemContent class="gap-0">
                     <ItemTitle>{person.username}</ItemTitle>
-                    <ItemDescription class="leading-none">{person.twitter}</ItemDescription>
+                    <ItemDescription class="leading-none">
+                      {person.twitter}
+                    </ItemDescription>
                   </ItemContent>
                 </Item>
               </DropdownMenuItem>

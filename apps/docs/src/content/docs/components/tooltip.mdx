@@ -30,7 +30,7 @@ npx solidui-cli@latest add tooltip
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -48,12 +48,18 @@ npm install @kobalte/core
 ## Usage
 
 ```tsx
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from "~/components/ui/tooltip"
 ```
 
 ```tsx showLineNumbers
 <Tooltip>
-  <TooltipTrigger as="button">Hover</TooltipTrigger>
+  <TooltipTrigger render={(partProps) => <button {...partProps} />}>
+    Hover
+  </TooltipTrigger>
   <TooltipContent>
     <p>Add to library</p>
   </TooltipContent>
@@ -70,23 +76,23 @@ Tooltip
 └── TooltipContent
 ```
 
-## Examples
+## Side
 
-### Side
+Use the `side` prop to change the position of the tooltip.
 
 <ComponentPreview name="tooltip-sides" />
 
-### With Keyboard Shortcut
+## With Keyboard Shortcut
 
 <ComponentPreview name="tooltip-keyboard" />
 
-### Disabled Button
+## Disabled Button
+
+Wrap a disabled button in a `span` and use that wrapper as the tooltip trigger.
 
 <ComponentPreview name="tooltip-disabled" />
 
 ## API Reference
-
-### Core Parts
 
 | Part             | Description                                              |
 | ---------------- | -------------------------------------------------------- |
@@ -94,4 +100,4 @@ Tooltip
 | `TooltipTrigger` | Interactive element that opens tooltip content.          |
 | `TooltipContent` | Floating content rendered in a portal near the trigger.  |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/tooltip) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/tooltip) documentation for more information.

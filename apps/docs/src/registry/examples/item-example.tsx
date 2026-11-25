@@ -1,6 +1,6 @@
-import { InboxIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 
-import { Example, ExampleWrapper } from "~/registry/examples/example"
+import { Example, ExampleWrapper } from "~/registry/components/example"
 import { Button } from "~/registry/ui/button"
 import {
   Item,
@@ -19,7 +19,22 @@ type ItemVariant = "default" | "outline" | "muted"
 type ItemSize = "default" | "sm" | "xs"
 
 function ArchiveIcon() {
-  return <InboxIcon />
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+      <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+    </svg>
+  )
 }
 
 function AvatarImage(props: { label: string }) {
@@ -35,12 +50,17 @@ function AvatarImage(props: { label: string }) {
 }
 
 function ActionButton(props: { size: ItemSize }) {
-  return <Button size={props.size === "default" ? undefined : "sm"}>Action</Button>
+  return (
+    <Button size={props.size === "default" ? undefined : "sm"}>Action</Button>
+  )
 }
 
 function OutlineActionButton(props: { size: ItemSize }) {
   return (
-    <Button size={props.size === "default" ? undefined : "sm"} variant="outline">
+    <Button
+      size={props.size === "default" ? undefined : "sm"}
+      variant="outline"
+    >
       Action
     </Button>
   )
@@ -57,7 +77,11 @@ function ConfirmActions() {
   )
 }
 
-function BasicVariantSection(props: { title: string; variant: ItemVariant; size?: ItemSize }) {
+function BasicVariantSection(props: {
+  title: string
+  variant: ItemVariant
+  size?: ItemSize
+}) {
   const size = () => props.size ?? "default"
   const itemSize = () => (size() === "default" ? undefined : size())
 
@@ -79,7 +103,9 @@ function BasicVariantSection(props: { title: string; variant: ItemVariant; size?
       <Item size={itemSize()} variant={props.variant}>
         <ItemContent>
           <ItemTitle>Title + Description</ItemTitle>
-          <ItemDescription>This is a description that provides additional context.</ItemDescription>
+          <ItemDescription>
+            This is a description that provides additional context.
+          </ItemDescription>
         </ItemContent>
       </Item>
       <Item size={itemSize()} variant={props.variant}>
@@ -118,7 +144,9 @@ function BasicVariantSection(props: { title: string; variant: ItemVariant; size?
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Media + Title + Description</ItemTitle>
-          <ItemDescription>This item includes media, title, and description.</ItemDescription>
+          <ItemDescription>
+            This item includes media, title, and description.
+          </ItemDescription>
         </ItemContent>
       </Item>
       <Item size={itemSize()} variant={props.variant}>
@@ -128,7 +156,8 @@ function BasicVariantSection(props: { title: string; variant: ItemVariant; size?
         <ItemContent>
           <ItemTitle>Media + Title + Description + Button</ItemTitle>
           <ItemDescription>
-            Complete item with all components: media, title, description, and button.
+            Complete item with all components: media, title, description, and
+            button.
           </ItemDescription>
         </ItemContent>
         <ItemActions>
@@ -138,7 +167,9 @@ function BasicVariantSection(props: { title: string; variant: ItemVariant; size?
       <Item size={itemSize()} variant={props.variant}>
         <ItemContent>
           <ItemTitle>Multiple Actions</ItemTitle>
-          <ItemDescription>Item with multiple action buttons in the actions area.</ItemDescription>
+          <ItemDescription>
+            Item with multiple action buttons in the actions area.
+          </ItemDescription>
         </ItemContent>
         <ItemActions>
           <ConfirmActions />
@@ -160,7 +191,9 @@ function LinkItemsSection(props: { title: string; variant: ItemVariant }) {
         <Item as="a" href="#" variant={props.variant}>
           <ItemContent>
             <ItemTitle>Title + Description (Link)</ItemTitle>
-            <ItemDescription>Clickable item with title and description.</ItemDescription>
+            <ItemDescription>
+              Clickable item with title and description.
+            </ItemDescription>
           </ItemContent>
         </Item>
         <Item as="a" href="#" variant={props.variant}>
@@ -185,7 +218,9 @@ function LinkItemsSection(props: { title: string; variant: ItemVariant }) {
         <Item as="a" href="#" variant={props.variant}>
           <ItemContent>
             <ItemTitle>With Actions (Link)</ItemTitle>
-            <ItemDescription>Link item that also has action buttons.</ItemDescription>
+            <ItemDescription>
+              Link item that also has action buttons.
+            </ItemDescription>
           </ItemContent>
           <ItemActions>
             <Button size="sm" variant="outline">
@@ -297,7 +332,9 @@ function ImageItemsSection(props: {
         <ItemContent>
           <ItemTitle>Project Dashboard</ItemTitle>
           {!props.compact ? (
-            <ItemDescription>Overview of project settings and configuration.</ItemDescription>
+            <ItemDescription>
+              Overview of project settings and configuration.
+            </ItemDescription>
           ) : null}
         </ItemContent>
       </Item>
@@ -308,7 +345,9 @@ function ImageItemsSection(props: {
         <ItemContent>
           <ItemTitle>Document</ItemTitle>
           {!props.compact ? (
-            <ItemDescription>A document with metadata displayed.</ItemDescription>
+            <ItemDescription>
+              A document with metadata displayed.
+            </ItemDescription>
           ) : null}
         </ItemContent>
         <ItemActions>
@@ -344,11 +383,23 @@ export default function ItemExample() {
       <BasicVariantSection title="Outline" variant="outline" />
       <BasicVariantSection title="Muted" variant="muted" />
       <BasicVariantSection size="sm" title="Small" variant="default" />
-      <BasicVariantSection size="sm" title="Outline - Small" variant="outline" />
+      <BasicVariantSection
+        size="sm"
+        title="Outline - Small"
+        variant="outline"
+      />
       <BasicVariantSection size="sm" title="Muted - Small" variant="muted" />
       <BasicVariantSection size="xs" title="Extra Small" variant="default" />
-      <BasicVariantSection size="xs" title="Outline - Extra Small" variant="outline" />
-      <BasicVariantSection size="xs" title="Muted - Extra Small" variant="muted" />
+      <BasicVariantSection
+        size="xs"
+        title="Outline - Extra Small"
+        variant="outline"
+      />
+      <BasicVariantSection
+        size="xs"
+        title="Muted - Extra Small"
+        variant="muted"
+      />
       <LinkItemsSection title="asChild" variant="default" />
       <LinkItemsSection title="Outline - asChild" variant="outline" />
       <LinkItemsSection title="Muted - asChild" variant="muted" />
@@ -361,7 +412,11 @@ export default function ItemExample() {
       <ItemHeaderAndFooterExamples />
       <ImageItemsSection title="Default - ItemMedia image" variant="default" />
       <ImageItemsSection title="Outline - ItemMedia image" variant="outline" />
-      <ImageItemsSection size="sm" title="Outline - ItemMedia image - Small" variant="outline" />
+      <ImageItemsSection
+        size="sm"
+        title="Outline - ItemMedia image - Small"
+        variant="outline"
+      />
       <ImageItemsSection
         compact
         size="xs"
@@ -377,13 +432,25 @@ function ItemSeparatorExample() {
   return (
     <Example title="ItemSeparator">
       <ItemGroup>
-        <OutlineMailboxItem title="Inbox" description="View all incoming messages." />
+        <OutlineMailboxItem
+          title="Inbox"
+          description="View all incoming messages."
+        />
         <ItemSeparator />
-        <OutlineMailboxItem title="Sent" description="View all sent messages." />
+        <OutlineMailboxItem
+          title="Sent"
+          description="View all sent messages."
+        />
         <ItemSeparator />
-        <OutlineMailboxItem title="Drafts" description="View all draft messages." />
+        <OutlineMailboxItem
+          title="Drafts"
+          description="View all draft messages."
+        />
         <ItemSeparator />
-        <OutlineMailboxItem title="Archive" description="View archived messages." />
+        <OutlineMailboxItem
+          title="Archive"
+          description="View archived messages."
+        />
       </ItemGroup>
     </Example>
   )
@@ -413,7 +480,8 @@ function ItemHeaderExamples() {
         <ItemContent>
           <ItemTitle>Component Library</ItemTitle>
           <ItemDescription>
-            A comprehensive collection of reusable UI components for building consistent interfaces.
+            A comprehensive collection of reusable UI components for building
+            consistent interfaces.
           </ItemDescription>
         </ItemContent>
       </Item>
@@ -424,7 +492,8 @@ function ItemHeaderExamples() {
         <ItemContent>
           <ItemTitle>Campaign Analytics</ItemTitle>
           <ItemDescription>
-            Track performance metrics and engagement rates across all marketing channels.
+            Track performance metrics and engagement rates across all marketing
+            channels.
           </ItemDescription>
         </ItemContent>
       </Item>
@@ -435,7 +504,8 @@ function ItemHeaderExamples() {
         <ItemContent>
           <ItemTitle>API Documentation</ItemTitle>
           <ItemDescription>
-            Complete reference guide for all available endpoints and authentication methods.
+            Complete reference guide for all available endpoints and
+            authentication methods.
           </ItemDescription>
         </ItemContent>
       </Item>
@@ -450,31 +520,36 @@ function ItemFooterExamples() {
         <ItemContent>
           <ItemTitle>Quarterly Report Q4 2024</ItemTitle>
           <ItemDescription>
-            Financial overview including revenue, expenses, and growth metrics for the fourth
-            quarter.
+            Financial overview including revenue, expenses, and growth metrics
+            for the fourth quarter.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
-          <span class="text-sm text-muted-foreground">Last updated 2 hours ago</span>
+          <span class="text-sm text-muted-foreground">
+            Last updated 2 hours ago
+          </span>
         </ItemFooter>
       </Item>
       <Item variant="outline">
         <ItemContent>
           <ItemTitle>User Research Findings</ItemTitle>
           <ItemDescription>
-            Insights from interviews and surveys conducted with 50+ users across different
-            demographics.
+            Insights from interviews and surveys conducted with 50+ users across
+            different demographics.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
-          <span class="text-sm text-muted-foreground">Created by Sarah Chen</span>
+          <span class="text-sm text-muted-foreground">
+            Created by Sarah Chen
+          </span>
         </ItemFooter>
       </Item>
       <Item variant="muted">
         <ItemContent>
           <ItemTitle>Product Roadmap</ItemTitle>
           <ItemDescription>
-            Planned features and improvements scheduled for the next three months.
+            Planned features and improvements scheduled for the next three
+            months.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
@@ -495,12 +570,14 @@ function ItemHeaderAndFooterExamples() {
         <ItemContent>
           <ItemTitle>Website Redesign</ItemTitle>
           <ItemDescription>
-            Complete overhaul of the company website with modern design principles and improved user
-            experience.
+            Complete overhaul of the company website with modern design
+            principles and improved user experience.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
-          <span class="text-sm text-muted-foreground">Updated 5 minutes ago</span>
+          <span class="text-sm text-muted-foreground">
+            Updated 5 minutes ago
+          </span>
         </ItemFooter>
       </Item>
       <Item variant="outline">
@@ -510,7 +587,8 @@ function ItemHeaderAndFooterExamples() {
         <ItemContent>
           <ItemTitle>Mobile App Development</ItemTitle>
           <ItemDescription>
-            Building a cross-platform mobile application for iOS and Android with React Native.
+            Building a cross-platform mobile application for iOS and Android
+            with React Native.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
@@ -524,12 +602,14 @@ function ItemHeaderAndFooterExamples() {
         <ItemContent>
           <ItemTitle>API Integration Guide</ItemTitle>
           <ItemDescription>
-            Step-by-step instructions for integrating third-party APIs with authentication and error
-            handling.
+            Step-by-step instructions for integrating third-party APIs with
+            authentication and error handling.
           </ItemDescription>
         </ItemContent>
         <ItemFooter>
-          <span class="text-sm text-muted-foreground">Category: Technical • 3 attachments</span>
+          <span class="text-sm text-muted-foreground">
+            Category: Technical • 3 attachments
+          </span>
         </ItemFooter>
       </Item>
     </Example>

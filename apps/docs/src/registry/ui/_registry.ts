@@ -2,9 +2,188 @@ import type { Registry } from "~/registry/schema"
 
 export const ui: Registry["items"] = [
   {
+    name: "attachment",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    registryDependencies: ["button", "style-utilities"],
+    files: [
+      {
+        path: "ui/attachment.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "bubble",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/bubble.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "marker",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    registryDependencies: ["utils", "style-utilities"],
+    files: [
+      {
+        path: "ui/marker.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "message",
+    type: "registry:ui",
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/message.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "trace",
+    type: "registry:ui",
+    registryDependencies: ["collapsible", "utils", "style-utilities"],
+    files: [
+      {
+        path: "ui/trace.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "code-block",
+    type: "registry:ui",
+    dependencies: ["class-variance-authority"],
+    registryDependencies: ["button", "utils", "style-utilities"],
+    files: [
+      {
+        path: "ui/code-block.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "calendar",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/calendar.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "carousel",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["button", "utils"],
+    files: [
+      {
+        path: "ui/carousel.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "drawer",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/drawer.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "input-otp",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/input-otp.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "resizable",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/resizable.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "scroll-area",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["utils"],
+    files: [
+      {
+        path: "ui/scroll-area.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "message-scroller",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["button", "utils"],
+    files: [
+      {
+        path: "ui/message-scroller.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "toast",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["button", "utils"],
+    files: [
+      {
+        path: "ui/toast.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
+    name: "questionnaire",
+    type: "registry:ui",
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["button", "utils"],
+    files: [
+      {
+        path: "ui/questionnaire.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "accordion",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
+    registryDependencies: ["style-utilities"],
     files: [
       {
         path: "ui/accordion.tsx",
@@ -26,7 +205,7 @@ export const ui: Registry["items"] = [
   {
     name: "alert-dialog",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button"],
     files: [
       {
@@ -46,9 +225,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "avatar",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/avatar.tsx",
@@ -57,6 +237,7 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "badge",
     type: "registry:ui",
     dependencies: ["class-variance-authority"],
@@ -68,9 +249,9 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "breadcrumb",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/breadcrumb.tsx",
@@ -79,9 +260,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "button",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority"],
+    dependencies: ["class-variance-authority"],
     files: [
       {
         path: "ui/button.tsx",
@@ -92,7 +274,7 @@ export const ui: Registry["items"] = [
   {
     name: "button-group",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority"],
+    dependencies: ["class-variance-authority"],
     registryDependencies: ["separator"],
     files: [
       {
@@ -112,9 +294,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "checkbox",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/checkbox.tsx",
@@ -125,7 +308,7 @@ export const ui: Registry["items"] = [
   {
     name: "command",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["dialog", "input-group"],
     files: [
       {
@@ -135,9 +318,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "context-menu",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/context-menu.tsx",
@@ -146,9 +330,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "collapsible",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/collapsible.tsx",
@@ -159,7 +344,7 @@ export const ui: Registry["items"] = [
   {
     name: "combobox",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
     registryDependencies: ["button", "input-group"],
     files: [
       {
@@ -181,7 +366,7 @@ export const ui: Registry["items"] = [
   {
     name: "dialog",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button"],
     files: [
       {
@@ -193,7 +378,6 @@ export const ui: Registry["items"] = [
   {
     name: "direction",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
     files: [
       {
         path: "ui/direction.tsx",
@@ -202,9 +386,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "dropdown-menu",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/dropdown-menu.tsx",
@@ -236,9 +421,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "hover-card",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/hover-card.tsx",
@@ -301,9 +487,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "menubar",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/menubar.tsx",
@@ -314,7 +501,6 @@ export const ui: Registry["items"] = [
   {
     name: "native-select",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/native-select.tsx",
@@ -323,9 +509,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "navigation-menu",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
     files: [
       {
         path: "ui/navigation-menu.tsx",
@@ -336,7 +523,6 @@ export const ui: Registry["items"] = [
   {
     name: "pagination",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
     registryDependencies: ["button"],
     files: [
       {
@@ -346,9 +532,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "popover",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/popover.tsx",
@@ -357,9 +544,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "progress",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/progress.tsx",
@@ -368,9 +556,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "radio-group",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/radio-group.tsx",
@@ -379,9 +568,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "select",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/select.tsx",
@@ -392,7 +582,7 @@ export const ui: Registry["items"] = [
   {
     name: "sheet",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "lucide-solid"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     registryDependencies: ["button"],
     files: [
       {
@@ -404,7 +594,7 @@ export const ui: Registry["items"] = [
   {
     name: "sidebar",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority", "lucide-solid"],
+    dependencies: ["class-variance-authority"],
     registryDependencies: [
       "button",
       "input",
@@ -434,7 +624,6 @@ export const ui: Registry["items"] = [
   {
     name: "spinner",
     type: "registry:ui",
-    dependencies: ["lucide-solid"],
     files: [
       {
         path: "ui/spinner.tsx",
@@ -443,9 +632,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "slider",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/slider.tsx",
@@ -454,9 +644,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "switch",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/switch.tsx",
@@ -465,9 +656,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "separator",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/separator.tsx",
@@ -478,7 +670,8 @@ export const ui: Registry["items"] = [
   {
     name: "tabs",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
+    registryDependencies: ["style-utilities"],
     files: [
       {
         path: "ui/tabs.tsx",
@@ -497,9 +690,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "toggle",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
     files: [
       {
         path: "ui/toggle.tsx",
@@ -510,8 +704,8 @@ export const ui: Registry["items"] = [
   {
     name: "toggle-group",
     type: "registry:ui",
-    dependencies: ["@kobalte/core", "class-variance-authority"],
-    registryDependencies: ["toggle"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core", "class-variance-authority"],
+    registryDependencies: ["toggle", "style-utilities"],
     files: [
       {
         path: "ui/toggle-group.tsx",
@@ -520,9 +714,10 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    registryDependencies: [],
     name: "tooltip",
     type: "registry:ui",
-    dependencies: ["@kobalte/core"],
+    dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],
     files: [
       {
         path: "ui/tooltip.tsx",

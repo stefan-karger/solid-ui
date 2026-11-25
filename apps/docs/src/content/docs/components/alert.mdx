@@ -27,6 +27,12 @@ npx solidui-cli@latest add alert
 
 <Steps class="mb-0 pt-2">
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="alert" title="components/ui/alert.tsx" />
@@ -42,19 +48,22 @@ npx solidui-cli@latest add alert
 ## Usage
 
 ```tsx
-import { Alert, AlertAction, AlertDescription, AlertTitle } from "~/components/ui/alert"
-import { Button } from "~/components/ui/button"
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle
+} from "~/components/ui/alert"
 ```
 
 ```tsx showLineNumbers
 <Alert>
-  <InfoIcon />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
     You can add components and dependencies to your app using the cli.
   </AlertDescription>
   <AlertAction>
-    <Button variant="outline">Enable</Button>
+    <button type="button">Enable</button>
   </AlertAction>
 </Alert>
 ```
@@ -65,33 +74,34 @@ Use the following composition to build an `Alert`:
 
 ```text
 Alert
-├── Icon or custom media
+├── Icon
 ├── AlertTitle
 ├── AlertDescription
 └── AlertAction
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 A basic alert with an icon, title and description.
 
 <ComponentPreview name="alert-basic" previewClassName="h-auto sm:h-72 p-6" />
 
-### Destructive
+## Destructive
 
 Use `variant="destructive"` to create a destructive alert.
 
-<ComponentPreview name="alert-destructive" previewClassName="h-auto sm:h-72 p-6" />
+<ComponentPreview
+  name="alert-destructive"
+  previewClassName="h-auto sm:h-72 p-6"
+/>
 
-### Action
+## Action
 
 Use `AlertAction` to add a button or other action element to the alert.
 
 <ComponentPreview name="alert-action" previewClassName="h-auto sm:h-72 p-6" />
 
-### Colors
+## Custom Colors
 
 You can customize the alert colors by adding custom classes such as `bg-amber-50 dark:bg-amber-950` to the `Alert` component.
 

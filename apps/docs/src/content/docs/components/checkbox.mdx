@@ -30,7 +30,7 @@ npx solidui-cli@latest add checkbox
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -55,65 +55,46 @@ import { Checkbox } from "~/components/ui/checkbox"
 <Checkbox />
 ```
 
-## Controlled State
+## Checked State
 
-Use `checked` and `onChange` to fully control the checkbox state.
+Use `defaultChecked` for uncontrolled checkboxes, or `checked` and
+`onCheckedChange` to control the state.
 
-```tsx showLineNumbers
-import { createSignal } from "solid-js"
+## Invalid State
 
-import { Checkbox } from "~/components/ui/checkbox"
+Set `aria-invalid` on the checkbox and `data-invalid` on the field wrapper to
+show the invalid styles.
 
-function NewsletterCheckbox() {
-  const [checked, setChecked] = createSignal(false)
+<ComponentPreview name="checkbox-invalid" />
 
-  return (
-    <label class="flex items-center gap-2 text-sm">
-      <Checkbox checked={checked()} onChange={setChecked} />
-      Weekly newsletter
-    </label>
-  )
-}
-```
-
-## Indeterminate State
-
-Use `indeterminate` to represent a partial selection state.
-
-```tsx showLineNumbers
-<Checkbox checked={allSelected()} indeterminate={someSelected()} />
-```
-
-## Examples
-
-### Basic
+## Basic
 
 Pair the checkbox with `Field` and `FieldLabel` for proper layout and labeling.
 
 <ComponentPreview name="checkbox-basic" />
 
-### Description
+## Description
 
 Use `FieldContent` and `FieldDescription` for helper text.
 
 <ComponentPreview name="checkbox-description" />
 
-### Disabled
+## Disabled
 
 Use the `disabled` prop to prevent interaction and add the `data-disabled` attribute to the `<Field>` component for disabled styles.
 
 <ComponentPreview name="checkbox-disabled" />
 
-### Group
+## Group
 
 Use multiple fields to create a checkbox list.
 
 <ComponentPreview name="checkbox-group" />
 
-### Table
+## Table
 
-<ComponentPreview align="start" name="checkbox-table" previewClassName="p-4 md:p-8" />
+<ComponentPreview name="checkbox-table" previewClassName="p-4 md:p-8" />
 
 ## API Reference
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/checkbox) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/checkbox) documentation for more information.

@@ -1,4 +1,4 @@
-import { ChevronDownIcon, EllipsisIcon } from "lucide-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
 import {
@@ -25,12 +25,31 @@ export default function InputGroupDropdown() {
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
             <DropdownMenuTrigger
-              as={InputGroupButton}
+              render={(partProps) => (
+                <InputGroupButton
+                  {...partProps}
+                  size="icon-xs"
+                  variant="ghost"
+                />
+              )}
               aria-label="More"
-              size="icon-xs"
-              variant="ghost"
             >
-              <EllipsisIcon class="size-4" />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="size-4"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
+              </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuGroup>
@@ -47,9 +66,27 @@ export default function InputGroupDropdown() {
         <InputGroupInput placeholder="Enter search query" />
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
-            <DropdownMenuTrigger as={InputGroupButton} class="pr-1.5 text-xs" variant="ghost">
+            <DropdownMenuTrigger
+              render={(partProps) => (
+                <InputGroupButton {...partProps} variant="ghost" />
+              )}
+              class="pr-1.5 text-xs"
+            >
               {scope()}
-              <ChevronDownIcon class="size-3" />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="size-3"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="[--radius:0.95rem]">
               <DropdownMenuGroup>

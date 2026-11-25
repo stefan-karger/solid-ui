@@ -10,10 +10,10 @@ export default function ToggleGroupFontWeightSelector() {
     <FieldGroup class="w-full max-w-xs">
       <FieldLabel>Font Weight</FieldLabel>
       <ToggleGroup
-        onChange={(value) => setFontWeight(value ?? "normal")}
+        onValueChange={(value) => setFontWeight(value[0] ?? "normal")}
         size="lg"
         spacing={2}
-        value={fontWeight()}
+        value={[fontWeight()]}
         variant="outline"
       >
         <ToggleGroupItem
@@ -50,8 +50,11 @@ export default function ToggleGroupFontWeightSelector() {
         </ToggleGroupItem>
       </ToggleGroup>
       <FieldDescription>
-        Use <code class="rounded-md bg-muted px-1 py-0.5 font-mono">font-{fontWeight()}</code> to
-        set the font weight.
+        Use{" "}
+        <code class="rounded-md bg-muted px-1 py-0.5 font-mono">
+          font-{fontWeight()}
+        </code>{" "}
+        to set the font weight.
       </FieldDescription>
     </FieldGroup>
   )

@@ -30,7 +30,7 @@ npx solidui-cli@latest add hover-card
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @kobalte/core
+npm install @ui-sdk/solid @ui-sdk/core
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
@@ -48,12 +48,21 @@ npm install @kobalte/core
 ## Usage
 
 ```tsx
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/components/ui/hover-card"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
+} from "~/components/ui/hover-card"
 ```
 
 ```tsx showLineNumbers
 <HoverCard>
-  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
     Hover
   </HoverCardTrigger>
   <HoverCardContent>
@@ -77,40 +86,48 @@ HoverCard
 Use `openDelay` and `closeDelay` on `HoverCard` to control when content opens and closes.
 
 ```tsx showLineNumbers
-<HoverCard openDelay={100} closeDelay={200}>
-  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+<HoverCard delay={100} closeDelay={200}>
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
     Hover
   </HoverCardTrigger>
-  <HoverCardContent>Content</HoverCardContent>
+  <HoverCardContent side="left" sideOffset={8}>
+    Content
+  </HoverCardContent>
 </HoverCard>
 ```
 
 ## Positioning
 
-Use `placement` on `HoverCard` to choose where the content appears.
+Use `side`, `align`, and `sideOffset` on `HoverCardContent` to position the content.
 
 ```tsx showLineNumbers
-<HoverCard placement="left" gutter={8}>
-  <HoverCardTrigger as="a" href="/docs/components/hover-card" class="underline underline-offset-4">
+<HoverCard>
+  <HoverCardTrigger
+    render={(partProps) => (
+      <a {...partProps} href="/docs/components/hover-card" />
+    )}
+    class="underline underline-offset-4"
+  >
     Hover
   </HoverCardTrigger>
   <HoverCardContent>Content</HoverCardContent>
 </HoverCard>
 ```
 
-## Examples
-
-### Basic
+## Basic
 
 <ComponentPreview name="hover-card-demo" previewClassName="h-80" />
 
-### Sides
+## Sides
 
 <ComponentPreview name="hover-card-sides" previewClassName="h-[22rem]" />
 
 ## API Reference
-
-### Core Parts
 
 | Part               | Description                                               |
 | ------------------ | --------------------------------------------------------- |
@@ -118,4 +135,4 @@ Use `placement` on `HoverCard` to choose where the content appears.
 | `HoverCardTrigger` | Interactive trigger that opens content on hover or focus. |
 | `HoverCardContent` | Floating card content rendered inside a portal.           |
 
-See the [Kobalte](https://kobalte.dev/docs/core/components/hover-card) documentation for more information.
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/hover-card) documentation for more information.

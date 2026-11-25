@@ -20,14 +20,17 @@ export default function DialogDemo() {
           event.preventDefault()
         }}
       >
-        <DialogTrigger as={Button} variant="outline">
+        <DialogTrigger
+          render={(partProps) => <Button {...partProps} variant="outline" />}
+        >
           Open Dialog
         </DialogTrigger>
         <DialogContent class="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re done.
+              Make changes to your profile here. Click save when you&apos;re
+              done.
             </DialogDescription>
           </DialogHeader>
           <div class="grid gap-4">
@@ -37,11 +40,19 @@ export default function DialogDemo() {
             </div>
             <div class="grid gap-3">
               <Label for="dialog-demo-username">Username</Label>
-              <Input id="dialog-demo-username" name="username" value="@peduarte" />
+              <Input
+                id="dialog-demo-username"
+                name="username"
+                value="@peduarte"
+              />
             </div>
           </div>
           <DialogFooter>
-            <DialogClose as={Button} variant="outline">
+            <DialogClose
+              render={(partProps) => (
+                <Button {...partProps} variant="outline" />
+              )}
+            >
               Cancel
             </DialogClose>
             <Button type="submit">Save changes</Button>

@@ -2,17 +2,37 @@ import { afterEach, describe, expect, it } from "vitest"
 
 import { initializeCodeCollapsibles } from "./code-collapsibles"
 
-function renderCollapsible() {
+function renderCollapsible(variant: "preview" | "source") {
   document.body.innerHTML = `
-    <div data-code-collapsible>
+    <div data-code-collapsible data-variant="${variant}">
       <div data-code-content>source</div>
-      <button data-code-toggle type="button">
-        <span data-code-label-collapsed>Expand</span>
-        <span data-code-label-expanded hidden>Collapse</span>
-      </button>
+      <div data-code-control data-code-top-control>
+        <button data-code-toggle data-code-top-toggle type="button">
+          <span data-code-label-collapsed>Expand</span>
+          <span data-code-label-expanded hidden>Collapse</span>
+        </button>
+      </div>
+      <div data-code-control data-code-reveal>
+        <button data-code-toggle data-code-reveal-toggle type="button">
+          <span data-code-label-collapsed>View Code</span>
+          <span data-code-label-expanded hidden>Collapse</span>
+        </button>
+      </div>
     </div>
   `
-  return document.querySelector<HTMLElement>("[data-code-collapsible]")!
+  initializeCodeCollapsibles()
+  const root = document.querySelector<HTMLElement>("[data-code-collapsible]")!
+  return {
+    root,
+    content: root.querySelector<HTMLElement>("[data-code-content]")!,
+    top: root.querySelector<HTMLButtonElement>("[data-code-top-toggle]")!,
+    reveal: root.querySelector<HTMLButtonElement>("[data-code-reveal-toggle]")!
+  }
+}
+
+function activate(button: HTMLButtonElement) {
+  button.focus()
+  button.click()
 }
 
 describe("initializeCodeCollapsibles", () => {
@@ -20,29 +40,48 @@ describe("initializeCodeCollapsibles", () => {
     document.body.innerHTML = ""
   })
 
-  it("enhances code into an accessible collapsed state", () => {
-    const root = renderCollapsible()
-    initializeCodeCollapsibles()
+  it("moves focus to the visible control when a preview expands and collapses", () => {
+    const { root, top, reveal } = renderCollapsible("preview")
 
-    const content = root.querySelector<HTMLElement>("[data-code-content]")!
-    const toggle = root.querySelector<HTMLButtonElement>("[data-code-toggle]")!
-    expect(root.dataset.codeEnhanced).toBe("true")
+    activate(reveal)
+    expect(root.dataset.expanded).toBe("true")
+    expect(document.activeElement).toBe(top)
+
+    activate(top)
     expect(root.dataset.expanded).toBe("false")
-    expect(toggle.getAttribute("aria-expanded")).toBe("false")
-    expect(toggle.getAttribute("aria-controls")).toBe(content.id)
+    expect(document.activeElement).toBe(reveal)
   })
 
-  it("toggles labels without installing duplicate listeners", () => {
-    const root = renderCollapsible()
-    initializeCodeCollapsibles()
+  it("keeps focus on the source's top control, which stays visible", () => {
+    const { root, top, reveal } = renderCollapsible("source")
+
+    activate(reveal)
+    expect(document.activeElement).toBe(top)
+
+    activate(top)
+    expect(root.dataset.expanded).toBe("false")
+    expect(document.activeElement).toBe(top)
+  })
+
+  it("does not move focus that the activated control never had", () => {
+    const { top, reveal } = renderCollapsible("preview")
+
+    reveal.click()
+    expect(document.activeElement).not.toBe(top)
+  })
+
+  it("keeps both controls' ARIA state in sync and initializes once", () => {
+    const { root, content, top, reveal } = renderCollapsible("preview")
     initializeCodeCollapsibles()
 
-    const toggle = root.querySelector<HTMLButtonElement>("[data-code-toggle]")!
-    toggle.click()
-
+    reveal.click()
     expect(root.dataset.expanded).toBe("true")
-    expect(toggle.getAttribute("aria-expanded")).toBe("true")
-    expect(root.querySelector<HTMLElement>("[data-code-label-collapsed]")!.hidden).toBe(true)
-    expect(root.querySelector<HTMLElement>("[data-code-label-expanded]")!.hidden).toBe(false)
+    for (const toggle of [top, reveal]) {
+      expect(toggle.getAttribute("aria-controls")).toBe(content.id)
+      expect(toggle.getAttribute("aria-expanded")).toBe("true")
+    }
+    expect(
+      root.querySelector<HTMLElement>("[data-code-label-expanded]")!.hidden
+    ).toBe(false)
   })
 })
