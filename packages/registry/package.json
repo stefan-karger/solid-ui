@@ -1,6 +1,6 @@
 {
   "name": "@solid-ui/registry",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Presets, themes, schemas and registry helpers shared by the Solid UI docs and CLI.",
   "license": "MIT",

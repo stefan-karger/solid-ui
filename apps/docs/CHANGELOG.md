@@ -1,5 +1,22 @@
 # docs
 
+## 1.0.0
+
+### Major Changes
+
+- [#240](https://github.com/stefan-karger/solid-ui/pull/240) [`c5622a0`](https://github.com/stefan-karger/solid-ui/commit/c5622a071fc78e332ee2af021c309d652a4c1dec) Thanks [@stefan-karger](https://github.com/stefan-karger)! - Solid UI v2: the docs and registry move to Solid 2 and UI SDK.
+
+  - Components compose UI SDK primitives instead of Kobalte and Corvu, and examples use Solid 2 APIs.
+  - The docs are rebuilt with Astro, MDX and Tailwind CSS 4, with eight visual styles, light and dark mode, and a preset editor.
+  - The registry is published per style under `/r/styles/<style>/`. For a transition period, `/registry/` keeps serving the unchanged v1 components to `solidui-cli` 0.7.
+  - Icons are inlined as SVG from Lucide, so components and examples no longer depend on `lucide-solid`.
+  - New Installation, Vite, CLI and Migration pages, and the Shared Styles section shows the `solid-ui.css` that `solidui-cli` 1.0 generates.
+
+### Patch Changes
+
+- Updated dependencies [[`b99fde1`](https://github.com/stefan-karger/solid-ui/commit/b99fde1f55c44cf6dca7e6f5b54aa80ce95176f8)]:
+  - @solid-ui/registry@0.1.0
+
 ## 0.5.1
 
 ### Patch Changes
