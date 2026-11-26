@@ -87,7 +87,7 @@ Components, examples, and the docs inline their icons as SVG copied from
 Lucide, since `lucide-solid` still declares a Solid 1 peer range. Icons keep
 Lucide's 24px stroke geometry, are `aria-hidden="true"` unless the markup names
 them, and each file credits Lucide in its first line. The LICENSE carries the
-ISC notice and the shadcn/ui attribution.
+shadcn/ui attribution; THIRD_PARTY_NOTICES.md carries Lucide's ISC notice.
 
 ## Component API
 
