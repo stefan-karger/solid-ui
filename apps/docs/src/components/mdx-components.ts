@@ -35,6 +35,7 @@ import LinkedCard from "~/components/docs/linked-card.astro"
 import Ol from "~/components/docs/ol.astro"
 import P from "~/components/docs/p.astro"
 import Pre from "~/components/docs/pre.astro"
+import SolidUiCss from "~/components/docs/solid-ui-css.astro"
 import Step from "~/components/docs/step.astro"
 import Steps from "~/components/docs/steps.astro"
 import Strong from "~/components/docs/strong.astro"
@@ -80,6 +81,7 @@ export const mdxComponents = {
   TabsContent,
   Tab: "div",
   Step,
+  SolidUiCss,
   SupportedVersions,
   Steps,
   h1: H1,

@@ -47,15 +47,20 @@ The components share a visual language so you can combine them in a form, menu, 
 
 ## Shared Styles
 
-For manual installation, install `tw-animate-css` and save the shared stylesheet as `solid-ui.css` alongside your app stylesheet. It defines the component state variants, accordion animations, scroll fades, and text shimmer used by the registry.
+`init` writes `solid-ui.css` from your preset: the theme tokens, fonts, dark mode and the shared utilities the components use, such as state variants, accordion animations, scroll fades and text shimmer. Run it again with `--force` to switch the preset, see [Switch the theme](/docs/cli/#switch-the-theme).
 
-```css
+To set it up by hand, install the packages the stylesheet imports, save it next to your app stylesheet and import it right after Tailwind CSS. `@layer ui-sdk` comes first, so your styles and Tailwind utilities override UI SDK's own CSS.
+
+```css title="src/App.css"
+@layer ui-sdk;
+
 @import "tailwindcss";
-@import "tw-animate-css";
 @import "./solid-ui.css";
 ```
 
-<ComponentSource name="style-utilities" title="solid-ui.css" />
+The stylesheet below uses the Nova preset. For another one, build it on the [Create](/create) page and run `init` with its code.
+
+<SolidUiCss />
 
 ## AI-Ready
 
