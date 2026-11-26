@@ -189,10 +189,16 @@ export const add = new Command()
   .name("add")
   .description("add components to your project")
   .argument("[components...]", "the components to add")
-  .option("-c, --cwd <dir>", "the project directory", process.cwd())
+  .option(
+    "-c, --cwd <dir>",
+    "the project directory (default: current directory)"
+  )
   .option("-o, --overwrite", "replace files that differ", false)
   .option("-y, --yes", "skip the prompts; keep files that differ", false)
   .option("-a, --all", "add every component", false)
   .action(async (components: string[], options: AddOptions) => {
-    await runAdd(components, options)
+    await runAdd(components, {
+      ...options,
+      cwd: options.cwd ?? process.cwd()
+    })
   })

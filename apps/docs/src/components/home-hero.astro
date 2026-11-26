@@ -87,15 +87,26 @@ const visiblePrototypes = showPrototypes
         {prototype.id === "4" && (
           <SolidBrand variant="launch" class="mt-2 h-8" />
         )}
-        <a
-          href="/docs/components/"
-          class:list={[
-            buttonVariants({ variant: "default", size: "default" }),
-            "mt-2 h-9 shadow-none"
-          ]}
-        >
-          View Components
-        </a>
+        <div class="mt-2 flex flex-wrap items-center justify-center gap-2">
+          <a
+            href="/docs/installation/"
+            class:list={[
+              buttonVariants({ variant: "default", size: "default" }),
+              "h-9 shadow-none"
+            ]}
+          >
+            Get Started
+          </a>
+          <a
+            href="/docs/components/"
+            class:list={[
+              buttonVariants({ variant: "ghost", size: "default" }),
+              "h-9 shadow-none"
+            ]}
+          >
+            View Components
+          </a>
+        </div>
       </div>
     </div>
   ))}

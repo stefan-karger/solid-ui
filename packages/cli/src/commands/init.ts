@@ -502,7 +502,10 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 export const init = new Command()
   .name("init")
   .description("set up Solid UI in a Solid 2 project")
-  .option("-c, --cwd <dir>", "the project directory", process.cwd())
+  .option(
+    "-c, --cwd <dir>",
+    "the project directory (default: current directory)"
+  )
   .option("-p, --preset <code>", "a preset code from solid-ui.com/create")
   .option("-y, --yes", "skip the prompts and use the defaults", false)
   .option(
@@ -516,5 +519,5 @@ export const init = new Command()
     "the import alias for the components (default: ~)"
   )
   .action(async (options: InitOptions) => {
-    await runInit(options)
+    await runInit({ ...options, cwd: options.cwd ?? process.cwd() })
   })
