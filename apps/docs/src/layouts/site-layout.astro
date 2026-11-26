@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 
+import ogImage from "~/assets/og.png"
 import DocsAppearance from "~/components/docs-appearance"
 import DocsMobileNav from "~/components/docs-mobile-nav"
 import DocsSearch from "~/components/docs-search"
@@ -22,9 +23,10 @@ const navigation =
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 const isHome = currentPath === "/"
 const defaultStyle = isHome ? "rhea" : "nova"
-// Absolute URLs for link previews on Discord, X and other sites.
+// Absolute URLs for link previews on Discord, X and other sites. The image
+// URL carries a content hash, so a new image isn't hidden by their caches.
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href
-const imageUrl = new URL("/og.png", Astro.site).href
+const imageUrl = new URL(ogImage.src, Astro.site).href
 const onComponentsPage =
   currentPath === "/docs/components" ||
   currentPath.startsWith("/docs/components/")
@@ -48,8 +50,8 @@ const onComponentsPage =
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={pageUrl} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content="2400" />
-    <meta property="og:image:height" content="1260" />
+    <meta property="og:image:width" content={String(ogImage.width)} />
+    <meta property="og:image:height" content={String(ogImage.height)} />
     <meta
       property="og:image:alt"
       content="Solid UI: The Foundation for your Design System"
