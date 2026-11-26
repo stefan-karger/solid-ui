@@ -78,6 +78,7 @@ export function fakeRegistry(items = registryItems()) {
 export function recordingUi(
   answers: {
     confirm?: boolean | ((message: string) => boolean)
+    text?: string
     select?: unknown
   } = {}
 ) {
@@ -102,6 +103,10 @@ export function recordingUi(
       return answers.select as never
     },
     multiselect: async () => (answers.select ?? []) as never,
+    text: async (message, initial) => {
+      messages.push(`text: ${message}`)
+      return answers.text ?? initial
+    },
     confirm: async (message) => {
       messages.push(`confirm: ${message}`)
       return typeof answers.confirm === "function"

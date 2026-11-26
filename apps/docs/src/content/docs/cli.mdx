@@ -22,6 +22,7 @@ Options:
   -y, --yes            skip the prompts and use the defaults
   -f, --force          replace an existing components.json and solid-ui.css
   --css <file>         the app stylesheet that imports Tailwind CSS
+  --alias <prefix>     the import alias for the components (default: ~)
   -h, --help           display help for command
 ```
 
@@ -56,7 +57,7 @@ In CI, scripts or coding agents, pass `--yes` together with the preset:
 npx solidui-cli@latest init --preset <code> --yes
 ```
 
-Without `--preset`, `--yes` uses the Nova preset. `--yes` never overwrites your files: `init` keeps a changed `lib/utils.ts` and `add` keeps components that differ from the registry. It does update packages the components can't work without, like an older Tailwind CSS minor or another UI SDK beta. Other packages outside the tested ranges stay as they are, with a warning.
+Without `--preset` and `--alias`, `--yes` uses the Nova preset and the `~` alias. `--yes` never overwrites your files: `init` keeps a changed `lib/utils.ts` and `add` keeps components that differ from the registry. It does update packages the components can't work without, like an older Tailwind CSS minor or another UI SDK beta. Other packages outside the tested ranges stay as they are, with a warning.
 
 ### Switch the theme
 
@@ -81,6 +82,16 @@ Commit your changes first, then compare the diff and merge back the edits you wa
 ### Use your package manager
 
 Run the CLI with the package manager your project uses, for example `pnpm dlx` or `bunx`. When nothing is installed yet, `init` installs the dependencies with that tool. The solid-v2 templates ship a `pnpm-lock.yaml`, so the lockfile can't tell which tool you chose. Once `node_modules` exists, the CLI keeps using the package manager that installed it, or the one in the `packageManager` field of `package.json`.
+
+### Use another import alias
+
+Components import each other through `~/` by default. If your project already uses another prefix such as `@/`, give it when `init` asks, or pass it:
+
+```bash
+npx solidui-cli@latest init --alias @
+```
+
+`init` saves the aliases in `components.json` and adds `@/*` to `tsconfig.json` unless it's there already. `add` rewrites the imports of every component to match, so `~/lib/utils` arrives as `@/lib/utils`. Running `init` again keeps the aliases from `components.json`.
 
 ### Choose the app stylesheet
 

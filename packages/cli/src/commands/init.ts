@@ -4,7 +4,8 @@ import path from "node:path"
 import {
   CONFIG_FILE,
   CONFIG_SCHEMA_URL,
-  DEFAULT_ALIASES,
+  aliasesFor,
+  DEFAULT_ALIAS,
   type ComponentsJson
 } from "@solid-ui/registry/config"
 import { createSolidUiCss, solidUiCssPackages } from "@solid-ui/registry/css"
@@ -39,11 +40,12 @@ import {
 } from "~/preflight/init"
 import { patchAppCss } from "~/project/app-css"
 import { readPackageJson } from "~/project/package-json"
-import { addTildeAlias } from "~/project/tsconfig"
+import { addPathAlias, resolveAlias } from "~/project/tsconfig"
 import { canUpdateInto, resolveVersion, satisfies } from "~/project/versions"
 import {
   TSCONFIG_PATHS_ENTRY,
   TSCONFIG_PATHS_SNIPPET,
+  readViteConfig,
   type ViteConfig
 } from "~/project/vite"
 import { createRegistryClient, type RegistryClient } from "~/registry/client"
@@ -67,6 +69,7 @@ export type InitOptions = {
   yes: boolean
   force: boolean
   css?: string
+  alias?: string
 }
 
 export type InitDeps = {
@@ -111,7 +114,7 @@ async function planViteStep(
     interactive &&
     !options.yes &&
     !(await ui.confirm(
-      `${path.basename(vite.path)} sets resolve.tsconfigPaths to false. Solid UI components import through ~/, which needs it. Set it to true?`,
+      `${path.basename(vite.path)} sets resolve.tsconfigPaths to false. Solid UI components import through the tsconfig paths alias, which needs it. Set it to true?`,
       true
     ))
   )
@@ -219,6 +222,38 @@ async function alignVersions(
   ui.info(`Update them with:\n\n${commands}`)
 }
 
+// "@", "@/" and "@/*" all mean the prefix "@".
+function parseAlias(input: string) {
+  const prefix = input.trim().replace(/\/\*?$/, "")
+  return /^[^\s/*.][^\s/*]*$/.test(prefix) ? prefix : null
+}
+
+// The aliases to write: --alias, else the ones an existing components.json
+// has, else the prompt with `~` as the default (also for --yes).
+async function chooseAliases(
+  options: InitOptions,
+  existing: ComponentsJson["aliases"] | null,
+  ui: Ui,
+  interactive: boolean
+): Promise<ComponentsJson["aliases"]> {
+  if (options.alias) {
+    const prefix = parseAlias(options.alias)
+    if (!prefix)
+      throw new CliError(
+        `${options.alias} is not an import alias. Use a prefix such as ~ or @.`
+      )
+    return aliasesFor(prefix)
+  }
+  if (existing) return existing
+  if (!interactive || options.yes) return aliasesFor(DEFAULT_ALIAS)
+  const answer = await ui.text(
+    "Which import alias should the components use?",
+    DEFAULT_ALIAS,
+    (value) => (parseAlias(value) ? undefined : "Use a prefix such as ~ or @.")
+  )
+  return aliasesFor(parseAlias(answer)!)
+}
+
 async function choosePreset(
   options: InitOptions,
   ui: Ui,
@@ -292,6 +327,14 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   const preset = await choosePreset(options, ui, interactive)
   if (!preset) return
   const code = encodePreset(preset)
+  const aliases = await chooseAliases(
+    options,
+    project.configAliases,
+    ui,
+    interactive
+  )
+  // "~" for ~/lib: the prefix the tsconfig path and Vite resolve.
+  const prefix = aliases.lib.slice(0, aliases.lib.indexOf("/"))
 
   const agent = detectAgent(cwd)
   const align = { ask: interactive && !options.yes, yes: options.yes }
@@ -336,26 +379,14 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     tailwind: { css: project.tailwindCss },
     menuColor: preset.menuColor,
     menuAccent: preset.menuAccent,
-    aliases: { ...DEFAULT_ALIASES }
+    aliases
   }
 
-  // The tsconfig as it will be once ~/* is in place.
-  const tsconfigText = project.needsTildeAlias
-    ? addTildeAlias(project.tsconfig, project.tildeTarget)
-    : project.tsconfig.text
-  const tsconfig = { ...project.tsconfig, text: tsconfigText }
-  if (project.needsTildeAlias) {
-    tsconfig.config = {
-      ...tsconfig.config,
-      compilerOptions: {
-        ...tsconfig.config.compilerOptions,
-        paths: {
-          ...tsconfig.config.compilerOptions?.paths,
-          "~/*": [project.tildeTarget]
-        }
-      }
-    }
-  }
+  // The tsconfig as it will be once the alias resolves.
+  const needsAlias = !resolveAlias(project.tsconfig, aliases.lib)
+  const tsconfig = needsAlias
+    ? addPathAlias(project.tsconfig, prefix, project.aliasTarget)
+    : project.tsconfig
 
   const appCssPath = path.resolve(cwd, project.tailwindCss)
   const solidUiCssPath = path.join(path.dirname(appCssPath), "solid-ui.css")
@@ -389,8 +420,9 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     ...solidUiCssPackages(preset).map(spec)
   ])
 
-  const viteStep = await planViteStep(project.vite, options, ui, interactive)
-  const viteName = project.vite ? rel(cwd, project.vite.path) : "vite.config.ts"
+  const vite = readViteConfig(cwd, prefix)
+  const viteStep = await planViteStep(vite, options, ui, interactive)
+  const viteName = vite ? rel(cwd, vite.path) : "vite.config.ts"
 
   // One spinner line per step: "Writing x" turns into "Wrote x".
   const update = (file: string, note: string, write: () => void) =>
@@ -405,9 +437,9 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     await update(project.tailwindCss, "", () =>
       writeFileSync(appCssPath, patchedAppCss)
     )
-  if (project.needsTildeAlias)
-    await update(rel(cwd, project.tsconfig.path), 'added "~/*"', () =>
-      writeFileSync(project.tsconfig.path, tsconfigText)
+  if (needsAlias)
+    await update(rel(cwd, tsconfig.path), `added "${prefix}/*"`, () =>
+      writeFileSync(tsconfig.path, tsconfig.text)
     )
   if (viteStep.kind === "write") {
     const { path: vitePath, text, enable } = viteStep
@@ -456,7 +488,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   const addButton = color.command(cliCommand("add button"))
   if (viteStep.kind === "manual") {
     ui.warn(
-      `Vite can't resolve ~/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${color.command(TSCONFIG_PATHS_ENTRY)} to the config, for example:\n\n${color.command(TSCONFIG_PATHS_SNIPPET)}`
+      `Vite can't resolve ${prefix}/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${color.command(TSCONFIG_PATHS_ENTRY)} to the config, for example:\n\n${color.command(TSCONFIG_PATHS_SNIPPET)}`
     )
     ui.outro(
       `Finish the ${viteName} step above, then add a component with: ${addButton}`
@@ -479,6 +511,10 @@ export const init = new Command()
     false
   )
   .option("--css <file>", "the app stylesheet that imports Tailwind CSS")
+  .option(
+    "--alias <prefix>",
+    "the import alias for the components (default: ~)"
+  )
   .action(async (options: InitOptions) => {
     await runInit(options)
   })

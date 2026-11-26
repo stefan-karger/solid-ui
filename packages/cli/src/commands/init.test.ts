@@ -30,16 +30,21 @@ async function init(
   {
     interactive = false,
     confirm,
+    text,
     install
   }: {
     interactive?: boolean
     confirm?: (message: string) => boolean
+    text?: string
     install?: Installer
   } = {}
 ) {
   const registry = fakeRegistry()
   const installer = recordingInstaller()
-  const { ui, messages } = recordingUi({ confirm })
+  const { ui, messages } = recordingUi({
+    confirm,
+    ...(text ? { text } : {})
+  })
   await runInit(
     { cwd, yes: true, force: false, ...options },
     {
@@ -353,6 +358,76 @@ describe("init", () => {
     expect(calls.at(-1)).toEqual({
       specs: [`tailwindcss@${supportedRange("tailwindcss")}`],
       dev: false
+    })
+  })
+
+  describe("import alias", () => {
+    const aliasesOf = (cwd: string) =>
+      JSON.parse(read(cwd, "components.json")).aliases
+
+    it("uses ~ with --yes and never asks", async () => {
+      const cwd = createProject()
+      const { messages } = await init(cwd)
+      expect(aliasesOf(cwd).ui).toBe("~/components/ui")
+      expect(messages.join("\n")).not.toContain("text:")
+    })
+
+    it("writes the prefix from --alias to components.json and tsconfig", async () => {
+      const cwd = createProject()
+      const { messages } = await init(cwd, { alias: "@/*" })
+      expect(aliasesOf(cwd)).toEqual({
+        components: "@/components",
+        ui: "@/components/ui",
+        lib: "@/lib",
+        utils: "@/lib/utils",
+        hooks: "@/hooks"
+      })
+      expect(read(cwd, "tsconfig.json")).toMatch(/"@\/\*": \[\s*"\.\/src\/\*"/)
+      expect(read(cwd, "src/lib/utils.ts")).toBe(UTILS_SOURCE)
+      expect(messages).toContain('task: Updated tsconfig.json (added "@/*")')
+    })
+
+    it("asks for the alias in a terminal", async () => {
+      const cwd = createProject()
+      const { messages } = await init(
+        cwd,
+        { yes: false, preset: "b0" },
+        { interactive: true, confirm: () => true, text: "@/" }
+      )
+      expect(messages).toContain(
+        "text: Which import alias should the components use?"
+      )
+      expect(aliasesOf(cwd).utils).toBe("@/lib/utils")
+    })
+
+    it("leaves an alias the tsconfig already has alone", async () => {
+      const cwd = createProject({
+        files: {
+          "tsconfig.json": TEMPLATE_TSCONFIG.replace(
+            '"strict": true,',
+            '"strict": true,\n    "paths": { "@/*": ["./src/*"] },'
+          ),
+          "vite.config.ts": TEMPLATE_VITE_CONFIG,
+          "src/App.css": "@import 'tailwindcss';\n"
+        }
+      })
+      const tsconfig = read(cwd, "tsconfig.json")
+      const { messages } = await init(cwd, { alias: "@" })
+      expect(read(cwd, "tsconfig.json")).toBe(tsconfig)
+      expect(messages.join("\n")).not.toContain("Updated tsconfig.json")
+    })
+
+    it("keeps the aliases of components.json when switching the preset", async () => {
+      const cwd = createProject()
+      await init(cwd, { alias: "@" })
+      await init(cwd, { force: true, preset: "b0" })
+      expect(aliasesOf(cwd).ui).toBe("@/components/ui")
+    })
+
+    it("rejects an alias that isn't a prefix", async () => {
+      await expect(init(createProject(), { alias: "./src" })).rejects.toThrow(
+        "./src is not an import alias"
+      )
     })
   })
 

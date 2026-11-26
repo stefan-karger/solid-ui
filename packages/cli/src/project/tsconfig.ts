@@ -28,8 +28,6 @@ export type TsConfigFile = {
   config: TsConfig
 }
 
-export const TILDE_ALIAS = "~/*"
-
 export function readTsConfig(file: string): TsConfigFile | null {
   if (!existsSync(file)) return null
   const text = readFileSync(file, "utf8")
@@ -103,19 +101,35 @@ const FORMATTING: FormattingOptions = {
   eol: "\n"
 }
 
-// Adds `"~/*": ["./src/*"]` to compilerOptions.paths and keeps the comments
-// and formatting of the rest of the file. TypeScript 7 drops baseUrl, so the
-// target is relative to the tsconfig.
-export function addTildeAlias(file: TsConfigFile, target: string): string {
+// Adds `"<prefix>/*": [target]` to compilerOptions.paths, keeping the comments
+// and formatting of the rest of the file, and returns the file as it will be.
+// TypeScript 7 drops baseUrl, so the target is relative to the tsconfig.
+export function addPathAlias(
+  file: TsConfigFile,
+  prefix: string,
+  target: string
+): TsConfigFile {
+  const pattern = `${prefix}/*`
   const indent = file.text.match(/\n( +|\t)"/)?.[1]
   const formattingOptions: FormattingOptions = indent?.startsWith("\t")
     ? { ...FORMATTING, insertSpaces: false }
     : { ...FORMATTING, tabSize: indent?.length ?? 2 }
   const eol = file.text.includes("\r\n") ? "\r\n" : "\n"
-  return applyEdits(
+  const text = applyEdits(
     file.text,
-    modify(file.text, ["compilerOptions", "paths", TILDE_ALIAS], [target], {
+    modify(file.text, ["compilerOptions", "paths", pattern], [target], {
       formattingOptions: { ...formattingOptions, eol }
     })
   )
+  return {
+    ...file,
+    text,
+    config: {
+      ...file.config,
+      compilerOptions: {
+        ...file.config.compilerOptions,
+        paths: { ...tsPaths(file), [pattern]: [target] }
+      }
+    }
+  }
 }

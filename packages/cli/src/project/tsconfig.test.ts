@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest"
 
 import { createProject, TEMPLATE_TSCONFIG } from "../../test/project"
 import {
-  addTildeAlias,
+  addPathAlias,
   findAppTsConfig,
   readTsConfig,
   resolveAlias
@@ -15,7 +15,8 @@ describe("tsconfig", () => {
   it("adds ~/* without baseUrl and keeps the comments", () => {
     const cwd = createProject()
     const file = readTsConfig(path.join(cwd, "tsconfig.json"))!
-    const text = addTildeAlias(file, "./src/*")
+    const { text, config } = addPathAlias(file, "~", "./src/*")
+    expect(config.compilerOptions?.paths).toMatchObject({ "~/*": ["./src/*"] })
     expect(text).toContain("// Type Checking & Safety")
     expect(text).toMatch(/"paths": \{\s+"~\/\*": \[\s*"\.\/src\/\*"\s*\]\s+\}/)
     expect(text).not.toContain("baseUrl")

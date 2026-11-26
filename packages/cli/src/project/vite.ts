@@ -28,9 +28,9 @@ export function findViteConfig(cwd: string): string | null {
   return null
 }
 
-// What init has to do so Vite resolves `~/` through the tsconfig paths.
+// What init has to do so Vite resolves the import alias through the tsconfig paths.
 export type ViteAliasPlan =
-  // The config already resolves `~/`.
+  // The config already resolves the import alias.
   | { kind: "resolved" }
   // `text` is the config with resolve.tsconfigPaths set to true; `enable`
   // means the config had it set to false.
@@ -40,11 +40,11 @@ export type ViteAliasPlan =
 
 export type ViteConfig = { path: string; text: string; plan: ViteAliasPlan }
 
-export function readViteConfig(cwd: string): ViteConfig | null {
+export function readViteConfig(cwd: string, prefix = "~"): ViteConfig | null {
   const file = findViteConfig(cwd)
   if (!file) return null
   const text = readFileSync(file, "utf8")
-  return { path: file, text, plan: planViteAlias(text, file) }
+  return { path: file, text, plan: planViteAlias(text, file, prefix) }
 }
 
 type Property = ObjectExpression["properties"][number]
@@ -145,26 +145,28 @@ function findConfigObject(program: Program): ObjectExpression | string {
   return "its export default is not a config object"
 }
 
-function isTilde(node: Node | null | undefined) {
+function isPrefix(node: Node | null | undefined, prefix: string) {
   node = unwrap(node)
-  if (node?.type === "StringLiteral") return /^~\/?$/.test(node.value)
-  if (node?.type === "RegExpLiteral") return node.pattern.startsWith("^~")
+  if (node?.type === "StringLiteral")
+    return node.value === prefix || node.value === `${prefix}/`
+  if (node?.type === "RegExpLiteral")
+    return node.pattern.startsWith(`^${prefix}`)
   return false
 }
 
-// An alias for `~` in resolve.alias, as an object or a list of { find }.
-function aliasesTilde(resolve: ObjectExpression) {
+// An alias for the prefix in resolve.alias, as an object or a list of { find }.
+function aliasesPrefix(resolve: ObjectExpression, prefix: string) {
   const alias = propertyValue(resolve, "alias")
   if (alias?.type === "ObjectExpression")
     return alias.properties.some((property) =>
-      ["~", "~/"].includes(keyName(property) ?? "")
+      [prefix, `${prefix}/`].includes(keyName(property) ?? "")
     )
   if (alias?.type === "ArrayExpression")
     return alias.elements.some((element) => {
       const entry = unwrap(element)
       return (
         entry?.type === "ObjectExpression" &&
-        isTilde(propertyValue(entry, "find"))
+        isPrefix(propertyValue(entry, "find"), prefix)
       )
     })
   return false
@@ -230,11 +232,12 @@ function insertFirst(text: string, object: ObjectExpression, entry: string) {
   )
 }
 
-// How to make the Vite config resolve `~/` through the tsconfig paths, as
+// How to make the Vite config resolve the import alias through the tsconfig paths, as
 // text edits that keep the file's formatting and comments.
 export function planViteAlias(
   text: string,
-  file = "vite.config.ts"
+  file = "vite.config.ts",
+  prefix = "~"
 ): ViteAliasPlan {
   let program: Program
   try {
@@ -263,7 +266,7 @@ export function planViteAlias(
   const resolve = propertyValue(config, "resolve")
   if (resolve?.type !== "ObjectExpression")
     return manual("its resolve option is not an object literal")
-  if (aliasesTilde(resolve)) return { kind: "resolved" }
+  if (aliasesPrefix(resolve, prefix)) return { kind: "resolved" }
 
   if (!findProperty(resolve, "tsconfigPaths")) {
     if (hasSpread(resolve))

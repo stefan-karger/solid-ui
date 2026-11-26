@@ -21,6 +21,12 @@ export type Ui = {
   ): Promise<T>
   multiselect<T>(message: string, options: SelectOption<T>[]): Promise<T[]>
   confirm(message: string, initial?: boolean): Promise<boolean>
+  // A line of text; `validate` returns the problem with the answer, if any.
+  text(
+    message: string,
+    initial: string,
+    validate?: (value: string) => string | undefined
+  ): Promise<string>
   task<T>(message: string, run: () => Promise<T>, done?: string): Promise<T>
 }
 
@@ -57,6 +63,14 @@ export const terminalUi: Ui = {
         required: false
       })
     ) as never,
+  text: async (message, initial, validate) =>
+    cancelled<string>(
+      await p.text({
+        message,
+        initialValue: initial,
+        ...(validate ? { validate: (value) => validate(value ?? "") } : {})
+      })
+    ),
   confirm: async (message, initial = true) =>
     cancelled<boolean>(await p.confirm({ message, initialValue: initial })),
   task: async (message, run, done) => {

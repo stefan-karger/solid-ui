@@ -5,8 +5,7 @@ import { describe, expect, it } from "vitest"
 import {
   createProject,
   supportedInstall,
-  TEMPLATE_TSCONFIG,
-  TEMPLATE_VITE_CONFIG
+  TEMPLATE_TSCONFIG
 } from "../../test/project"
 import { runInitPreflight, type InitPreflight } from "./init"
 
@@ -21,38 +20,34 @@ function message(result: InitPreflight, code: string) {
 }
 
 describe("init preflight", () => {
-  it("accepts the solid-v2 Tailwind template and plans the ~/* alias", () => {
+  it("accepts the solid-v2 Tailwind template", () => {
     const result = runInitPreflight(createProject(), options)
     expect(codes(result)).toEqual([])
     expect(result.ok && result.project).toMatchObject({
       tailwindCss: "src/App.css",
-      needsTildeAlias: true,
-      tildeTarget: "./src/*",
-      vite: { plan: { kind: "patch", enable: false } },
-      hasConfig: false
+      aliasTarget: "./src/*",
+      hasConfig: false,
+      configAliases: null
     })
   })
 
-  it("keeps an existing ~/* alias and sees Vite's tsconfig paths", () => {
+  it("reads the aliases of an existing components.json", () => {
     const cwd = createProject({
       files: {
-        "tsconfig.json": TEMPLATE_TSCONFIG.replace(
-          '"strict": true,',
-          '"strict": true,\n    "paths": { "~/*": ["./app/*"] },'
-        ),
-        "vite.config.ts": TEMPLATE_VITE_CONFIG.replace(
-          "export default defineConfig({",
-          "export default defineConfig({\n  resolve: { tsconfigPaths: true },"
-        ),
+        "tsconfig.json": TEMPLATE_TSCONFIG,
         "src/App.css": '@import "tailwindcss";\n',
-        "components.json": "{}"
+        "components.json": JSON.stringify({
+          style: "nova",
+          preset: "b0",
+          tailwind: { css: "src/App.css" },
+          aliases: { ui: "@/ui" }
+        })
       }
     })
     const result = runInitPreflight(cwd, options)
     expect(result.ok && result.project).toMatchObject({
-      needsTildeAlias: false,
-      vite: { plan: { kind: "resolved" } },
-      hasConfig: true
+      hasConfig: true,
+      configAliases: { ui: "@/ui", utils: "~/lib/utils" }
     })
   })
 

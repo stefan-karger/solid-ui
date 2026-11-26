@@ -259,6 +259,7 @@ test("links the CLI examples and tested versions by anchor", async ({
     "skip-the-prompts",
     "update-components",
     "use-your-package-manager",
+    "use-another-import-alias",
     "fix-unresolved-imports",
     "solid-1-projects"
   ])

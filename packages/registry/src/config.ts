@@ -7,13 +7,20 @@ export const CONFIG_FILE = "components.json"
 export const LEGACY_CONFIG_FILE = "ui.config.json"
 export const CONFIG_SCHEMA_URL = "https://solid-ui.com/schema.json"
 
-export const DEFAULT_ALIASES = {
-  components: "~/components",
-  ui: "~/components/ui",
-  lib: "~/lib",
-  utils: "~/lib/utils",
-  hooks: "~/hooks"
-} as const
+// The import alias prefix: `~` gives `~/components`, `~/lib/utils` and so on.
+export const DEFAULT_ALIAS = "~"
+
+export function aliasesFor(prefix: string) {
+  return {
+    components: `${prefix}/components`,
+    ui: `${prefix}/components/ui`,
+    lib: `${prefix}/lib`,
+    utils: `${prefix}/lib/utils`,
+    hooks: `${prefix}/hooks`
+  }
+}
+
+export const DEFAULT_ALIASES = aliasesFor(DEFAULT_ALIAS)
 
 // components.json for solidui-cli 1.x. It follows shadcn/ui's file without
 // the React, Tailwind 3 and icon options; see plans and the CLI docs.

@@ -1,19 +1,19 @@
-import { existsSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import path from "node:path"
 
-import { CONFIG_FILE, LEGACY_CONFIG_FILE } from "@solid-ui/registry/config"
+import {
+  CONFIG_FILE,
+  componentsJsonSchema,
+  LEGACY_CONFIG_FILE,
+  type ComponentsJson
+} from "@solid-ui/registry/config"
 import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
 import semver from "semver"
 
 import { INSTALLATION_URL, LEGACY_CLI_VERSION } from "~/constants"
 import { findTailwindStylesheets } from "~/project/css"
 import { declaredRange, readPackageJson } from "~/project/package-json"
-import {
-  findAppTsConfig,
-  TILDE_ALIAS,
-  tsPaths,
-  type TsConfigFile
-} from "~/project/tsconfig"
+import { findAppTsConfig, type TsConfigFile } from "~/project/tsconfig"
 import {
   canUpdateInto,
   isBelowRange,
@@ -22,7 +22,6 @@ import {
   satisfies,
   type ResolvedVersion
 } from "~/project/versions"
-import { readViteConfig, type ViteConfig } from "~/project/vite"
 import { cliCommand } from "~/utils/package-manager"
 
 export type PreflightIssue = {
@@ -46,13 +45,11 @@ export type InitProject = {
   // Stylesheet with `@import "tailwindcss"`, relative to cwd.
   tailwindCss: string
   tsconfig: TsConfigFile
-  // True when the tsconfig has no `~/*` path yet; init adds it.
-  needsTildeAlias: boolean
-  // Path target for `~/*`: ./src/* when the project has a src folder.
-  tildeTarget: string
-  // The Vite config and how init makes it resolve `~/`; null without one.
-  vite: ViteConfig | null
+  // Where the import alias points: ./src/* when the project has a src folder.
+  aliasTarget: string
   hasConfig: boolean
+  // The aliases of an existing, valid components.json; init keeps them.
+  configAliases: ComponentsJson["aliases"] | null
   // Requirements package.json declares that aren't installed yet; init
   // installs the dependencies first.
   needsInstall: boolean
@@ -227,7 +224,16 @@ export function runInitPreflight(
   )
     return { ok: false, issues }
 
-  const needsTildeAlias = !(TILDE_ALIAS in tsPaths(tsconfig))
+  const configPath = path.join(cwd, CONFIG_FILE)
+  let configAliases: ComponentsJson["aliases"] | null = null
+  try {
+    const parsed = componentsJsonSchema.safeParse(
+      JSON.parse(readFileSync(configPath, "utf8"))
+    )
+    if (parsed.success) configAliases = parsed.data.aliases
+  } catch {
+    // No or unreadable components.json: init writes a new one.
+  }
   return {
     ok: true,
     issues,
@@ -235,10 +241,9 @@ export function runInitPreflight(
       cwd,
       tailwindCss,
       tsconfig,
-      needsTildeAlias,
-      tildeTarget: existsSync(path.join(cwd, "src")) ? "./src/*" : "./*",
-      vite: readViteConfig(cwd),
-      hasConfig: existsSync(path.join(cwd, CONFIG_FILE)),
+      aliasTarget: existsSync(path.join(cwd, "src")) ? "./src/*" : "./*",
+      hasConfig: existsSync(configPath),
+      configAliases,
       needsInstall: Object.values(versions).some(
         (entry) => entry.source === "declared" || entry.source === "unresolved"
       ),
