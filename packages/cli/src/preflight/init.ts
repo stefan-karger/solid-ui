@@ -10,7 +10,11 @@ import {
 import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
 import semver from "semver"
 
-import { INSTALLATION_URL, LEGACY_CLI_VERSION } from "~/constants"
+import {
+  INSTALLATION_URL,
+  LEGACY_CLI_VERSION,
+  MIGRATION_URL
+} from "~/constants"
 import { findTailwindStylesheets } from "~/project/css"
 import { declaredRange, readPackageJson } from "~/project/package-json"
 import { findAppTsConfig, type TsConfigFile } from "~/project/tsconfig"
@@ -86,7 +90,9 @@ function legacyMessage(found: string[]) {
     "registry (Solid 1, Kobalte and Corvu, Tailwind CSS 3), use version",
     `${LEGACY_CLI_VERSION} directly:`,
     "",
-    `  ${cliCommand("init", LEGACY_CLI_VERSION)}`
+    `  ${cliCommand("init", LEGACY_CLI_VERSION)}`,
+    "",
+    `To move to Solid 2, see ${MIGRATION_URL}.`
   ].join("\n")
 }
 
@@ -131,7 +137,7 @@ export function runInitPreflight(
   if (existsSync(path.join(cwd, LEGACY_CONFIG_FILE))) {
     error(
       "legacy-project",
-      `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry.\nKeep using that version for this project:\n\n  ${cliCommand("add <component>", LEGACY_CLI_VERSION)}\n\nTo move to Solid UI 1.x, upgrade to Solid 2 and Tailwind CSS 4, delete ${LEGACY_CONFIG_FILE} and run init again.`
+      `${LEGACY_CONFIG_FILE} belongs to solidui-cli ${LEGACY_CLI_VERSION} and the Solid 1 registry.\nKeep using that version for this project:\n\n  ${cliCommand("add <component>", LEGACY_CLI_VERSION)}\n\nTo move to Solid UI 1.x, see ${MIGRATION_URL}.`
     )
   }
 

@@ -250,7 +250,7 @@ test("links the home page, docs, component catalog and project from the shared s
   await expect(page).toHaveURL("/")
 })
 
-test("links the CLI examples and tested versions by anchor", async ({
+test("links the CLI examples, tested versions and migration guide by anchor", async ({
   page
 }) => {
   await page.goto("/docs/cli/#switch-the-theme")
@@ -272,6 +272,12 @@ test("links the CLI examples and tested versions by anchor", async ({
   const versions = page.locator("#tested-versions")
   await expect(versions).toContainText("Built for Solid 2 and Tailwind CSS 4")
   await expect(versions).toContainText(supportedRange("@ui-sdk/solid")!)
+
+  await page.goto("/docs/cli/#solid-1-projects")
+  await page.getByRole("article").getByRole("link", { name: "migrate" }).click()
+  await expect(page).toHaveURL(/\/docs\/migration\/$/)
+  for (const id of ["api-changes", "renamed-and-removed-components"])
+    await expect(page.locator(`h2#${id}`)).toHaveCount(1)
 })
 
 test("lists AI patterns with working Solid UI examples in the docs", async ({

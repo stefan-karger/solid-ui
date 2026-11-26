@@ -1,0 +1,105 @@
+---
+title: Migration
+description: Move a project from solidui-cli 0.7 on Solid 1 to Solid UI for Solid 2.
+---
+
+<Callout title="You don't have to migrate right away" showIcon>
+  Projects on Solid 1 keep working with `solidui-cli@0.7.2`, which installs from
+  the previous registry. Migrate when your app moves to Solid 2.
+</Callout>
+
+## What changes
+
+| Area          | solidui-cli 0.7                                  | Solid UI for Solid 2                         |
+| ------------- | ------------------------------------------------ | -------------------------------------------- |
+| Framework     | Solid 1, SolidStart                              | Solid 2 with Vite and `@solidjs/vite-plugin` |
+| Primitives    | Kobalte, Corvu, Ark UI, cmdk-solid, solid-sonner | UI SDK                                       |
+| Tailwind CSS  | 3, with `tailwind.config.cjs`                    | 4.3 or later, configured in CSS              |
+| Theme         | HSL variables in your app stylesheet             | Preset tokens in a generated `solid-ui.css`  |
+| Configuration | `ui.config.json`                                 | `components.json`                            |
+| Language      | TypeScript or JavaScript                         | TypeScript                                   |
+| Dark mode     | `.dark` or Kobalte's `[data-kb-theme="dark"]`    | `.dark` on an ancestor                       |
+
+Your imports keep working: both versions put components in `~/components/ui` and the `cn` helper in `~/lib/utils`.
+
+## Migrate a project
+
+<Steps>
+
+### Upgrade to Solid 2
+
+Follow Solid's [migration guide](https://github.com/solidjs/solid/blob/main/documentation/solid-2.0/MIGRATION.md). Solid UI needs a Vite app with `@solidjs/vite-plugin`; SolidStart projects aren't supported yet.
+
+### Upgrade to Tailwind CSS 4
+
+Run Tailwind's upgrade tool. It moves your `tailwind.config.cjs` into CSS and updates your classes:
+
+```bash
+npx @tailwindcss/upgrade
+```
+
+Then remove what Solid UI 0.7 added to your stylesheet and config: the `:root` and `.dark` blocks with HSL variables such as `--background: 0 0% 100%`, the color, radius and accordion entries that point to them, and `tailwindcss-animate`. The new `solid-ui.css` defines all of them, and the old variables would override it with values that no longer work. Keep your own styles.
+
+See Tailwind's [upgrade guide](https://tailwindcss.com/docs/upgrade-guide) for the other changes.
+
+### Run init
+
+Delete `ui.config.json` and run `init`:
+
+```bash
+npx solidui-cli@latest init
+```
+
+Pick the preset closest to your old theme, or build one on the [Create](/create) page and pass its code with `--preset`. If you used Kobalte's color mode, toggle the `dark` class on `<html>` instead of `data-kb-theme`.
+
+### Re-add your components
+
+Commit your work, then add the components you use again. `--overwrite` replaces the old Kobalte and Corvu versions:
+
+```bash
+npx solidui-cli@latest add button dialog select --overwrite
+```
+
+Compare the diff and merge back your own edits. Components that were renamed or removed are listed [below](#renamed-and-removed-components).
+
+### Update your component usage
+
+The components follow UI SDK's API now. Update the places that use the props in [API changes](#api-changes), then check each page in the [components](/docs/components/) docs for its parts.
+
+### Remove the old packages
+
+Uninstall the packages Solid UI 0.7 installed and nothing else uses:
+
+```bash
+npm uninstall @kobalte/core @corvu/drawer @corvu/otp-field @corvu/resizable @ark-ui/solid cmdk-solid solid-sonner embla-carousel-solid chart.js tailwindcss-animate
+```
+
+</Steps>
+
+## API changes
+
+| Previous API                                                                 | Current API                                                               |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `as={Button}` on primitive parts                                             | `render={(partProps) => <Button {...partProps} />}`                       |
+| `options`, `optionValue`, `optionLabel`, `itemComponent`, `sectionComponent` | Explicit items and groups, usually rendered with `For`                    |
+| Collection `onChange`                                                        | Select and Combobox `onValueChange`, Command `onAction`                   |
+| `onInputChange`                                                              | `onQueryChange`                                                           |
+| Select-generated content and list                                            | Your children inside `SelectContent`                                      |
+| Custom Combobox chip state and removal                                       | `ComboboxValue`, `ComboboxChips`, `ComboboxChip` and `ComboboxChipRemove` |
+| Root popup `placement` and `gutter`                                          | Content `side`, `align` and `sideOffset`                                  |
+| Checkbox `indeterminate` boolean                                             | `checked="indeterminate"`                                                 |
+| Checkbox and Switch `onChange`                                               | `onCheckedChange`                                                         |
+
+Object values still work through `itemToValue` and `itemToLabel`.
+
+## Renamed and removed components
+
+| solidui-cli 0.7                                                          | Now                                                                                                           |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `text-field`                                                             | [Input](/docs/components/input/), [Textarea](/docs/components/textarea/) and [Field](/docs/components/field/) |
+| `otp-field`                                                              | [Input OTP](/docs/components/input-otp/)                                                                      |
+| `sonner`                                                                 | [Toast](/docs/components/toast/)                                                                              |
+| `date-picker`                                                            | [Date Picker](/docs/components/date-picker/), composed from Calendar and Popover                              |
+| `callout`                                                                | [Alert](/docs/components/alert/)                                                                              |
+| `charts`, `number-field`                                                 | Not available yet                                                                                             |
+| `badge-delta`, `bar-list`, `flex`, `grid`, `progress-circle`, `timeline` | Removed; use Tailwind CSS layouts or keep your copies                                                         |

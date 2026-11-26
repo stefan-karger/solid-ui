@@ -89,19 +89,10 @@ Lucide's 24px stroke geometry, are `aria-hidden="true"` unless the markup names
 them, and each file credits Lucide in its first line. The LICENSE carries the
 ISC notice and the shadcn/ui attribution.
 
-## Component API changes
+## Component API
 
-| Previous API                                                                 | Current API                                                                    |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `as={Button}` on SDK parts                                                   | `render={(partProps) => <Button {...partProps} />}`                            |
-| `options`, `optionValue`, `optionLabel`, `itemComponent`, `sectionComponent` | Explicit items and groups, usually rendered with `For`                         |
-| Collection `onChange`                                                        | Select/Combobox `onValueChange`, Command `onAction`                            |
-| `onInputChange`                                                              | `onQueryChange`                                                                |
-| Select-generated content/list                                                | Caller children inside `SelectContent`                                         |
-| Custom Combobox chip state/removal                                           | SDK `ComboboxValue`, `ComboboxChips`, `ComboboxChip`, and `ComboboxChipRemove` |
-| Root popup `placement`/`gutter`                                              | Content `side`/`align`/`sideOffset`                                            |
-| Checkbox `indeterminate` boolean                                             | `checked="indeterminate"`                                                      |
-| Checkbox/Switch `onChange`                                                   | `onCheckedChange`                                                              |
+The API changes from solidui-cli 0.7 (Kobalte and Corvu) are listed in the
+[migration guide](./apps/docs/src/content/docs/migration.mdx#api-changes).
 
 Object values remain supported through `itemToValue` and `itemToLabel`.
 Presentation-only parts use Solid's `dynamic()` for element overrides;

@@ -2,7 +2,7 @@
 
 Add [Solid UI](https://www.solid-ui.com) components to your Solid 2 app. Like shadcn/ui, the CLI copies the component source into your project, so you own and edit it. The components are built with [UI SDK](https://ui-sdk.dev) and Tailwind CSS.
 
-**Requires** Solid 2, Vite with `@solidjs/vite-plugin`, Tailwind CSS 4.3 or later and TypeScript. Projects on Solid 1 or Tailwind CSS 3 keep using `solidui-cli@0.7.2`.
+**Requires** Solid 2, Vite with `@solidjs/vite-plugin`, Tailwind CSS 4.3 or later and TypeScript. Projects on Solid 1 or Tailwind CSS 3 keep using `solidui-cli@0.7.2`, or follow the [migration guide](https://www.solid-ui.com/docs/migration).
 
 ## Quick start
 

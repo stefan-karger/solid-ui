@@ -36,6 +36,7 @@ const docsSections = [
   { title: "Introduction", routeId: "" },
   { title: "Installation", routeId: "installation" },
   { title: "CLI", routeId: "cli" },
+  { title: "Migration", routeId: "migration" },
   { title: "Components", routeId: "components" },
   { title: "AI Elements", routeId: "ai-elements" }
 ]
