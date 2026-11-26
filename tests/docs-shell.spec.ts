@@ -726,16 +726,38 @@ test("opens mobile navigation without horizontal overflow", async ({
       includeHidden: true
     })
   ).toBeHidden()
+  const header = page.locator("[data-docs-header]")
   await expect(
-    page
-      .getByRole("button", { name: "Search documentation" })
-      .getByText("Search...", { exact: true })
-  ).toBeVisible()
-  await page.getByRole("button", { name: "Toggle menu" }).click()
+    header.getByRole("button", { name: "Search documentation" })
+  ).toBeHidden()
+  await expect(
+    header.getByRole("link", { name: /Solid UI on GitHub/ })
+  ).toBeHidden()
+  const style = header.getByRole("combobox", { name: "Preview style" })
+  expect(
+    await style
+      .locator('[data-slot="select-value"]')
+      .evaluate(
+        (value) =>
+          value.scrollWidth <= value.clientWidth &&
+          value.scrollHeight <= value.clientHeight
+      )
+  ).toBe(true)
+  const menu = page.getByRole("button", { name: "Toggle menu" })
+  await menu.click()
   const navigation = page.getByRole("navigation", {
     name: "Mobile documentation"
   })
   await expect(navigation).toBeVisible()
+  await expect(menu).toHaveAttribute("aria-expanded", "true")
+  // Touch has no hover, so take the pointer off the trigger.
+  await page.mouse.move(300, 700)
+  expect(
+    await menu.evaluate(async (button) => {
+      await Promise.all(button.getAnimations().map((motion) => motion.finished))
+      return getComputedStyle(button).backgroundColor
+    })
+  ).toBe("rgba(0, 0, 0, 0)")
   await expect(navigation.getByRole("link", { name: "Home" })).toHaveAttribute(
     "href",
     "/"

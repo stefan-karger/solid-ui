@@ -60,7 +60,7 @@ export default function DocsAppearance(props: { defaultStyle?: DocsStyle }) {
         <SelectTrigger
           aria-label="Preview style"
           size="sm"
-          class="w-[4.75rem] capitalize sm:w-24"
+          class="w-24 capitalize"
         >
           <SelectValue />
         </SelectTrigger>

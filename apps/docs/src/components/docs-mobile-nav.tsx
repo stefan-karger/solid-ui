@@ -38,7 +38,7 @@ export default function DocsMobileNav(props: {
           <Button
             {...part}
             variant="ghost"
-            class="extend-touch-target h-8 shrink-0 gap-2.5 px-0! hover:bg-transparent lg:hidden"
+            class="extend-touch-target h-8 shrink-0 gap-2.5 px-0! hover:bg-transparent aria-expanded:bg-transparent lg:hidden"
           />
         )}
       >

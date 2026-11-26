@@ -34,7 +34,7 @@ export default function DocsSearch(props: {
           <Button
             {...part}
             variant="outline"
-            class="extend-touch-target relative h-8 min-w-0 shrink justify-start rounded-lg border-none bg-muted px-1 text-xs text-foreground shadow-none transition-colors hover:bg-muted/50 min-[360px]:px-1.5 min-[360px]:text-sm sm:px-3 md:w-48 md:shrink-0 lg:w-40 xl:w-64 dark:bg-card"
+            class="extend-touch-target relative h-8 min-w-0 shrink justify-start rounded-lg border-none bg-muted px-3 text-sm text-foreground shadow-none transition-colors hover:bg-muted/50 max-sm:hidden md:w-48 md:shrink-0 lg:w-40 xl:w-64 dark:bg-card"
           />
         )}
       >
