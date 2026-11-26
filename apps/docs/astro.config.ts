@@ -13,6 +13,7 @@ import {
 } from "./src/lib/highlight-code"
 
 export default defineConfig({
+  site: "https://www.solid-ui.com",
   integrations: [mdx(), solid()],
   markdown: {
     processor: unified({

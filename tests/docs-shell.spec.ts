@@ -115,6 +115,26 @@ test("publishes the v2 registry and the static v1 CLI registry in the production
   })
 })
 
+test("gives every page a link preview with an absolute image and URL @smoke", async ({
+  page,
+  request
+}) => {
+  await page.goto("/docs/components/button/")
+  const meta = (property: string) =>
+    page.locator(`meta[property="${property}"]`).getAttribute("content")
+  expect(await meta("og:title")).toBe("Button")
+  expect(await meta("og:url")).toBe(
+    "https://www.solid-ui.com/docs/components/button/"
+  )
+  const image = await meta("og:image")
+  expect(image).toMatch(/^https:\/\/www\.solid-ui\.com\/.+\.png$/)
+  expect((await request.get(new URL(image!).pathname)).ok()).toBe(true)
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image"
+  )
+})
+
 test("links the home page, docs, component catalog and project from the shared shell @smoke", async ({
   page
 }) => {
