@@ -51,3 +51,8 @@ Solid 2 app comes with Vite 8 and its plugin, so they aren't checked. Packages
 the CLI installs start at the pin, `^<pin>`; UI SDK betas stay pinned to one
 build. All of it comes from `packages/registry/src/versions/compute.ts`; run
 `pnpm sync:versions` after changing a pin.
+
+Test CLI changes against the local registry: run `pnpm --filter docs dev`, then
+`SOLID_UI_REGISTRY_URL=http://localhost:4321 node packages/cli/dist/index.js init`
+in a Solid 2 app after `pnpm --filter solidui-cli build`. REGISTRY.md describes
+the shared package, the CLI and the registry format.

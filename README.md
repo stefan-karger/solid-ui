@@ -79,6 +79,7 @@ Tests cover dialog Escape and close-button dismissal, focus restoration, menus, 
 | --------------------------------- | ------------------------------------------------- |
 | `apps/docs`                       | Astro documentation site and component registry   |
 | `packages/cli`                    | The `solidui-cli` package                         |
+| `packages/registry`               | Code the docs and CLI share                       |
 | `apps/docs/src/registry/ui`       | Solid UI component implementations                |
 | `apps/docs/src/registry/examples` | Live component examples                           |
 | `apps/docs/src/content/docs`      | MDX component documentation                       |
