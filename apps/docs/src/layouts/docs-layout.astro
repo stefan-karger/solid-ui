@@ -1,0 +1,73 @@
+---
+import type { MarkdownHeading } from "astro"
+import { getCollection } from "astro:content"
+
+import DocsNavigation from "~/components/docs-navigation.astro"
+import DocsToc from "~/components/docs-toc.astro"
+import SiteLayout from "~/layouts/site-layout.astro"
+import { createDocsNavigation } from "~/lib/docs"
+
+type Props = {
+  title: string
+  description: string
+  headings?: MarkdownHeading[]
+}
+const { title, description, headings = [] } = Astro.props
+const navigation = createDocsNavigation(await getCollection("docs"))
+const currentPath = Astro.url.pathname.replace(/\/$/, "")
+---
+
+<SiteLayout {title} {description} {navigation}>
+  <div class="grid w-full flex-1 grid-cols-1 items-start px-2 lg:grid-cols-[18rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)_18rem]">
+    <aside class="sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] min-w-0 overflow-hidden lg:block">
+      <div
+        aria-hidden="true"
+        data-sidebar-divider
+        class="pointer-events-none absolute top-12 right-2 bottom-0 w-px bg-[linear-gradient(to_bottom,transparent_0%,var(--border)_10%,var(--border)_90%,transparent_100%)]"
+      ></div>
+      <div
+        class="no-scrollbar h-full w-56 overflow-x-hidden overflow-y-auto overscroll-y-contain pt-12 pl-2.5"
+        data-docs-sidebar
+      >
+        <DocsNavigation {navigation} {currentPath} />
+      </div>
+    </aside>
+    <main id="main-content" class="min-w-0" tabindex="-1">
+      {headings.some(
+        (heading) => heading.depth === 2 || heading.depth === 3
+      ) && (
+        <details class="mx-4 mt-5 border-b pb-4 sm:mx-6 xl:hidden">
+          <summary class="cursor-pointer text-sm font-medium">
+            On This Page
+          </summary>
+          <div class="pt-4">
+            <DocsToc {headings} showTitle={false} />
+          </div>
+        </details>
+      )}
+      <slot />
+    </main>
+    <aside
+      data-docs-toc-rail
+      class="sticky top-[calc(var(--header-height)+1px)] no-scrollbar hidden max-h-[calc(100svh-var(--header-height)-1px)] overflow-y-auto overscroll-y-contain px-8 pt-12 pb-8 xl:block"
+    >
+      <DocsToc {headings} />
+    </aside>
+  </div>
+  <script>
+    import { initializeCodeCollapsibles } from "~/lib/code-collapsibles"
+    import { initializeCopyButtons } from "~/lib/copy-buttons"
+    import { initializeDocsAccordions } from "~/lib/docs-accordions"
+    import { initializeSourceThemes } from "~/lib/docs-source-theme"
+    import { initializeDocsTabs } from "~/lib/docs-tabs"
+    function initializeDocs() {
+      initializeDocsAccordions()
+      initializeCodeCollapsibles()
+      initializeCopyButtons()
+      initializeDocsTabs()
+      initializeSourceThemes()
+    }
+    initializeDocs()
+    document.addEventListener("astro:page-load", initializeDocs)
+  </script>
+</SiteLayout>

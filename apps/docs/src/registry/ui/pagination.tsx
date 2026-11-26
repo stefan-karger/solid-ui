@@ -1,182 +1,155 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { Show, splitProps } from "solid-js"
-
-import * as PaginationPrimitive from "@kobalte/core/pagination"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps } from "@solidjs/web"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { buttonVariants } from "~/registry/ui/button"
+import { Button, type ButtonProps } from "~/registry/ui/button"
 
-const PaginationItems = PaginationPrimitive.Items
+type PaginationProps = ComponentProps<"nav">
 
-type PaginationRootProps<T extends ValidComponent = "nav"> =
-  PaginationPrimitive.PaginationRootProps<T> & { class?: string | undefined }
+const Pagination = (props: PaginationProps) => (
+  <nav
+    aria-label="pagination"
+    data-slot="pagination"
+    {...props}
+    class={cn("cn-pagination mx-auto flex w-full justify-center", props.class)}
+  />
+)
 
-const Pagination = <T extends ValidComponent = "nav">(
-  props: PolymorphicProps<T, PaginationRootProps<T>>
-) => {
-  const [local, others] = splitProps(props as PaginationRootProps, ["class"])
+type PaginationContentProps = ComponentProps<"ul">
+
+const PaginationContent = (props: PaginationContentProps) => (
+  <ul
+    data-slot="pagination-content"
+    {...props}
+    class={cn("cn-pagination-content flex items-center", props.class)}
+  />
+)
+
+type PaginationItemProps = ComponentProps<"li">
+
+const PaginationItem = (props: PaginationItemProps) => (
+  <li data-slot="pagination-item" {...props} />
+)
+
+type PaginationLinkProps = Omit<ButtonProps<"a">, "as" | "variant"> & {
+  isActive?: boolean
+}
+
+const PaginationLink = (props: PaginationLinkProps) => {
+  const others = omit(props, "isActive", "size")
   return (
-    <PaginationPrimitive.Root
-      class={cn("[&>*]:flex [&>*]:flex-row [&>*]:items-center [&>*]:gap-1", local.class)}
+    <Button
+      as="a"
+      variant={props.isActive ? "outline" : "ghost"}
+      size={props.size === undefined ? "icon" : props.size}
+      aria-current={props.isActive ? "page" : undefined}
+      data-slot="pagination-link"
+      data-active={props.isActive}
       {...others}
+      class={cn("cn-pagination-link", props.class)}
     />
   )
 }
 
-type PaginationItemProps<T extends ValidComponent = "button"> =
-  PaginationPrimitive.PaginationItemProps<T> & { class?: string | undefined }
+type PaginationPreviousProps = ComponentProps<typeof PaginationLink>
 
-const PaginationItem = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, PaginationItemProps<T>>
-) => {
-  const [local, others] = splitProps(props as PaginationItemProps, ["class"])
+const PaginationPrevious = (props: PaginationPreviousProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <PaginationPrimitive.Item
-      class={cn(
-        buttonVariants({
-          variant: "ghost"
-        }),
-        "size-10 data-[current]:border",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-type PaginationEllipsisProps<T extends ValidComponent = "div"> =
-  PaginationPrimitive.PaginationEllipsisProps<T> & {
-    class?: string | undefined
-  }
-
-const PaginationEllipsis = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, PaginationEllipsisProps<T>>
-) => {
-  const [local, others] = splitProps(props as PaginationEllipsisProps, ["class"])
-  return (
-    <PaginationPrimitive.Ellipsis
-      class={cn("flex size-10 items-center justify-center", local.class)}
+    <PaginationLink
+      aria-label="Go to previous page"
+      size="default"
+      class={cn("cn-pagination-previous", props.class)}
       {...others}
     >
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="size-4"
+        aria-hidden="true"
+        data-icon="inline-start"
       >
-        <circle cx="12" cy="12" r="1" />
-        <circle cx="19" cy="12" r="1" />
-        <circle cx="5" cy="12" r="1" />
+        <path d="m15 18-6-6 6-6" />
       </svg>
-      <span class="sr-only">More pages</span>
-    </PaginationPrimitive.Ellipsis>
+      <span class="cn-pagination-previous-text hidden sm:block">Previous</span>
+    </PaginationLink>
   )
 }
 
-type PaginationPreviousProps<T extends ValidComponent = "button"> =
-  PaginationPrimitive.PaginationPreviousProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
+type PaginationNextProps = ComponentProps<typeof PaginationLink>
 
-const PaginationPrevious = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, PaginationPreviousProps<T>>
-) => {
-  const [local, others] = splitProps(props as PaginationPreviousProps, ["class", "children"])
+const PaginationNext = (props: PaginationNextProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <PaginationPrimitive.Previous
-      class={cn(
-        buttonVariants({
-          variant: "ghost"
-        }),
-        "gap-1 pl-2.5",
-        local.class
-      )}
+    <PaginationLink
+      aria-label="Go to next page"
+      size="default"
+      class={cn("cn-pagination-next", props.class)}
       {...others}
     >
-      <Show
-        when={local.children}
-        fallback={
-          <>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4"
-            >
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-            <span>Previous</span>
-          </>
-        }
+      <span class="cn-pagination-next-text hidden sm:block">Next</span>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        data-icon="inline-end"
       >
-        {(children) => children()}
-      </Show>
-    </PaginationPrimitive.Previous>
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    </PaginationLink>
   )
 }
 
-type PaginationNextProps<T extends ValidComponent = "button"> =
-  PaginationPrimitive.PaginationNextProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
+type PaginationEllipsisProps = ComponentProps<"span">
 
-const PaginationNext = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, PaginationNextProps<T>>
-) => {
-  const [local, others] = splitProps(props as PaginationNextProps, ["class", "children"])
-  return (
-    <PaginationPrimitive.Next
-      class={cn(
-        buttonVariants({
-          variant: "ghost"
-        }),
-        "gap-1 pl-2.5",
-        local.class
-      )}
-      {...others}
+const PaginationEllipsis = (props: PaginationEllipsisProps) => (
+  <span
+    aria-hidden="true"
+    data-slot="pagination-ellipsis"
+    {...props}
+    class={cn(
+      "cn-pagination-ellipsis flex items-center justify-center",
+      props.class
+    )}
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
     >
-      <Show
-        when={local.children}
-        fallback={
-          <>
-            <span>Next</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4"
-            >
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </>
-        }
-      >
-        {(children) => children()}
-      </Show>
-    </PaginationPrimitive.Next>
-  )
-}
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="19" cy="12" r="1" />
+      <circle cx="5" cy="12" r="1" />
+    </svg>
+    <span class="sr-only">More pages</span>
+  </span>
+)
 
 export {
   Pagination,
-  PaginationItems,
-  PaginationItem,
+  PaginationContent,
   PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
   PaginationPrevious,
-  PaginationNext
+  type PaginationLinkProps
 }

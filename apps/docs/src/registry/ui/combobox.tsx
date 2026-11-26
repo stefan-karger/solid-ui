@@ -1,192 +1,327 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { Show, splitProps } from "solid-js"
-
-import * as ComboboxPrimitive from "@kobalte/core/combobox"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps, JSX } from "@solidjs/web"
+import {
+  Combobox as SdkCombobox,
+  ComboboxInput as SdkComboboxInput,
+  ComboboxTrigger as SdkComboboxTrigger,
+  ComboboxContent as SdkComboboxContent,
+  ComboboxList as SdkComboboxList,
+  ComboboxItem as SdkComboboxItem,
+  ComboboxItemIndicator as SdkComboboxItemIndicator,
+  ComboboxItemText as SdkComboboxItemText,
+  ComboboxGroup as SdkComboboxGroup,
+  ComboboxGroupLabel as SdkComboboxGroupLabel,
+  ComboboxEmpty as SdkComboboxEmpty,
+  ComboboxClear as SdkComboboxClear,
+  ComboboxChips as SdkComboboxChips,
+  ComboboxChip as SdkComboboxChip,
+  ComboboxChipRemove as SdkComboboxChipRemove,
+  ComboboxValue as SdkComboboxValue,
+  ComboboxSeparator as SdkComboboxSeparator
+} from "@ui-sdk/solid/combobox"
+import { omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const Combobox = ComboboxPrimitive.Root
-const ComboboxItemLabel = ComboboxPrimitive.ItemLabel
-const ComboboxHiddenSelect = ComboboxPrimitive.HiddenSelect
-
-type ComboboxItemProps<T extends ValidComponent = "li"> = ComboboxPrimitive.ComboboxItemProps<T> & {
-  class?: string | undefined
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton
+} from "~/registry/ui/input-group"
+const Combobox = SdkCombobox
+const ComboboxValue = SdkComboboxValue
+type ComboboxInputProps = Omit<
+  ComponentProps<typeof SdkComboboxInput>,
+  "class"
+> & {
+  class?: string
+  children?: JSX.Element
+  showTrigger?: boolean
+  showClear?: boolean
 }
-
-const ComboboxItem = <T extends ValidComponent = "li">(
-  props: PolymorphicProps<T, ComboboxItemProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxItemProps, ["class"])
+const ComboboxInput = (props: ComboboxInputProps) => {
+  const rest = omit(props, "class", "children", "showTrigger", "showClear")
   return (
-    <ComboboxPrimitive.Item
-      class={cn(
-        "relative flex cursor-default select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-type ComboboxItemIndicatorProps<T extends ValidComponent = "div"> =
-  ComboboxPrimitive.ComboboxItemIndicatorProps<T> & {
-    children?: JSX.Element
-  }
-
-const ComboboxItemIndicator = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, ComboboxItemIndicatorProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxItemIndicatorProps, ["children"])
-  return (
-    <ComboboxPrimitive.ItemIndicator {...others}>
-      <Show
-        when={local.children}
-        fallback={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M5 12l5 5l10 -10" />
-          </svg>
-        }
-      >
-        {(children) => children()}
-      </Show>
-    </ComboboxPrimitive.ItemIndicator>
-  )
-}
-
-type ComboboxSectionProps<T extends ValidComponent = "li"> =
-  ComboboxPrimitive.ComboboxSectionProps<T> & { class?: string | undefined }
-
-const ComboboxSection = <T extends ValidComponent = "li">(
-  props: PolymorphicProps<T, ComboboxSectionProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxSectionProps, ["class"])
-  return (
-    <ComboboxPrimitive.Section
-      class={cn(
-        "overflow-hidden p-1 px-2 py-1.5 text-xs font-medium text-muted-foreground ",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-type ComboboxControlProps<
-  U,
-  T extends ValidComponent = "div"
-> = ComboboxPrimitive.ComboboxControlProps<U, T> & {
-  class?: string | undefined
-}
-
-const ComboboxControl = <T, U extends ValidComponent = "div">(
-  props: PolymorphicProps<U, ComboboxControlProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxControlProps<T>, ["class"])
-  return (
-    <ComboboxPrimitive.Control
-      class={cn("flex h-10 items-center rounded-md border px-3", local.class)}
-      {...others}
-    />
-  )
-}
-
-type ComboboxInputProps<T extends ValidComponent = "input"> =
-  ComboboxPrimitive.ComboboxInputProps<T> & { class?: string | undefined }
-
-const ComboboxInput = <T extends ValidComponent = "input">(
-  props: PolymorphicProps<T, ComboboxInputProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxInputProps, ["class"])
-  return (
-    <ComboboxPrimitive.Input
-      class={cn(
-        "flex size-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-type ComboboxTriggerProps<T extends ValidComponent = "button"> =
-  ComboboxPrimitive.ComboboxTriggerProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
-
-const ComboboxTrigger = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, ComboboxTriggerProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxTriggerProps, ["class", "children"])
-  return (
-    <ComboboxPrimitive.Trigger class={cn("size-4 opacity-50", local.class)} {...others}>
-      <ComboboxPrimitive.Icon>
-        <Show
-          when={local.children}
-          fallback={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4"
-            >
-              <path d="M8 9l4 -4l4 4" />
-              <path d="M16 15l-4 4l-4 -4" />
-            </svg>
-          }
-        >
-          {(children) => children()}
-        </Show>
-      </ComboboxPrimitive.Icon>
-    </ComboboxPrimitive.Trigger>
-  )
-}
-
-type ComboboxContentProps<T extends ValidComponent = "div"> =
-  ComboboxPrimitive.ComboboxContentProps<T> & { class?: string | undefined }
-
-const ComboboxContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, ComboboxContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as ComboboxContentProps, ["class"])
-  return (
-    <ComboboxPrimitive.Portal>
-      <ComboboxPrimitive.Content
+    <InputGroup class={cn("cn-combobox-input w-auto", props.class)}>
+      <SdkComboboxInput
+        {...rest}
+        data-ui="input-group-control"
         class={cn(
-          "relative z-50 min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80",
-          local.class
+          "cn-input cn-input-group-input w-full min-w-0 flex-1 outline-none placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         )}
-        {...others}
-      >
-        <ComboboxPrimitive.Listbox class="m-0 p-1" />
-      </ComboboxPrimitive.Content>
-    </ComboboxPrimitive.Portal>
+      />
+      <InputGroupAddon align="inline-end">
+        <Show when={props.showTrigger !== false}>
+          <ComboboxTrigger
+            disabled={props.disabled}
+            class="group-has-data-[slot=combobox-clear]/input-group:hidden"
+          />
+        </Show>
+        <Show when={props.showClear}>
+          <ComboboxClear disabled={props.disabled} />
+        </Show>
+      </InputGroupAddon>
+      {props.children}
+    </InputGroup>
   )
 }
-
+const ComboboxTrigger = (
+  props: Omit<
+    ComponentProps<typeof SdkComboboxTrigger>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxTrigger
+    aria-label="Show options"
+    render={(partProps) => (
+      <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+    )}
+    {...props}
+    class={cn("cn-combobox-trigger", props.class)}
+  >
+    {props.children ?? (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-trigger-icon pointer-events-none"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    )}
+  </SdkComboboxTrigger>
+)
+const ComboboxClear = (
+  props: Omit<ComponentProps<typeof SdkComboboxClear>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxClear
+    aria-label="Clear selection"
+    render={(partProps) => (
+      <InputGroupButton {...partProps} size="icon-xs" variant="ghost" />
+    )}
+    {...props}
+    class={cn("cn-combobox-clear", props.class)}
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      class="cn-combobox-clear-icon pointer-events-none"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  </SdkComboboxClear>
+)
+const ComboboxContent = (
+  props: Omit<
+    ComponentProps<typeof SdkComboboxContent>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxContent
+    sideOffset={6}
+    align="start"
+    {...props}
+    class={cn(
+      "cn-combobox-content cn-menu-target cn-menu-translucent group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+--spacing(7))] origin-(--transform-origin) [[data-slot=combobox-chips]~&]:min-w-(--anchor-width)",
+      props.class
+    )}
+  />
+)
+const ComboboxList = (
+  props: Omit<ComponentProps<typeof SdkComboboxList>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxList
+    {...props}
+    class={cn(
+      "cn-combobox-list overflow-y-auto overscroll-contain",
+      props.class
+    )}
+  />
+)
+const ComboboxItem = (
+  props: Omit<ComponentProps<typeof SdkComboboxItem>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxItem
+    {...props}
+    class={cn(
+      "cn-combobox-item relative flex w-full cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+      props.class
+    )}
+  >
+    {props.children}
+    <SdkComboboxItemIndicator class="cn-combobox-item-indicator">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-item-indicator-icon pointer-events-none"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    </SdkComboboxItemIndicator>
+  </SdkComboboxItem>
+)
+const ComboboxItemText = SdkComboboxItemText
+const ComboboxGroup = (
+  props: Omit<ComponentProps<typeof SdkComboboxGroup>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxGroup {...props} class={cn("cn-combobox-group", props.class)} />
+)
+const ComboboxLabel = (
+  props: Omit<
+    ComponentProps<typeof SdkComboboxGroupLabel>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxGroupLabel
+    {...props}
+    class={cn("cn-combobox-label", props.class)}
+  />
+)
+const ComboboxEmpty = (
+  props: Omit<ComponentProps<typeof SdkComboboxEmpty>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxEmpty {...props} class={cn("cn-combobox-empty", props.class)} />
+)
+const ComboboxSeparator = (
+  props: Omit<
+    ComponentProps<typeof SdkComboboxSeparator>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxSeparator
+    {...props}
+    class={cn("cn-combobox-separator", props.class)}
+  />
+)
+const ComboboxChips = (
+  props: Omit<ComponentProps<typeof SdkComboboxChips>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxChips
+    render={InputGroup}
+    {...props}
+    class={cn("cn-combobox-chips flex-wrap", props.class)}
+  />
+)
+const ComboboxChip = (
+  props: Omit<ComponentProps<typeof SdkComboboxChip>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => <SdkComboboxChip {...props} class={cn("cn-combobox-chip", props.class)} />
+const ComboboxChipRemove = (
+  props: Omit<
+    ComponentProps<typeof SdkComboboxChipRemove>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxChipRemove
+    aria-label="Remove selection"
+    {...props}
+    class={cn("cn-combobox-chip-remove", props.class)}
+  >
+    {props.children ?? (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="cn-combobox-chip-indicator-icon"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    )}
+  </SdkComboboxChipRemove>
+)
+const ComboboxChipInput = (
+  props: Omit<ComponentProps<typeof SdkComboboxInput>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkComboboxInput
+    data-ui="input-group-control"
+    {...props}
+    class={cn(
+      "min-w-24 flex-1 outline-none placeholder:text-muted-foreground",
+      props.class
+    )}
+  />
+)
 export {
   Combobox,
-  ComboboxItem,
-  ComboboxItemLabel,
-  ComboboxItemIndicator,
-  ComboboxSection,
-  ComboboxControl,
-  ComboboxTrigger,
+  ComboboxValue,
   ComboboxInput,
-  ComboboxHiddenSelect,
-  ComboboxContent
+  ComboboxTrigger,
+  ComboboxClear,
+  ComboboxContent,
+  ComboboxList,
+  ComboboxItem,
+  ComboboxItemText,
+  ComboboxGroup,
+  ComboboxLabel,
+  ComboboxEmpty,
+  ComboboxSeparator,
+  ComboboxChips,
+  ComboboxChip,
+  ComboboxChipRemove,
+  ComboboxChipInput
 }

@@ -1,29 +1,34 @@
-import type { ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as SeparatorPrimitive from "@kobalte/core/separator"
+import { type ComponentProps } from "@solidjs/web"
+import { Separator as SdkSeparator } from "@ui-sdk/solid/separator"
+import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-type SeparatorRootProps<T extends ValidComponent = "hr"> =
-  SeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined }
-
-const Separator = <T extends ValidComponent = "hr">(
-  props: PolymorphicProps<T, SeparatorRootProps<T>>
-) => {
-  const [local, others] = splitProps(props as SeparatorRootProps, ["class", "orientation"])
+type SeparatorProps = Omit<ComponentProps<typeof SdkSeparator>, "class"> & {
+  class?: string
+  "data-slot"?: string
+}
+const Separator = (props: SeparatorProps) => {
+  const others = omit(props, "render", "data-slot")
+  const renderSeparator: SeparatorProps["render"] = (part, state) => {
+    const attributes = merge(part, () => ({
+      "data-slot": props["data-slot"] ?? "separator"
+    }))
+    return props.render ? (
+      props.render(attributes, state)
+    ) : (
+      <div {...attributes} />
+    )
+  }
   return (
-    <SeparatorPrimitive.Root
-      orientation={local.orientation ?? "horizontal"}
-      class={cn(
-        "shrink-0 bg-border",
-        local.orientation === "vertical" ? "h-full w-px" : "h-px w-full",
-        local.class
-      )}
+    <SdkSeparator
       {...others}
+      orientation={props.orientation ?? "horizontal"}
+      class={cn(
+        "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch",
+        props.class
+      )}
+      render={renderSeparator}
     />
   )
 }
-
-export { Separator }
+export { Separator, type SeparatorProps }

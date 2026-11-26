@@ -1,0 +1,127 @@
+---
+title: Select
+description: Displays a list of options for the user to pick from—triggered by a button.
+component: true
+---
+
+<ComponentPreview name="select-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add select
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="select" title="components/ui/select.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/components/ui/select"
+
+;<Select placeholder="Select a fruit">
+  <SelectTrigger aria-label="Fruit">
+    <SelectValue />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Fruits</SelectLabel>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+Use `value` and `onValueChange` for a controlled selection. Object values use `itemToValue` and `itemToLabel`. Compose items inside `SelectContent`; groups use `SelectGroup` and `SelectLabel`.
+
+## Composition
+
+Use the following composition to build a `Select`:
+
+```text
+Select
+├── SelectTrigger
+│   └── SelectValue
+└── SelectContent
+    ├── SelectGroup
+    │   ├── SelectLabel
+    │   ├── SelectItem
+    │   └── SelectItem
+    ├── SelectSeparator
+    └── SelectGroup
+        ├── SelectLabel
+        ├── SelectItem
+        └── SelectItem
+```
+
+## Align Item With Trigger
+
+Use the `position` prop on `SelectContent` to control alignment. When `position="item-aligned"` (default), the popup positions so the selected item appears over the trigger. When `position="popper"`, the popup aligns to the trigger edge.
+
+<ComponentPreview name="select-align-item" />
+
+## Groups
+
+Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize items.
+
+<ComponentPreview name="select-groups" />
+
+## Scrollable
+
+A select with many items that scrolls.
+
+<ComponentPreview name="select-scrollable" />
+
+## Disabled
+
+<ComponentPreview name="select-disabled" />
+
+## Invalid
+
+Set `data-invalid` on `Field` and `aria-invalid` on `SelectTrigger` to style an invalid selection. Use `FieldError` to explain the error.
+
+<ComponentPreview name="select-invalid" />
+
+## API Reference
+
+See the [UI SDK Select API](https://ui-sdk.dev/docs/solid/components/select) for the full API reference.

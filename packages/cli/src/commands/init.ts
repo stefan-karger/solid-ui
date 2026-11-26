@@ -1,171 +1,523 @@
-import { existsSync } from "node:fs"
-import { mkdir, writeFile } from "node:fs/promises"
+import { readFileSync, writeFileSync } from "node:fs"
 import path from "node:path"
 
-import * as p from "@clack/prompts"
-import { Command } from "commander"
-import { execa } from "execa"
-import * as v from "valibot"
-
-import type { RawConfig } from "~/utils/config"
 import {
-  DEFAULT_COMPONENTS,
-  DEFAULT_CSS_FILE,
-  DEFAULT_TAILWIND_CONFIG,
-  DEFAULT_TAILWIND_PREFIX,
-  DEFAULT_UTILS,
-  RawConfigSchema,
-  resolveConfigPaths
-} from "~/utils/config"
-import { getPackageInfo } from "~/utils/get-package-info"
-import { getPackageManager } from "~/utils/get-package-manager"
-import { handleError, headline, highlight, subtle } from "~/utils/logger"
-import * as templates from "~/utils/templates"
+  CONFIG_FILE,
+  CONFIG_SCHEMA_URL,
+  aliasesFor,
+  DEFAULT_ALIAS,
+  type ComponentsJson
+} from "@solid-ui/registry/config"
+import { createSolidUiCss, solidUiCssPackages } from "@solid-ui/registry/css"
+import {
+  DEFAULT_PRESET_NAME,
+  DEFAULT_PRESETS,
+  encodePreset,
+  normalizePreset,
+  parsePresetInput,
+  type Preset
+} from "@solid-ui/registry/preset"
+import { SUPPORTED_VERSIONS, supportedRange } from "@solid-ui/registry/versions"
+import { Command } from "commander"
+import type { Agent } from "package-manager-detector"
 
-const PROJECT_DEPENDENCIES = [
-  "tailwindcss-animate",
-  "class-variance-authority",
-  "clsx",
-  "tailwind-merge"
-]
+import { CREATE_URL } from "~/constants"
+import {
+  parseSpec,
+  planDependencies,
+  resolveConflicts
+} from "~/install/dependencies"
+import {
+  applyFiles,
+  resolveTargetPath,
+  type PlannedFile
+} from "~/install/files"
+import { transformSource } from "~/install/transform"
+import {
+  rangeMessage,
+  runInitPreflight,
+  type InitProject
+} from "~/preflight/init"
+import { patchAppCss } from "~/project/app-css"
+import { readPackageJson } from "~/project/package-json"
+import { addPathAlias, resolveAlias } from "~/project/tsconfig"
+import { canUpdateInto, resolveVersion, satisfies } from "~/project/versions"
+import {
+  TSCONFIG_PATHS_ENTRY,
+  TSCONFIG_PATHS_SNIPPET,
+  readViteConfig,
+  type ViteConfig
+} from "~/project/vite"
+import { createRegistryClient, type RegistryClient } from "~/registry/client"
+import { badge, color } from "~/utils/colors"
+import { CliError } from "~/utils/errors"
+import {
+  cliCommand,
+  detectAgent,
+  formatCommand,
+  installCommand,
+  installedMessage,
+  installPackages,
+  type Installer
+} from "~/utils/package-manager"
+import { terminalUi, type Ui } from "~/utils/ui"
+import { CLI_NAME, CLI_VERSION } from "~/utils/version"
 
-const initOptionsSchema = v.object({
-  cwd: v.string()
-})
+export type InitOptions = {
+  cwd: string
+  preset?: string
+  yes: boolean
+  force: boolean
+  css?: string
+  alias?: string
+}
+
+export type InitDeps = {
+  client?: RegistryClient
+  install?: Installer
+  ui?: Ui
+  // False in CI and pipes: init then needs --preset or --yes.
+  interactive?: boolean
+}
+
+// Packages every installed component relies on, besides the utils item's own.
+const BASE_PACKAGES = ["class-variance-authority"]
+
+function spec(name: string) {
+  const range = supportedRange(name)
+  return range ? `${name}@${range}` : name
+}
+
+function rel(cwd: string, file: string) {
+  return path.relative(cwd, file).split(path.sep).join("/")
+}
+
+type ViteStep =
+  | { kind: "none" }
+  | { kind: "write"; path: string; text: string; enable: boolean }
+  | { kind: "manual"; reason: string }
+
+// How init makes Vite resolve `~/`. A config that turns tsconfigPaths off
+// is only changed after asking, or with --yes.
+async function planViteStep(
+  vite: ViteConfig | null,
+  options: InitOptions,
+  ui: Ui,
+  interactive: boolean
+): Promise<ViteStep> {
+  if (!vite) return { kind: "manual", reason: "the project has no vite.config" }
+  const { plan } = vite
+  if (plan.kind === "resolved") return { kind: "none" }
+  if (plan.kind === "manual") return plan
+  if (
+    plan.enable &&
+    interactive &&
+    !options.yes &&
+    !(await ui.confirm(
+      `${path.basename(vite.path)} sets resolve.tsconfigPaths to false. Solid UI components import through the tsconfig paths alias, which needs it. Set it to true?`,
+      true
+    ))
+  )
+    return { kind: "manual", reason: "you kept resolve.tsconfigPaths: false" }
+  return {
+    kind: "write",
+    path: vite.path,
+    text: plan.text,
+    enable: plan.enable
+  }
+}
+
+// Installed requirements outside the tested ranges, for example when a
+// template's lockfile installs older versions.
+function versionsOutsideRanges(cwd: string) {
+  const pkg = readPackageJson(cwd) ?? {}
+  return Object.entries(SUPPORTED_VERSIONS.requirements).flatMap(
+    ([name, range]) => {
+      const found = resolveVersion(cwd, pkg, name)
+      return found.source === "installed" && !satisfies(found.version, range)
+        ? [
+            {
+              name,
+              version: found.version,
+              range,
+              dev: Boolean(pkg.devDependencies?.[name])
+            }
+          ]
+        : []
+    }
+  )
+}
+
+type AlignOptions = {
+  ask: boolean
+  yes: boolean
+  // Before init writes files a version it can't fix stops it; afterwards
+  // init only warns.
+  required: boolean
+}
+
+// Updates requirements below the tested ranges within their major, after
+// asking or with --yes.
+async function alignVersions(
+  cwd: string,
+  agent: Agent,
+  install: Installer,
+  ui: Ui,
+  { ask, yes, required }: AlignOptions
+) {
+  const outside = versionsOutsideRanges(cwd)
+  if (!outside.length) return
+
+  const stuck = outside.filter(
+    ({ version, range }) => !canUpdateInto(version, range)
+  )
+  if (stuck.length) {
+    const message = rangeMessage(
+      CLI_VERSION,
+      stuck.map(({ name, version }) => ({ name, source: "installed", version }))
+    )
+    if (required) throw new CliError(message)
+    ui.warn(message)
+    return
+  }
+
+  const groups = [false, true]
+    .map((dev) => ({
+      dev,
+      specs: outside
+        .filter((entry) => entry.dev === dev)
+        .map(({ name, range }) => `${name}@${range}`)
+    }))
+    .filter(({ specs }) => specs.length)
+  ui.warn(
+    [
+      `These packages are older than the versions ${CLI_NAME} ${CLI_VERSION} supports:`,
+      ...outside.map(
+        ({ name, version, range }) => `  ${name} ${version} (needs ${range})`
+      )
+    ].join("\n")
+  )
+  if (yes || (ask && (await ui.confirm("Update them now?", true)))) {
+    const names = outside.map(({ name }) => name).join(", ")
+    await ui.task(
+      `Updating ${names} with ${agent}`,
+      async () => {
+        for (const { dev, specs } of groups)
+          await install(cwd, specs, { agent, dev })
+      },
+      `${color.changed("Updated")} ${names}`
+    )
+    return
+  }
+  const commands = groups
+    .map(
+      ({ dev, specs }) =>
+        `  ${color.command(formatCommand(installCommand(specs, { agent, dev })))}`
+    )
+    .join("\n")
+  if (required)
+    throw new CliError(
+      `Update them with:\n\n${commands}\n\nThen run init again.`
+    )
+  ui.info(`Update them with:\n\n${commands}`)
+}
+
+// "@", "@/" and "@/*" all mean the prefix "@".
+function parseAlias(input: string) {
+  const prefix = input.trim().replace(/\/\*?$/, "")
+  return /^[^\s/*.][^\s/*]*$/.test(prefix) ? prefix : null
+}
+
+// The aliases to write: --alias, else the ones an existing components.json
+// has, else the prompt with `~` as the default (also for --yes).
+async function chooseAliases(
+  options: InitOptions,
+  existing: ComponentsJson["aliases"] | null,
+  ui: Ui,
+  interactive: boolean
+): Promise<ComponentsJson["aliases"]> {
+  if (options.alias) {
+    const prefix = parseAlias(options.alias)
+    if (!prefix)
+      throw new CliError(
+        `${options.alias} is not an import alias. Use a prefix such as ~ or @.`
+      )
+    return aliasesFor(prefix)
+  }
+  if (existing) return existing
+  if (!interactive || options.yes) return aliasesFor(DEFAULT_ALIAS)
+  const answer = await ui.text(
+    "Which import alias should the components use?",
+    DEFAULT_ALIAS,
+    (value) => (parseAlias(value) ? undefined : "Use a prefix such as ~ or @.")
+  )
+  return aliasesFor(parseAlias(answer)!)
+}
+
+async function choosePreset(
+  options: InitOptions,
+  ui: Ui,
+  interactive: boolean
+): Promise<Preset | null> {
+  if (options.preset) {
+    const preset = parsePresetInput(options.preset)
+    if (!preset)
+      throw new CliError(
+        `${options.preset} is not a preset code. Copy one from ${CREATE_URL}.`
+      )
+    return normalizePreset(preset)
+  }
+  if (options.yes) return DEFAULT_PRESETS[DEFAULT_PRESET_NAME].preset
+  if (!interactive)
+    throw new CliError(
+      "Pass --preset <code> or --yes when init can't ask, for example in CI."
+    )
+
+  const choice = await ui.select(
+    "Which preset would you like to start from?",
+    [
+      ...Object.entries(DEFAULT_PRESETS).map(([value, named]) => ({
+        value,
+        label: named.title,
+        hint: named.description
+      })),
+      { value: "custom", label: "Custom", hint: `build one at ${CREATE_URL}` }
+    ],
+    DEFAULT_PRESET_NAME
+  )
+  if (choice === "custom") {
+    ui.note(
+      `Build your preset at ${CREATE_URL}, then run the command it copies:\n\n  ${color.command(cliCommand("init --preset <code>"))}`,
+      "Custom preset"
+    )
+    return null
+  }
+  return DEFAULT_PRESETS[choice as keyof typeof DEFAULT_PRESETS].preset
+}
+
+export async function runInit(options: InitOptions, deps: InitDeps = {}) {
+  const ui = deps.ui ?? terminalUi
+  const interactive = deps.interactive ?? Boolean(process.stdin.isTTY)
+  const install = deps.install ?? installPackages
+  const cwd = path.resolve(options.cwd)
+
+  ui.intro(badge())
+
+  const preflight = runInitPreflight(cwd, {
+    cliVersion: CLI_VERSION,
+    ...(options.css ? { css: options.css } : {})
+  })
+  for (const issue of preflight.issues)
+    (issue.level === "error" ? ui.error : ui.warn)(issue.message)
+  if (!preflight.ok)
+    throw new CliError("init stopped before changing anything.")
+  const project: InitProject = preflight.project
+
+  if (project.hasConfig && !options.force) {
+    const replace =
+      interactive &&
+      !options.yes &&
+      (await ui.confirm(`${CONFIG_FILE} already exists. Replace it?`, false))
+    if (!replace)
+      throw new CliError(
+        `${CONFIG_FILE} already exists. Run init with --force to replace it and regenerate solid-ui.css.`
+      )
+  }
+
+  const preset = await choosePreset(options, ui, interactive)
+  if (!preset) return
+  const code = encodePreset(preset)
+  const aliases = await chooseAliases(
+    options,
+    project.configAliases,
+    ui,
+    interactive
+  )
+  // "~" for ~/lib: the prefix the tsconfig path and Vite resolve.
+  const prefix = aliases.lib.slice(0, aliases.lib.indexOf("/"))
+
+  const agent = detectAgent(cwd)
+  const align = { ask: interactive && !options.yes, yes: options.yes }
+
+  if (project.needsInstall) {
+    await ui.task(
+      `Installing dependencies with ${agent}`,
+      () => install(cwd, [], { agent }),
+      `Installed dependencies with ${agent}.`
+    )
+    const pkg = readPackageJson(cwd) ?? {}
+    const missing = Object.keys(SUPPORTED_VERSIONS.requirements).filter(
+      (name) => resolveVersion(cwd, pkg, name).source !== "installed"
+    )
+    if (missing.length)
+      throw new CliError(
+        `${missing.join(", ")} still ${missing.length === 1 ? "isn't" : "aren't"} installed after ${agent} install.`
+      )
+  }
+  await alignVersions(cwd, agent, install, ui, { ...align, required: true })
+
+  const client = deps.client ?? createRegistryClient()
+  const [utils, utilities] = await ui.task(
+    `Loading the ${preset.style} style from ${client.baseUrl}`,
+    () =>
+      Promise.all([
+        client.item(preset.style, "utils"),
+        client.item(preset.style, "style-utilities")
+      ]),
+    `Loaded the ${preset.style} style for preset ${color.command(code)}.`
+  )
+  const utilitiesCss = utilities?.files?.[0]?.content
+  if (!utils?.files?.length || !utilitiesCss)
+    throw new CliError(
+      `The registry at ${client.baseUrl} is missing the utils or style-utilities item for ${preset.style}.`
+    )
+
+  const config: ComponentsJson = {
+    $schema: CONFIG_SCHEMA_URL,
+    style: preset.style,
+    preset: code,
+    tailwind: { css: project.tailwindCss },
+    menuColor: preset.menuColor,
+    menuAccent: preset.menuAccent,
+    aliases
+  }
+
+  // The tsconfig as it will be once the alias resolves.
+  const needsAlias = !resolveAlias(project.tsconfig, aliases.lib)
+  const tsconfig = needsAlias
+    ? addPathAlias(project.tsconfig, prefix, project.aliasTarget)
+    : project.tsconfig
+
+  const appCssPath = path.resolve(cwd, project.tailwindCss)
+  const solidUiCssPath = path.join(path.dirname(appCssPath), "solid-ui.css")
+  const appCss = readFileSync(appCssPath, "utf8")
+  const patchedAppCss = patchAppCss(appCss)
+
+  // components.json and solid-ui.css belong to the CLI and are rewritten.
+  const owned: PlannedFile[] = [
+    {
+      path: path.join(cwd, CONFIG_FILE),
+      content: JSON.stringify(config, null, 2)
+    },
+    {
+      path: solidUiCssPath,
+      content: createSolidUiCss({
+        preset,
+        utilitiesCss,
+        appCss: path.basename(appCssPath)
+      })
+    }
+  ]
+  // lib/utils.ts is the project's: a changed copy is only replaced on request.
+  const source: PlannedFile[] = (utils.files ?? []).map((file) => ({
+    path: resolveTargetPath(file, config, tsconfig, cwd),
+    content: transformSource(file.path, file.content ?? "", config)
+  }))
+
+  const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, [
+    ...(utils.dependencies ?? []),
+    ...BASE_PACKAGES.map(spec),
+    ...solidUiCssPackages(preset).map(spec)
+  ])
+
+  const vite = readViteConfig(cwd, prefix)
+  const viteStep = await planViteStep(vite, options, ui, interactive)
+  const viteName = vite ? rel(cwd, vite.path) : "vite.config.ts"
+
+  // One spinner line per step: "Writing x" turns into "Wrote x".
+  const update = (file: string, note: string, write: () => void) =>
+    ui.task(
+      `Updating ${file}`,
+      async () => write(),
+      `${color.changed("Updated")} ${file}${note ? ` ${color.muted(`(${note})`)}` : ""}`
+    )
+
+  const written = await applyFiles(owned, cwd, ui, { overwrite: true })
+  if (appCss !== patchedAppCss)
+    await update(project.tailwindCss, "", () =>
+      writeFileSync(appCssPath, patchedAppCss)
+    )
+  if (needsAlias)
+    await update(rel(cwd, tsconfig.path), `added "${prefix}/*"`, () =>
+      writeFileSync(tsconfig.path, tsconfig.text)
+    )
+  if (viteStep.kind === "write") {
+    const { path: vitePath, text, enable } = viteStep
+    await update(
+      viteName,
+      enable
+        ? "set resolve.tsconfigPaths to true"
+        : "added resolve.tsconfigPaths",
+      () => writeFileSync(vitePath, text)
+    )
+  }
+  const kept = await applyFiles(source, cwd, ui, {
+    overwrite: false,
+    confirm: async (file) =>
+      interactive &&
+      !options.yes &&
+      ui.confirm(
+        `${file} differs from the registry version. Replace it?`,
+        false
+      )
+  })
+  for (const file of [...written.kept, ...kept.kept])
+    ui.info(
+      `${color.kept("Kept")} ${file} ${color.muted("(yours differs from the registry)")}`
+    )
+
+  const specs = await resolveConflicts(plan, ui, {
+    ask: interactive && !options.yes,
+    yes: options.yes
+  })
+  if (specs.length) {
+    await ui.task(
+      `Installing ${specs.length} packages with ${agent}`,
+      () => install(cwd, specs, { agent }),
+      installedMessage(
+        specs.map((entry) => parseSpec(entry).name),
+        agent
+      )
+    )
+    await alignVersions(cwd, agent, install, ui, {
+      ...align,
+      required: false
+    })
+  }
+
+  const addButton = color.command(cliCommand("add button"))
+  if (viteStep.kind === "manual") {
+    ui.warn(
+      `Vite can't resolve ${prefix}/ yet. init left ${viteName} alone because ${viteStep.reason}. Add ${color.command(TSCONFIG_PATHS_ENTRY)} to the config, for example:\n\n${color.command(TSCONFIG_PATHS_SNIPPET)}`
+    )
+    ui.outro(
+      `Finish the ${viteName} step above, then add a component with: ${addButton}`
+    )
+    return
+  }
+  ui.note(addButton, "Add your first component")
+  ui.outro("Solid UI is set up.")
+}
 
 export const init = new Command()
   .name("init")
-  .description("initialize your project and install dependencies")
-  .option("-c, --cwd <cwd>", "the working directory", process.cwd())
-  .action(async (opts) => {
-    try {
-      const options = v.parse(initOptionsSchema, opts)
-
-      const cwd = path.resolve(options.cwd)
-      if (!existsSync(cwd)) {
-        throw new Error(`The path ${cwd} does not exist. Please try again.`)
-      }
-
-      const info = getPackageInfo()
-      p.intro(headline(` ${info.name} - ${info.version} `))
-
-      const rawConfig = await promptForConfig()
-
-      const spinner = p.spinner()
-      spinner.start(`Creating ui.config.json...`)
-
-      const targetPath = path.resolve(cwd, "ui.config.json")
-      await writeFile(targetPath, JSON.stringify(rawConfig, null, 2), "utf-8")
-
-      spinner.stop(`ui.config.json created.`)
-
-      const config = await resolveConfigPaths(cwd, rawConfig)
-
-      spinner.start(`Initializing project...`)
-
-      // make sure all the directories exist
-      for (const [key, resolvedPath] of Object.entries(config.resolvedPaths)) {
-        let dirname = path.extname(resolvedPath) ? path.dirname(resolvedPath) : resolvedPath
-
-        if (key === "utils" && resolvedPath.endsWith("/utils")) {
-          dirname = dirname.replace(/\/utils$/, "") // remove /utils at the end
-        }
-
-        if (!existsSync(dirname)) {
-          await mkdir(dirname, { recursive: true })
-        }
-      }
-
-      const extension = config.tsx ? "ts" : "js"
-
-      await writeFile(
-        config.resolvedPaths.tailwindConfig,
-        templates.TAILWIND_CONFIG.replace("<%- prefix %>", config.tailwind.prefix),
-        "utf-8"
-      )
-
-      await writeFile(config.resolvedPaths.tailwindCss, templates.TAILWIND_CSS, "utf-8")
-
-      await writeFile(
-        `${config.resolvedPaths.utils}.${extension}`,
-        extension === "ts" ? templates.UTILS : templates.UTILS_JS,
-        "utf-8"
-      )
-
-      spinner.stop(`Project initialized.`)
-
-      spinner.start(`Installing dependencies...`)
-
-      const packageManager = await getPackageManager(cwd)
-      await execa(packageManager, [
-        "add",
-        packageManager === "deno" ? "--npm" : "",
-        ...PROJECT_DEPENDENCIES,
-      ], { cwd });
-
-      spinner.stop(`Dependencies installed.`)
-
-      p.outro(
-        `${highlight("Success!")} Project initialization completed. You may now add components.`
-      )
-    } catch (e) {
-      handleError(e)
-    }
-  })
-
-async function promptForConfig(): Promise<RawConfig> {
-  const options = await p.group(
-    {
-      typescript: () =>
-        p.confirm({
-          message: `Would you like to use ${highlight("Typescript")} (recommended)?`,
-          initialValue: true
-        }),
-      cssFile: () =>
-        p.text({
-          message: `Where is your ${highlight("global CSS")} file? ${subtle("(this file will be overwritten)")}`,
-          initialValue: DEFAULT_CSS_FILE
-        }),
-      tailwindConfig: () =>
-        p.text({
-          message: `Where is your ${highlight("Tailwind config")} located? ${subtle("(this file will be overwritten)")}`,
-          initialValue: DEFAULT_TAILWIND_CONFIG
-        }),
-      tailwindPrefix: () =>
-        p.text({
-          message: `Are you using a custom ${highlight("tailwind prefix eg. tw-")}? (Leave blank if not)`,
-          initialValue: DEFAULT_TAILWIND_PREFIX
-        }),
-      components: () =>
-        p.text({
-          message: `Configure the import alias for ${highlight("components")}:`,
-          initialValue: DEFAULT_COMPONENTS
-        }),
-      utils: () =>
-        p.text({
-          message: `Configure the import alias for ${highlight("utils")}:`,
-          initialValue: DEFAULT_UTILS
-        })
-    },
-    {
-      onCancel: () => {
-        p.cancel("Cancelled.")
-        process.exit(0)
-      }
-    }
+  .description("set up Solid UI in a Solid 2 project")
+  .option(
+    "-c, --cwd <dir>",
+    "the project directory (default: current directory)"
   )
-
-  return v.parse(RawConfigSchema, {
-    $schema: "https://solid-ui.com/schema.json",
-    tsx: options.typescript,
-    tailwind: {
-      css: options.cssFile,
-      config: options.tailwindConfig,
-      prefix: options.tailwindPrefix
-    },
-    aliases: {
-      components: options.components,
-      utils: options.utils
-    }
+  .option("-p, --preset <code>", "a preset code from solid-ui.com/create")
+  .option("-y, --yes", "skip the prompts and use the defaults", false)
+  .option(
+    "-f, --force",
+    "replace an existing components.json and solid-ui.css",
+    false
+  )
+  .option("--css <file>", "the app stylesheet that imports Tailwind CSS")
+  .option(
+    "--alias <prefix>",
+    "the import alias for the components (default: ~)"
+  )
+  .action(async (options: InitOptions) => {
+    await runInit({ ...options, cwd: options.cwd ?? process.cwd() })
   })
-}

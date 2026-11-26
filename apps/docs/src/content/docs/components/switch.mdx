@@ -1,0 +1,92 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+component: true
+---
+
+<ComponentPreview name="switch-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add switch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="switch" title="components/ui/switch.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Switch } from "~/components/ui/switch"
+```
+
+```tsx
+<Switch />
+```
+
+## Description
+
+<ComponentPreview name="switch-description" />
+
+## Choice Card
+
+Card-style selection where `FieldLabel` wraps the entire `Field` for a clickable card pattern.
+
+<ComponentPreview name="switch-choice-card" />
+
+## Disabled
+
+Set `disabled` on `Switch` to prevent interaction. Add `data-disabled` to `Field` to style the rest of the field.
+
+<ComponentPreview name="switch-disabled" />
+
+## Invalid
+
+Set `aria-invalid` on `Switch` and `data-invalid` on `Field` to show the invalid state.
+
+<ComponentPreview name="switch-invalid" />
+
+## Size
+
+Use the `size` prop to change the size of the switch.
+
+<ComponentPreview name="switch-sizes" />
+
+## API Reference
+
+| Part     | Description                                                         |
+| -------- | ------------------------------------------------------------------- |
+| `Switch` | Root switch primitive with hidden input, visual control, and thumb. |
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/switch) documentation for more information.

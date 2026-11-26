@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import LanguageIcon from "~/components/language-icon.astro"
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"figcaption"> & {
+  "data-language"?: string
+}
+
+const { class: className, ...props } = Astro.props
+const language =
+  typeof props["data-language"] === "string" ? props["data-language"] : ""
+---
+
+<figcaption
+  class={cn(
+    "flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:opacity-70",
+    className
+  )}
+  {...props}
+>
+  <LanguageIcon language={language} />
+  <slot />
+</figcaption>

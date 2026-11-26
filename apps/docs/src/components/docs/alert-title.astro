@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"h5">
+
+const { class: className, ...props } = Astro.props
+---
+
+<h5 class={cn("cn-alert-title", className)} data-slot="alert-title" {...props}>
+  <slot />
+</h5>

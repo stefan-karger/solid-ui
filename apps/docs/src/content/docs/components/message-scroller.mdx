@@ -1,0 +1,295 @@
+---
+title: Message Scroller
+description: A chat scroll container that anchors turns, opens saved transcripts, follows streamed responses, loads history without jumping, and jumps to any message.
+component: true
+---
+
+<ComponentPreview
+  name="message-scroller-demo"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+## What Makes a Great Streaming Chat Experience
+
+Building a chat interface used to be simple. You create an inverted list with
+an input. Type a message, it appends at the bottom. When a reply comes in, the
+list grows and scrolls. Done.
+
+Streaming breaks that model. Messages arrive in chunks while you may still be
+reading, scrolling, or looking somewhere else entirely.
+
+Now the challenge is preserving the reader's place while the conversation keeps
+changing. Get that wrong and the experience feels jumpy: people are pulled to
+the bottom, lose context, and have to find their way back.
+
+In practice, this comes down to scroll: when to follow, when to hold, and when
+to let the reader decide. A great streaming chat should:
+
+1. **Move only when the reader asked to move.** If someone is reading, don’t pull them somewhere else. Auto-scroll should never be the default.
+2. **Follow only while they’re following.** If they’re at the live edge, keep the stream in view. If they scroll away, leave them there.
+3. **Every interaction is a signal.** Scrolling is not the only one. Selecting text, using the keyboard, opening a link, or searching should all stop the interface from moving.
+4. **Start a new turn near the top of the viewport.** This gives the new turn somewhere it can be read from the beginning.
+5. **Then stream in the answer.** The answer should grow into the screen, not immediately push everything away.
+6. **Keep part of the previous conversation in context.** The prompt and reply should stay visually connected, and enough of the previous turn should remain visible so the reader knows where they are.
+7. **Let new content arrive offscreen.** The conversation can keep streaming without changing what the reader is looking at.
+8. **Show what’s happening out of view.** Make it clear when a response is still streaming or when new messages have arrived.
+9. **Make it easy to return to the latest reply.** A “Jump to latest” action should bring the reader back and resume following.
+10. **Let people jump anywhere in the conversation.** Long threads need message links, search, unread markers, and direct navigation.
+11. **Reopen where the reader left off.** A saved conversation should open at the last meaningful turn. Often this is the last user message. Not the absolute bottom.
+12. **Keep the reader’s place when layout changes.** Images load. Markdown expands. Code blocks render. Older messages appear above. None of that should make the reader lose their place.
+13. **Handle interruptions without stealing position.** Stopping, retrying, regenerating, branching, or errors should not unexpectedly move the conversation.
+14. **Stay responsive in long threads.** Streaming text, markdown, code, images, and long history should still feel responsive.
+15. **Be accessible without the noise.** Keep the transcript navigable, preserve keyboard focus, and announce important events at a comfortable pace.
+
+**Never move the reader against their intent.**
+
+## MessageScroller
+
+`MessageScroller` manages the chat transcript viewport. It follows streamed output with `stickToEnd` and lets readers return to the latest message with `MessageScrollerButton`.
+
+The examples build turn anchoring, opening positions, history restoration, and message jumps on top of the viewport. Your application owns the transcript, transport, and persistence.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add message-scroller
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="message-scroller"
+  title="components/ui/message-scroller.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerViewport
+} from "~/components/ui/message-scroller"
+```
+
+```tsx showLineNumbers
+<MessageScroller class="h-64">
+  <MessageScrollerViewport role="region" aria-label="Messages">
+    <MessageScrollerContent role="log" aria-relevant="additions">
+      <MessageScrollerItem>Could you check the preview?</MessageScrollerItem>
+      <MessageScrollerItem>It is ready to review.</MessageScrollerItem>
+    </MessageScrollerContent>
+  </MessageScrollerViewport>
+  <MessageScrollerButton />
+</MessageScroller>
+```
+
+The root uses SDK Scroll Area with `stickToEnd`. Scroll up to pause following and return to the bottom or press `MessageScrollerButton` to resume. Use `createMessageScrollerController` to drive scrolling from another control.
+
+See the [UI SDK scroll-area API](https://ui-sdk.dev/docs/solid/components/scroll-area) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `MessageScroller`:
+
+```text
+MessageScroller
+├── MessageScrollerViewport
+│   └── MessageScrollerContent
+│       ├── MessageScrollerItem
+│       └── MessageScrollerItem
+└── MessageScrollerButton
+```
+
+Render messages, separators, and other transcript rows inside `MessageScrollerContent`. Put the scroll-to-end button next to the viewport so it stays outside the scrolling area.
+
+## Core Concepts
+
+### Anchoring Turns
+
+A turn often starts with a user message, followed by the assistant's reply. Use **Add turn** to append both rows. The demo scrolls to the newly added row for the selected anchor role.
+
+<ComponentPreview
+  name="message-scroller-anchoring"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Group Chat
+
+In a group chat, the turn boundary is more specific than "the user message". It is often
+the message that asks the model to respond, or a marker like "Marcus joined the
+chat". Typing indicators and history controls usually should not anchor.
+
+Because anchoring is role-independent, you can anchor a marker just as easily as
+a message.
+
+<ComponentPreview
+  name="message-scroller-group-chat"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Keeping Context Visible
+
+Keep the previous message in view while a new reply begins. Press **Send** to stream a reply and see how the demo scrolls to the preceding row.
+
+<ComponentPreview
+  name="message-scroller-previous-context"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Following the Live Edge
+
+With `stickToEnd`, streamed replies stay in view while the reader is at the bottom. Scroll up to pause following. Return to the bottom or use `MessageScrollerButton` to resume.
+
+<ComponentPreview
+  name="message-scroller-streaming"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Opening Saved Threads
+
+Try opening the transcript at the start, end, or last user message. The demo uses the scroll controller for the edges and the viewport for the last message.
+
+<ComponentPreview
+  name="message-scroller-opening-position"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+  hideCode
+/>
+
+### Avoiding a Flash on Reload
+
+Server-rendered transcripts initially start at the top. Use `stickToEnd` for a chat that should open at the latest message, or apply a saved position after the viewport and its rows are mounted.
+
+### Loading Earlier Messages
+
+Press **Load earlier messages** to prepend history. The demo adjusts the viewport offset by the height of the inserted rows so the message you were reading stays in place.
+
+<ComponentPreview
+  name="message-scroller-load-history"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Animating New Messages
+
+Apply an entrance animation to `MessageScrollerItem`. The example fades rows in with `motion-safe` so readers who prefer reduced motion see them immediately.
+
+<ComponentPreview
+  name="message-scroller-animation"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+### Jumping to Messages
+
+Use the message picker to jump to a row in the viewport. The **Start** and **End** buttons use `createMessageScrollerController` to scroll to the transcript edges.
+
+<ComponentPreview
+  name="message-scroller-commands"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+  hideCode
+/>
+
+### Tracking the Reader's Position
+
+Read the visible rows from the viewport as it scrolls. The demo shows the first user message still in view.
+
+<ComponentPreview
+  name="message-scroller-visibility"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+  hideCode
+/>
+
+### Reading Scroll State
+
+Use `controller.isAtStart()` and `controller.isAtEnd()` to distinguish the beginning, end, and middle of the transcript.
+
+<ComponentPreview
+  name="message-scroller-scrollable"
+  class="rounded-[34px] sm:rounded-4xl"
+  previewClassName="h-auto bg-surface dark:bg-background p-4 min-[480px]:p-8 min-[560px]:p-10 sm:px-10 sm:py-16"
+/>
+
+## Performance
+
+The SDK tracks follow-output in the scroll-area controller. Message rows stay in the DOM while streamed text updates within the active row.
+
+## Virtualization
+
+Virtualization is intentionally left outside the primitive. `MessageScroller`
+renders real DOM rows and stays fast well into the thousands of turns (see
+[Performance](#performance)), so most transcripts never need it.
+
+When a transcript is large enough to need virtualization, use
+`MessageScrollerViewport` as the scroll element and let the virtualizer own the
+rows.
+
+## Accessibility
+
+`MessageScroller` keeps the scroll container keyboard reachable and the
+transcript announceable without forcing a specific message UI.
+
+Give `MessageScrollerViewport` a descriptive `aria-label` and `role="region"`
+so readers can find the keyboard-scrollable transcript.
+
+Use `role="log"` and `aria-relevant="additions"` on `MessageScrollerContent`
+to announce new rows without announcing each streamed token.
+
+Pass `aria-busy` while a turn streams if announcements should wait for the
+completed message row.
+
+`MessageScrollerButton` exposes `data-visible` when readers can return to the
+end. It is inert while the reader is already there or scrolling there.
+
+## Unstyled
+
+Compose the [UI SDK Scroll Area](https://ui-sdk.dev/docs/solid/components/scroll-area) parts with `stickToEnd` to style an end-following transcript.
+
+## API Reference
+
+The root exposes the Scroll Area options. Use `createMessageScrollerController()` with `controller` to read scroll state or call `scrollToEnd()`.

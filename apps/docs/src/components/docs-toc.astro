@@ -1,0 +1,69 @@
+---
+import type { MarkdownHeading } from "astro"
+type Props = { headings: MarkdownHeading[]; showTitle?: boolean }
+const { headings, showTitle = true } = Astro.props
+const entries = headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3
+)
+---
+
+{entries.length > 0 && (
+  <nav
+    aria-label="On this page"
+    class="flex flex-col gap-2 p-4 pt-0 text-sm"
+    data-docs-toc
+  >
+    {showTitle && (
+      <p class="h-6 bg-background text-xs font-medium text-muted-foreground">
+        On This Page
+      </p>
+    )}
+    {entries.map((heading) => (
+      <a
+        href={`#${heading.slug}`}
+        data-toc-id={heading.slug}
+        data-depth={heading.depth}
+        class="text-[0.8rem] text-muted-foreground no-underline transition-colors hover:text-foreground aria-[current=location]:font-medium aria-[current=location]:text-foreground data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+      >
+        {heading.text}
+      </a>
+    ))}
+  </nav>
+)}
+<script>
+  function initializeToc() {
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-toc-id]")
+    )
+    const headings = links
+      .map((link) => document.getElementById(link.dataset.tocId!))
+      .filter((node): node is HTMLElement => node !== null)
+    if (!headings.length) return
+    function update() {
+      const current =
+        headings
+          .filter((node) => node.getBoundingClientRect().top <= 128)
+          .at(-1) ?? headings[0]!
+      for (const link of links) {
+        if (link.dataset.tocId === current.id)
+          link.setAttribute("aria-current", "location")
+        else link.removeAttribute("aria-current")
+      }
+    }
+    let queued = false
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (queued) return
+        queued = true
+        requestAnimationFrame(() => {
+          update()
+          queued = false
+        })
+      },
+      { passive: true }
+    )
+    update()
+  }
+  initializeToc()
+</script>

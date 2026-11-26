@@ -1,0 +1,78 @@
+---
+import ComboboxDemo from "~/registry/examples/combobox-demo"
+import DialogDemo from "~/registry/examples/dialog-demo"
+import DropdownMenuDemo from "~/registry/examples/dropdown-menu-demo"
+import SelectDemo from "~/registry/examples/select-demo"
+import TabsDemo from "~/registry/examples/tabs-demo"
+
+import Async from "../components/async"
+import Counter from "../components/counter"
+---
+
+<html lang="en">
+  <head>
+    <title>Solid 2 adapter tests</title>
+    <style is:global>
+      @layer ui-sdk;
+      [hidden] {
+        display: none !important;
+      }
+      button {
+        padding: 8px;
+      }
+      [role="dialog"] {
+        background: white;
+        padding: 24px;
+      }
+      [role="menu"],
+      [role="listbox"] {
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="first">
+      <Counter initial={3} client:load>
+        <b>Default slot</b>
+        <b slot="named-slot">Named slot</b>
+      </Counter>
+    </div>
+    <div id="second">
+      <Counter initial={7} client:load />
+    </div>
+    <div id="only">
+      <Counter initial={10} client:only="solid-js">
+        <b>Client default slot</b>
+        <b slot="named-slot">Client named slot</b>
+        <p slot="fallback">Fallback content</p>
+      </Counter>
+    </div>
+    <div id="static">
+      <Counter initial={20}>Static slot</Counter>
+    </div>
+    <div id="lazy">
+      <Async client:load />
+    </div>
+    <div id="lazy-again">
+      <Async client:load />
+    </div>
+    <div id="lazy-static">
+      <Async />
+    </div>
+    <div id="dialog">
+      <DialogDemo client:load />
+    </div>
+    <div id="menu">
+      <DropdownMenuDemo client:load />
+    </div>
+    <div id="combobox">
+      <ComboboxDemo client:load />
+    </div>
+    <div id="select">
+      <SelectDemo client:load />
+    </div>
+    <div id="tabs">
+      <TabsDemo client:load />
+    </div>
+  </body>
+</html>

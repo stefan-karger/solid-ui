@@ -1,121 +1,103 @@
-import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type {
-  ContentProps,
-  DescriptionProps,
-  DynamicProps,
-  LabelProps,
-  OverlayProps
-} from "@corvu/drawer"
-import DrawerPrimitive from "@corvu/drawer"
+import type { ComponentProps } from "@solidjs/web"
+import {
+  Drawer as SdkDrawer,
+  DrawerTrigger as SdkDrawerTrigger,
+  DrawerClose as SdkDrawerClose,
+  DrawerContent as SdkDrawerContent,
+  DrawerBackdrop as SdkDrawerBackdrop,
+  DrawerHandle as SdkDrawerHandle,
+  DrawerTitle as SdkDrawerTitle,
+  DrawerDescription as SdkDrawerDescription
+} from "@ui-sdk/solid/drawer"
 
 import { cn } from "~/lib/utils"
 
-const Drawer = DrawerPrimitive
-
-const DrawerTrigger = DrawerPrimitive.Trigger
-
-const DrawerPortal = DrawerPrimitive.Portal
-
-const DrawerClose = DrawerPrimitive.Close
-
-type DrawerOverlayProps<T extends ValidComponent = "div"> = OverlayProps<T> & { class?: string }
-
-const DrawerOverlay = <T extends ValidComponent = "div">(
-  props: DynamicProps<T, DrawerOverlayProps<T>>
-) => {
-  const [, rest] = splitProps(props as DrawerOverlayProps, ["class"])
-  const drawerContext = DrawerPrimitive.useContext()
+export const Drawer = SdkDrawer
+export const DrawerTrigger = SdkDrawerTrigger
+export const DrawerClose = SdkDrawerClose
+export function DrawerOverlay(
+  props: Omit<ComponentProps<typeof SdkDrawerBackdrop>, "class"> & {
+    class?: string
+  }
+) {
   return (
-    <DrawerPrimitive.Overlay
-      class={cn(
-        "fixed inset-0 z-50 data-[transitioning]:transition-colors data-[transitioning]:duration-300",
-        props.class
-      )}
-      style={{
-        "background-color": `rgb(0 0 0 / ${0.8 * drawerContext.openPercentage()})`
-      }}
-      {...rest}
+    <SdkDrawerBackdrop
+      {...props}
+      class={cn("cn-drawer-overlay", props.class)}
     />
   )
 }
-
-type DrawerContentProps<T extends ValidComponent = "div"> = ContentProps<T> & {
-  class?: string
-  children?: JSX.Element
-}
-
-const DrawerContent = <T extends ValidComponent = "div">(
-  props: DynamicProps<T, DrawerContentProps<T>>
-) => {
-  const [, rest] = splitProps(props as DrawerContentProps, ["class", "children"])
+export function DrawerContent(
+  props: Omit<ComponentProps<typeof SdkDrawerContent>, "class"> & {
+    class?: string
+  }
+) {
+  // The SDK positions and moves the sheet. Only its contents and appearance are styled here.
   return (
-    <DrawerPortal>
+    <>
       <DrawerOverlay />
-      <DrawerPrimitive.Content
+      <SdkDrawerContent
+        {...props}
         class={cn(
-          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background after:absolute after:inset-x-0 after:top-full after:h-1/2 after:bg-inherit data-[transitioning]:transition-transform data-[transitioning]:duration-300 md:select-none",
+          "cn-drawer-content flex max-h-[90svh] flex-col data-[side=left]:max-w-sm data-[side=right]:max-w-sm",
           props.class
         )}
-        {...rest}
-      >
-        <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-        {props.children}
-      </DrawerPrimitive.Content>
-    </DrawerPortal>
+      />
+    </>
   )
 }
-
-const DrawerHeader: Component<ComponentProps<"div">> = (props) => {
-  const [, rest] = splitProps(props, ["class"])
-  return <div class={cn("grid gap-1.5 p-4 text-center sm:text-left", props.class)} {...rest} />
-}
-
-const DrawerFooter: Component<ComponentProps<"div">> = (props) => {
-  const [, rest] = splitProps(props, ["class"])
-  return <div class={cn("t-auto flex flex-col gap-2 p-4", props.class)} {...rest} />
-}
-
-type DrawerTitleProps<T extends ValidComponent = "div"> = LabelProps<T> & { class?: string }
-
-const DrawerTitle = <T extends ValidComponent = "div">(
-  props: DynamicProps<T, DrawerTitleProps<T>>
-) => {
-  const [, rest] = splitProps(props as DrawerTitleProps, ["class"])
+export function DrawerHandle(
+  props: Omit<ComponentProps<typeof SdkDrawerHandle>, "class"> & {
+    class?: string
+  }
+) {
   return (
-    <DrawerPrimitive.Label
-      class={cn("text-lg font-semibold leading-none tracking-tight", props.class)}
-      {...rest}
+    <SdkDrawerHandle
+      aria-label="Resize drawer"
+      {...props}
+      class={cn(
+        "mx-auto my-3 h-1 w-24 shrink-0 rounded-full bg-muted",
+        props.class
+      )}
     />
   )
 }
-
-type DrawerDescriptionProps<T extends ValidComponent = "div"> = DescriptionProps<T> & {
-  class?: string
-}
-
-const DrawerDescription = <T extends ValidComponent = "div">(
-  props: DynamicProps<T, DrawerDescriptionProps<T>>
-) => {
-  const [, rest] = splitProps(props as DrawerDescriptionProps, ["class"])
+export function DrawerTitle(
+  props: Omit<ComponentProps<typeof SdkDrawerTitle>, "class"> & {
+    class?: string
+  }
+) {
   return (
-    <DrawerPrimitive.Description
-      class={cn("text-sm text-muted-foreground", props.class)}
-      {...rest}
+    <SdkDrawerTitle {...props} class={cn("cn-drawer-title", props.class)} />
+  )
+}
+export function DrawerDescription(
+  props: Omit<ComponentProps<typeof SdkDrawerDescription>, "class"> & {
+    class?: string
+  }
+) {
+  return (
+    <SdkDrawerDescription
+      {...props}
+      class={cn("cn-drawer-description", props.class)}
     />
   )
 }
-
-export {
-  Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
-  DrawerDescription
+export function DrawerHeader(props: ComponentProps<"div">) {
+  return (
+    <div
+      {...props}
+      data-slot="drawer-header"
+      class={cn("cn-drawer-header flex flex-col", props.class)}
+    />
+  )
+}
+export function DrawerFooter(props: ComponentProps<"div">) {
+  return (
+    <div
+      {...props}
+      data-slot="drawer-footer"
+      class={cn("cn-drawer-footer mt-auto flex flex-col", props.class)}
+    />
+  )
 }

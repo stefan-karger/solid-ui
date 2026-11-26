@@ -1,0 +1,187 @@
+---
+title: Marker
+description: Displays an inline status, system note, bordered row, or labeled separator in a conversation.
+component: true
+---
+
+<ComponentPreview name="marker-demo" previewClassName="h-auto" />
+
+The `Marker` component displays inline conversation markers such as status updates, system notes, bordered rows, and labeled separators. Compose it with [`Message`](/docs/components/message) in a conversation thread.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add marker
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="marker" title="components/ui/marker.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { Marker, MarkerContent } from "~/components/ui/marker"
+```
+
+```tsx showLineNumbers
+<Marker>
+  <MarkerContent>Explored four files</MarkerContent>
+</Marker>
+```
+
+`variant` is `default`, `separator`, or `border`. `MarkerIcon` is decorative; `MarkerContent` contains the readable label.
+
+## Composition
+
+Use the following composition to build a marker:
+
+```text
+Marker
+├── MarkerIcon
+└── MarkerContent
+```
+
+## Features
+
+- Inline marker, bordered row, and labeled separator variants
+- Decorative icon slot that is hidden from assistive tech
+- Polymorphic root via `render` for link and button markers
+- Pairs with the [`shimmer`](/docs/#shared-styles) utility for streaming status text
+- Customizable styling through the `class` prop on every part
+
+## Variants
+
+Use `variant` to switch between an inline marker, bordered row, and labeled separator.
+
+<ComponentPreview name="marker-variants" previewClassName="h-auto" />
+
+| Variant     | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `default`   | An inline marker for status, notes, and actions.     |
+| `border`    | A default marker with a bottom border under the row. |
+| `separator` | A centered label with divider lines on each side.    |
+
+## Status
+
+Set `role="status"` and include a [`Spinner`](/docs/components/spinner) for streaming or in-progress markers so updates are announced.
+
+<ComponentPreview name="marker-status" previewClassName="h-auto" />
+
+## Shimmer
+
+Add `shimmer` to `MarkerContent` for animated streaming text. The class is included in the [shared stylesheet](/docs/#shared-styles).
+
+<ComponentPreview name="marker-shimmer" previewClassName="h-auto" />
+
+## Separator
+
+Use the `separator` variant for labeled dividers, such as dates or section breaks, in a conversation. A [Checkpoint](/docs/ai-elements/checkpoint/) is a separator with a button that restores the thread to that point.
+
+<ComponentPreview name="marker-separator" previewClassName="h-auto" />
+
+## Border
+
+A bordered marker keeps the same semantics as the default marker. The bottom border is decorative. Choose `role="status"`, a rendered link or button, or ordinary text according to the marker's purpose.
+
+<ComponentPreview name="marker-border" previewClassName="h-auto" />
+
+## With Icon
+
+Use `MarkerIcon` to render an icon alongside the content. Use `flex-col` to stack the icon above the content.
+
+<ComponentPreview name="marker-icon" previewClassName="h-auto" />
+
+## Links and Buttons
+
+Use the `render` prop on `Marker` to turn it into a link or button.
+
+<ComponentPreview name="marker-link-button" previewClassName="h-auto" />
+
+## Accessibility
+
+`Marker` is presentational by default. The correct semantics depend on how you use it, so choose the role based on intent rather than relying on a single default.
+
+### Status and Progress
+
+For streaming or progress markers such as "Thinking..." or a running tool, set `role="status"` so assistive tech announces the update as it appears. `Marker` forwards `role` to the underlying element.
+
+### Labeled Separators
+
+A separator that carries text, such as a date or a section label, needs no role. The divider lines are decorative CSS pseudo-elements, and the text is announced as ordinary content.
+
+<Callout>
+  **Note:** Do not add `role="separator"` to a labeled divider. A separator
+  takes its accessible name from `aria-label`, not from its text, and its
+  contents are treated as presentational, so the visible label would not be
+  announced. Reserve `role="separator"` for a divider with no meaningful text.
+</Callout>
+
+### Bordered Markers
+
+A bordered marker keeps the same semantics as the default marker. The bottom border is decorative, so choose `role="status"`, `asChild`, or no role based on the marker's purpose.
+
+### Decorative Icons
+
+`MarkerIcon` is decorative and hidden from assistive tech with `aria-hidden`, so the adjacent `MarkerContent` carries the meaning. For an icon-only marker, provide an `aria-label` or visible text so it is not announced as empty.
+
+### Interactive Markers
+
+When a marker links or triggers an action, render it as a real `<button>` or `<a>` with the `render` prop so it is focusable and exposes the correct role. The accessible name comes from the marker text.
+
+## API Reference
+
+### Marker
+
+The root marker element. The file also exports `markerVariants` for composing the marker styles into custom components.
+
+| Prop      | Type                                   | Default     | Description                                      |
+| --------- | -------------------------------------- | ----------- | ------------------------------------------------ |
+| `variant` | `"default" \| "border" \| "separator"` | `"default"` | The marker layout.                               |
+| `render`  | Render function                        | -           | Render a custom element with the part props.     |
+| `class`   | `string`                               | -           | Additional classes to apply to the root element. |
+
+### MarkerIcon
+
+A decorative icon slot. Hidden from assistive tech with `aria-hidden`.
+
+| Prop    | Type     | Default | Description                                   |
+| ------- | -------- | ------- | --------------------------------------------- |
+| `class` | `string` | -       | Additional classes to apply to the icon slot. |
+
+### MarkerContent
+
+The marker text content.
+
+| Prop    | Type     | Default | Description                                      |
+| ------- | -------- | ------- | ------------------------------------------------ |
+| `class` | `string` | -       | Additional classes to apply to the content slot. |

@@ -1,9 +1,24 @@
 {
   "name": "solidui-cli",
-  "version": "0.7.2",
-  "description": "Add Solid UI Components to your application using the Solid-UI CLI tool",
-  "publishConfig": {
-    "access": "public"
+  "version": "1.0.0",
+  "description": "Add Solid UI components to your Solid 2 app: shadcn/ui-style, copy-and-own components built with UI SDK and Tailwind CSS",
+  "keywords": [
+    "cli",
+    "components",
+    "copy-and-own",
+    "registry",
+    "shadcn",
+    "shadcn-ui",
+    "solid",
+    "solid-js",
+    "solid-ui",
+    "solidjs",
+    "tailwindcss",
+    "ui",
+    "ui-sdk"
+  ],
+  "bugs": {
+    "url": "https://github.com/stefan-karger/solid-ui/issues"
   },
   "license": "MIT",
   "author": {
@@ -15,49 +30,42 @@
     "url": "https://github.com/stefan-karger/solid-ui.git",
     "directory": "packages/cli"
   },
-  "bugs": {
-    "url": "https://github.com/stefan-karger/solid-ui/issues"
-  },
-  "type": "module",
+  "bin": "./dist/index.js",
   "files": [
     "dist"
   ],
+  "type": "module",
   "exports": "./dist/index.js",
-  "bin": "./dist/index.js",
-  "keywords": [
-    "components",
-    "ui",
-    "tailwind",
-    "kobalte",
-    "corvu",
-    "solid",
-    "solidjs",
-    "shadcn",
-    "tremor"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
-    "release": "changeset version",
+    "check": "tsc --noEmit",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
-    "pub:release": "pnpm build && pnpm publish --access public"
+    "pub:release": "pnpm build && pnpm publish --access public",
+    "release": "changeset version"
   },
   "dependencies": {
-    "@antfu/ni": "^0.23.0",
-    "@babel/core": "^7.25.2",
-    "@babel/parser": "^7.25.6",
-    "@babel/plugin-transform-typescript": "^7.25.2",
-    "@clack/prompts": "^0.10.0",
-    "chalk": "^5.4.1",
-    "commander": "^12.1.0",
-    "execa": "^9.4.0",
-    "recast": "^0.23.9",
-    "ts-morph": "^20.0.0",
-    "tsconfig-paths": "^4.2.0"
+    "@babel/parser": "^8.1.3",
+    "@clack/prompts": "^1.9.0",
+    "commander": "^15.1.0",
+    "execa": "^10.2.1",
+    "jsonc-parser": "^3.3.1",
+    "package-manager-detector": "^1.9.0",
+    "semver": "^7.8.6",
+    "tailwind-merge": "^3.7.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.5",
-    "@types/node": "^20.14.12",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.2"
+    "@babel/types": "^8.1.3",
+    "@solid-ui/registry": "workspace:*",
+    "@types/node": "24.19.2",
+    "@types/semver": "^7.8.0",
+    "tsup": "^9.0.0",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
   }
 }

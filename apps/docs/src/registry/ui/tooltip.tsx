@@ -1,35 +1,45 @@
-import type { ValidComponent } from "solid-js"
-import { splitProps, type Component } from "solid-js"
-
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as TooltipPrimitive from "@kobalte/core/tooltip"
+type TooltipProps = ComponentProps<typeof SdkTooltip>
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Tooltip as SdkTooltip,
+  TooltipTrigger as SdkTooltipTrigger,
+  TooltipContent as SdkTooltipContent,
+  TooltipArrow as SdkTooltipArrow
+} from "@ui-sdk/solid/tooltip"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const TooltipTrigger = TooltipPrimitive.Trigger
-
-const Tooltip: Component<TooltipPrimitive.TooltipRootProps> = (props) => {
-  return <TooltipPrimitive.Root gutter={4} {...props} />
+const Tooltip = (props: TooltipProps) => <SdkTooltip {...props} />
+type TooltipTriggerProps = Omit<
+  ComponentProps<typeof SdkTooltipTrigger>,
+  "class"
+> & {
+  class?: string
 }
-
-type TooltipContentProps<T extends ValidComponent = "div"> =
-  TooltipPrimitive.TooltipContentProps<T> & { class?: string | undefined }
-
-const TooltipContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, TooltipContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as TooltipContentProps, ["class"])
+const TooltipTrigger = (props: TooltipTriggerProps) => (
+  <SdkTooltipTrigger {...props} />
+)
+type TooltipContentProps = Omit<
+  ComponentProps<typeof SdkTooltipContent>,
+  "class"
+> & {
+  class?: string
+}
+const TooltipContent = (props: TooltipContentProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content
+    <>
+      <SdkTooltipContent
         class={cn(
-          "z-50 origin-[var(--kb-popover-content-transform-origin)] overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95",
-          local.class
+          "cn-tooltip-content z-50 w-fit max-w-xs origin-(--transform-origin) bg-foreground text-background",
+          props.class
         )}
         {...others}
-      />
-    </TooltipPrimitive.Portal>
+      >
+        {props.children}
+        <SdkTooltipArrow class="cn-tooltip-arrow z-50 bg-foreground fill-foreground" />
+      </SdkTooltipContent>
+    </>
   )
 }
-
-export { Tooltip, TooltipTrigger, TooltipContent }
+export { Tooltip, TooltipContent, TooltipTrigger }

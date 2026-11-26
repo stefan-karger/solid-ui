@@ -1,0 +1,74 @@
+---
+title: Delta Bar
+description: Bar to show negative or positive deviation from a particular threshold.
+component: true
+---
+
+<ComponentPreview name="delta-bar-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add delta-bar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="delta-bar" title="components/ui/delta-bar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import { DeltaBar } from "~/components/ui/delta-bar"
+```
+
+```tsx showLineNumbers
+<DeltaBar value={42} />
+```
+
+## Examples
+
+### Inverted Semantics
+
+Use `isIncreasePositive={false}` when increases should be shown as unfavorable, like latency or cost.
+
+<ComponentPreview name="delta-bar-inverted" />
+
+### Custom Colors
+
+Use `data-tone="positive|negative"` selectors from the root `class` to override the default indicator and marker colors.
+
+<ComponentPreview name="delta-bar-custom-colors" />
+
+## API Reference
+
+### DeltaBar
+
+| Prop                 | Type      | Default |
+| -------------------- | --------- | ------- |
+| `value`              | `number`  | -       |
+| `isIncreasePositive` | `boolean` | `true`  |
+| `class`              | `string`  | -       |

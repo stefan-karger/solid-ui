@@ -1,34 +1,57 @@
-import type { Component, JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Progress as SdkProgress,
+  ProgressTrack as SdkProgressTrack,
+  ProgressIndicator as SdkProgressIndicator,
+  ProgressLabel as SdkProgressLabel,
+  ProgressValue as SdkProgressValue
+} from "@ui-sdk/solid/progress"
+import { omit } from "solid-js"
 
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as ProgressPrimitive from "@kobalte/core/progress"
-
-import { Label } from "~/registry/ui/label"
-
-type ProgressRootProps<T extends ValidComponent = "div"> =
-  ProgressPrimitive.ProgressRootProps<T> & { children?: JSX.Element }
-
-const Progress = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, ProgressRootProps<T>>
-) => {
-  const [local, others] = splitProps(props as ProgressRootProps, ["children"])
+import { cn } from "~/lib/utils"
+type ProgressProps = Omit<ComponentProps<typeof SdkProgress>, "class"> & {
+  class?: string
+}
+const Progress = (props: ProgressProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <ProgressPrimitive.Root {...others}>
-      {local.children}
-      <ProgressPrimitive.Track class="relative h-2 w-full overflow-hidden rounded-full bg-secondary">
-        <ProgressPrimitive.Fill class="h-full w-[var(--kb-progress-fill-width)] flex-1 bg-primary transition-all" />
-      </ProgressPrimitive.Track>
-    </ProgressPrimitive.Root>
+    <SdkProgress class={cn("w-full", props.class)} {...others}>
+      {props.children}
+      <SdkProgressTrack
+        class={cn("cn-progress cn-progress-track relative overflow-hidden")}
+      >
+        <SdkProgressIndicator
+          class={cn(
+            "cn-progress-indicator h-full w-(--progress-value) transition-all"
+          )}
+        />
+      </SdkProgressTrack>
+    </SdkProgress>
   )
 }
-
-const ProgressLabel: Component<ProgressPrimitive.ProgressLabelProps> = (props) => {
-  return <ProgressPrimitive.Label as={Label} {...props} />
+type ProgressLabelProps = Omit<
+  ComponentProps<typeof SdkProgressLabel>,
+  "class"
+> & {
+  class?: string
 }
-
-const ProgressValueLabel: Component<ProgressPrimitive.ProgressValueLabelProps> = (props) => {
-  return <ProgressPrimitive.ValueLabel as={Label} {...props} />
+const ProgressLabel = (props: ProgressLabelProps) => (
+  <SdkProgressLabel {...props} class={cn("cn-progress-label", props.class)} />
+)
+type ProgressValueProps = Omit<
+  ComponentProps<typeof SdkProgressValue>,
+  "class"
+> & {
+  class?: string
 }
-
-export { Progress, ProgressLabel, ProgressValueLabel }
+const ProgressValue = (props: ProgressValueProps) => (
+  <SdkProgressValue {...props} class={cn("cn-progress-value", props.class)} />
+)
+export {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+  type ProgressLabelProps,
+  type ProgressProps,
+  type ProgressValueProps
+}

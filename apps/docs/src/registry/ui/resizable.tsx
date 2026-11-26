@@ -1,65 +1,55 @@
-import type { ValidComponent } from "solid-js"
-import { Show, splitProps } from "solid-js"
-
-import type { DynamicProps, HandleProps, RootProps } from "@corvu/resizable"
-import ResizablePrimitive from "@corvu/resizable"
+import type { ComponentProps } from "@solidjs/web"
+import {
+  Resizable as SdkResizable,
+  ResizablePanel as SdkResizablePanel,
+  ResizableHandle as SdkResizableHandle
+} from "@ui-sdk/solid/resizable"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-type ResizableProps<T extends ValidComponent = "div"> = RootProps<T> & { class?: string }
-
-const Resizable = <T extends ValidComponent = "div">(props: DynamicProps<T, ResizableProps<T>>) => {
-  const [, rest] = splitProps(props as ResizableProps, ["class"])
+export function ResizablePanelGroup(
+  props: Omit<ComponentProps<typeof SdkResizable>, "class"> & { class?: string }
+) {
   return (
-    <ResizablePrimitive
-      class={cn("flex size-full data-[orientation=vertical]:flex-col", props.class)}
-      {...rest}
+    <SdkResizable
+      {...props}
+      class={cn(
+        "cn-resizable-panel-group flex h-full w-full data-[orientation=vertical]:flex-col",
+        props.class
+      )}
     />
   )
 }
 
-const ResizablePanel = ResizablePrimitive.Panel
-
-type ResizableHandleProps<T extends ValidComponent = "button"> = HandleProps<T> & {
-  class?: string
-  withHandle?: boolean
-}
-
-const ResizableHandle = <T extends ValidComponent = "button">(
-  props: DynamicProps<T, ResizableHandleProps<T>>
-) => {
-  const [, rest] = splitProps(props as ResizableHandleProps, ["class", "withHandle"])
+export function ResizablePanel(
+  props: Omit<ComponentProps<typeof SdkResizablePanel>, "class"> & {
+    class?: string
+  }
+) {
   return (
-    <ResizablePrimitive.Handle
-      class={cn(
-        "relative flex w-px shrink-0 items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full data-[orientation=vertical]:after:left-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full data-[orientation=vertical]:after:-translate-y-1/2 data-[orientation=vertical]:after:translate-x-0 [&[data-orientation=vertical]>div]:rotate-90",
-        props.class
-      )}
-      {...rest}
-    >
-      <Show when={props.withHandle}>
-        <div class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-2.5"
-          >
-            <path d="M9 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M9 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M9 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M15 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M15 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M15 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-          </svg>
-        </div>
-      </Show>
-    </ResizablePrimitive.Handle>
+    <SdkResizablePanel {...props} class={cn("min-h-0 min-w-0", props.class)} />
   )
 }
 
-export { Resizable, ResizablePanel, ResizableHandle }
+export function ResizableHandle(
+  props: Omit<ComponentProps<typeof SdkResizableHandle>, "class"> & {
+    class?: string
+    withHandle?: boolean
+  }
+) {
+  const rest = omit(props, "class", "withHandle")
+  return (
+    <SdkResizableHandle
+      {...rest}
+      class={cn(
+        "cn-resizable-handle relative flex w-px shrink-0 items-center justify-center bg-border outline-none focus-visible:ring-1 focus-visible:ring-ring data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full",
+        props.class
+      )}
+    >
+      {props.withHandle && (
+        <div class="cn-resizable-handle-icon z-10 flex shrink-0" />
+      )}
+    </SdkResizableHandle>
+  )
+}

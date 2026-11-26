@@ -1,0 +1,120 @@
+---
+import HeroPrototypeSwitcher from "~/components/hero-prototype-switcher.astro"
+import SolidBrand from "~/components/solid-brand.astro"
+import { buttonVariants } from "~/registry/ui/button"
+
+type Props = {
+  showPrototypes?: boolean
+}
+
+const { showPrototypes = false } = Astro.props
+const defaultPrototype = "5"
+const prototypes = [
+  {
+    id: "1",
+    heading: "The Foundation for your Design System",
+    description:
+      "Inspired by shadcn/ui and built for Solid 2.0. Start with composable, accessible components with thoughtful defaults, powered by UI SDK. Copy the code into your project and make it yours."
+  },
+  {
+    id: "2",
+    heading: "The shadcn/ui workflow for",
+    description:
+      "Build your own component library with accessible components powered by UI SDK. Start with ready-to-use defaults and customize the source as your design system grows."
+  },
+  {
+    id: "3",
+    heading: "Build your design system with Solid 2.0",
+    description:
+      "Inspired by shadcn/ui, Solid UI gives you accessible, composable components powered by UI SDK. Add them to your project and shape the source to fit what you’re building."
+  },
+  {
+    id: "4",
+    heading: "Own the components you build with",
+    description:
+      "Copy accessible components into your Solid 2.0 project and customize them there. The workflow comes from shadcn/ui, and UI SDK handles interactions like keyboard navigation and focus."
+  },
+  {
+    id: "5",
+    heading: "The Foundation for your Design System",
+    description:
+      "Bring the shadcn/ui approach to Solid. Build your own component library with code you can customize, extend, and make your own. Powered by UI SDK."
+  }
+]
+const visiblePrototypes = showPrototypes
+  ? prototypes
+  : prototypes.filter(({ id }) => id === defaultPrototype)
+---
+
+<section
+  class="mx-auto w-full max-w-350 px-6 py-8 text-center md:pt-16 lg:pt-20 lg:pb-12"
+  data-home-hero
+>
+  {visiblePrototypes.map((prototype) => (
+    <div
+      data-hero-variant={prototype.id}
+      hidden={prototype.id !== defaultPrototype}
+    >
+      <div class="flex flex-col items-center gap-2 xl:gap-4">
+        {prototype.id === "1" && (
+          <SolidBrand variant="launch" class="mb-2 h-9 sm:h-10" />
+        )}
+        {prototype.id === "3" && (
+          <SolidBrand variant="icon" class="mb-2 h-10" />
+        )}
+        {prototype.id === "5" && (
+          <div class="mb-2 inline-flex items-center gap-2 text-sm font-medium">
+            <SolidBrand variant="icon-flat" class="h-5" />
+            Built for Solid 2.0
+          </div>
+        )}
+        <h1 class="max-w-4xl text-3xl font-semibold tracking-tight text-balance lg:leading-[1.1] xl:text-5xl xl:tracking-tighter">
+          {prototype.id === "2" ? (
+            <>
+              {prototype.heading}{" "}
+              <span class="inline-flex items-baseline gap-[0.24em] whitespace-nowrap">
+                <SolidBrand variant="icon-flat" class="h-6 self-center" />
+                Solid 2.0
+              </span>
+            </>
+          ) : (
+            prototype.heading
+          )}
+        </h1>
+        <p class="max-w-4xl text-base text-balance text-foreground sm:text-lg">
+          {prototype.description}
+        </p>
+        {prototype.id === "4" && (
+          <SolidBrand variant="launch" class="mt-2 h-8" />
+        )}
+        <div class="mt-2 flex flex-wrap items-center justify-center gap-2">
+          <a
+            href="/docs/installation/"
+            class:list={[
+              buttonVariants({ variant: "default", size: "default" }),
+              "h-9 shadow-none"
+            ]}
+          >
+            Get Started
+          </a>
+          <a
+            href="/docs/components/"
+            class:list={[
+              buttonVariants({ variant: "ghost", size: "default" }),
+              "h-9 shadow-none"
+            ]}
+          >
+            View Components
+          </a>
+        </div>
+      </div>
+    </div>
+  ))}
+</section>
+
+{showPrototypes && (
+  <HeroPrototypeSwitcher
+    {defaultPrototype}
+    prototypeIds={prototypes.map(({ id }) => id)}
+  />
+)}

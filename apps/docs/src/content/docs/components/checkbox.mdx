@@ -1,0 +1,100 @@
+---
+title: Checkbox
+description: A control that allows the user to toggle between checked and not checked.
+component: true
+---
+
+<ComponentPreview name="checkbox-demo" previewClassName="h-80" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add checkbox
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="checkbox" title="components/ui/checkbox.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Checkbox } from "~/components/ui/checkbox"
+```
+
+```tsx
+<Checkbox />
+```
+
+## Checked State
+
+Use `defaultChecked` for uncontrolled checkboxes, or `checked` and
+`onCheckedChange` to control the state.
+
+## Invalid State
+
+Set `aria-invalid` on the checkbox and `data-invalid` on the field wrapper to
+show the invalid styles.
+
+<ComponentPreview name="checkbox-invalid" />
+
+## Basic
+
+Pair the checkbox with `Field` and `FieldLabel` for proper layout and labeling.
+
+<ComponentPreview name="checkbox-basic" />
+
+## Description
+
+Use `FieldContent` and `FieldDescription` for helper text.
+
+<ComponentPreview name="checkbox-description" />
+
+## Disabled
+
+Use the `disabled` prop to prevent interaction and add the `data-disabled` attribute to the `<Field>` component for disabled styles.
+
+<ComponentPreview name="checkbox-disabled" />
+
+## Group
+
+Use multiple fields to create a checkbox list.
+
+<ComponentPreview name="checkbox-group" />
+
+## Table
+
+<ComponentPreview name="checkbox-table" previewClassName="p-4 md:p-8" />
+
+## API Reference
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/checkbox) documentation for more information.

@@ -1,37 +1,43 @@
-import type { Component, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import * as HoverCardPrimitive from "@kobalte/core/hover-card"
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
+type HoverCardProps = ComponentProps<typeof SdkHoverCard>
+import { type ComponentProps } from "@solidjs/web"
+import {
+  HoverCard as SdkHoverCard,
+  HoverCardTrigger as SdkHoverCardTrigger,
+  HoverCardContent as SdkHoverCardContent
+} from "@ui-sdk/solid/hover-card"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const HoverCardTrigger = HoverCardPrimitive.Trigger
-
-const HoverCard: Component<HoverCardPrimitive.HoverCardRootProps> = (props) => {
-  return <HoverCardPrimitive.Root gutter={4} {...props} />
+const HoverCard = (props: HoverCardProps) => <SdkHoverCard {...props} />
+type HoverCardTriggerProps = Omit<
+  ComponentProps<typeof SdkHoverCardTrigger>,
+  "class"
+> & {
+  class?: string
 }
-
-type HoverCardContentProps<T extends ValidComponent = "div"> =
-  HoverCardPrimitive.HoverCardContentProps<T> & {
-    class?: string | undefined
-  }
-
-const HoverCardContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, HoverCardContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as HoverCardContentProps, ["class"])
+const HoverCardTrigger = (props: HoverCardTriggerProps) => (
+  <SdkHoverCardTrigger {...props} />
+)
+type HoverCardContentProps = Omit<
+  ComponentProps<typeof SdkHoverCardContent>,
+  "class"
+> & {
+  class?: string
+}
+const HoverCardContent = (props: HoverCardContentProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <HoverCardPrimitive.Portal>
-      <HoverCardPrimitive.Content
+    <>
+      <SdkHoverCardContent
         class={cn(
-          "z-50 w-64 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          local.class
+          "cn-hover-card-content z-50 origin-(--transform-origin) outline-hidden",
+          props.class
         )}
         {...others}
-      />
-    </HoverCardPrimitive.Portal>
+      >
+        {props.children}
+      </SdkHoverCardContent>
+    </>
   )
 }
-
-export { HoverCard, HoverCardTrigger, HoverCardContent }
+export { HoverCard, HoverCardContent, HoverCardTrigger }

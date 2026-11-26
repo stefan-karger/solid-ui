@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"div">
+
+const { class: className, ...props } = Astro.props
+---
+
+<div
+  class="cn-accordion-content overflow-hidden"
+  data-accordion-content
+  data-slot="accordion-content"
+  role="region"
+  {...props}
+>
+  <div
+    class={cn(
+      "cn-accordion-content-inner [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+      className
+    )}
+    data-slot="accordion-content-inner"
+  >
+    <slot />
+  </div>
+</div>

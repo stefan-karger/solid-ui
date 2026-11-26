@@ -1,7 +1,8 @@
 {
-	"$schema": "https://cdn.jsdelivr.net/npm/tsup/schema.json",
+  "$schema": "https://cdn.jsdelivr.net/npm/tsup/schema.json",
   "entry": ["src/index.ts"],
   "splitting": false,
   "clean": true,
-	"format": "esm"
+  "format": "esm",
+  "noExternal": ["@solid-ui/registry"]
 }

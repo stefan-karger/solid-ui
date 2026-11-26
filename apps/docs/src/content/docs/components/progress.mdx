@@ -1,0 +1,80 @@
+---
+title: Progress
+description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+component: true
+---
+
+<ComponentPreview name="progress-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add progress
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="progress" title="components/ui/progress.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Progress } from "~/components/ui/progress"
+```
+
+```tsx showLineNumbers
+<Progress value={65} />
+```
+
+## Label
+
+Use a `Field` component to add a label to the progress bar.
+
+<ComponentPreview name="progress-label" />
+
+## Controlled
+
+A progress bar that can be controlled by a slider.
+
+<ComponentPreview name="progress-controlled" />
+
+## API Reference
+
+| Part            | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `Progress`      | Root container that manages progress state and ARIA attributes. |
+| `ProgressLabel` | Accessible text label associated with the progress bar.         |
+| `ProgressValue` | Formatted value label generated from progress state.            |
+
+`Progress` renders the track and indicator internally.
+
+See the [UI SDK](https://ui-sdk.dev/docs/solid/components/progress) documentation for more information.

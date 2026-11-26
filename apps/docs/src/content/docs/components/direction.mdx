@@ -1,0 +1,72 @@
+---
+title: Direction
+description: A provider component that sets the text direction for your application.
+component: true
+---
+
+The `DirectionProvider` component is used to set the text direction (`ltr` or `rtl`) for your application. This is essential for supporting right-to-left languages like Arabic, Hebrew, and Persian.
+
+Here's a preview of the component in RTL mode. Use the language selector to switch the language. To see more examples, look for the RTL section on components pages.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add direction
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="direction" title="components/ui/direction.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DirectionProvider } from "~/components/ui/direction"
+```
+
+```tsx showLineNumbers
+<html lang="ar" dir="rtl">
+  <body>
+    <DirectionProvider direction="rtl">
+      <main>محتوى التطبيق</main>
+    </DirectionProvider>
+  </body>
+</html>
+```
+
+## useDirection
+
+Use `useDirection()` to read the current direction from context.
+
+```tsx showLineNumbers
+import { useDirection } from "~/components/ui/direction"
+
+const Example = () => {
+  const direction = useDirection()
+
+  return <div>Current direction: {direction()}</div>
+}
+```

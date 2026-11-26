@@ -1,0 +1,41 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import CodeBlockCommand from "~/components/code-block-command.astro"
+import { cn } from "~/lib/utils"
+
+type Props = HTMLAttributes<"pre"> & {
+  __npm__?: string
+  __yarn__?: string
+  __pnpm__?: string
+  __bun__?: string
+}
+
+const {
+  class: className,
+  __npm__: npm,
+  __yarn__: yarn,
+  __pnpm__: pnpm,
+  __bun__: bun,
+  ...props
+} = Astro.props
+
+const commandProps =
+  npm && yarn && pnpm && bun ? { npm, yarn, pnpm, bun } : undefined
+const preContent = commandProps
+  ? undefined
+  : await Astro.slots.render("default")
+---
+
+{commandProps ? (
+  <CodeBlockCommand {...commandProps} />
+) : (
+  <pre
+    class={cn(
+      "no-scrollbar min-w-0 overflow-x-auto overflow-y-auto overscroll-x-contain overscroll-y-auto px-4 py-3.5 outline-none has-data-highlighted-line:px-0 has-data-line-numbers:px-0",
+      className
+    )}
+    set:html={preContent}
+    {...props}
+  />
+)}

@@ -1,0 +1,145 @@
+---
+title: Carousel
+description: A carousel with motion, swipe, and keyboard paging.
+component: true
+---
+
+<ComponentPreview name="carousel-demo" previewClassName="h-80 sm:h-[32rem]" />
+
+## About
+
+Carousel is built on the [UI SDK Carousel](https://ui-sdk.dev/docs/solid/components/carousel), which handles paging, swiping, looping, autoplay, and keyboard support.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add carousel
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add button
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="carousel" title="components/ui/carousel.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselViewport
+} from "~/components/ui/carousel"
+```
+
+```tsx showLineNumbers
+<Carousel aria-label="Featured slides">
+  <CarouselViewport>
+    <CarouselContent>
+      <CarouselItem>Slide one</CarouselItem>
+      <CarouselItem>Slide two</CarouselItem>
+    </CarouselContent>
+  </CarouselViewport>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+Compose `CarouselViewport` and `CarouselContent` under `Carousel`, then render explicit `CarouselItem` children. Configure it with props on `Carousel`, such as `page`, `onPageChange`, `loop`, `slidesPerPage`, and `controller`. Give vertical viewports an explicit height.
+
+See the [UI SDK carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `Carousel`:
+
+```text
+Carousel
+├── CarouselViewport
+│   └── CarouselContent
+│       ├── CarouselItem
+│       └── CarouselItem
+├── CarouselPrevious
+└── CarouselNext
+```
+
+## Sizes
+
+To set the size of the items, you can use the `basis` utility class on the `<CarouselItem />`.
+
+<ComponentPreview name="carousel-size" />
+
+## Spacing
+
+To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
+
+<ComponentPreview name="carousel-spacing" />
+
+## Orientation
+
+Use the `orientation` prop to set the orientation of the carousel.
+
+<ComponentPreview name="carousel-orientation" previewClassName="h-[32rem]" />
+
+## Options
+
+Pass options as props on `Carousel`:
+
+- `loop` continues from the last page to the first.
+- `slidesPerPage` sets how many slides one page holds, or `"auto"` to fit as many as the viewport shows.
+- `align` sets where a page lines up in the viewport.
+- `dragFree`, `skipSnaps`, and `drag` control how swipes and drags move the slides.
+
+See the [UI SDK Carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for every option.
+
+## Controlled
+
+Use `page` and `onPageChange` to read and set the current page. `onPageChange` receives the requested page and change details whose `reason` explains the change. `onPageChangeComplete` runs once the slides come to rest. To page the carousel from elsewhere, pass a `controller` created with `createCarouselController()`.
+
+<ComponentPreview name="carousel-api" previewClassName="sm:h-[32rem]" />
+
+## Autoplay
+
+Use `defaultPlaying` or `playing` with `interval` to rotate through the pages. Rotation pauses while the carousel is hovered, scrolled out of view, or in a hidden tab, and stops when the user pages. It doesn't start on its own when the user prefers reduced motion.
+
+<ComponentPreview name="carousel-plugin" previewClassName="sm:h-[32rem]" />
+
+## API Reference
+
+See the [UI SDK Carousel API](https://ui-sdk.dev/docs/solid/components/carousel) for the full API reference.

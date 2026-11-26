@@ -1,35 +1,105 @@
-import type { Component, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as PopoverPrimitive from "@kobalte/core/popover"
+import { type ComponentProps } from "@solidjs/web"
+import {
+  Popover as SdkPopover,
+  PopoverTrigger as SdkPopoverTrigger,
+  PopoverContent as SdkPopoverContent,
+  PopoverClose as SdkPopoverClose,
+  PopoverTitle as SdkPopoverTitle,
+  PopoverDescription as SdkPopoverDescription,
+  PopoverArrow as SdkPopoverArrow
+} from "@ui-sdk/solid/popover"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const PopoverTrigger = PopoverPrimitive.Trigger
-
-const Popover: Component<PopoverPrimitive.PopoverRootProps> = (props) => {
-  return <PopoverPrimitive.Root gutter={4} {...props} />
+type PopoverProps = ComponentProps<typeof SdkPopover>
+const Popover = (props: PopoverProps) => <SdkPopover {...props} />
+type PopoverTriggerProps = Omit<
+  ComponentProps<typeof SdkPopoverTrigger>,
+  "class"
+> & {
+  class?: string
 }
-
-type PopoverContentProps<T extends ValidComponent = "div"> =
-  PopoverPrimitive.PopoverContentProps<T> & { class?: string | undefined }
-
-const PopoverContent = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, PopoverContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as PopoverContentProps, ["class"])
+const PopoverTrigger = (props: PopoverTriggerProps) => (
+  <SdkPopoverTrigger {...props} />
+)
+type PopoverContentProps = Omit<
+  ComponentProps<typeof SdkPopoverContent>,
+  "class"
+> & {
+  class?: string
+}
+const PopoverContent = (props: PopoverContentProps) => {
+  const others = omit(props, "class", "children")
   return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content
+    <>
+      <SdkPopoverContent
         class={cn(
-          "z-50 w-72 origin-[var(--kb-popover-content-transform-origin)] rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95",
-          local.class
+          "cn-popover-content z-50 w-72 origin-(--transform-origin) outline-hidden",
+          props.class
         )}
         {...others}
-      />
-    </PopoverPrimitive.Portal>
+      >
+        {props.children}
+      </SdkPopoverContent>
+    </>
   )
 }
-
-export { Popover, PopoverTrigger, PopoverContent }
+type PopoverCloseButtonProps = Omit<
+  ComponentProps<typeof SdkPopoverClose>,
+  "class"
+> & {
+  class?: string
+}
+const PopoverCloseButton = (props: PopoverCloseButtonProps) => (
+  <SdkPopoverClose {...props} class={cn(props.class)} />
+)
+type PopoverHeaderProps = ComponentProps<"div"> & {
+  class?: string | undefined
+}
+const PopoverHeader = (props: PopoverHeaderProps) => (
+  <div
+    data-slot="popover-header"
+    {...props}
+    class={cn("cn-popover-header", props.class)}
+  />
+)
+type PopoverTitleProps = Omit<
+  ComponentProps<typeof SdkPopoverTitle>,
+  "class"
+> & {
+  class?: string
+}
+const PopoverTitle = (props: PopoverTitleProps) => (
+  <SdkPopoverTitle {...props} class={cn("cn-popover-title", props.class)} />
+)
+type PopoverDescriptionProps = Omit<
+  ComponentProps<typeof SdkPopoverDescription>,
+  "class"
+> & {
+  class?: string
+}
+const PopoverDescription = (props: PopoverDescriptionProps) => (
+  <SdkPopoverDescription
+    {...props}
+    class={cn("cn-popover-description", props.class)}
+  />
+)
+type PopoverArrowProps = Omit<
+  ComponentProps<typeof SdkPopoverArrow>,
+  "class"
+> & {
+  class?: string
+}
+const PopoverArrow = (props: PopoverArrowProps) => (
+  <SdkPopoverArrow {...props} class={cn(props.class)} />
+)
+export {
+  Popover,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger
+}

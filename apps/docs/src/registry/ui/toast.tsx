@@ -1,163 +1,158 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { Match, splitProps, Switch } from "solid-js"
-import { Portal } from "solid-js/web"
-
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as ToastPrimitive from "@kobalte/core/toast"
-import type { VariantProps } from "class-variance-authority"
-import { cva } from "class-variance-authority"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps } from "@solidjs/web"
+import {
+  Toast as SdkToast,
+  ToastRegion as SdkToastRegion,
+  ToastTitle as SdkToastTitle,
+  ToastDescription as SdkToastDescription,
+  ToastAction as SdkToastAction,
+  ToastClose as SdkToastClose,
+  type ToastType
+} from "@ui-sdk/solid/toast"
+import { Match, Switch } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { Button } from "~/registry/ui/button"
 
-const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--kb-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--kb-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[opened]:animate-in data-[closed]:animate-out data-[swipe=end]:animate-out data-[closed]:fade-out-80 data-[closed]:slide-out-to-right-full data-[opened]:slide-in-from-top-full data-[opened]:sm:slide-in-from-bottom-full",
-  {
-    variants: {
-      variant: {
-        default: "border bg-background text-foreground",
-        destructive:
-          "destructive group border-destructive bg-destructive text-destructive-foreground",
-        success: "success border-success-foreground bg-success text-success-foreground",
-        warning: "warning border-warning-foreground bg-warning text-warning-foreground",
-        error: "error border-error-foreground bg-error text-error-foreground"
-      }
-    },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-)
-type ToastVariant = NonNullable<VariantProps<typeof toastVariants>["variant"]>
+export { toast, createToaster } from "@ui-sdk/solid/toast"
 
-type ToastListProps<T extends ValidComponent = "ol"> = ToastPrimitive.ToastListProps<T> & {
-  class?: string | undefined
-}
-
-const Toaster = <T extends ValidComponent = "ol">(
-  props: PolymorphicProps<T, ToastListProps<T>>
-) => {
-  const [local, others] = splitProps(props as ToastListProps, ["class"])
+function ToastIcon(props: { type: ToastType }) {
   return (
-    <Portal>
-      <ToastPrimitive.Region>
-        <ToastPrimitive.List
-          class={cn(
-            "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-            local.class
-          )}
-          {...others}
-        />
-      </ToastPrimitive.Region>
-    </Portal>
+    <Switch>
+      <Match when={props.type === "success"}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-slot="toast-icon"
+          aria-hidden="true"
+          class="size-4 shrink-0"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m16 9-5.5 5.5L8 12" />
+        </svg>
+      </Match>
+      <Match when={props.type === "info"}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-slot="toast-icon"
+          aria-hidden="true"
+          class="size-4 shrink-0"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+      </Match>
+      <Match when={props.type === "warning"}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-slot="toast-icon"
+          aria-hidden="true"
+          class="size-4 shrink-0"
+        >
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+        </svg>
+      </Match>
+      <Match when={props.type === "error"}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-slot="toast-icon"
+          aria-hidden="true"
+          class="size-4 shrink-0"
+        >
+          <path d="m15 9-6 6" />
+          <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+          <path d="m9 9 6 6" />
+        </svg>
+      </Match>
+      <Match when={props.type === "loading"}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-slot="toast-icon"
+          aria-hidden="true"
+          class="size-4 shrink-0 motion-safe:animate-spin"
+        >
+          <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+        </svg>
+      </Match>
+    </Switch>
   )
 }
 
-type ToastRootProps<T extends ValidComponent = "li"> = ToastPrimitive.ToastRootProps<T> &
-  VariantProps<typeof toastVariants> & { class?: string | undefined }
-
-const Toast = <T extends ValidComponent = "li">(props: PolymorphicProps<T, ToastRootProps<T>>) => {
-  const [local, others] = splitProps(props as ToastRootProps, ["class", "variant"])
-  return (
-    <ToastPrimitive.Root
-      class={cn(toastVariants({ variant: local.variant }), local.class)}
-      {...others}
-    />
-  )
-}
-
-type ToastCloseButtonProps<T extends ValidComponent = "button"> =
-  ToastPrimitive.ToastCloseButtonProps<T> & { class?: string | undefined }
-
-const ToastClose = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, ToastCloseButtonProps<T>>
-) => {
-  const [local, others] = splitProps(props as ToastCloseButtonProps, ["class"])
-  return (
-    <ToastPrimitive.CloseButton
-      class={cn(
-        "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-destructive-foreground group-[.error]:text-error-foreground group-[.success]:text-success-foreground group-[.warning]:text-warning-foreground",
-        local.class
-      )}
-      {...others}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="size-4"
-      >
-        <path d="M18 6l-12 12" />
-        <path d="M6 6l12 12" />
-      </svg>
-    </ToastPrimitive.CloseButton>
-  )
-}
-
-type ToastTitleProps<T extends ValidComponent = "div"> = ToastPrimitive.ToastTitleProps<T> & {
-  class?: string | undefined
-}
-
-const ToastTitle = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, ToastTitleProps<T>>
-) => {
-  const [local, others] = splitProps(props as ToastTitleProps, ["class"])
-  return <ToastPrimitive.Title class={cn("text-sm font-semibold", local.class)} {...others} />
-}
-
-type ToastDescriptionProps<T extends ValidComponent = "div"> =
-  ToastPrimitive.ToastDescriptionProps<T> & { class?: string | undefined }
-
-const ToastDescription = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, ToastDescriptionProps<T>>
-) => {
-  const [local, others] = splitProps(props as ToastDescriptionProps, ["class"])
-  return <ToastPrimitive.Description class={cn("text-sm opacity-90", local.class)} {...others} />
-}
-
-function showToast(props: {
-  title?: JSX.Element
-  description?: JSX.Element
-  variant?: ToastVariant
-  duration?: number
-}) {
-  ToastPrimitive.toaster.show((data) => (
-    <Toast toastId={data.toastId} variant={props.variant} duration={props.duration}>
-      <div class="grid gap-1">
-        {props.title && <ToastTitle>{props.title}</ToastTitle>}
-        {props.description && <ToastDescription>{props.description}</ToastDescription>}
-      </div>
-      <ToastClose />
-    </Toast>
-  ))
-}
-
-function showToastPromise<T, U>(
-  promise: Promise<T> | (() => Promise<T>),
-  options: {
-    loading?: JSX.Element
-    success?: (data: T) => JSX.Element
-    error?: (error: U) => JSX.Element
-    duration?: number
+export function Toaster(
+  props: Omit<ComponentProps<typeof SdkToastRegion>, "class"> & {
+    class?: string
   }
 ) {
-  const variant: { [key in ToastPrimitive.ToastPromiseState]: ToastVariant } = {
-    pending: "default",
-    fulfilled: "success",
-    rejected: "error"
-  }
-  return ToastPrimitive.toaster.promise<T, U>(promise, (props) => (
-    <Toast toastId={props.toastId} variant={variant[props.state]} duration={options.duration}>
-      <Switch>
-        <Match when={props.state === "pending"}>{options.loading}</Match>
-        <Match when={props.state === "fulfilled"}>{options.success?.(props.data!)}</Match>
-        <Match when={props.state === "rejected"}>{options.error?.(props.error!)}</Match>
-      </Switch>
-    </Toast>
-  ))
+  return (
+    <SdkToastRegion
+      expanded
+      side="top"
+      align="center"
+      {...props}
+      class={cn(
+        "group/toaster fixed z-100 m-4 h-[calc(var(--toast-stack-height)+(var(--toast-count)-1)*0.75rem)] w-[min(24rem,calc(100vw-2rem))] outline-none data-[align=center]:left-1/2 data-[align=center]:mx-0 data-[align=center]:-translate-x-1/2 data-[align=end]:end-0 data-[align=start]:start-0 data-[side=bottom]:bottom-0 data-[side=top]:top-0",
+        props.class
+      )}
+    >
+      {(item) => (
+        <SdkToast class="cn-toast absolute inset-x-0 flex h-(--toast-height) [translate:var(--toast-swipe-x,0px)_calc(-1*var(--offset)+var(--toast-swipe-y,0px))] items-center gap-3 border bg-popover p-4 text-popover-foreground shadow-lg transition-[translate,opacity] duration-200 outline-none select-none [--offset:calc(var(--toast-offset)+var(--toast-index)*0.75rem)] group-data-[side=bottom]/toaster:bottom-0 group-data-[side=top]/toaster:top-0 group-data-[side=top]/toaster:[translate:var(--toast-swipe-x,0px)_calc(var(--offset)+var(--toast-swipe-y,0px))] data-ending-style:opacity-0 data-starting-style:opacity-0 data-swiping:transition-none">
+          <ToastIcon type={item.type} />
+          <div class="min-w-0 flex-1">
+            <SdkToastTitle class="text-sm font-medium" />
+            <SdkToastDescription class="text-sm text-muted-foreground" />
+          </div>
+          <SdkToastAction
+            render={(part) => <Button {...part} variant="outline" size="sm" />}
+          />
+          {item.cancel && (
+            <SdkToastClose
+              action={(event, details) =>
+                item.cancel?.onCancel?.(event, details)
+              }
+              render={(part) => <Button {...part} variant="ghost" size="sm" />}
+            >
+              {item.cancel.label}
+            </SdkToastClose>
+          )}
+        </SdkToast>
+      )}
+    </SdkToastRegion>
+  )
 }
-
-export { Toaster, Toast, ToastClose, ToastTitle, ToastDescription, showToast, showToastPromise }

@@ -1,73 +1,36 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type { PolymorphicProps } from "@kobalte/core/polymorphic"
-import * as RadioGroupPrimitive from "@kobalte/core/radio-group"
+import type { ComponentProps } from "@solidjs/web"
+import {
+  Radio as SdkRadio,
+  RadioIndicator as SdkRadioIndicator,
+  RadioGroup as SdkRadioGroup
+} from "@ui-sdk/solid/radio"
 
 import { cn } from "~/lib/utils"
-
-type RadioGroupRootProps<T extends ValidComponent = "div"> =
-  RadioGroupPrimitive.RadioGroupRootProps<T> & { class?: string | undefined }
-
-const RadioGroup = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, RadioGroupRootProps<T>>
-) => {
-  const [local, others] = splitProps(props as RadioGroupRootProps, ["class"])
-  return <RadioGroupPrimitive.Root class={cn("grid gap-2", local.class)} {...others} />
+type RadioGroupProps = Omit<ComponentProps<typeof SdkRadioGroup>, "class"> & {
+  class?: string
 }
-
-type RadioGroupItemProps<T extends ValidComponent = "div"> =
-  RadioGroupPrimitive.RadioGroupItemProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
-
-const RadioGroupItem = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, RadioGroupItemProps<T>>
-) => {
-  const [local, others] = splitProps(props as RadioGroupItemProps, ["class", "children"])
-  return (
-    <RadioGroupPrimitive.Item class={cn("flex items-center space-x-2", local.class)} {...others}>
-      <RadioGroupPrimitive.ItemInput />
-      <RadioGroupPrimitive.ItemControl class="aspect-square size-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-        <RadioGroupPrimitive.ItemIndicator class="flex h-full items-center justify-center ">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-2.5 fill-current text-current"
-          >
-            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-          </svg>
-        </RadioGroupPrimitive.ItemIndicator>
-      </RadioGroupPrimitive.ItemControl>
-      {local.children}
-    </RadioGroupPrimitive.Item>
-  )
+const RadioGroup = (props: RadioGroupProps) => (
+  <SdkRadioGroup {...props} class={cn("cn-radio-group w-full", props.class)} />
+)
+type RadioGroupItemProps = Omit<ComponentProps<typeof SdkRadio>, "class"> & {
+  class?: string
 }
-
-type RadioGroupLabelProps<T extends ValidComponent = "label"> =
-  RadioGroupPrimitive.RadioGroupLabelProps<T> & {
-    class?: string | undefined
-  }
-
-const RadioGroupItemLabel = <T extends ValidComponent = "label">(
-  props: PolymorphicProps<T, RadioGroupLabelProps<T>>
-) => {
-  const [local, others] = splitProps(props as RadioGroupLabelProps, ["class"])
-  return (
-    <RadioGroupPrimitive.ItemLabel
-      class={cn(
-        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-        local.class
-      )}
-      {...others}
-    />
-  )
+const RadioGroupItem = (props: RadioGroupItemProps) => (
+  <SdkRadio
+    {...props}
+    class={cn(
+      "cn-radio-group-item peer relative aspect-square shrink-0 border outline-none data-disabled:opacity-50",
+      props.class
+    )}
+  >
+    <SdkRadioIndicator class="cn-radio-group-indicator">
+      <span class="cn-radio-group-indicator-icon" />
+    </SdkRadioIndicator>
+  </SdkRadio>
+)
+export {
+  RadioGroup,
+  RadioGroupItem,
+  type RadioGroupItemProps,
+  type RadioGroupProps
 }
-
-export { RadioGroup, RadioGroupItem, RadioGroupItemLabel }

@@ -1,186 +1,171 @@
-import type { JSX, ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type { PolymorphicProps } from "@kobalte/core"
-import * as NavigationMenuPrimitive from "@kobalte/core/navigation-menu"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import { type ComponentProps } from "@solidjs/web"
+import {
+  NavigationMenu as SdkNavigationMenu,
+  NavigationMenuContent as SdkNavigationMenuContent,
+  NavigationMenuLink as SdkNavigationMenuLink,
+  NavigationMenuItem as SdkNavigationMenuItem,
+  NavigationMenuList as SdkNavigationMenuList,
+  NavigationMenuTrigger as SdkNavigationMenuTrigger,
+  NavigationMenuViewport as SdkNavigationMenuViewport,
+  NavigationMenuIndicator as SdkNavigationMenuIndicator
+} from "@ui-sdk/solid/navigation-menu"
+import { cva } from "class-variance-authority"
+import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-
-const NavigationMenuItem = NavigationMenuPrimitive.Menu
-
-type NavigationMenuProps<T extends ValidComponent = "ul"> =
-  NavigationMenuPrimitive.NavigationMenuRootProps<T> & {
-    class?: string | undefined
-    children?: JSX.Element
-  }
-
-const NavigationMenu = <T extends ValidComponent = "ul">(
-  props: PolymorphicProps<T, NavigationMenuProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuProps, ["class", "children"])
+type NavigationMenuProps = (Omit<
+  ComponentProps<typeof SdkNavigationMenu>,
+  "class"
+> & {
+  class?: string
+}) & {
+  viewport?: boolean
+}
+const NavigationMenu = (props: NavigationMenuProps) => {
+  const local = merge({ viewport: true }, props) as NavigationMenuProps
+  const others = omit(props, "class", "children", "viewport")
   return (
-    <NavigationMenuPrimitive.Root
-      gutter={6}
+    <SdkNavigationMenu
+      data-viewport={local.viewport}
       class={cn(
-        "group/menu flex w-max flex-1 list-none items-center justify-center data-[orientation=vertical]:flex-col [&>li]:w-full",
+        "cn-navigation-menu group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
         local.class
       )}
       {...others}
     >
       {local.children}
-      <NavigationMenuViewport />
-    </NavigationMenuPrimitive.Root>
+      {local.viewport && <NavigationMenuViewport />}
+    </SdkNavigationMenu>
   )
 }
-
-type NavigationMenuTriggerProps<T extends ValidComponent = "button"> =
-  NavigationMenuPrimitive.NavigationMenuTriggerProps<T> & {
-    class?: string | undefined
+type NavigationMenuListProps = ComponentProps<typeof SdkNavigationMenuList>
+const NavigationMenuList = (props: NavigationMenuListProps) => (
+  <SdkNavigationMenuList
+    {...props}
+    class={cn(
+      "cn-navigation-menu-list group flex flex-1 list-none items-center justify-center",
+      props.class
+    )}
+  />
+)
+type NavigationMenuItemProps = ComponentProps<typeof SdkNavigationMenuItem>
+const NavigationMenuItem = (props: NavigationMenuItemProps) => (
+  <SdkNavigationMenuItem
+    {...props}
+    class={cn("cn-navigation-menu-item relative", props.class)}
+  />
+)
+const navigationMenuTriggerStyle = cva(
+  "cn-navigation-menu-trigger group/navigation-menu-trigger relative z-0 inline-flex h-9 w-max items-center justify-center outline-none focus-visible:z-10 disabled:pointer-events-none data-open:z-10"
+)
+type NavigationMenuTriggerProps = (Omit<
+  ComponentProps<typeof SdkNavigationMenuTrigger>,
+  "class"
+> & {
+  class?: string
+}) & {
+  showIcon?: boolean
+}
+const NavigationMenuTrigger = (props: NavigationMenuTriggerProps) => {
+  const others = omit(props, "class", "children", "showIcon")
+  const showIcon = () => {
+    if (props.showIcon !== undefined) {
+      return props.showIcon
+    }
+    return !("href" in (others as Record<string, unknown>))
   }
-
-const NavigationMenuTrigger = <T extends ValidComponent = "button">(
-  props: PolymorphicProps<T, NavigationMenuTriggerProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuTriggerProps, ["class"])
   return (
-    <NavigationMenuPrimitive.Trigger
-      class={cn(
-        "group/trigger inline-flex h-10 w-full items-center justify-center whitespace-nowrap rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[expanded]:bg-accent/50",
-        local.class
+    <SdkNavigationMenuTrigger
+      class={cn(navigationMenuTriggerStyle(), "group", props.class)}
+      {...others}
+    >
+      {props.children}
+      {showIcon() && (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="cn-navigation-menu-trigger-icon"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       )}
-      {...others}
-    />
+    </SdkNavigationMenuTrigger>
   )
 }
-const NavigationMenuIcon = () => {
-  return (
-    <NavigationMenuPrimitive.Icon aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="relative top-px ml-1 size-3 transition duration-200 group-data-[expanded]/trigger:rotate-180 group-data-[orientation=vertical]/menu:-rotate-90 group-data-[orientation=vertical]/menu:group-data-[expanded]/trigger:rotate-90"
-      >
-        <path d="M6 9l6 6l6 -6" />
-      </svg>
-    </NavigationMenuPrimitive.Icon>
-  )
+type NavigationMenuContentProps = Omit<
+  ComponentProps<typeof SdkNavigationMenuContent>,
+  "class"
+> & {
+  class?: string
 }
-
-type NavigationMenuViewportProps<T extends ValidComponent = "li"> =
-  NavigationMenuPrimitive.NavigationMenuViewportProps<T> & { class?: string | undefined }
-
-const NavigationMenuViewport = <T extends ValidComponent = "li">(
-  props: PolymorphicProps<T, NavigationMenuViewportProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuViewportProps, ["class"])
-  return (
-    <NavigationMenuPrimitive.Viewport
+const NavigationMenuContent = (props: NavigationMenuContentProps) => (
+  <>
+    <SdkNavigationMenuContent
+      {...props}
       class={cn(
-        // base settings
-        "pointer-events-none z-[1000] flex h-[var(--kb-navigation-menu-viewport-height)] w-[var(--kb-navigation-menu-viewport-width)] origin-[var(--kb-menu-content-transform-origin)] items-center justify-center overflow-x-clip overflow-y-visible rounded-md border bg-popover opacity-0 shadow-lg data-[expanded]:pointer-events-auto data-[orientation=vertical]:overflow-y-clip data-[orientation=vertical]:overflow-x-visible data-[expanded]:rounded-md",
-        // animate
-        "animate-content-hide transition-[width,height] duration-200 ease-in data-[expanded]:animate-content-show data-[expanded]:opacity-100 data-[expanded]:ease-out",
-        local.class
+        "cn-navigation-menu-content top-0 left-0 w-full group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none md:absolute md:w-auto",
+        props.class
       )}
-      {...others}
     />
-  )
+  </>
+)
+type NavigationMenuViewportProps = ComponentProps<
+  typeof SdkNavigationMenuViewport
+>
+const NavigationMenuViewport = (props: NavigationMenuViewportProps) => (
+  <SdkNavigationMenuViewport
+    {...props}
+    class={cn(
+      "cn-navigation-menu-viewport h-(--viewport-height) w-(--viewport-width) max-w-(--available-width) origin-(--transform-origin) overflow-hidden",
+      props.class
+    )}
+  />
+)
+type NavigationMenuLinkProps = Omit<
+  ComponentProps<typeof SdkNavigationMenuLink>,
+  "class"
+> & {
+  class?: string
 }
-
-type NavigationMenuContentProps<T extends ValidComponent = "ul"> =
-  NavigationMenuPrimitive.NavigationMenuContentProps<T> & {
-    class?: string | undefined
-  }
-
-const NavigationMenuContent = <T extends ValidComponent = "ul">(
-  props: PolymorphicProps<T, NavigationMenuContentProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuContentProps, ["class"])
-  return (
-    <NavigationMenuPrimitive.Portal>
-      <NavigationMenuPrimitive.Content
-        class={cn(
-          // base settings
-          "pointer-events-none absolute left-0 top-0 box-border p-4 focus:outline-none data-[expanded]:pointer-events-auto",
-          // base animation settings
-          "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out",
-          // left to right
-          "data-[orientation=horizontal]:data-[motion=from-start]:slide-in-from-left-52 data-[orientation=horizontal]:data-[motion=to-end]:slide-out-to-right-52",
-          // right to left
-          "data-[orientation=horizontal]:data-[motion=from-end]:slide-in-from-right-52 data-[orientation=horizontal]:data-[motion=to-start]:slide-out-to-left-52",
-          // top to bottom
-          "data-[orientation=vertical]:data-[motion=from-start]:slide-in-from-top-52 data-[orientation=vertical]:data-[motion=to-end]:slide-out-to-bottom-52",
-          //bottom to top
-          "data-[orientation=vertical]:data-[motion=from-end]:slide-in-from-bottom-52 data-[orientation=vertical]:data-[motion=to-start]:slide-out-to-bottom-52",
-          local.class
-        )}
-        {...others}
-      />
-    </NavigationMenuPrimitive.Portal>
-  )
+const NavigationMenuLink = (props: NavigationMenuLinkProps) => (
+  <SdkNavigationMenuLink
+    {...props}
+    class={cn("cn-navigation-menu-link", props.class)}
+  />
+)
+type NavigationMenuIndicatorProps = Omit<
+  ComponentProps<typeof SdkNavigationMenuIndicator>,
+  "class"
+> & {
+  class?: string
 }
-
-type NavigationMenuLinkProps<T extends ValidComponent = "a"> =
-  NavigationMenuPrimitive.NavigationMenuItemProps<T> & { class?: string | undefined }
-
-const NavigationMenuLink = <T extends ValidComponent = "a">(
-  props: PolymorphicProps<T, NavigationMenuLinkProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuLinkProps, ["class"])
-  return (
-    <NavigationMenuPrimitive.Item
-      class={cn(
-        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors  hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-type NavigationMenuLabelProps<T extends ValidComponent = "div"> =
-  NavigationMenuPrimitive.NavigationMenuItemLabelProps<T> & { class?: string | undefined }
-
-const NavigationMenuLabel = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, NavigationMenuLabelProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuLabelProps, ["class"])
-  return (
-    <NavigationMenuPrimitive.ItemLabel
-      class={cn("text-sm font-medium leading-none", local.class)}
-      {...others}
-    />
-  )
-}
-
-type NavigationMenuDescriptionProps<T extends ValidComponent = "div"> =
-  NavigationMenuPrimitive.NavigationMenuItemDescriptionProps<T> & { class?: string | undefined }
-
-const NavigationMenuDescription = <T extends ValidComponent = "div">(
-  props: PolymorphicProps<T, NavigationMenuDescriptionProps<T>>
-) => {
-  const [local, others] = splitProps(props as NavigationMenuDescriptionProps, ["class"])
-  return (
-    <NavigationMenuPrimitive.ItemDescription
-      class={cn("text-sm leading-snug text-muted-foreground", local.class)}
-      {...others}
-    />
-  )
-}
-
+const NavigationMenuIndicator = (props: NavigationMenuIndicatorProps) => (
+  <SdkNavigationMenuIndicator
+    {...props}
+    class={cn(
+      "cn-navigation-menu-indicator absolute top-full left-(--active-item-left) z-1 flex h-1.5 w-(--active-item-width) items-end justify-center overflow-hidden not-data-visible:hidden",
+      props.class
+    )}
+  >
+    <div class="cn-navigation-menu-indicator-arrow relative top-[60%] h-2 w-2 rotate-45" />
+  </SdkNavigationMenuIndicator>
+)
 export {
   NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuIcon,
-  NavigationMenuViewport,
   NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuLabel,
-  NavigationMenuDescription
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+  NavigationMenuViewport
 }

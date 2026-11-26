@@ -1,163 +1,204 @@
-import { existsSync } from "node:fs"
-import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 
-import * as p from "@clack/prompts"
+import type { RegistryItem } from "@solid-ui/registry/schema"
+import { supportedRange } from "@solid-ui/registry/versions"
 import { Command } from "commander"
-import { execa } from "execa"
-import * as v from "valibot"
 
-import { getConfig } from "~/utils/config"
-import { getPackageManager } from "~/utils/get-package-manager"
-import { handleError, highlight } from "~/utils/logger"
-import { fetchTree, getRegistryIndex, resolveTree } from "~/utils/registry"
-import { transform } from "~/utils/transformers"
+import {
+  parseSpec,
+  planDependencies,
+  resolveConflicts
+} from "~/install/dependencies"
+import {
+  applyFiles,
+  resolveTargetPath,
+  type PlannedFile
+} from "~/install/files"
+import { transformSource } from "~/install/transform"
+import { runAddPreflight } from "~/preflight/add"
+import { readPackageJson } from "~/project/package-json"
+import { createRegistryClient, type RegistryClient } from "~/registry/client"
+import { installableItems, resolveTree } from "~/registry/resolve"
+import { badge, color } from "~/utils/colors"
+import { CliError } from "~/utils/errors"
+import {
+  cliCommand,
+  detectAgent,
+  installedMessage,
+  installPackages,
+  type Installer
+} from "~/utils/package-manager"
+import { terminalUi, type Ui } from "~/utils/ui"
+import { CLI_NAME, CLI_VERSION } from "~/utils/version"
 
-const addOptionsSchema = v.object({
-  components: v.optional(v.array(v.string()), []),
-  cwd: v.string(),
-  overwrite: v.boolean(),
-  all: v.boolean()
-})
+export type AddOptions = {
+  cwd: string
+  overwrite: boolean
+  yes: boolean
+  all: boolean
+}
+
+export type AddDeps = {
+  client?: RegistryClient
+  install?: Installer
+  ui?: Ui
+  interactive?: boolean
+}
+
+// UI SDK is a beta and pinned exactly. The registry follows the docs deploy,
+// so it can be ahead of the version this CLI release was tested with.
+function anchorNotes(specs: string[]) {
+  return specs.flatMap((spec) => {
+    const { name, range } = parseSpec(spec)
+    const anchor = name.startsWith("@ui-sdk/")
+      ? supportedRange(name)
+      : undefined
+    return anchor && range && anchor !== range
+      ? [
+          `The registry uses ${name} ${range}; ${CLI_NAME} ${CLI_VERSION} was tested with ${anchor}. Update with: ${color.command(cliCommand(""))}`
+        ]
+      : []
+  })
+}
+
+async function chooseItems(
+  names: string[],
+  options: AddOptions,
+  catalogNames: string[],
+  ui: Ui,
+  interactive: boolean
+) {
+  if (options.all) return catalogNames
+  if (names.length) return names
+  if (!interactive)
+    throw new CliError(
+      `Name the components to add, for example: ${color.command(cliCommand("add button"))}`
+    )
+  return ui.multiselect(
+    "Which components would you like to add?",
+    catalogNames.map((name) => ({ value: name, label: name }))
+  )
+}
+
+export async function runAdd(
+  names: string[],
+  options: AddOptions,
+  deps: AddDeps = {}
+) {
+  const ui = deps.ui ?? terminalUi
+  const interactive = deps.interactive ?? Boolean(process.stdin.isTTY)
+  const install = deps.install ?? installPackages
+  const cwd = path.resolve(options.cwd)
+
+  ui.intro(badge())
+  const project = runAddPreflight(cwd)
+  const { config } = project
+  const client = deps.client ?? createRegistryClient()
+
+  const catalog = await ui.task(
+    `Loading the ${config.style} catalog from ${client.baseUrl}`,
+    () => client.catalog(config.style),
+    `Loaded the ${config.style} catalog.`
+  )
+  const components = installableItems(catalog)
+    .filter((item) => item.type === "registry:ui")
+    .map((item) => item.name)
+  const selected = await chooseItems(
+    names,
+    options,
+    components,
+    ui,
+    interactive
+  )
+  if (!selected.length) {
+    ui.outro("No components selected.")
+    return
+  }
+
+  const tree = resolveTree(catalog, selected)
+  const items = await ui.task(
+    `Loading ${tree.length} ${tree.length === 1 ? "item" : "items"}`,
+    () =>
+      Promise.all(
+        tree.map(async ({ name }) => {
+          const item = await client.item(config.style, name)
+          if (!item)
+            throw new CliError(
+              `The registry lists ${name} for ${config.style} but doesn't serve it.`
+            )
+          return item
+        })
+      ),
+    `Loaded ${tree.map(({ name }) => name).join(", ")}.`
+  )
+
+  const files: PlannedFile[] = items.flatMap((item: RegistryItem) =>
+    (item.files ?? []).map((file) => {
+      if (file.content === undefined)
+        throw new CliError(`${item.name} has no content for ${file.path}.`)
+      return {
+        path: resolveTargetPath(file, config, project.tsconfig, cwd),
+        content: transformSource(file.path, file.content, config)
+      }
+    })
+  )
+
+  const written = await applyFiles(files, cwd, ui, {
+    overwrite: options.overwrite,
+    confirm: async (file) =>
+      interactive &&
+      !options.yes &&
+      ui.confirm(`${file} already exists and differs. Overwrite it?`, false)
+  })
+
+  const specs = items.flatMap((item) => item.dependencies ?? [])
+  for (const note of anchorNotes(specs)) ui.info(note)
+  const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, specs)
+  const installs = await resolveConflicts(plan, ui, {
+    ask: interactive && !options.yes,
+    yes: options.yes
+  })
+  if (installs.length) {
+    const agent = detectAgent(cwd)
+    await ui.task(
+      `Installing ${installs.length} packages with ${agent}`,
+      () => install(cwd, installs, { agent }),
+      installedMessage(
+        installs.map((entry) => parseSpec(entry).name),
+        agent
+      )
+    )
+  }
+
+  for (const file of written.kept)
+    ui.info(
+      `${color.kept("Kept")} ${file} ${color.muted("(yours differs from the registry)")}`
+    )
+  if (written.kept.length && !options.overwrite)
+    ui.info(
+      `Run add with ${color.command("--overwrite")} to replace files that differ.`
+    )
+  ui.outro(
+    written.written.length || installs.length
+      ? `Added ${selected.join(", ")}.`
+      : `${selected.join(", ")} ${selected.length === 1 ? "is" : "are"} already up to date.`
+  )
+}
 
 export const add = new Command()
   .name("add")
   .description("add components to your project")
   .argument("[components...]", "the components to add")
-  .option("-c, --cwd <cwd>", "the working directory", process.cwd())
-  .option("-o --overwrite", "overwrite existing files", false)
-  .option("-a, --all", "add all available components", false)
-  .action(async (components, opts) => {
-    try {
-      const options = v.parse(addOptionsSchema, { components, ...opts })
-
-      const cwd = path.resolve(options.cwd)
-      if (!existsSync(cwd)) {
-        throw new Error(`The path ${cwd} does not exist. Please try again.`)
-      }
-
-      const config = await getConfig(cwd)
-      if (!config) {
-        p.log.warning(
-          `Configuration is missing. Please run ${highlight(`init`)} to create a components.json file.`
-        )
-        process.exit(1)
-      }
-
-      const registryIndex = await getRegistryIndex()
-
-      let selectedComponents = options.all ? registryIndex.map((v) => v.name) : options.components
-      if (!selectedComponents.length) {
-        const prompts = await p.group(
-          {
-            components: () =>
-              p.multiselect<string>({
-                message: `Which ${highlight("components")} would you like to add?`,
-                options: registryIndex.map((v) => ({ label: v.name, value: v.name })),
-                maxItems: 10
-              })
-          },
-          {
-            onCancel: () => {
-              p.cancel("Cancelled.")
-              process.exit(0)
-            }
-          }
-        )
-        selectedComponents = prompts.components
-      }
-
-      if (!selectedComponents.length) {
-        p.log.warn(`No components selected. Exiting.`)
-        process.exit(0)
-      }
-
-      const tree = await resolveTree(registryIndex, selectedComponents)
-      const payload = await fetchTree(tree)
-
-      if (!payload.length) {
-        p.log.warn(`Selected components not found. Exiting.`)
-        process.exit(0)
-      }
-
-      const spinner = p.spinner()
-      spinner.start("Installing...")
-
-      const targetDir = config.resolvedPaths.components
-      if (!existsSync(targetDir)) {
-        await mkdir(targetDir, { recursive: true })
-      }
-
-      for (const item of payload) {
-        spinner.message(`Installing ${highlight(item.name)}...`)
-
-        const existingComponent = item.files.filter((file) =>
-          existsSync(path.resolve(targetDir, file.name))
-        )
-        if (existingComponent.length && !options.overwrite) {
-          if (selectedComponents.includes(item.name)) {
-            spinner.stop()
-
-            const prompts = await p.group(
-              {
-                overwrite: () =>
-                  p.confirm({
-                    message: `Component ${item.name} already exists. Would you like to overwrite?`,
-                    initialValue: false
-                  })
-              },
-              {
-                onCancel: () => {
-                  p.cancel("Cancelled.")
-                  process.exit(0)
-                }
-              }
-            )
-            const overwrite = prompts.overwrite
-            if (!overwrite) {
-              p.log.info(
-                `Skipped ${item.name}. To overwrite, run with the ${highlight("--overwrite")} flag.`
-              )
-              continue
-            }
-
-            spinner.start(`Installing ${highlight(item.name)}...`)
-          } else {
-            continue
-          }
-        }
-
-        for (const file of item.files) {
-          let filePath = path.resolve(targetDir, file.name)
-
-          // run transformers
-          const content = await transform({
-            filename: file.name,
-            raw: file.content,
-            config: config
-          })
-
-          if (!config.tsx) {
-            filePath = filePath.replace(/\.tsx$/, ".jsx")
-            filePath = filePath.replace(/\.ts$/, ".js")
-          }
-
-          await writeFile(filePath, content, "utf-8")
-        }
-
-        // install dependencies
-        if (item.dependencies?.length) {
-          const packageManager = await getPackageManager(cwd)
-          await execa(packageManager, [
-            "add",
-            packageManager === "deno" ? "--npm" : "",
-            ...item.dependencies,
-          ], { cwd });
-        }
-      }
-
-      spinner.stop("Done.")
-    } catch (e) {
-      handleError(e)
-    }
+  .option(
+    "-c, --cwd <dir>",
+    "the project directory (default: current directory)"
+  )
+  .option("-o, --overwrite", "replace files that differ", false)
+  .option("-y, --yes", "skip the prompts; keep files that differ", false)
+  .option("-a, --all", "add every component", false)
+  .action(async (components: string[], options: AddOptions) => {
+    await runAdd(components, {
+      ...options,
+      cwd: options.cwd ?? process.cwd()
+    })
   })

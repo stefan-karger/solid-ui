@@ -1,0 +1,210 @@
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { posix } from "node:path"
+
+import { componentsJsonJsonSchema } from "@solid-ui/registry/config"
+import { registrySchema, type RegistryItem } from "@solid-ui/registry/schema"
+import {
+  ACTIVE_REGISTRY_STYLE,
+  normalizeRegistryPath,
+  prepareRegistrySource
+} from "@solid-ui/registry/source"
+import {
+  PROJECT_PACKAGES,
+  SUPPORTED_VERSIONS
+} from "@solid-ui/registry/versions"
+import ts from "typescript"
+
+import { styles, type DocsStyle } from "../src/lib/appearance.ts"
+import { registry } from "../src/registry/index.ts"
+
+const installableTypes = new Set<RegistryItem["type"]>([
+  "registry:ui",
+  "registry:lib",
+  "registry:hook",
+  "registry:style",
+  "registry:component",
+  "registry:block"
+])
+const ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json"
+// A project brings Solid and Tailwind CSS itself.
+const projectPackages = new Set<string>(PROJECT_PACKAGES)
+
+function dependencySpec(name: string) {
+  const range = SUPPORTED_VERSIONS.packages[name]
+  if (!range)
+    throw new Error(
+      `[registry] Pin ${name} in apps/docs/package.json and run pnpm sync:versions`
+    )
+  return `${name}@${range}`
+}
+const { name: registryName, homepage, items } = registrySchema.parse(registry)
+const names = new Set<string>()
+const owners = new Map<string, string>()
+for (const item of items) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.name) || names.has(item.name)) {
+    throw new Error(`[registry] Invalid or duplicate item name "${item.name}"`)
+  }
+  names.add(item.name)
+  for (const { path } of item.files ?? []) {
+    owners.set(
+      normalizeRegistryPath(path, item.name).replace(/\.[^.]+$/, ""),
+      item.name
+    )
+  }
+}
+
+const registryDir = new URL("../src/registry/", import.meta.url)
+const sources = new Map<string, Promise<string>>()
+function readSource(path: string) {
+  let source = sources.get(path)
+  if (!source) {
+    source = readFile(new URL(path, registryDir), "utf8")
+    sources.set(path, source)
+  }
+  return source
+}
+
+async function prepareFiles(item: RegistryItem, styleName: DocsStyle) {
+  const styleCss = await readSource(`styles/style-${styleName}.css`)
+  return Promise.all(
+    (item.files ?? []).map(async (file) => {
+      const registryPath = normalizeRegistryPath(file.path, item.name)
+      const { code } = await prepareRegistrySource(
+        await readSource(registryPath),
+        {
+          registryPath,
+          styleName,
+          keepMenuMarkers: true,
+          styleCss,
+          ...(file.target ? { target: file.target } : {})
+        }
+      )
+      return { ...file, content: code }
+    })
+  )
+}
+
+async function prepareItem(item: RegistryItem) {
+  const files = await prepareFiles(item, ACTIVE_REGISTRY_STYLE)
+  const packages = new Set(item.dependencies ?? [])
+  const registryDependencies = new Set(item.registryDependencies ?? [])
+
+  for (const file of files) {
+    if (!/\.[jt]sx?$/.test(file.path)) continue
+    for (const { fileName } of ts.preProcessFile(file.content, true, true)
+      .importedFiles) {
+      if (fileName.startsWith("~/") || fileName.startsWith(".")) {
+        const path = fileName.startsWith(".")
+          ? posix.join(posix.dirname(file.path), fileName)
+          : fileName
+              .replace(/^~\/components\/ui\//, "ui/")
+              .replace(/^~\/(?=components\/|lib\/|hooks\/)/, "")
+        const owner = owners.get(path.replace(/\.(?:tsx?|jsx?)$/, ""))
+        if (!owner)
+          throw new Error(
+            `[registry] ${file.path} imports an unpublished file: ${fileName}`
+          )
+        if (owner !== item.name) registryDependencies.add(owner)
+      } else if (!fileName.startsWith("node:")) {
+        packages.add(
+          fileName
+            .split("/")
+            .slice(0, fileName.startsWith("@") ? 2 : 1)
+            .join("/")
+        )
+      }
+    }
+  }
+
+  return {
+    ...item,
+    files,
+    dependencies: [...packages]
+      .filter((name) => !projectPackages.has(name))
+      .sort()
+      .map(dependencySpec),
+    registryDependencies: [...registryDependencies].sort()
+  }
+}
+
+const catalog = await Promise.all(items.map(prepareItem))
+const byName = new Map(catalog.map((item) => [item.name, item]))
+const visiting = new Set<string>()
+const visited = new Set<string>()
+function visit(name: string) {
+  if (visited.has(name)) return
+  if (visiting.has(name))
+    throw new Error(`[registry] Dependency cycle at "${name}"`)
+  const item = byName.get(name)
+  if (!item) throw new Error(`[registry] No item named "${name}"`)
+  visiting.add(name)
+  for (const dependency of item.registryDependencies) visit(dependency)
+  visiting.delete(name)
+  visited.add(name)
+}
+for (const name of byName.keys()) visit(name)
+
+const installable = catalog.filter(({ type }) => installableTypes.has(type))
+function withFileMetadata(item: (typeof catalog)[number]) {
+  return {
+    ...item,
+    files: item.files.map(({ path, type, target }) => ({ path, type, target }))
+  }
+}
+
+// Mirrors shadcn's apps/v4 public/r layout. index.json lists the installable
+// items. styles/<style> holds every item, including examples, and the
+// registry.json catalog for that style.
+const modernFiles = new Map<string, unknown>([
+  ["index.json", installable.map(withFileMetadata)],
+  [
+    "styles/index.json",
+    styles.map((name) => ({
+      name,
+      label: `${name[0]!.toUpperCase()}${name.slice(1)}`
+    }))
+  ]
+])
+for (const style of styles) {
+  modernFiles.set(`styles/${style}/registry.json`, {
+    name: registryName,
+    homepage,
+    items: catalog.map(withFileMetadata)
+  })
+  for (const item of catalog) {
+    const files =
+      style === ACTIVE_REGISTRY_STYLE
+        ? item.files
+        : await prepareFiles(item, style)
+    modernFiles.set(`styles/${style}/${item.name}.json`, {
+      $schema: ITEM_SCHEMA,
+      ...item,
+      files
+    })
+  }
+}
+
+const publicR = new URL("../public/r/", import.meta.url)
+
+async function writeRegistry(files: Map<string, unknown>) {
+  await rm(publicR, { recursive: true, force: true })
+  const parents = new Set([...files.keys()].map((file) => posix.dirname(file)))
+  await Promise.all(
+    [...parents].map((parent) =>
+      mkdir(new URL(`${parent}/`, publicR), { recursive: true })
+    )
+  )
+  for (const [path, payload] of files) {
+    await writeFile(new URL(path, publicR), JSON.stringify(payload))
+  }
+}
+
+await writeRegistry(modernFiles)
+await writeFile(
+  new URL("../public/schema.json", import.meta.url),
+  `${JSON.stringify(componentsJsonJsonSchema(), null, 2)}
+`
+)
+console.log(
+  `Registry built: ${modernFiles.size} files in public/r and public/schema.json.`
+)

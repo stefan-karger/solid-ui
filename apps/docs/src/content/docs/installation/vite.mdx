@@ -1,0 +1,179 @@
+---
+title: Vite
+description: Install and configure Solid UI for Vite.
+---
+
+Choose the setup that matches your starting point.
+
+<div class="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <LinkedCard href="#new-project" class="items-start gap-1 p-6 text-sm sm:p-6">
+    <div class="font-medium">New Project</div>
+    <div class="leading-relaxed text-muted-foreground">
+      Create a Solid 2 app with Tailwind CSS and set up Solid UI.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-project"
+    class="items-start gap-1 p-6 text-sm sm:p-6"
+  >
+    <div class="font-medium">Existing Project</div>
+    <div class="leading-relaxed text-muted-foreground">
+      Add Solid UI to a Solid 2 app you already created.
+    </div>
+  </LinkedCard>
+</div>
+
+## New Project
+
+<Steps>
+
+### Create Project
+
+Create a Solid 2 app with `create-solid`:
+
+```bash
+npm create solid@latest
+```
+
+Choose Solid 2.0, TypeScript and the `with-tailwindcss` template when it asks:
+
+```txt
+◇  What type of project would you like to create?
+│  Solid 2.0
+│
+◇  Use Typescript?
+│  Yes
+│
+◇  Which template would you like to use?
+│  with-tailwindcss
+```
+
+### Run the CLI
+
+Run `init` in the project folder. It installs the project's dependencies with the package manager you run it with, so you can skip the install step `create-solid` suggests.
+
+```bash
+npx solidui-cli@latest init
+```
+
+To start from a preset you built on the [Create](/create) page, pass its code with `--preset`.
+
+### Add Components
+
+Add the `Card` component to your project:
+
+```bash
+npx solidui-cli@latest add card
+```
+
+The command above adds the `Card` component to your project. You can then import it like this:
+
+```tsx title="src/routes/index.tsx"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/components/ui/card"
+
+export default function Home() {
+  return (
+    <Card class="max-w-sm">
+      <CardHeader>
+        <CardTitle>Project Overview</CardTitle>
+        <CardDescription>
+          Track progress and recent activity for your Vite app.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        Your design system is ready. Start building your next component.
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+</Steps>
+
+## Existing Project
+
+<Steps>
+
+### Open Your Project
+
+Open a terminal in the root of your Solid 2 app. Solid UI needs Vite with `@solidjs/vite-plugin` and TypeScript.
+
+### Add Tailwind CSS
+
+If your project already has Tailwind CSS configured, skip this step.
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Add the Tailwind CSS plugin to `vite.config.ts`:
+
+```ts title="vite.config.ts"
+import solid from "@solidjs/vite-plugin"
+import tailwindcss from "@tailwindcss/vite"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [solid(), tailwindcss()]
+})
+```
+
+Import Tailwind CSS at the top of your app stylesheet, for example `src/App.css`:
+
+```css title="src/App.css"
+@import "tailwindcss";
+```
+
+### Run the CLI
+
+Run `init` to set up Solid UI in your project:
+
+```bash
+npx solidui-cli@latest init
+```
+
+It adds the `~/*` alias to `tsconfig.json` and `resolve.tsconfigPaths` to `vite.config.ts`, so Vite resolves the component imports. If Vite still can't, see [Fix unresolved imports](/docs/cli/#fix-unresolved-imports).
+
+### Add Components
+
+Add the `Card` component to your project:
+
+```bash
+npx solidui-cli@latest add card
+```
+
+The command above adds the `Card` component to your project. You can then import it like this:
+
+```tsx title="src/App.tsx"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "~/components/ui/card"
+
+export default function App() {
+  return (
+    <Card class="max-w-sm">
+      <CardHeader>
+        <CardTitle>Project Overview</CardTitle>
+        <CardDescription>
+          Track progress and recent activity for your Vite app.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        Your design system is ready. Start building your next component.
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+</Steps>

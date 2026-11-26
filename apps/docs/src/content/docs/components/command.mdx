@@ -1,0 +1,124 @@
+---
+title: Command
+description: Command menu for search and quick actions.
+component: true
+---
+
+<ComponentPreview
+  name="command-demo"
+  align="start"
+  previewClassName="h-[24.5rem]"
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add command
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the required Solid UI dependencies:</Step>
+
+```bash
+npx solidui-cli@latest add dialog input-group
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="command" title="components/ui/command.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandItem,
+  CommandEmpty
+} from "~/components/ui/command"
+```
+
+```tsx
+<Command onAction={(value) => console.log(value)}>
+  <CommandInput aria-label="Search commands" placeholder="Search commands..." />
+  <CommandList>
+    <CommandGroup>
+      <CommandGroupLabel>Suggestions</CommandGroupLabel>
+      <CommandItem value="calendar">Calendar</CommandItem>
+      <CommandItem value="settings">Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+  <CommandEmpty>No results found.</CommandEmpty>
+</Command>
+```
+
+`onAction` receives the command value when a command runs. `onValueChange` reports the highlighted command. Use `query` and `onQueryChange` to control search text; native filtering works with composed items. `CommandDialog` wraps the command palette in a named dialog.
+
+## Composition
+
+Use the following composition to build a `Command`:
+
+```text
+Command
+├── CommandInput
+└── CommandList
+    ├── CommandEmpty
+    ├── CommandGroup
+    │   ├── CommandItem
+    │   └── CommandItem
+    ├── CommandSeparator
+    └── CommandGroup
+        ├── CommandItem
+        └── CommandItem
+```
+
+## Basic
+
+A simple command menu in a dialog.
+
+<ComponentPreview name="command-basic" />
+
+## Shortcuts
+
+<ComponentPreview name="command-shortcuts" />
+
+## Groups
+
+A command menu with groups, icons and separators.
+
+<ComponentPreview name="command-groups" />
+
+## Scrollable
+
+Scrollable command menu with multiple items.
+
+<ComponentPreview name="command-scrollable" />
+
+## API Reference
+
+See the [UI SDK Command API](https://ui-sdk.dev/docs/solid/components/command) for filtering options and keyboard behavior.

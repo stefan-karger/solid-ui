@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content"
+
+import { getComponentLinks, type ComponentListVariant } from "~/lib/docs"
+
+type Props = {
+  variant?: ComponentListVariant
+}
+
+const { variant = "all" } = Astro.props
+const links = await getComponentLinks(() => getCollection("docs"), variant)
+---
+
+{links.length > 0 && (
+  <div class="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3" data-not-typeset>
+    {links.map((link) => (
+      <a
+        class="relative flex min-w-0 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+        href={link.href}
+      >
+        <span class="truncate">{link.title}</span>
+        {variant === "all" && link.isNew && (
+          <span class="ml-auto flex shrink-0 items-center pl-2">
+            <span class="sr-only">New</span>
+            <span
+              aria-hidden="true"
+              class="size-1.5 rounded-full bg-blue-500"
+            />
+          </span>
+        )}
+      </a>
+    ))}
+  </div>
+)}

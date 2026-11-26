@@ -1,0 +1,120 @@
+---
+title: Drawer
+description: A panel that slides in from an edge of the screen, with dragging and snap points.
+component: true
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## About
+
+Drawer is built on the [UI SDK Drawer](https://ui-sdk.dev/docs/solid/components/drawer). It shares Dialog's focus and dismissal behavior and adds dragging, snap points, and a handle you can use with the keyboard.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx solidui-cli@latest add drawer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps class="mb-0 pt-2">
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @ui-sdk/solid @ui-sdk/core
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="drawer" title="components/ui/drawer.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "~/components/ui/drawer"
+```
+
+```tsx showLineNumbers
+<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Activity goal</DrawerTitle>
+      <DrawerDescription>Review your daily goal.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose>Done</DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+Use `side`, `snapPoints`, and `defaultSnapPoint` from the SDK. Content renders in place using the browser top layer. The SDK owns positioning and movement.
+
+See the [UI SDK drawer API](https://ui-sdk.dev/docs/solid/components/drawer) for native options and keyboard behavior.
+
+## Composition
+
+Use the following composition to build a `Drawer`:
+
+```text
+Drawer
+├── DrawerTrigger
+└── DrawerContent
+    ├── DrawerHeader
+    │   ├── DrawerTitle
+    │   └── DrawerDescription
+    └── DrawerFooter
+```
+
+## Scrollable Content
+
+Keep actions visible while the content scrolls.
+
+<ComponentPreview name="drawer-scrollable-content" />
+
+## Sides
+
+Set `side` on `Drawer` to open it from the `top`, `right`, `bottom`, or `left`.
+
+<ComponentPreview name="drawer-sides" />
+
+## Responsive Dialog
+
+You can combine the `Dialog` and `Drawer` components to create a responsive dialog. This renders a `Dialog` component on desktop and a `Drawer` on mobile.
+
+<ComponentPreview name="drawer-dialog" />
+
+## API Reference
+
+See the [UI SDK Drawer API](https://ui-sdk.dev/docs/solid/components/drawer) for the full API reference.

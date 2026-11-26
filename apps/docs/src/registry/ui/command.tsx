@@ -1,145 +1,201 @@
-import type { Component, ComponentProps, ParentProps, VoidProps } from "solid-js"
-import { splitProps } from "solid-js"
-
-import type { DialogRootProps } from "@kobalte/core/dialog"
-import * as CommandPrimitive from "cmdk-solid"
+// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
+import type { ComponentProps, JSX } from "@solidjs/web"
+import {
+  Command as SdkCommand,
+  CommandInput as SdkCommandInput,
+  CommandList as SdkCommandList,
+  CommandEmpty as SdkCommandEmpty,
+  CommandGroup as SdkCommandGroup,
+  CommandGroupLabel as SdkCommandGroupLabel,
+  CommandSeparator as SdkCommandSeparator,
+  CommandItem as SdkCommandItem,
+  CommandShortcut as SdkCommandShortcut,
+  CommandItemText as SdkCommandItemText
+} from "@ui-sdk/solid/command"
+import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
-import { Dialog, DialogContent } from "~/registry/ui/dialog"
-
-const Command: Component<ParentProps<CommandPrimitive.CommandRootProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <CommandPrimitive.CommandRoot
-      class={cn(
-        "flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground blur-none",
-        local.class
-      )}
-      {...others}
-    />
-  )
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle
+} from "~/registry/ui/dialog"
+import { InputGroup, InputGroupAddon } from "~/registry/ui/input-group"
+const Command = (
+  props: Omit<ComponentProps<typeof SdkCommand>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommand
+    {...props}
+    class={cn(
+      "cn-command flex size-full flex-col overflow-hidden",
+      props.class
+    )}
+  />
+)
+const CommandInput = (
+  props: Omit<ComponentProps<typeof SdkCommandInput>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <div data-ui="command-input-wrapper" class="cn-command-input-wrapper">
+    <InputGroup class="cn-command-input-group">
+      <SdkCommandInput
+        aria-label="Search commands"
+        data-ui="input-group-control"
+        {...props}
+        class={cn(
+          "cn-command-input outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+          props.class
+        )}
+      />
+      <InputGroupAddon>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          data-ui="command-input-icon"
+          class="cn-command-input-icon"
+        >
+          <path d="m21 21-4.34-4.34" />
+          <circle cx="11" cy="11" r="8" />
+        </svg>
+      </InputGroupAddon>
+    </InputGroup>
+  </div>
+)
+const CommandList = (
+  props: Omit<ComponentProps<typeof SdkCommandList>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandList
+    {...props}
+    class={cn("cn-command-list overflow-x-hidden overflow-y-auto", props.class)}
+  />
+)
+const CommandEmpty = (
+  props: Omit<ComponentProps<typeof SdkCommandEmpty>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandEmpty
+    {...props}
+    class={cn("cn-command-empty empty:hidden", props.class)}
+  />
+)
+const CommandGroup = (
+  props: Omit<ComponentProps<typeof SdkCommandGroup>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => <SdkCommandGroup {...props} class={cn("cn-command-group", props.class)} />
+const CommandGroupLabel = SdkCommandGroupLabel
+const CommandSeparator = (
+  props: Omit<
+    ComponentProps<typeof SdkCommandSeparator>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandSeparator
+    {...props}
+    class={cn("cn-command-separator", props.class)}
+  />
+)
+const CommandShortcut = (
+  props: Omit<
+    ComponentProps<typeof SdkCommandShortcut>,
+    "class" | "children"
+  > & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandShortcut
+    {...props}
+    class={cn("cn-command-shortcut", props.class)}
+  />
+)
+const CommandItem = (
+  props: Omit<ComponentProps<typeof SdkCommandItem>, "class" | "children"> & {
+    class?: string
+    children?: JSX.Element
+  }
+) => (
+  <SdkCommandItem
+    {...props}
+    class={cn(
+      "cn-command-item group/command-item relative flex cursor-default items-center outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-50",
+      props.class
+    )}
+  />
+)
+const CommandItemLabel = SdkCommandItemText
+const CommandItemDescription = (props: ComponentProps<"span">) => (
+  <span {...props} />
+)
+type CommandDialogProps = ComponentProps<typeof Dialog> & {
+  class?: string
+  title?: string
+  description?: string
+  showCloseButton?: boolean
 }
-
-const CommandDialog: Component<ParentProps<DialogRootProps>> = (props) => {
-  const [local, others] = splitProps(props, ["children"])
-
+const CommandDialog = (props: CommandDialogProps) => {
+  const rest = omit(
+    props,
+    "class",
+    "title",
+    "description",
+    "showCloseButton",
+    "children"
+  )
   return (
-    <Dialog {...others}>
-      <DialogContent class="overflow-hidden p-0">
-        <Command class="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:size-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:size-5">
-          {local.children}
-        </Command>
+    <Dialog {...rest}>
+      <DialogContent
+        class={cn(
+          "cn-command-dialog top-1/3 translate-y-0 overflow-hidden p-0",
+          props.class
+        )}
+        showCloseButton={props.showCloseButton ?? false}
+      >
+        <DialogHeader class="sr-only">
+          <DialogTitle>{props.title ?? "Command Palette"}</DialogTitle>
+          <DialogDescription>
+            {props.description ?? "Search for a command to run..."}
+          </DialogDescription>
+        </DialogHeader>
+        {props.children}
       </DialogContent>
     </Dialog>
   )
 }
-
-const CommandInput: Component<VoidProps<CommandPrimitive.CommandInputProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <div class="flex items-center border-b px-3" cmdk-input-wrapper="">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="mr-2 size-4 shrink-0 opacity-50"
-      >
-        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-        <path d="M21 21l-6 -6" />
-      </svg>
-      <CommandPrimitive.CommandInput
-        class={cn(
-          "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-          local.class
-        )}
-        {...others}
-      />
-    </div>
-  )
-}
-
-const CommandList: Component<ParentProps<CommandPrimitive.CommandListProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <CommandPrimitive.CommandList
-      class={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", local.class)}
-      {...others}
-    />
-  )
-}
-
-const CommandEmpty: Component<ParentProps<CommandPrimitive.CommandEmptyProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <CommandPrimitive.CommandEmpty
-      class={cn("py-6 text-center text-sm", local.class)}
-      {...others}
-    />
-  )
-}
-
-const CommandGroup: Component<ParentProps<CommandPrimitive.CommandGroupProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <CommandPrimitive.CommandGroup
-      class={cn(
-        "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-const CommandSeparator: Component<VoidProps<CommandPrimitive.CommandSeparatorProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return <CommandPrimitive.CommandSeparator class={cn("h-px bg-border", local.class)} {...others} />
-}
-
-const CommandItem: Component<ParentProps<CommandPrimitive.CommandItemProps>> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <CommandPrimitive.CommandItem
-      cmdk-item=""
-      class={cn(
-        "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
-
-const CommandShortcut: Component<ComponentProps<"span">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-
-  return (
-    <span
-      class={cn("ml-auto text-xs tracking-widest text-muted-foreground", local.class)}
-      {...others}
-    />
-  )
-}
-
 export {
   Command,
-  CommandDialog,
   CommandInput,
   CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandItem,
+  CommandGroupLabel,
+  CommandSeparator,
   CommandShortcut,
-  CommandSeparator
+  CommandItem,
+  CommandItemLabel,
+  CommandItemDescription,
+  CommandDialog
 }

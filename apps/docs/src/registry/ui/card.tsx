@@ -1,43 +1,86 @@
-import type { Component, ComponentProps } from "solid-js"
-import { splitProps } from "solid-js"
+import { type ComponentProps } from "@solidjs/web"
+import { merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
 
-const Card: Component<ComponentProps<"div">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
+type CardProps = ComponentProps<"div"> & {
+  size?: "default" | "sm"
+}
+
+const Card = (props: CardProps) => {
+  const local = merge({ size: "default" } as const, props)
+  const others = omit(props, "class", "size")
   return (
     <div
-      class={cn("rounded-lg border bg-card text-card-foreground shadow-sm", local.class)}
+      class={cn("cn-card group/card flex flex-col", local.class)}
+      data-size={local.size}
+      data-slot="card"
       {...others}
     />
   )
 }
 
-const CardHeader: Component<ComponentProps<"div">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <div class={cn("flex flex-col space-y-1.5 p-6", local.class)} {...others} />
-}
+const CardHeader = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-header"
+    {...props}
+    class={cn(
+      "cn-card-header group/card-header @container/card-header grid auto-rows-min items-start has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]",
+      props.class
+    )}
+  />
+)
 
-const CardTitle: Component<ComponentProps<"h3">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <h3 class={cn("text-lg font-semibold leading-none tracking-tight", local.class)} {...others} />
-  )
-}
+const CardTitle = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-title"
+    {...props}
+    class={cn("cn-card-title", props.class)}
+  />
+)
 
-const CardDescription: Component<ComponentProps<"p">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <p class={cn("text-sm text-muted-foreground", local.class)} {...others} />
-}
+const CardDescription = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-description"
+    {...props}
+    class={cn("cn-card-description", props.class)}
+  />
+)
 
-const CardContent: Component<ComponentProps<"div">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <div class={cn("p-6 pt-0", local.class)} {...others} />
-}
+const CardAction = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-action"
+    {...props}
+    class={cn(
+      "cn-card-action col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+      props.class
+    )}
+  />
+)
 
-const CardFooter: Component<ComponentProps<"div">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <div class={cn("flex items-center p-6 pt-0", local.class)} {...others} />
-}
+const CardContent = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-content"
+    {...props}
+    class={cn("cn-card-content", props.class)}
+  />
+)
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+const CardFooter = (props: ComponentProps<"div">) => (
+  <div
+    data-slot="card-footer"
+    {...props}
+    class={cn("cn-card-footer flex items-center", props.class)}
+  />
+)
+
+export {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  type CardProps
+}

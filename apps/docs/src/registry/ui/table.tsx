@@ -1,70 +1,79 @@
-import type { Component, ComponentProps } from "solid-js"
-import { splitProps } from "solid-js"
+import { type ComponentProps } from "@solidjs/web"
 
 import { cn } from "~/lib/utils"
 
-const Table: Component<ComponentProps<"table">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <div class="relative w-full overflow-auto">
-      <table class={cn("w-full caption-bottom text-sm", local.class)} {...others} />
-    </div>
-  )
-}
+type TableProps = ComponentProps<"table">
 
-const TableHeader: Component<ComponentProps<"thead">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <thead class={cn("[&_tr]:border-b", local.class)} {...others} />
-}
+const Table = (props: TableProps) => (
+  <div class="cn-table-container" data-slot="table-container">
+    <table data-slot="table" {...props} class={cn("cn-table", props.class)} />
+  </div>
+)
 
-const TableBody: Component<ComponentProps<"tbody">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <tbody class={cn("[&_tr:last-child]:border-0", local.class)} {...others} />
-}
+const TableHeader = (props: ComponentProps<"thead">) => (
+  <thead
+    data-slot="table-header"
+    {...props}
+    class={cn("cn-table-header", props.class)}
+  />
+)
 
-const TableFooter: Component<ComponentProps<"tfoot">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <tfoot class={cn("bg-primary font-medium text-primary-foreground", local.class)} {...others} />
-  )
-}
+const TableBody = (props: ComponentProps<"tbody">) => (
+  <tbody
+    data-slot="table-body"
+    {...props}
+    class={cn("cn-table-body", props.class)}
+  />
+)
 
-const TableRow: Component<ComponentProps<"tr">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <tr
-      class={cn(
-        "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
+const TableFooter = (props: ComponentProps<"tfoot">) => (
+  <tfoot
+    data-slot="table-footer"
+    {...props}
+    class={cn("cn-table-footer", props.class)}
+  />
+)
 
-const TableHead: Component<ComponentProps<"th">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <th
-      class={cn(
-        "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
-        local.class
-      )}
-      {...others}
-    />
-  )
-}
+const TableRow = (props: ComponentProps<"tr">) => (
+  <tr
+    data-slot="table-row"
+    {...props}
+    class={cn("cn-table-row", props.class)}
+  />
+)
 
-const TableCell: Component<ComponentProps<"td">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return (
-    <td class={cn("p-2 align-middle [&:has([role=checkbox])]:pr-0", local.class)} {...others} />
-  )
-}
+const TableHead = (props: ComponentProps<"th">) => (
+  <th
+    data-slot="table-head"
+    {...props}
+    class={cn("cn-table-head", props.class)}
+  />
+)
 
-const TableCaption: Component<ComponentProps<"caption">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <caption class={cn("mt-4 text-sm text-muted-foreground", local.class)} {...others} />
-}
+const TableCell = (props: ComponentProps<"td">) => (
+  <td
+    data-slot="table-cell"
+    {...props}
+    class={cn("cn-table-cell", props.class)}
+  />
+)
 
-export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption }
+const TableCaption = (props: ComponentProps<"caption">) => (
+  <caption
+    data-slot="table-caption"
+    {...props}
+    class={cn("cn-table-caption", props.class)}
+  />
+)
+
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+  type TableProps
+}
