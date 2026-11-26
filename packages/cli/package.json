@@ -1,17 +1,21 @@
 {
   "name": "solidui-cli",
   "version": "0.7.2",
-  "description": "Add Solid UI Components to your application using the Solid-UI CLI tool",
+  "description": "Add Solid UI components to your Solid 2 app: shadcn/ui-style, copy-and-own components built with UI SDK and Tailwind CSS",
   "keywords": [
+    "cli",
     "components",
-    "corvu",
-    "kobalte",
+    "copy-and-own",
+    "registry",
     "shadcn",
+    "shadcn-ui",
     "solid",
+    "solid-js",
+    "solid-ui",
     "solidjs",
-    "tailwind",
-    "tremor",
-    "ui"
+    "tailwindcss",
+    "ui",
+    "ui-sdk"
   ],
   "bugs": {
     "url": "https://github.com/stefan-karger/solid-ui/issues"
