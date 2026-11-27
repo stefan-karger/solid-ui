@@ -173,7 +173,7 @@ describe("add", () => {
     const { installer } = await add(cwd, ["accordion"])
     expect(read(cwd, "src/components/ui/accordion.tsx")).toBe(
       [
-        'import ChevronDownIcon from "@lucide/solid/icons/chevron-down"',
+        'import { ChevronDownIcon } from "@lucide/solid"',
         "",
         'import { cn } from "~/lib/utils"',
         "",

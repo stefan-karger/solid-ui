@@ -1,6 +1,4 @@
-import BookOpenIcon from "@lucide/solid/icons/book-open"
-import BoxIcon from "@lucide/solid/icons/box"
-import CornerDownLeftIcon from "@lucide/solid/icons/corner-down-left"
+import { BookOpenIcon, BoxIcon, CornerDownLeftIcon } from "@lucide/solid"
 import { For } from "solid-js"
 
 import type { DocsNavigationGroup } from "~/lib/docs"

@@ -95,7 +95,18 @@ npx solidui-cli@latest init --alias @
 
 ### Icons
 
-Components name their icons for each icon library. `init` asks which library to use, saves it as `iconLibrary` in `components.json` and installs its package. `add` turns every icon into that library's component, so the Select chevron arrives as `ChevronDownIcon`, imported from `@lucide/solid/icons/chevron-down`. One module per icon keeps the Vite dev server from loading the whole library. Lucide is the only library for now, and the default for projects set up before `iconLibrary` existed. A preset code from the [Create](/create) page carries its icon library, so `init --preset` doesn't ask.
+Components name their icons for each icon library. `init` asks which library to use, saves it as `iconLibrary` in `components.json` and installs its package. `add` turns every icon into that library's component, so the Select chevron arrives as `import { ChevronDownIcon } from "@lucide/solid"`. Lucide is the only library for now, and the default for projects set up before `iconLibrary` existed. A preset code from the [Create](/create) page carries its icon library, so `init --preset` doesn't ask.
+
+In development, Vite loads every module of `@lucide/solid` for such an import, since Solid packages skip dependency prebundling. [`vite-plugin-lucide-preprocess`](https://github.com/WarningImHack3r/vite-plugin-lucide-preprocess) rewrites the imports to one module per icon:
+
+```ts title="vite.config.ts"
+import lucidePreprocess from "vite-plugin-lucide-preprocess"
+
+export default defineConfig({
+  resolve: { tsconfigPaths: true },
+  plugins: [lucidePreprocess(), solid(), tailwindcss()]
+})
+```
 
 ### Choose the app stylesheet
 

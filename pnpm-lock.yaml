@@ -438,6 +438,9 @@ importers:
       typescript:
         specifier: 6.0.3
         version: 6.0.3
+      vite-plugin-lucide-preprocess:
+        specifier: 1.15.0
+        version: 1.15.0(rolldown@1.2.19)(rollup@4.68.8)(vite@8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/cli:
     dependencies:
@@ -4402,6 +4405,18 @@ packages:
 
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
+
+  vite-plugin-lucide-preprocess@1.15.0:
+    resolution: {integrity: sha512-83VL7insWUy8YHj9u5rFS8vi3aZvPyOO6+vdLd78Q5KmT1yar61GiyjijSmjKhqSSuk3hW4F7E3dTdtTg2Z23w==}
+    peerDependencies:
+      rolldown: '>=0.1 || >=1.0.0-0'
+      rollup: '>=1'
+      vite: '>=2'
+    peerDependenciesMeta:
+      rolldown:
+        optional: true
+      rollup:
+        optional: true
 
   vite@8.3.8:
     resolution: {integrity: sha512-LzOn3h9rG/0vhLdXrV4yJ4QFA9eEoqCl+Yx+kGJd7aB9w6nfNgVHKSYwLPZUHrz4ZGa+t+kXjV9itvcHDLQouA==}
@@ -8812,6 +8827,14 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
+
+  vite-plugin-lucide-preprocess@1.15.0(rolldown@1.2.19)(rollup@4.68.8)(vite@8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)):
+    dependencies:
+      magic-string: 1.4.5
+      vite: 8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
+    optionalDependencies:
+      rolldown: 1.2.19
+      rollup: 4.68.8
 
   vite@8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1):
     dependencies:

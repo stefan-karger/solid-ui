@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { iconLibraries, iconPlaceholderNames, transformIcons } from "./icons.ts"
+import { iconPlaceholderNames, transformIcons } from "./icons.ts"
 
 const source = `import { type ComponentProps } from "@solidjs/web"
 import { Accordion as SdkAccordion } from "@ui-sdk/solid/accordion"
@@ -29,8 +29,7 @@ export function Trigger(props: ComponentProps<"svg">) {
 describe("transformIcons", () => {
   it("replaces each placeholder with the library's component", () => {
     expect(transformIcons(source, "lucide"))
-      .toBe(`import CheckIcon from "@lucide/solid/icons/check"
-import ChevronDownIcon from "@lucide/solid/icons/chevron-down"
+      .toBe(`import { CheckIcon, ChevronDownIcon } from "@lucide/solid"
 import { type ComponentProps } from "@solidjs/web"
 import { Accordion as SdkAccordion } from "@ui-sdk/solid/accordion"
 
@@ -63,7 +62,7 @@ import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 export const Icon = () => <IconPlaceholder lucide="XIcon" />`,
       "lucide"
     )
-    expect(output).toBe(`import XIcon from "@lucide/solid/icons/x"
+    expect(output).toBe(`import { XIcon } from "@lucide/solid"
 import { omit } from "solid-js"
 
 export const Icon = () => <XIcon />`)
@@ -77,7 +76,7 @@ import { Button } from "~/registry/ui/button"
 export const Icon = () => <IconPlaceholder lucide="XIcon" />`,
       "lucide"
     )
-    expect(output).toBe(`import XIcon from "@lucide/solid/icons/x"
+    expect(output).toBe(`import { XIcon } from "@lucide/solid"
 
 import { Button } from "~/registry/ui/button"
 
@@ -105,15 +104,6 @@ export const Icon = () => <XIcon />`)
         "lucide"
       )
     ).toThrow("self-closing")
-  })
-})
-
-describe("iconLibraries", () => {
-  it("imports each Lucide icon from its own module", () => {
-    const { module } = iconLibraries.lucide
-    expect(module("ChevronDownIcon")).toBe("@lucide/solid/icons/chevron-down")
-    expect(module("Settings2Icon")).toBe("@lucide/solid/icons/settings-2")
-    expect(module("LoaderCircleIcon")).toBe("@lucide/solid/icons/loader-circle")
   })
 })
 

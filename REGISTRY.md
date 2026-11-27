@@ -94,19 +94,22 @@ libraries in the order presets encode them, which is shadcn/ui's.
 
 The registry serves the placeholders. `solidui-cli add` replaces each one with
 the component of the `iconLibrary` in `components.json`, keeping the other
-props, and swaps the placeholder import for one default import per icon, such
-as `@lucide/solid/icons/chevron-down`. Solid's Vite plugin keeps Solid packages
-out of dependency prebundling, so a named import from `@lucide/solid` would
-load all of its 2,400 modules on every page in development. Use Lucide's
-canonical names: deprecated aliases such as `BoldIcon` and names whose digits
-don't map back to the file, such as `ArrowDown01Icon`, have no module, and
-`scripts/build-icons.ts` fails on them. Items don't list
-the icon library; `init` and `add` install the project's. The docs show Lucide:
+props, and swaps the placeholder import for the library's, as in
+`import { ChevronDownIcon } from "@lucide/solid"`. Items don't list the icon
+library; `init` and `add` install the project's. The docs show Lucide:
 their source views resolve the placeholders with the same transform, and the
 previews render `src/registry/icons/icon-placeholder.tsx`, which loads only the
 icons `scripts/build-icons.ts` collects into `__lucide__.ts` in the `prebuild`
 step. Placeholders take string icon names and no children. Lucide hides an
 icon from assistive technology unless it gets an `aria-*` prop or `role`.
+
+Solid's Vite plugin keeps Solid packages out of dependency prebundling, so a
+named import from `@lucide/solid` loads all of its 2,400 icon modules in
+development. The docs add
+[`vite-plugin-lucide-preprocess`](https://github.com/WarningImHack3r/vite-plugin-lucide-preprocess),
+which rewrites such imports to one module per icon (137 instead of 2,441
+requests on a component page). It runs with `enforce: "post"`, after MDX
+compiles, so the import lines in the docs' code samples stay as written.
 
 The LICENSE carries the shadcn/ui attribution; THIRD_PARTY_NOTICES.md carries
 Lucide's ISC notice for the icon paths the docs site still inlines.

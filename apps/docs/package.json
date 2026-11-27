@@ -62,6 +62,7 @@
     "@astrojs/check": "0.9.12",
     "@tailwindcss/vite": "4.3.5",
     "tailwindcss": "4.3.5",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vite-plugin-lucide-preprocess": "1.15.0"
   }
 }

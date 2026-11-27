@@ -4,6 +4,7 @@ import solid from "@astrojs/solid-js"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import { rehypePrettyCode } from "rehype-pretty-code"
+import lucidePreprocess from "vite-plugin-lucide-preprocess"
 
 import { rehypeCommandMetadata } from "./src/lib/command-metadata"
 import {
@@ -34,6 +35,9 @@ export default defineConfig({
   vite: {
     // UI SDK installation guide: pre-bundling core would load a second copy.
     optimizeDeps: { exclude: ["@ui-sdk/core"] },
-    plugins: [tailwindcss()]
+    // Solid packages skip prebundling, so `import { XIcon } from "@lucide/solid"`
+    // would load every icon module in development; the plugin imports each
+    // one. After MDX compiles, so code samples in the docs stay as written.
+    plugins: [{ ...lucidePreprocess(), enforce: "post" }, tailwindcss()]
   }
 })

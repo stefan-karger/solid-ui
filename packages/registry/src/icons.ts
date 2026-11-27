@@ -6,24 +6,8 @@
 //
 // Presets store the library's index, in shadcn's order: lucide, hugeicons,
 // tabler, phosphor, remixicon. Add a library only in that order.
-//
-// Each icon is imported from its own module: Solid's Vite plugin keeps Solid
-// packages out of dependency prebundling, so a named import from the package
-// root loads every icon (over 2,400 modules for Lucide) in development.
 export const iconLibraries = {
-  lucide: {
-    name: "lucide",
-    title: "Lucide",
-    package: "@lucide/solid",
-    // ChevronDownIcon is icons/chevron-down. Names whose digits or single
-    // letters don't map back, like ArrowDown01Icon, fail the docs prebuild.
-    module: (icon: string) =>
-      `@lucide/solid/icons/${icon
-        .replace(/Icon$/, "")
-        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-        .replace(/([a-zA-Z])(\d)/g, "$1-$2")
-        .toLowerCase()}`
-  }
+  lucide: { name: "lucide", title: "Lucide", package: "@lucide/solid" }
 } as const
 
 export type IconLibraryName = keyof typeof iconLibraries
@@ -172,13 +156,7 @@ export function transformIcons(
     if (code.slice(start - 2, start) === "\n\n" && code[end] === "\n") end++
     code = code.slice(0, start) + code.slice(end)
   }
-  const { module } = iconLibraries[library]
-  return addImports(
-    code,
-    [...icons]
-      .map((icon) => ({ icon, module: module(icon) }))
-      .sort((a, b) => a.module.localeCompare(b.module))
-  )
+  return addImport(code, iconLibraries[library].package, [...icons])
 }
 
 // The import declarations at the top of the module. Code samples in strings
@@ -197,17 +175,13 @@ function leadingImports(code: string) {
   }
 }
 
-// Adds a default import per icon among the package imports, sorted by module.
-function addImports(code: string, icons: { icon: string; module: string }[]) {
-  const lines = icons
-    .map(({ icon, module }) => `import ${icon} from "${module}"\n`)
-    .join("")
+// Adds the named imports among the package imports, sorted by module.
+function addImport(code: string, module: string, names: string[]) {
+  const line = `import { ${names.sort().join(", ")} } from "${module}"\n`
   const packages = leadingImports(code).filter(
     (match) => !/^[.~]/.test(match[1]!)
   )
-  const next = packages.find(
-    (match) => match[1]!.localeCompare(icons[0]!.module) > 0
-  )
+  const next = packages.find((match) => match[1]!.localeCompare(module) > 0)
   const last = packages.at(-1)
   const first = leadingImports(code)[0]
   const at = next
@@ -217,5 +191,5 @@ function addImports(code: string, icons: { icon: string; module: string }[]) {
       : (first?.index ?? 0)
   // Without package imports, a blank line separates it from the alias ones.
   const separator = !last && first ? "\n" : ""
-  return code.slice(0, at) + lines + separator + code.slice(at)
+  return code.slice(0, at) + line + separator + code.slice(at)
 }

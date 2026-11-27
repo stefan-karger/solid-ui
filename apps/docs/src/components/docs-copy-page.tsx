@@ -1,6 +1,4 @@
-import CheckIcon from "@lucide/solid/icons/check"
-import ChevronDownIcon from "@lucide/solid/icons/chevron-down"
-import CopyIcon from "@lucide/solid/icons/copy"
+import { CheckIcon, ChevronDownIcon, CopyIcon } from "@lucide/solid"
 import { createSignal, For, onCleanup, onSettled, Show } from "solid-js"
 
 import { copyToClipboard } from "~/lib/clipboard"

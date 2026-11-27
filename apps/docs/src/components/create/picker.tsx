@@ -1,6 +1,6 @@
 // Picker parts follow shadcn/ui 055aa6b, apps/v4/app/(app)/(create)/components/picker.tsx (MIT).
 // The neutral overlay colors are swapped for the docs site's dark Solid palette.
-import CheckIcon from "@lucide/solid/icons/check"
+import { CheckIcon } from "@lucide/solid"
 import { type ComponentProps } from "@solidjs/web"
 import {
   MenuContent as SdkMenuContent,
