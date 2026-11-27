@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIDataTypes,
@@ -76,20 +76,7 @@ function ToolRow(componentProps: {
           <TraceCollapsibleTrigger>
             <TraceLine status={failed ? "error" : undefined}>
               <TraceIcon>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 19h8" />
-                  <path d="m4 17 6-6-6-6" />
-                </svg>
+                <IconPlaceholder lucide="TerminalIcon" />
               </TraceIcon>
               <TraceTitle>
                 {failed ? "Failed to run" : "Ran"} {command}
@@ -109,20 +96,7 @@ function ToolRow(componentProps: {
     return (
       <TraceLine status={streaming ? "running" : "error"}>
         <TraceIcon>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 19h8" />
-            <path d="m4 17 6-6-6-6" />
-          </svg>
+          <IconPlaceholder lucide="TerminalIcon" />
         </TraceIcon>
         <TraceTitle>
           {streaming ? "Running" : "Failed to run"} {command}

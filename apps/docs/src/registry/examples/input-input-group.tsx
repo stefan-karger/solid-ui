@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Field, FieldLabel } from "~/registry/ui/field"
 import {
   InputGroup,
@@ -18,22 +17,7 @@ export default function InputInputGroup() {
           <InputGroupText>https://</InputGroupText>
         </InputGroupAddon>
         <InputGroupAddon align="inline-end">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            class="size-4"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4" />
-            <path d="M12 8h.01" />
-          </svg>
+          <IconPlaceholder lucide="InfoIcon" class="size-4" />
         </InputGroupAddon>
       </InputGroup>
     </Field>

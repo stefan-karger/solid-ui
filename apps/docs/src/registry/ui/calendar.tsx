@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps } from "@solidjs/web"
 import {
   Calendar as SdkCalendar,
@@ -17,6 +16,7 @@ import { omit } from "solid-js"
 import { For } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 
 export function CalendarRoot(
   props: Omit<ComponentProps<typeof SdkCalendar>, "class"> & { class?: string }
@@ -38,20 +38,10 @@ export function CalendarPrevious(
       )}
     >
       {props.children ?? (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+        <IconPlaceholder
+          lucide="ChevronLeftIcon"
           class="size-4 rtl:rotate-180"
-        >
-          <path d="m15 18-6-6 6-6" />
-        </svg>
+        />
       )}
     </SdkCalendarPrevious>
   )
@@ -71,20 +61,10 @@ export function CalendarNext(
       )}
     >
       {props.children ?? (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+        <IconPlaceholder
+          lucide="ChevronRightIcon"
           class="size-4 rtl:rotate-180"
-        >
-          <path d="m9 18 6-6-6-6" />
-        </svg>
+        />
       )}
     </SdkCalendarNext>
   )

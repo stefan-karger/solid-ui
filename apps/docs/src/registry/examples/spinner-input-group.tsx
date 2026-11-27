@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   InputGroup,
   InputGroupAddon,
@@ -25,21 +24,7 @@ export default function SpinnerInputGroup() {
           <Spinner />
           Validating...
           <InputGroupButton class="ml-auto" variant="default">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              class="size-4"
-            >
-              <path d="m5 12 7-7 7 7" />
-              <path d="M12 19V5" />
-            </svg>
+            <IconPlaceholder lucide="ArrowUpIcon" class="size-4" />
             <span class="sr-only">Send</span>
           </InputGroupButton>
         </InputGroupAddon>

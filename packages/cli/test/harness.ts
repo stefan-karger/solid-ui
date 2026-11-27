@@ -98,9 +98,14 @@ export function recordingUi(
     warn: record("warn"),
     error: record("error"),
     note: record("note"),
-    select: async (message) => {
+    // An answer that isn't one of the options keeps the default.
+    select: async (message, options, initial) => {
       messages.push(`select: ${message}`)
-      return answers.select as never
+      return (
+        options.some(({ value }) => value === answers.select)
+          ? answers.select
+          : initial
+      ) as never
     },
     multiselect: async () => (answers.select ?? []) as never,
     text: async (message, initial) => {

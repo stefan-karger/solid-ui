@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import {
   CodeBlock,
@@ -35,20 +35,7 @@ export default function CodeBlockActionsExample() {
       <CodeBlock>
         <CodeBlockHeader>
           <CodeBlockTitle>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M12 19h8" />
-              <path d="m4 17 6-6-6-6" />
-            </svg>
+            <IconPlaceholder lucide="TerminalIcon" />
             Terminal
           </CodeBlockTitle>
           <CodeBlockActions>
@@ -60,22 +47,7 @@ export default function CodeBlockActionsExample() {
               class="aria-pressed:text-foreground"
               onClick={() => setWrap((enabled) => !enabled)}
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m16 16-3 3 3 3" />
-                <path d="M3 12h14.5a1 1 0 0 1 0 7H13" />
-                <path d="M3 19h6" />
-                <path d="M3 5h18" />
-              </svg>
+              <IconPlaceholder lucide="TextWrapIcon" />
             </Button>
             <Button
               variant="ghost"
@@ -83,21 +55,7 @@ export default function CodeBlockActionsExample() {
               aria-label="Download"
               onClick={() => download(output, "lint.log")}
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M12 15V3" />
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <path d="m7 10 5 5 5-5" />
-              </svg>
+              <IconPlaceholder lucide="DownloadIcon" />
             </Button>
             <CodeBlockCopyButton value={output} />
           </CodeBlockActions>

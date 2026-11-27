@@ -93,6 +93,10 @@ npx solidui-cli@latest init --alias @
 
 `init` saves the aliases in `components.json` and adds `@/*` to `tsconfig.json` unless it's there already. `add` rewrites the imports of every component to match, so `~/lib/utils` arrives as `@/lib/utils`. Running `init` again keeps the aliases from `components.json`.
 
+### Icons
+
+Components name their icons for each icon library. `init` asks which library to use, saves it as `iconLibrary` in `components.json` and installs its package. `add` turns every icon into that library's component, so the Select chevron arrives as `import { ChevronDownIcon } from "@lucide/solid"`. Lucide is the only library for now, and the default for projects set up before `iconLibrary` existed. A preset code from the [Create](/create) page carries its icon library, so `init --preset` doesn't ask.
+
 ### Choose the app stylesheet
 
 `init` imports `solid-ui.css` into the stylesheet that imports Tailwind CSS. If more than one stylesheet does, name the one your app loads:

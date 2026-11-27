@@ -8,6 +8,7 @@
   "exports": {
     "./config": "./src/config.ts",
     "./css": "./src/css.ts",
+    "./icons": "./src/icons.ts",
     "./menu": "./src/menu.ts",
     "./preset": "./src/preset/index.ts",
     "./schema": "./src/schema.ts",

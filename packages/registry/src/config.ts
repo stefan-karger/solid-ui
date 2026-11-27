@@ -1,5 +1,6 @@
 import { z } from "zod"
 
+import { DEFAULT_ICON_LIBRARY, iconLibraryNames } from "./icons.ts"
 import { isPresetCode, presetOptions } from "./preset/codec.ts"
 import { styles } from "./styles.ts"
 
@@ -23,7 +24,7 @@ export function aliasesFor(prefix: string) {
 export const DEFAULT_ALIASES = aliasesFor(DEFAULT_ALIAS)
 
 // components.json for solidui-cli 1.x. It follows shadcn/ui's file without
-// the React, Tailwind 3 and icon options; see plans and the CLI docs.
+// the React and Tailwind 3 options; see the CLI docs.
 export const componentsJsonSchema = z
   .object({
     $schema: z.string().optional(),
@@ -37,6 +38,8 @@ export const componentsJsonSchema = z
         css: z.string().min(1)
       })
       .strict(),
+    // solidui-cli 1.0 wrote no icon library; its projects use Lucide.
+    iconLibrary: z.enum(iconLibraryNames).default(DEFAULT_ICON_LIBRARY),
     menuColor: z.enum(presetOptions.menuColor).default("default"),
     menuAccent: z.enum(presetOptions.menuAccent).default("subtle"),
     aliases: z

@@ -69,6 +69,7 @@ describe("init", () => {
       $schema: "https://solid-ui.com/schema.json",
       style: "nova",
       tailwind: { css: "src/App.css" },
+      iconLibrary: "lucide",
       menuColor: "default",
       aliases: { ui: "~/components/ui", utils: "~/lib/utils" }
     })
@@ -90,6 +91,7 @@ describe("init", () => {
         "clsx@^2.1.1",
         "tailwind-merge@^3.7.1",
         expect.stringMatching(/^class-variance-authority@\^/),
+        expect.stringMatching(/^@lucide\/solid@\^/),
         expect.stringMatching(/^tw-animate-css@\^/),
         expect.stringMatching(/^@fontsource-variable\/geist@\^/)
       ])
@@ -116,6 +118,19 @@ describe("init", () => {
       expect.stringMatching(/^task: Installed \d+ packages with /)
     ])
     expect(messages.join("\n")).not.toContain("Vite can't resolve")
+  })
+
+  it("asks for the icon library after a named preset", async () => {
+    const cwd = createProject()
+    const { messages } = await init(
+      cwd,
+      { yes: false },
+      { interactive: true, confirm: () => true }
+    )
+    expect(messages).toContain(
+      "select: Which icon library would you like to use?"
+    )
+    expect(JSON.parse(read(cwd, "components.json")).iconLibrary).toBe("lucide")
   })
 
   it("applies a preset code from the Create page", async () => {
@@ -397,6 +412,8 @@ describe("init", () => {
       expect(messages).toContain(
         "text: Which import alias should the components use?"
       )
+      // The preset code carries the icon library.
+      expect(messages.join("\n")).not.toContain("icon library")
       expect(aliasesOf(cwd).utils).toBe("@/lib/utils")
     })
 

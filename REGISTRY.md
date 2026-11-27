@@ -32,23 +32,23 @@ utilities), and the docs show the default, opaque menus.
 
 `packages/registry` (`@solid-ui/registry`, private) holds the code the docs and
 the CLI share: the preset codec and named presets, the theme and `solid-ui.css`
-generation, the menu transform, the `components.json` schema, and the
-supported versions. The docs import it as TypeScript source; tsup bundles it
+generation, the menu and icon transforms, the `components.json` schema, and
+the supported versions. The docs import it as TypeScript source; tsup bundles it
 into `solidui-cli`.
 
 `packages/cli` is `solidui-cli` 1.x with two commands. `init` checks the
 project, writes `components.json`, `solid-ui.css` and `lib/utils.ts`, wires the
 import alias into `tsconfig.json` and `vite.config`, and installs the shared
 packages. `add` resolves registry dependencies, rewrites imports to the
-project's aliases, resolves the menu markers and installs the packages each
-item lists. The CLI reference is shadcn/ui
+project's aliases, resolves the menu markers and icon placeholders and installs
+the packages each item lists. The CLI reference is shadcn/ui
 [`055aa6b`](https://github.com/shadcn-ui/ui/tree/055aa6b7837b1808456a24beb4c97a677864aa82/packages/shadcn).
 User-facing behavior is documented on `/docs/cli`; the version rules are in
 [AGENTS.md](./AGENTS.md#solidui-cli).
 
-`components.json` follows shadcn/ui's file without the React, Tailwind 3, and
-icon options: `style`, `preset`, `tailwind.css`, `menuColor`, `menuAccent`,
-and `aliases`. Its JSON schema is generated to `/schema.json`.
+`components.json` follows shadcn/ui's file without the React and Tailwind 3
+options: `style`, `preset`, `tailwind.css`, `iconLibrary`, `menuColor`,
+`menuAccent`, and `aliases`. Its JSON schema is generated to `/schema.json`.
 
 ## Publishing the registry
 
@@ -83,11 +83,28 @@ Use `apps/docs` as the Vercel project root. It runs `pnpm build` and publishes
 committed static files for `solidui-cli` 0.7.2 (Solid 1, Kobalte, Tailwind CSS
 3). No script touches it; delete it when the transition period ends.
 
-Components, examples, and the docs inline their icons as SVG copied from
-Lucide, since `lucide-solid` still declares a Solid 1 peer range. Icons keep
-Lucide's 24px stroke geometry, are `aria-hidden="true"` unless the markup names
-them, and each file credits Lucide in its first line. The LICENSE carries the
-shadcn/ui attribution; THIRD_PARTY_NOTICES.md carries Lucide's ISC notice.
+## Icons
+
+Components and examples name each icon for every icon library, as shadcn/ui
+[`0e5b2e6`](https://github.com/shadcn-ui/ui/blob/0e5b2e621a9ee4cf6a604bbe6c5c0d5b70561eb4/apps/v4/app/%28app%29/%28create%29/components/icon-placeholder.tsx)
+does: `<IconPlaceholder lucide="ChevronDownIcon" class="size-4" />`, imported
+from `~/registry/icons/icon-placeholder`. Lucide (`@lucide/solid`, its Solid 2
+package) is the only library so far; `@solid-ui/registry/icons` lists the
+libraries in the order presets encode them, which is shadcn/ui's.
+
+The registry serves the placeholders. `solidui-cli add` replaces each one with
+the component of the `iconLibrary` in `components.json`, keeping the other
+props, and swaps the placeholder import for the library's, as in
+`import { ChevronDownIcon } from "@lucide/solid"`. Items don't list the icon
+library; `init` and `add` install the project's. The docs show Lucide:
+their source views resolve the placeholders with the same transform, and the
+previews render `src/registry/icons/icon-placeholder.tsx`, which loads only the
+icons `scripts/build-icons.ts` collects into `__lucide__.ts` in the `prebuild`
+step. Placeholders take string icon names and no children. Lucide hides an
+icon from assistive technology unless it gets an `aria-*` prop or `role`.
+
+The LICENSE carries the shadcn/ui attribution; THIRD_PARTY_NOTICES.md carries
+Lucide's ISC notice for the icon paths the docs site still inlines.
 
 ## Component API
 

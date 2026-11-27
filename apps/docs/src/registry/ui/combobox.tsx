@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps, JSX } from "@solidjs/web"
 import {
   Combobox as SdkCombobox,
@@ -22,6 +21,7 @@ import {
 import { omit, Show } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   InputGroup,
   InputGroupAddon,
@@ -82,20 +82,10 @@ const ComboboxTrigger = (
     class={cn("cn-combobox-trigger", props.class)}
   >
     {props.children ?? (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
+      <IconPlaceholder
+        lucide="ChevronDownIcon"
         class="cn-combobox-trigger-icon pointer-events-none"
-      >
-        <path d="m6 9 6 6 6-6" />
-      </svg>
+      />
     )}
   </SdkComboboxTrigger>
 )
@@ -113,21 +103,10 @@ const ComboboxClear = (
     {...props}
     class={cn("cn-combobox-clear", props.class)}
   >
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
+    <IconPlaceholder
+      lucide="XIcon"
       class="cn-combobox-clear-icon pointer-events-none"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
+    />
   </SdkComboboxClear>
 )
 const ComboboxContent = (
@@ -178,20 +157,10 @@ const ComboboxItem = (
   >
     {props.children}
     <SdkComboboxItemIndicator class="cn-combobox-item-indicator">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
+      <IconPlaceholder
+        lucide="CheckIcon"
         class="cn-combobox-item-indicator-icon pointer-events-none"
-      >
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
+      />
     </SdkComboboxItemIndicator>
   </SdkComboboxItem>
 )
@@ -273,21 +242,7 @@ const ComboboxChipRemove = (
     class={cn("cn-combobox-chip-remove", props.class)}
   >
     {props.children ?? (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        class="cn-combobox-chip-indicator-icon"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-      </svg>
+      <IconPlaceholder lucide="XIcon" class="cn-combobox-chip-indicator-icon" />
     )}
   </SdkComboboxChipRemove>
 )

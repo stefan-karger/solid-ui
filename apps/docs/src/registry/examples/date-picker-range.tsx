@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import { Calendar } from "~/registry/ui/calendar"
 import { Field, FieldLabel } from "~/registry/ui/field"
@@ -33,22 +33,7 @@ export default function DatePickerRange() {
             />
           )}
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M8 2v3" />
-            <path d="M16 2v3" />
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <path d="M3 9h18" />
-          </svg>
+          <IconPlaceholder lucide="CalendarIcon" />
           {range()
             ?.map((date) => formatDate.format(new Date(date)))
             .join(" - ") ?? <span>Pick a date</span>}

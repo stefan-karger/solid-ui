@@ -1,3 +1,5 @@
+import { supportedRange } from "@solid-ui/registry/versions"
+
 import type { PackageJson } from "~/project/package-json"
 import { resolveVersion, satisfies } from "~/project/versions"
 import type { Ui } from "~/utils/ui"
@@ -16,6 +18,12 @@ export type DependencyPlan = {
   // changed when the user agrees.
   conflicts: DependencyConflict[]
   satisfied: string[]
+}
+
+// The package with the range this release was tested with.
+export function supportedSpec(name: string) {
+  const range = supportedRange(name)
+  return range ? `${name}@${range}` : name
 }
 
 export function parseSpec(spec: string) {

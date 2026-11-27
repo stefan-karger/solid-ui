@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import { ButtonGroup } from "~/registry/ui/button-group"
 import { Field, FieldDescription, FieldLabel } from "~/registry/ui/field"
@@ -17,25 +16,7 @@ export default function ButtonGroupPopover() {
   return (
     <ButtonGroup>
       <Button variant="outline">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          class="size-4"
-        >
-          <path d="M12 8V4H8" />
-          <rect width="16" height="12" x="4" y="8" rx="2" />
-          <path d="M2 14h2" />
-          <path d="M20 14h2" />
-          <path d="M15 13v2" />
-          <path d="M9 13v2" />
-        </svg>
+        <IconPlaceholder lucide="BotIcon" class="size-4" />
         Copilot
       </Button>
       <Popover>
@@ -45,20 +26,7 @@ export default function ButtonGroupPopover() {
           )}
           aria-label="Open Popover"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            class="size-4"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          <IconPlaceholder lucide="ChevronDownIcon" class="size-4" />
         </PopoverTrigger>
         <PopoverContent side="bottom" align="end" class="rounded-xl text-sm">
           <PopoverHeader>

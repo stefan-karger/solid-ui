@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 
 export default function ButtonSize() {
@@ -10,20 +9,7 @@ export default function ButtonSize() {
           Extra Small
         </Button>
         <Button size="icon-xs" aria-label="Submit" variant="outline">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 7h10v10" />
-            <path d="M7 17 17 7" />
-          </svg>
+          <IconPlaceholder lucide="ArrowUpRightIcon" />
         </Button>
       </div>
       <div class="flex items-start gap-2">
@@ -31,39 +17,13 @@ export default function ButtonSize() {
           Small
         </Button>
         <Button size="icon-sm" aria-label="Submit" variant="outline">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 7h10v10" />
-            <path d="M7 17 17 7" />
-          </svg>
+          <IconPlaceholder lucide="ArrowUpRightIcon" />
         </Button>
       </div>
       <div class="flex items-start gap-2">
         <Button variant="outline">Default</Button>
         <Button size="icon" aria-label="Submit" variant="outline">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 7h10v10" />
-            <path d="M7 17 17 7" />
-          </svg>
+          <IconPlaceholder lucide="ArrowUpRightIcon" />
         </Button>
       </div>
       <div class="flex items-start gap-2">
@@ -71,20 +31,7 @@ export default function ButtonSize() {
           Large
         </Button>
         <Button size="icon-lg" aria-label="Submit" variant="outline">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 7h10v10" />
-            <path d="M7 17 17 7" />
-          </svg>
+          <IconPlaceholder lucide="ArrowUpRightIcon" />
         </Button>
       </div>
     </div>

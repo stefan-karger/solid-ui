@@ -1,6 +1,5 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
 import { Example, ExampleWrapper } from "~/registry/components/example"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import {
   Item,
@@ -17,25 +16,6 @@ import {
 
 type ItemVariant = "default" | "outline" | "muted"
 type ItemSize = "default" | "sm" | "xs"
-
-function ArchiveIcon() {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-      <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-    </svg>
-  )
-}
 
 function AvatarImage(props: { label: string }) {
   return (
@@ -121,7 +101,7 @@ function BasicVariantSection(props: {
       </Item>
       <Item size={itemSize()} variant={props.variant}>
         <ItemMedia variant="icon">
-          <ArchiveIcon />
+          <IconPlaceholder lucide="InboxIcon" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Media + Title</ItemTitle>
@@ -129,7 +109,7 @@ function BasicVariantSection(props: {
       </Item>
       <Item size={itemSize()} variant={props.variant}>
         <ItemMedia variant="icon">
-          <ArchiveIcon />
+          <IconPlaceholder lucide="InboxIcon" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Media + Title + Button</ItemTitle>
@@ -140,7 +120,7 @@ function BasicVariantSection(props: {
       </Item>
       <Item size={itemSize()} variant={props.variant}>
         <ItemMedia variant="icon">
-          <ArchiveIcon />
+          <IconPlaceholder lucide="InboxIcon" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Media + Title + Description</ItemTitle>
@@ -151,7 +131,7 @@ function BasicVariantSection(props: {
       </Item>
       <Item size={itemSize()} variant={props.variant}>
         <ItemMedia variant="icon">
-          <ArchiveIcon />
+          <IconPlaceholder lucide="InboxIcon" />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Media + Title + Description + Button</ItemTitle>
@@ -198,7 +178,7 @@ function LinkItemsSection(props: { title: string; variant: ItemVariant }) {
         </Item>
         <Item as="a" href="#" variant={props.variant}>
           <ItemMedia variant="icon">
-            <ArchiveIcon />
+            <IconPlaceholder lucide="InboxIcon" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Media + Title (Link)</ItemTitle>
@@ -206,7 +186,7 @@ function LinkItemsSection(props: { title: string; variant: ItemVariant }) {
         </Item>
         <Item as="a" href="#" variant={props.variant}>
           <ItemMedia variant="icon">
-            <ArchiveIcon />
+            <IconPlaceholder lucide="InboxIcon" />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Media + Title + Description (Link)</ItemTitle>
@@ -240,7 +220,7 @@ function ItemGroupSection(props: { title: string; variant: ItemVariant }) {
         <Item variant={props.variant}>
           {props.variant === "outline" ? (
             <ItemMedia variant="icon">
-              <ArchiveIcon />
+              <IconPlaceholder lucide="InboxIcon" />
             </ItemMedia>
           ) : null}
           <ItemContent>
@@ -264,7 +244,7 @@ function ItemGroupSection(props: { title: string; variant: ItemVariant }) {
         <Item variant={props.variant}>
           {props.variant === "outline" ? (
             <ItemMedia variant="icon">
-              <ArchiveIcon />
+              <IconPlaceholder lucide="InboxIcon" />
             </ItemMedia>
           ) : null}
           <ItemContent>
@@ -288,7 +268,7 @@ function ItemGroupSection(props: { title: string; variant: ItemVariant }) {
         <Item variant={props.variant}>
           {props.variant === "outline" ? (
             <ItemMedia variant="icon">
-              <ArchiveIcon />
+              <IconPlaceholder lucide="InboxIcon" />
             </ItemMedia>
           ) : null}
           <ItemContent>
@@ -460,7 +440,7 @@ function OutlineMailboxItem(props: { title: string; description: string }) {
   return (
     <Item variant="outline">
       <ItemMedia variant="icon">
-        <ArchiveIcon />
+        <IconPlaceholder lucide="InboxIcon" />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{props.title}</ItemTitle>

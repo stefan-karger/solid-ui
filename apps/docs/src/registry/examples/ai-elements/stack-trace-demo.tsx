@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIDataTypes,
@@ -100,20 +100,7 @@ function StackTrace(componentProps: { stack: string }) {
         <TraceCollapsibleTrigger>
           <TraceLine status="error">
             <TraceIcon>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M12 19h8" />
-                <path d="m4 17 6-6-6-6" />
-              </svg>
+              <IconPlaceholder lucide="TerminalIcon" />
             </TraceIcon>
             <TraceTitle>Failed: {error}</TraceTitle>
           </TraceLine>
@@ -127,22 +114,7 @@ function StackTrace(componentProps: { stack: string }) {
                   <a href={`#${frame.file}:${frame.lineNumber}`}>
                     <TraceLine>
                       <TraceIcon>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
-                          <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-                          <path d="M10 12.5 8 15l2 2.5" />
-                          <path d="m14 12.5 2 2.5-2 2.5" />
-                        </svg>
+                        <IconPlaceholder lucide="FileCodeIcon" />
                       </TraceIcon>
                       <TraceTitle>
                         {frame.name} in {frame.file}:{frame.lineNumber}
@@ -156,21 +128,7 @@ function StackTrace(componentProps: { stack: string }) {
               <TraceCollapsibleTrigger>
                 <TraceLine>
                   <TraceIcon>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
-                      <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
-                      <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
-                    </svg>
+                    <IconPlaceholder lucide="LayersIcon" />
                   </TraceIcon>
                   <TraceTitle>
                     {internalFrames.length} framework frames
@@ -210,20 +168,7 @@ function CommandRow(componentProps: { part: ToolPart; streaming: boolean }) {
           <TraceCollapsibleTrigger>
             <TraceLine>
               <TraceIcon>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 19h8" />
-                  <path d="m4 17 6-6-6-6" />
-                </svg>
+                <IconPlaceholder lucide="TerminalIcon" />
               </TraceIcon>
               <TraceTitle>Ran {command}</TraceTitle>
             </TraceLine>
@@ -241,20 +186,7 @@ function CommandRow(componentProps: { part: ToolPart; streaming: boolean }) {
     return (
       <TraceLine status={streaming ? "running" : "error"}>
         <TraceIcon>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 19h8" />
-            <path d="m4 17 6-6-6-6" />
-          </svg>
+          <IconPlaceholder lucide="TerminalIcon" />
         </TraceIcon>
         <TraceTitle>
           {streaming ? "Running" : "Failed to run"} {command}

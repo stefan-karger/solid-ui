@@ -1,3 +1,4 @@
+import { iconLibraries } from "@solid-ui/registry/icons"
 import {
   baseColors,
   defaultPreset,
@@ -41,7 +42,7 @@ const groups = [
   ["style"],
   ["baseColor", "theme", "chartColor"],
   ["fontHeading", "font"],
-  ["radius"],
+  ["iconLibrary", "radius"],
   ["menuColor", "menuAccent"]
 ] as const satisfies readonly (readonly PresetField[])[]
 const labels: Record<PresetField, string> = {
@@ -51,6 +52,7 @@ const labels: Record<PresetField, string> = {
   chartColor: "Chart Color",
   fontHeading: "Heading",
   font: "Font",
+  iconLibrary: "Icon Library",
   radius: "Radius",
   menuColor: "Menu",
   menuAccent: "Menu Accent"
@@ -104,7 +106,7 @@ function Swatch(props: { color: string }) {
 }
 
 // Trigger glyphs from shadcn/ui 055aa6b (MIT): the radius corner, Hugeicons Menu02Icon
-// and the menu accent bucket.
+// and the menu accent bucket; the Lucide logo from its icon-library-picker.tsx.
 const samples: Record<PresetField, (preset: Preset) => JSX.Element> = {
   style: (preset) => <StyleGlyph style={preset.style} />,
   baseColor: (preset) => <Swatch color={presetColorSwatch(preset.baseColor)} />,
@@ -125,6 +127,20 @@ const samples: Record<PresetField, (preset: Preset) => JSX.Element> = {
   ),
   font: (preset) => (
     <span style={{ "font-family": fontFamily(preset.font) }}>Aa</span>
+  ),
+  iconLibrary: () => (
+    <svg
+      class="size-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+    >
+      <path d="M14 12a4 4 0 0 0-8 0 8 8 0 1 0 16 0 11.97 11.97 0 0 0-4-8.944" />
+      <path d="M10 12a4 4 0 0 0 8 0 8 8 0 1 0-16 0 11.97 11.97 0 0 0 4.063 9" />
+    </svg>
   ),
   radius: () => (
     <svg
@@ -392,6 +408,15 @@ export default function CreateEditor() {
         ]
       case "font":
         return fontSections(field)
+      case "iconLibrary":
+        return [
+          {
+            key: field,
+            options: presetOptions.iconLibrary.map((library) =>
+              option(field, library, iconLibraries[library].title)
+            )
+          }
+        ]
       case "menuAccent":
         return [
           {
@@ -405,6 +430,7 @@ export default function CreateEditor() {
   function display(field: PresetField) {
     const current = preset()
     if (field === "font") return fontLabel(current.font)
+    if (field === "iconLibrary") return iconLibraries[current.iconLibrary].title
     if (field === "fontHeading")
       return fontLabel(
         current.fontHeading === "inherit" ? current.font : current.fontHeading

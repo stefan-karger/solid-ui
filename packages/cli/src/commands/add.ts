@@ -1,5 +1,6 @@
 import path from "node:path"
 
+import { hasIconPlaceholders, iconLibraries } from "@solid-ui/registry/icons"
 import type { RegistryItem } from "@solid-ui/registry/schema"
 import { supportedRange } from "@solid-ui/registry/versions"
 import { Command } from "commander"
@@ -7,7 +8,8 @@ import { Command } from "commander"
 import {
   parseSpec,
   planDependencies,
-  resolveConflicts
+  resolveConflicts,
+  supportedSpec
 } from "~/install/dependencies"
 import {
   applyFiles,
@@ -151,7 +153,17 @@ export async function runAdd(
       ui.confirm(`${file} already exists and differs. Overwrite it?`, false)
   })
 
-  const specs = items.flatMap((item) => item.dependencies ?? [])
+  // Registry items name their icons with placeholders, resolved above to the
+  // project's icon library, so they don't list its package.
+  const usesIcons = items.some((item) =>
+    item.files?.some((file) => hasIconPlaceholders(file.content ?? ""))
+  )
+  const specs = [
+    ...items.flatMap((item) => item.dependencies ?? []),
+    ...(usesIcons
+      ? [supportedSpec(iconLibraries[config.iconLibrary].package)]
+      : [])
+  ]
   for (const note of anchorNotes(specs)) ui.info(note)
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, specs)
   const installs = await resolveConflicts(plan, ui, {

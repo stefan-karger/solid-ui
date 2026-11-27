@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   Attachment,
   AttachmentAction,
@@ -121,23 +121,7 @@ export default function PromptInputDemo() {
                   {(file) => (
                     <Attachment size="sm">
                       <AttachmentMedia>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
-                          <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-                          <path d="M10 9H8" />
-                          <path d="M16 13H8" />
-                          <path d="M16 17H8" />
-                        </svg>
+                        <IconPlaceholder lucide="FileTextIcon" />
                       </AttachmentMedia>
                       <AttachmentContent>
                         <AttachmentTitle>{file.name}</AttachmentTitle>
@@ -151,20 +135,7 @@ export default function PromptInputDemo() {
                             )
                           }
                         >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                          >
-                            <path d="M18 6 6 18" />
-                            <path d="m6 6 12 12" />
-                          </svg>
+                          <IconPlaceholder lucide="XIcon" />
                         </AttachmentAction>
                       </AttachmentActions>
                     </Attachment>
@@ -193,20 +164,7 @@ export default function PromptInputDemo() {
               aria-label="Attach files"
               onClick={() => inputRef?.click()}
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5v14" />
-              </svg>
+              <IconPlaceholder lucide="PlusIcon" />
             </InputGroupButton>
             <DropdownMenu>
               <DropdownMenuTrigger
@@ -219,19 +177,7 @@ export default function PromptInputDemo() {
                     class="ml-auto"
                   >
                     {currentModel().name}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <IconPlaceholder lucide="ChevronDownIcon" />
                   </InputGroupButton>
                 )}
               />
@@ -277,19 +223,7 @@ export default function PromptInputDemo() {
                   >
                     <span class="text-muted-foreground">Effort</span>
                     {currentEffort().name}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <IconPlaceholder lucide="ChevronDownIcon" />
                   </InputGroupButton>
                 )}
               />
@@ -321,20 +255,7 @@ export default function PromptInputDemo() {
               disabled={!canSend()}
               aria-label="Send"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m5 12 7-7 7 7" />
-                <path d="M12 19V5" />
-              </svg>
+              <IconPlaceholder lucide="ArrowUpIcon" />
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>

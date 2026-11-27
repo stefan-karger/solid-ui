@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps, JSX } from "@solidjs/web"
 import {
   Checkbox as SdkCheckbox,
@@ -22,6 +21,7 @@ import {
 } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button, type ButtonProps } from "~/registry/ui/button"
 
 export type QuestionnaireAnswers = Record<string, string | string[]>
@@ -363,21 +363,11 @@ export function QuestionnaireChoice(props: {
           data-slot="questionnaire-choice-indicator-dot"
           class="cn-questionnaire-choice-indicator-dot hidden rounded-full group-data-[type=checkbox]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
         />
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+        <IconPlaceholder
+          lucide="CheckIcon"
           data-slot="questionnaire-choice-indicator-check"
           class="cn-questionnaire-choice-indicator-check hidden group-data-[type=radio]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+        />
       </span>
       <span class="cn-questionnaire-choice-label cn-questionnaire-choice-content flex min-w-0 flex-1 flex-col leading-snug">
         {props.children}

@@ -1,3 +1,4 @@
+import { DEFAULT_ICON_LIBRARY } from "@solid-ui/registry/icons"
 import {
   registrySchema,
   type Registry,
@@ -235,7 +236,8 @@ export async function getRegistrySource(options: {
       registryPath: normalizeRegistryPath(selected.path, options.name),
       ...(selected.target ? { target: selected.target } : {}),
       styleName,
-      styleCss
+      styleCss,
+      iconLibrary: DEFAULT_ICON_LIBRARY
     })
   )
   preparedSourceCache.set(cacheKey, prepared)

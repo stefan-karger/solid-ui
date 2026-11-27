@@ -93,6 +93,8 @@ async function prepareItem(item: RegistryItem) {
     if (!/\.[jt]sx?$/.test(file.path)) continue
     for (const { fileName } of ts.preProcessFile(file.content, true, true)
       .importedFiles) {
+      // The CLI swaps the placeholder for the project's icon library.
+      if (fileName.endsWith("/icon-placeholder")) continue
       if (fileName.startsWith("~/") || fileName.startsWith(".")) {
         const path = fileName.startsWith(".")
           ? posix.join(posix.dirname(file.path), fileName)

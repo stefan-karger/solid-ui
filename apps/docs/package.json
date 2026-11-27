@@ -7,8 +7,8 @@
     "build": "astro build",
     "check": "astro check",
     "dev": "astro dev",
-    "prebuild": "node scripts/build-registry.ts",
-    "predev": "node scripts/build-registry.ts",
+    "prebuild": "node scripts/build-icons.ts && node scripts/build-registry.ts",
+    "predev": "node scripts/build-icons.ts && node scripts/build-registry.ts",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -41,6 +41,7 @@
     "@fontsource-variable/source-sans-3": "5.3.1",
     "@fontsource-variable/space-grotesk": "5.3.0",
     "@fontsource/instrument-serif": "5.3.0",
+    "@lucide/solid": "1.81.0",
     "@solid-ui/registry": "workspace:*",
     "@solidjs/web": "2.0.1",
     "@ui-sdk/core": "0.1.0-beta.17",
@@ -61,6 +62,7 @@
     "@astrojs/check": "0.9.12",
     "@tailwindcss/vite": "4.3.5",
     "tailwindcss": "4.3.5",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vite-plugin-lucide-preprocess": "1.15.0"
   }
 }
