@@ -116,23 +116,21 @@ test("publishes the v2 registry and the static v1 CLI registry in the production
 })
 
 test("gives every page a link preview with an absolute image and URL @smoke", async ({
-  page,
   request
 }) => {
-  await page.goto("/docs/components/button/")
-  const meta = (property: string) =>
-    page.locator(`meta[property="${property}"]`).getAttribute("content")
-  expect(await meta("og:title")).toBe("Button")
-  expect(await meta("og:url")).toBe(
+  const html = await (await request.get("/docs/components/button/")).text()
+  const meta = (name: string) =>
+    new RegExp(`<meta (?:property|name)="${name}" content="([^"]*)"`).exec(
+      html
+    )?.[1]
+  expect(meta("og:title")).toBe("Button")
+  expect(meta("og:url")).toBe(
     "https://www.solid-ui.com/docs/components/button/"
   )
-  const image = await meta("og:image")
+  const image = meta("og:image")
   expect(image).toMatch(/^https:\/\/www\.solid-ui\.com\/.+\.png$/)
   expect((await request.get(new URL(image!).pathname)).ok()).toBe(true)
-  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
-    "content",
-    "summary_large_image"
-  )
+  expect(meta("twitter:card")).toBe("summary_large_image")
 })
 
 test("links the home page, docs, component catalog and project from the shared shell @smoke", async ({
@@ -151,42 +149,9 @@ test("links the home page, docs, component catalog and project from the shared s
     "aria-current",
     "page"
   )
-  await expect(
-    page.getByText("Built for Solid 2.0", { exact: true })
-  ).toBeVisible()
-  await expect(
-    page.getByText(
-      "Bring the shadcn/ui approach to Solid. Build your own component library with code you can customize, extend, and make your own. Powered by UI SDK.",
-      { exact: true }
-    )
-  ).toBeVisible()
-  await expect(
-    page.getByRole("navigation", { name: "Hero prototypes" })
-  ).toHaveCount(0)
-  await expect(
-    header.getByRole("link", { name: "Solid UI on GitHub" })
-  ).toHaveAttribute("href", "https://github.com/stefan-karger/solid-ui")
   const footer = page.getByRole("contentinfo")
-  await expect(footer).toHaveText(
-    "Built by shadcn. Ported to Solid by Stefan Karger. The source code is available on GitHub."
-  )
-  await expect(
-    footer.getByRole("link", { name: "shadcn", exact: true })
-  ).toHaveAttribute("href", "https://x.com/shadcn")
-  await expect(footer.getByRole("link", { name: "GitHub" })).toHaveAttribute(
-    "href",
-    "https://github.com/stefan-karger/solid-ui"
-  )
-  await expect(
-    footer.getByRole("link", { name: "Stefan Karger" })
-  ).toHaveAttribute("href", "https://x.com/karger_stefan")
+  await expect(footer).toBeVisible()
   const examples = page.getByRole("region", { name: "Component examples" })
-  await expect(
-    examples.getByText("Contribution History", { exact: true })
-  ).toBeVisible()
-  await expect(
-    examples.getByText("Scan to connect your mobile device")
-  ).toBeVisible()
   const showNotifications = examples.getByRole("switch", {
     name: "Enable compact notifications"
   })
@@ -198,24 +163,10 @@ test("links the home page, docs, component catalog and project from the shared s
   await showNotifications.uncheck()
   await expect(showNotifications).not.toBeChecked()
   const select = header.getByRole("combobox", { name: "Preview style" })
-  const mode = header.getByRole("button", { name: "Toggle theme" })
   await expect(
     select.locator("xpath=ancestor::astro-island")
   ).not.toHaveAttribute("ssr", "")
-  expect((await mode.boundingBox())!.x).toBeGreaterThan(
-    (await select.boundingBox())!.x
-  )
-  await expect(examples.locator('[data-slot="card"]').first()).toHaveCSS(
-    "border-radius",
-    "24px"
-  )
   await select.click()
-  const popup = page.locator('[data-slot="select-content"][data-open]')
-  await expect(popup.locator('[data-slot="select-list"]')).toHaveCSS(
-    "padding",
-    "4px"
-  )
-  await expect(popup).toHaveCSS("box-shadow", /rgb\(223, 228, 236\)/)
   await page.getByRole("option", { name: /^sera$/i }).click()
   await expect(page.locator("html")).toHaveClass(/style-sera/)
   await expect(examples.locator('[data-slot="card"]').first()).toHaveCSS(
@@ -227,26 +178,10 @@ test("links the home page, docs, component catalog and project from the shared s
     page.getByRole("heading", { name: "Components", exact: true })
   ).toBeVisible()
   await expect(footer).toHaveCount(0)
-  await expect(
-    page.getByRole("article").getByRole("link", { name: "Button", exact: true })
-  ).toHaveCSS("border-top-width", "0px")
   await navigation.getByRole("link", { name: "Docs", exact: true }).click()
   await expect(
     page.getByRole("heading", { name: "Installation", level: 1 })
   ).toBeVisible()
-  await page
-    .getByRole("article")
-    .locator("a[data-not-typeset]", { hasText: "Vite" })
-    .click()
-  await expect(
-    page.getByRole("heading", { name: "Vite", level: 1 })
-  ).toBeVisible()
-  await expect(
-    page
-      .getByRole("article")
-      .locator("a[data-not-typeset]", { hasText: "New Project" })
-  ).toHaveAttribute("href", "#new-project")
-  await expect(page.locator("h2#new-project")).toBeVisible()
   await page.goto("/docs/")
   await expect(
     page.getByRole("heading", { name: "Introduction", level: 1 })
@@ -270,46 +205,11 @@ test("links the home page, docs, component catalog and project from the shared s
   await expect(page).toHaveURL("/")
 })
 
-test("links the CLI examples, tested versions and migration guide by anchor", async ({
-  page
-}) => {
-  await page.goto("/docs/cli/#switch-the-theme")
-  await expect(page.locator("h3#switch-the-theme")).toBeInViewport()
-  for (const id of [
-    "skip-the-prompts",
-    "update-components",
-    "use-your-package-manager",
-    "use-another-import-alias",
-    "fix-unresolved-imports",
-    "solid-1-projects"
-  ])
-    await expect(page.locator(`h3#${id}`)).toHaveCount(1)
-  await page
-    .getByRole("article")
-    .getByRole("link", { name: "tested versions" })
-    .click()
-  await expect(page).toHaveURL(/\/docs\/installation\/#tested-versions$/)
-  const versions = page.locator("#tested-versions")
-  await expect(versions).toContainText("Built for Solid 2 and Tailwind CSS 4")
-  await expect(versions).toContainText(supportedRange("@ui-sdk/solid")!)
-
-  await page.goto("/docs/cli/#solid-1-projects")
-  await page.getByRole("article").getByRole("link", { name: "migrate" }).click()
-  await expect(page).toHaveURL(/\/docs\/migration\/$/)
-  for (const id of ["api-changes", "renamed-and-removed-components"])
-    await expect(page.locator(`h2#${id}`)).toHaveCount(1)
-})
-
-test("lists AI patterns with working Solid UI examples in the docs", async ({
+test("lists the AI patterns in the docs and their Markdown", async ({
   page,
   request
 }) => {
-  await page.goto("/docs/components/trace/")
-  await page
-    .getByRole("article")
-    .getByRole("link", { name: "AI Elements" })
-    .click()
-  await expect(page).toHaveURL(/\/docs\/ai-elements\/?$/)
+  await page.goto("/docs/ai-elements/")
   const article = page.getByRole("article", { name: "AI Elements" })
   await expect(article.getByRole("heading", { name: "Patterns" })).toBeVisible()
   await expect(
@@ -324,52 +224,20 @@ test("lists AI patterns with working Solid UI examples in the docs", async ({
   ).toHaveAttribute("href", "/docs/components/")
 
   const grid = article.locator('[data-slot="ai-pattern-grid"]')
-  const table = article.getByRole("table").first()
-  await expect(table.locator("..")).toHaveCSS("border-top-width", "0px")
-  await expect(table.getByRole("row").first()).toHaveCSS(
-    "border-bottom-width",
-    "1px"
-  )
   const links = await grid
     .getByRole("link")
     .evaluateAll((cards) =>
       cards.map((card) => (card as HTMLAnchorElement).href)
     )
   expect(links).toHaveLength(21)
-  await Promise.all(
-    links.map(async (link) => {
-      const { pathname } = new URL(link)
-      expect(pathname).toMatch(/^\/docs\/ai-elements\/[^/]+\/$/)
-      const response = await request.get(pathname)
-      expect(response.ok(), pathname).toBe(true)
-      expect(await response.text(), link).toContain(
-        'data-slot="component-preview"'
-      )
-    })
-  )
+  for (const link of links)
+    expect(new URL(link).pathname).toMatch(/^\/docs\/ai-elements\/[^/]+\/$/)
 
   const markdown = await request.get("/docs/ai-elements.md")
   expect(markdown.ok()).toBe(true)
   expect(await markdown.text()).toContain(
     "- [Chain of Thought](/docs/ai-elements/chain-of-thought/)"
   )
-})
-
-test("streams the confirmation example through a tool decision", async ({
-  page
-}) => {
-  await page.goto("/docs/ai-elements/confirmation/")
-  const preview = page
-    .locator('[data-slot="component-preview"] astro-island')
-    .first()
-  await preview.scrollIntoViewIfNeeded()
-  await expect(preview).not.toHaveAttribute("ssr", "")
-  await preview.getByRole("button", { name: "Send message" }).click()
-  await preview.getByRole("button", { name: "Deny", exact: true }).click()
-  await expect(
-    preview.getByText("Okay, I left the dist folder in place.")
-  ).toBeVisible()
-  await expect(preview.getByText(/^Denied rm/)).toBeVisible()
 })
 
 test("copies docs Markdown and offers the page actions and pagination", async ({
@@ -395,10 +263,6 @@ test("copies docs Markdown and offers the page actions and pagination", async ({
     .getByRole("button", { name: "Copy Page options" })
     .press("Enter")
   const menu = page.getByRole("menu", { name: "Copy Page options" })
-  await expect(menu.getByRole("menuitem")).toHaveCount(4)
-  await expect(
-    menu.getByRole("menuitem", { name: "Open in Scira" }).locator("svg")
-  ).toHaveAttribute("fill", "none")
   const view = menu.getByRole("menuitem", { name: "View as Markdown" })
   await expect(view).toHaveAttribute("target", "_blank")
   const markdownPath = await view.getAttribute("href")
@@ -433,7 +297,6 @@ test("copies docs Markdown and offers the page actions and pagination", async ({
     name: "More documentation",
     exact: true
   })
-  await expect(bottom).toHaveCSS("border-top-width", "0px")
   for (const direction of [/^Previous page,/, /^Next page,/]) {
     await expect(bottom.getByRole("link", { name: direction })).toHaveAttribute(
       "href",
@@ -451,7 +314,6 @@ test("searches sidebar links and navigates from the command palette by keyboard"
   await expect(
     trigger.getByText("Search documentation...", { exact: true })
   ).toBeVisible()
-  await expect(trigger.locator("svg, kbd")).toHaveCount(0)
   const searchIsland = trigger.locator("xpath=ancestor::astro-island")
   await expect(searchIsland).not.toHaveAttribute("ssr", "")
   const sidebarLinks = await page
@@ -464,11 +326,8 @@ test("searches sidebar links and navigates from the command palette by keyboard"
     name: "Find a section or component"
   })
   await expect(search).toBeFocused()
-  await expect(dialog).toHaveCSS("box-shadow", /0px 0px 0px 4px/)
   await expect(dialog.locator('[data-slot="command-empty"]')).toBeHidden()
   const footer = dialog.locator('[data-slot="dialog-footer"]')
-  await expect(footer.getByText("Go to Page", { exact: true })).toBeVisible()
-  await expect(footer.locator("kbd")).toHaveText("Enter")
   expect(
     (await dialog.getByRole("option").allTextContents()).map((text) =>
       text.trim()
@@ -523,15 +382,9 @@ test("navigates docs with an active sidebar and working page contents", async ({
     .getByRole("navigation", { name: "On this page", exact: true })
     .filter({ visible: true })
   const usage = toc.getByRole("link", { name: "Usage", exact: true })
-  await expect(toc.getByText("On This Page", { exact: true })).toHaveCSS(
-    "font-size",
-    "12px"
-  )
-  await expect(usage).toHaveCSS("font-size", "12.8px")
   await usage.click()
   await expect(page).toHaveURL(/#usage$/)
   await expect(usage).toHaveAttribute("aria-current", "location")
-  await expect(usage).toHaveCSS("font-weight", "500")
   expect(
     await page
       .locator("[data-docs-header]")

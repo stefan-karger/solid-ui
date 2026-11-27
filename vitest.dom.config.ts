@@ -21,8 +21,8 @@ export default defineProject({
     }
   },
   test: {
-    // Persistent transforms retain stale import.meta.glob file lists after ports.
-    fsModuleCache: false,
+    // Transforms persist between runs. The one test whose subject uses
+    // import.meta.glob runs in the uncached astro-render project instead.
     name: "dom",
     // `pnpm validate` runs the suite beside the builds and type checks.
     testTimeout: 15_000,
@@ -32,7 +32,12 @@ export default defineProject({
       include: [/style-nova\.css/]
     },
     include: ["apps/**/*.test.{ts,tsx}"],
-    exclude: ["**/node_modules/**", "**/dist/**", "**/*.render.test.ts"],
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/*.render.test.ts",
+      "**/registry.server.test.ts"
+    ],
     server: {
       deps: {
         // Keep UI SDK and the tests on the same Solid instance.

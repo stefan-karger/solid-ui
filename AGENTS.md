@@ -29,13 +29,16 @@ Record the upstream revision and intentional Solid 2 differences in `vendor/astr
 
 ## Validation
 
-`pnpm validate` is the fast loop (about a minute): Astro hashes, format, lint, types,
-unit tests and builds run in parallel, then the browser tests tagged `@smoke`. Run it
-after each step. Run a single browser spec with `pnpm test:e2e tests/<name>.spec.ts`
-after a build. Run `pnpm validate:full`, which adds every browser test (about seven
-minutes), once at the end of a plan, a larger task or a loop, and before handing back
-changes to the adapter, the themes or shared docs rendering. Tag a browser test
-`@smoke` in its title only when it guards a core path in a few seconds.
+`pnpm validate` is the fast loop (about half a minute): Astro hashes, format, lint,
+types, unit tests and builds run in parallel, then the browser tests tagged `@smoke`
+against the built docs. Run it after each step. Run a single browser spec with
+`pnpm test:e2e tests/<name>.spec.ts` after a build; set `E2E_SCOPE=docs` to skip the
+adapter fixture servers for docs specs. Run `pnpm validate:full`, which also builds
+the adapter fixture and runs every browser test (about two minutes), once at the end
+of a plan, a larger task or a loop, and before handing back changes to the adapter,
+the themes or shared docs rendering. Tag a browser test `@smoke` in its title only
+when it guards a core path in a few seconds. A browser test loads each page once:
+check every style or state in place rather than reloading per case.
 
 ## solidui-cli
 

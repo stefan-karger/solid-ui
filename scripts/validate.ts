@@ -1,5 +1,6 @@
 // Runs the independent checks and builds in parallel, then the browser tests.
-// `pnpm validate` runs the @smoke browser tests; `pnpm validate:full` runs all.
+// `pnpm validate` runs the @smoke browser tests against the built docs;
+// `pnpm validate:full` also builds the adapter fixture and runs every test.
 import { spawn } from "node:child_process"
 
 const full = process.argv.includes("--full")
@@ -34,16 +35,22 @@ const results = await Promise.all([
   run("check", "pnpm check"),
   run("test", "pnpm test"),
   run("build", "pnpm build"),
-  run(
-    "adapter fixture build",
-    "pnpm --filter docs exec astro build --root test/fixtures/adapter"
-  )
+  ...(full
+    ? [
+        run(
+          "adapter fixture build",
+          "pnpm --filter docs exec astro build --root test/fixtures/adapter"
+        )
+      ]
+    : [])
 ])
 const failed = results.filter((result) => result.code !== 0)
 for (const result of failed)
   console.log(`\n──── ${result.name} ────\n${result.output.trimEnd()}`)
 if (failed.length) process.exit(1)
 
+// The smoke tests need only the docs server (see playwright.config.ts).
+if (!full) process.env.E2E_SCOPE = "docs"
 const browser = await run(
   full ? "browser tests" : "browser smoke tests",
   full ? "pnpm test:e2e" : "pnpm test:e2e --grep @smoke",

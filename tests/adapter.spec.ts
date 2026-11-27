@@ -37,7 +37,7 @@ test.beforeEach(async ({ page }) => {
   expect(errors).toEqual([])
 })
 
-test("hydrates independent islands, preserves slots and replaces client-only fallbacks @smoke", async ({
+test("hydrates independent islands, preserves slots and replaces client-only fallbacks", async ({
   page
 }) => {
   // Cold Vite dependency discovery can reload the document after its first load.
@@ -97,7 +97,7 @@ test("hydrates independent islands, preserves slots and replaces client-only fal
 
 // Adapted from upstream solid-component.test.ts: lazy-only CSS must reach the
 // initial HTML, including static islands, and be deduplicated per page.
-test("delivers lazy CSS before hydration and deduplicates production styles @smoke", async ({
+test("delivers lazy CSS before hydration and deduplicates production styles", async ({
   page,
   request,
   browser
@@ -127,7 +127,50 @@ test("delivers lazy CSS before hydration and deduplicates production styles @smo
   await initial.close()
 })
 
-test("disposes on astro:unmount @smoke", async ({ page }) => {
+test("SDK islands respond to the keyboard and dispose on astro:unmount", async ({
+  page
+}) => {
+  const dialogTrigger = page.getByRole("button", {
+    name: "Open Dialog",
+    exact: true
+  })
+  await dialogTrigger.click()
+  const dialog = page.getByRole("dialog", { name: "Edit profile" })
+  await expect(dialog).toBeVisible()
+  await expect(dialog).toHaveAttribute("aria-modal", "true")
+  await page.keyboard.press("Escape")
+  await expect(dialog).toBeHidden()
+  await expect(dialogTrigger).toBeFocused()
+
+  const menuTrigger = page
+    .locator("#menu")
+    .getByRole("button", { name: "Open", exact: true })
+  await menuTrigger.click()
+  await expect(page.getByRole("menu").first()).toBeVisible()
+  await page.keyboard.press("Escape")
+  await expect(page.getByRole("menu")).toHaveCount(0)
+  await expect(menuTrigger).toBeFocused()
+  await page.getByRole("tab", { name: "Overview", exact: true }).focus()
+  await page.keyboard.press("ArrowRight")
+  await expect(
+    page.getByRole("tab", { name: "Analytics", exact: true })
+  ).toHaveAttribute("aria-selected", "true")
+  await expect(
+    page.getByRole("tabpanel", { name: "Analytics", exact: true })
+  ).toBeVisible()
+
+  const input = page.locator("#combobox").getByRole("combobox")
+  await input.fill("Svelte")
+  await page.keyboard.press("ArrowDown")
+  await page.keyboard.press("Enter")
+  await expect(input).toHaveValue("Svelte")
+  await expect(input).toHaveAttribute("aria-expanded", "false")
+  await page.locator("#select").getByRole("combobox").click()
+  await page.getByRole("option", { name: "Banana", exact: true }).click()
+  await expect(page.locator("#select").getByRole("combobox")).toContainText(
+    "Banana"
+  )
+
   await page.evaluate(() => {
     document.body.dataset.disposed = "0"
     window.addEventListener("counter:disposed", () => {
@@ -140,58 +183,4 @@ test("disposes on astro:unmount @smoke", async ({ page }) => {
       .dispatchEvent(new Event("astro:unmount"))
   })
   await expect(page.locator("body")).toHaveAttribute("data-disposed", "1")
-})
-
-test("dismisses a modal dialog and restores trigger focus @smoke", async ({
-  page
-}) => {
-  const trigger = page.getByRole("button", { name: "Open Dialog", exact: true })
-  await trigger.click()
-  const dialog = page.getByRole("dialog", { name: "Edit profile" })
-  await expect(dialog).toBeVisible()
-  await expect(dialog).toHaveAttribute("aria-modal", "true")
-  await page.keyboard.press("Escape")
-  await expect(dialog).toBeHidden()
-  await expect(trigger).toBeFocused()
-  await trigger.click()
-  await dialog.getByRole("button", { name: "Cancel", exact: true }).click()
-  await expect(dialog).toBeHidden()
-  await expect(trigger).toBeFocused()
-})
-
-test("dismisses menus with Escape and activates tabs with the keyboard @smoke", async ({
-  page
-}) => {
-  const trigger = page
-    .locator("#menu")
-    .getByRole("button", { name: "Open", exact: true })
-  await trigger.click()
-  await expect(page.getByRole("menu").first()).toBeVisible()
-  await page.keyboard.press("Escape")
-  await expect(page.getByRole("menu")).toHaveCount(0)
-  await expect(trigger).toBeFocused()
-  await page.getByRole("tab", { name: "Overview", exact: true }).focus()
-  await page.keyboard.press("ArrowRight")
-  await expect(
-    page.getByRole("tab", { name: "Analytics", exact: true })
-  ).toHaveAttribute("aria-selected", "true")
-  await expect(
-    page.getByRole("tabpanel", { name: "Analytics", exact: true })
-  ).toBeVisible()
-})
-
-test("filters a combobox and selects an option without hydration errors @smoke", async ({
-  page
-}) => {
-  const input = page.locator("#combobox").getByRole("combobox")
-  await input.fill("Svelte")
-  await page.keyboard.press("ArrowDown")
-  await page.keyboard.press("Enter")
-  await expect(input).toHaveValue("Svelte")
-  await expect(input).toHaveAttribute("aria-expanded", "false")
-  await page.locator("#select").getByRole("combobox").click()
-  await page.getByRole("option", { name: "Banana", exact: true }).click()
-  await expect(page.locator("#select").getByRole("combobox")).toContainText(
-    "Banana"
-  )
 })

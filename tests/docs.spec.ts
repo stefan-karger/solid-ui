@@ -2,6 +2,8 @@ import { readdirSync } from "node:fs"
 
 import { expect, test } from "@playwright/test"
 
+import { hydrateAll } from "./hydrate"
+
 const pages = ["components", "ai-elements"].flatMap((section) =>
   readdirSync(`apps/docs/dist/docs/${section}`, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
@@ -29,16 +31,10 @@ for (const slug of pages) {
     })
     const response = await page.goto(`/docs/${slug}/`)
     expect(response?.status()).toBe(200)
-    const islands = page.locator("astro-island")
-    for (const island of await islands.all()) {
-      await island.evaluate((node) =>
-        node.parentElement?.scrollIntoView({ block: "center" })
-      )
-      await expect(island).not.toHaveAttribute("ssr", "", { timeout: 30_000 })
-      await expect(island).not.toContainText(
-        "The component preview could not be loaded."
-      )
-    }
+    await hydrateAll(page)
+    await expect(
+      page.getByText("The component preview could not be loaded.")
+    ).toHaveCount(0)
     if (slug === "components/navigation-menu") {
       const preview = page.locator('article[data-slot="docs"]')
       await preview

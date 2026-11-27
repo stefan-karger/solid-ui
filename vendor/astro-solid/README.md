@@ -82,7 +82,9 @@ prop reconciliation, unmount cleanup, and independent island hydration. Browser
 tests exercise UI SDK controls in Astro dev and production, then every component
 docs page. Console errors and hydration errors fail the suite. The dev fixture disables
 Astro's development toolbar and uses one browser worker to avoid exhausting Chromium
-with concurrent requests for the unbundled SDK graph. Production and docs keep two workers.
+with concurrent requests for the unbundled SDK graph. Production and docs use four
+local workers (two on CI). The fixture tests run in `pnpm validate:full`; the fast
+loop's smoke tests cover the adapter through the production docs build.
 
 To update the PR pin, fetch its integration and renderer source at one commit,
 refresh the file hashes and package metadata in `revision.json`, rebuild, reinstall,

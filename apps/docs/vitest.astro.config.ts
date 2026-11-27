@@ -10,11 +10,16 @@ export default getViteConfig(
       alias: { "~": fileURLToPath(new URL("./src", import.meta.url)) }
     },
     test: {
-      // Each project owns its cache setting; the registry glob must stay current.
+      // A cached transform keeps a stale import.meta.glob file list.
       fsModuleCache: false,
       name: "astro-render",
       environment: "node",
-      include: ["src/components/docs/**/*.render.test.ts"],
+      // registry.server prepares sources against the theme stylesheet.
+      css: { include: [/style-nova\.css/] },
+      include: [
+        "src/components/docs/**/*.render.test.ts",
+        "src/lib/registry.server.test.ts"
+      ],
       exclude: ["**/node_modules/**", "**/dist/**"]
     }
   },

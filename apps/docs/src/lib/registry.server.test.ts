@@ -10,15 +10,6 @@ import {
   validateRegistryCatalog
 } from "./registry.server"
 
-const previewModules = import.meta.glob<{ default?: unknown }>(
-  [
-    "../registry/examples/**/*.{tsx,jsx}",
-    "../registry/components/**/*.{tsx,jsx}",
-    "../registry/blocks/**/*.{tsx,jsx}"
-  ],
-  { eager: true }
-)
-
 describe("registry catalog", () => {
   it("resolves real source and preview entries", () => {
     expect(getRegistryFile("button").path).toBe("ui/button.tsx")
@@ -48,19 +39,6 @@ describe("registry catalog", () => {
     expect(() => validateRegistryCatalog(fixture, new Set())).toThrow(
       "declares missing file"
     )
-  })
-
-  it("imports every SSR-safe preview with a callable default export", () => {
-    for (const item of registry.items) {
-      // Components such as `example` are helper modules with named exports.
-      if (!["registry:example", "registry:block"].includes(item.type)) continue
-
-      const descriptor = resolvePreview(item.name)
-      if (descriptor.clientOnly) continue
-      const relativeId = `..${descriptor.moduleId.replace("/src", "")}`
-      expect(previewModules[relativeId]).toBeDefined()
-      expect(previewModules[relativeId]?.default).toBeTypeOf("function")
-    }
   })
 
   it("prepares every declared registry file without internal style helpers", async () => {

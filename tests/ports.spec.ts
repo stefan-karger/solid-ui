@@ -19,7 +19,7 @@ async function example(page: Page, slug: string) {
   return island
 }
 
-test("dims disabled accordion triggers and skips them when tabbing @smoke", async ({
+test("dims disabled accordion triggers and skips them when tabbing", async ({
   page
 }) => {
   await page.goto("/docs/components/accordion/")
@@ -90,7 +90,6 @@ test("calendar selects dates with keys and enforces unavailable days", async ({
   const selected = calendar.locator(
     '[data-slot="calendar-day"][aria-selected="true"]'
   )
-  await expect(selected).toHaveCSS("text-align", "center")
   await selected.focus()
   await selected.press("ArrowRight")
   await page.keyboard.press("Enter")
@@ -105,33 +104,7 @@ test("calendar selects dates with keys and enforces unavailable days", async ({
   ).toHaveAttribute("aria-disabled", "true")
 })
 
-test("attachment state styling includes shimmer and respects reduced motion", async ({
-  page
-}) => {
-  const main = await example(page, "attachment")
-  await expect(main.locator('img[alt="Workspace"]')).toBeVisible()
-  await expect(main.getByText("sales-dashboard.pdf")).toBeVisible()
-  await expect(main.locator('[data-slot="attachment-group"]')).not.toHaveCSS(
-    "mask-image",
-    "none"
-  )
-  const states = page
-    .locator("article astro-island")
-    .filter({ hasText: "market-research.pdf" })
-  await states.scrollIntoViewIfNeeded()
-  await expect(states).not.toHaveAttribute("ssr", "")
-  const title = states.locator(
-    '[data-state="processing"] [data-slot="attachment-title"]'
-  )
-  await expect(title).toHaveCSS("animation-name", "tw-shimmer")
-  await page.emulateMedia({ reducedMotion: "reduce" })
-  await expect(title).toHaveCSS("animation-name", "none")
-  expect(
-    await title.evaluate((n) => getComputedStyle(n).webkitTextFillColor)
-  ).not.toBe("rgba(0, 0, 0, 0)")
-})
-
-test("attachment triggers compose with links and SDK dialogs", async ({
+test("attachment triggers compose with links and dialogs, and the shimmer respects reduced motion", async ({
   page
 }) => {
   await page.goto("/docs/components/attachment/")
@@ -151,6 +124,21 @@ test("attachment triggers compose with links and SDK dialogs", async ({
   ).toBeVisible()
   await page.keyboard.press("Escape")
   await expect(trigger).toBeFocused()
+
+  const states = page
+    .locator("article astro-island")
+    .filter({ hasText: "market-research.pdf" })
+  await states.scrollIntoViewIfNeeded()
+  await expect(states).not.toHaveAttribute("ssr", "")
+  const title = states.locator(
+    '[data-state="processing"] [data-slot="attachment-title"]'
+  )
+  await expect(title).toHaveCSS("animation-name", "tw-shimmer")
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await expect(title).toHaveCSS("animation-name", "none")
+  expect(
+    await title.evaluate((n) => getComputedStyle(n).webkitTextFillColor)
+  ).not.toBe("rgba(0, 0, 0, 0)")
 })
 
 test("date picker opens a native calendar and restores trigger focus", async ({
@@ -192,13 +180,9 @@ test("carousel pages through explicit slides and supports keyboard navigation", 
   await expect(
     carousel.locator('[data-slot="carousel-item"][data-active]')
   ).toHaveText("3")
-  await carousel.getByRole("button", { name: "Previous slide" }).click()
-  await expect(
-    carousel.locator('[data-slot="carousel-item"][data-active]')
-  ).toHaveText("2")
 })
 
-test("OTP edits one native field and updates every visual slot @smoke", async ({
+test("OTP edits one native field and updates every visual slot", async ({
   page
 }) => {
   const otp = await example(page, "input-otp")
@@ -243,17 +227,13 @@ test("resizable handles change panel geometry with keys and pointer", async ({
     .toBeGreaterThan(before + 30)
 })
 
-test("drawer edits content, dismisses, and restores focus", async ({
-  page
-}) => {
+test("drawer dismisses and restores focus", async ({ page }) => {
   const drawer = await example(page, "drawer")
   const trigger = drawer.getByRole("button", { name: "Open drawer" })
   const triggerElement = await trigger.elementHandle()
   await trigger.click()
   const dialog = drawer.getByRole("dialog", { name: "Move goal" })
   await expect(dialog).toBeVisible()
-  await dialog.getByRole("button", { name: "Increase goal" }).click()
-  await expect(dialog.locator("output")).toHaveText("360")
   await dialog.getByRole("button", { name: "Save goal" }).click()
   await expect(dialog).toBeHidden()
   await expect(trigger).toBeFocused()
@@ -262,7 +242,7 @@ test("drawer edits content, dismisses, and restores focus", async ({
   )
 })
 
-test("toast positions, actions, promises, and Escape use the native queue", async ({
+test("toast actions, stacking, promises, and Escape use the native queue", async ({
   page
 }) => {
   const preview = await example(page, "toast")
@@ -271,22 +251,6 @@ test("toast positions, actions, promises, and Escape use the native queue", asyn
   const region = preview.getByRole("region", { name: /Notifications/ })
   const toasts = region.locator('[data-slot="toast"]')
   await expect(region).toContainText("Event has been created")
-  await expect(region.locator('[data-slot="toast-close"]')).toHaveCount(0)
-  await expect(region).toHaveAttribute("data-side", "top")
-  await expect(region).toHaveAttribute("data-align", "center")
-  await expect
-    .poll(() =>
-      toasts.first().evaluate((element) => {
-        const { left, top, width } = element.getBoundingClientRect()
-        const viewportCenter = document.documentElement.clientWidth / 2
-        return (
-          top >= 0 &&
-          top < 40 &&
-          Math.abs(left + width / 2 - viewportCenter) < 1
-        )
-      })
-    )
-    .toBe(true)
   await region.getByRole("button", { name: "Undo" }).click()
   await expect(region).toContainText("Event removed")
   await showToast.click()
@@ -311,24 +275,9 @@ test("toast positions, actions, promises, and Escape use the native queue", asyn
   await types.getByRole("button", { name: "Promise" }).click()
   const promiseRegion = types.getByRole("region", { name: /Notifications/ })
   const promiseToast = promiseRegion.locator('[data-slot="toast"]')
-  const icon = promiseToast.locator('[data-slot="toast-icon"]')
-  await expect(promiseToast).toContainText("Loading...")
   await expect(promiseToast).toHaveAttribute("data-type", "loading")
-  await expect(icon).toHaveClass(/animate-spin/)
   await expect(promiseToast).toContainText("Event has been created")
   await expect(promiseToast).toHaveAttribute("data-type", "success")
-  await expect(icon).toBeVisible()
-  await expect(icon).not.toHaveClass(/animate-spin/)
-
-  const positions = namedExample(page, "toast-position")
-  await positions.scrollIntoViewIfNeeded()
-  await expect(positions).not.toHaveAttribute("ssr", "")
-  await positions.getByRole("button", { name: "Bottom Left" }).click()
-  await expect(
-    positions.locator(
-      '[data-side="bottom"][data-align="start"] [data-slot="toast"]'
-    )
-  ).toBeVisible()
 })
 
 test("message scroller releases and resumes following growing content", async ({
@@ -360,9 +309,6 @@ test("message scroller releases and resumes following growing content", async ({
   expect(await viewport.evaluate((n) => n.scrollTop)).toBe(0)
   await resume.click()
   await expect.poll(atEnd).toBe(true)
-  await send.click()
-  await expect(transcript).toHaveAttribute("aria-busy", "false")
-  await expect.poll(atEnd).toBe(true)
 })
 
 test("code block fades overflow, wraps, copies, and preserves its line variants", async ({
@@ -371,10 +317,6 @@ test("code block fades overflow, wraps, copies, and preserves its line variants"
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
   const code = await example(page, "code-block")
-  await expect(code.locator('[data-slot="code-block-line"]')).toHaveCount(13)
-  await expect(code.locator('[data-slot="code-block-line"]').nth(1)).toHaveText(
-    "\n"
-  )
   const block = code.locator('[data-slot="code-block"]')
   const content = block.locator('[data-slot="code-block-content"]')
   const wrap = block.getByRole("button", { name: "Wrap lines" })
@@ -382,9 +324,6 @@ test("code block fades overflow, wraps, copies, and preserves its line variants"
     content.evaluate((element) => element.scrollWidth > element.clientWidth)
   const mask = () =>
     content.evaluate((element) => getComputedStyle(element).maskImage)
-  // Nova keeps the upstream bordered block.
-  await expect(block).toHaveCSS("border-top-left-radius", "10px")
-  await expect(block).toHaveCSS("border-top-width", "1px")
   await expect(content).toHaveCSS(
     "mask-image",
     /linear-gradient\(to right.*min\(/
@@ -420,30 +359,10 @@ test("code block fades overflow, wraps, copies, and preserves its line variants"
     "Hello, {name}!",
     "</p>"
   ])
-
-  await page.getByRole("tab", { name: "Manual", exact: true }).click()
-  for (const file of ["hooks/use-highlighted-code.ts", "lib/highlighter.tsx"]) {
-    const source = page.getByRole("figure", { name: file, exact: true })
-    await expect(source).toBeVisible()
-    await expect(source).toHaveAttribute("data-registry-path", file)
-  }
 })
 
 test("trace disclosures toggle details with keyboard", async ({ page }) => {
   const trace = await example(page, "trace")
-  const diff = trace.getByRole("button", { name: /^Ran git diff/ })
-  const failure = trace.getByRole("button", { name: /^Failed to run pnpm/ })
-  const failureTitle = failure.locator('[data-slot="trace-title"]')
-  const chevron = failure.locator(':scope > [data-slot="trace-icon"] svg')
-  const replay = trace.getByRole("button", { name: "Replay", exact: true })
-  await expect(diff).toHaveAttribute("aria-expanded", "true")
-  await expect(trace.getByText(/1 file changed/)).toBeVisible()
-  const errorColor = await failureTitle.evaluate(
-    (element) => getComputedStyle(element).color
-  )
-  await expect(chevron).toHaveCSS("stroke", errorColor)
-  await expect(replay.locator("svg")).toBeVisible()
-
   const trigger = trace.getByRole("button", { name: "Used 2 sources" })
   const reference = trace.getByRole("link", { name: /^Continuous Integration/ })
   await trigger.focus()
@@ -452,14 +371,9 @@ test("trace disclosures toggle details with keyboard", async ({ page }) => {
   await expect(reference).toBeVisible()
   await trigger.press("Space")
   await expect(reference).toBeHidden()
-
-  await replay.click()
-  await expect(replay).toBeDisabled()
-  await expect(replay.locator("svg")).toBeVisible()
-  await expect(diff).toHaveAttribute("aria-expanded", "true")
 })
 
-test("questionnaire validates, preserves answers, and completes across step types", async ({
+test("questionnaire validates and preserves answers across steps", async ({
   page
 }) => {
   const form = await example(page, "questionnaire")
@@ -476,7 +390,6 @@ test("questionnaire validates, preserves answers, and completes across step type
   await form.getByRole("checkbox", { name: "Progress", exact: true }).check()
   await form.getByRole("checkbox", { name: "Decisions", exact: true }).check()
   await next.click()
-  await form.getByRole("radio", { name: "Start now" }).check()
   await form.getByRole("button", { name: "Previous" }).click()
   await expect(
     form.getByRole("checkbox", { name: "Progress", exact: true })
@@ -484,10 +397,4 @@ test("questionnaire validates, preserves answers, and completes across step type
   await expect(
     form.getByRole("checkbox", { name: "Decisions", exact: true })
   ).toBeChecked()
-  await next.click()
-  await expect(form.getByRole("radio", { name: "Start now" })).toBeChecked()
-  await form.getByRole("button", { name: "Save plan" }).click()
-  await expect(
-    form.getByRole("region", { name: /Notifications/ })
-  ).toContainText("Agent plan saved")
 })

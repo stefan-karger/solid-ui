@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test"
-test("hydrates native SDK components and updates active descendants @smoke", async ({
+test("hydrates native SDK components and updates active descendants", async ({
   page
 }) => {
   const errors: string[] = []

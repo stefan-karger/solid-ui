@@ -7,7 +7,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "public/r/**"]
+      "outputs": ["dist/**", "public/r/**", "public/schema.json"]
     },
     "check": {
       "dependsOn": ["^check"],

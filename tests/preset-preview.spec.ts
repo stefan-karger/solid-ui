@@ -273,9 +273,7 @@ test("the site toggle overrides the system mode and updates an embedded preset p
   await expect(root).toHaveClass("style-sera")
 })
 
-test("default and unsupported presets use neutral colors @smoke", async ({
-  page
-}) => {
+test("default and unsupported presets use neutral colors", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" })
   await page.goto(preview)
   const root = page.locator("html")

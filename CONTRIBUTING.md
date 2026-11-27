@@ -92,8 +92,8 @@ The docs use reproducible builds of Astro's official Solid 2 pull request. Read 
 ## Testing
 
 ```bash
-pnpm validate        # format, lint, types, unit tests, builds and smoke browser tests (~1 min)
-pnpm validate:full   # everything above plus every browser test (~7 min)
+pnpm validate        # format, lint, types, unit tests, builds and smoke browser tests (~30 s)
+pnpm validate:full   # everything above plus the adapter fixture and every browser test (~2 min)
 pnpm test:e2e tests/<name>.spec.ts
 ```
 
