@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIDataTypes,
@@ -94,49 +94,11 @@ function TodoLine(componentProps: { todo: Todo; streaming: boolean }) {
       >
         <TraceIcon>
           {todo.status === "completed" ? (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="m16 9-5.5 5.5L8 12" />
-            </svg>
+            <IconPlaceholder lucide="CircleCheckIcon" />
           ) : todo.status === "in_progress" ? (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="1" />
-              <circle cx="12" cy="12" r="10" />
-            </svg>
+            <IconPlaceholder lucide="CircleDotIcon" />
           ) : (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" />
-            </svg>
+            <IconPlaceholder lucide="CircleIcon" />
           )}
         </TraceIcon>
         <TraceTitle>{todo.content}</TraceTitle>
@@ -158,23 +120,7 @@ function TodoQueue(componentProps: { todos: Todo[]; streaming: boolean }) {
             <TraceCollapsibleTrigger>
               <TraceLine>
                 <TraceIcon>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M13 5h8" />
-                    <path d="M13 12h8" />
-                    <path d="M13 19h8" />
-                    <path d="m3 17 2 2 4-4" />
-                    <rect x="3" y="4" width="6" height="6" rx="1" />
-                  </svg>
+                  <IconPlaceholder lucide="ListTodoIcon" />
                 </TraceIcon>
                 <TraceTitle>{pending.length} to do</TraceTitle>
               </TraceLine>
@@ -195,23 +141,7 @@ function TodoQueue(componentProps: { todos: Todo[]; streaming: boolean }) {
             <TraceCollapsibleTrigger>
               <TraceLine>
                 <TraceIcon>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M13 5h8" />
-                    <path d="M13 12h8" />
-                    <path d="M13 19h8" />
-                    <path d="m3 17 2 2 4-4" />
-                    <path d="m3 7 2 2 4-4" />
-                  </svg>
+                  <IconPlaceholder lucide="ListChecksIcon" />
                 </TraceIcon>
                 <TraceTitle>{completed.length} completed</TraceTitle>
               </TraceLine>

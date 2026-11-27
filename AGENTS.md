@@ -11,7 +11,9 @@ Build the Astro PR packages with `pnpm astro:build`; `pnpm astro:check` verifies
 the source hashes and reproducible archives. See `vendor/astro-solid/README.md`.
 
 Import SDK parts by name, aliasing each as `SdkXxx`. Compose them directly rather
-than introducing namespace imports or `Primitive.Root` maps. Use SDK `render` for
+than introducing namespace imports or `Primitive.Root` maps. Registry files name
+icons with `<IconPlaceholder lucide="ChevronDownIcon" />` (see REGISTRY.md),
+never inline SVG or an icon library import. Use SDK `render` for
 composition and explicit collection children. Edit the theme CSS directly in
 `apps/docs/src/registry/styles`. The docs and registry source export both use
 these styles. Shared Tailwind utilities live in

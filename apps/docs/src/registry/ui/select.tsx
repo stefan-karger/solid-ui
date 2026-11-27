@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps, JSX } from "@solidjs/web"
 import {
   Select as SdkSelect,
@@ -16,6 +15,7 @@ import {
 import { omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 const Select = SdkSelect
 const SelectGroup = (
   props: Omit<ComponentProps<typeof SdkSelectGroup>, "class" | "children"> & {
@@ -58,20 +58,10 @@ const SelectTrigger = (props: SelectTriggerProps) => {
       )}
     >
       {props.children}
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
+      <IconPlaceholder
+        lucide="ChevronDownIcon"
         class="cn-select-trigger-icon pointer-events-none"
-      >
-        <path d="m6 9 6 6 6-6" />
-      </svg>
+      />
     </SdkSelectTrigger>
   )
 }
@@ -115,20 +105,10 @@ const SelectItem = (
         {props.children}
       </SdkSelectItemText>
       <SdkSelectItemIndicator class="cn-select-item-indicator">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+        <IconPlaceholder
+          lucide="CheckIcon"
           class="cn-select-item-indicator-icon pointer-events-none"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+        />
       </SdkSelectItemIndicator>
     </SdkSelectItem>
   )

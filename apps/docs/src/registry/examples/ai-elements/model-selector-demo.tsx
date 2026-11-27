@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -93,20 +93,7 @@ export default function ModelSelectorDemo() {
               disabled={canSend()}
               aria-label="Attach"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5v14" />
-              </svg>
+              <IconPlaceholder lucide="PlusIcon" />
             </InputGroupButton>
             <DropdownMenu>
               <DropdownMenuTrigger
@@ -119,19 +106,7 @@ export default function ModelSelectorDemo() {
                     class="ml-auto"
                   >
                     {currentModel().name}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <IconPlaceholder lucide="ChevronDownIcon" />
                   </InputGroupButton>
                 )}
               />
@@ -177,19 +152,7 @@ export default function ModelSelectorDemo() {
                   >
                     <span class="text-muted-foreground">Effort</span>
                     {currentEffort().name}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <IconPlaceholder lucide="ChevronDownIcon" />
                   </InputGroupButton>
                 )}
               />
@@ -221,20 +184,7 @@ export default function ModelSelectorDemo() {
               disabled={!canSend()}
               aria-label="Send"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m5 12 7-7 7 7" />
-                <path d="M12 19V5" />
-              </svg>
+              <IconPlaceholder lucide="ArrowUpIcon" />
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>

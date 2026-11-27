@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal, For, onCleanup, Show } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Bubble, BubbleContent } from "~/registry/ui/bubble"
 import { Button } from "~/registry/ui/button"
 import { Message, MessageContent } from "~/registry/ui/message"
@@ -62,20 +62,7 @@ export default function TraceToolCalls() {
                       fallback={
                         <TraceLine status="running">
                           <TraceIcon>
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M12 19h8" />
-                              <path d="m4 17 6-6-6-6" />
-                            </svg>
+                            <IconPlaceholder lucide="TerminalIcon" />
                           </TraceIcon>
                           <TraceTitle>Running {call.command}</TraceTitle>
                         </TraceLine>
@@ -85,20 +72,7 @@ export default function TraceToolCalls() {
                         <TraceCollapsibleTrigger>
                           <TraceLine status={call.failed ? "error" : undefined}>
                             <TraceIcon>
-                              <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <path d="M12 19h8" />
-                                <path d="m4 17 6-6-6-6" />
-                              </svg>
+                              <IconPlaceholder lucide="TerminalIcon" />
                             </TraceIcon>
                             <TraceTitle>
                               {call.failed ? "Failed" : "Ran"} {call.command}

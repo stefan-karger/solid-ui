@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
 import {
   Menu as SdkMenu,
@@ -20,6 +19,7 @@ import { Menubar as SdkMenubar } from "@ui-sdk/solid/menubar"
 import { createUniqueId, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 type MenubarProps = Omit<ComponentProps<typeof SdkMenubar>, "class"> & {
   class?: string
 }
@@ -119,19 +119,7 @@ const MenubarCheckboxItem = (props: MenubarCheckboxItemProps) => {
         class="cn-menubar-checkbox-item-indicator pointer-events-none absolute flex items-center justify-center"
       >
         <SdkMenuItemIndicator>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <IconPlaceholder lucide="CheckIcon" />
         </SdkMenuItemIndicator>
       </span>
       {props.children}
@@ -168,19 +156,7 @@ const MenubarRadioItem = (props: MenubarRadioItemProps) => {
         class="cn-menubar-radio-item-indicator pointer-events-none absolute flex items-center justify-center"
       >
         <SdkMenuItemIndicator>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <IconPlaceholder lucide="CheckIcon" />
         </SdkMenuItemIndicator>
       </span>
       {props.children}
@@ -247,20 +223,7 @@ const MenubarSubTrigger = (props: MenubarSubTriggerProps) => {
       {...others}
     >
       {props.children}
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        class="ml-auto"
-      >
-        <path d="m9 18 6-6-6-6" />
-      </svg>
+      <IconPlaceholder lucide="ChevronRightIcon" class="ml-auto" />
     </SdkMenuSubTrigger>
   )
 }

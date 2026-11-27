@@ -1,8 +1,8 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { ComponentProps } from "@solidjs/web"
 import { For, type Component } from "solid-js"
 import { createMemo, createSignal, Show } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import {
   Command,
@@ -15,66 +15,6 @@ import {
   CommandList,
   CommandShortcut
 } from "~/registry/ui/command"
-
-function CreditCard(props: ComponentProps<"svg">) {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <rect width="20" height="14" x="2" y="5" rx="2" />
-      <line x1="2" x2="22" y1="10" y2="10" />
-    </svg>
-  )
-}
-
-function Settings(props: ComponentProps<"svg">) {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  )
-}
-
-function User(props: ComponentProps<"svg">) {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  )
-}
 
 type CommandOption = {
   value: string
@@ -92,9 +32,24 @@ const options: CommandGroupOption[] = [
   {
     heading: "Settings",
     items: [
-      { value: "profile", label: "Profile", shortcut: "⌘P", icon: User },
-      { value: "billing", label: "Billing", shortcut: "⌘B", icon: CreditCard },
-      { value: "settings", label: "Settings", shortcut: "⌘S", icon: Settings }
+      {
+        value: "profile",
+        label: "Profile",
+        shortcut: "⌘P",
+        icon: (props) => <IconPlaceholder lucide="UserIcon" {...props} />
+      },
+      {
+        value: "billing",
+        label: "Billing",
+        shortcut: "⌘B",
+        icon: (props) => <IconPlaceholder lucide="CreditCardIcon" {...props} />
+      },
+      {
+        value: "settings",
+        label: "Settings",
+        shortcut: "⌘S",
+        icon: (props) => <IconPlaceholder lucide="SettingsIcon" {...props} />
+      }
     ]
   }
 ]

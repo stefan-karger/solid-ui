@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   Attachment,
   AttachmentAction,
@@ -50,20 +50,7 @@ export default function AttachmentImage() {
               </AttachmentContent>
               <AttachmentActions>
                 <AttachmentAction aria-label={`Remove ${image.name}`}>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M18 6 6 18" />
-                    <path d="m6 6 12 12" />
-                  </svg>
+                  <IconPlaceholder lucide="XIcon" />
                 </AttachmentAction>
               </AttachmentActions>
               <AttachmentTrigger

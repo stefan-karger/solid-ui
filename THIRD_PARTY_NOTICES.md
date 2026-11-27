@@ -2,8 +2,9 @@
 
 ## Lucide
 
-Registry items and the docs inline icon paths from Lucide (https://lucide.dev),
-distributed under the ISC License:
+The docs site inlines some icon paths from Lucide (https://lucide.dev), and
+registry items use its `@lucide/solid` package. Lucide is distributed under the
+ISC License:
 
 ```
 ISC License

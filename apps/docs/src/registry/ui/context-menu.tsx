@@ -1,4 +1,3 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { type ComponentProps } from "@solidjs/web"
 import {
   Menu as SdkMenu,
@@ -19,6 +18,7 @@ import {
 import { createUniqueId, merge, omit } from "solid-js"
 
 import { cn } from "~/lib/utils"
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 type ContextMenuProps = ComponentProps<typeof SdkMenu>
 const ContextMenu = (props: ContextMenuProps) => <SdkMenu {...props} />
 type ContextMenuTriggerProps = Omit<
@@ -126,20 +126,7 @@ const ContextMenuSubTrigger = (props: ContextMenuSubTriggerProps) => {
       {...others}
     >
       {props.children}
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        class="ml-auto"
-      >
-        <path d="m9 18 6-6-6-6" />
-      </svg>
+      <IconPlaceholder lucide="ChevronRightIcon" class="ml-auto" />
     </SdkMenuSubTrigger>
   )
 }
@@ -182,19 +169,7 @@ const ContextMenuCheckboxItem = (props: ContextMenuCheckboxItemProps) => {
     >
       <span class="cn-context-menu-item-indicator pointer-events-none">
         <SdkMenuItemIndicator>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <IconPlaceholder lucide="CheckIcon" />
         </SdkMenuItemIndicator>
       </span>
       {props.children}
@@ -228,19 +203,7 @@ const ContextMenuRadioItem = (props: ContextMenuRadioItemProps) => {
     >
       <span class="cn-context-menu-item-indicator pointer-events-none">
         <SdkMenuItemIndicator>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <IconPlaceholder lucide="CheckIcon" />
         </SdkMenuItemIndicator>
       </span>
       {props.children}

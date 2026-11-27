@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   Item,
   ItemActions,
@@ -19,20 +18,7 @@ export default function ItemLink() {
           </ItemDescription>
         </ItemContent>
         <ItemActions>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            class="size-4"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
+          <IconPlaceholder lucide="ChevronRightIcon" class="size-4" />
         </ItemActions>
       </Item>
 
@@ -50,21 +36,7 @@ export default function ItemLink() {
           </ItemDescription>
         </ItemContent>
         <ItemActions>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            class="size-4"
-          >
-            <path d="M7 7h10v10" />
-            <path d="M7 17 17 7" />
-          </svg>
+          <IconPlaceholder lucide="ArrowUpRightIcon" class="size-4" />
         </ItemActions>
       </Item>
     </div>

@@ -1,4 +1,6 @@
 // Field order and widths from shadcn/ui f50887a, packages/registry/src/preset/preset.ts (MIT).
+import { iconLibraryNames } from "../icons.ts"
+
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 const styles = [
   "nova",
@@ -90,6 +92,7 @@ export const presetOptions = {
   menuAccent: menuAccents,
   radius: radii,
   font: fonts,
+  iconLibrary: iconLibraryNames,
   theme: themes,
   baseColor: baseColors,
   style: styles,
@@ -106,7 +109,7 @@ const fieldLayout = {
   menuAccent: [3, 3],
   radius: [6, 4],
   font: [10, 6],
-  // Offsets 16–21 are reserved for the icon library; zero encodes Lucide.
+  iconLibrary: [16, 6],
   theme: [22, 6],
   baseColor: [28, 6],
   style: [34, 6],

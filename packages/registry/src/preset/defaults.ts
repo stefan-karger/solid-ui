@@ -4,12 +4,13 @@ import { normalizePreset } from "./normalize.ts"
 
 export type NamedPreset = {
   title: string
-  // Fonts only: components ship their icons as inline SVG.
+  // The fonts; every named preset uses Lucide icons.
   description: string
   preset: Preset
 }
 
 const base = {
+  iconLibrary: "lucide",
   baseColor: "neutral",
   theme: "neutral",
   chartColor: "neutral",
@@ -20,7 +21,7 @@ const base = {
 } as const
 
 // One preset per style, from shadcn/ui 055aa6b,
-// packages/shadcn/src/preset/defaults.ts (MIT), without the icon libraries.
+// packages/shadcn/src/preset/defaults.ts (MIT), all with Lucide icons.
 export const DEFAULT_PRESETS: Record<Style, NamedPreset> = {
   nova: {
     title: "Nova",

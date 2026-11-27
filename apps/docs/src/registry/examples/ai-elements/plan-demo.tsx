@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIMessage,
@@ -80,21 +80,7 @@ function PlanRow(componentProps: {
         <TraceCollapsibleTrigger>
           <TraceLine status={running ? "running" : undefined}>
             <TraceIcon>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="6" cy="19" r="3" />
-                <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
-                <circle cx="18" cy="5" r="3" />
-              </svg>
+              <IconPlaceholder lucide="RouteIcon" />
             </TraceIcon>
             <TraceTitle>{plan.title}</TraceTitle>
             <TraceDescription>
@@ -118,49 +104,11 @@ function PlanRow(componentProps: {
                   >
                     <TraceIcon>
                       {step.status === "done" ? (
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <circle cx="12" cy="12" r="10" />
-                          <path d="m16 9-5.5 5.5L8 12" />
-                        </svg>
+                        <IconPlaceholder lucide="CircleCheckIcon" />
                       ) : step.status === "running" ? (
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <circle cx="12" cy="12" r="1" />
-                          <circle cx="12" cy="12" r="10" />
-                        </svg>
+                        <IconPlaceholder lucide="CircleDotIcon" />
                       ) : (
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <circle cx="12" cy="12" r="10" />
-                        </svg>
+                        <IconPlaceholder lucide="CircleIcon" />
                       )}
                     </TraceIcon>
                     <TraceTitle>{step.title}</TraceTitle>

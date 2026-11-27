@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For, createSignal, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIDataTypes,
@@ -207,20 +207,7 @@ export default function ChatDemo() {
                     }}
                     disabled={busy()}
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
-                      <path d="M21 3v5h-5" />
-                    </svg>
+                    <IconPlaceholder lucide="RotateCwIcon" />
                   </Button>
                 )}
               />
@@ -234,26 +221,7 @@ export default function ChatDemo() {
               <Empty class="h-full">
                 <EmptyHeader>
                   <EmptyMedia variant="icon">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M10.1 2.182a10 10 0 0 1 3.8 0" />
-                      <path d="M13.9 21.818a10 10 0 0 1-3.8 0" />
-                      <path d="M17.609 3.72a10 10 0 0 1 2.69 2.7" />
-                      <path d="M2.182 13.9a10 10 0 0 1 0-3.8" />
-                      <path d="M20.28 17.61a10 10 0 0 1-2.7 2.69" />
-                      <path d="M21.818 10.1a10 10 0 0 1 0 3.8" />
-                      <path d="M3.721 6.391a10 10 0 0 1 2.7-2.69" />
-                      <path d="m6.163 21.117-2.906.85a1 1 0 0 1-1.236-1.169l.965-2.98" />
-                    </svg>
+                    <IconPlaceholder lucide="MessageCircleDashedIcon" />
                   </EmptyMedia>
                   <EmptyTitle>What should we build?</EmptyTitle>
                   <EmptyDescription>
@@ -369,79 +337,22 @@ export default function ChatDemo() {
                           size="icon-sm"
                           variant="outline"
                         >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                          >
-                            <path d="M5 12h14" />
-                            <path d="M12 5v14" />
-                          </svg>
+                          <IconPlaceholder lucide="PlusIcon" />
                         </InputGroupButton>
                       )}
                     />
                     <DropdownMenuContent align="start" side="top" class="w-44">
                       <DropdownMenuItem>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
-                        </svg>
+                        <IconPlaceholder lucide="PaperclipIcon" />
                         Add Photos & Files
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44" />
-                          <path d="m13.56 11.747 4.332-.924" />
-                          <path d="m16 21-3.105-6.21" />
-                          <path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z" />
-                          <path d="m6.158 8.633 1.114 4.456" />
-                          <path d="m8 21 3.105-6.21" />
-                          <circle cx="12" cy="13" r="2" />
-                        </svg>
+                        <IconPlaceholder lucide="TelescopeIcon" />
                         Deep Research
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <circle cx="12" cy="12" r="10" />
-                          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                          <path d="M2 12h20" />
-                        </svg>
+                        <IconPlaceholder lucide="GlobeIcon" />
                         Web Search
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -453,20 +364,7 @@ export default function ChatDemo() {
                     disabled={!canSend()}
                     class="ml-auto"
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m5 12 7-7 7 7" />
-                      <path d="M12 19V5" />
-                    </svg>
+                    <IconPlaceholder lucide="ArrowUpIcon" />
                     <span class="sr-only">Send</span>
                   </InputGroupButton>
                 </InputGroupAddon>
@@ -505,35 +403,12 @@ function ReasoningRow(componentProps: { text: string; running: boolean }) {
           <TraceLine status={running ? "running" : undefined}>
             <TraceIcon>
               {running ? (
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
+                <IconPlaceholder
+                  lucide="LoaderCircleIcon"
                   class="animate-spin"
-                >
-                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                </svg>
+                />
               ) : (
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="m16 9-5.5 5.5L8 12" />
-                </svg>
+                <IconPlaceholder lucide="CircleCheckIcon" />
               )}
             </TraceIcon>
             <TraceTitle>{running ? "Thinking" : "Thought"}</TraceTitle>
@@ -560,20 +435,7 @@ function ToolRow(componentProps: { part: ToolPart; streaming: boolean }) {
           <TraceCollapsibleTrigger>
             <TraceLine status={failed ? "error" : undefined}>
               <TraceIcon>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 19h8" />
-                  <path d="m4 17 6-6-6-6" />
-                </svg>
+                <IconPlaceholder lucide="TerminalIcon" />
               </TraceIcon>
               <TraceTitle>
                 {failed ? "Failed to run" : "Ran"} {command}
@@ -593,20 +455,7 @@ function ToolRow(componentProps: { part: ToolPart; streaming: boolean }) {
     return (
       <TraceLine status={streaming ? "running" : "error"}>
         <TraceIcon>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 19h8" />
-            <path d="m4 17 6-6-6-6" />
-          </svg>
+          <IconPlaceholder lucide="TerminalIcon" />
         </TraceIcon>
         <TraceTitle>
           {streaming ? "Running" : "Failed to run"} {command}

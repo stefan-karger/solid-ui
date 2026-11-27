@@ -7,7 +7,7 @@ import {
 } from "./config.ts"
 
 describe("components.json", () => {
-  it("fills in the menu options and the ~/ aliases", () => {
+  it("fills in Lucide, the menu options and the ~/ aliases", () => {
     expect(
       componentsJsonSchema.parse({
         style: "nova",
@@ -18,6 +18,7 @@ describe("components.json", () => {
       style: "nova",
       preset: "b0",
       tailwind: { css: "src/App.css" },
+      iconLibrary: "lucide",
       menuColor: "default",
       menuAccent: "subtle",
       aliases: DEFAULT_ALIASES

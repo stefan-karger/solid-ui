@@ -19,6 +19,12 @@ const previewModules = import.meta.glob<{ default?: unknown }>(
   { eager: true }
 )
 
+const rawRegistryModules = import.meta.glob<string>("../registry/**/*.tsx", {
+  query: "?raw",
+  import: "default",
+  eager: true
+})
+
 describe("registry catalog", () => {
   it("resolves real source and preview entries", () => {
     expect(getRegistryFile("button").path).toBe("ui/button.tsx")
@@ -81,20 +87,22 @@ describe("registry catalog", () => {
     }
   })
 
-  it("ships icons inline, hidden unless they are named", async () => {
+  it("names its icons through IconPlaceholder", async () => {
     const findings: string[] = []
+    for (const [path, raw] of Object.entries(rawRegistryModules)) {
+      if (path.includes("/icons/")) continue
+      if (/<svg\b/.test(raw)) findings.push(`${path}: inline svg`)
+      if (/from "(?:@lucide\/solid|lucide-solid)/.test(raw))
+        findings.push(`${path}: imports an icon library`)
+    }
     for (const item of registry.items) {
       for (const file of item.files ?? []) {
         const { code } = await getRegistrySource({
           name: item.name,
           file: file.path
         })
-        // Lucide still targets Solid 1, so registry files must not import it.
-        if (code.includes('from "lucide-solid"'))
-          findings.push(`${file.path}: imports lucide-solid`)
-        for (const [svg] of code.matchAll(/<svg\b[^>]*>/g))
-          if (!/aria-hidden="true"|aria-label=|\{\.\.\.props\}/.test(svg))
-            findings.push(`${file.path}: unlabeled visible svg`)
+        if (code.includes("IconPlaceholder"))
+          findings.push(`${file.path}: unresolved IconPlaceholder`)
       }
     }
     expect(findings).toEqual([])

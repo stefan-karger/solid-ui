@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Avatar, AvatarFallback, AvatarImage } from "~/registry/ui/avatar"
 import { Button } from "~/registry/ui/button"
 import {
@@ -44,20 +44,7 @@ export default function ItemDropdown() {
         class="w-fit"
       >
         Select
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          class="size-4"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
+        <IconPlaceholder lucide="ChevronDownIcon" class="size-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end" class="w-56">
         <DropdownMenuGroup>

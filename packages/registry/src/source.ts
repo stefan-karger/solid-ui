@@ -1,3 +1,4 @@
+import { transformIcons, type IconLibraryName } from "./icons.ts"
 import { MENU_MARKERS } from "./menu.ts"
 
 export const ACTIVE_REGISTRY_STYLE = "nova"
@@ -26,6 +27,9 @@ type PrepareRegistrySourceOptions = {
   // Keep the menu marker classes for the CLI, which resolves them from the
   // project's menu color. Without it they are removed, as for the default.
   keepMenuMarkers?: boolean
+  // Resolve the icon placeholders to this library, as the docs show them.
+  // Without it they stay for the CLI, which resolves them from the project.
+  iconLibrary?: IconLibraryName
 }
 
 const INTERNAL_ALIASES = [
@@ -221,6 +225,7 @@ export async function prepareRegistrySource(
   code = rewriteInternalAliases(code)
 
   if (SCRIPT_LANGUAGES.has(language)) {
+    if (options.iconLibrary) code = transformIcons(code, options.iconLibrary)
     if (!options.styleCss) {
       throw new Error(
         `[registry-source] Missing style-${options.styleName}.css while preparing ${options.registryPath}`

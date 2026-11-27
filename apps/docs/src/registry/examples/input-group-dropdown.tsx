@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,22 +34,7 @@ export default function InputGroupDropdown() {
               )}
               aria-label="More"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                class="size-4"
-              >
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="19" cy="12" r="1" />
-                <circle cx="5" cy="12" r="1" />
-              </svg>
+              <IconPlaceholder lucide="EllipsisIcon" class="size-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuGroup>
@@ -73,20 +58,7 @@ export default function InputGroupDropdown() {
               class="pr-1.5 text-xs"
             >
               {scope()}
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                class="size-3"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
+              <IconPlaceholder lucide="ChevronDownIcon" class="size-3" />
             </DropdownMenuTrigger>
             <DropdownMenuContent class="[--radius:0.95rem]">
               <DropdownMenuGroup>

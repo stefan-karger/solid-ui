@@ -377,6 +377,9 @@ importers:
       '@fontsource/instrument-serif':
         specifier: 5.3.0
         version: 5.3.0
+      '@lucide/solid':
+        specifier: 1.81.0
+        version: 1.81.0(solid-js@2.0.1)
       '@solid-ui/registry':
         specifier: workspace:*
         version: link:../../packages/registry
@@ -1492,6 +1495,11 @@ packages:
 
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
+
+  '@lucide/solid@1.81.0':
+    resolution: {integrity: sha512-aviP9glz9JShIifWMobv0T/JbJRmpysWBbYtPuHrKsDgPObmgU8+8guOutdYsLHbWmcU9OsIUkxAD2f+NLt3dg==}
+    peerDependencies:
+      solid-js: ^2.0.0-rc.0
 
   '@manypkg/find-root@3.1.0':
     resolution: {integrity: sha512-BcSqCyKhBVZ5YkSzOiheMCV41kqAFptW6xGqYSTjkVTl9XQpr+pqHhwgGCOHQtjDCv7Is6EFyA14Sm5GVbVABA==}
@@ -5650,6 +5658,10 @@ snapshots:
       keyv: 5.6.0
 
   '@keyv/serialize@1.1.1': {}
+
+  '@lucide/solid@1.81.0(solid-js@2.0.1)':
+    dependencies:
+      solid-js: 2.0.1
 
   '@manypkg/find-root@3.1.0':
     dependencies:

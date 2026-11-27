@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   Combobox,
   ComboboxContent,
@@ -57,21 +57,7 @@ export default function ComboxboxInputGroup() {
         aria-label="Select a timezone"
       >
         <InputGroupAddon>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-            <path d="M2 12h20" />
-          </svg>
+          <IconPlaceholder lucide="GlobeIcon" />
         </InputGroupAddon>
       </ComboboxInput>
       <ComboboxContent alignOffset={-28} class="w-60">

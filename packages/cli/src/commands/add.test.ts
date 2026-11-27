@@ -45,6 +45,23 @@ const items: Record<string, Partial<RegistryItem>> = {
       }
     ]
   },
+  accordion: {
+    name: "accordion",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/accordion.tsx",
+        type: "registry:ui",
+        content: [
+          'import { IconPlaceholder } from "~/registry/icons/icon-placeholder"',
+          'import { cn } from "~/lib/utils"',
+          "",
+          'export const Icon = () => <IconPlaceholder lucide="ChevronDownIcon" class={cn("size-4")} />',
+          ""
+        ].join("\n")
+      }
+    ]
+  },
   marker: {
     name: "marker",
     type: "registry:ui",
@@ -149,6 +166,24 @@ describe("add", () => {
     const source = read(cwd, "src/components/ui/dropdown-menu.tsx")
     expect(source).toMatch(/"dark z-50 .*bg-popover\/70/)
     expect(source).not.toContain("cn-menu")
+  })
+
+  it("resolves icons to the project's library and installs it", async () => {
+    const cwd = setUp()
+    const { installer } = await add(cwd, ["accordion"])
+    expect(read(cwd, "src/components/ui/accordion.tsx")).toBe(
+      [
+        'import ChevronDownIcon from "@lucide/solid/icons/chevron-down"',
+        "",
+        'import { cn } from "~/lib/utils"',
+        "",
+        'export const Icon = () => <ChevronDownIcon class={cn("size-4")} />',
+        ""
+      ].join("\n")
+    )
+    expect(installer.calls).toEqual([
+      [`@lucide/solid@${supportedRange("@lucide/solid")}`]
+    ])
   })
 
   it("leaves style-utilities to init and places hooks by alias", async () => {

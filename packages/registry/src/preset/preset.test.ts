@@ -12,9 +12,10 @@ import { DEFAULT_PRESETS } from "./defaults.ts"
 import { normalizePreset } from "./normalize.ts"
 
 describe("shadcn presets", () => {
-  it("decodes the upstream example without exposing the icon library", () => {
+  it("decodes the upstream example, reading other icon libraries as Lucide", () => {
     const preset = decodePreset("b2Whd5Ob2")
     expect(preset).toEqual({
+      iconLibrary: "lucide",
       style: "sera",
       baseColor: "mist",
       theme: "cyan",

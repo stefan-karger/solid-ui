@@ -1,7 +1,7 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import type { JSX } from "@solidjs/web"
 import { For, createSignal, createMemo } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   useDemoChat,
   type UIDataTypes,
@@ -91,54 +91,12 @@ function StatusIcon(componentProps: {
   const content = createMemo(() => {
     const { status } = componentProps
     if (status === "running") {
-      return (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          class="animate-spin"
-        >
-          <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-        </svg>
-      )
+      return <IconPlaceholder lucide="LoaderCircleIcon" class="animate-spin" />
     }
     return status === "error" ? (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" x2="12" y1="8" y2="12" />
-        <line x1="12" x2="12.01" y1="16" y2="16" />
-      </svg>
+      <IconPlaceholder lucide="CircleExclamationPointIcon" />
     ) : (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="m16 9-5.5 5.5L8 12" />
-      </svg>
+      <IconPlaceholder lucide="CircleCheckIcon" />
     )
   })
   return <>{content()}</>
@@ -206,41 +164,14 @@ function StepRow(componentProps: { part: StepPart; streaming: boolean }) {
                       <a href={result.url} target="_blank" rel="noreferrer">
                         <TraceLine>
                           <TraceIcon>
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <circle cx="12" cy="12" r="10" />
-                              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                              <path d="M2 12h20" />
-                            </svg>
+                            <IconPlaceholder lucide="GlobeIcon" />
                           </TraceIcon>
                           <TraceTitle>
                             {result.title}
                             <span class="sr-only"> (opens in a new tab)</span>
                           </TraceTitle>
                           <TraceIcon>
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M7 7h10v10" />
-                              <path d="M7 17 17 7" />
-                            </svg>
+                            <IconPlaceholder lucide="ArrowUpRightIcon" />
                           </TraceIcon>
                         </TraceLine>
                       </a>

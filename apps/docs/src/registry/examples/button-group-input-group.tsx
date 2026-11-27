@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { createSignal } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Button } from "~/registry/ui/button"
 import { ButtonGroup } from "~/registry/ui/button-group"
 import {
@@ -18,21 +18,7 @@ export default function ButtonGroupInputGroup() {
     <ButtonGroup class="[--radius:9999rem]">
       <ButtonGroup>
         <Button aria-label="Add" size="icon" variant="outline">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            class="size-4"
-          >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-          </svg>
+          <IconPlaceholder lucide="PlusIcon" class="size-4" />
         </Button>
       </ButtonGroup>
       <ButtonGroup class="flex-1">
@@ -55,25 +41,7 @@ export default function ButtonGroupInputGroup() {
                 data-active={voiceEnabled()}
                 onClick={() => setVoiceEnabled((value) => !value)}
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                  class="size-4"
-                >
-                  <path d="M2 10v3" />
-                  <path d="M6 6v11" />
-                  <path d="M10 3v18" />
-                  <path d="M14 8v7" />
-                  <path d="M18 5v13" />
-                  <path d="M22 10v3" />
-                </svg>
+                <IconPlaceholder lucide="AudioLinesIcon" class="size-4" />
               </TooltipTrigger>
               <TooltipContent>Voice Mode</TooltipContent>
             </Tooltip>

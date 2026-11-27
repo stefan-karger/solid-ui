@@ -1,5 +1,4 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
-
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import { Calendar } from "~/registry/ui/calendar"
 import { Field, FieldGroup, FieldLabel } from "~/registry/ui/field"
 import {
@@ -22,20 +21,7 @@ export default function CalendarTime() {
           <InputGroup>
             <InputGroupInput id="time-from" type="time" value="10:30" />
             <InputGroupAddon>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
+              <IconPlaceholder lucide="Clock4Icon" />
             </InputGroupAddon>
           </InputGroup>
         </Field>
@@ -44,20 +30,7 @@ export default function CalendarTime() {
           <InputGroup>
             <InputGroupInput id="time-to" type="time" value="12:30" />
             <InputGroupAddon>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
+              <IconPlaceholder lucide="Clock4Icon" />
             </InputGroupAddon>
           </InputGroup>
         </Field>

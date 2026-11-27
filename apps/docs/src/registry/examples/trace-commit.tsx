@@ -1,6 +1,6 @@
-// Inline SVG icons from Lucide (https://lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors.
 import { For } from "solid-js"
 
+import { IconPlaceholder } from "~/registry/icons/icon-placeholder"
 import {
   CodeBlock,
   CodeBlockContent,
@@ -87,21 +87,7 @@ export default function TraceCommit() {
         <TraceCollapsibleTrigger>
           <TraceLine>
             <TraceIcon>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="3" />
-                <line x1="3" x2="9" y1="12" y2="12" />
-                <line x1="15" x2="21" y1="12" y2="12" />
-              </svg>
+              <IconPlaceholder lucide="GitCommitHorizontalIcon" />
             </TraceIcon>
             <TraceTitle>Committed a1b2c3: Fix the login redirect</TraceTitle>
           </TraceLine>
@@ -115,38 +101,9 @@ export default function TraceCommit() {
                     <TraceLine>
                       <TraceIcon>
                         {file.added ? (
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                          >
-                            <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
-                            <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-                            <path d="M9 15h6" />
-                            <path d="M12 18v-6" />
-                          </svg>
+                          <IconPlaceholder lucide="FilePlusIcon" />
                         ) : (
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                          >
-                            <path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34" />
-                            <path d="M14 2v5a1 1 0 0 0 1 1h5" />
-                            <path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z" />
-                          </svg>
+                          <IconPlaceholder lucide="FilePenIcon" />
                         )}
                       </TraceIcon>
                       <TraceTitle>
@@ -156,19 +113,7 @@ export default function TraceCommit() {
                         +{file.additions} −{file.deletions}
                       </TraceDescription>
                       <TraceIcon>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="m9 18 6-6-6-6" />
-                        </svg>
+                        <IconPlaceholder lucide="ChevronRightIcon" />
                       </TraceIcon>
                     </TraceLine>
                   </SheetTrigger>

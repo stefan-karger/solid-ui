@@ -10,6 +10,11 @@ import {
 } from "@solid-ui/registry/config"
 import { createSolidUiCss, solidUiCssPackages } from "@solid-ui/registry/css"
 import {
+  iconLibraries,
+  iconLibraryNames,
+  type IconLibraryName
+} from "@solid-ui/registry/icons"
+import {
   DEFAULT_PRESET_NAME,
   DEFAULT_PRESETS,
   encodePreset,
@@ -17,7 +22,7 @@ import {
   parsePresetInput,
   type Preset
 } from "@solid-ui/registry/preset"
-import { SUPPORTED_VERSIONS, supportedRange } from "@solid-ui/registry/versions"
+import { SUPPORTED_VERSIONS } from "@solid-ui/registry/versions"
 import { Command } from "commander"
 import type { Agent } from "package-manager-detector"
 
@@ -25,7 +30,8 @@ import { CREATE_URL } from "~/constants"
 import {
   parseSpec,
   planDependencies,
-  resolveConflicts
+  resolveConflicts,
+  supportedSpec
 } from "~/install/dependencies"
 import {
   applyFiles,
@@ -82,11 +88,6 @@ export type InitDeps = {
 
 // Packages every installed component relies on, besides the utils item's own.
 const BASE_PACKAGES = ["class-variance-authority"]
-
-function spec(name: string) {
-  const range = supportedRange(name)
-  return range ? `${name}@${range}` : name
-}
 
 function rel(cwd: string, file: string) {
   return path.relative(cwd, file).split(path.sep).join("/")
@@ -295,6 +296,25 @@ async function choosePreset(
   return DEFAULT_PRESETS[choice as keyof typeof DEFAULT_PRESETS].preset
 }
 
+// A preset code from Create carries its icon library; a named preset asks.
+async function chooseIconLibrary(
+  preset: Preset,
+  options: InitOptions,
+  ui: Ui,
+  interactive: boolean
+): Promise<IconLibraryName> {
+  if (options.preset || options.yes || !interactive) return preset.iconLibrary
+  return ui.select(
+    "Which icon library would you like to use?",
+    iconLibraryNames.map((name) => ({
+      value: name,
+      label: iconLibraries[name].title,
+      hint: iconLibraries[name].package
+    })),
+    preset.iconLibrary
+  )
+}
+
 export async function runInit(options: InitOptions, deps: InitDeps = {}) {
   const ui = deps.ui ?? terminalUi
   const interactive = deps.interactive ?? Boolean(process.stdin.isTTY)
@@ -324,8 +344,12 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
       )
   }
 
-  const preset = await choosePreset(options, ui, interactive)
-  if (!preset) return
+  const chosen = await choosePreset(options, ui, interactive)
+  if (!chosen) return
+  const preset: Preset = {
+    ...chosen,
+    iconLibrary: await chooseIconLibrary(chosen, options, ui, interactive)
+  }
   const code = encodePreset(preset)
   const aliases = await chooseAliases(
     options,
@@ -377,6 +401,7 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
     style: preset.style,
     preset: code,
     tailwind: { css: project.tailwindCss },
+    iconLibrary: preset.iconLibrary,
     menuColor: preset.menuColor,
     menuAccent: preset.menuAccent,
     aliases
@@ -416,8 +441,9 @@ export async function runInit(options: InitOptions, deps: InitDeps = {}) {
 
   const plan = planDependencies(cwd, readPackageJson(cwd) ?? {}, [
     ...(utils.dependencies ?? []),
-    ...BASE_PACKAGES.map(spec),
-    ...solidUiCssPackages(preset).map(spec)
+    ...BASE_PACKAGES.map(supportedSpec),
+    supportedSpec(iconLibraries[preset.iconLibrary].package),
+    ...solidUiCssPackages(preset).map(supportedSpec)
   ])
 
   const vite = readViteConfig(cwd, prefix)

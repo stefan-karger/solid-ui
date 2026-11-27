@@ -69,7 +69,11 @@ const text = "~/components/ui/button"`
 
   it("resolves menu markers in scripts and leaves other files alone", () => {
     const menu = `const c = "cn-menu-target z-50"`
-    const config = { aliases: DEFAULT_ALIASES, menuColor: "inverted" as const }
+    const config = {
+      aliases: DEFAULT_ALIASES,
+      menuColor: "inverted" as const,
+      iconLibrary: "lucide" as const
+    }
     expect(transformSource("ui/menu.tsx", menu, config)).toBe(
       `const c = "dark z-50"`
     )

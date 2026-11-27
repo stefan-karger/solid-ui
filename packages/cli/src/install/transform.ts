@@ -1,4 +1,5 @@
 import type { ComponentsJson } from "@solid-ui/registry/config"
+import { transformIcons } from "@solid-ui/registry/icons"
 import { transformMenu } from "@solid-ui/registry/menu"
 
 const SPECIFIER =
@@ -34,8 +35,12 @@ export function rewriteAliases(
 export function transformSource(
   path: string,
   code: string,
-  config: Pick<ComponentsJson, "aliases" | "menuColor">
+  config: Pick<ComponentsJson, "aliases" | "menuColor" | "iconLibrary">
 ) {
   if (!/\.[cm]?[jt]sx?$/.test(path)) return code
-  return rewriteAliases(transformMenu(code, config.menuColor), config.aliases)
+  const resolved = transformIcons(
+    transformMenu(code, config.menuColor),
+    config.iconLibrary
+  )
+  return rewriteAliases(resolved, config.aliases)
 }
