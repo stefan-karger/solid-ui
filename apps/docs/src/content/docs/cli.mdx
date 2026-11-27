@@ -97,17 +97,6 @@ npx solidui-cli@latest init --alias @
 
 Components name their icons for each icon library. `init` asks which library to use, saves it as `iconLibrary` in `components.json` and installs its package. `add` turns every icon into that library's component, so the Select chevron arrives as `import { ChevronDownIcon } from "@lucide/solid"`. Lucide is the only library for now, and the default for projects set up before `iconLibrary` existed. A preset code from the [Create](/create) page carries its icon library, so `init --preset` doesn't ask.
 
-In development, Vite loads every module of `@lucide/solid` for such an import, since Solid packages skip dependency prebundling. [`vite-plugin-lucide-preprocess`](https://github.com/WarningImHack3r/vite-plugin-lucide-preprocess) rewrites the imports to one module per icon:
-
-```ts title="vite.config.ts"
-import lucidePreprocess from "vite-plugin-lucide-preprocess"
-
-export default defineConfig({
-  resolve: { tsconfigPaths: true },
-  plugins: [lucidePreprocess(), solid(), tailwindcss()]
-})
-```
-
 ### Choose the app stylesheet
 
 `init` imports `solid-ui.css` into the stylesheet that imports Tailwind CSS. If more than one stylesheet does, name the one your app loads:
