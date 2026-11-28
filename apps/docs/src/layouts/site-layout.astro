@@ -16,8 +16,10 @@ type Props = {
   title: string
   description: string
   navigation?: DocsNavigationGroup[]
+  // The page's Markdown version, announced to agents that fetch the HTML.
+  markdown?: string
 }
-const { title, description } = Astro.props
+const { title, description, markdown } = Astro.props
 const navigation =
   Astro.props.navigation ?? createDocsNavigation(await getCollection("docs"))
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
@@ -44,6 +46,7 @@ const onComponentsPage =
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={pageUrl} />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Solid UI" />
     <meta property="og:title" content={title} />
