@@ -120,6 +120,9 @@ element chosen by `as`.
 - Calendar uses ISO values and focusable table cells, Carousel the SDK
   page/controller API, Drawer native snap points, Input OTP one native field,
   Message Scroller native Scroll Area stick-to-end, and Toast the SDK queue.
+- Sonner themes [solid-sonner](https://github.com/wobsoriano/solid-sonner)
+  1.x instead of SDK parts, matching shadcn/ui's Sonner. Its docs page mounts
+  one `Toaster` for all of its examples.
 - Chart (Recharts) and Data Table (TanStack Table, whose Solid adapter targets
   Solid 1) are not ported yet. The Persian calendar and RTL sections are
   deferred.

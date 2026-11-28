@@ -13,6 +13,7 @@ import { getRegistrySource } from "~/lib/registry.server"
 type DocsPage = CollectionEntry<"docs">
 
 // The page source with its generated lists written out as Markdown links.
+// The Sonner page's Toaster renders nothing to read, so it is left out.
 export function formatDocsBody(page: DocsPage, pages: readonly DocsPage[]) {
   const descriptions = new Map(
     pages.map((entry) => [toDocsPath(entry.id), entry.data.description])
@@ -27,6 +28,7 @@ export function formatDocsBody(page: DocsPage, pages: readonly DocsPage[]) {
   return (page.body ?? "")
     .replace(/<ComponentsList\s+variant=["']new["']\s*\/>/g, () => list("new"))
     .replace(/<ComponentsList\s*\/>/g, () => list("all"))
+    .replace(/\n*<SonnerToaster\s*\/>/g, "")
     .replace(/<AiPatternGrid\s*\/>/g, () =>
       aiPatterns
         .map(

@@ -13,7 +13,7 @@ description: Move a project from solidui-cli 0.7 on Solid 1 to Solid UI for Soli
 | Area          | solidui-cli 0.7                                  | Solid UI for Solid 2                         |
 | ------------- | ------------------------------------------------ | -------------------------------------------- |
 | Framework     | Solid 1, SolidStart                              | Solid 2 with Vite and `@solidjs/vite-plugin` |
-| Primitives    | Kobalte, Corvu, Ark UI, cmdk-solid, solid-sonner | UI SDK                                       |
+| Primitives    | Kobalte, Corvu, Ark UI, cmdk-solid, solid-sonner | UI SDK, and solid-sonner 1 for Sonner        |
 | Tailwind CSS  | 3, with `tailwind.config.cjs`                    | 4.3 or later, configured in CSS              |
 | Theme         | HSL variables in your app stylesheet             | Preset tokens in a generated `solid-ui.css`  |
 | Configuration | `ui.config.json`                                 | `components.json`                            |
@@ -74,6 +74,8 @@ Uninstall the packages Solid UI 0.7 installed and nothing else uses:
 npm uninstall @kobalte/core @corvu/drawer @corvu/otp-field @corvu/resizable @ark-ui/solid cmdk-solid solid-sonner embla-carousel-solid chart.js tailwindcss-animate
 ```
 
+Keep `solid-sonner` if you add [Sonner](/docs/components/sonner/) again. It needs solid-sonner 1 for Solid 2, and `add sonner` offers to upgrade an older version.
+
 </Steps>
 
 ## API changes
@@ -98,7 +100,7 @@ Object values still work through `itemToValue` and `itemToLabel`.
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | `text-field`                                                             | [Input](/docs/components/input/), [Textarea](/docs/components/textarea/) and [Field](/docs/components/field/) |
 | `otp-field`                                                              | [Input OTP](/docs/components/input-otp/)                                                                      |
-| `sonner`                                                                 | [Toast](/docs/components/toast/)                                                                              |
+| `sonner`                                                                 | [Sonner](/docs/components/sonner/) on solid-sonner 1, or [Toast](/docs/components/toast/) built from UI SDK   |
 | `date-picker`                                                            | [Date Picker](/docs/components/date-picker/), composed from Calendar and Popover                              |
 | `callout`                                                                | [Alert](/docs/components/alert/)                                                                              |
 | `charts`, `number-field`                                                 | Not available yet                                                                                             |

@@ -280,6 +280,53 @@ test("toast actions, stacking, promises, and Escape use the native queue", async
   await expect(promiseToast).toHaveAttribute("data-type", "success")
 })
 
+test("sonner shows themed toasts from every example in the page Toaster", async ({
+  page
+}) => {
+  const preview = await example(page, "sonner")
+  await preview.getByRole("button", { name: "Show Toast" }).click()
+  const toaster = page.locator("[data-sonner-toaster]").first()
+  const toast = toaster.locator("[data-sonner-toast]")
+  await expect(toast).toHaveCount(1)
+  await expect(toast).toContainText("Sunday, December 03, 2023 at 9:00 AM")
+  await expect(toast).toHaveClass(/cn-toast/)
+  await expect(toast).toHaveCSS(
+    "background-color",
+    await page.evaluate(() => {
+      const probe = document.createElement("div")
+      probe.style.backgroundColor = "var(--popover)"
+      document.body.append(probe)
+      const color = getComputedStyle(probe).backgroundColor
+      probe.remove()
+      return color
+    })
+  )
+  await toast.getByRole("button", { name: "Undo" }).click()
+  await expect(toaster).toContainText("Event removed")
+
+  await page.evaluate(() => document.documentElement.classList.add("dark"))
+  await expect(toaster).toHaveAttribute("data-sonner-theme", "dark")
+
+  const types = namedExample(page, "sonner-types")
+  await types.scrollIntoViewIfNeeded()
+  await expect(types).not.toHaveAttribute("ssr", "")
+  await types.getByRole("button", { name: "Promise" }).click()
+  const promise = page.locator('[data-sonner-toast][data-promise="true"]')
+  await expect(promise).toHaveAttribute("data-type", "loading")
+  await expect(promise).toHaveAttribute("data-type", "success")
+  await expect(promise).toContainText("Event has been created")
+
+  const positions = namedExample(page, "sonner-position")
+  await positions.scrollIntoViewIfNeeded()
+  await expect(positions).not.toHaveAttribute("ssr", "")
+  await positions.getByRole("button", { name: "Top Left" }).click()
+  await expect(
+    page.locator(
+      '[data-sonner-toaster][data-y-position="top"][data-x-position="left"] [data-sonner-toast]'
+    )
+  ).toHaveCount(1)
+})
+
 test("message scroller releases and resumes following growing content", async ({
   page
 }) => {

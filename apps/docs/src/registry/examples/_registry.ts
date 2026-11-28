@@ -3641,6 +3641,32 @@ export const examples: Registry["items"] = [
     files: [{ path: "examples/toast-types.tsx", type: "registry:example" }]
   },
   {
+    name: "sonner-demo",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-demo.tsx", type: "registry:example" }]
+  },
+  {
+    name: "sonner-description",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [
+      { path: "examples/sonner-description.tsx", type: "registry:example" }
+    ]
+  },
+  {
+    name: "sonner-position",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-position.tsx", type: "registry:example" }]
+  },
+  {
+    name: "sonner-types",
+    type: "registry:example",
+    registryDependencies: ["sonner", "button"],
+    files: [{ path: "examples/sonner-types.tsx", type: "registry:example" }]
+  },
+  {
     name: "trace-collapsible",
     type: "registry:example",
     registryDependencies: ["code-block", "trace"],
