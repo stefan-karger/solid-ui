@@ -272,7 +272,11 @@ test("copies docs Markdown and offers the page actions and pagination", async ({
   const renderedMarkdown = await response.text()
   expect(renderedMarkdown).toContain('title: "Button"')
   expect(renderedMarkdown).toContain("```tsx")
-  expect(renderedMarkdown).not.toContain("<ComponentPreview")
+  expect(renderedMarkdown).toContain('```tsx title="components/ui/button.tsx"')
+  expect(renderedMarkdown).not.toMatch(/<Component(?:Preview|Source)/)
+  await expect(
+    page.locator('head link[rel="alternate"][type="text/markdown"]')
+  ).toHaveAttribute("href", markdownPath!)
 
   for (const [name, service] of [
     ["Open in ChatGPT", "https://chatgpt.com/"],
@@ -303,6 +307,46 @@ test("copies docs Markdown and offers the page actions and pagination", async ({
       (await top.getByRole("link", { name: direction }).getAttribute("href"))!
     )
   }
+})
+
+test("indexes every docs page in llms.txt and collects them in llms-full.txt", async ({
+  page,
+  request
+}) => {
+  const index = await request.get("/llms.txt")
+  expect(index.ok()).toBe(true)
+  const text = await index.text()
+  expect(text.startsWith("# Solid UI\n\n> ")).toBe(true)
+  const links = Array.from(
+    text.matchAll(
+      /^- \[[^\]]+\]\((https:\/\/www\.solid-ui\.com\/[^)]+)\): \S/gm
+    ),
+    ([, url]) => new URL(url!).pathname
+  )
+
+  // The sidebar and the index come from the same collection.
+  await page.goto("/docs/")
+  const sidebar = await page
+    .getByRole("navigation", { name: "Documentation", exact: true })
+    .getByRole("link")
+    .evaluateAll((anchors) =>
+      anchors.map(
+        (anchor) => new URL((anchor as HTMLAnchorElement).href).pathname
+      )
+    )
+  expect(sidebar.length).toBeGreaterThan(80)
+  for (const path of sidebar)
+    expect(links).toContain(`${path.replace(/\/$/, "")}.md`)
+
+  const full = await (await request.get("/llms-full.txt")).text()
+  await Promise.all(
+    links.map(async (path) => {
+      const markdown = await request.get(path)
+      expect(markdown.ok(), path).toBe(true)
+      expect(await markdown.text()).toMatch(/^---\ntitle: /)
+      expect(full).toContain(`Source: https://www.solid-ui.com${path}\n`)
+    })
+  )
 })
 
 test("searches sidebar links and navigates from the command palette by keyboard", async ({

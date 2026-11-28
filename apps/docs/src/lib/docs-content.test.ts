@@ -16,7 +16,8 @@ function listMdx(dir: string): string[] {
 }
 
 function resolvesToPage(link: string) {
-  const path = link.replace(/^\/docs\/?/, "").replace(/\/$/, "")
+  // A page's Markdown version is at its path plus `.md`.
+  const path = link.replace(/^\/docs\/?/, "").replace(/(?:\.md|\/)$/, "")
   const candidates = path ? [`${path}.mdx`, `${path}/index.mdx`] : ["index.mdx"]
   return candidates.some((candidate) => existsSync(resolve(docsDir, candidate)))
 }

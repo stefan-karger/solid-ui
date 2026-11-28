@@ -10,8 +10,8 @@ import { getRegistrySource } from "~/lib/registry.server"
 
 type DocsPage = CollectionEntry<"docs">
 
-export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
-  const { title, description, component, new: isNew } = page.data
+// The page source with its generated lists written out as Markdown links.
+export function formatDocsBody(page: DocsPage, pages: readonly DocsPage[]) {
   const descriptions = new Map(
     pages.map((entry) => [toDocsPath(entry.id), entry.data.description])
   )
@@ -22,7 +22,7 @@ export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
           `- [${title}](${href}/) — ${descriptions.get(href)}`
       )
       .join("\n")
-  const body = (page.body ?? "")
+  return (page.body ?? "")
     .replace(/<ComponentsList\s+variant=["']new["']\s*\/>/g, () => list("new"))
     .replace(/<ComponentsList\s*\/>/g, () => list("all"))
     .replace(/<AiPatternGrid\s*\/>/g, () =>
@@ -34,7 +34,10 @@ export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
         .join("\n")
     )
     .trim()
+}
 
+export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
+  const { title, description, component, new: isNew } = page.data
   return [
     "---",
     `title: ${JSON.stringify(title)}`,
@@ -43,18 +46,22 @@ export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
     ...(isNew ? ["new: true"] : []),
     "---",
     "",
-    body,
+    formatDocsBody(page, pages),
     ""
   ].join("\n")
 }
 
+// Writes out the code behind example previews and component sources, so the
+// Markdown carries what the page shows. A source keeps its file path as title.
 export async function includeDocsExamples(markdown: string) {
-  const previewTag = /<ComponentPreview\b([^>]*?)\/>/g
+  const sourceTag = /<Component(?:Preview|Source)\b([^>]*?)\/>/g
+  const attribute = (attributes: string, key: string) =>
+    attributes.match(new RegExp(`\\b${key}=["']([^"']+)["']`))?.[1]
   const examples = await Promise.all(
-    Array.from(markdown.matchAll(previewTag), async ([tag, attributes]) => {
-      const name = attributes?.match(/\bname=["']([^"']+)["']/)?.[1]
+    Array.from(markdown.matchAll(sourceTag), async ([tag, attributes = ""]) => {
+      const name = attribute(attributes, "name")
       if (!name) return tag
-      const file = attributes?.match(/\bfile=["']([^"']+)["']/)?.[1]
+      const file = attribute(attributes, "file")
       const source = await getRegistrySource({
         name,
         ...(file ? { file } : {})
@@ -64,9 +71,13 @@ export async function includeDocsExamples(markdown: string) {
         ...Array.from(source.code.matchAll(/`{3,}/g), ([run]) => run.length)
       )
       const fence = "`".repeat(longestRun + 1)
-      return `${fence}${source.language}\n${source.code}\n${fence}`
+      const title = tag.startsWith("<ComponentSource")
+        ? attribute(attributes, "title")
+        : undefined
+      const meta = title ? ` title=${JSON.stringify(title)}` : ""
+      return `${fence}${source.language}${meta}\n${source.code}\n${fence}`
     })
   )
   let index = 0
-  return markdown.replace(previewTag, (tag) => examples[index++] ?? tag)
+  return markdown.replace(sourceTag, (tag) => examples[index++] ?? tag)
 }
