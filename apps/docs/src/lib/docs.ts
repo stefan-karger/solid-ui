@@ -174,3 +174,9 @@ export async function getComponentLinks(
 ) {
   return createComponentLinks(await getDocsPages(loadDocs), variant)
 }
+
+// MDX tags that stand for registry code: an example preview or a source file.
+export const registryCodeTag = /<Component(?:Preview|Source)\b([^>]*?)\/>/g
+
+export const tagAttribute = (attributes: string, key: string) =>
+  attributes.match(new RegExp(`\\b${key}=["']([^"']+)["']`))?.[1]

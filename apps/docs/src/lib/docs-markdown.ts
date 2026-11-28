@@ -3,6 +3,8 @@ import type { CollectionEntry } from "astro:content"
 import { aiPatterns } from "~/lib/ai-patterns"
 import {
   createComponentLinks,
+  registryCodeTag,
+  tagAttribute,
   toDocsPath,
   type ComponentListVariant
 } from "~/lib/docs"
@@ -54,30 +56,30 @@ export function formatDocsMarkdown(page: DocsPage, pages: readonly DocsPage[]) {
 // Writes out the code behind example previews and component sources, so the
 // Markdown carries what the page shows. A source keeps its file path as title.
 export async function includeDocsExamples(markdown: string) {
-  const sourceTag = /<Component(?:Preview|Source)\b([^>]*?)\/>/g
-  const attribute = (attributes: string, key: string) =>
-    attributes.match(new RegExp(`\\b${key}=["']([^"']+)["']`))?.[1]
   const examples = await Promise.all(
-    Array.from(markdown.matchAll(sourceTag), async ([tag, attributes = ""]) => {
-      const name = attribute(attributes, "name")
-      if (!name) return tag
-      const file = attribute(attributes, "file")
-      const source = await getRegistrySource({
-        name,
-        ...(file ? { file } : {})
-      })
-      const longestRun = Math.max(
-        2,
-        ...Array.from(source.code.matchAll(/`{3,}/g), ([run]) => run.length)
-      )
-      const fence = "`".repeat(longestRun + 1)
-      const title = tag.startsWith("<ComponentSource")
-        ? attribute(attributes, "title")
-        : undefined
-      const meta = title ? ` title=${JSON.stringify(title)}` : ""
-      return `${fence}${source.language}${meta}\n${source.code}\n${fence}`
-    })
+    Array.from(
+      markdown.matchAll(registryCodeTag),
+      async ([tag, attributes = ""]) => {
+        const name = tagAttribute(attributes, "name")
+        if (!name) return tag
+        const file = tagAttribute(attributes, "file")
+        const source = await getRegistrySource({
+          name,
+          ...(file ? { file } : {})
+        })
+        const longestRun = Math.max(
+          2,
+          ...Array.from(source.code.matchAll(/`{3,}/g), ([run]) => run.length)
+        )
+        const fence = "`".repeat(longestRun + 1)
+        const title = tag.startsWith("<ComponentSource")
+          ? tagAttribute(attributes, "title")
+          : undefined
+        const meta = title ? ` title=${JSON.stringify(title)}` : ""
+        return `${fence}${source.language}${meta}\n${source.code}\n${fence}`
+      }
+    )
   )
   let index = 0
-  return markdown.replace(sourceTag, (tag) => examples[index++] ?? tag)
+  return markdown.replace(registryCodeTag, (tag) => examples[index++] ?? tag)
 }

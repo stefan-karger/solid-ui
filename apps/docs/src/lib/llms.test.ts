@@ -28,7 +28,7 @@ describe("llms.txt", () => {
       true
     )
     expect(index).toContain(
-      "(https://www.solid-ui.com/llms-full.txt) has every page in one file."
+      "(https://www.solid-ui.com/llms-full.txt) has the text of every page in one file, without that code."
     )
     expect(index.slice(index.indexOf("## "))).toBe(`## Docs
 
@@ -53,11 +53,14 @@ describe("llms.txt", () => {
 `)
   })
 
-  it("collects every page body in the same order", () => {
+  it("collects every page's text in the same order and names its code", () => {
     const full = formatLlmsFull(
       pages.map((entry) => ({
         page: entry,
-        body: `\nBody of ${entry.data.title}.\n`
+        body:
+          entry.data.title === "Button"
+            ? `\n<ComponentPreview name="button-demo" previewClassName="h-72" />\n\nBody of Button.\n\n<ComponentSource\n  name="button"\n  title="components/ui/button.tsx"\n/>\n`
+            : `\nBody of ${entry.data.title}.\n`
       })),
       site
     )
@@ -80,7 +83,11 @@ Source: https://www.solid-ui.com/docs/components/button.md
 
 > About Button.
 
+[Example: button-demo]
+
 Body of Button.
+
+[Source: components/ui/button.tsx]
 
 # Tabs`)
   })

@@ -339,6 +339,11 @@ test("indexes every docs page in llms.txt and collects them in llms-full.txt", a
     expect(links).toContain(`${path.replace(/\/$/, "")}.md`)
 
   const full = await (await request.get("/llms-full.txt")).text()
+  // About 100k tokens, so the whole file fits a 200k-token context. The code
+  // stays on each page's Markdown.
+  expect(full.length).toBeLessThan(450_000)
+  expect(full).not.toMatch(/<Component(?:Preview|Source)/)
+  expect(full).toContain("[Source: components/ui/button.tsx]")
   await Promise.all(
     links.map(async (path) => {
       const markdown = await request.get(path)

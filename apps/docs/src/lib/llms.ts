@@ -1,4 +1,10 @@
-import { sortDocsPages, toDocsPath, toRouteId } from "~/lib/docs"
+import {
+  registryCodeTag,
+  sortDocsPages,
+  tagAttribute,
+  toDocsPath,
+  toRouteId
+} from "~/lib/docs"
 
 // llms.txt (https://llmstxt.org) for the docs. Both files are generated from
 // the docs collection at build time, so a new or renamed page shows up here
@@ -15,7 +21,7 @@ const notes = (
 
 - Write Solid 2.0 code (\`solid-js\` and \`@solidjs/web\` 2.x). Solid 1.x and React APIs don't apply.
 - Set up a project with \`npx solidui-cli@latest init\`. Add components by the name in their \`/docs/components/\` URL, such as \`npx solidui-cli@latest add button dropdown-menu\`. The CLI copies their source into the project.
-- Each link below is the page as Markdown, with the source of its examples and components written out. [llms-full.txt](${fullUrl}) has every page in one file.`
+- Each link below is the page as Markdown, with the source of its examples and components written out. [llms-full.txt](${fullUrl}) has the text of every page in one file, without that code.`
 
 const markdownUrl = (page: LlmsPage, site: URL | string) =>
   new URL(`${toDocsPath(page.id)}.md`, site).href
@@ -67,8 +73,20 @@ export function formatLlmsIndex(
     .concat("\n")
 }
 
-// llms-full.txt: every page in llms.txt order. Each page's Markdown body is
-// passed in, since writing out its examples needs the registry.
+// Example and component code makes up most of the page Markdown. Without it
+// the text of every page fits a 200k-token context, so llms-full.txt names
+// the code and leaves it to each page's Markdown.
+const referenceRegistryCode = (body: string) =>
+  body.replace(registryCodeTag, (tag, attributes: string) => {
+    const name = tagAttribute(attributes, "name")
+    if (!name) return tag
+    return tag.startsWith("<ComponentSource")
+      ? `[Source: ${tagAttribute(attributes, "title") ?? name}]`
+      : `[Example: ${name}]`
+  })
+
+// llms-full.txt: the text of every page in llms.txt order. Each page's
+// Markdown body is passed in, with its generated lists written out.
 export function formatLlmsFull(
   pages: readonly { page: LlmsPage; body: string }[],
   site: URL | string
@@ -80,7 +98,8 @@ export function formatLlmsFull(
   )
   return [
     "# Solid UI: full documentation",
-    `> Every page listed in ${new URL("/llms.txt", site).href}, as Markdown.`,
+    `> The text of every page listed in ${new URL("/llms.txt", site).href}, as Markdown.`,
+    "Examples and component sources appear as `[Example: name]` and `[Source: path]`. The Markdown at each page's Source URL has their code.",
     ...pages
       .toSorted((a, b) => order.get(a.page.id)! - order.get(b.page.id)!)
       .map(({ page, body }) =>
@@ -88,7 +107,7 @@ export function formatLlmsFull(
           `# ${page.data.title}`,
           `Source: ${markdownUrl(page, site)}`,
           `> ${page.data.description}`,
-          body.trim()
+          referenceRegistryCode(body).trim()
         ].join("\n\n")
       )
   ]
