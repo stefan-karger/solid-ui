@@ -413,6 +413,9 @@ importers:
       solid-js:
         specifier: 2.0.1
         version: 2.0.1
+      solid-sonner:
+        specifier: 1.0.0
+        version: 1.0.0(@solidjs/web@2.0.1(solid-js@2.0.1))(solid-js@2.0.1)
       tailwind-merge:
         specifier: 3.7.1
         version: 3.7.1
@@ -4068,6 +4071,12 @@ packages:
   solid-js@2.0.1:
     resolution: {integrity: sha512-5bBwRCblIZ672y2H2aB5KIOfeP/N+acx1YoCjNCWYFc4ZI/Y7y7n/6N1kei8AgWmcJJQ1m5SV90rs3V8CPAnYQ==}
     engines: {node: '>=22.12.0'}
+
+  solid-sonner@1.0.0:
+    resolution: {integrity: sha512-KuBUO29W5qykhYJjQyyfsKPFoF4G78sa/Yo+yYPJkHBsClCjnh7dx5mOGrnYczJ45Y8dvA8U90+zIX8NnDAzFg==}
+    peerDependencies:
+      '@solidjs/web': ^2.0.0
+      solid-js: ^2.0.0
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -8498,6 +8507,11 @@ snapshots:
       '@solidjs/signals': 2.0.1
       seroval: 1.8.1
       seroval-plugins: 1.8.0(seroval@1.8.1)
+
+  solid-sonner@1.0.0(@solidjs/web@2.0.1(solid-js@2.0.1))(solid-js@2.0.1):
+    dependencies:
+      '@solidjs/web': 2.0.1(solid-js@2.0.1)
+      solid-js: 2.0.1
 
   source-map-js@1.2.1: {}
 

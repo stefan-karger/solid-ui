@@ -36,6 +36,7 @@ import Ol from "~/components/docs/ol.astro"
 import P from "~/components/docs/p.astro"
 import Pre from "~/components/docs/pre.astro"
 import SolidUiCss from "~/components/docs/solid-ui-css.astro"
+import SonnerToaster from "~/components/docs/sonner-toaster.astro"
 import Step from "~/components/docs/step.astro"
 import Steps from "~/components/docs/steps.astro"
 import Strong from "~/components/docs/strong.astro"
@@ -82,6 +83,7 @@ export const mdxComponents = {
   Tab: "div",
   Step,
   SolidUiCss,
+  SonnerToaster,
   SupportedVersions,
   Steps,
   h1: H1,

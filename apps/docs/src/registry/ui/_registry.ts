@@ -168,6 +168,17 @@ export const ui: Registry["items"] = [
     ]
   },
   {
+    name: "sonner",
+    type: "registry:ui",
+    dependencies: ["solid-sonner"],
+    files: [
+      {
+        path: "ui/sonner.tsx",
+        type: "registry:ui"
+      }
+    ]
+  },
+  {
     name: "questionnaire",
     type: "registry:ui",
     dependencies: ["@ui-sdk/solid", "@ui-sdk/core"],

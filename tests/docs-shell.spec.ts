@@ -26,7 +26,7 @@ test("publishes the v2 registry and the static v1 CLI registry in the production
   const index = registryIndexSchema.parse(await json("/r/index.json"))
   const names = new Set(index.map(({ name }) => name))
   expect(names.has("toast")).toBe(true)
-  expect(names.has("sonner")).toBe(false)
+  expect(names.has("sonner")).toBe(true)
   for (const item of index) {
     expect(item.type).not.toBe("registry:example")
     for (const dependency of item.registryDependencies ?? []) {
